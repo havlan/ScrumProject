@@ -1,0 +1,24 @@
+{
+  "name": "scrum2017",
+  "version": "1.0.0",
+  "description": "scrum prosjekt 2017",
+  "main": "server.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hlongdayle/scrumLords2017.git"
+  },
+  "keywords": [
+    "web",
+    "server",
+    "restful"
+  ],
+  "author": "team4",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hlongdayle/scrumLords2017/issues"
+  },
+  "homepage": "https://github.com/hlongdayle/scrumLords2017#readme"
+}
