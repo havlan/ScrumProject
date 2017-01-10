@@ -7,6 +7,13 @@ tasks.xml
 workspace.xml
 vcs.xml
 modules.xml
+IntelliLang.xml
+code.style.schemes.xml
+debugger.xml
+diff.xml
+markdown_navigator.shared.xml
+vcs.xml
+web-browsers.xml
 
 # Runtime data
 pids
