@@ -4,9 +4,11 @@ var bodyParser = require('body-parser');
 var postNyHest = 0;
 var path = require('path');
 
+var dbHelper = require('./helpers/db.js');
 
 //use
 app.use(bodyParser.json());
+
 
 //sms
 /*var c = new TMClient('username', 'C7XDKZOQZo6HvhJwtUw0MBcslfqwtp4');
@@ -28,8 +30,9 @@ require("console-stamp")(console, {
 
 
 app.get('/',function(req,res){
-    res.sendFile(path.join(__dirname + '/index.html'));
+    //res.sendFile(path.join(__dirname + '/index.html'));
     console.log("GET ROOT");
+    dbHelper.getConnection(req, res, "select * from NodeETest");
 });
 
 app.post('/hest',function(req,res){
