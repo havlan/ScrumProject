@@ -1,7 +1,6 @@
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
-var TMClient = require('textmagic-rest-client');
 var postNyHest = 0;
 var path = require('path');
 
