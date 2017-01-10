@@ -29,10 +29,14 @@ require("console-stamp")(console, {
 });
 
 
+//select * from NodeETest
+//insert into NodeETest values ('42', 'Barbaren Dave')
+//delete from NodeETest where id = '42'
+
 app.get('/',function(req,res){
     //res.sendFile(path.join(__dirname + '/index.html'));
     console.log("GET ROOT");
-    dbHelper.getConnection(req, res, "select * from NodeETest");
+    dbHelper.dbQuery(req, res, "delete from NodeETest where id = '42'");
 });
 
 app.post('/hest',function(req,res){
