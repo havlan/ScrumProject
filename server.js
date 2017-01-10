@@ -4,12 +4,13 @@ var bodyParser = require('body-parser');
 var postNyHest = 0;
 var path = require('path');
 
-var dbHelper = require('./helpers/db.js');
+//var dbHelper = require('./helpers/db.js');
+var getController = require('./controllers/getReq.js');
+
 
 //use
 app.use(bodyParser.json());
-
-
+//app.use('/', dbHelper);
 //sms
 /*var c = new TMClient('username', 'C7XDKZOQZo6HvhJwtUw0MBcslfqwtp4');
 c.Messages.send({text: 'test message', phones:'95551048'}, function(err, res){
@@ -29,15 +30,16 @@ require("console-stamp")(console, {
 });
 
 
+
 //select * from NodeETest
 //insert into NodeETest values ('42', 'Barbaren Dave')
 //delete from NodeETest where id = '42'
 
-app.get('/',function(req,res){
+/*app.get('/',function(req,res){
     //res.sendFile(path.join(__dirname + '/index.html'));
     console.log("GET ROOT");
     dbHelper.dbQuery(req, res, "delete from NodeETest where id = '42'");
-});
+});*/
 
 app.post('/hest',function(req,res){
     console.log("POST '/hest' # " + ++postNyHest + " " + JSON.stringify(req.body));
