@@ -3,6 +3,7 @@ var app = express();
 var bodyParser = require('body-parser');
 var postNyHest = 0;
 var path = require('path');
+var router = require('./controllers/routes');
 
 //var dbHelper = require('./helpers/db.js');
 var getController = require('./controllers/getReq.js');
@@ -10,13 +11,7 @@ var getController = require('./controllers/getReq.js');
 
 //use
 app.use(bodyParser.json());
-//app.use('/', dbHelper);
-//sms
-/*var c = new TMClient('username', 'C7XDKZOQZo6HvhJwtUw0MBcslfqwtp4');
-c.Messages.send({text: 'test message', phones:'95551048'}, function(err, res){
-    console.log('Messages.send()', err, res);
-});*/
-
+app.use('/', router);
 
 
 require("console-stamp")(console, {

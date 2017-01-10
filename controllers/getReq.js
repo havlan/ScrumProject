@@ -6,7 +6,7 @@ var totalgetReq = 0;
 module.exports = {
 
     getRoot : function(req,res){
-        res.sendFile(path.join(__dirname + '../index.html'));
+        res.sendFile(path.join(__dirname + '/../index.html'));
         console.log("GET index.html #" + ++totalgetReq + " today.");
     },
 
