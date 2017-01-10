@@ -1,6 +1,8 @@
 # scrumLords2017
 MinVakt === Scrum prosjekt, systemutvikling 2 2017
-test
+
+__Script for å få installert dependencies, npm install når du er i git bash / cmd / terminal " npm install " __
+
 
 #controllers/ – defines your app routes and their logic
 #helpers/ – code and functionality to be shared by different parts of the project
