@@ -1,21 +1,13 @@
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
-var postNyHest = 0;
 var path = require('path');
 
 
 //use
 app.use(bodyParser.json());
 
-//sms
-/*var c = new TMClient('username', 'C7XDKZOQZo6HvhJwtUw0MBcslfqwtp4');
-c.Messages.send({text: 'test message', phones:'95551048'}, function(err, res){
-    console.log('Messages.send()', err, res);
-});*/
-
-
-
+//console logging template
 require("console-stamp")(console, {
     pattern:"dd/mm/yyyy HH:MM:ss.l",
     metadata:'[' + process.pid + ']',
