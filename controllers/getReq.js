@@ -6,8 +6,7 @@ var totalgetReq = 0;
 module.exports = {
 
     getRoot : function(req,res){
-        res.status(200).send("ok");
-        //res.redirect('/login');
+        res.redirect('/login');
     },
 
     getUser : function(req,res){
@@ -20,6 +19,10 @@ module.exports = {
         //res.sendFile(path.join(__dirname + '/../index.html'));
         res.json({"Msg":"Yodeliho"});
         console.log("GET index.html #" + ++totalgetReq + " today.");
+    },
+
+    get404 : function (req, res) {
+        res.send('what???', 404);
     }
 
 }

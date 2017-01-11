@@ -10,5 +10,6 @@ router.route('/').get(getCtrl.getRoot);
 router.route('/user').get(getCtrl.getUser);
 router.route('/user/:id').get(getCtrl.getUser);
 router.route('/login').get(getCtrl.getLogin);
+router.route('/*').get(getCtrl.get404);
 
 module.exports = router;
