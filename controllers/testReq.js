@@ -1,5 +1,5 @@
 var NodeETestMiddelware = require('../middlewares/NodeETestQ'); // kun for tester
-
+var path = require('path');
 
 
 module.exports = {
@@ -7,6 +7,7 @@ module.exports = {
         NodeETestMiddelware.putNodeETest(req,res);
     },
     getNodeETest : function(req,res){
+        //res.sendFile(path.join(__dirname + '/../public/html/myProfile.html'));
         NodeETestMiddelware.getNodeETest(req,res);
     },
     postNodeETest : function(req,res){
