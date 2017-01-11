@@ -8,6 +8,7 @@ module.exports = {
 
     getRoot : function(req,res){
         dbMiddelware.getUserInfo(req,res);
+        //dbMiddelware.getEmployeesWorking(req,res,datefrom,dateto);
         //res.redirect('/login');
     },
 
