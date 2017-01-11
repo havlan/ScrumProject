@@ -15,6 +15,10 @@ markdown_navigator.shared.xml
 vcs.xml
 web-browsers.xml
 inspection
+git.xml
+abbreviations.xml
+keymap.xml
+laf.xml
 
 # Runtime data
 pids
