@@ -7,14 +7,12 @@ var totalgetReq = 0;
 module.exports = {
 
     getRoot : function(req,res){
-        dbMiddelware.getUserInfo(req,res);
-        //dbMiddelware.getEmployeesWorking(req,res,datefrom,dateto);
-        //res.redirect('/login');
+        //res.redirect('/login'); //
     },
 
     getUser : function(req,res){
         //get user functionality here
-        res.json({"Params": "\n" + req.params.id});
+        res.json({"Params": "" + req.params.id});
         console.log("GET user #" + ++totalgetReq + " " + JSON.stringify(req.body));
     },
 
@@ -23,6 +21,14 @@ module.exports = {
         res.json({"Msg":"Yodeliho"});
         console.log("GET index.html #" + ++totalgetReq + " today.");
     },
+    //IKKE ENDRE PÅ TEST FUNKSJONENE!
+    getNodeETest : function(req,res){
+      dbMiddelware.getNodeETest(req,res);
+    },
+    putNodeETest : function(req,res){
+      dbMiddelware.putNodeETest(req,res);
+    },
+    //TEST FUNKSJONER FERDIG
     //404 må være sist
     get404 : function (req, res) {
         res.send('what???', 404);
