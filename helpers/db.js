@@ -11,25 +11,26 @@ var pool = mysql.createPool({
 
 
 module.exports =
-{
-    getConnection:function (req, res, query) {
-        pool.getConnection(function (err, connection) {
-            if (err) {
-                res.status(500); // Internal server error
-                res.json({"error": "Error connecting to database: " + err});
-                return;
-            }
-            console.log('Connected to database');
-            connection.query(query, function (err, rows) {
-                connection.release(); // Legg tilbake i pool
-                if (!err) {
-                    console.log(rows);
-                    res.json(rows);
-                } else {
-                    res.status(500);
-                    res.json({"error": "Error reading database: " + err});
+    {
+        dbQuery: function (req, res, query) {
+            pool.getConnection(function (err, connection) {
+                if (err) {
+                    res.status(500); // Internal server error
+                    res.json({"error": "Error connecting to database: " + err});
+                    return;
                 }
+                console.log('Connected to database');
+                connection.query(query, function (err, rows) {
+                    connection.release(); // Legg tilbake i pool
+                    if (!err) {
+                        console.log(rows);
+                        res.json(rows);
+                    } else {
+                        console.log("error: Error reading database: " + err);
+                        res.status(500);
+                        res.json({"error": "Error reading database: " + err});
+                    }
+                });
             });
-        });
-    }
-};
+        }
+    };
