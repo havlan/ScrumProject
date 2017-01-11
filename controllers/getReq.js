@@ -21,17 +21,10 @@ module.exports = {
         res.json({"Msg":"Yodeliho"});
         console.log("GET index.html #" + ++totalgetReq + " today.");
     },
-    //IKKE ENDRE PÅ TEST FUNKSJONENE!
-    getNodeETest : function(req,res){
-      dbMiddelware.getNodeETest(req,res);
-    },
-    putNodeETest : function(req,res){
-      dbMiddelware.putNodeETest(req,res);
-    },
-    //TEST FUNKSJONER FERDIG
     //404 må være sist
     get404 : function (req, res) {
-        res.send('what???', 404);
+        res.status(404).send("<h1>Fokken hell m8</h1>");
+        //res.send('what???', 404);
     }
 
 }
