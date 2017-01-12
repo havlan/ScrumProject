@@ -15,5 +15,8 @@ module.exports = {
     },
     getEmployeeOvertime : function (req,res) {
         NodeETestMiddelware.getEmployeeOvertime(req,res);
+    },
+    getPersonalInfo : function (req, res) {
+        NodeETestMiddelware.getPersonalInfo(req,res);
     }
 }
