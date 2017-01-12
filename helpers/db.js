@@ -24,7 +24,7 @@ module.exports =
                     connection.release(); // Legg tilbake i pool
                     if (!err) {
                         console.log(rows);
-                        return res.json(rows);
+                        res.json(rows);
 
                     } else {
                         console.log("error: Error reading database: " + err);
