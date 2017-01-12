@@ -5,27 +5,6 @@
     <title>MinProfil</title>
     <link href ="/css/myProfile.css" rel="stylesheet" type = "text/css" > <!-- public + /css/myProfile.css   -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-
-    <script>
-
-
-        $(document).ready(function(){ // syntax for å hente data når dokument (html) er lastet inn
-            $.get('/NodeETest', {}, function(req, res, data){
-                //console.log(JSON.stringify(data));
-                //console.log(res.body);
-                var innhold = data.responseJSON;
-                document.getElementById("h1").innerHTML = data.responseJSON[0].notat;
-                //console.log(innhold);
-
-                //var objekter = JSON.parse(innhold);
-
-                //console.log(objekter);
-
-            });
-        });
-
-    </script>
-
 </head>
 <body>
 <main>
@@ -53,6 +32,16 @@
 <figure>
     <img src="/img/kungen.jpg" alt = "Bilde av ansatt" size="width:100px height:100px;">
 </figure>
+<script>
+    $(document).ready(function(){ // syntax for å hente data når dokument (html) er lastet inn
+        $.get('/NodeETest', {}, function(req, res, data){
+
+            document.getElementById("h1").innerHTML = data.responseJSON[0].notat;
+
+
+        });
+    });
+</script>
 </body>
 </html>
 
