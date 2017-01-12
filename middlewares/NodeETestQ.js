@@ -14,6 +14,9 @@ module.exports = {
         var post = {notat: req.body.notat};
         dbHelper.postdbQuery(req,res, "insert into NodeETest set ?", post);
         console.log("NodeETest POST");
+    },
+    getEmployeeOvertime : function (req,res) {
+        dbHelper.dbQuery(req,res,"select * from Employee_Overtime");
     }
 }
 
