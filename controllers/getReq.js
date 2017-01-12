@@ -7,6 +7,7 @@ var totalgetReq = 0;
 module.exports = {
 
     getRoot : function(req,res){
+
         res.redirect('/login'); //
     },
 

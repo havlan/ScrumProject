@@ -11,7 +11,8 @@ module.exports = {
         console.log("NodeETest PUT");
     },
     postNodeETest : function(req,res){
-        dbHelper.dbQuery(req,res, "insert into NodeETest values (default, 'dvergponni');");
+        var post = {notat: req.body.notat};
+        dbHelper.postdbQuery(req,res, "insert into NodeETest set ?", post);
         console.log("NodeETest POST");
     }
 }
