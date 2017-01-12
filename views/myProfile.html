@@ -4,11 +4,28 @@
     <meta charset="UTF-8">
     <title>MinProfil</title>
     <link rel="stylesheet" href="../public/css/myProfile.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js">
-        $(document).ready(function(){
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
-        })
+    <script>
+
+
+        function onClick() {
+            $.get('/NodeETest', {}, function(req, res, data){
+                //console.log(JSON.stringify(data));
+                //console.log(res.body);
+                var innhold = data.responseJSON;
+
+                console.log(innhold);
+
+                //var objekter = JSON.parse(innhold);
+
+                //console.log(objekter);
+
+            });
+        }
+
     </script>
+
 </head>
 <body>
 <main>
@@ -31,11 +48,10 @@
             <td class="db">FRADATABASE</td>
         </tr>
     </table>
-    <button type="button" onclick="alert('Ring administrasjonen')">Rediger</button>
+    <button type="button" onclick="onClick()">Rediger</button>
 </main>
 <figure>
     <img src="https://s3.amazonaws.com/whisperinvest-images/default.png" alt = "Bilde av ansatt" size="width:100px height:100px;">
 </figure>
-<script type = "text/javascript"  src = "../public/frontendJS/myProfile.js"></script>
 </body>
 </html>
