@@ -13,6 +13,9 @@ module.exports = {
     postNodeETest : function(req,res){
         dbHelper.dbQuery(req,res, "insert into NodeETest values (default, 'dvergponni');");
         console.log("NodeETest POST");
+    },
+    getEmployeeOvertime : function (req,res) {
+        dbHelper.dbQuery(req,res,"select * from Employee_Overtime");
     }
 }
 

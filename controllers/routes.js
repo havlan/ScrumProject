@@ -19,6 +19,7 @@ router.route('/login').get(getCtrl.getLogin);
 router.route('/NodeETest').get(testCtrl.getNodeETest);
 router.route('/NodeETest/put').get(testCtrl.putNodeETest);
 router.route('/NodeETest/post').get(testCtrl.postNodeETest);
+router.route('/EmployeeOvertime').get(testCtrl.getEmployeeOvertime);
 //router.route('NodeETest/post')
 //======== TEST ROUTE FERDIG ========
 
