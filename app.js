@@ -11,6 +11,7 @@ var getController = require('./controllers/getReq.js');
 
 //use
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 app.use('/', router);
 
 

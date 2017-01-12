@@ -32,5 +32,25 @@ module.exports =
                     }
                 });
             });
+        },
+        postdbQuery : function(req,res,query,post){
+            pool.getConnection(function(err,connection){
+                if(err){
+                    res.status(500) //err
+                    res.json({"Error":"Couldnt connect to MYSQL" + err});
+                    return;
+                }
+                console.log("Connected to database");
+                connection.query(query ,post, function(err,rows){
+                    connection.release();
+                    if(!err){
+                        res.json(rows);
+                    }else{
+                        console.log("error: Error reading database: " + err);
+                        res.status(500);
+                        res.json({"error": "Error reading database: " + err});
+                    }
+                });
+            });
         }
     };
