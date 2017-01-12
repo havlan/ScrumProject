@@ -12,19 +12,19 @@
     <table cellspacing="10">
         <tr>
             <td class="info">Stillingstittel</td>
-            <td class="db"></td>
+            <td class="db" id="stillingstittel"></td>
         </tr>
         <tr>
             <td class="info">Telefonnummer</td>
-            <td class="db">FRADATABASE</td>
+            <td class="db" id="tlfnr">FRADATABASE</td>
         </tr>
         <tr>
             <td class="info">E-postadresse</td>
-            <td class="db">FRADATABASE</td>
+            <td class="db" id="epost">FRADATABASE</td>
         </tr>
         <tr>
             <td class="info">Adresse</td>
-            <td class="db">FRADATABASE</td>
+            <td class="db" id="adresse">FRADATABASE</td>
         </tr>
     </table>
     <button type="button">Rediger</button>
@@ -36,8 +36,14 @@
     $(document).ready(function(){ // syntax for å hente data når dokument (html) er lastet inn
         $.get('/NodeETest', {}, function(req, res, data){
 
-            document.getElementById("h1").innerHTML = data.responseJSON[0].notat;
+            console.log(data);
+            console.log(data.responseJSON[1]);
 
+            document.getElementById("h1").innerHTML = data.responseJSON[0].notat;
+            document.getElementById("stillingstittel").innerHTML = data.responseJSON[1].notat;
+            document.getElementById("tlfnr").innerHTML = data.responseJSON[0].id;
+            document.getElementById("epost").innerHTML = data.responseJSON[0].notat;
+            document.getElementById("adresse").innerHTML = data.responseJSON[0].id;
 
         });
     });
