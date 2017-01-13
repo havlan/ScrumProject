@@ -15,11 +15,5 @@ module.exports = {
         dbHelper.postdbQuery(req,res, "insert into NodeETest set ?", post);
         console.log("NodeETest POST");
     },
-    getEmployeeOvertime : function (req,res) {
-        dbHelper.dbQuery(req,res,"select * from Employee_Overtime");
-    },
-    getPersonalInfo : function (req, res) {
-        dbHelper.dbQuery(req,res,"select * from Employee where employee_id employee_id=1");
-    }
 }
 

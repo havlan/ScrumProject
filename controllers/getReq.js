@@ -26,6 +26,12 @@ module.exports = {
     get404 : function (req, res) {
         res.status(404).send("<h1>Fokken hell m8</h1>");
         //res.send('what???', 404);
+    },
+    getOvertime : function (req, res) {
+
+    },
+    getUserInfo : function (req, res) {
+
     }
 
 }
