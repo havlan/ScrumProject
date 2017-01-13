@@ -23,11 +23,14 @@ router.route('/getDepartment').get(getCtrl.getDepartment);
 router.route('/getType').get(getCtrl.getType);
 router.route('/getShift').get(getCtrl.getShift);
 router.route('/getShift_has_employee').get(getCtrl.getShift_has_employee);
+router.route('/getRequest').get(getCtrl.getRequest);
+router.route('/getAbsence').get(getCtrl.getAbsence);
+router.route('/getOvertime').get(getCtrl.getOvertime);
+router.route('/getUserInfo').get(getCtrl.getUserInfo);
 
 //router.route('/getVaktoversikt').get(getCtrl.getVaktoversikt);
 
-router.route('/getUserInfo').get(getCtrl.getUserInfo);
-router.route('/getOvertime').get(getCtrl.getOvertime);
+
 //post / put
 router.route('/postUser').post(postCtrl.postEmployee);
 router.route('/postDepartment').post(postCtrl.postDepartment);

@@ -29,6 +29,21 @@ module.exports = {
         console.log("Overview Shift_has_employee");
         dbHelper.getdbQuery(req,res, "select * from shift_has_employee ?", get);
     },
+    getRequest : function(req,res){
+        var get = {request_id:req.body.request_id, shift_id:req.body.shift_id, employee_id:req.body.employee_id, checked_by_admin:req.body.checked_by_admin};
+        console.log("Overview Request");
+        dbHelper.getdbQuery(req,res, "select * from Request ?", get);
+    },
+    getAbsence : function(req,res){
+        var get = {absence_id:req.body.absence_id, checked_by_admin:req.body.checked_by_admin, shift_id:req.body.shift_id, employee_id:req.body.employee_id};
+        console.log("Overview Absence");
+        dbHelper.getdbQuery(req,res, "select * from Absence ?", get);
+    },
+    getOvertime : function(req,res){
+        var get = {overtime_id:req.body.overtime_id, checked_by_admin:req.body.checked_by_admin, shift_id:req.body.shift_id, employee_id:req.body.employee_id, overtime:req.body.overtime};
+        console.log("Overview Overtime");
+        dbHelper.getdbQuery(req,res, "select * from Overtime ?", get);
+    },
     /**
     getVaktoversikt : function(req,res){
         var get = {name:req.body.name, type:req.body.type, department:req.body.department, responsibility_allowed:req.body.type, phone_nr:req.body.phone_nr};

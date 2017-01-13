@@ -38,6 +38,18 @@ module.exports = {
     getShift_has_employee : function (req, res){
         dbMiddelware.getShift_has_employee(req,res);
     },
+    getRequest : function (req, res){
+        dbMiddelware.getRequest(req,res);
+    },
+    getAbsence : function (req, res){
+        dbMiddelware.getAbsence(req,res);
+    },
+    getOvertime : function (req, res){
+        dbMiddelware.getOvertime(req,res);
+    },
+    getUserInfo : function (req, res) {
+
+    },
    /**
     getVaktoversikt : function (req, res){
         //oversikt over vaktlister
@@ -50,11 +62,6 @@ module.exports = {
         res.status(404).send("<h1>Fokken hell m8</h1>");
         //res.send('what???', 404);
     },
-    getOvertime : function (req, res) {
 
-    },
-    getUserInfo : function (req, res) {
-
-    }
 
 }
