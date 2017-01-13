@@ -23,7 +23,8 @@ router.route('/postUser').post(postCtrl.postEmployee);
 router.route('/postDepartment').post(postCtrl.postDepartment);
 router.route('/postType').post(postCtrl.postType);
 router.route('/postShift').post(postCtrl.postShift);
-
+router.route('/postShift_has_employee').post(postCtrl.postShift_has_employee);
+router.route('/postRequest').post(postCtrl.postRequest);
 
 //delete
 

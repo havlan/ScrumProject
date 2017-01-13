@@ -4,10 +4,6 @@ var dbHelper = require('../helpers/db');
 
 module.exports = {
     //GET
-
-
-
-
     //POST/PUT
     postNewEmployee : function(req,res){
         var post = {name : req.body.name, phone_nr:req.body.phone_nr,email:req.body.email,seniority:req.body.seniority,
@@ -29,9 +25,17 @@ module.exports = {
     postNewShift : function (req, res) {
         var post = {shift_id:req.body.shift_id, minutes:req.body.minutes, date:req.body.date, department_id:req.body.department_id,type_name:req.body.type_name};
         console.log("Posting new Shift");
-        dbHelper.postdbQuery(req,res,"insert into Shift set?", post);
+        dbHelper.postdbQuery(req,res,"insert into Shift set ?", post);
+    },
+    postNewShift_has_employee : function (req, res) {
+        var post = {shift_id:req.body.shift_id,employee_id:req.body.employee_id,avalibility:req.body.avalibility};
+        console.log("Posting new shift_has_employee");
+        dbHelper.postdbQuery(req,res,"insert into shift_has_employee set ?",post);
+    },
+    postNewRequest : function (req, res) {
+        var post = {request_id:req.body.request_id,shift_id:req.body.shift_id,employee_id:req.body.employee_id,checked_by_admin:req.body.checked_by_admin};
+        console.log("Posting new request");
+        dbHelper.postdbQuery(req,res,"insert into Request set ?",post);
     }
-
-
 }
 //heihei

@@ -14,6 +14,11 @@ module.exports = {
     },
     postShift : function (req, res) {
         dbMiddelware.postNewShift(req,res);
+    },
+    postShift_has_employee : function (req, res) {
+        dbMiddelware.postNewShift_has_employee(req,res);
+    },
+    postRequest : function (req, res) {
+        dbMiddelware.postNewRequest(req,res);
     }
-
 }
