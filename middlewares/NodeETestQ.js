@@ -21,5 +21,7 @@ module.exports = {
     getPersonalInfo : function (req, res) {
         dbHelper.dbQuery(req,res,"select * from Employee where employee_id=1");
     }
+
+
 }
 
