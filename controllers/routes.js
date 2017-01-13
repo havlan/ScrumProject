@@ -18,6 +18,12 @@ router.route('/').get(getCtrl.getRoot);
 router.route('/user').get(getCtrl.getUser);
 router.route('/user/:id').get(getCtrl.getUser);
 router.route('/login').get(getCtrl.getLogin);
+router.route('/getEmployee').get(getCtrl.getEmployee);
+router.route('/getDepartment').get(getCtrl.getDepartment);
+router.route('/getType').get(getCtrl.getType);
+router.route('getShift').get(getCtrl.getShift);
+router.route('/getVaktoversikt').get(getCtrl.getVaktoversikt);
+
 router.route('/getUserInfo').get(getCtrl.getUserInfo);
 router.route('/getOvertime').get(getCtrl.getOvertime);
 //post / put

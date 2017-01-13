@@ -22,6 +22,24 @@ module.exports = {
         res.json({"Msg":"Yodeliho"});
         console.log("GET index.html #" + ++totalgetReq + " today.");
     },
+
+    getEmployee : function (req, res){
+      dbMiddelware.getEmployee(req,res);
+    },
+    getDepartment : function (req, res){
+        dbMiddelware.getDepartment(req,res);
+    },
+    getType : function (req, res){
+        dbMiddelware.getType(req,res);
+    },
+    getShift : function (req, res) {
+        db.Middleware.getShift
+    },
+    getVaktoversikt : function (req, res){
+        //oversikt over vaktlister
+        //res.sendFile(path.join(__dirname + '/../views/Vaktoversikt.html'));
+    },
+
     //404 må være sist
     get404 : function (req, res) {
         res.status(404).send("<h1>Fokken hell m8</h1>");
