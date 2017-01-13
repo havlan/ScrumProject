@@ -5,9 +5,8 @@ var dbHelper = require('../helpers/db');
 module.exports = {
     //GET
     getEmployee : function(req,res){
-        var get = {phone_nr:req.body.phone_nr, total_hours:req.body.total_hours, employee_id:req.body.employee_id, email:req.body.email, seniority:req.body.seniority, responsibility_allowed:req.body.responsibility_allowed, type_name:req.body.type_name, name:req.body.name, address:req.body.address, pers_id:req.body.pers_id};
         console.log("Overview Employee");
-        dbHelper.getdbQuery(req,res, "select * from Employee ?", get);
+        dbHelper.getdbQuery(req,res, "select * from Employee");
     },
     getDepartment : function(req,res){
       //var get = {department_id:req.body.department_id};
@@ -15,34 +14,29 @@ module.exports = {
       dbHelper.getdbQuery(req,res, "select * from Department where department_id = ?", req.params.department_id);
     },
     getType : function(req,res){
-        var get = {name:req.body.name, rank:req.body.rank};
         console.log("Overview Type");
-        dbHelper.getdbQuery(req,res, "select * from Type ?", get);
+        dbHelper.getdbQuery(req,res, "select * from Type");
     },
     getShift : function(req,res){
-        var get = {skift_id:req.body.shift_id, minutes:req.body.minutes, date:req.body.date, department_id:req.body.department_id, type_name:req.body.type_name};
+
         console.log("Overview Shift");
-        dbHelper.getdbQuery(req,res, "select * from Shift ?", get);
+        dbHelper.getdbQuery(req,res, "select * from Shift");
     },
     getShift_has_employee : function(req,res){
-        var get = {shift_id:req.body.shift_id, employee_id:req.body.employee_id, availibility:req.body.availibility};
         console.log("Overview Shift_has_employee");
-        dbHelper.getdbQuery(req,res, "select * from shift_has_employee ?", get);
+        dbHelper.getdbQuery(req,res, "select * from shift_has_employee");
     },
     getRequest : function(req,res){
-        var get = {request_id:req.body.request_id, shift_id:req.body.shift_id, employee_id:req.body.employee_id, checked_by_admin:req.body.checked_by_admin};
         console.log("Overview Request");
-        dbHelper.getdbQuery(req,res, "select * from Request ?", get);
+        dbHelper.getdbQuery(req,res, "select * from Request");
     },
     getAbsence : function(req,res){
-        var get = {absence_id:req.body.absence_id, checked_by_admin:req.body.checked_by_admin, shift_id:req.body.shift_id, employee_id:req.body.employee_id};
+
         console.log("Overview Absence");
-        dbHelper.getdbQuery(req,res, "select * from Absence ?", get);
+        dbHelper.getdbQuery(req,res, "select * from Absence");
     },
     getOvertime : function(req,res){
-        var get = {overtime_id:req.body.overtime_id, checked_by_admin:req.body.checked_by_admin, shift_id:req.body.shift_id, employee_id:req.body.employee_id, overtime:req.body.overtime};
-        console.log("Overview Overtime");
-        dbHelper.getdbQuery(req,res, "select * from Overtime ?", get);
+        dbHelper.getdbQuery(req,res, "select * from Overtime");
     },
     /**
     getVaktoversikt : function(req,res){
