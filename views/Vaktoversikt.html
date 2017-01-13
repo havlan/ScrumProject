@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Vaktoversikt</title>
-    <script src="../public/frontendJS/sorttable.js"></script>
-    <link rel="stylesheet" href="../public/css/Vaktoversiktstyle.css">
+    <script src="frontendJS/sorttable.js"></script>
+    <link rel="stylesheet" href="css/Vaktoversiktstyle.css">
 
 
 </head>
@@ -104,56 +104,13 @@
 
 
             </table>
-            <button type="button" onclick="addToTable(contentname,contenttype,contentdepartment,contentresponsibility,contentphone,
-                             newIDdaybox, newIDname, newIDtype, newIDdepartment, newIDresponsibility, newIDphone)">trykk</button>
         </div>
     </div>
 </div>
 
-<script type="text/javascript">
-
-    function addToTable(contentname,contenttype,contentdepartment,contentresponsibility,contentphone,
-                             newIDdaybox, newIDname, newIDtype, newIDdepartment, newIDresponsibility, newIDphone){
-        var daybox_tr = document.createElement('tr');
-        daybox_tr.id = newIDdaybox;
-        daybox_tr.className = 'daybox';
-        var name_td = document.createElement('td');
-        name_td.id = newIDname;
-        name_td.className = 'name';
-        var type_td = document.createElement('td');
-        type_td.id = newIDtype;
-        type_td.className = 'type';
-        var department_td = document.createElement('td');
-        department_td.id = newIDdepartment;
-        department_td.className = 'department';
-        var responsibility_td = document.createElement('td');
-        responsibility_td.id = newIDresponsibility;
-        responsibility_td.className = 'responsibility';
-        var phone_td = document.createElement('td');
-        phone_td.id = newIDphone;
-        phone_td.className = 'phone';
-
-        name_td.innerHTML = contentname;
-        type_td.innerHTML = contenttype;
-        department_td.innerHTML = contentdepartment;
-        responsibility_td.innerHTML = contentdepartment;
-        phone_td.innerHTML = contentphone;
-        // The variable iDiv is still good... Just append to it.
+<script>
 
 
-        daybox_tr.insertCell(name_td);
-        daybox_tr.insertCell(type_td);
-        daybox_tr.insertCell(department_td);
-        daybox_tr.insertCell(responsibility_td);
-        daybox_tr.insertCell(phone_td);
-
-        document.getElementById("day").insertRow(daybox_tr);
-
-    }
-    function remove(id){
-        var elem = document.getElementById(id);
-        return elem.parentNode.removeChild(elem);
-    }
 
 </script>
 
