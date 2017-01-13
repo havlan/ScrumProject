@@ -25,6 +25,8 @@ router.route('/postType').post(postCtrl.postType);
 router.route('/postShift').post(postCtrl.postShift);
 router.route('/postShift_has_employee').post(postCtrl.postShift_has_employee);
 router.route('/postRequest').post(postCtrl.postRequest);
+router.route('/postAbsence').post(postCtrl.postAbsence);
+router.route('/postOvertime').post(postCtrl.postOvertime);
 
 //delete
 

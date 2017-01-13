@@ -20,5 +20,11 @@ module.exports = {
     },
     postRequest : function (req, res) {
         dbMiddelware.postNewRequest(req,res);
+    },
+    postAbsence : function (req,res) {
+        dbMiddelware.postNewAbsence(req,res);
+    },
+    postOvertime : function (req, res) {
+        dbMiddelware.postnewOvertime(req,res);
     }
 }
