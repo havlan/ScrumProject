@@ -51,6 +51,12 @@ module.exports = {
         var post = {username:req.body.username,password_hash:req.body.password_hash,password_salt:req.body.password_salt,employee_id:req.body.employee_id};
         console.log("Posting new LogInInfo");
         dbHelper.postdbQuery(req,res,"insert into LogInInfo set ?",post);
+    },
+    getEmployeeOvertime : function (req,res) {
+        dbHelper.dbQuery(req,res,"select * from Employee_Overtime");
+    },
+    getPersonalInfo : function (req, res) {
+        dbHelper.dbQuery(req,res,"select * from Employee where employee_id employee_id=1");
     }
 }
 //heihei
