@@ -12,7 +12,7 @@ describe('=====TESTING=====', function(){
     it("GET ROOT", function testSlash(done){ // 200 == ok, when redirecting http status code 302 is res.
         request(server)
             .get('/')
-            .expect(302,done); // 302 == found
+            .expect(200,done); // 302 == found
     });
     it("GET /user",function testPath(done){
         request(server)
@@ -24,4 +24,5 @@ describe('=====TESTING=====', function(){
             .get('/hest/hestere')
             .expect(404,done); // 404 not found
     });
+
 });

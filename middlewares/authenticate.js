@@ -1,0 +1,3 @@
+var cryptoHash = require('./cryptoHash');
+
+
