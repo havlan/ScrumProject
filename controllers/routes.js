@@ -19,7 +19,7 @@ router.route('/user').get(getCtrl.getUser);
 router.route('/user/:id').get(getCtrl.getUser);
 router.route('/login').get(getCtrl.getLogin);
 router.route('/getEmployee').get(getCtrl.getEmployee);
-router.route('/getDepartment').get(getCtrl.getDepartment);
+router.route('/getDepartment/:department_id').get(getCtrl.getDepartment);
 router.route('/getType').get(getCtrl.getType);
 router.route('/getShift').get(getCtrl.getShift);
 router.route('/getShift_has_employee').get(getCtrl.getShift_has_employee);

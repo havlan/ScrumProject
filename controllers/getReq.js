@@ -27,6 +27,7 @@ module.exports = {
       dbMiddelware.getEmployee(req,res);
     },
     getDepartment : function (req, res){
+        console.log("DEPARTMENT REQUEST" + req.params.department_id);
         dbMiddelware.getDepartment(req,res);
     },
     getType : function (req, res){

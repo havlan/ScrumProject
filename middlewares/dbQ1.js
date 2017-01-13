@@ -10,9 +10,9 @@ module.exports = {
         dbHelper.getdbQuery(req,res, "select * from Employee ?", get);
     },
     getDepartment : function(req,res){
-      var get = {department_id:req.body.department_id, department_name:req.body.department_nanme};
+      //var get = {department_id:req.body.department_id};
       console.log("Overview Department");
-      dbHelper.getdbQuery(req,res, "select * from Department ?", get);
+      dbHelper.getdbQuery(req,res, "select * from Department where department_id = ?", req.params.department_id);
     },
     getType : function(req,res){
         var get = {name:req.body.name, rank:req.body.rank};
