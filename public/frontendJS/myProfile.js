@@ -4,9 +4,11 @@ var bodyParser = require('body-parser');
 
 
 var navn;
+var perssonalinfo;
 
 $(document).ready(function(){
 
     navn = test1.getNodeETest(req,res);
-    document.getElementById("h1").innerHTML = navn;
+    personalinfo = test1.getPersonalInfo(req,res);
+    document.getElementById("h1").innerHTML = perssonalinfo;
 })

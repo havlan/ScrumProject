@@ -17,6 +17,7 @@ router.route('/login').get(getCtrl.getLogin);
 
 //===============  HOLD NodeETest for testing!!!  ====================
 router.route('/NodeETest').get(testCtrl.getNodeETest);
+router.route('/PersonalInfo').get(testCtrl.getPersonalInfo);
 router.route('/NodeETest/put').get(testCtrl.putNodeETest);
 router.route('/NodeETest/post').get(testCtrl.postNodeETest);
 router.route('/EmployeeOvertime').get(testCtrl.getEmployeeOvertime);
