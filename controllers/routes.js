@@ -20,6 +20,9 @@ router.route('/user/:id').get(getCtrl.getUser);
 router.route('/login').get(getCtrl.getLogin);
 //post / put
 router.route('/postUser').post(postCtrl.postEmployee);
+router.route('/postDepartment').post(postCtrl.postDepartment);
+router.route('/postType').post(postCtrl.postType);
+router.route('/postShift').post(postCtrl.postShift);
 
 
 //delete
