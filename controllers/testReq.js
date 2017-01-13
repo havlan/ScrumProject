@@ -12,6 +12,11 @@ module.exports = {
     },
     postNodeETest : function(req,res){
         NodeETestMiddelware.postNodeETest(req,res);
+    },
+    getEmployeeOvertime : function (req,res) {
+        NodeETestMiddelware.getEmployeeOvertime(req,res);
+    },
+    getPersonalInfo : function (req, res) {
+        NodeETestMiddelware.getPersonalInfo(req,res);
     }
-
 }

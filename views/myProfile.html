@@ -3,12 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>MinProfil</title>
-    <link rel="stylesheet" href="../public/css/myProfile.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js">
-        $(document).ready(function(){
-
-        })
-    </script>
+    <link href ="/css/myProfile.css" rel="stylesheet" type = "text/css" > <!-- public + /css/myProfile.css   -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 </head>
 <body>
 <main>
@@ -16,26 +12,43 @@
     <table cellspacing="10">
         <tr>
             <td class="info">Stillingstittel</td>
-            <td class="db"></td>
+            <td class="db" id="stillingstittel"></td>
         </tr>
         <tr>
             <td class="info">Telefonnummer</td>
-            <td class="db">FRADATABASE</td>
+            <td class="db" id="tlfnr">FRADATABASE</td>
         </tr>
         <tr>
             <td class="info">E-postadresse</td>
-            <td class="db">FRADATABASE</td>
+            <td class="db" id="epost">FRADATABASE</td>
         </tr>
         <tr>
             <td class="info">Adresse</td>
-            <td class="db">FRADATABASE</td>
+            <td class="db" id="adresse">FRADATABASE</td>
         </tr>
     </table>
-    <button type="button" onclick="alert('Ring administrasjonen')">Rediger</button>
+    <button type="button">Rediger</button>
 </main>
 <figure>
-    <img src="https://s3.amazonaws.com/whisperinvest-images/default.png" alt = "Bilde av ansatt" size="width:100px height:100px;">
+    <img src="/img/kungen.jpg" alt = "Bilde av ansatt" size="width:100px height:100px;">
 </figure>
-<script type = "text/javascript"  src = "../public/frontendJS/myProfile.js"></script>
+<script>
+    $(document).ready(function(){ // syntax for å hente data når dokument (html) er lastet inn
+        $.get('/NodeETest', {}, function(req, res, data){
+
+            console.log(data);
+            console.log(data.responseJSON[1]);
+
+            document.getElementById("h1").innerHTML = data.responseJSON[0].notat;
+            document.getElementById("stillingstittel").innerHTML = data.responseJSON[1].notat;
+            document.getElementById("tlfnr").innerHTML = data.responseJSON[0].id;
+            document.getElementById("epost").innerHTML = data.responseJSON[0].notat;
+            document.getElementById("adresse").innerHTML = data.responseJSON[0].id;
+
+        });
+    });
+</script>
 </body>
 </html>
+
+<!--"https://s3.amazonaws.com/whisperinvest-images/default.png" -->

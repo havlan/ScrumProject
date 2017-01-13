@@ -7,7 +7,8 @@ var totalgetReq = 0;
 module.exports = {
 
     getRoot : function(req,res){
-        //res.redirect('/login'); //
+
+        res.redirect('/login'); //
     },
 
     getUser : function(req,res){
@@ -17,8 +18,8 @@ module.exports = {
     },
 
     getLogin : function (req, res) {
-        //res.sendFile(path.join(__dirname + '/../index.html'));
-        res.json({"Msg":"Yodeliho"});
+        res.sendFile(path.join(__dirname + '/../views/myProfile.html'));0
+        //res.json({"Msg":"Yodeliho"});
         console.log("GET index.html #" + ++totalgetReq + " today.");
     },
     //404 må være sist

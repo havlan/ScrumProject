@@ -1,0 +1,153 @@
+#nameInput {
+    width: 25%;
+    font-size: 16px;
+    padding: 12px 20px 12px 40px;
+    border: 1px solid #ddd;
+    margin-bottom: 12px;
+}
+
+#positionInput {
+    width: 25%;
+    font-size: 16px;
+    padding: 12px 20px 12px 40px;
+    border: 1px solid #ddd;
+    margin-bottom: 12px;
+}
+
+#myTable {
+    border-collapse: collapse;
+    width: 100%;
+    border: 1px solid #ddd;
+    font-size: 18px;
+}
+
+#myTable th, #myTable td {
+    text-align: left;
+    padding: 12px;
+}
+
+#myTable tr {
+    border-bottom: 1px solid #ddd;
+}
+
+#myTable tr.header{
+    background-color: #f1f1f1;
+}
+#myTable tr:hover{
+    background-color: aliceblue;
+    cursor: pointer;
+}
+
+body{
+    padding-left: 3%;
+    padding-right: 3%;
+}
+
+.infoCard {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    width: 40%;
+    border-radius: 5px;
+    position: absolute;
+}
+
+.infoCard:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+img {
+    border-radius: 5px 5px 0 0;
+}
+
+.container {
+    padding: 2px 16px;
+}
+#edit{
+    background-color: #f1f1f1;
+    border: none;
+    color: black;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+#remove{
+    margin-left: 10px;
+    background-color: indianred;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+#add{
+    margin-left: 10px;
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+#personForm{
+    position: relative;
+    width: 50%;
+    margin-left: 45%;
+    text-align: right;
+    padding-bottom: 5%;
+}
+
+.buttons{
+    margin-left: 270px;
+    padding-top: 5%;
+    position: relative;
+}
+
+.modal-footer{
+    position: relative;
+    padding-top: 10%;
+}
+#personInfo{
+    margin-left: 45%;
+    text-align: right;
+    font-size: 16px;
+}
+#picEmp{
+    border: solid black 1px;
+    position:absolute;
+    margin-left: 60%;
+}
+
+#addEmp{
+    position: relative;
+    text-align:right;
+    margin-right: 50%;
+}
+
+#addPicEmp{
+    position: absolute;
+    margin-left: 65%;
+    margin-top: 30%;
+}
+
+#save{
+    margin-left: 10px;
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+.info{
+    font-size: 18px;
+}

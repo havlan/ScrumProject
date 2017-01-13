@@ -11,7 +11,9 @@ var getController = require('./controllers/getReq.js');
 
 //use
 app.use(bodyParser.json());
+app.use(express.static (__dirname + '/public'));
 app.use('/', router);
+
 
 
 require("console-stamp")(console, {
