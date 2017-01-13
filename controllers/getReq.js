@@ -16,11 +16,15 @@ module.exports = {
         res.json({"Params": "" + req.params.id});
         console.log("GET user #" + ++totalgetReq + " " + JSON.stringify(req.body));
     },
+    getLogin : function (req,res){
+        res.sendFile(path.join(__dirname + '/../views/Login.html'));
+    },
 
-    getLogin : function (req, res) {
+    submitLogin : function (req, res) {
         //res.sendFile(path.join(__dirname + '/../index.html'));
-        res.json({"Msg":"Yodeliho"});
-        console.log("GET index.html #" + ++totalgetReq + " today.");
+        //res.json({"Msg":"Yodeliho"});
+        //console.log("GET index.html #" + ++totalgetReq + " today.");
+        dbMiddelware.getSaltHash(req,res);
     },
 
     getEmployee : function (req, res){

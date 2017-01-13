@@ -38,6 +38,9 @@ module.exports = {
     getOvertime : function(req,res){
         dbHelper.getdbQuery(req,res, "select * from Overtime");
     },
+    getSaltHash: function(req,res){
+        dbHelper.getdbQuery(req,res, "select password_hash, password_salt, is_admin from LoginInfo where Username = ?",req.body.username);
+    },
     /**
     getVaktoversikt : function(req,res){
         var get = {name:req.body.name, type:req.body.type, department:req.body.department, responsibility_allowed:req.body.type, phone_nr:req.body.phone_nr};
@@ -47,6 +50,8 @@ module.exports = {
 */
 
     //POST/PUT
+
+
     postNewEmployee : function(req,res){
         var post = {name : req.body.name, phone_nr:req.body.phone_nr,email:req.body.email,seniority:req.body.seniority,
             username:req.body.username,address:req.body.address,type_name:req.body.type_name,responsibility_allowed:

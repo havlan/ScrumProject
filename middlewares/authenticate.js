@@ -20,7 +20,14 @@ passport.deserializeUser(function(username, done) { // finn login her
 passport.use('login', new LocalStrategy({
     passReqToCallback: true}, function(req,res){
     //FINN BRUKER DB query
-    query.
+    query.getSaltHash(req,res, function(err,user){
+        if(err){
+            console.log("ERROR LOGIN");
+        }
+        if(user){
+            
+        }
+    });
 
 }))
 
