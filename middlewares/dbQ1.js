@@ -46,6 +46,11 @@ module.exports = {
         var post = {overtime_id:req.body.overtime_id,checked_by_admin:req.body.checked_by_admin,shift_id:req.body.shift_id,employee_id:req.body.employee_id,overtime:req.body.overtime};
         console.log("Posting new overtime");
         dbHelper.postdbQuery(req,res,"insert into Overtime set ?",post);
+    },
+    postnewLogInInfo : function (req, res) {
+        var post = {username:req.body.username,password_hash:req.body.password_hash,password_salt:req.body.password_salt,employee_id:req.body.employee_id};
+        console.log("Posting new LogInInfo");
+        dbHelper.postdbQuery(req,res,"insert into LogInInfo set ?",post);
     }
 }
 //heihei

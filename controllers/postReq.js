@@ -26,5 +26,8 @@ module.exports = {
     },
     postOvertime : function (req, res) {
         dbMiddelware.postnewOvertime(req,res);
+    },
+    postLogInInfo : function (req, res) {
+        dbMiddelware.postnewLogInInfo(req,res);
     }
 }
