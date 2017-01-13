@@ -33,12 +33,17 @@ module.exports = {
         dbMiddelware.getType(req,res);
     },
     getShift : function (req, res) {
-        db.Middleware.getShift
+        dbMiddelware.getShift(req,res);
     },
+    getShift_has_employee : function (req, res){
+        dbMiddelware.getShift_has_employee(req,res);
+    },
+   /**
     getVaktoversikt : function (req, res){
         //oversikt over vaktlister
         //res.sendFile(path.join(__dirname + '/../views/Vaktoversikt.html'));
     },
+    */
 
     //404 må være sist
     get404 : function (req, res) {

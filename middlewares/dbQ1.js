@@ -7,29 +7,35 @@ module.exports = {
     getEmployee : function(req,res){
         var get = {phone_nr:req.body.phone_nr, total_hours:req.body.total_hours, employee_id:req.body.employee_id, email:req.body.email, seniority:req.body.seniority, responsibility_allowed:req.body.responsibility_allowed, type_name:req.body.type_name, name:req.body.name, address:req.body.address, pers_id:req.body.pers_id};
         console.log("Overview Employee");
-        dbHelper.getdbQuery(req,res, "overview employees ?", get);
+        dbHelper.getdbQuery(req,res, "select * from Employee ?", get);
     },
     getDepartment : function(req,res){
       var get = {department_id:req.body.department_id, department_name:req.body.department_nanme};
       console.log("Overview Department");
-      dbHelper.getdbQuery(req,res, "overview departments ?", get);
+      dbHelper.getdbQuery(req,res, "select * from Department ?", get);
     },
     getType : function(req,res){
         var get = {name:req.body.name, rank:req.body.rank};
         console.log("Overview Type");
-        dbHelper.getdbQuery(req,res, "overview types ?", get);
+        dbHelper.getdbQuery(req,res, "select * from Type ?", get);
     },
     getShift : function(req,res){
         var get = {skift_id:req.body.shift_id, minutes:req.body.minutes, date:req.body.date, department_id:req.body.department_id, type_name:req.body.type_name};
         console.log("Overview Shift");
-        dbHelper.getdbQuery(req,res, "overview shifts ?", get);
+        dbHelper.getdbQuery(req,res, "select * from Shift ?", get);
     },
+    getShift_has_employee : function(req,res){
+        var get = {shift_id:req.body.shift_id, employee_id:req.body.employee_id, availibility:req.body.availibility};
+        console.log("Overview Shift_has_employee");
+        dbHelper.getdbQuery(req,res, "select * from shift_has_employee ?", get);
+    },
+    /**
     getVaktoversikt : function(req,res){
         var get = {name:req.body.name, type:req.body.type, department:req.body.department, responsibility_allowed:req.body.type, phone_nr:req.body.phone_nr};
         console.log("Overview worklist");
         dbHelper.getdbQuery(req,res, "overview shifts ?", get);
     },
-
+*/
 
     //POST/PUT
     postNewEmployee : function(req,res){

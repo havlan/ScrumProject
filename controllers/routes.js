@@ -22,7 +22,9 @@ router.route('/getEmployee').get(getCtrl.getEmployee);
 router.route('/getDepartment').get(getCtrl.getDepartment);
 router.route('/getType').get(getCtrl.getType);
 router.route('/getShift').get(getCtrl.getShift);
-router.route('/getVaktoversikt').get(getCtrl.getVaktoversikt);
+router.route('/getShift_has_employee').get(getCtrl.getShift_has_employee);
+
+//router.route('/getVaktoversikt').get(getCtrl.getVaktoversikt);
 
 router.route('/getUserInfo').get(getCtrl.getUserInfo);
 router.route('/getOvertime').get(getCtrl.getOvertime);
