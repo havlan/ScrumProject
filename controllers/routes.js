@@ -4,6 +4,7 @@
 var express = require('express');
 var getCtrl = require('./getReq');
 var putCtrl = require('./putReq');
+var postCtrl = require('./postReq');
 var delCtrl = require('./delReq');
 var testCtrl = require('./testReq');
 var router = express.Router();
@@ -18,6 +19,8 @@ router.route('/user').get(getCtrl.getUser);
 router.route('/user/:id').get(getCtrl.getUser);
 router.route('/login').get(getCtrl.getLogin);
 //post / put
+router.route('/postUser').post(postCtrl.postEmployee);
+
 
 //delete
 
