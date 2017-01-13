@@ -1,0 +1,49 @@
+@charset "utf-8";
+/* CSS Document */
+
+thead{
+    background-color:#bf946f;
+}
+th{
+    width: 100px;
+    height: 30px;
+    cursor:pointer;
+}
+td{
+    text-align:center;
+    height: 30px;
+    border:#CBCBCB 1px;
+    background-color:#E5E5E5;
+    width: 100px;
+}
+h4{
+    margin: 0px;
+}
+
+.tbody-container{
+    height: 240px;
+    overflow-y: scroll;
+}
+
+table tbody,table thead{
+    display:block;
+}
+
+table tbody {
+    overflow: auto;
+    height: 100px;
+}
+.left{
+    position:relative;
+    float: left;
+}
+.right{
+    position: relative;
+    float: left;
+}
+
+.center{
+
+    text-align:center;
+}
+
