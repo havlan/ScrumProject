@@ -5,49 +5,11 @@
     <title>Vaktoversikt</title>
     <script src="../public/frontendJS/sorttable.js"></script>
     <link rel="stylesheet" href="../public/css/Vaktoversiktstyle.css">
-    <script type="text/javascript">
-        function addRow(content1, content2, content3, content4, content5)
-        {
-            if (!document.getElementsByTagName) return;
-            tabBody=document.getElementsByTagName("tbody").item(0);
-            row=document.createElement("tr");
-            cell1 = document.createElement("td");
-            cell2 = document.createElement("td");
-            cell3 = document.createElement("td");
-            cell4 = document.createElement("td");
-            cell5 = document.createElement("td");
-            textnode1=document.createTextNode(content1);
-            textnode2=document.createTextNode(content2);
-            textnode3=document.createTextNode(content3);
-            textnode4=document.createTextNode(content4);
-            textnode5=document.createTextNode(content5);
-            cell1.appendChild(textnode1);
-            cell2.appendChild(textnode2);
-            cell3.appendChild(textnode3);
-            cell4.appendChild(textnode4);
-            cell5.appendChild(textnode5);
-            row.appendChild(cell1);
-            row.appendChild(cell2);
-            row.appendChild(cell3);
-            row.appendChild(cell4);
-            row.appendChild(cell5);
-            tabBody.appendChild(row);
 
-
-        }
-    </script>
 
 </head>
 
 <body>
-<table border='1' id='mytable'>
-    <tbody>
-    <tr><td>22</td><td>333</td></tr>
-    <tr><td>22</td><td>333</td></tr>
-    </tbody>
-</table>
-<button onClick='addRow("123","456","sdfg","cgh","dfb");return false;'>
-    Add Row</button>
 
 
 <div class="main-content">
@@ -75,13 +37,13 @@
                     <th>Nummer</th>
                 </tr>
                 </thead>
-                <tbody>
-                <tr>
-                    <td >Per</td>
-                    <td>Sykepleier</td>
-                    <td>Nord</td>
-                    <td>nei</td>
-                    <td>98403848</td>
+                <tbody id="day">
+                <tr class="daybox">
+                    <td class="name"></td>
+                    <td class="type"></td>
+                    <td class="department"></td>
+                    <td class="responsibility"></td>
+                    <td class="phone"></td>
                 </tr>
 
                 </tbody>
@@ -103,43 +65,15 @@
                     <th>Nummer</th>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody id="evening">
                 <tr>
-                    <td>Per</td>
-                    <td>Sykepleier</td>
-                    <td>Nord</td>
-                    <td>nei</td>
-                    <td>98403848</td>
+                    <td id="name1" ></td>
+                    <td id="type1"></td>
+                    <td id="department1"></td>
+                    <td id="responsibility1"></td>
+                    <td id="phone1"></td>
                 </tr>
-                <tr>
-                    <td>Ole</td>
-                    <td>Assistent</td>
-                    <td>Nord</td>
-                    <td>nei</td>
-                    <td>98765423</td>
-                </tr>
-                <tr>
-                    <td>Kari</td>
-                    <td>Lege</td>
-                    <td>Sør</td>
-                    <td>ja</td>
-                    <td>57890987</td>
-                </tr>
-                <tr>
-                    <td>Bernt</td>
-                    <td>Sykepleier</td>
-                    <td>Sør</td>
-                    <td>nei</td>
-                    <td>45678934</td>
-                </tr>
-                <tr>
-                    <td>Silja</td>
-                    <td>Sykepleier</td>
-                    <td>Nord</td>
-                    <td>ja</td>
-                    <td>34567893</td>
-                </tr>
-                </tbody>
+
 
             </table>
         </div>
@@ -158,49 +92,71 @@
                     <th>Nummer</th>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody id="night">
                 <tr>
-                    <td>Per</td>
-                    <td>Sykepleier</td>
-                    <td>Nord</td>
-                    <td>nei</td>
-                    <td>98403848</td>
-                </tr>
-                <tr>
-                    <td>Ole</td>
-                    <td>Assistent</td>
-                    <td>Nord</td>
-                    <td>nei</td>
-                    <td>98765423</td>
-                </tr>
-                <tr>
-                    <td>Kari</td>
-                    <td>Lege</td>
-                    <td>Sør</td>
-                    <td>ja</td>
-                    <td>57890987</td>
-                </tr>
-                <tr>
-                    <td>Bernt</td>
-                    <td>Sykepleier</td>
-                    <td>Sør</td>
-                    <td>nei</td>
-                    <td>45678934</td>
-                </tr>
-                <tr>
-                    <td>Silja</td>
-                    <td>Sykepleier</td>
-                    <td>Nord</td>
-                    <td>ja</td>
-                    <td>34567893</td>
+                    <td id="name2" ></td>
+                    <td id="type2"></td>
+                    <td id="department2"></td>
+                    <td id="responsibility2"></td>
+                    <td id="phone2"></td>
                 </tr>
                 </tbody>
 
+
             </table>
+            <button type="button" onclick="addToTable(contentname,contenttype,contentdepartment,contentresponsibility,contentphone,
+                             newIDdaybox, newIDname, newIDtype, newIDdepartment, newIDresponsibility, newIDphone)">trykk</button>
         </div>
     </div>
 </div>
 
+<script type="text/javascript">
+
+    function addToTable(contentname,contenttype,contentdepartment,contentresponsibility,contentphone,
+                             newIDdaybox, newIDname, newIDtype, newIDdepartment, newIDresponsibility, newIDphone){
+        var daybox_tr = document.createElement('tr');
+        daybox_tr.id = newIDdaybox;
+        daybox_tr.className = 'daybox';
+        var name_td = document.createElement('td');
+        name_td.id = newIDname;
+        name_td.className = 'name';
+        var type_td = document.createElement('td');
+        type_td.id = newIDtype;
+        type_td.className = 'type';
+        var department_td = document.createElement('td');
+        department_td.id = newIDdepartment;
+        department_td.className = 'department';
+        var responsibility_td = document.createElement('td');
+        responsibility_td.id = newIDresponsibility;
+        responsibility_td.className = 'responsibility';
+        var phone_td = document.createElement('td');
+        phone_td.id = newIDphone;
+        phone_td.className = 'phone';
+
+        name_td.innerHTML = contentname;
+        type_td.innerHTML = contenttype;
+        department_td.innerHTML = contentdepartment;
+        responsibility_td.innerHTML = contentdepartment;
+        phone_td.innerHTML = contentphone;
+        // The variable iDiv is still good... Just append to it.
+
+
+        daybox_tr.insertCell(name_td);
+        daybox_tr.insertCell(type_td);
+        daybox_tr.insertCell(department_td);
+        daybox_tr.insertCell(responsibility_td);
+        daybox_tr.insertCell(phone_td);
+
+        document.getElementById("day").insertRow(daybox_tr);
+
+    }
+    function remove(id){
+        var elem = document.getElementById(id);
+        return elem.parentNode.removeChild(elem);
+    }
+
+</script>
 
 </body>
 </html>
+
