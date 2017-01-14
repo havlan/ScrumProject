@@ -46,7 +46,13 @@ if(process.env.NODE_ENV !== 'test'){
 //insert into NodeETest values ('42', 'Barbaren Dave')
 //delete from NodeETest where id = '42'
 app.post('/slippmeginn',function(req,res,next){ // expire: 24t, sessionId: ahsdhelwleggogpg223311, is_admin: bool
-    res.json({"Success":"MaBoii"});
+    if(req.session && req.session.is_admin === true && req.session.username === "Abigail"){ // sjekk det du må
+        console.log("ADMIN LOGIN");
+    }else{ // sjekk vanlig login
+        console.log("No session data exists");
+        req.session.username = req.body.username;
+        req.session.is_admin = true;
+    }
     next();
 });
 app.get('/sessiontest',function(req,res,next){
