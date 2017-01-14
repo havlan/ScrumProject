@@ -25,7 +25,7 @@ module.exports =
                 connection.query(query, function (err, rows) {
                     connection.release(); // Legg tilbake i pool
                     if (!err) {
-                        console.log(rows);
+                        //console.log(rows);
                          res.json(rows);
 
                     } else {
