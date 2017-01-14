@@ -18,7 +18,6 @@ module.exports = {
         dbHelper.getdbQuery(req,res, "select * from Type");
     },
     getShift : function(req,res){
-
         console.log("Overview Shift");
         dbHelper.getdbQuery(req,res, "select * from Shift");
     },
@@ -31,7 +30,6 @@ module.exports = {
         dbHelper.getdbQuery(req,res, "select * from Request");
     },
     getAbsence : function(req,res){
-
         console.log("Overview Absence");
         dbHelper.getdbQuery(req,res, "select * from Absence");
     },
@@ -103,7 +101,7 @@ module.exports = {
         dbHelper.dbQuery(req,res,"select * from Employee_Overtime");
     },
     getPersonalInfo : function (req, res) {
-        dbHelper.dbQuery(req,res,"select * from Employee where employee_id employee_id=1");
+        dbHelper.dbQuery(req,res,"select * from Employee");
     }
 }
 //heihei
