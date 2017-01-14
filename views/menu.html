@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="css/menu.css">
+    <title></title>
+</head>
+
+<body>
+<!-- HEADER AND ALL HEADER ELEMENTS -->
+<header class="header_elements">
+    <div id="image" class="header_elements"></div>
+    <div id="dropdown_button" class="header_elements">
+        <a id="dropdown_button_text" class="header_text_element" href="javascript:void(0)" onclick="openMenu()" title="Menu">Menu</a>
+    </div>
+    <p class="header_text_element">MinVakt v0.0</p>
+    <div id="logout_button" class="header_elements">
+        <a id="logout_button_text" class="header_text_element" href="javascript:void(0)" onclick="logout()" title="Menu">Log out</a>
+    </div>
+
+</header>
+<!-- DROPDOWN BOX AND BUTTONS -->
+<div id=dropdown_box class="hidden"></div>
+<main>
+
+    <!-- SIDEBAR AND SIDEBAR BUTTONS -->
+    <sidebar class="sidebar_elements">
+        <div class="sidebar_item" class="sidebar_elements">
+            <a class="sidebar_logo" href="javascript:vod(0)" onclick="changeWindow(CALENDAR)">#</a>
+        </div>
+        <div class="sidebar_item" class="sidebar_elements">
+            <a class="sidebar_logo" href="javascript:vod(0)" onclick="changeWindow(DAY)">#</a>
+        </div>
+        <div class="sidebar_item" class="sidebar_elements">
+            <a class="sidebar_logo" href="javascript:vod(0)" onclick="changeWindow(DISPONIBILITY)">#</a>
+        </div>
+        <div class="sidebar_item" class="sidebar_elements">
+            <a class="sidebar_logo" href="javascript:vod(0)" onclick="changeWindow(REQUESTS)">#</a>
+        </div>
+        <div class="sidebar_item" class="sidebar_elements">
+            <a class="sidebar_logo" href="javascript:vod(0)" onclick="changeWindow(PEOPLE)">#</a>
+        </div>
+        <div class="sidebar_item" class="sidebar_elements">
+            <a class="sidebar_logo" href="javascript:vod(0)" onclick="changeWindow(PROFILE)">#</a>
+        </div>
+        <div class="sidebar_item" class="sidebar_elements">
+            <a class="sidebar_logo" href="javascript:vod(0)" onclick="changeWindow(HISTORY)">#</a>
+        </div>
+    </sidebar>
+
+    <!-- MAINBOX CONTAINING ALL THE DIFFERENT TABS -->
+    <div id="mainbox">
+
+    </div>
+
+</main>
+
+<!-- JAVASCRIPT LINK -->
+<script src="frontendJS/menu.js"></script>
+</body>
+</html>

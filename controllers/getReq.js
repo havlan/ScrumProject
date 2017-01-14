@@ -18,7 +18,7 @@ module.exports = {
     },
 
     getLogin : function (req, res) {
-        res.sendFile(path.join(__dirname + '/../views/myProfile.html'));0
+        res.sendFile(path.join(__dirname + '/../views/overviewForAdmin.html'));
         //res.json({"Msg":"Yodeliho"});
         console.log("GET index.html #" + ++totalgetReq + " today.");
     },
