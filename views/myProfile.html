@@ -34,14 +34,17 @@
 </figure>
 <script>
     $(document).ready(function(){ // syntax for å hente data når dokument (html) er lastet inn
-        $.get('/PersonalInfo', {}, function(req, res, data){
+        $.get('/NodeETest', {}, function(req, res, data){
 
             console.log(data);
             console.log(data.responseJSON[1]);
 
-            //console.log("dsfksjhdf");
+            document.getElementById("h1").innerHTML = data.responseJSON[0].notat;
+            document.getElementById("stillingstittel").innerHTML = data.responseJSON[1].notat;
+            document.getElementById("tlfnr").innerHTML = data.responseJSON[0].id;
+            document.getElementById("epost").innerHTML = data.responseJSON[0].notat;
+            document.getElementById("adresse").innerHTML = data.responseJSON[0].id;
 
-            document.getElementById("h1").innerHTML = data.responseJSON[0].email;
         });
     });
 </script>
