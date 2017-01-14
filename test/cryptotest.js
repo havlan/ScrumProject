@@ -38,7 +38,7 @@ function saltHashPassword(userpassword) {
     console.log('Passwordhash = ' + passwordData.passwordHash);
     console.log('\nSalt = ' + passwordData.salt);
 
-    var test = 'arne123';
+    var test = 'pizza123';
 
     var passwordTest = sha512(test, passwordData.salt);
 
@@ -53,5 +53,5 @@ function saltHashPassword(userpassword) {
     } else console.log("Nei");
 }
 
-//saltHashPassword('Arne123');
+saltHashPassword('pizza123');
 
