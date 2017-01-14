@@ -2,6 +2,13 @@
  * Created by LittleGpNator on 13.01.2017.
  */
 
+$( document ).ready(function() {
+    $(function(){
+        $("#includedContent").load("troll");
+    });
+});
+
+
 var myList= [];
 
 
@@ -9,14 +16,11 @@ $.get('/PersonalInfo', {}, function(req, res, data){
     console.log(data);
 
     myList = data.responseJSON;
-    document.getElementById("name").innerHTML = data.responseJSON[0].name;
-    document.getElementById("type").innerHTML = data.responseJSON[0].type_name;
-    document.getElementById("employee_id").innerHTML = data.responseJSON[0].employee_id;
-    document.getElementById("responsibility_allowed").innerHTML = data.responseJSON[0].responsibility_allowed;
-    document.getElementById("phone").innerHTML = data.responseJSON[0].phone_nr;
     //document.getElementById("data").innerHTML = myList;
 
     buildHtmlTable('#excelDataTable')
+
+
 });
 
 

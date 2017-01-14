@@ -18,10 +18,14 @@ module.exports = {
     },
 
     getLogin : function (req, res) {
-        res.sendFile(path.join(__dirname + '/../views/overviewForAdmin.html'));
+        res.sendFile(path.join(__dirname + '/../views/vaktoversikt.html'));
         //res.json({"Msg":"Yodeliho"});
         console.log("GET index.html #" + ++totalgetReq + " today.");
     },
+    getTroll : function (req,res) {
+        res.sendFile(path.join(__dirname + '/../views/troll.html'));
+    }
+    ,
     //404 må være sist
     get404 : function (req, res) {
         res.status(404).send("<h1>Fokken hell m8</h1>");
