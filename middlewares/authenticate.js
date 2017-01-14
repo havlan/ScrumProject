@@ -1,9 +1,12 @@
 var cryptoHash = require('./cryptoHash');
 var app = require('../app');
-var passport = require('passport');
 var query = require('./dbQ1');
 
-
+app.use(session)({
+    secret: "horse",
+    resave: true,
+    saveUninitialized: false
+});
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -25,7 +28,10 @@ passport.use('login', new LocalStrategy({
             console.log("ERROR LOGIN");
         }
         if(user){
-            
+            if(cryptoHash.sha512(req.body.password,res.body.password_salt).passwordHash == res.body.password_hash){
+                req.session.authenticate = true;
+                console.log("AUTH");
+            }
         }
     });
 

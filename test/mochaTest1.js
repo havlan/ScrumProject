@@ -1,4 +1,5 @@
 var request = require('supertest');
+process.env.NODE_ENV = 'test'; // blocks console.log when running tests
 
 describe('=====TESTING=====', function(){
     var server;
