@@ -32,7 +32,7 @@ router.route('/getUserInfo').get(getCtrl.getUserInfo);
 
 
 //post / put
-router.route('/login').post(getCtrl.submitLogin);
+router.route('/login').post(postCtrl.submitLogin);
 router.route('/postUser').post(postCtrl.postEmployee);
 router.route('/postDepartment').post(postCtrl.postDepartment);
 router.route('/postType').post(postCtrl.postType);

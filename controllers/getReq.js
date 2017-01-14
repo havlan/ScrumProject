@@ -20,13 +20,6 @@ module.exports = {
         res.sendFile(path.join(__dirname + '/../views/Login.html'));
     },
 
-    submitLogin : function (req, res) {
-        //res.sendFile(path.join(__dirname + '/../index.html'));
-        //res.json({"Msg":"Yodeliho"});
-        //console.log("GET index.html #" + ++totalgetReq + " today.");
-        dbMiddelware.getSaltHash(req,res);
-    },
-
     getEmployee : function (req, res){
       dbMiddelware.getEmployee(req,res);
     },

@@ -29,7 +29,6 @@ app.use('/', router);
 
 
 if(process.env.NODE_ENV !== 'test'){
-    app.use(express.logger());
     require("console-stamp")(console, {
         pattern:"dd/mm/yyyy HH:MM:ss.l",
         metadata:'[' + process.pid + ']',
@@ -46,17 +45,18 @@ if(process.env.NODE_ENV !== 'test'){
 //select * from NodeETest
 //insert into NodeETest values ('42', 'Barbaren Dave')
 //delete from NodeETest where id = '42'
-
-/*app.get('/',function(req,res){
-    //res.sendFile(path.join(__dirname + '/index.html'));
-    console.log("GET ROOT");
-    dbHelper.dbQuery(req, res, "delete from NodeETest where id = '42'");
-});*/
+var sess;
+app.post('/slippmeginn',function(req,res){
+    sess = req.session;
+    sess.username = req.body.username;
+    sess.password = req.body.password;
+    console.log("Sess ID #"+ sess.sessionID + "\n" + sess.username + ", " + sess.password);
+    res.json({"Yeah":"MaBoii"});
+});
 
 app.post('/hest',function(req,res){
-    console.log("POST '/hest' # " + ++postNyHest + " " + JSON.stringify(req.body));
-    res.type('json');
-    res.send("Success");
+    res.json({"Yeah":"MaBoii"});
+
 })
 
 var server = app.listen(3000, function(){
@@ -64,5 +64,7 @@ var server = app.listen(3000, function(){
 });
 
 
-//tests import app
+//tests imports app
 module.exports = server;
+//other exports
+module.exports = session;

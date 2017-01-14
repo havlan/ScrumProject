@@ -1,5 +1,5 @@
 var dbMiddelware = require('../middlewares/dbQ1');
-
+var session1;
 
 
 module.exports = {
@@ -14,6 +14,12 @@ module.exports = {
     },
     postShift : function (req, res) {
         dbMiddelware.postNewShift(req,res);
+    },
+
+    submitLogin : function (req, res) {
+        session1 = req.session;
+        console.log("SESSION1 ID = " + session1.sessionID);
+        dbMiddelware.getSaltHash(req,res);
     },
     postShift_has_employee : function (req, res) {
         dbMiddelware.postNewShift_has_employee(req,res);
