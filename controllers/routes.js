@@ -44,6 +44,13 @@ router.route('/postOvertime').post(postCtrl.postOvertime);
 router.route('/postLogInInfo').post(postCtrl.postLogInInfo);
 router.route('/updateShift_has_employee').post(postCtrl.updateShift_has_employee);
 router.route('/updateEmployee').post(postCtrl.updateEmployee);
+router.route('/updateType').post(postCtrl.updateType);
+router.route('/updateShift').post(postCtrl.updateshift);
+router.route('/updateDepartment').post(postCtrl.updateDepartment);
+router.route('/updateRequest').post(postCtrl.updateRequest);
+router.route('/updateAbsence').post(postCtrl.updateAbsence);
+router.route('/updateOvertime').post(postCtrl.updateOvertime);
+router.route('/updateLogInInfo').post(postCtrl.updateLogInInfo);
 //delete
 
 

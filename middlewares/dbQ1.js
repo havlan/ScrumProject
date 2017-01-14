@@ -110,6 +110,27 @@ module.exports = {
     },
     updateEmployee : function (req, res) {
         dbHelper.postdbQuery(req,res,"update Employee set phone_nr=?,total_hours=?,employee_id=?,email=?,seniority=?,responsibility_allowed=?,type_name=?,name=?,address=?,pers_id=? where employee_id = ?",[req.body.phone_nr,req.body.total_hours,req.body.employee_id,req.body.email,req.body.seniority,req.body.responsibility_allowed,req.body.type_name,req.body.name,req.body.address,req.body.pers_id,req.body.employee_id]);
+    },
+    updateType : function(req,res){
+        dbHelper.postdbQuery(req,res,"update Type set rank = ? where name = ?",[req.body.rank,req.body.name]);
+    },
+    updateShift : function (req, res) {
+        dbHelper.postdbQuery(req,res,"update Shift set minutes=?,date=?,department_id=?,type_name=? where shift_id=?",[req.body.minutes,req.body.date,req.body.department_id,req.body.type_name,req.body.shift_id]);
+    },
+    updateDepartment : function (req, res) {
+        dbHelper.postdbQuery(req,res,"update Department set department_name =? where department_id=?",[req.body.department_name,req.body.department_id]);
+    },
+    updateRequest : function (req, res) {
+        dbHelper.postdbQuery(req,res,"update Request set shift_id = ?, employee_id =?, checked_by_admin =? where request_id =?",[req.body.shift_id,req.body.employee_id,req.body.checked_by_admin,req.body.request_id]);
+    },
+    updateAbsence : function (req, res) {
+        dbHelper.postdbQuery(req,res,"update Absence set checked_by_admin =?,shift_id=?,employee_id=? where absence_id =?",[req.body.checked_by_admin,req.body.shift_id,req.body.employee_id,req.body.absence_id]);
+    },
+    updateOvertime : function (req, res) {
+        dbHelper.postdbQuery(req,res,"update Overtime set checked_by_admin=?,shift_id=?,employee_id=?,overtime=? where overtime_id=?",[req.body.checked_by_admin,req.body.shift_id,req.body.employee_id,req.body.overtime,req.body.overtime_id]);
+    },
+    updateLogInInfo : function (req, res) {
+        dbHelper.postdbQuery(req,res,"update LoginInfo set is_admin=? where Username=?",[req.body.is_admin,req.body.Username]);
     }
 
 

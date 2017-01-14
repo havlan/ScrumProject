@@ -3,6 +3,7 @@ var dbMiddelware = require('../middlewares/dbQ1');
 
 
 module.exports = {
+    //POST
     postEmployee : function(req,res){
         dbMiddelware.postNewEmployee(req,res);
     },
@@ -30,10 +31,32 @@ module.exports = {
     postLogInInfo : function (req, res) {
         dbMiddelware.postnewLogInInfo(req,res);
     },
+    //UPDATE
     updateShift_has_employee : function (req, res) {
         dbMiddelware.updateShift_has_employee(req,res);
     },
     updateEmployee : function (req, res) {
         dbMiddelware.updateEmployee(req,res);
+    },
+    updateType : function (req, res) {
+        dbMiddelware.updateType(req,res);
+    },
+    updateshift: function (req,res) {
+        dbMiddelware.updateShift(req,res);
+    },
+    updateDepartment : function (req, res) {
+        dbMiddelware.updateDepartment(req,res);
+    },
+    updateRequest : function (req, res) {
+        dbMiddelware.updateRequest(req,res);
+    },
+    updateAbsence : function (req, res) {
+        dbMiddelware.updateAbsence(req,res);
+    },
+    updateOvertime : function (req, res) {
+        dbMiddelware.updateOvertime(req,res);
+    },
+    updateLogInInfo : function (req, res) {
+        dbMiddelware.updateLogInInfo(req,res);
     }
 }
