@@ -19,7 +19,7 @@ module.exports = {
         dbHelper.dbQuery(req,res,"select * from Employee_Overtime");
     },
     getPersonalInfo : function (req, res) {
-        dbHelper.dbQuery(req,res,"select * from Employee where employee_id=1");
+        dbHelper.dbQuery(req,res,"select * from Employee");
     }
 
 
