@@ -42,7 +42,8 @@ router.route('/postRequest').post(postCtrl.postRequest);
 router.route('/postAbsence').post(postCtrl.postAbsence);
 router.route('/postOvertime').post(postCtrl.postOvertime);
 router.route('/postLogInInfo').post(postCtrl.postLogInInfo);
-
+router.route('/updateShift_has_employee').post(postCtrl.updateShift_has_employee);
+router.route('/updateEmployee').post(postCtrl.updateEmployee);
 //delete
 
 

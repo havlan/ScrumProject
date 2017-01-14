@@ -39,6 +39,12 @@ module.exports = {
     getSaltHash: function(req,res){
         dbHelper.getdbQuery(req,res, "select password_hash, password_salt, is_admin from LoginInfo where Username = ?",req.body.username);
     },
+    getEmployeeOvertime : function (req,res) {
+        dbHelper.dbQuery(req,res,"select * from Employee_Overtime");
+    },
+    getPersonalInfo : function (req, res) {
+        dbHelper.dbQuery(req,res,"select * from Employee");
+    },
     /**
     getVaktoversikt : function(req,res){
         var get = {name:req.body.name, type:req.body.type, department:req.body.department, responsibility_allowed:req.body.type, phone_nr:req.body.phone_nr};
@@ -97,11 +103,15 @@ module.exports = {
         console.log("Posting new LogInInfo");
         dbHelper.postdbQuery(req,res,"insert into LogInInfo set ?",post);
     },
-    getEmployeeOvertime : function (req,res) {
-        dbHelper.dbQuery(req,res,"select * from Employee_Overtime");
+
+    //update
+    updateShift_has_employee : function (req, res) {
+        dbHelper.postdbQuery(req,res,"update shift_has_employee set avalibility = ?,employee_id = ?,shift_id = ? where employee_id = ? and shift_id = ?",[req.body.avalibility,req.body.employee_id,req.body.shift_id,req.body.employee_id,req.body.shift_id]);
     },
-    getPersonalInfo : function (req, res) {
-        dbHelper.dbQuery(req,res,"select * from Employee");
+    updateEmployee : function (req, res) {
+        dbHelper.postdbQuery(req,res,"update Employee set phone_nr=?,total_hours=?,employee_id=?,email=?,seniority=?,responsibility_allowed=?,type_name=?,name=?,address=?,pers_id=? where employee_id = ?",[req.body.phone_nr,req.body.total_hours,req.body.employee_id,req.body.email,req.body.seniority,req.body.responsibility_allowed,req.body.type_name,req.body.name,req.body.address,req.body.pers_id,req.body.employee_id]);
     }
+
+
 }
 //heihei
