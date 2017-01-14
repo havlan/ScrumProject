@@ -55,6 +55,6 @@ router.route('/NodeETest/post').post(testCtrl.postNodeETest);
 //======== TEST ROUTE FERDIG ========
 
 
-router.route('/*').get(getCtrl.get404);
+//router.route('/*').get(getCtrl.get404);
 
 module.exports = router;
