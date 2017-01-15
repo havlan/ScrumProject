@@ -7,6 +7,7 @@ var session = require('express-session');
 var expressValidator = require('express-validator')
 var passport = require('passport');
 var hbs = require('express-handlebars');
+var FileStore = require('session-file-store')(session);
 
 
 
@@ -28,6 +29,7 @@ app.use(express.static (__dirname + '/public'));
 app.use(expressValidator());
 app.use(session({
     secret: "hest",
+    store: new FileStore,
     resave: true,
     saveUninitialized: false,
     cookie: {maxAge: 60*60*24*1000}
