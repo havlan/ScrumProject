@@ -14,8 +14,9 @@ router.route('/user').get(getCtrl.getUser);
 router.route('/user/:id').get(getCtrl.getUser);
 router.route('/login').get(getCtrl.getLogin);
 router.route('/troll').get(getCtrl.getTroll);
-router.route('').get(getCtrl.get)
-router.route('').get(getCtrl.get)
+router.route('/menu').get(getCtrl.getMenu);
+router.route('/overviewForAdmin').get(getCtrl.getOverviewForAdmin);
+router.route('/myProfile').get(getCtrl.getMyProfile);
 
 
 

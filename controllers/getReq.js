@@ -24,8 +24,16 @@ module.exports = {
     },
     getTroll : function (req,res) {
         res.sendFile(path.join(__dirname + '/../views/troll.html'));
-    }
-    ,
+    },
+    getMenu : function (req,res) {
+        res.sendFile(path.join(__dirname + '/../views/menu.html'));
+    },
+    getOverviewForAdmin : function (req,res) {
+        res.sendFile(path.join(__dirname + '/../views/overviewForAdmin.html'));
+    },
+    getMyProfile : function (req,res) {
+        res.sendFile(path.join(__dirname + '/../views/myProfile.html'));
+    },
     //404 må være sist
     get404 : function (req, res) {
         res.status(404).send("<h1>Fokken hell m8</h1>");

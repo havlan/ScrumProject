@@ -41,7 +41,7 @@ function buildHtmlTable(selector) {
 
 function addAllColumnHeaders(myList, selector) {
     var columnSet = [];
-    var headerTr$ = $('<tr/>');
+    var headerTr$ = $('<thead><tr/>');
 
     for (var i = 0; i < myList.length; i++) {
         var rowHash = myList[i];
