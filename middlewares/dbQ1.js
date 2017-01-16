@@ -105,6 +105,10 @@ module.exports = {
     },
 
     //update
+    //SYNTAKS
+    //var pk = req.body.primarykey;
+    //dbHelper.postdbQuery(req,res,"update TABLE set ? where PRIMARY KEY = ?",[{variabel : req.body.variabelnavn,.... },pk]);
+
     updateShift_has_employee : function (req, res) {
         dbHelper.postdbQuery(req,res,"update shift_has_employee set avalibility = ?,employee_id = ?,shift_id = ? where employee_id = ? and shift_id = ?",[req.body.avalibility,req.body.employee_id,req.body.shift_id,req.body.employee_id,req.body.shift_id]);
     },

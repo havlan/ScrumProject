@@ -39,11 +39,11 @@
             console.log(data);
             console.log(data.responseJSON[1]);
 
-            document.getElementById("h1").innerHTML = data.responseJSON[0].notat;
-            document.getElementById("stillingstittel").innerHTML = data.responseJSON[1].notat;
-            document.getElementById("tlfnr").innerHTML = data.responseJSON[0].id;
-            document.getElementById("epost").innerHTML = data.responseJSON[0].notat;
-            document.getElementById("adresse").innerHTML = data.responseJSON[0].id;
+            document.getElementById("h1").innerHTML = data.responseJSON[0].employee_id;
+    //        document.getElementById("stillingstittel").innerHTML = data.responseJSON[1].notat;
+    //        document.getElementById("tlfnr").innerHTML = data.responseJSON[0].id;
+    //        document.getElementById("epost").innerHTML = data.responseJSON[0].notat;
+    //        document.getElementById("adresse").innerHTML = data.responseJSON[0].id;
 
         });
     });
