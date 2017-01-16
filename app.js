@@ -8,6 +8,7 @@ var expressValidator = require('express-validator')
 var passport = require('passport');
 var hbs = require('express-handlebars');
 var FileStore = require('session-file-store')(session);
+var auth = require('./middlewares/authenticate');
 
 
 
@@ -32,7 +33,12 @@ app.use(session({
     store: new FileStore,
     resave: true,
     saveUninitialized: false,
-    cookie: {maxAge: 60*60*24*1000}
+    cookie: {
+        maxAge: 60*60*24*1000*3,
+        username:""
+    },
+    success: false,
+    is_admin:false
 }));
 
 app.use('/', router);
@@ -68,6 +74,19 @@ app.post('/slippmeginn',function(req,res,next){ // expire: 24t, sessionId: ahsdh
 
 });
 app.get('/vrinsk',function(req,res,next){
+    if(typeof req.session.success == 'undefined') { // checks if session already exists
+        req.session.success = false;
+    }
+    if(typeof req.session.is_admin == 'undefined'){
+        req.session.is_admin = false;
+    }
+    if(typeof req.session.username == 'undefined'){
+        req.session.username = "";
+    }
+
+    if(req.session.success && req.session.is_admin == true){
+        console.log("ADMIN LOGIN");
+    }
     res.render('kake', {title: 'Form validation', success:req.session.success, errors: req.session.errors});
     req.session.errors = null;
 });
@@ -84,17 +103,15 @@ app.get('/sessiontest',function(req,res,next){
     }
 });
 
-app.post('/vrinsk',function(req,res){
-    req.check('email', 'Invalid email address').isEmail();
-    req.check('password', 'Password is invalid').isLength({min:7}).equals(req.body.confirmPassword);
+app.post('/vrinsk',function(req,res,next){
     var errors = req.validationErrors();
     if(errors){
         req.session.errors = errors;
         req.session.success = false;
         res.redirect('/vrinsk');
-    }else{
-        req.session.success = true;
-        res.redirect('/');
+    }else {
+        console.log("Trying to login");
+        auth.logUserIn(req,res,next);
     }
 });
 

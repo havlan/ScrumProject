@@ -46,10 +46,11 @@ module.exports =
                     connection.release();
                     if(!err) {
                         res.json(rows);
+                        console.log(res);
                     }else{
                         console.log("error: Error reading database: " + err);
                         res.status(500);
-                        res.json({"error": "Error reading database: " + err});
+                        console.log("Error reading database: ");
                     }
                 });
             });
