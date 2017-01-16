@@ -3,7 +3,9 @@
  */
 
 $( document ).ready(function() {
-    $("#includedContent").load("troll");
+    $(function(){
+        $("#includedContent").load("troll");
+    });
 });
 
 
@@ -24,7 +26,7 @@ $.get('/PersonalInfo', {}, function(req, res, data){
 
 function buildHtmlTable(selector) {
     var columns = addAllColumnHeaders(myList, selector);
-
+    var tbody$ = $('<tbody/>');
     for (var i = 0; i < myList.length; i++) {
         var row$ = $('<tr/>');
         for (var colIndex = 0; colIndex < columns.length; colIndex++) {
@@ -34,12 +36,14 @@ function buildHtmlTable(selector) {
         }
         $(selector).append(row$);
     }
+    $(selector).append(tbody$);
 }
 
 
 function addAllColumnHeaders(myList, selector) {
     var columnSet = [];
-    var headerTr$ = $('<thead><tr/>');
+    var headerThead$ = $('<thead/>');
+    var headerTr$ = $('<tr/>');
 
     for (var i = 0; i < myList.length; i++) {
         var rowHash = myList[i];
@@ -51,6 +55,7 @@ function addAllColumnHeaders(myList, selector) {
         }
     }
     $(selector).append(headerTr$);
+    $(selector).append(headerThead$);
 
     return columnSet;
 };
