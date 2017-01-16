@@ -41,7 +41,7 @@ module.exports = {
     updateType : function (req, res) {
         dbMiddelware.updateType(req,res);
     },
-    updateshift: function (req,res) {
+    updateShift: function (req,res) {
         dbMiddelware.updateShift(req,res);
     },
     updateDepartment : function (req, res) {
