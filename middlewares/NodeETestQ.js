@@ -15,5 +15,10 @@ module.exports = {
         dbHelper.postdbQuery(req,res, "insert into NodeETest set ?", post);
         console.log("NodeETest POST");
     },
+
+    getBatman : function(req,res){
+        dbHelper.getdbQuery(req,res, "select * from Batman");
+    }
+
 }
 

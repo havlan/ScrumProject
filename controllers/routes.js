@@ -59,6 +59,7 @@ router.route('/updateLogInInfo').post(postCtrl.updateLogInInfo);
 router.route('/NodeETest').get(testCtrl.getNodeETest);
 router.route('/NodeETest/put').put(testCtrl.putNodeETest);
 router.route('/NodeETest/post').post(testCtrl.postNodeETest);
+router.route('/Batman').get(testCtrl.getBatman);
 //router.route('NodeETest/post')
 //======== TEST ROUTE FERDIG ========
 

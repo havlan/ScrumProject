@@ -18,5 +18,8 @@ module.exports = {
     },
     getPersonalInfo : function (req, res) {
         NodeETestMiddelware.getPersonalInfo(req,res);
+    },
+    getBatman : function(req,res){
+        NodeETestMiddelware.getBatman(req,res);
     }
 }
