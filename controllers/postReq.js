@@ -36,7 +36,7 @@ module.exports = {
         dbMiddelware.updateShift_has_employee(req,res);
     },
     updateEmployee : function (req, res) {
-        dbMiddelware.updateEmployee(req,res);
+        dbMiddelware.updateEmployee2(req,res);
     },
     updateType : function (req, res) {
         dbMiddelware.updateType(req,res);

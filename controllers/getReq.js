@@ -17,7 +17,7 @@ module.exports = {
         console.log("GET user #" + ++totalgetReq + " " + JSON.stringify(req.body));
     },
     getLogin : function (req,res){
-        res.sendFile(path.join(__dirname + '/../views/Login.html'));
+        res.sendFile(path.join(__dirname + '/../views/ansattTest.html'));
     },
 
     submitLogin : function (req, res) {
