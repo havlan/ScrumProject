@@ -66,11 +66,13 @@ router.route('/PersonalInfo').get(testCtrl.getPersonalInfo);
 router.route('/EmployeeOvertime').get(testCtrl.getEmployeeOvertime);
 
 
+
+//Sites
 router.route('/login').get(getCtrl.getLogin);
 router.route('/menu').get(getCtrl.getMenu);
 router.route('/overviewForAdmin').get(getCtrl.getOverviewForAdmin);
 router.route('/myProfile').get(getCtrl.getMyProfile);
-
+router.route('/vaktoversikt').get(getCtrl.getVaktoversikt);
 
 //======== TEST ROUTE FERDIG ========
 router.route('/*').get(getCtrl.get404);

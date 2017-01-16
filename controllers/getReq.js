@@ -16,6 +16,9 @@ module.exports = {
         res.json({"Params": "" + req.params.id});
         console.log("GET user #" + ++totalgetReq + " " + JSON.stringify(req.body));
     },
+
+
+    //Windows
     getLogin : function (req,res){
         res.sendFile(path.join(__dirname + '/../views/Login.html'));
     },
@@ -28,6 +31,12 @@ module.exports = {
     getMyProfile : function (req,res){
         res.sendFile(path.join(__dirname + '/../views/myProfile.html'));
     },
+    getVaktoversikt : function (req,res){
+        res.sendFile(path.join(__dirname + '/../views/vaktoversikt.html'));
+    },
+
+
+
     submitLogin : function (req, res) {
         //res.sendFile(path.join(__dirname + '/../index.html'));
         //res.json({"Msg":"Yodeliho"});

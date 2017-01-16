@@ -3,9 +3,7 @@
  */
 
 $( document ).ready(function() {
-    $(function(){
-        $("#includedContent").load("troll");
-    });
+    $("#includedContent").load("troll");
 });
 
 
