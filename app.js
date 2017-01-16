@@ -11,9 +11,9 @@ var getController = require('./controllers/getReq.js');
 
 //use
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 app.use(express.static (__dirname + '/public'));
 app.use('/', router);
-
 
 
 require("console-stamp")(console, {
@@ -44,8 +44,8 @@ app.post('/hest',function(req,res){
     res.send("Success");
 })
 
-var server = app.listen(8080, function(){
-    console.log("Live at 8080");
+var server = app.listen(3000, function(){
+    console.log("Live at 3000");
 });
 
 
