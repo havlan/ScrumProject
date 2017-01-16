@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JustaTest</title>
+    <link rel="stylesheet" type="text/css" href="../public/css/employees.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+        function updateEmployee() {
+            var phone,email,address;
+            phone = document.getElementById("number");
+            email = document.getElementById("email");
+            address = document.getElementById("address");
+
+
+        }
+
+    </script>
+</head>
+<body>
+<h1>Kontaktinformasjon</h1>
+<input type="tel" id="phoneInput" onkeyup="updateEmployee()" placeholder = "Phone">
+<input type="email" id="emailInput" onkeyup="updateEmployee()" placeholder = "Email">
+<input type="text" id="addressInput" onkeyup="updateEmployee()" placeholder = "Address">
+<button type="button" id="add">Oppdater info</button>
+</body>
+</html>
