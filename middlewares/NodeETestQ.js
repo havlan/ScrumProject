@@ -20,10 +20,10 @@ module.exports = {
         dbHelper.getdbQuery(req,res, "select * from Batman");
     },
     getJustaTest : function(req,res){
-        dbHelper.getJustaTest(req,res, "select phone_nr, employee_id, email, name, address from Employee where employee_id = ?");
+        dbHelper.getdbQuery(req,res, "select phone_nr, employee_id, email, name, address from Employee where employee_id = ?");
     },
     putJustaTest : function(req,res){
-        dbHelper.putJustaTest (req,res, "update Emplyee set phone_nr = ?,email= ?, address = ? where employee_id = ? ",[req.body.phone_nr,req.body.email,req.body.address,req.body.employee_id]);
+        dbHelper.postdbQuery(req,res, "update Emplyee set phone_nr = ?,email= ?, address = ? where employee_id = ? ",[req.body.phone_nr,req.body.email,req.body.address,req.body.employee_id]);
     }
 
 }
