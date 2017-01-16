@@ -8,16 +8,17 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!--<script src="../public/frontendJS/batman.js"></script> -->
     <script>
-        function updateEmployee() {
-            var phone,email,address;
-            phone = document.getElementById("number");
-            email = document.getElementById("email");
-            address = document.getElementById("address");
-
-
+        function onClick() {
+            alert("ALLAH");
+            $.post("/JustaTest/put",{
+                phone_nr: 95551048,
+                email: "creedence@clearwater.com",
+                address: "glønavegen 2",
+                employee_id: 2
+            });
         }
-
     </script>
 </head>
 <body>
@@ -25,6 +26,7 @@
 <input type="tel" id="phoneInput" onkeyup="updateEmployee()" placeholder = "Phone">
 <input type="email" id="emailInput" onkeyup="updateEmployee()" placeholder = "Email">
 <input type="text" id="addressInput" onkeyup="updateEmployee()" placeholder = "Address">
-<button type="button" id="add">Oppdater info</button>
+<input type="text" id="employee_idInput" onkeyup="updateEmployee()" placeholder = "Employee_id">
+<button type="button" id="add" onclick="onClick()">Oppdater info</button>
 </body>
 </html>

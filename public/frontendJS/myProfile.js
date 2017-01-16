@@ -10,5 +10,5 @@ $(document).ready(function(){
 
     navn = test1.getNodeETest(req,res);
     personalinfo = test1.getPersonalInfo(req,res);
-    document.getElementById("h1").innerHTML = perssonalinfo;
+    document.getElementById("h1").innerHTML = personalinfo;
 })
