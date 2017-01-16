@@ -32,7 +32,7 @@ function onClick() {
         name: document.getElementById("nameInput2").value,
         address: document.getElementById("addressInput").value,
         pers_id: document.getElementById("persidInput").value,
-        employee_id: document.getElementById("employee_idInput").value
+       // employee_id: document.getElementById("employee_idInput").value
     });
 }
 

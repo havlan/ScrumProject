@@ -109,13 +109,9 @@ module.exports = {
         dbHelper.postdbQuery(req,res,"update shift_has_employee set avalibility = ?,employee_id = ?,shift_id = ? where employee_id = ? and shift_id = ?",[req.body.avalibility,req.body.employee_id,req.body.shift_id,req.body.employee_id,req.body.shift_id]);
     },
     updateEmployee : function (req, res) {
-        //dbHelper.postdbQuery(req,res, "update Employee set phone_nr = ?,email= ?, address = ? where employee_id = ? ",[req.body.phone_nr,req.body.email,req.body.address,req.body.employee_id]);
-        dbHelper.postdbQuery(req,res,"update Employee set phone_nr=?,total_hours=?,employee_id=?,email=?,seniority=?,responsibility_allowed=?,type_name=?,name=?,address=?,pers_id=? where employee_id = ?",[req.body.phone_nr,req.body.total_hours,req.body.employee_id,req.body.email,req.body.seniority,req.body.responsibility_allowed,req.body.type_name,req.body.name,req.body.address,req.body.pers_id,req.body.employee_id]);
-    },
-    updateEmployee2 : function(req,res){
-        var post = {phone_nr : req.body.phone_nr, total_hours:req.body.total_hours, employee_id:req.body.employee_id, email:req.body.email, seniority : req.body.seniority,
-                    responsibility_allowed: req.body.responsibility_allowed, type_name : req.body.type_name, address: req.body.address, pers_id: req.body.pers_id};
-        dbHelper.postdbQuery(req,res,"update Employee set ? where employee_id = ?",post,[req.body.employee_id]);
+        var id = req.body.employee_id;
+        dbHelper.postdbQuery(req,res,"update Employee set ? where employee_id = ?",[{phone_nr : req.body.phone_nr, total_hours:req.body.total_hours,
+            email:req.body.email, seniority : req.body.seniority, responsibility_allowed: req.body.responsibility_allowed, address: req.body.address, pers_id: req.body.pers_id}, id]);
     },
     updateType : function(req,res){
         dbHelper.postdbQuery(req,res,"update Type set rank = ? where name = ?",[req.body.rank,req.body.name]);
