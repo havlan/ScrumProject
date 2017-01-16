@@ -27,8 +27,5 @@ module.exports = {
     },
     putJustaTest : function (req,res){
         NodeETestMiddelware.putJustaTest(req,res);
-    },
-    postJustaTest : function (req,res){
-        NodeETestMiddelware.postJustaTest(req,res);
     }
-}
+};

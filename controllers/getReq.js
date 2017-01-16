@@ -19,7 +19,15 @@ module.exports = {
     getLogin : function (req,res){
         res.sendFile(path.join(__dirname + '/../views/Login.html'));
     },
-
+    getMenu : function (req,res){
+        res.sendFile(path.join(__dirname + '/../views/menu.html'));
+    },
+    getOverviewForAdmin : function (req,res){
+        res.sendFile(path.join(__dirname + '/../views/overviewForAdmin.html'));
+    },
+    getMyProfile : function (req,res){
+        res.sendFile(path.join(__dirname + '/../views/myProfile.html'));
+    },
     submitLogin : function (req, res) {
         //res.sendFile(path.join(__dirname + '/../index.html'));
         //res.json({"Msg":"Yodeliho"});

@@ -62,28 +62,19 @@ router.route('/NodeETest/post').post(testCtrl.postNodeETest);
 router.route('/Batman').get(testCtrl.getBatman);
 router.route('/JustaTest').get(testCtrl.getJustaTest);
 router.route('/JustaTest/put').put(testCtrl.putJustaTest);
-router.route('/JustaTest').post(testCtrl.postJustaTest);
-//router.route('NodeETest/post')
-//======== TEST ROUTE FERDIG ========
+router.route('/PersonalInfo').get(testCtrl.getPersonalInfo);
+router.route('/EmployeeOvertime').get(testCtrl.getEmployeeOvertime);
 
 
-router.route('/*').get(getCtrl.get404);
 router.route('/login').get(getCtrl.getLogin);
-router.route('/troll').get(getCtrl.getTroll);
 router.route('/menu').get(getCtrl.getMenu);
 router.route('/overviewForAdmin').get(getCtrl.getOverviewForAdmin);
 router.route('/myProfile').get(getCtrl.getMyProfile);
 
 
-
-//===============  HOLD NodeETest for testing!!!  ====================
-router.route('/NodeETest').get(testCtrl.getNodeETest);
-router.route('/PersonalInfo').get(testCtrl.getPersonalInfo);
-router.route('/NodeETest/put').get(testCtrl.putNodeETest);
-router.route('/NodeETest/post').get(testCtrl.postNodeETest);
-router.route('/EmployeeOvertime').get(testCtrl.getEmployeeOvertime);
-//router.route('NodeETest/post')
 //======== TEST ROUTE FERDIG ========
+router.route('/*').get(getCtrl.get404);
+
 
 
 router.route('/*').get(getCtrl.get404);
