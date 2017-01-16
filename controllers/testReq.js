@@ -21,5 +21,14 @@ module.exports = {
     },
     getBatman : function(req,res){
         NodeETestMiddelware.getBatman(req,res);
+    },
+    getJustaTest : function (req,res){
+        JustaTestMiddelware.getJustaTest(req,res);
+    },
+    putJustaTest : function (req,res){
+        JustaTestMiddelware.putJustaTest(req,res);
+    },
+    postJustaTest : function (req,res){
+        JustaTestMiddelware.postJustaTest(req,res);
     }
 }

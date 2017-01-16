@@ -60,6 +60,9 @@ router.route('/NodeETest').get(testCtrl.getNodeETest);
 router.route('/NodeETest/put').put(testCtrl.putNodeETest);
 router.route('/NodeETest/post').post(testCtrl.postNodeETest);
 router.route('/Batman').get(testCtrl.getBatman);
+router.route('/JustaTest').get(testCtrl.getJustaTest);
+router.route('/JustaTest').put(testCtrl.putJustaTest);
+router.route('/JustaTest').post(testCtrl.postJustaTest);
 //router.route('NodeETest/post')
 //======== TEST ROUTE FERDIG ========
 

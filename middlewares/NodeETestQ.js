@@ -18,6 +18,12 @@ module.exports = {
 
     getBatman : function(req,res){
         dbHelper.getdbQuery(req,res, "select * from Batman");
+    },
+    getJustaTest : function(req,res){
+        dbHelper.getJustaTest(req,res, "select phone_nr, employee_id, email, name, address from Employee where employee_id = ?");
+    },
+    putJustaTest : function(req,res){
+        dbHelper.putJustaTest (req,res, "");
     }
 
 }
