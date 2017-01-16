@@ -110,7 +110,9 @@ module.exports = {
     //dbHelper.postdbQuery(req,res,"update TABLE set ? where PRIMARY KEY = ?",[{variabel : req.body.variabelnavn,.... },pk]);
 
     updateShift_has_employee : function (req, res) {
-        dbHelper.postdbQuery(req,res,"update shift_has_employee set avalibility = ?,employee_id = ?,shift_id = ? where employee_id = ? and shift_id = ?",[req.body.avalibility,req.body.employee_id,req.body.shift_id,req.body.employee_id,req.body.shift_id]);
+        var pk = req.body.shift_id;
+        var pk2 = req.body.employee_id;
+        dbHelper.postdbQuery(req,res,"update shift_has_employee set ? where employee_id = ? and shift_id = ?",[{avalibility:req.body.avalibility},pk,pk2]);
     },
     updateEmployee : function (req, res) {
         var id = req.body.employee_id;
@@ -118,25 +120,32 @@ module.exports = {
             email:req.body.email, seniority : req.body.seniority, responsibility_allowed: req.body.responsibility_allowed, address: req.body.address, pers_id: req.body.pers_id}, id]);
     },
     updateType : function(req,res){
-        dbHelper.postdbQuery(req,res,"update Type set rank = ? where name = ?",[req.body.rank,req.body.name]);
+        var pk = req.body.name;
+        dbHelper.postdbQuery(req,res,"update Type set ? where name = ?",[{rank:req.body.rank},pk]);
     },
     updateShift : function (req, res) {
-        dbHelper.postdbQuery(req,res,"update Shift set minutes=?,date=?,department_id=?,type_name=? where shift_id=?",[req.body.minutes,req.body.date,req.body.department_id,req.body.type_name,req.body.shift_id]);
+        var pk = req.body.shift_id;
+        dbHelper.postdbQuery(req,res,"update Shift set ? where shift_id = ?",[{minutes:req.body.minutes,date:req.body.date,department_id:req.body.department_id,type_name:req.body.type_name},pk]);
     },
     updateDepartment : function (req, res) {
-        dbHelper.postdbQuery(req,res,"update Department set department_name =? where department_id=?",[req.body.department_name,req.body.department_id]);
+        var pk = req.body.department_id;
+        dbHelper.postdbQuery(req,res,"update Department set ? where department_id=?",[{department_name:req.body.department_name},pk]);
     },
     updateRequest : function (req, res) {
-        dbHelper.postdbQuery(req,res,"update Request set shift_id = ?, employee_id =?, checked_by_admin =? where request_id =?",[req.body.shift_id,req.body.employee_id,req.body.checked_by_admin,req.body.request_id]);
+        var pk = request_id;
+        dbHelper.postdbQuery(req,res,"update Request set ? where request_id =?",[{shift_id:req.body.shift_id,employee_id:req.body.employee_id,checked_by_admin:req.body.checked_by_admin},pk]);
     },
     updateAbsence : function (req, res) {
-        dbHelper.postdbQuery(req,res,"update Absence set checked_by_admin =?,shift_id=?,employee_id=? where absence_id =?",[req.body.checked_by_admin,req.body.shift_id,req.body.employee_id,req.body.absence_id]);
+        var pk = req.body.absence_id;
+        dbHelper.postdbQuery(req,res,"update Absence set ? where absence_id =?",[{checked_by_admin:req.body.checked_by_admin,shift_id:req.body.shift_id,employee_id:req.body.employee_id},pk]);
     },
     updateOvertime : function (req, res) {
-        dbHelper.postdbQuery(req,res,"update Overtime set checked_by_admin=?,shift_id=?,employee_id=?,overtime=? where overtime_id=?",[req.body.checked_by_admin,req.body.shift_id,req.body.employee_id,req.body.overtime,req.body.overtime_id]);
+        var pk = req.body.overtime_id;
+        dbHelper.postdbQuery(req,res,"update Overtime set ? where overtime_id=?",[{checked_by_admin:req.body.checked_by_admin,shift_id:req.body.shift_id,employee_id:req.body.employee_id,overtime:req.body.overtime},pk]);
     },
     updateLogInInfo : function (req, res) {
-        dbHelper.postdbQuery(req,res,"update LoginInfo set is_admin=? where Username=?",[req.body.is_admin,req.body.Username]);
+        var pk = req.body.Username;
+        dbHelper.postdbQuery(req,res,"update LoginInfo set ? where Username=?",[{is_admin:req.body.is_admin},pk]);
     }
 
 
