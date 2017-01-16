@@ -20,6 +20,16 @@ module.exports = {
     },
     getPersonalInfo : function (req, res) {
         dbHelper.dbQuery(req,res,"select * from Employee");
+    },
+    getBatman : function(req,res){
+        dbHelper.getdbQuery(req,res, "select * from Batman");
+    },
+    getJustaTest : function(req,res){
+        dbHelper.getdbQuery(req,res, "select phone_nr, employee_id, email, name, address from Employee where employee_id = ?");
+    },
+    putJustaTest : function(req,res){
+        dbHelper.postdbQuery(req,res, "update Emplyee set phone_nr = ?,email= ?, address = ? where employee_id = ? ",[req.body.phone_nr,req.body.email,req.body.address,req.body.employee_id]);
     }
+
 }
 

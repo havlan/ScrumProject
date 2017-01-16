@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Batman</title>
+
+    <script> src="/frontendJS/batman.js"</script>
+
+</head>
+<body>
+
+
+<h1 id = "h1">Batman</h1>
+<table cellspacing="30">
+    <tr>
+        <td class="info">Name</td>
+        <td class="db" id="name1">test1</td>
+    </tr>
+    <tr>
+        <td class="info">Phone Number</td>
+        <td class="db" id="phone_nr1">test2</td>
+    </tr>
+</table>
+<script>
+    $(document).ready(function() {
+        $.get('/Batman', {}, function (req, res, data) {
+            console.log(data);
+            console.log(data.responseJSON[1]);
+
+            document.getElementById("h99").innerHTML = data.responseJSON[0].notat
+            document.getElementById("name1").innerHTML = data.responseJSON[0].name;
+            document.getElementById("phone_nr1").innerHTML = data.responseJSON[0].phone_nr;
+
+        });
+    });
+</script>
+</body>
+</html>

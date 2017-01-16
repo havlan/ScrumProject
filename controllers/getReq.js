@@ -7,8 +7,8 @@ var totalgetReq = 0;
 module.exports = {
 
     getRoot : function(req,res){
-
-        res.redirect('/login'); //
+        //res.redirect('/login'); //
+        res.sendFile(path.join(__dirname + '/../index.html'));
     },
 
     getUser : function(req,res){
@@ -16,28 +16,57 @@ module.exports = {
         res.json({"Params": "" + req.params.id});
         console.log("GET user #" + ++totalgetReq + " " + JSON.stringify(req.body));
     },
+    getLogin : function (req,res){
+        res.sendFile(path.join(__dirname + '/../views/Login.html'));
+    },
 
-    getLogin : function (req, res) {
-        res.sendFile(path.join(__dirname + '/../views/vaktoversikt.html'));
+    submitLogin : function (req, res) {
+        //res.sendFile(path.join(__dirname + '/../index.html'));
         //res.json({"Msg":"Yodeliho"});
-        console.log("GET index.html #" + ++totalgetReq + " today.");
+        //console.log("GET index.html #" + ++totalgetReq + " today.");
+        dbMiddelware.getSaltHash(req,res);
     },
-    getTroll : function (req,res) {
-        res.sendFile(path.join(__dirname + '/../views/troll.html'));
+
+    getEmployee : function (req, res){
+      dbMiddelware.getEmployee(req,res);
     },
-    getMenu : function (req,res) {
-        res.sendFile(path.join(__dirname + '/../views/menu.html'));
+    getDepartment : function (req, res){
+        console.log("DEPARTMENT REQUEST" + req.params.department_id);
+        dbMiddelware.getDepartment(req,res);
     },
-    getOverviewForAdmin : function (req,res) {
-        res.sendFile(path.join(__dirname + '/../views/overviewForAdmin.html'));
+    getType : function (req, res){
+        dbMiddelware.getType(req,res);
     },
-    getMyProfile : function (req,res) {
-        res.sendFile(path.join(__dirname + '/../views/myProfile.html'));
+    getShift : function (req, res) {
+        dbMiddelware.getShift(req,res);
     },
+    getShift_has_employee : function (req, res){
+        dbMiddelware.getShift_has_employee(req,res);
+    },
+    getRequest : function (req, res){
+        dbMiddelware.getRequest(req,res);
+    },
+    getAbsence : function (req, res){
+        dbMiddelware.getAbsence(req,res);
+    },
+    getOvertime : function (req, res){
+        dbMiddelware.getOvertime(req,res);
+    },
+    getUserInfo : function (req, res) {
+
+    },
+   /**
+    getVaktoversikt : function (req, res){
+        //oversikt over vaktlister
+        //res.sendFile(path.join(__dirname + '/../views/vaktoversikt.html'));
+    },
+    */
+
     //404 må være sist
     get404 : function (req, res) {
         res.status(404).send("<h1>Fokken hell m8</h1>");
         //res.send('what???', 404);
-    }
+    },
+
 
 }
