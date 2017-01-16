@@ -1,4 +1,6 @@
 var mysql = require('mysql');
+var bodyParser = require('body-parser');
+
 
 var pool = mysql.createPool({
     connectionLimit: 27,
@@ -23,9 +25,32 @@ module.exports =
                 connection.query(query, function (err, rows) {
                     connection.release(); // Legg tilbake i pool
                     if (!err) {
-                        console.log(rows);
-                        res.json(rows);
+                        //console.log(rows);
+                         res.json(rows);
+
                     } else {
+                        console.log("error: Error reading database: " + err);
+                        res.status(500);
+                        res.json({"error": "Error reading database: " + err});
+                    }
+                });
+            });
+        },
+        postdbQuery : function(req,res,query,post){
+            pool.getConnection(function(err,connection){
+                if(err){
+                    res.status(500) //err
+                    res.json({"Error":"Couldnt connect to MYSQL" + err});
+                    return;
+                }
+                console.log("Connected to database");
+                connection.query(query ,post, function(err,rows){
+                    connection.release();
+                    console.log("QUERY " + query+post)
+                    if(!err){
+                        console.log("db.js produces: " + rows);
+                        res.json(rows);
+                    }else{
                         console.log("error: Error reading database: " + err);
                         res.status(500);
                         res.json({"error": "Error reading database: " + err});

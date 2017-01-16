@@ -4,7 +4,8 @@
   "description": "scrum prosjekt 2017",
   "main": "server.js",
   "scripts": {
-    "test": "test"
+    "test": "./node_modules/.bin/mocha --reporter spec",
+    "doc": "./node_modules/.bin/"
   },
   "dependencies": {
     "body-parser":"^1.15.2",
@@ -19,7 +20,11 @@
     "react-dom": "^15.4.1",
     "nodemon": "^1.11.0",
     "async":"^2.1.4",
-    "router":"^1.1.4"
+    "router":"^1.1.4",
+    "mocha":"^3.2.0",
+    "supertest":"^2.0.1",
+    "should":"^11.1.2",
+    "jsdoc":"^3.4.3"
   },
   "repository": {
     "type": "git",
