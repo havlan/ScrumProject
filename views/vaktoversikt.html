@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>vaktoversikt</title>
@@ -7,6 +7,11 @@
     <!--<script src="vaktoversikt.js"></script>-->
     <link rel="stylesheet" href="css/Vaktoversiktstyle.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <style src="//cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css"></style>
+    <script src="//cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+
+
+
 </head>
 
 <body>
@@ -28,8 +33,8 @@
             <div class="dagsvakt-text">
                 <h4>Dagsvakt 08:00-16:00</h4>
             </div>
-            <table id="excelDataTable">
-                <tr class="header">
+            <table id="excelDataTable" class="sortable">
+
             </table>
         </div>
 
@@ -65,7 +70,6 @@
             <div class="nattevakt-text">
                 <h4>nattevakt 24:00-08:00</h4>
             </div>
-            <table class="sortable">
                 <thead>
                 <tr>
                     <th>Navn</th>

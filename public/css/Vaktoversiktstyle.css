@@ -27,6 +27,11 @@
     background-color: aliceblue;
     cursor: pointer;
 }
+
+thead{
+    background-color: #4CAF50;
+}
+
 /*
 table.sortable thead:nth-child(odd) {
     background-color:#bf946f;

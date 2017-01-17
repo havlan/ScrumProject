@@ -23,6 +23,8 @@ $.get('/getVaktliste', {}, function(req, res, data){
 });
 
 
+
+
 function buildHtmlTable(selector) {
     var columns = addAllColumnHeaders(myList, selector);
     var tbody = $('<tbody/>');
@@ -35,9 +37,10 @@ function buildHtmlTable(selector) {
         }
         $(selector).append(row$);
     }
-    $(selector).append(tbody);
+    $(tbody).append(row$);
 }
 function addAllColumnHeaders(myList, selector) {
+
     var columnSet = [];
     var headerThead$ = $('<thead/>');
     var headerTr$ = $('<tr/>');
@@ -47,11 +50,16 @@ function addAllColumnHeaders(myList, selector) {
             if ($.inArray(key, columnSet) == -1) {
                 columnSet.push(key);
                 headerTr$.append($('<th/>').html(key));
+
+
             }
+
         }
+
     }
-    $(selector).append(headerTr$);
     $(selector).append(headerThead$);
+    $(headerThead$).append(headerTr$);
+
 
     return columnSet;
 }
