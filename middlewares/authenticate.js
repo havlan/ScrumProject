@@ -22,15 +22,20 @@ module.exports = {
     },
     resCheck: function (req, res, rows) {
 
+        console.log("IN RESCHECK");
+
         if (res.length > 0) {
             if (res) {
-
                 if (cryptoHash.sha512(req.body.password, rows[0].password_salt).passwordHash == rows[0].password_hash) {
                     req.session.is_admin = rows[0].is_admin;
                     req.session.success = true;
                     req.session.username = req.body.username;
-                    res.redirect('/getProfile');
+                    console.log("HEE");
+                    console.log(req.session);
+                    res.sendFile(path.join(__dirname + '/../index.html'));
+                    //res.redirect('/getProfile');
                     //res.end();
+
                 } else {
                     console.log("NOPE");
                     res.redirect("/loginmv");
@@ -40,6 +45,11 @@ module.exports = {
             console.log("Not auth");
             res.redirect("/loginmv");
         }
+    },
+    logOutUser : function (req,res,next) {
+        delete req.session.is_admin;
+        delete req.session.success;
+        delete req.session.username;
     }
 }
 

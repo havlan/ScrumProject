@@ -71,12 +71,7 @@ app.post('/slippmeginn',function(req,res,next){ // expire: 24t, sessionId: ahsdh
     next();
 
 });
-app.get('/loginmv',function(req,res){
-    console.log(req.session.success);
-    console.log(req.session.username);
-    console.log(req.session.is_admin);
-
-
+app.get('/home',function(req,res){
     if(typeof req.session.success == 'undefined') { // checks if session already exists
         req.session.success = false;
     }
@@ -87,15 +82,6 @@ app.get('/loginmv',function(req,res){
         req.session.username = "";
     }
 
-    if(req.session.success && req.session.is_admin == true){
-        console.log("ADMIN LOGIN");
-    }
-
-    console.log(req.sessionID);
-    console.log(req.session.success);
-    console.log(req.session.username);
-    console.log(req.session.is_admin);
-
     console.log("User at login");
 
     if(req.session.success){
@@ -105,26 +91,26 @@ app.get('/loginmv',function(req,res){
     req.session.errors = null;
 });
 app.get('/sessiontest',function(req,res,next){
-    var sess = req.session;
-    console.log("Session test");
-    if(sess.views){
-        sess.views++;
-        res.json({"Views":sess.views});
-    }else{
-        sess.views = 1;
-        res.json({"Views":sess.views});
-        next();
-    }
+    console.log(req.session.success);
+    console.log(req.session.username);
+    console.log(req.session.is_admin);
+
+    auth.logOutUser(req,res,next);
+    console.log(req.session.success);
+    console.log(req.session.username);
+    console.log(req.session.is_admin);
+
+    res.send("hei");
 });
 
 
-app.post('/loginmv',function(req,res){
+app.post('/home',function(req,res){
     console.log("User clicked login");
     var errors = req.validationErrors();
     if(errors){
         req.session.errors = errors;
         req.session.success = false;
-        res.redirect('/loginmv');
+        res.redirect('/home');
     }else {
 
         console.log("Trying to login");
