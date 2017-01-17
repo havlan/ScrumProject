@@ -16,12 +16,12 @@ module.exports = {
         res.json({"Params": "" + req.params.id});
         console.log("GET user #" + ++totalgetReq + " " + JSON.stringify(req.body));
     },
-    //Windows
+    //Sites
     getLoginSite : function (req, res){
         res.sendFile(path.join(__dirname + '/../views/Login.html'));
     },
     getMenuSite : function (req, res){
-        res.sendFile(path.join(__dirname + '/../views/HMenu.html'));
+        res.sendFile(path.join(__dirname + '/../views/hMenu.html'));
     },
     getOverviewForAdminSite : function (req, res){
         res.sendFile(path.join(__dirname + '/../views/overviewForAdmin.html'));
