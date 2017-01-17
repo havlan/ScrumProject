@@ -75,6 +75,7 @@ router.route('/myProfile').get(getCtrl.getMyProfileSite);
 router.route('/vaktoversikt').get(getCtrl.getVaktoversiktSite);
 router.route('/calendar').get(getCtrl.getCalendarSite);
 router.route('/approvalAdmin').get(getCtrl.getApprovalAdminSite);
+router.route('/frontpageAdmin').get(getCtrl.getFrontpageAdminSite);
 
 //Images
 router.route('/IMG01').get(getCtrl.getLogo);
