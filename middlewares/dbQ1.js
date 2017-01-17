@@ -41,7 +41,7 @@ module.exports = {
     getSaltHash: function(req,res, next){
         console.log("2. calling getdbQuery");
         console.log(req.body.username);
-        dbHelper.getdbQuery(req,res, "select password_hash, password_salt, is_admin from LoginInfo where Username = ?",[req.body.username],next);
+        dbHelper.getLogin(req,res, "select password_hash, password_salt, is_admin from LoginInfo where Username = ?",[req.body.username],next);
     },
 
 

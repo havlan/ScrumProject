@@ -38,7 +38,7 @@ module.exports = {
 
                 } else {
                     console.log("NOPE");
-                    res.redirect("/loginmv");
+                    res.redirect("/home");
                 }
             }
         } else {

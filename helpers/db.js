@@ -62,6 +62,34 @@ module.exports =
             });
         },
 
+        getLogin : function(req,res,query,get,next){
+            console.log("Start av getdbQuery");
+            pool.getConnection(function(err,connection){
+                if(err){
+                    res.status(500) //err
+                    res.json({"Error":"Couldnt connect to MYSQL" + err});
+                    return;
+                }
+                console.log("Connected to database");
+                connection.query(query ,get, function(err,rows){
+                    connection.release();
+                    if(!err) {
+                        //console.log(rows);
+                        res.length = rows.length;
+                        //res.json(rows);
+                        console.log("Calling next yay")
+                        next(req,res,rows);
+                    }else{
+                        console.log("error: Error reading database: " + err);
+                        res.status(500);
+                        console.log("Error reading database: ");
+                        console.log("Calling next");
+                        next(req,res);
+                    }
+                });
+            });
+        },
+
         postdbQuery : function(req,res,query,post){
             pool.getConnection(function(err,connection){
                 if(err){

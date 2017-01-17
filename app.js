@@ -112,7 +112,6 @@ app.post('/home',function(req,res){
         req.session.success = false;
         res.redirect('/home');
     }else {
-
         console.log("Trying to login");
         auth.logUserIn(req,res,auth.resCheck);
     }
