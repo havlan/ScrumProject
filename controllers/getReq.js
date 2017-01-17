@@ -76,6 +76,9 @@ module.exports = {
     getEmployee_shifts_toCurrentDate:function(req,res){
         dbMiddelware.getEmployee_shifts_toCurrentDate(req,res);
     },
+    getVaktliste:function(req,res){
+        dbMiddelware.getVaktliste(req,res);
+    },
 
 
     //404 må være sist

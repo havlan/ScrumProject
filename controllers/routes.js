@@ -28,6 +28,7 @@ router.route('/getAbsence').get(getCtrl.getAbsence);
 router.route('/getOvertime').get(getCtrl.getOvertime);
 //router.route('/getUserInfo').get(getCtrl.getUserInfo);
 router.route('/getVaktoversikt').get(getCtrl.getVaktoversikt);
+router.route('/Vaktliste').get(getCtrl.getVaktliste);
 router.route('/getEmployeeShiftsToCurrent').get(getCtrl.getEmployee_shifts_toCurrentDate);
 
 
@@ -62,7 +63,6 @@ router.route('/NodeETest/post').post(testCtrl.postNodeETest);
 router.route('/Batman').get(testCtrl.getBatman);
 router.route('/JustaTest').get(testCtrl.getJustaTest);
 router.route('/JustaTest/put').put(testCtrl.putJustaTest);
-router.route('/PersonalInfo').get(testCtrl.getPersonalInfo);
 router.route('/EmployeeOvertime').get(testCtrl.getEmployeeOvertime);
 
 

@@ -43,9 +43,6 @@ module.exports = {
     getEmployeeOvertime: function (req, res) {
         dbHelper.dbQuery(req, res, "select * from Employee_Overtime");
     },
-    getPersonalInfo: function (req, res) {
-        dbHelper.dbQuery(req, res, "select * from Employee");
-    },
     getEmployee_shifts_toCurrentDate: function (req, res) {
         dbHelper.dbQuery(req, res, "select * from Employee_shifts_toCurrentDate where employee_id =?", req.params.employee_id);
     },
@@ -59,6 +56,9 @@ module.exports = {
         };
         console.log("Overview worklist");
         dbHelper.getdbQuery(req, res, "overview shifts ?", get);
+    },
+    getVaktliste: function (req, res) {
+        dbHelper.dbQuery(req, res, "select * from TestVaktliste");
     },
 
     //POST/PUT

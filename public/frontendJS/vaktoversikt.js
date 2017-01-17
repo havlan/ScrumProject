@@ -12,7 +12,7 @@ $( document ).ready(function() {
 var myList= [];
 
 
-$.get('/PersonalInfo', {}, function(req, res, data){
+$.get('/Vaktliste', {}, function(req, res, data){
     console.log(data);
     console.log(data.responseJSON[0]);
     myList = data.responseJSON;
