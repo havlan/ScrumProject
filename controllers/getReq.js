@@ -19,7 +19,7 @@ module.exports = {
     getLogin : function (req,res){
         res.sendFile(path.join(__dirname + '/../views/overviewForAdmin.html'));
     },
-f
+
     submitLogin : function (req, res) {
         //res.sendFile(path.join(__dirname + '/../index.html'));
         //res.json({"Msg":"Yodeliho"});
@@ -55,7 +55,7 @@ f
     getUserInfo : function (req, res) {
 
     },
-    getEmployee_shifts_toCurrentDate(req,res){
+    getEmployee_shifts_toCurrentDate:function(req,res){
         dbMiddelware.getEmployee_shifts_toCurrentDate(req,res);
     },
    /**
