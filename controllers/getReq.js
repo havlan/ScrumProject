@@ -8,6 +8,7 @@ module.exports = {
 
     getRoot : function(req,res){
         //res.redirect('/login'); //
+        console.log("GET ROOT", req.session);
         res.sendFile(path.join(__dirname + '/../index.html'));
     },
 

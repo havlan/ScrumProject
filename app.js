@@ -8,11 +8,10 @@ var expressValidator = require('express-validator')
 var passport = require('passport');
 var hbs = require('express-handlebars');
 var FileStore = require('session-file-store')(session);
-var auth = require('./middlewares/authenticate');
+var auth = require('./middlewares/authenticatePLANB');
 var flash = require('connect-flash');
 var morgan = require('morgan');
 var cookieParser = require('cookie-parser');
-var check = require('./helpers/passportConfig').isLoggedIn;
 
 require('./helpers/passportConfig')(passport);
 
@@ -44,42 +43,8 @@ app.use(flash());
 app.use('/', router);
 
 
-/*if(process.env.NODE_ENV !== 'test'){
-    require("console-stamp")(console, {
-        pattern:"dd/mm/yyyy HH:MM:ss.l",
-        metadata:'[' + process.pid + ']',
-        colors: {
-            stamp : "yellow",
-            label: "red",
-            metadata: "green"
-        }
-    });
-}*/
-app.post('/slippmeginn',function(req,res,next){ // expire: 24t, sessionId: ahsdhelwleggogpg223311, is_admin: bool
-    if(req.session && req.session.is_admin === true && req.session.username === "Abigail"){ // sjekk det du må
-        console.log("ADMIN LOGIN");
-    }else{ // sjekk vanlig login
-        console.log("No session data exists");
-        req.session.username = req.body.username;
-        req.session.is_admin = true;
-    }
-    next();
-
-});
 app.get('/vrinsk',function(req,res,next){
-    /*if(typeof req.session.success == 'undefined') { // checks if session already exists
-        req.session.success = false;
-    }
-    if(typeof req.session.is_admin == 'undefined'){
-        req.session.is_admin = false;
-    }
-    if(typeof req.session.username == 'undefined'){
-        req.session.username = "";
-    }
 
-    if(req.session.success && req.session.is_admin == true){
-        console.log("ADMIN LOGIN");
-    }*/
     res.render('kake', {title: 'Form validation', success:req.session.success, errors: req.session.errors});
     req.session.errors = null;
 });
@@ -97,10 +62,12 @@ app.get('/sessiontest',function(req,res,next){
 });
 
 app.post('/vrinsk',passport.authenticate('local-login', {
-        failureRedirect: '/vrinsk'
+        failureRedirect: '/vrinsk',
+        successRedirect: '/'
     }), function(req,res){
-    res.sendFile(path.join(__dirname + '/index.html'));
-   // res.json(req.user);
+    //res.redirect('/');
+    //res.sendFile(path.join(__dirname + '/index.html'));
+
 });
 app.post('/arneBrimi',passport.authenticate('local-login', {
     failureRedirect: '/vrinsk'}),function(req,res){
@@ -115,6 +82,8 @@ app.get('/gigi',function(req,res){
 
 });
 
+//require('./controllers/routes')(passport); // send inn app and passport for authentication and running
+
 var server = app.listen(3000, function(){
     console.log("Live at 3000");
 });
@@ -124,10 +93,3 @@ var server = app.listen(3000, function(){
 module.exports = server;
 //other exports
 module.exports = session;
-
-
-//session tabell select ditt og datt fra cookietable where Date.now() < expires
-/*
-login -> sjekk -> hvis ok -> lagre cookie
-logout -> cookie.clear()
- */

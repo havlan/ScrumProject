@@ -1,4 +1,4 @@
-/*var mysql = require('mysql');
+var mysql = require('mysql');
 var cryptoHash = require('./../middlewares/cryptoHash');
 var localStrat = require('passport-local').Strategy;
 
@@ -100,53 +100,64 @@ module.exports =
             });
         }
     };
+
+
+//passport configuration
 module.exports = function(passport) {
-
     passport.serializeUser(function(user,done){
-        done(null,user);
+        console.log("SERIALIZING");
+        console.log(JSON.stringify(user));
+        done(null, {
+            username : user.username,
+            id: user.employee_id,
+            is_admin: user.is_admin
+        });
+        console.log("DONE SERIALIZING");
     });
-
     passport.deserializeUser(function(username, done){
-        pool.getConnection(function(err,connection){
-            connection.query("select  * from LoginInfo where Username = '" + connection,escape(username) + "';", [username],function(err,rows){
-                console.log("WWGAT GTGE FUUUUUUUK \n\n\n");
-                if(err) {
+        console.log("DESERIALIZING");
+        pool.getConnection(function(err, connection){
+            if(err){
+                return done(err);
+            }
+            connection.query('select * from LoginInfo where username = ?',[username],function(err,rows){
+                connection.release();
+                if(!rows){
+                    return done(null,false, {message:"Incorrect username"});
+                }
+                if(err){
                     return done(err);
                 }
-                if(!rows){
-                    return done(null,false, {message: "Incorrect username"});
-                }
-                return done(null, rows[0]);
-            });
-
-        })
+                //console.log(rows);
+                done(err,rows[0]);
+            } );
+        });
     });
-
-
     passport.use('local-login',new localStrat({
             usernameField: 'username',
             passwordField: 'password',
             passReqToCallback: true
         },
         function (req,username,password, done) {
-            console.log("SIGN IN METHOD CALLED");
-            console.log("URS" + username);
-            pool.getConnection(function(err,connection){
+            console.log(req.passport);
+            basseng.getConnection(function(err, connection){
                 connection.query("select * from LoginInfo where Username = ?", [username], function (err, rows) {
+                    connection.release();
+                    //console.log(rows);
+                    if (!rows.length) {
+                        return done(null, false, req.flash("loginMsg", "No user found."));
+                    }
                     if (err) {
                         return done(err);
                     }
-                    if (!rows) {
-                        return done(null, false, {message: "Incorrect username"});
-                    }
-                    console.log(rows[0]);
                     if (!cryptoHash.sha512(req.body.password, rows[0].password_salt).passwordHash == rows[0].password_hash) {
-                        return done(null, false, {message: "Incorrect password"});
+                        return done(null, false, req.flash("loginMsg", "WHooooooooops, wrong password."));
                     }
+                    console.log("LOGIN OK");
+                    //req.login(); // wtf man
                     return done(null, rows[0]);
                 })
             });
         }
     ))
-};
-*/
+}
