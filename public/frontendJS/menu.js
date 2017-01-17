@@ -3,8 +3,8 @@
  */
 
 
-(document).ready(function() {
-    $("#includedContent").load("Login");
+$(document).ready(function() {
+    $("#includedContent").load("login");
 });
 
 

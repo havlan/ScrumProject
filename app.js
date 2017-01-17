@@ -44,8 +44,8 @@ app.post('/hest',function(req,res){
     res.send("Success");
 })
 
-var server = app.listen(8080, function(){
-    console.log("Live at 8080");
+var server = app.listen(3000, function(){
+    console.log("Live at 3000");
 });
 
 

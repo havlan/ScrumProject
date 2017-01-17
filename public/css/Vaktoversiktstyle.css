@@ -46,4 +46,17 @@ table tbody {
 
     text-align:center;
 }
+/*
+table.sortable thead:nth-child(odd) {
+    background-color:#bf946f;
+}
 
+
+table.sortable td:nth-child(even) {
+    text-align:center;
+    height: 30px;
+    border:#CBCBCB 1px;
+    background-color:#E5E5E5;
+    width: 100px;
+}
+*/

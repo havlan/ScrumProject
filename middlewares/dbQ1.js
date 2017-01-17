@@ -45,13 +45,11 @@ module.exports = {
     getPersonalInfo : function (req, res) {
         dbHelper.dbQuery(req,res,"select * from Employee");
     },
-    /**
     getVaktoversikt : function(req,res){
         var get = {name:req.body.name, type:req.body.type, department:req.body.department, responsibility_allowed:req.body.type, phone_nr:req.body.phone_nr};
         console.log("Overview worklist");
         dbHelper.getdbQuery(req,res, "overview shifts ?", get);
     },
-*/
 
     //POST/PUT
 
@@ -133,7 +131,5 @@ module.exports = {
     updateLogInInfo : function (req, res) {
         dbHelper.postdbQuery(req,res,"update LoginInfo set is_admin=? where Username=?",[req.body.is_admin,req.body.Username]);
     }
-
-
 }
 //heihei

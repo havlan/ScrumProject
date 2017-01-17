@@ -14,13 +14,12 @@ var myList= [];
 
 $.get('/PersonalInfo', {}, function(req, res, data){
     console.log(data);
-
+    console.log(data.responseJSON[0]);
     myList = data.responseJSON;
     //document.getElementById("data").innerHTML = myList;
 
     buildHtmlTable('#excelDataTable')
-
-
+    //tableCreate();
 });
 
 
@@ -58,4 +57,28 @@ function addAllColumnHeaders(myList, selector) {
     $(selector).append(headerThead$);
 
     return columnSet;
-};
+}
+
+//function tableCreate(){
+//    var body = document.body,
+//        tbl  = document.createElement('table');
+//    tbl.style.width  = '100px';
+//    tbl.style.border = '1px solid black';
+//
+//    for(var i = 0; i < 3; i++){
+//        var tr = tbl.insertRow();
+//        for(var j = 0; j < 2; j++){
+//            if(i == 2 && j == 1){
+//                break;
+//            } else {
+//                var td = tr.insertCell();
+//                td.appendChild(document.createTextNode('Cell'));
+//                td.style.border = '1px solid black';
+//                if(i == 1 && j == 1){
+//                    td.setAttribute('rowSpan', '2');
+//                }
+//            }
+//        }
+//    }
+//    body.appendChild(tbl);
+//}

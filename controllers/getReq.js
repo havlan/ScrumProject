@@ -7,8 +7,8 @@ var totalgetReq = 0;
 module.exports = {
 
     getRoot : function(req,res){
-        //res.redirect('/login'); //
-        res.sendFile(path.join(__dirname + '/../index.html'));
+        res.redirect('/login');
+        //res.sendFile(path.join(__dirname + '/../index.html'));
     },
 
     getUser : function(req,res){
@@ -16,8 +16,6 @@ module.exports = {
         res.json({"Params": "" + req.params.id});
         console.log("GET user #" + ++totalgetReq + " " + JSON.stringify(req.body));
     },
-
-
     //Windows
     getLogin : function (req,res){
         res.sendFile(path.join(__dirname + '/../views/Login.html'));
@@ -33,6 +31,12 @@ module.exports = {
     },
     getVaktoversikt : function (req,res){
         res.sendFile(path.join(__dirname + '/../views/vaktoversikt.html'));
+    },
+    getCalendar : function (req,res){
+        res.sendFile(path.join(__dirname + '/../views/calendarA.html'));
+    },
+    getLogo : function (req,res){
+        res.sendFile(path.join(__dirname + '/../public/lib/MinVakt.png'));
     },
 
 
@@ -69,15 +73,7 @@ module.exports = {
     getOvertime : function (req, res){
         dbMiddelware.getOvertime(req,res);
     },
-    getUserInfo : function (req, res) {
 
-    },
-   /**
-    getVaktoversikt : function (req, res){
-        //oversikt over vaktlister
-        //res.sendFile(path.join(__dirname + '/../views/vaktoversikt.html'));
-    },
-    */
 
     //404 må være sist
     get404 : function (req, res) {

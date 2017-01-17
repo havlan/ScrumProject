@@ -7,30 +7,29 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link href ="css/myProfile.css" rel="stylesheet" type = "text/css" > <!-- public + /css/myProfile.css   -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="frontendJS/jquery-latest.js"></script>
+
     <script type="text/javascript" src="frontendJS/tablesorter.js"></script>
 
 </head>
 <body class="profile">
 <main class="infoEmp">
-    <h1>navn på ansatt FRADATABASE</h1>
+    <h1 id = "navn">navn på ansatt FRADATABASE</h1>
     <table>
         <tr>
-            <td class="info">Stillingstittel</td>
-            <td class="db">FRADATABASE</td>
+            <td class="info">Stillings Prosent</td>
+            <td class="db" id = "stillingsprosent">FRADATABASE</td>
         </tr>
         <tr>
             <td class="info">Telefonnummer</td>
-            <td class="db">FRADATABASE</td>
+            <td class="db" id = "tlfnr">FRADATABASE</td>
         </tr>
         <tr>
             <td class="info">E-postadresse</td>
-            <td class="db">FRADATABASE</td>
+            <td class="db" id = "email">FRADATABASE</td>
         </tr>
         <tr>
             <td class="info">Adresse</td>
-            <td class="db">FRADATABASE</td>
+            <td class="db" id = "adresse">FRADATABASE</td>
         </tr>
     </table>
     <button type="button" id="editBtn" onclick="alert('Ring administrasjonen')">Rediger</button>
@@ -55,56 +54,8 @@
             <!-- Modal body-->
             <div class="table-responsive">
                 <table class = "histTable " id="sortTable">
-                    <thead>
-                    <tr class="headerTable">
-                        <th style="width:19%;" >Dato &#8597;</th>
-                        <th style="width:15%;" >Avdeling &#8597;</th>
-                        <th style="width:15%;">Stilling &#8597;</th>
-                        <th style="width:17%;">Ansvarsvakt &#8597;</th>
-                        <th style="width:15%;">Starttid &#8597;</th>
-                        <th style="width:10%;">Timer &#8597;</th>
-                        <th style="width:10%;">Overtid &#8597;</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>16.01.17</td>
-                        <td>2</td>
-                        <td>Assistent</td>
-                        <td>Nei</td>
-                        <td>16:00</td>
-                        <td>4</td>
-                        <td>0</td>
-                    </tr>
-                    <tr>
-                        <td>17.01.17</td>
-                        <td>6</td>
-                        <td>Sykepleier</td>
-                        <td>Ja</td>
-                        <td>16:00</td>
-                        <td>8</td>
-                        <td>2</td>
-                    </tr>
-                    <tr>
-                        <td>27.01.17</td>
-                        <td>9</td>
-                        <td>Hjelpepleier</td>
-                        <td>Ja</td>
-                        <td>16:00</td>
-                        <td>5</td>
-                        <td>1</td>
-                    </tr>
-                    </tbody>
                 </table>
             </div>
-            <script>
-                $(document).ready(function()
-                    {
-                        $("#sortTable").tablesorter();
-                    }
-                );
-
-            </script>
             <!-- Modal footer-->
             <div class="modal-footer">
                 <button type="button" class="close" data-dismiss="modal">Lukk</button>
@@ -113,22 +64,7 @@
     </div>
 </div>
 
-<script>
-    $(document).ready(function(){ // syntax for å hente data når dokument (html) er lastet inn
-        $.get('/getEmployee', {}, function(req, res, data){
-
-            console.log(data);
-            console.log(data.responseJSON[1]);
-
-            document.getElementById("h1").innerHTML = data.responseJSON[0].notat;
-            document.getElementById("stillingstittel").innerHTML = data.responseJSON[1].notat;
-            document.getElementById("tlfnr").innerHTML = data.responseJSON[0].id;
-            document.getElementById("epost").innerHTML = data.responseJSON[0].notat;
-            document.getElementById("adresse").innerHTML = data.responseJSON[0].id;
-
-        });
-    });
-</script>
+<script src = "frontendJS/myProfile.js"></script>
 </body>
 </html>
 

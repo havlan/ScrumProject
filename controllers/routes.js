@@ -26,9 +26,8 @@ router.route('/getShift_has_employee').get(getCtrl.getShift_has_employee);
 router.route('/getRequest').get(getCtrl.getRequest);
 router.route('/getAbsence').get(getCtrl.getAbsence);
 router.route('/getOvertime').get(getCtrl.getOvertime);
-router.route('/getUserInfo').get(getCtrl.getUserInfo);
-
-//router.route('/getVaktoversikt').get(getCtrl.getVaktoversikt);
+//router.route('/getUserInfo').get(getCtrl.getUserInfo);
+router.route('/getVaktoversikt').get(getCtrl.getVaktoversikt);
 
 
 //post / put
@@ -73,6 +72,10 @@ router.route('/menu').get(getCtrl.getMenu);
 router.route('/overviewForAdmin').get(getCtrl.getOverviewForAdmin);
 router.route('/myProfile').get(getCtrl.getMyProfile);
 router.route('/vaktoversikt').get(getCtrl.getVaktoversikt);
+router.route('/calendar').get(getCtrl.getCalendar);
+
+//Images
+router.route('/IMG01').get(getCtrl.getLogo);
 
 //======== TEST ROUTE FERDIG ========
 router.route('/*').get(getCtrl.get404);

@@ -2,16 +2,16 @@
 <html>
 <head>
 <meta charset='utf-8' />
-<link href='css/fullcalendar.min.css' rel='stylesheet' />
-<link href='css/fullcalendar.print.min.css' rel='stylesheet' media='print' />
-<script src='frontenJS/moment.min.js'></script>
-<script src='frontenJS/jquery.min.js'></script>
-<script src='frontenJS/fullcalendar.min.js'></script>
-<script src='frontenJS/nb.js'></script>
+<link href="/css/fullcalendar.min.css" rel="stylesheet" />
+<link href="/css/fullcalendar.print.min.css" rel="stylesheet" media="print" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="/frontendJS/moment.min.js"></script>
+<script src="/frontendJS/jquery.min.js"></script>
+<script src="/frontendJS/fullcalendar.min.js"></script>
+<script src="/frontendJS/nb.js"></script>
+
 <script>
-
 	$(document).ready(function() {
-
 		$('#calendar').fullCalendar({
 			header: {
 				left: 'prev,next today',
@@ -35,10 +35,9 @@
 			//GETTING EVENTS FROM JSON FEED; SHORT AND EXTENDED
 			events: 'events.json', //TODO
 		});
-		
 	});
-
 </script>
+
 <style>
 
 	body {
