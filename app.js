@@ -9,21 +9,18 @@ var passport = require('passport');
 var hbs = require('express-handlebars');
 var FileStore = require('session-file-store')(session);
 var auth = require('./middlewares/authenticate');
+var flash = require('connect-flash');
+var morgan = require('morgan');
 
 
 
-//var dbHelper = require('./helpers/db.js');
-var getController = require('./controllers/getReq.js');
+//require('./helpers/db')(passport);
 
 
-//use
-//app.set('trust proxy',1);
 app.engine('hbs', hbs({extname : 'hbs', layoutsDir: __dirname + '/public/css'}));
 app.set('views', path.join(__dirname + '/views'));
 app.set('view engine','hbs');
-
-app.use(passport.initialize());
-app.use(passport.session());
+app.use(morgan('combined'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 app.use(express.static (__dirname + '/public'));
@@ -40,11 +37,15 @@ app.use(session({
     success: false,
     is_admin:false
 }));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
+
 
 app.use('/', router);
 
 
-if(process.env.NODE_ENV !== 'test'){
+/*if(process.env.NODE_ENV !== 'test'){
     require("console-stamp")(console, {
         pattern:"dd/mm/yyyy HH:MM:ss.l",
         metadata:'[' + process.pid + ']',
@@ -54,14 +55,7 @@ if(process.env.NODE_ENV !== 'test'){
             metadata: "green"
         }
     });
-}
-
-
-
-//select * from NodeETest
-//insert into NodeETest values ('42', 'Barbaren Dave')
-//delete from NodeETest where id = '42'
-//sessions are stored on the server, the client only stores session id
+}*/
 app.post('/slippmeginn',function(req,res,next){ // expire: 24t, sessionId: ahsdhelwleggogpg223311, is_admin: bool
     if(req.session && req.session.is_admin === true && req.session.username === "Abigail"){ // sjekk det du må
         console.log("ADMIN LOGIN");
@@ -103,8 +97,9 @@ app.get('/sessiontest',function(req,res,next){
     }
 });
 
-app.post('/vrinsk',function(req,res,next){
+app.post('/vrinsk',passport.authenticate('local', {failureRedirect: '/vrinsk'}),function(req,res,next){
     var errors = req.validationErrors();
+    console.log(req.sessionID);
     if(errors){
         req.session.errors = errors;
         req.session.success = false;
@@ -114,6 +109,23 @@ app.post('/vrinsk',function(req,res,next){
         auth.logUserIn(req,res,next);
     }
 });
+app.post('/arneBrimi',function(req,res){
+    console.log("KJØRER ARNE");
+    var usr = req.body.username;
+    var pw1 = req.body.username;
+    console.log(usr + ", " + pw1);
+    //req.checkBody('username', 'Username is required').notEmpty();
+
+    var err = req.validationErrors();
+    if(err){
+        console.log("Errors");
+    }else{
+        console.log("No errs");
+    }
+});
+app.get('/gigi',function(req,res){
+    res.json({"Message":JSON.stringify(req.session.cookie)});
+})
 
 var server = app.listen(3000, function(){
     console.log("Live at 3000");

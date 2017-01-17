@@ -38,9 +38,12 @@ module.exports = {
     getOvertime : function(req,res){
         dbHelper.getdbQuery(req,res, "select * from Overtime");
     },
-    getSaltHash: function(req,res){
-        dbHelper.getdbQuery(req,res, "select password_hash, password_salt, is_admin from LoginInfo where Username = ?",req.body.username);
+    getSaltHash: function(req,res,next){
+        dbHelper.getdbQWNext(req,res, "select password_hash, password_salt, is_admin from LoginInfo where Username = ?",[req.body.username],next);
     },
+    /*simpleLogin : function(username){
+        dbHelper.simpleLogin("select * from LoginInfo where Username = ?", [username]);
+    },*/
     /**
     getVaktoversikt : function(req,res){
         var get = {name:req.body.name, type:req.body.type, department:req.body.department, responsibility_allowed:req.body.type, phone_nr:req.body.phone_nr};
