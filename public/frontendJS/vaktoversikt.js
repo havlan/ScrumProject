@@ -39,7 +39,6 @@ function buildHtmlTable(selector) {
 }
 function addAllColumnHeaders(myList, selector) {
     var columnSet = [];
-    var headerThead$ = $('<thead/>');
     var headerTr$ = $('<tr/>');
     for (var i = 0; i < myList.length; i++) {
         var rowHash = myList[i];
@@ -51,9 +50,12 @@ function addAllColumnHeaders(myList, selector) {
         }
     }
     $(selector).append(headerTr$);
-    $(selector).append(headerThead$);
 
     return columnSet;
+}
+
+function addHeader(myList, selector) {
+    var columns = addAllColumnHeaders(myList, selector);
 }
 
 //function tableCreate(){
