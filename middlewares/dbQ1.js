@@ -132,7 +132,8 @@ module.exports = {
             checked_by_admin: req.body.checked_by_admin,
             shift_id: req.body.shift_id,
             employee_id: req.body.employee_id,
-            overtime: req.body.overtime
+            overtime: req.body.overtime,
+            explanation: req.body.explanation
         };
         console.log("Posting new overtime");
         dbHelper.postdbQuery(req, res, "insert into Overtime set ?", post);

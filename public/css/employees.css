@@ -14,26 +14,26 @@
     margin-bottom: 12px;
 }
 
-#myTable {
+#excelDataTable {
     border-collapse: collapse;
     width: 100%;
     border: 1px solid #ddd;
     font-size: 18px;
 }
 
-#myTable th, #myTable td {
+#excelDataTable th, #excelDataTable td {
     text-align: left;
     padding: 12px;
 }
 
-#myTable tr {
+#excelDataTable tr {
     border-bottom: 1px solid #ddd;
 }
 
-#myTable tr.header{
+#excelDataTable tr.header{
     background-color: #f1f1f1;
 }
-#myTable tr:hover{
+#excelDataTable tr:hover{
     background-color: aliceblue;
     cursor: pointer;
 }

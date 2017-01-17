@@ -16,8 +16,8 @@
 <input type="text" id="positionInput" onkeyup="searchPositionFunction()" placeholder = "Søk på stilling">
 <button type="button" id="add" data-toggle="modal" data-target="#addModal">Legg til ansatt</button>
 
-<table id="myTable">
-    <tr class="header" id="excelDataTable">
+<table id="excelDataTable">
+    <tr class="header" >
 </table>
 
 <!-- 1:Modal-Add -->
@@ -36,11 +36,8 @@
                 <img id="picEmp" src="http://www.freeiconspng.com/uploads/profile-icon-9.png" alt="Bilde av ansatt" height="150px" width="150px"></img>
                 <button type="button" id="addPicEmp">Legg til bilde</button>
                 <form id="addEmp">
-                    Fornavn:
-                    <input required id="fornavn" type="text" name="firstname" placeholder="eks: Ola">
-                    <br>
-                    Etternavn:
-                    <input required id="etternavn" type="text" name="lastname" placeholder="eks: Nordmann">
+                    Navn:
+                    <input required id="fornavn" type="text" name="name" placeholder="eks: Jan Skrotnes">
                     <br>
                     Stilling:
                     <input required id="stilling" type="text" name="position" placeholder="eks: sykepleier">
@@ -95,11 +92,8 @@
                 </div>
                 <section id="personForm" style="display:none;">
                     <form id="editEmp" action="#">
-                        Fornavn:
-                        <input required id="fornavn" type="text" name="firstname" placeholder="eks: Ola">
-                        <br>
-                        Etternavn:
-                        <input required id="etternavn" type="text" name="lastname" placeholder="eks: Nordmann">
+                        Navn:
+                        <input required id="fornavn" type="text" name="name" placeholder="eks: Jan Skrotnes">
                         <br>
                         Stilling:
                         <input required id="stilling" type="text" name="position" placeholder="eks: sykepleier">
