@@ -28,6 +28,10 @@
 
 #excelDataTable tr {
     border-bottom: 1px solid #ddd;
+    ;
+}
+#excelDataTable td:hover{
+    color: darkgray;
 }
 
 #excelDataTable tr.header{

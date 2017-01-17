@@ -103,5 +103,34 @@ function removeFunction() {
         //FJERN ANSATT FRA DATABASE
     }
 }
+function hideForm() {
+    document.getElementById('personForm').style.display = "none";
+    document.getElementById("personInfo").style.display = "block";
+    document.getElementById("edit").style.display = "inline";
+    document.getElementById("remove").style.display = "inline";
+    document.getElementById("back").style.display = "none";
+}
+
+function hideInfo() {
+    document.getElementById("personInfo").style.display = "none";
+    document.getElementById("personForm").style.display = "block";
+    document.getElementById("remove").style.display = "none";
+    document.getElementById("edit").style.display="none";
+    document.getElementById("back").style.display="inline";
+    document.getElementById("back").style.display="inline";
+}
+
+function saveFunction() {
+    var x;
+    if (confirm("Er du sikker på at du vil lagre?") == true) {
+        //OPPDATER INFO I DATABASEN
+    }
+}
+
+$('table tbody tr  td').on('click',function(){
+    $("#myModal").modal("show");
+    $("#nameModal").val($(this).closest('tr').children()[0].textContent);
+    $("#positionModal").val($(this).closest('tr').children()[1].textContent);
+});
 
 
