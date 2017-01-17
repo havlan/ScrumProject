@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Forespørsler</title>
+    <link rel="stylesheet" type="text/css" href="css/forespørsler.css">
+    <script src="frontendJS/forespørsler.js"></script>
+
+</head>
+<body>
+<button id="fravær">FRAVÆR</button>
+<button id="overtid">OVERTID</button>
+<button id="bytt">BYTT VAKT</button>
+<button id="bytt2">BYTT VAKT MED</button>
+<span id="mySpan"></span>
+<div id="1">
+    <div class="fravær-content">
+        <form>
+            <fieldset>
+
+                Fraværstype<br>
+                <select>
+                    <option value="" disabled selected>Velg</option>
+                    <option value="vacation">ferie</option>
+                    <option value="disease">sykdom</option>
+                    <option value="Religion">Religiøs høytid</option>
+                    <option value="public-verv">Offentlig verv</option>
+                    <option value="Military-service">Millitær tjeneste</option>
+                    <option value="leave">Permisjon</option>
+                    <option value="funeral">Begravelse</option>
+                </select><br>
+
+                Dato:<br>
+                fra:<input type="date">
+                til: <input type="date"><br>
+
+                Årsak:
+                <br>
+                <textarea></textarea><br>
+
+                <input type="submit">
+            </fieldset>
+        </form>
+
+    </div>
+</div>
+
+<div id="2">
+    <form id="overtimeform">
+        <fieldset>
+
+            Vakttype<br>
+            <select>
+                <option value="" disabled selected>Velg</option>
+                <option value="Dayshift">Dagvakt</option>
+                <option value="eveningshift">Kveldsvakt</option>
+                <option value="nightshift">nattevakt</option>
+            </select><br>
+
+            Dato:<br>
+            <input type="date" >
+            <br>
+
+            kom: <input type="time" id="overtimeinput1">
+            dro: <input type="time" id="overtimeinput2">
+            <br>
+
+            Årsak:
+            <br>
+            <textarea></textarea><br>
+
+            <input type="submit" id="overtimesubmit">
+        </fieldset>
+    </form>
+
+
+</div>
+<div id="3">
+    <div class="Byttvakt-content">
+        <form>
+            <fieldset>
+
+                Bytt vakt<br>
+                Velg vakt<br>
+                <select id="selectvakt" size="5">
+                </select><br>
+                Årsak:
+                <br>
+                <textarea></textarea><br>
+
+                <input type="submit">
+            </fieldset>
+        </form>
+
+    </div>
+</div>
+
+<div id="4">
+    <div class="Byttvakt-content">
+        <form>
+            <fieldset>
+
+                Bytt vakt med<br>
+                din vakt	ønsket vakt<br>
+                <select size="5">
+                    <option>something</option>
+                    <option>something</option>
+                    <option>something</option>
+                </select>
+                <select size="5">
+                    <option>something</option>
+                    <option>something</option>
+                    <option>something</option>
+                    <option>something</option>
+                </select><br>
+                Årsak:
+                <br>
+                <textarea></textarea><br>
+
+
+                <input type="submit">
+            </fieldset>
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+</html>
