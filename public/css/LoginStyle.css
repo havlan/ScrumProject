@@ -20,7 +20,6 @@ button {
     width: 100%;
 }
 
-
 .imgcontainer {
     text-align: center;
     padding-top: 4%;
@@ -30,6 +29,7 @@ img.avatar {
     width: 40%;
     border-radius: 50%;
 }
+
 
 
 .container {
