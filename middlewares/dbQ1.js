@@ -45,6 +45,9 @@ module.exports = {
     getPersonalInfo : function (req, res) {
         dbHelper.dbQuery(req,res,"select * from Employee");
     },
+    getEmployee_shifts_toCurrentDate : function(req,res){
+        dbHelper.dbQuery(req,res,"select * from Employee_shifts_toCurrentDate where employee_id =?",req.params.employee_id);
+    },
     getVaktoversikt : function(req,res){
         var get = {name:req.body.name, type:req.body.type, department:req.body.department, responsibility_allowed:req.body.type, phone_nr:req.body.phone_nr};
         console.log("Overview worklist");
