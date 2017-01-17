@@ -53,6 +53,9 @@ module.exports = {
         console.log("Overview worklist");
         dbHelper.getdbQuery(req,res, "overview shifts ?", get);
     },
+    getVaktliste: function (req, res) {
+        dbHelper.dbQuery(req, res, "select * from TestVaktliste");
+    },
 
     //POST/PUT
 
