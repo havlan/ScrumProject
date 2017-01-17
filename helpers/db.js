@@ -15,7 +15,7 @@ module.exports =
         dbQuery: function (req, res, query) {
             pool.getConnection(function (err, connection) {
                 if (err) {
-                    res.status(500); // Internal server error
+                    res.status(500); //fuckfuckfuck, Internal server error
                     res.json({"error": "Error connecting to database: " + err});
                     return;
                 }

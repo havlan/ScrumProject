@@ -58,12 +58,7 @@ module.exports = {
     getEmployee_shifts_toCurrentDate:function(req,res){
         dbMiddelware.getEmployee_shifts_toCurrentDate(req,res);
     },
-   /**
-    getVaktoversikt : function (req, res){
-        //oversikt over vaktlister
-        //res.sendFile(path.join(__dirname + '/../views/Vaktoversikt.html'));
-    },
-    */
+
 
     //404 må være sist
     get404 : function (req, res) {
