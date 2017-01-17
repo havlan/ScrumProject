@@ -1,7 +1,7 @@
-var mysql = require('mysql');
+/*var mysql = require('mysql');
 
 
-var pool = mysql.createPool({
+var pool = module.exports.pool = mysql.createPool({
     connectionLimit: 27,
     host: 'mysql.stud.iie.ntnu.no',
     user: 'g_scrum04',
@@ -9,10 +9,6 @@ var pool = mysql.createPool({
     database: 'g_scrum04',
     debug: false
 });
-pool.getConnection(function(err){
-    if(err){
-        console.log("POOL ERROR");
-        throw err;
-    }
-})
+
 module.exports = pool;
+*/

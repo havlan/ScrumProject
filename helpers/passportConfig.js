@@ -1,15 +1,47 @@
-var pool = require('./dbConfig');
+//var basseng = require('./dbConfig');
 var cryptoHash = require('./../middlewares/cryptoHash');
 var localStrat = require('passport-local').Strategy;
+var mysql = require('mysql');
 
 
+var basseng = mysql.createPool({
+    connectionLimit: 27,
+    host: 'mysql.stud.iie.ntnu.no',
+    user: 'g_scrum04',
+    password: 'gBq9reK7',
+    database: 'g_scrum04',
+    debug: false
+});
 
 module.exports = function(passport) {
     passport.serializeUser(function(user,done){
-        console.log(user);
-        done(null,user);
+        console.log("SERIALIZING");
+        console.log(user.Username);
+        done(null, {
+            username : user.Username,
+            id: user.employee_id,
+            is_admin: user.is_admin
     });
-     passport.deserializeUser(function(username, done) { // FAILED TO DESERIALIZE????
+       console.log("DONE");
+    });
+    passport.deserializeUser(function(username, done){
+        console.log("DESERIALIZING");
+        basseng.getConnection(function(err, connection){
+            if(err){
+                return done(err);
+            }
+            connection.query('select * from LoginInfo where username = ?',[username],function(err,rows){
+                if(!rows || err){
+                    return done(null,false, {message:"Hell"});
+                }
+                connection.release();
+                console.log(rows);
+                done(err,rows[0]);
+            } );
+        });
+    });
+
+     /*passport.deserializeUser(function(username, done) { // FAILED TO DESERIALIZE????
      db.query('SELECT * FROM LoginInfo WHERE Username = ?', [username], function(err, result) {
          if (err){
              console.log(err);
@@ -17,12 +49,12 @@ module.exports = function(passport) {
              console.log(result);
          }
          if (!err) {
-             done(null, result);
+             done(null, result[0]);
          } else {
              done(err, null);
          }
          });
-     });
+     });*/
 
 
     passport.use('local-login',new localStrat({
@@ -33,9 +65,10 @@ module.exports = function(passport) {
         function (req,username,password, done) {
             console.log("SIGN IN METHOD CALLED");
             console.log("URS" + username);
-            pool.getConnection(function(err,connection){
+            basseng.getConnection(function(err, connection){
                 connection.query("select * from LoginInfo where Username = ?", [username], function (err, rows) {
                     connection.release();
+                    //console.log(rows);
                     if (err) {
                         return done(err);
                     }

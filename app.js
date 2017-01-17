@@ -14,7 +14,7 @@ var morgan = require('morgan');
 
 
 
-//require('./helpers/db')(passport);
+require('./helpers/passportConfig')(passport);
 
 
 app.engine('hbs', hbs({extname : 'hbs', layoutsDir: __dirname + '/public/css'}));
@@ -32,8 +32,11 @@ app.use(session({
     saveUninitialized: false,
     cookie: {
         maxAge: 60*60*24*1000*3,
-        username:""
+        username:'',
+        success:false,
+        is_admin:false
     },
+    username:'',
     success: false,
     is_admin:false
 }));
@@ -97,35 +100,28 @@ app.get('/sessiontest',function(req,res,next){
     }
 });
 
-app.post('/vrinsk',passport.authenticate('local', {failureRedirect: '/vrinsk'}),function(req,res,next){
-    var errors = req.validationErrors();
-    console.log(req.sessionID);
-    if(errors){
-        req.session.errors = errors;
-        req.session.success = false;
-        res.redirect('/vrinsk');
-    }else {
-        console.log("Trying to login");
-        auth.logUserIn(req,res,next);
-    }
-});
-app.post('/arneBrimi',function(req,res){
-    console.log("KJØRER ARNE");
-    var usr = req.body.username;
-    var pw1 = req.body.username;
-    console.log(usr + ", " + pw1);
-    //req.checkBody('username', 'Username is required').notEmpty();
+app.post('/vrinsk',passport.authenticate('local-login', {
+        failureRedirect: '/vrinsk',
+        successRedirect:'/sessiontest'
+    }));
+app.post('/arneBrimi',passport.authenticate('local-login', {
+        failureRedirect: '/vrinsk',
+        successRedirect: '/gigi'
 
-    var err = req.validationErrors();
-    if(err){
-        console.log("Errors");
-    }else{
-        console.log("No errs");
-    }
-});
+}));
 app.get('/gigi',function(req,res){
-    res.json({"Message":JSON.stringify(req.session.cookie)});
-})
+        console.log("KJØRER ARNE");
+        var usr = req.body.username;
+        var pw1 = req.body.username;
+        //console.log(usr + ", " + pw1);
+        var err = req.validationErrors();
+        if(err){
+            console.log("Errors");
+        }else{
+            console.log("No errs");
+            res.json({Message: "Fokkn hell mait"});
+        }
+});
 
 var server = app.listen(3000, function(){
     console.log("Live at 3000");
