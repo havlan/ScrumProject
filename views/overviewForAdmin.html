@@ -6,53 +6,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script>
-        //search for name(s)
-        function searchNameFunction() {
-            var input, filter, table, tr, td, i;
-            input = document.getElementById("nameInput");
-            filter = input.value.toUpperCase();
-            table = document.getElementById("myTable");
-            tr = table.getElementsByTagName("tr");
+    <script src="frontendJS/overviewAdmin.js"></script>
 
-            //Hide the rows that dont match the search
-            for (i = 0; i < tr.length; i++) {
-                td = tr[i].getElementsByTagName("td")[0];
-                if (td) {
-                    if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
-                        tr[i].style.display = "";
-                    } else {
-                        tr[i].style.display = "none";
-                    }
-                }
-            }
-        }
-        //search for position
-        function searchPositionFunction() {
-            var input, filter, table, tr, td, i;
-            input = document.getElementById("positionInput");
-            filter = input.value.toUpperCase();
-            table = document.getElementById("myTable");
-            tr = table.getElementsByTagName("tr");
-            for (i = 0; i < tr.length; i++) {
-                td = tr[i].getElementsByTagName("td")[1];
-                if (td) {
-                    if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
-                        tr[i].style.display = "";
-                    } else {
-                        tr[i].style.display = "none";
-                    }
-                }
-            }
-        }
-        // remove employee
-        function removeFunction() {
-            var x;
-            if (confirm("Er du sikker på at du vil fjerne denne ansatte?") == true) {
-                //FJERN ANSATT FRA DATABASE
-            }
-        }
-    </script>
 </head>
 
 <body>
@@ -62,51 +17,7 @@
 <button type="button" id="add" data-toggle="modal" data-target="#addModal">Legg til ansatt</button>
 
 <table id="myTable">
-    <tr class="header">
-        <th style="width:15%;">Navn</th>
-        <th style="width:14%;">Stilling</th>
-        <th style="width:14%;">Telefonnummer</th>
-        <th style="width:14%;">E-post</th>
-        <th style="width:14%;">Adresse</th>
-        <th style="width:14%;">Personnummer</th>
-        <th style="width:14%;">Brukernavn</th>
-    </tr>
-    <tr data-toggle="modal";>
-        <td>Alfreds Futterkiste</td>
-        <td>Sykepleier</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr data-toggle="modal";>
-        <td>Berglunds snabbkop</td>
-        <td>Assistent</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr data-toggle="modal";>
-        <td>Island Trading</td>
-        <td>Assistent</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr data-toggle="modal";>
-        <td>Koniglich Essen</td>
-        <td>Hjelpepleier</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
+    <tr class="header" id="excelDataTable">
 </table>
 
 <!-- 1:Modal-Add -->

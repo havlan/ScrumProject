@@ -73,6 +73,9 @@ module.exports = {
     getOvertime : function (req, res){
         dbMiddelware.getOvertime(req,res);
     },
+    getEmployee_shifts_toCurrentDate:function(req,res){
+        dbMiddelware.getEmployee_shifts_toCurrentDate(req,res);
+    },
 
 
     //404 må være sist
