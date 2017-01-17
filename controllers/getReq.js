@@ -83,7 +83,7 @@ module.exports = {
 
     //404 må være sist
     get404 : function (req, res) {
-        res.status(404).send("<h1>Fokken hell m8</h1>");
+        res.status(404).sendFile(path.join(__dirname + '/../views/404.html'));
         //res.send('what???', 404);
     },
 
