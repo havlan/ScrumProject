@@ -57,10 +57,14 @@ module.exports = {
         console.log("Overview worklist");
         dbHelper.getdbQuery(req, res, "overview shifts ?", get);
     },
-    getVaktliste: function (req, res) {
+    getVaktliste : function (req, res) {
         dbHelper.dbQuery(req, res, "select * from TestVaktliste");
     },
-
+/*
+    getVaktliste : function (req, res){
+        dbHelper.dbQuery(req, res, "select * from TestVaktliste2 where date = ?", req.params.date);
+    },
+*/
     //POST/PUT
 
 
