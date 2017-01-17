@@ -1,5 +1,9 @@
 
+
+
 $(document).ready(function(){ // syntax for å hente data når dokument (html) er lastet inn
+
+    $("#includedContent").load("menu");
 
     $("#sortTable").tablesorter();
 

@@ -4,6 +4,7 @@
 var myList = [];
 $(document).ready(function getInfo(){
     $.get("/getEmployee",{},function (req, res,data) {
+        $("#includedContent").load("menu");
         document.getElementById("firstnamedb").innerHTML = data.responseJSON[0].name;
         document.getElementById("lastnamedb").innerHTML = data.responseJSON[0].name;
         document.getElementById("posdb").innerHTML = data.responseJSON[0].type_name;

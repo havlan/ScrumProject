@@ -12,6 +12,7 @@
 
 <script>
 	$(document).ready(function() {
+        $("#includedContent").load("menu");
 		$('#calendar').fullCalendar({
 			header: {
 				left: 'prev,next today',
@@ -54,6 +55,7 @@
 
 </style>
 </head>
+<div id="includedContent"></div>
 <body>
 
 	<div id='calendar'></div>

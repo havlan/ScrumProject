@@ -21,7 +21,7 @@ module.exports = {
         res.sendFile(path.join(__dirname + '/../views/Login.html'));
     },
     getMenu : function (req,res){
-        res.sendFile(path.join(__dirname + '/../views/menu.html'));
+        res.sendFile(path.join(__dirname + '/../views/HMenu.html'));
     },
     getOverviewForAdmin : function (req,res){
         res.sendFile(path.join(__dirname + '/../views/overviewForAdmin.html'));
@@ -33,7 +33,7 @@ module.exports = {
         res.sendFile(path.join(__dirname + '/../views/vaktoversikt.html'));
     },
     getCalendar : function (req,res){
-        res.sendFile(path.join(__dirname + '/../views/calendarA.html'));
+        res.sendFile(path.join(__dirname + '/../views/calendar.html'));
     },
     getLogo : function (req,res){
         res.sendFile(path.join(__dirname + '/../public/lib/MinVakt.png'));
