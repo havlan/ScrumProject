@@ -15,6 +15,9 @@
     <link rel="stylesheet" href="/css/calendar.css">
     <link rel="stylesheet" href="css/frontpageAdmin.css">
 </head>
+
+<div id="includedContent"></div>
+
 <body>
     <div id='calendar' style="display:block"></div>
 <aside id="warning">
@@ -39,22 +42,5 @@
 <button type="button" class="buttonsAdmin" id="listButton" onclick="listFunction()"> <span>Dagens vakter</span> </button>
 </body>
 <script>
-    function calendarFunction(){
-        document.getElementById('list').style.display = "none";
-        document.getElementById('calendar').style.display = "block";
-    }
-    function listFunction(){
-        document.getElementById('list').style.display = "block";
-        document.getElementById('calendar').style.display = "none";
-    }
-    //TODO
-    $(function changeTabs(){
-
-        $('#buttonChangeTab').click(function(e){
-            e.preventDefault();
-            $('#mytabs a[href="#second"]').tab('show');
-        })
-
-    })
 </script>
 </html>
