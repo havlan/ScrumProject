@@ -38,6 +38,9 @@ module.exports = {
     getApprovalAdminSite : function (req,res){
         res.sendFile(path.join(__dirname + '/../views/approvalAdmin.html'));
     },
+    getFrontpageAdminSite : function (req,res){
+        res.sendFile(path.join(__dirname + '/../views/frontpageAdmin.html'));
+    },
     getLogo : function (req,res){
         res.sendFile(path.join(__dirname + '/../public/img/MinVakt.png'));
     },
