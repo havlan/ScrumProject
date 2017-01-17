@@ -13,16 +13,26 @@ var basseng = mysql.createPool({
     debug: false
 });
 
+module.exports = {
+    isLoggedIn: function (req, res, next) {
+        if (req.session.passport.user) {
+            return next();
+        } else {
+            res.redirect('/login');
+        }
+    }
+}
+
 module.exports = function(passport) {
     passport.serializeUser(function(user,done){
         console.log("SERIALIZING");
-        console.log(user.Username);
+        console.log(JSON.stringify(user));
         done(null, {
-            username : user.Username,
+            username : user.username,
             id: user.employee_id,
             is_admin: user.is_admin
     });
-       console.log("DONE");
+        console.log("DONE SERIALIZING");
     });
     passport.deserializeUser(function(username, done){
         console.log("DESERIALIZING");
@@ -31,54 +41,40 @@ module.exports = function(passport) {
                 return done(err);
             }
             connection.query('select * from LoginInfo where username = ?',[username],function(err,rows){
-                if(!rows || err){
-                    return done(null,false, {message:"Hell"});
-                }
                 connection.release();
-                console.log(rows);
+                if(!rows){
+                    return done(null,false, {message:"Incorrect username"});
+                }
+                if(err){
+                    return done(err);
+                }
+                //console.log(rows);
                 done(err,rows[0]);
             } );
         });
     });
-
-     /*passport.deserializeUser(function(username, done) { // FAILED TO DESERIALIZE????
-     db.query('SELECT * FROM LoginInfo WHERE Username = ?', [username], function(err, result) {
-         if (err){
-             console.log(err);
-         } else {
-             console.log(result);
-         }
-         if (!err) {
-             done(null, result[0]);
-         } else {
-             done(err, null);
-         }
-         });
-     });*/
-
-
     passport.use('local-login',new localStrat({
             usernameField: 'username',
             passwordField: 'password',
             passReqToCallback: true
         },
         function (req,username,password, done) {
-            console.log("SIGN IN METHOD CALLED");
-            console.log("URS" + username);
+            console.log(req.passport);
             basseng.getConnection(function(err, connection){
                 connection.query("select * from LoginInfo where Username = ?", [username], function (err, rows) {
                     connection.release();
                     //console.log(rows);
+                    if (!rows.length) {
+                        return done(null, false, req.flash("loginMsg", "No user found."));
+                    }
                     if (err) {
                         return done(err);
                     }
-                    if (!rows) {
-                        return done(null, false, {message: "Incorrect username"});
-                    }
-                    console.log(rows[0]);
                     if (!cryptoHash.sha512(req.body.password, rows[0].password_salt).passwordHash == rows[0].password_hash) {
-                        return done(null, false, {message: "Incorrect password"});
+                        return done(null, false, req.flash("loginMsg", "WHooooooooops, wrong password."));
                     }
+                    console.log("LOGIN OK");
+                    //req.login(); // wtf man
                     return done(null, rows[0]);
                 })
             });

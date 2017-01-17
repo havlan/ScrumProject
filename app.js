@@ -11,8 +11,8 @@ var FileStore = require('session-file-store')(session);
 var auth = require('./middlewares/authenticate');
 var flash = require('connect-flash');
 var morgan = require('morgan');
-
-
+var cookieParser = require('cookie-parser');
+var check = require('./helpers/passportConfig').isLoggedIn;
 
 require('./helpers/passportConfig')(passport);
 
@@ -21,6 +21,7 @@ app.engine('hbs', hbs({extname : 'hbs', layoutsDir: __dirname + '/public/css'}))
 app.set('views', path.join(__dirname + '/views'));
 app.set('view engine','hbs');
 app.use(morgan('combined'));
+app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 app.use(express.static (__dirname + '/public'));
@@ -29,17 +30,12 @@ app.use(session({
     secret: "hest",
     store: new FileStore,
     resave: true,
-    saveUninitialized: false,
+    saveUninitialized: true,
     cookie: {
-        maxAge: 60*60*24*1000*3,
-        username:'',
-        success:false,
-        is_admin:false
-    },
-    username:'',
-    success: false,
-    is_admin:false
+        maxAge: 60*60*24*1000*7
+    }
 }));
+
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
@@ -71,7 +67,7 @@ app.post('/slippmeginn',function(req,res,next){ // expire: 24t, sessionId: ahsdh
 
 });
 app.get('/vrinsk',function(req,res,next){
-    if(typeof req.session.success == 'undefined') { // checks if session already exists
+    /*if(typeof req.session.success == 'undefined') { // checks if session already exists
         req.session.success = false;
     }
     if(typeof req.session.is_admin == 'undefined'){
@@ -83,13 +79,13 @@ app.get('/vrinsk',function(req,res,next){
 
     if(req.session.success && req.session.is_admin == true){
         console.log("ADMIN LOGIN");
-    }
+    }*/
     res.render('kake', {title: 'Form validation', success:req.session.success, errors: req.session.errors});
     req.session.errors = null;
 });
 app.get('/sessiontest',function(req,res,next){
     var sess = req.session;
-    console.log("Session test");
+    //console.log("USER: " + req.passport.username);
     if(sess.views){
         sess.views++;
         res.json({"Views":sess.views});
@@ -101,26 +97,22 @@ app.get('/sessiontest',function(req,res,next){
 });
 
 app.post('/vrinsk',passport.authenticate('local-login', {
-        failureRedirect: '/vrinsk',
-        successRedirect:'/sessiontest'
-    }));
+        failureRedirect: '/vrinsk'
+    }), function(req,res){
+    res.sendFile(path.join(__dirname + '/index.html'));
+   // res.json(req.user);
+});
 app.post('/arneBrimi',passport.authenticate('local-login', {
-        failureRedirect: '/vrinsk',
-        successRedirect: '/gigi'
-
-}));
+    failureRedirect: '/vrinsk'}),function(req,res){
+    res.json(req.user);
+    //res.redirect('/sessiontest');
+});
+app.get('/logout', function(req,res){
+        delete req.session.passport.user;
+        res.json({message: req.session});
+})
 app.get('/gigi',function(req,res){
-        console.log("KJØRER ARNE");
-        var usr = req.body.username;
-        var pw1 = req.body.username;
-        //console.log(usr + ", " + pw1);
-        var err = req.validationErrors();
-        if(err){
-            console.log("Errors");
-        }else{
-            console.log("No errs");
-            res.json({Message: "Fokkn hell mait"});
-        }
+
 });
 
 var server = app.listen(3000, function(){
