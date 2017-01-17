@@ -9,6 +9,7 @@ var passport = require('passport');
 var hbs = require('express-handlebars');
 var FileStore = require('session-file-store')(session);
 var auth = require('./middlewares/authenticate');
+var auth2 = require('./middlewares/authenicate2');
 
 
 
@@ -34,11 +35,8 @@ app.use(session({
     resave: true,
     saveUninitialized: false,
     cookie: {
-        maxAge: 60*60*24*1000*3,
-        username:""
-    },
-    success: false,
-    is_admin:false
+        maxAge: 60*60*24*1000*3
+    }
 }));
 
 app.use('/', router);
@@ -73,7 +71,12 @@ app.post('/slippmeginn',function(req,res,next){ // expire: 24t, sessionId: ahsdh
     next();
 
 });
-app.get('/vrinsk',function(req,res,next){
+app.get('/loginmv',function(req,res){
+    console.log(req.session.success);
+    console.log(req.session.username);
+    console.log(req.session.is_admin);
+
+
     if(typeof req.session.success == 'undefined') { // checks if session already exists
         req.session.success = false;
     }
@@ -87,7 +90,18 @@ app.get('/vrinsk',function(req,res,next){
     if(req.session.success && req.session.is_admin == true){
         console.log("ADMIN LOGIN");
     }
-    res.render('kake', {title: 'Form validation', success:req.session.success, errors: req.session.errors});
+
+    console.log(req.sessionID);
+    console.log(req.session.success);
+    console.log(req.session.username);
+    console.log(req.session.is_admin);
+
+    console.log("User at login");
+
+    if(req.session.success){
+        res.redirect('/getProfile');
+    } else res.render('kake', {title: 'Login', success:req.session.success, errors: req.session.errors});
+    console.log(req.session.success);
     req.session.errors = null;
 });
 app.get('/sessiontest',function(req,res,next){
@@ -103,15 +117,18 @@ app.get('/sessiontest',function(req,res,next){
     }
 });
 
-app.post('/vrinsk',function(req,res,next){
+
+app.post('/loginmv',function(req,res){
+    console.log("User clicked login");
     var errors = req.validationErrors();
     if(errors){
         req.session.errors = errors;
         req.session.success = false;
-        res.redirect('/vrinsk');
+        res.redirect('/loginmv');
     }else {
+
         console.log("Trying to login");
-        auth.logUserIn(req,res,next);
+        auth.logUserIn(req,res,auth.resCheck);
     }
 });
 

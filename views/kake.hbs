@@ -1,4 +1,10 @@
-<h1>{{ title }}</h1>
+<head>
+
+    <link rel="stylesheet" href="/css/LoginStyle.css">
+
+
+</head>
+<body>
 {{# if success }}
     <section class="success">
         <h2>Successful Validation!</h2>
@@ -13,15 +19,21 @@
             </ul>
         </section>
     {{/if}}
-    <form action="/vrinsk" method="post">
-        <div class="input">
-            <label for="email">E-Mail</label>
-            <input type="text" id="email" name="email">
-        </div>
-        <div class="input">
-            <label for="password">Password</label>
-            <input type="password" id="password" name="password">
-        </div>
-        <button type="submit">Sign up</button>
-    </form>
+    <div class="imgcontainer">
+        <img src="http://www.hsdtaxlaw.com/wp-content/uploads/2016/05/20140806_LogoSupporterPlaceholder.png" alt="Logo" class="logo">
+    </div>
+    <div class="container">
+        <form action="/loginmv" method="post">
+            <div class="input">
+                <label for="email">Username</label>
+                <input type="text" id="username" name="username">
+            </div>
+            <div class="input">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password">
+            </div>
+            <button type="submit">Login</button>
+        </form>
+    </div>
 {{/if}}
+</body>

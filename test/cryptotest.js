@@ -53,5 +53,5 @@ function saltHashPassword(userpassword) {
     } else console.log("Nei");
 }
 
-//saltHashPassword('Arne123');
+saltHashPassword('pizza123');
 

@@ -1,6 +1,7 @@
 var cryptoHash = require('./cryptoHash');
 var app = require('../app');
 var query = require('./dbQ1');
+var path = require('path');
 
 var session = require('../app');
 
@@ -16,40 +17,39 @@ module.exports = {
         if (typeof req.session.username == 'undefined') {
             req.session.username = "";
         }
-        if (checkIfSaltHash(req, res)) {
-            if (cryptoHash.sha512(req.body.password, res.password_salt) == res.password_hash) {
-                console.log("SALT: " + res.password_salt + "\nHash: " + res.password_hash);
-                req.session.is_admin = res.is_admin;
-                req.session.success = true;
-                req.session.username = req.body.username;
-                console.log("INNER INNER INNER AUTH METHOD");
-                console.log("StatusCode should be 200");
-                next();
+
+        checkIfSaltHash(req, res, next);
+    },
+    resCheck: function (req, res, rows) {
+
+        if (res.length > 0) {
+            if (res) {
+
+                if (cryptoHash.sha512(req.body.password, rows[0].password_salt).passwordHash == rows[0].password_hash) {
+                    req.session.is_admin = rows[0].is_admin;
+                    req.session.success = true;
+                    req.session.username = req.body.username;
+                    res.redirect('/getProfile');
+                    //res.end();
+                } else {
+                    console.log("NOPE");
+                    res.redirect("/loginmv");
+                }
             }
         } else {
             console.log("Not auth");
-            res.send("Not identified");
+            res.redirect("/loginmv");
         }
     }
 }
 
-function checkIfSaltHash(req,res){
-    if(req.body.username != "" || req.body.username != null) {
-        query.getSaltHash(req, res);
-        if (res.length > 0) {
-            if (res) {
-                return true;
-            }
-        } else {
-            return false;
-        }
+
+function checkIfSaltHash(req, res, next) {
+    if (req.body.username != "") {
+        console.log("1. calling getSaltHash");
+        query.getSaltHash(req, res, next);
+    } else {
+        console.log("1. returning false");
+        return false;
     }
-}
-
-function isAuth(req,res,next){
-
-
-}
-function isInAdminMode(req,res,next){
-
 }

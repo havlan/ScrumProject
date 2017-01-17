@@ -20,6 +20,10 @@ module.exports = {
         res.sendFile(path.join(__dirname + '/../views/Login.html'));
     },
 
+    getProfile: function (req,res) {
+        res.sendFile(path.join(__dirname + '/../views/myProfile.html'));
+    },
+
     getEmployee : function (req, res){
       dbMiddelware.getEmployee(req,res);
     },

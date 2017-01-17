@@ -34,7 +34,8 @@ module.exports =
             });
         },
 
-        getdbQuery : function(req,res,query,get){
+        getdbQuery : function(req,res,query,get,next){
+            console.log("Start av getdbQuery");
             pool.getConnection(function(err,connection){
                 if(err){
                     res.status(500) //err
@@ -45,12 +46,17 @@ module.exports =
                 connection.query(query ,get, function(err,rows){
                     connection.release();
                     if(!err) {
-                        res.json(rows);
-                        console.log(res);
+                        //console.log(rows);
+                        res.length = rows.length;
+                        //res.json(rows);
+                        console.log("Calling next yay")
+                        next(req,res,rows);
                     }else{
                         console.log("error: Error reading database: " + err);
                         res.status(500);
                         console.log("Error reading database: ");
+                        console.log("Calling next");
+                        next(req,res);
                     }
                 });
             });
