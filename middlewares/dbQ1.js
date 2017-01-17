@@ -46,7 +46,7 @@ module.exports = {
     getEmployee_shifts_toCurrentDate: function (req, res) {
         dbHelper.dbQuery(req, res, "select * from Employee_shifts_toCurrentDate where employee_id =?", req.params.employee_id);
     },
-    getVaktoversikt: function (req, res) {
+    getVaktoversiktSite: function (req, res) {
         var get = {
             name: req.body.name,
             type: req.body.type,

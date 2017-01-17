@@ -24,7 +24,7 @@ $(document).ready(function(){ // syntax for å hente data når dokument (html) e
 var myList= [];
 
 
-$.get('/getVaktoversikt', {}, function(req, res, data){
+$.get('/getVaktoversiktSite', {}, function(req, res, data){
     console.log(data);
     console.log(data.responseJSON[0]);
     myList = data.responseJSON;

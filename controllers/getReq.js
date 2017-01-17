@@ -17,23 +17,26 @@ module.exports = {
         console.log("GET user #" + ++totalgetReq + " " + JSON.stringify(req.body));
     },
     //Windows
-    getLogin : function (req,res){
+    getLoginSite : function (req, res){
         res.sendFile(path.join(__dirname + '/../views/Login.html'));
     },
-    getMenu : function (req,res){
+    getMenuSite : function (req, res){
         res.sendFile(path.join(__dirname + '/../views/HMenu.html'));
     },
-    getOverviewForAdmin : function (req,res){
+    getOverviewForAdminSite : function (req, res){
         res.sendFile(path.join(__dirname + '/../views/overviewForAdmin.html'));
     },
-    getMyProfile : function (req,res){
+    getMyProfileSite : function (req, res){
         res.sendFile(path.join(__dirname + '/../views/myProfile.html'));
     },
-    getVaktoversikt : function (req,res){
+    getVaktoversiktSite : function (req, res){
         res.sendFile(path.join(__dirname + '/../views/vaktoversikt.html'));
     },
-    getCalendar : function (req,res){
+    getCalendarSite : function (req, res){
         res.sendFile(path.join(__dirname + '/../views/calendar.html'));
+    },
+    getApprovalAdminSite : function (req,res){
+        res.sendFile(path.join(__dirname + '/../views/approvalAdmin.html'));
     },
     getLogo : function (req,res){
         res.sendFile(path.join(__dirname + '/../public/img/MinVakt.png'));

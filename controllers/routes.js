@@ -17,7 +17,7 @@ var router = express.Router();
 router.route('/').get(getCtrl.getRoot);
 router.route('/user').get(getCtrl.getUser);
 router.route('/user/:id').get(getCtrl.getUser);
-router.route('/login').get(getCtrl.getLogin);
+router.route('/login').get(getCtrl.getLoginSite);
 router.route('/getEmployee').get(getCtrl.getEmployee);
 router.route('/getDepartment/:department_id').get(getCtrl.getDepartment);
 router.route('/getType').get(getCtrl.getType);
@@ -27,7 +27,7 @@ router.route('/getRequest').get(getCtrl.getRequest);
 router.route('/getAbsence').get(getCtrl.getAbsence);
 router.route('/getOvertime').get(getCtrl.getOvertime);
 //router.route('/getUserInfo').get(getCtrl.getUserInfo);
-router.route('/getVaktoversikt').get(getCtrl.getVaktoversikt);
+router.route('/getVaktoversiktSite').get(getCtrl.getVaktoversiktSite);
 router.route('/getVaktliste').get(getCtrl.getVaktliste);
 router.route('/getEmployeeShiftsToCurrent').get(getCtrl.getEmployee_shifts_toCurrentDate);
 
@@ -68,12 +68,13 @@ router.route('/EmployeeOvertime').get(testCtrl.getEmployeeOvertime);
 
 
 //Sites
-router.route('/login').get(getCtrl.getLogin);
-router.route('/menu').get(getCtrl.getMenu);
-router.route('/overviewForAdmin').get(getCtrl.getOverviewForAdmin);
-router.route('/myProfile').get(getCtrl.getMyProfile);
-router.route('/vaktoversikt').get(getCtrl.getVaktoversikt);
-router.route('/calendar').get(getCtrl.getCalendar);
+router.route('/login').get(getCtrl.getLoginSite);
+router.route('/menu').get(getCtrl.getMenuSite);
+router.route('/overviewForAdmin').get(getCtrl.getOverviewForAdminSite);
+router.route('/myProfile').get(getCtrl.getMyProfileSite);
+router.route('/vaktoversikt').get(getCtrl.getVaktoversiktSite);
+router.route('/calendar').get(getCtrl.getCalendarSite);
+router.route('/approvalAdmin').get(getCtrl.getApprovalAdminSite);
 
 //Images
 router.route('/IMG01').get(getCtrl.getLogo);
