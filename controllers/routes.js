@@ -72,7 +72,7 @@ router.route('/login').get(getCtrl.getLogin);
 router.route('/troll').get(getCtrl.getTroll);
 router.route('/menu').get(getCtrl.getMenu);
 router.route('/overviewForAdmin').get(getCtrl.getOverviewForAdmin);
-router.route('/myProfile').get(getCtrl.getMyProfile);
+//router.route('/myProfile').get(getCtrl.getMyProfile);
 
 
 
