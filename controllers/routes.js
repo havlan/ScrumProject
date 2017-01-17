@@ -28,7 +28,7 @@ router.route('/getAbsence').get(getCtrl.getAbsence);
 router.route('/getOvertime').get(getCtrl.getOvertime);
 //router.route('/getUserInfo').get(getCtrl.getUserInfo);
 router.route('/getVaktoversikt').get(getCtrl.getVaktoversikt);
-router.route('/Vaktliste').get(getCtrl.getVaktliste);
+router.route('/getVaktliste').get(getCtrl.getVaktliste);
 router.route('/getEmployeeShiftsToCurrent').get(getCtrl.getEmployee_shifts_toCurrentDate);
 
 
