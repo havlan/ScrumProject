@@ -28,7 +28,6 @@
 
 #excelDataTable tr {
     border-bottom: 1px solid #ddd;
-    ;
 }
 #excelDataTable td:hover{
     color: darkgray;
@@ -40,11 +39,6 @@
 #excelDataTable tr:hover{
     background-color: aliceblue;
     cursor: pointer;
-}
-
-body{
-    padding-left: 3%;
-    padding-right: 3%;
 }
 
 .infoCard {
@@ -61,6 +55,10 @@ body{
 
 img {
     border-radius: 5px 5px 0 0;
+}
+
+.flytt{
+
 }
 
 .container {

@@ -36,7 +36,7 @@ module.exports = {
         res.sendFile(path.join(__dirname + '/../views/calendar.html'));
     },
     getLogo : function (req,res){
-        res.sendFile(path.join(__dirname + '/../public/lib/MinVakt.png'));
+        res.sendFile(path.join(__dirname + '/../public/img/MinVakt.png'));
     },
 
 
