@@ -34,7 +34,6 @@ function buildHtmlTable(selector) {
             var cellValue = myList[i][columns[colIndex]];
             if (cellValue == null) cellValue = "";
             row$.append($('<td/>').html(cellValue));
-            nmbr++;
         }
         $(selector).append(row$);
     }
