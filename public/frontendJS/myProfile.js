@@ -17,6 +17,7 @@ $(document).ready(function(){ // syntax for å hente data når dokument (html) e
         document.getElementById("tlfnr").innerHTML              = data.responseJSON[0].phone_nr;
         document.getElementById("email").innerHTML              = data.responseJSON[0].email;
         document.getElementById("adresse").innerHTML            = data.responseJSON[0].address;
+        $("#cover").fadeOut(10); <!-- MÅ ligge etter det som tar legst å loade-->
     });
 });
 
