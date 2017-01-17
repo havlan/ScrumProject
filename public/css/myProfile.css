@@ -26,14 +26,16 @@ h1{
 }
 
 .profile{
-    margin-left: 10%;
     position: absolute;
     width: 100%;
     height: 100%;
-
 }
 
-#navn
+.flytt{
+    margin-left: 10%;
+}
+
+
 
 #editBtn{
     position: absolute;

@@ -15,53 +15,55 @@
 <div id="includedContent"></div>
 
 <body class="profile">
-<main class="infoEmp">
-    <h1 id = "navn">navn på ansatt FRADATABASE</h1>
-    <table>
-        <tr>
-            <td class="info">Stillings Prosent</td>
-            <td class="db" id = "stillingsprosent">FRADATABASE</td>
-        </tr>
-        <tr>
-            <td class="info">Telefonnummer</td>
-            <td class="db" id = "tlfnr">FRADATABASE</td>
-        </tr>
-        <tr>
-            <td class="info">E-postadresse</td>
-            <td class="db" id = "email">FRADATABASE</td>
-        </tr>
-        <tr>
-            <td class="info">Adresse</td>
-            <td class="db" id = "adresse">FRADATABASE</td>
-        </tr>
-    </table>
-    <button type="button" id="editBtn" onclick="alert('Ring administrasjonen')">Rediger</button>
-    <button type="button" id="historyBtn" data-toggle="modal" data-target="#historyModal">Historikk</button>
+<div class = flytt>
+    <main class="infoEmp">
+        <h1 id = "navn">navn på ansatt FRADATABASE</h1>
+        <table>
+            <tr>
+                <td class="info">Stillings Prosent</td>
+                <td class="db" id = "stillingsprosent">FRADATABASE</td>
+            </tr>
+            <tr>
+                <td class="info">Telefonnummer</td>
+                <td class="db" id = "tlfnr">FRADATABASE</td>
+            </tr>
+            <tr>
+                <td class="info">E-postadresse</td>
+                <td class="db" id = "email">FRADATABASE</td>
+            </tr>
+            <tr>
+                <td class="info">Adresse</td>
+                <td class="db" id = "adresse">FRADATABASE</td>
+            </tr>
+        </table>
+        <button type="button" id="editBtn" onclick="alert('Ring administrasjonen')">Rediger</button>
+        <button type="button" id="historyBtn" data-toggle="modal" data-target="#historyModal">Historikk</button>
 
-</main>
-<figure>
-    <img src="https://s3.amazonaws.com/whisperinvest-images/default.png" id="profilePic" alt = "Bilde av ansatt" size="width:100px height:100px;">
-</figure>
-<button type="button" id="picBtn" onclick="alert('Ring administrasjonen')">Rediger profilbilde</button>
+    </main>
+    <figure>
+        <img src="https://s3.amazonaws.com/whisperinvest-images/default.png" id="profilePic" alt = "Bilde av ansatt" size="width:100px height:100px;">
+    </figure>
+    <button type="button" id="picBtn" onclick="alert('Ring administrasjonen')">Rediger profilbilde</button>
 
-<!-- Modal:history -->
-<div class="modal fade" id="historyModal" role="dialog">
-    <div class="modal-dialog modal-lg">
-        <!-- Modal content-->
-        <!-- Modal header-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h3 class="modal-title">Historikk</h3>
-            </div>
-            <!-- Modal body-->
-            <div class="table-responsive">
-                <table class = "histTable " id="sortTable">
-                </table>
-            </div>
-            <!-- Modal footer-->
-            <div class="modal-footer">
-                <button type="button" class="close" data-dismiss="modal">Lukk</button>
+    <!-- Modal:history -->
+    <div class="modal fade" id="historyModal" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <!-- Modal content-->
+            <!-- Modal header-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h3 class="modal-title">Historikk</h3>
+                </div>
+                <!-- Modal body-->
+                <div class="table-responsive">
+                    <table class = "histTable " id="sortTable">
+                    </table>
+                </div>
+                <!-- Modal footer-->
+                <div class="modal-footer">
+                    <button type="button" class="close" data-dismiss="modal">Lukk</button>
+                </div>
             </div>
         </div>
     </div>
