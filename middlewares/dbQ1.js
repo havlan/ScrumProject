@@ -65,6 +65,7 @@ module.exports = {
         dbHelper.dbQuery(req, res, "select * from TestVaktliste2 where date = ?", req.params.date);
     },
 */
+
     //POST/PUT
 
 
