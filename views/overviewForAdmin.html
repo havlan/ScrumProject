@@ -7,10 +7,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="frontendJS/overviewAdmin.js"></script>
-
+    
 </head>
-<div id="includedContent"></div>
+
 <body>
+
 <div class = "flytt">
     <h1>Oversikt over ansatte</h1>
     <input type="text" id="nameInput" onkeyup="searchNameFunction()" placeholder="Søk på ansatt">
@@ -159,7 +160,7 @@
                     </section>
                     <aside class="buttons">
                         <button type="button" id="edit" onclick="hideInfo()" display="inline">Rediger ansatt</button>
-                        <button type="button" id="remove" onclick="removeFunction()" display="inline">Fjern ansatt</button>
+                        <button type="button" id="remove" onclick="removeFunction()" data-dismiss="modal" display="inline">Fjern ansatt</button>
                     </aside>
                 </main>
 
