@@ -12,7 +12,7 @@ var flash = require('connect-flash');
 var morgan = require('morgan');
 var cookieParser = require('cookie-parser');
 
-require('./helpers/db')(passport);
+require('./helpers/passtheport')(passport);
 
 
 app.engine('hbs', hbs({extname : 'hbs', layoutsDir: __dirname + '/public/css'}));
