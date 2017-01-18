@@ -1,8 +1,4 @@
-<head>
-    <meta charset="utf-8">
-    <title>Login</title>
-    <link rel="stylesheet" href="css/LoginStyle.css">
-</head>
+<h1>{{ title }}</h1>
 {{# if success }}
     <section class="success">
         <h2>Successful Validation!</h2>
@@ -17,14 +13,9 @@
             </ul>
         </section>
     {{/if}}
-    <div class="imgcontainer">
-        <img src="http://www.hsdtaxlaw.com/wp-content/uploads/2016/05/20140806_LogoSupporterPlaceholder.png" alt="Logo" class="logo">
-    </div>
-    <div class="container">
-    <form action="/loginMV" method="post">
-
+    <form action="/login" method="post">
         <div class="input">
-            <label for="email">E-Mail</label>
+            <label for="username">E-Mail</label>
             <input type="text" id="username" name="username">
         </div>
         <div class="input">
@@ -33,5 +24,4 @@
         </div>
         <button type="submit">Login</button>
     </form>
-    </div>
 {{/if}}

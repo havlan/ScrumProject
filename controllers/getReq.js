@@ -14,12 +14,11 @@ module.exports = {
     },
 
     getUser : function(req,res){
-        console.log("USER AT GETUSER");
-        console.log(req.session);
-        res.send(req.session);
+        //get user functionality here
+        res.sendFile(path.join(__dirname + '/../views/smashing.html'));
     },
     getLogin : function (req,res){
-        res.sendFile(path.join(__dirname + '/../views/Login.html'));
+        res.sendFile(path.join(__dirname + '/../views/login.html'));
     },
 
     getEmployee : function (req, res){
