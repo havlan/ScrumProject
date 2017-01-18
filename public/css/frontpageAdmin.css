@@ -49,7 +49,7 @@
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 20px;
+    font-size: 18px;
     cursor:pointer;
     width: 200px;
 }
@@ -79,19 +79,19 @@
 }
 
 #buttonChangeTab{
-    margin-top: 20%;
+    margin-top: 15%;
 }
 #buttonChangeTab:hover{
     background-color: #6585e7;
 }
 #calendarButton{
-    margin-top: 10%;
+    margin-top: 5%;
 }
 #calendarButton:hover{
     background-color: #6585e7;
 }
 #listButton{
-    margin-top: 15.3%;
+    margin-top: 10%;
 }
 #listButton:hover{
     background-color: #6585e7;
