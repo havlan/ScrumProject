@@ -46,7 +46,7 @@ module.exports = function (app, passport) {
         failureFlash: true
     }), function (req, res) {
         console.log("LOGIN OK?");
-        res.redirect('/');
+        res.redirect('/calendar');
     });
 
     app.post('/postUser', isAdmin, postCtrl.postEmployee);

@@ -61,8 +61,7 @@ function addAllColumnHeaders(myList, selector) {
     }
     $(selector).append(headerThead$);
     $(headerThead$).append(headerTr$);
-
-
+    $("#cover").fadeOut(20);
     return columnSet;
 }
 

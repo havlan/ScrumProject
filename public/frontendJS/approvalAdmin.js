@@ -22,8 +22,13 @@ function switchFunction(){
 }
 
 $(document).ready(function(){
+    $("#includedContent").load("menu");
+
     $("#mytable #checkall").click(function () {
+
         if ($("#mytable #checkall").is(':checked')) {
+
+
             $("#mytable input[type=checkbox]").each(function () {
                 $(this).prop("checked", true);
             });
