@@ -60,6 +60,9 @@ module.exports = {
     getVaktliste : function (req, res) {
         dbHelper.dbQuery(req, res, "select * from TestVaktliste");
     },
+    getEvents : function (req,res) {
+        dbHelper.dbQuery(req, res, "select * from Employee_Overtime");
+    },
 /*
     getVaktliste : function (req, res){
         dbHelper.dbQuery(req, res, "select * from TestVaktliste2 where date = ?", req.params.date);

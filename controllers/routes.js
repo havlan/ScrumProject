@@ -30,6 +30,7 @@ router.route('/getOvertime').get(getCtrl.getOvertime);
 router.route('/getVaktoversiktSite').get(getCtrl.getVaktoversiktSite);
 router.route('/getVaktliste').get(getCtrl.getVaktliste);
 router.route('/getEmployeeShiftsToCurrent').get(getCtrl.getEmployee_shifts_toCurrentDate);
+//router.route('/getEvents').get(getCtrl.getEvents());
 
 
 //post / put
@@ -55,7 +56,6 @@ router.route('/updateLogInInfo').post(postCtrl.updateLogInInfo);
 //delete
 
 
-
 //===============  KEEP NodeETest for testing!!!  ====================
 router.route('/NodeETest').get(testCtrl.getNodeETest);
 router.route('/NodeETest/put').put(testCtrl.putNodeETest);
@@ -66,6 +66,8 @@ router.route('/JustaTest/put').put(testCtrl.putJustaTest);
 router.route('/EmployeeOvertime').get(testCtrl.getEmployeeOvertime);
 
 
+//Site
+router.route('/OnePagedMenu').get(getCtrl.getOnePagedMenu);
 
 //Sites
 router.route('/login').get(getCtrl.getLoginSite);
@@ -81,10 +83,6 @@ router.route('/frontpageAdmin').get(getCtrl.getFrontpageAdminSite);
 router.route('/IMG01').get(getCtrl.getLogo);
 
 //======== TEST ROUTE FERDIG ========
-router.route('/*').get(getCtrl.get404);
-
-
-
 router.route('/*').get(getCtrl.get404);
 
 module.exports = router;

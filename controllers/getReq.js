@@ -16,6 +16,13 @@ module.exports = {
         res.json({"Params": "" + req.params.id});
         console.log("GET user #" + ++totalgetReq + " " + JSON.stringify(req.body));
     },
+
+
+    //Site
+    getOnePagedMenu : function (req,res){
+        res.sendFile(path.join(__dirname + '/../views/OnePagedMenu.html'));
+    },
+
     //Sites
     getLoginSite : function (req, res){
         res.sendFile(path.join(__dirname + '/../views/Login.html'));
@@ -44,6 +51,7 @@ module.exports = {
     getLogo : function (req,res){
         res.sendFile(path.join(__dirname + '/../public/img/MinVakt.png'));
     },
+
 
 
 
@@ -84,6 +92,9 @@ module.exports = {
     },
     getVaktliste:function(req,res){
         dbMiddelware.getVaktliste(req,res);
+    },
+    getEvents : function (req,res) {
+        dbMiddelware.getEvents(req,res);
     },
 
 

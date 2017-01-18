@@ -7,23 +7,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-    <script>
-        $(document).ready(function(){
-            $("#mytable #checkall").click(function () {
-                if ($("#mytable #checkall").is(':checked')) {
-                    $("#mytable input[type=checkbox]").each(function () {
-                        $(this).prop("checked", true);
-                    });
-
-                } else {
-                    $("#mytable input[type=checkbox]").each(function () {
-                        $(this).prop("checked", false);
-                    });
-                }
-            });
-            $("[data-toggle=tooltip]").tooltip();
-        });
-    </script>
+    <script src = "frontendJS/approvalAdmin.js"></script>
 
 </head>
 <body>
@@ -151,27 +135,9 @@
                 </tr>
                 </tbody>
             </table>
+        </table>
+    </table>
 </section>
 <button type="button" id ="save" onclick="saveFunction()"style="display:none">Godkjenn og lagre</button>
-<script>
-    function leaveFunction(){
-        document.getElementById('leaveApproval').style.display = "block";
-        document.getElementById('switchApproval').style.display = "none";
-        document.getElementById('overtimeApproval').style.display = "none";
-        document.getElementById('save').style.display = "block";
-    }
-    function overtimeFunction(){
-        document.getElementById('leaveApproval').style.display = "none";
-        document.getElementById('switchApproval').style.display = "none";
-        document.getElementById('overtimeApproval').style.display = "block";
-        document.getElementById('save').style.display = "block";
-    }
-    function switchFunction(){
-        document.getElementById('leaveApproval').style.display = "none";
-        document.getElementById('switchApproval').style.display = "block";
-        document.getElementById('overtimeApproval').style.display = "none";
-        document.getElementById('save').style.display = "block";
-    }
-</script>
 </body>
 </html>

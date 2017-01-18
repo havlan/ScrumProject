@@ -1,8 +1,11 @@
 /**
  * Created by LittleGpNator on 17.01.2017.
  */
+var events;
+
 $(document).ready(function() {
     $("#includedContent").load("menu");
+
     $('#calendar').fullCalendar({
         header: {
             left: 'prev,next today',
@@ -20,6 +23,6 @@ $(document).ready(function() {
         eventColor: '#aabfe0', //default event color //can be set individually
         eventTextColor: '#000000', //default event text color
         //GETTING EVENTS FROM JSON FEED; SHORT AND EXTENDED
-        events: 'events.json', //TODO
+        events: '/lib/events.json', //TODO
     });
 });
