@@ -51,6 +51,9 @@ module.exports = {
         console.log("USER ID "+req.session.passport.user.id);
         dbHelper.getdbQuery(req, res, "select * from Employee_Shifts_toCurrentDate where employee_id = ?",[req.session.passport.user.id]);
     },
+    getEvents : function (req,res) {
+        dbHelper.dbQuery(req, res, "select * from JSON_EMPLOYEE_VIEW");
+    },
     /*simpleLogin : function(username){
         dbHelper.simpleLogin("select * from LoginInfo where Username = ?", [username]);
     },*/
