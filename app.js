@@ -48,7 +48,7 @@ app.use(flash());
 //pass passport auth and app to route config
 require('./controllers/configRoute')(app,passport);
 
-var server = app.listen(3000, function(){
+var server = app.listen(3030, function(){
     console.log("Live at ",this.address().port);
 });
 
