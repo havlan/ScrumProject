@@ -1,6 +1,6 @@
 //this file executes queries towards mysql
 
-var dbHelper = require('../helpers/db');
+var dbHelper = require('../helpers/db').getPool();
 
 module.exports = {
     //GET

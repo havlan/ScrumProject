@@ -1,7 +1,6 @@
 //routing
 
 
-var express = require('express');
 var getCtrl = require('./getReq');
 var postCtrl = require('./postReq');
 
@@ -20,20 +19,20 @@ module.exports = function (app, passport) {
     app.get('/getRequest', isLoggedIn, getCtrl.getRequest);
     app.get('/getAbsence', isLoggedIn, getCtrl.getAbsence);
     app.get('/getOvertime', isLoggedIn, getCtrl.getOvertime);
-    app.get('/getUserInfo', isLoggedIn, getCtrl.getUserInfo);
+    //app.get('/getUserInfo', isLoggedIn, getCtrl.getUserInfo);
     app.get('/getVaktoversiktSite', isLoggedIn, getCtrl.getVaktoversiktSite);
     app.get('/getVaktliste', isLoggedIn, getCtrl.getVaktliste);
-    app.get('/getEmployeeShiftsToCurrent', isLoggedIn, getCtrl.getEmployee_shifts_toCurrentDate());
+    app.get('/getEmployeeShiftsToCurrent', isLoggedIn, getCtrl.getEmployee_shifts_toCurrentDate);
 
 
     //Sites
-    app.get('/menu', getCtrl.getMenuSite());
-    app.get('/overviewForAdmin', getCtrl.getOverviewForAdminSite());
-    app.get('/myProfile', getCtrl.getMyProfileSite());
-    app.get('/vaktoversikt', getCtrl.getVaktoversiktSite());
-    app.get('/calendar', getCtrl.getCalendarSite());
-    app.get('/approvalAdmin', getCtrl.getApprovalAdminSite());
-    app.get('/frontpageAdmin', getCtrl.getFrontpageAdminSite());
+    app.get('/menu', getCtrl.getMenuSite);
+    app.get('/overviewForAdmin', getCtrl.getOverviewForAdminSite);
+    app.get('/myProfile', getCtrl.getMyProfileSite);
+    app.get('/vaktoversikt', getCtrl.getVaktoversiktSite);
+    app.get('/calendar', getCtrl.getCalendarSite);
+    app.get('/approvalAdmin', getCtrl.getApprovalAdminSite);
+    app.get('/frontpageAdmin', getCtrl.getFrontpageAdminSite);
 
     //Images
     app.get('IMG01', isLoggedIn, getCtrl.getLogo);

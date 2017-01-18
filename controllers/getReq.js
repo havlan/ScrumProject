@@ -10,8 +10,7 @@ module.exports = {
         //res.redirect('/login'); //
         console.log("ROOT: ",req.session);
         console.log("GET ROOT", req.isAuthenticated());
-        res.sendFile(path.join(__dirname + '/../index.html'));
-        res.redirect('/login');
+        res.sendFile(path.join(__dirname + '/../views/hMenu.html'));
     },
 
     getUser : function(req,res){
@@ -93,7 +92,7 @@ module.exports = {
         dbMiddelware.getOvertime(req,res);
     },
     getEmployee_shifts_toCurrentDate:function(req,res){
-        dbMiddelware.getEmployee_shifts_toCurrentDate(req,res);
+        //dbMiddelware.getEmployee_shifts_toCurrentDate(req,res);
     },
     getVaktliste:function(req,res){
         dbMiddelware.getVaktliste(req,res);
