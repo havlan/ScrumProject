@@ -11,7 +11,7 @@
 </head>
 <div id="includedContent"></div>
 <body>
-<div class = flytt>
+<div class = "flytt">
     <h1>Oversikt over ansatte</h1>
     <input type="text" id="nameInput" onkeyup="searchNameFunction()" placeholder="Søk på ansatt">
     <input type="text" id="positionInput" onkeyup="searchPositionFunction()" placeholder="Søk på stilling">
@@ -121,7 +121,7 @@
                             <button type="button" id="back" onclick="hideForm()" display="none">&#8592;Tilbake</button>
                         </form>
                     </section>
-                    <section id="personInfo" style="display:block">
+                    <section id="personInfo" data-target="#myModal" style="display:block">
                         <table cellspacing="10">
                             <tr>
                                 <td class="info">Fornavn:</td>
@@ -167,7 +167,6 @@
                 <div class="modal-footer">
                     <button type="button" class="closeButton" data-dismiss="modal">Lukk</button>
                 </div>
-
             </div>
         </div>
     </div>

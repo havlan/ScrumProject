@@ -1,9 +1,10 @@
+
 #calendar{
     position: absolute;
     width: 50%;
     height:40%;
     margin-left: 22%;
-    margin-top: 4%;
+    margin-top: 0%;
 }
 
 #warning{
@@ -14,7 +15,7 @@
     height: 30%;
     width: 15%;
     margin-left: 75%;
-    margin-top: 9%;
+    margin-top: 5%;
     cursor: pointer;
 }
 #warning:hover{
@@ -29,12 +30,10 @@
     height: 30%;
     width: 15%;
     margin-left: 75%;
-    margin-top: 26%;
-    cursor:pointer;
+    margin-top: 23%;
+
 }
-#freeShifts:hover{
-    background-color: lightyellow;
-}
+
 .titles{
     font-family: Verdana, Geneva, sans-serif;
     text-align: center;
@@ -102,3 +101,4 @@
     margin-left: 25%;
     margin-top: 4%;
 }
+
