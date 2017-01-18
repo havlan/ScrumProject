@@ -15,12 +15,10 @@ module.exports = {
 
     getUser : function(req,res){
         //get user functionality here
-        console.log("GETUSER",req.session);
-        res.json({"Params": "" + req.params.id});
-        console.log("GET user #" + ++totalgetReq + " " + JSON.stringify(req.body));
+        res.sendFile(path.join(__dirname + '/../views/smashing.html'));
     },
     getLogin : function (req,res){
-        res.sendFile(path.join(__dirname + '/../views/Login.html'));
+        res.sendFile(path.join(__dirname + '/../views/login.html'));
     },
 
     getEmployee : function (req, res){

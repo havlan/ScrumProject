@@ -12,13 +12,14 @@ var router = express.Router();
 
 //ruting trenger ikke parameter eks: ikke blabla(req,res);
 //routing does not need parameter.
-// syntax - router.route(PATH).[REST METHOD](controller.controllerAccessName)
+// syntax - app.route(PATH).[REST METHOD](controller.controllerAccessName)
 
     //get
     router.route('/').get(isLoggedIn,getCtrl.getRoot);
     router.route('/user').get(getCtrl.getUser);
     router.route('/user/:id').get(getCtrl.getUser);
     router.route('/login').get(getCtrl.getLogin);
+    router.route('/logout').get(logOut);
     router.route('/getEmployee').get(getCtrl.getEmployee);
     router.route('/getDepartment/:department_id').get(getCtrl.getDepartment);
     router.route('/getType').get(getCtrl.getType);
@@ -29,11 +30,11 @@ var router = express.Router();
     router.route('/getOvertime').get(getCtrl.getOvertime);
     router.route('/getUserInfo').get(getCtrl.getUserInfo);
 
-    //router.route('/getVaktoversikt').get(getCtrl.getVaktoversikt);
+    //app.route('/getVaktoversikt').get(getCtrl.getVaktoversikt);
 
 
     //post / put
-    router.route('/login').post(postCtrl.submitLogin);
+    router.route('/login').post();
     router.route('/postUser').post(postCtrl.postEmployee);
     router.route('/postDepartment').post(postCtrl.postDepartment);
     router.route('/postType').post(postCtrl.postType);
@@ -51,11 +52,11 @@ var router = express.Router();
     router.route('/NodeETest').get(testCtrl.getNodeETest);
     router.route('/NodeETest/put').put(testCtrl.putNodeETest);
     router.route('/NodeETest/post').post(testCtrl.postNodeETest);
-//router.route('NodeETest/post')
+//app.route('NodeETest/post')
 //======== TEST ROUTE FERDIG ========
 
 
-//router.route('/*').get(getCtrl.get404);
+//app.route('/*').get(getCtrl.get404);
 
 function isLoggedIn (req, res, next) {
     console.log(req.session);
