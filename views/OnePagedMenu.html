@@ -181,47 +181,16 @@
             <button type="button" id ="save" onclick="saveFunction()"style="display:none">Godkjenn og lagre</button>
         </div>
         <div id="approvalOvertime" class="tap-pane fade">
-            <h3>Overtid til godkjenning</h3>
-            <table id="mytable" class="table table-bordred table-striped">
-                <thead>
-                <th><input type="checkbox" id="checkall" /></th>
-                <th>Navn</th>
-                <th>Dato</th>
-                <th>Fra</th>
-                <th>Til</th>
-                <th>Antall minutter</th>
-                <th>Årsak</th>
-                </thead>
-                <tbody>
-                <tr>
-                    <td><input type="checkbox" class="checkthis"/></td>
-                    <td>Navn</td>
-                    <td>17.01.17</td>
-                    <td> hei</td>
-                    <td> heo</td>
-                    <td>hei </td>
-                    <td>hallo </td>
-                <tr>
-                    <td><input type="checkbox" class="checkthis"/></td>
-                    <td>Navn</td>
-                    <td>17.01.17</td>
-                    <td> hei</td>
-                    <td> heo</td>
-                    <td>hei </td>
-                    <td>hallo </td>
-                </tbody>
-            </table>
-            <button type="button" id ="save" onclick="saveFunction()"style="display:none">Godkjenn og lagre</button>
-        </div>
-        <div id="approvalSwitch" class="tap-pane fade">
-            <h3>Vaktbytte til godkjenning</h3>
-            <h4>Enkeltbytte </h4>
-            <table id="mytable" class="table table-bordred table-striped">
+            <section class="approveSection" id="overtimeApproval" style="display:none">
+                <h3>Overtid til godkjenning</h3>
                 <table id="mytable" class="table table-bordred table-striped">
                     <thead>
                     <th><input type="checkbox" id="checkall" /></th>
                     <th>Navn</th>
-                    <th>Vakt</th>
+                    <th>Dato</th>
+                    <th>Fra</th>
+                    <th>Til</th>
+                    <th>Antall minutter</th>
                     <th>Årsak</th>
                     </thead>
                     <tbody>
@@ -230,23 +199,31 @@
                         <td>Navn</td>
                         <td>17.01.17</td>
                         <td> hei</td>
+                        <td> heo</td>
+                        <td>hei </td>
+                        <td>hallo </td>
                     <tr>
                         <td><input type="checkbox" class="checkthis"/></td>
                         <td>Navn</td>
                         <td>17.01.17</td>
                         <td> hei</td>
+                        <td> heo</td>
+                        <td>hei </td>
+                        <td>hallo </td>
                     </tbody>
                 </table>
-                <h4>Dobbeltbytte</h4>
+            </section>
+            <button type="button" id ="save" onclick="saveFunction()"style="display:none">Godkjenn og lagre</button>
+        </div>
+        <div id="approvalSwitch" class="tap-pane fade">
+            <section class="approveSection" id="switchApproval" style="display:none">
+                <h3>Vaktbytte til godkjenning</h3>
+                <h4>Enkeltbytte </h4>
                 <table id="mytable" class="table table-bordred table-striped">
                     <table id="mytable" class="table table-bordred table-striped">
                         <thead>
                         <th><input type="checkbox" id="checkall" /></th>
-                        <th>Fra</th>
-                        <th>Stilling (fra)</th>
-                        <th>Til</th>
-                        <th>Stilling (til)</th>
-                        <th>Dato</th>
+                        <th>Navn</th>
                         <th>Vakt</th>
                         <th>Årsak</th>
                         </thead>
@@ -256,24 +233,50 @@
                             <td>Navn</td>
                             <td>17.01.17</td>
                             <td> hei</td>
-                            <td> heo</td>
-                            <td>hei </td>
-                            <td>hallo </td>
-                            <td>hallo </td>
-                        </tr>
                         <tr>
                             <td><input type="checkbox" class="checkthis"/></td>
                             <td>Navn</td>
                             <td>17.01.17</td>
                             <td> hei</td>
-                            <td> heo</td>
-                            <td>hei </td>
-                            <td>hallo </td>
-                            <td>hallo </td>
-                        </tr>
                         </tbody>
                     </table>
-                </table>
+                    <h4>Dobbeltbytte</h4>
+                    <table id="mytable" class="table table-bordred table-striped">
+                        <table id="mytable" class="table table-bordred table-striped">
+                            <thead>
+                            <th><input type="checkbox" id="checkall" /></th>
+                            <th>Fra</th>
+                            <th>Stilling (fra)</th>
+                            <th>Til</th>
+                            <th>Stilling (til)</th>
+                            <th>Dato</th>
+                            <th>Vakt</th>
+                            <th>Årsak</th>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td><input type="checkbox" class="checkthis"/></td>
+                                <td>Navn</td>
+                                <td>17.01.17</td>
+                                <td> hei</td>
+                                <td> heo</td>
+                                <td>hei </td>
+                                <td>hallo </td>
+                                <td>hallo </td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" class="checkthis"/></td>
+                                <td>Navn</td>
+                                <td>17.01.17</td>
+                                <td> hei</td>
+                                <td> heo</td>
+                                <td>hei </td>
+                                <td>hallo </td>
+                                <td>hallo </td>
+                            </tr>
+                            </tbody>
+                        </table>
+            </section>
             <button type="button" id ="save" onclick="saveFunction()"style="display:none">Godkjenn og lagre</button>
         </div>
 
