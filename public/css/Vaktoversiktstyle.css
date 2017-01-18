@@ -1,5 +1,16 @@
 @charset "utf-8";
 /* CSS Document */
+/* Sortable tables */
+
+
+
+
+table.sortable thead {
+    background-color:#eee;
+    color:#666666;
+    font-weight: bold;
+    cursor: default;
+}
 
 #excelDataTable {
     border-collapse: collapse;
@@ -27,6 +38,11 @@
     background-color: aliceblue;
     cursor: pointer;
 }
+
+thead{
+    background-color: #4CAF50;
+}
+
 /*
 table.sortable thead:nth-child(odd) {
     background-color:#bf946f;
