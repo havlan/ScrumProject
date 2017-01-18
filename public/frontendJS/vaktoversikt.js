@@ -36,8 +36,8 @@ function buildHtmlTable(selector) {
             if (cellValue == null) cellValue = "";
             row$.append($('<td/>').html(cellValue));
         }
-        $(selector).append(row$);
         $(tbody).append(row$);
+
     }
     $(selector).append(tbody);
 }
