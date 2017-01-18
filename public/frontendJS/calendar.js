@@ -23,5 +23,11 @@ $(document).ready(function() {
         eventTextColor: '#000000', //default event text color
         //GETTING EVENTS FROM JSON FEED; SHORT AND EXTENDED
         events: '/getEvents', //TODO
+        eventClick: function(event) {
+            //TODO sumfin
+            //elsempel, åpner event url
+            window.open(event.url, 'gcalevent', 'width=700,height=600');
+            return false;
+        }
     });
 });
