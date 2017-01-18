@@ -2,31 +2,16 @@
  * Created by torsku on 16.01.2017.
  */
 var myList = [];
-$(document).ready(function getInfo(){
-    $.get("/getEmployee",{},function (req, res,data) {
-        $("#includedContent").load("menu");
-        document.getElementById("firstnamedb").innerHTML = data.responseJSON[0].name;
-        document.getElementById("lastnamedb").innerHTML = data.responseJSON[0].name;
-        document.getElementById("posdb").innerHTML = data.responseJSON[0].type_name;
-        document.getElementById("phonedb").innerHTML = data.responseJSON[0].phone_nr;
-        document.getElementById("emaildb").innerHTML = data.responseJSON[0].email;
-        document.getElementById("addressdb").innerHTML = data.responseJSON[0].address;
-        //  document.getElementById("persnodb").innerHTML = data.responesJSON[0].pers_id;
-    });
-    /*    $.get("/getLogInInfo",{},function (req, res, data) {
-     document.getElementById("usernamedb").innerHTML = data.responseJSON[0].username;
-     })*/
-});
 $.get('/getEmployee', {}, function(req, res, data){
     console.log(data);
     console.log(data.responseJSON[0]);
     myList = data.responseJSON;
     //document.getElementById("data").innerHTML = myList;
 
-    buildHtmlTable('#excelDataTable')
+    buildHtmlTable('#excelDataTable');
     //tableCreate();
 });
-
+//Build Table
 function buildHtmlTable(selector) {
     var columns = addAllColumnHeaders(myList, selector);
     var tbody = $('<tbody/>');
@@ -43,7 +28,6 @@ function buildHtmlTable(selector) {
     $(selector).append(tbody);
 }
 function addAllColumnHeaders(myList, selector) {
-
     var columnSet = [];
     var headerThead$ = $('<thead/>');
     var headerTr$ = $('<tr/>');
@@ -53,17 +37,11 @@ function addAllColumnHeaders(myList, selector) {
             if ($.inArray(key, columnSet) == -1) {
                 columnSet.push(key);
                 headerTr$.append($('<th/>').html(key));
-
-
             }
-
         }
-
     }
     $(selector).append(headerThead$);
     $(headerThead$).append(headerTr$);
-
-
     return columnSet;
 }
 //search for name(s)
@@ -134,11 +112,34 @@ function saveFunction() {
         //OPPDATER INFO I DATABASEN
     }
 }
-
-$('table thead tr').on('click',function(){
+//myModal info
+$('#excelDataTable').on('click',function(){
+    alert("heihei");
     $("#myModal").modal("show");
     $("#nameModal").val($(this).closest('tr').children()[0].textContent);
-    $("#positionModal").val($(this).closest('tr').children()[1].textContent);
+    $("#firstnamedb").val($(this).closest('tr').children()[1].textContent);
+    $("#lastnamedb").val($(this).closest('tr').children()[2].textContent);
+    $("#posdb").val($(this).closest('tr').children()[3].textContent);
+    $("#phonedb").val($(this).closest('tr').children()[4].textContent);
+    $("#email").val($(this).closest('tr').children()[5].textContent);
+    $("#addressdb").val($(this).closest('tr').children()[6].textContent);
+    $("#persnodb").val($(this).closest('tr').children()[7].textContent);
+    $("#usernamedb").val($(this).closest('tr').children()[8].textContent);
+});
+
+//myModal edit
+$(function(){
+    $('#editEmp').on('submit', function(e){
+        e.preventDefault();
+        $.ajax({
+            url: '/updateEmployee', //this is the submit URL
+            type: 'POST',
+            data: $('#editEmp').serialize(),
+            success: function(data){
+                alert('successfully submitted')
+            }
+        });
+    });
 });
 
 
