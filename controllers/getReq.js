@@ -8,12 +8,14 @@ module.exports = {
 
     getRoot : function(req,res){
         //res.redirect('/login'); //
-        console.log("GET ROOT", req.session);
+        console.log("ROOT: ",req.session);
+        console.log("GET ROOT", req.isAuthenticated());
         res.sendFile(path.join(__dirname + '/../index.html'));
     },
 
     getUser : function(req,res){
         //get user functionality here
+        console.log("GETUSER",req.session);
         res.json({"Params": "" + req.params.id});
         console.log("GET user #" + ++totalgetReq + " " + JSON.stringify(req.body));
     },

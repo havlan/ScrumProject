@@ -58,15 +58,15 @@ var router = express.Router();
 //router.route('/*').get(getCtrl.get404);
 
 function isLoggedIn (req, res, next) {
-    console.log("\n\nISLOGGEDINMETHOD\n\n");
-    if(!typeof req.session.passport) {
-        if (!typeof req.session.passport.user == 'undefined') {
-            next();
-        } else {
-            res.redirect('/login');
-        }
-    }else{
+    console.log(req.session);
+    if (req.isAuthenticated()) {
+        next();
+    } else {
         res.redirect('/login');
     }
+}
+function logOut(req,res){
+    req.logout();
+    res.redirect('/login');
 }
 module.exports = router;
