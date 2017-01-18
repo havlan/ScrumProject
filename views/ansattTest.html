@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JustaTest</title>
+    <link rel="stylesheet" type="text/css" href="../public/css/overviewAdmin.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!--<script src="../public/frontendJS/batman.js"></script> -->
+    <script>
+        function onClick() {
+            alert("ALLAH");
+            $.post("/updateEmployee",{
+                phone_nr: 95551048,
+                email: "creedence@clearwater.com",
+                address: "glønavegen 2",
+                employee_id: 2
+            });
+        }
+    </script>
+</head>
+<body>
+<h1>Kontaktinformasjon</h1>
+<input type="tel" id="phoneInput" onkeyup="updateEmployee()" placeholder = "Phone">
+<input type="email" id="emailInput" onkeyup="updateEmployee()" placeholder = "Email">
+<input type="text" id="addressInput" onkeyup="updateEmployee()" placeholder = "Address">
+<input type="text" id="employee_idInput" onkeyup="updateEmployee()" placeholder = "Employee_id">
+<button type="button" id="add" onclick="onClick()">Oppdater info</button>
+</body>
+</html>

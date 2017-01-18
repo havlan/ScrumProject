@@ -1,0 +1,17 @@
+body {
+    background-image: url(http://www.wallpaperbetter.com/wallpaper/953/224/28/beached-ship-beach-ocean-rust-abandon-deserted-urban-decay-hd-1080P-wallpaper-middle-size.jpg);
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+.error-template {padding: 40px 15px;text-align: center;}
+.error-actions {margin-top:15px;margin-bottom:15px;}
+.error-actions .btn {
+    margin-right:10px;
+    size: 140px;
+}
+#heihei {
+    position: absolute;
+    width: 700px;
+}

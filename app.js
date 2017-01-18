@@ -48,8 +48,8 @@ app.use(flash());
 //pass passport auth and app to route config
 require('./controllers/configRoute')(app,passport);
 
-var server = app.listen(3000, function(){
-    console.log("Live at 3000");
+var server = app.listen(4000, function(){
+    console.log("Live at 4000");
 });
 
 

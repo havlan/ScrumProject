@@ -1,0 +1,104 @@
+#calendar{
+    position: absolute;
+    width: 50%;
+    height:40%;
+    margin-left: 22%;
+    margin-top: 4%;
+}
+
+#warning{
+    position: absolute;
+    border: solid #f2f2f2 1px;
+    box-shadow: 10px 10px 5px #888888;
+    border-radius: 5px;
+    height: 30%;
+    width: 15%;
+    margin-left: 75%;
+    margin-top: 9%;
+    cursor: pointer;
+}
+#warning:hover{
+    background-color: lightyellow
+}
+
+#freeShifts{
+    position: absolute;
+    border: solid #f2f2f2 1px;
+    box-shadow: 10px 10px 5px #888888;
+    border-radius: 5px;
+    height: 30%;
+    width: 15%;
+    margin-left: 75%;
+    margin-top: 26%;
+    cursor:pointer;
+}
+#freeShifts:hover{
+    background-color: lightyellow;
+}
+.titles{
+    font-family: Verdana, Geneva, sans-serif;
+    text-align: center;
+}
+.buttonsAdmin{
+    background-color: royalblue;
+    position: absolute;
+    margin-left: 4%;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    cursor:pointer;
+    width: 200px;
+}
+
+.buttonsAdmin span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.3s;
+}
+
+.buttonsAdmin span:after {
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.3s;
+}
+
+.buttonsAdmin:hover span {
+    padding-right: 15px;
+}
+
+.buttonsAdmin:hover span:after {
+    opacity: 1;
+    right: 0;
+}
+
+#buttonChangeTab{
+    margin-top: 20%;
+}
+#buttonChangeTab:hover{
+    background-color: #6585e7;
+}
+#calendarButton{
+    margin-top: 10%;
+}
+#calendarButton:hover{
+    background-color: #6585e7;
+}
+#listButton{
+    margin-top: 15.3%;
+}
+#listButton:hover{
+    background-color: #6585e7;
+}
+#list{
+    position: absolute;
+    margin-left: 25%;
+    margin-top: 4%;
+}

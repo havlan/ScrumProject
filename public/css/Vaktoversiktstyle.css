@@ -1,49 +1,59 @@
 @charset "utf-8";
 /* CSS Document */
+/* Sortable tables */
+
+
+
+
+table.sortable thead {
+    background-color:#eee;
+    color:#666666;
+    font-weight: bold;
+    cursor: default;
+}
+
+#excelDataTable {
+    border-collapse: collapse;
+    width: 100%;
+    border: 1px solid #ddd;
+    font-size: 18px;
+}
+
+#excelDataTable th, #excelDataTable td {
+    text-align: left;
+    padding: 12px;
+}
+
+#excelDataTable tr {
+    border-bottom: 1px solid #ddd;
+}
+#excelDataTable td:hover{
+    color: darkgray;
+}
+
+#excelDataTable tr.header{
+    background-color: #f1f1f1;
+}
+#excelDataTable tr:hover{
+    background-color: aliceblue;
+    cursor: pointer;
+}
 
 thead{
+    background-color: #4CAF50;
+}
+
+/*
+table.sortable thead:nth-child(odd) {
     background-color:#bf946f;
 }
-th{
-    width: 100px;
-    height: 30px;
-    cursor:pointer;
-}
-td{
+
+
+table.sortable td:nth-child(even) {
     text-align:center;
     height: 30px;
     border:#CBCBCB 1px;
     background-color:#E5E5E5;
     width: 100px;
 }
-h4{
-    margin: 0px;
-}
-
-.tbody-container{
-    height: 240px;
-    overflow-y: scroll;
-}
-
-table tbody,table thead{
-    display:block;
-}
-
-table tbody {
-    overflow: auto;
-    height: 100px;
-}
-.left{
-    position:relative;
-    float: left;
-}
-.right{
-    position: relative;
-    float: left;
-}
-
-.center{
-
-    text-align:center;
-}
-
+*/

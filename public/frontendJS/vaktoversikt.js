@@ -1,23 +1,10 @@
+/**
+ * Created by LittleGpNator on 13.01.2017.
+ */
 
-
-
-$(document).ready(function(){ // syntax for å hente data når dokument (html) er lastet inn
-
-    $("#includedContent").load("menu");
-
-    //$("#sortTable").tablesorter();
-
-    $.get('/getEmployee', {}, function(req, res, data){
-
-        console.log(data);
-        console.log(data.responseJSON[0]);
-
-        document.getElementById("navn").innerHTML               = data.responseJSON[0].name;
-        document.getElementById("stillingsprosent").innerHTML    = data.responseJSON[0].seniority;
-        document.getElementById("tlfnr").innerHTML              = data.responseJSON[0].phone_nr;
-        document.getElementById("email").innerHTML              = data.responseJSON[0].email;
-        document.getElementById("adresse").innerHTML            = data.responseJSON[0].address;
-        $("#cover").fadeOut(10); <!-- MÅ ligge etter det som tar legst å loade-->
+$( document ).ready(function() {
+    $(function(){
+        $("#includedContent").load("troll");
     });
 });
 
@@ -25,20 +12,22 @@ $(document).ready(function(){ // syntax for å hente data når dokument (html) e
 var myList= [];
 
 
-$.get('/getVaktoversiktSite', {}, function(req, res, data){
+$.get('/getVaktliste', {}, function(req, res, data){
     console.log(data);
     console.log(data.responseJSON[0]);
     myList = data.responseJSON;
     //document.getElementById("data").innerHTML = myList;
 
-    buildHtmlTable('#histTable')
+    buildHtmlTable('#excelDataTable')
     //tableCreate();
 });
 
 
+
+
 function buildHtmlTable(selector) {
     var columns = addAllColumnHeaders(myList, selector);
-    var tbody$ = $('<tbody/>');
+    var tbody = $('<tbody/>');
     for (var i = 0; i < myList.length; i++) {
         var row$ = $('<tr/>');
         for (var colIndex = 0; colIndex < columns.length; colIndex++) {
@@ -47,27 +36,55 @@ function buildHtmlTable(selector) {
             row$.append($('<td/>').html(cellValue));
         }
         $(selector).append(row$);
+        $(tbody).append(row$);
     }
-    $(selector).append(tbody$);
+    $(selector).append(tbody);
 }
-
-
 function addAllColumnHeaders(myList, selector) {
+
     var columnSet = [];
     var headerThead$ = $('<thead/>');
     var headerTr$ = $('<tr/>');
-
     for (var i = 0; i < myList.length; i++) {
         var rowHash = myList[i];
         for (var key in rowHash) {
             if ($.inArray(key, columnSet) == -1) {
                 columnSet.push(key);
                 headerTr$.append($('<th/>').html(key));
+
+
             }
+
         }
+
     }
-    $(selector).append(headerTr$);
     $(selector).append(headerThead$);
+    $(headerThead$).append(headerTr$);
+
 
     return columnSet;
 }
+
+//function tableCreate(){
+//    var body = document.body,
+//        tbl  = document.createElement('table');
+//    tbl.style.width  = '100px';
+//    tbl.style.border = '1px solid black';
+//
+//    for(var i = 0; i < 3; i++){
+//        var tr = tbl.insertRow();
+//        for(var j = 0; j < 2; j++){
+//            if(i == 2 && j == 1){
+//                break;
+//            } else {
+//                var td = tr.insertCell();
+//                td.appendChild(document.createTextNode('Cell'));
+//                td.style.border = '1px solid black';
+//                if(i == 1 && j == 1){
+//                    td.setAttribute('rowSpan', '2');
+//                }
+//            }
+//        }
+//    }
+//    body.appendChild(tbl);
+//}

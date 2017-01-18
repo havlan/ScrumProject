@@ -1,6 +1,3 @@
-/**
- * Created by Knut-Egil on 13.01.2017.
- */
 /*
  SortTable
  version 2

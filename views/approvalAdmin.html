@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="approvalAdmin.css">
+    <title>Godkjenning</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <script src = "frontendJS/approvalAdmin.js"></script>
+
+</head>
+<body>
+<h1 id="godkjenning">Godkjenning</h1>
+<button type="button" class="approveButton" id ="leave" onclick="leaveFunction()" autofocus><span>Godkjenn fravær<span></button>
+<button type="button" class="approveButton" id ="overtime" onclick="overtimeFunction()"><span>Godkjenn overtid<span></button>
+<button type="button" class="approveButton" id ="switch" onclick="switchFunction()"><span>Godkjenn vaktbytte<span></button>
+
+<section class="approveSection" id="leaveApproval" style="display:none">
+    <h3>Fravær til godkjenning</h3>
+    <table id="mytable" class="table table-bordred table-striped">
+        <thead>
+        <th><input type="checkbox" id="checkall" /></th>
+        <th>Navn</th>
+        <th>Dato</th>
+        <th>Årsak</th>
+        </thead>
+        <tbody>
+        <tr>
+            <td><input type="checkbox" class="checkthis"/></td>
+            <td>Navn</td>
+            <td>17.01.17</td>
+            <td>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</td>
+        </tr>
+        <tr>
+            <td><input type="checkbox" class="checkthis"/></td>
+            <td>Navn</td>
+            <td>17.01.17</td>
+            <td>Syk   </tr>
+        </tbody>
+    </table>
+
+</section>
+
+<section class="approveSection" id="overtimeApproval" style="display:none">
+    <h3>Overtid til godkjenning</h3>
+    <table id="mytable" class="table table-bordred table-striped">
+        <thead>
+        <th><input type="checkbox" id="checkall" /></th>
+        <th>Navn</th>
+        <th>Dato</th>
+        <th>Fra</th>
+        <th>Til</th>
+        <th>Antall minutter</th>
+        <th>Årsak</th>
+        </thead>
+        <tbody>
+        <tr>
+            <td><input type="checkbox" class="checkthis"/></td>
+            <td>Navn</td>
+            <td>17.01.17</td>
+            <td> hei</td>
+            <td> heo</td>
+            <td>hei </td>
+            <td>hallo </td>
+        <tr>
+            <td><input type="checkbox" class="checkthis"/></td>
+            <td>Navn</td>
+            <td>17.01.17</td>
+            <td> hei</td>
+            <td> heo</td>
+            <td>hei </td>
+            <td>hallo </td>
+        </tbody>
+    </table>
+</section>
+
+<section class="approveSection" id="switchApproval" style="display:none">
+    <h3>Vaktbytte til godkjenning</h3>
+    <h4>Enkeltbytte </h4>
+    <table id="mytable" class="table table-bordred table-striped">
+        <table id="mytable" class="table table-bordred table-striped">
+            <thead>
+            <th><input type="checkbox" id="checkall" /></th>
+            <th>Navn</th>
+            <th>Vakt</th>
+            <th>Årsak</th>
+            </thead>
+            <tbody>
+            <tr>
+                <td><input type="checkbox" class="checkthis"/></td>
+                <td>Navn</td>
+                <td>17.01.17</td>
+                <td> hei</td>
+            <tr>
+                <td><input type="checkbox" class="checkthis"/></td>
+                <td>Navn</td>
+                <td>17.01.17</td>
+                <td> hei</td>
+            </tbody>
+        </table>
+        <h4>Dobbeltbytte</h4>
+        <table id="mytable" class="table table-bordred table-striped">
+            <table id="mytable" class="table table-bordred table-striped">
+                <thead>
+                <th><input type="checkbox" id="checkall" /></th>
+                <th>Fra</th>
+                <th>Stilling (fra)</th>
+                <th>Til</th>
+                <th>Stilling (til)</th>
+                <th>Dato</th>
+                <th>Vakt</th>
+                <th>Årsak</th>
+                </thead>
+                <tbody>
+                <tr>
+                    <td><input type="checkbox" class="checkthis"/></td>
+                    <td>Navn</td>
+                    <td>17.01.17</td>
+                    <td> hei</td>
+                    <td> heo</td>
+                    <td>hei </td>
+                    <td>hallo </td>
+                    <td>hallo </td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" class="checkthis"/></td>
+                    <td>Navn</td>
+                    <td>17.01.17</td>
+                    <td> hei</td>
+                    <td> heo</td>
+                    <td>hei </td>
+                    <td>hallo </td>
+                    <td>hallo </td>
+                </tr>
+                </tbody>
+            </table>
+        </table>
+    </table>
+</section>
+<button type="button" id ="save" onclick="saveFunction()"style="display:none">Godkjenn og lagre</button>
+</body>
+</html>

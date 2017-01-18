@@ -3,51 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <title>MinProfil</title>
-    <link href ="/css/myProfile.css" rel="stylesheet" type = "text/css" > <!-- public + /css/myProfile.css   -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href ="css/myProfile.css" rel="stylesheet" type = "text/css" > <!-- public + /css/myProfile.css   -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="frontendJS/tablesorter.js"></script>
+    <script src = "frontendJS/myProfile.js"></script>
+    <script src = "frontendJS/sendPassword.js"></script>
 </head>
-<body>
-<main>
-    <h1 id = "h1">navn på ansatt FRADATABASE</h1>
-    <table cellspacing="10">
-        <tr>
-            <td class="info">Stillingstittel</td>
-            <td class="db" id="stillingstittel"></td>
-        </tr>
-        <tr>
-            <td class="info">Telefonnummer</td>
-            <td class="db" id="tlfnr">FRADATABASE</td>
-        </tr>
-        <tr>
-            <td class="info">E-postadresse</td>
-            <td class="db" id="epost">FRADATABASE</td>
-        </tr>
-        <tr>
-            <td class="info">Adresse</td>
-            <td class="db" id="adresse">FRADATABASE</td>
-        </tr>
-    </table>
-    <button type="button">Rediger</button>
-</main>
-<figure>
-    <img src="/img/kungen.jpg" alt = "Bilde av ansatt" size="width:100px height:100px;">
-</figure>
-<script>
-    $(document).ready(function(){ // syntax for å hente data når dokument (html) er lastet inn
-        $.get('/NodeETest', {}, function(req, res, data){
 
-            console.log(data);
-            console.log(data.responseJSON[1]);
+<div id="includedContent"></div>
+<div id="cover" style="position: fixed; height: 100%; width: 100%; top:0; left: 0; background: #ffffff; z-index:9999;"></div>
+<body class="profile">
+<div class = flytt>
+    <main class="infoEmp">
+        <h1 id = "navn">navn på ansatt FRADATABASE</h1>
+        <table>
+            <tr>
+                <td class="info">Stillings Prosent</td>
+                <td class="db" id = "stillingsprosent">FRADATABASE</td>
+            </tr>
+            <tr>
+                <td class="info">Telefonnummer</td>
+                <td class="db" id = "tlfnr">FRADATABASE</td>
+            </tr>
+            <tr>
+                <td class="info">E-postadresse</td>
+                <td class="db" id = "email">FRADATABASE</td>
+            </tr>
+            <tr>
+                <td class="info">Adresse</td>
+                <td class="db" id = "adresse">FRADATABASE</td>
+            </tr>
+        </table>
+        <button type="button" id="editBtn" onclick="alert('Ring administrasjonen')">Rediger</button>
+        <button type="button" id="historyBtn" data-toggle="modal" data-target="#historyModal">Historikk</button>
 
-            document.getElementById("h1").innerHTML = data.responseJSON[0].notat;
-            document.getElementById("stillingstittel").innerHTML = data.responseJSON[0].notat;
-            document.getElementById("tlfnr").innerHTML = data.responseJSON[0].notat;
-            document.getElementById("epost").innerHTML = data.responseJSON[0].notat;
-            document.getElementById("adresse").innerHTML = data.responseJSON[0].notat;
+    </main>
+    <figure>
+        <img src="https://s3.amazonaws.com/whisperinvest-images/default.png" id="profilePic" alt = "Bilde av ansatt" size="width:100px height:100px;">
+    </figure>
+    <button type="button" id="picBtn" onclick="alert('Ring administrasjonen')">Rediger profilbilde</button>
 
-        });
-    });
-</script>
+    <!-- Modal:history -->
+    <div class="modal fade" id="historyModal" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <!-- Modal content-->
+            <!-- Modal header-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h3 class="modal-title">Historikk</h3>
+                </div>
+                <!-- Modal body-->
+                <div class="table-responsive">
+                    <table class = "histTable " id="sortTable">
+                    </table>
+                </div>
+                <!-- Modal footer-->
+                <div class="modal-footer">
+                    <button type="button" class="close" data-dismiss="modal">Lukk</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
 

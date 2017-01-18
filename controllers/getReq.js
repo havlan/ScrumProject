@@ -11,14 +11,60 @@ module.exports = {
         console.log("ROOT: ",req.session);
         console.log("GET ROOT", req.isAuthenticated());
         res.sendFile(path.join(__dirname + '/../index.html'));
+        res.redirect('/login');
     },
 
     getUser : function(req,res){
         //get user functionality here
         res.sendFile(path.join(__dirname + '/../views/smashing.html'));
     },
-    getLogin : function (req,res){
+    getLogin : function (req,res) {
         res.sendFile(path.join(__dirname + '/../views/login.html'));
+    },
+
+    //Site
+    getOnePagedMenu : function (req,res){
+        res.sendFile(path.join(__dirname + '/../views/OnePagedMenu.html'));
+    },
+
+    //Sites
+    getLoginSite : function (req, res){
+        res.sendFile(path.join(__dirname + '/../views/Login.html'));
+    },
+    getMenuSite : function (req, res){
+        res.sendFile(path.join(__dirname + '/../views/hMenu.html'));
+    },
+    getOverviewForAdminSite : function (req, res){
+        res.sendFile(path.join(__dirname + '/../views/overviewForAdmin.html'));
+    },
+    getMyProfileSite : function (req, res){
+        res.sendFile(path.join(__dirname + '/../views/myProfile.html'));
+    },
+    getVaktoversiktSite : function (req, res){
+        res.sendFile(path.join(__dirname + '/../views/vaktoversikt.html'));
+    },
+    getCalendarSite : function (req, res){
+        res.sendFile(path.join(__dirname + '/../views/calendar.html'));
+    },
+    getApprovalAdminSite : function (req,res){
+        res.sendFile(path.join(__dirname + '/../views/approvalAdmin.html'));
+    },
+    getFrontpageAdminSite : function (req,res){
+        res.sendFile(path.join(__dirname + '/../views/frontpageAdmin.html'));
+    },
+    getLogo : function (req,res){
+        res.sendFile(path.join(__dirname + '/../public/img/MinVakt.png'));
+    },
+
+
+
+
+    submitLogin : function (req, res) {
+        //res.sendFile(path.join(__dirname + '/../index.html'));
+        //res.json({"Msg":"Yodeliho"});
+        //console.log("GET index.html #" + ++totalgetReq + " today.");
+        dbMiddelware.getSaltHash(req,res);
+ remotes/origin/frontEnd
     },
 
     getEmployee : function (req, res){
@@ -46,19 +92,20 @@ module.exports = {
     getOvertime : function (req, res){
         dbMiddelware.getOvertime(req,res);
     },
-    getUserInfo : function (req, res) {
+    getEmployee_shifts_toCurrentDate:function(req,res){
+        dbMiddelware.getEmployee_shifts_toCurrentDate(req,res);
+    },
+    getVaktliste:function(req,res){
+        dbMiddelware.getVaktliste(req,res);
+    },
+    getEvents : function (req,res) {
+        dbMiddelware.getEvents(req,res);
+    },
 
-    },
-   /**
-    getVaktoversikt : function (req, res){
-        //oversikt over vaktlister
-        //res.sendFile(path.join(__dirname + '/../views/Vaktoversikt.html'));
-    },
-    */
 
     //404 må være sist
     get404 : function (req, res) {
-        res.status(404).send("<h1>Fokken hell m8</h1>");
+        res.status(404).sendFile(path.join(__dirname + '/../views/404.html'));
         //res.send('what???', 404);
     },
 

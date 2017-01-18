@@ -21,11 +21,24 @@ module.exports = function (app, passport) {
     app.get('/getAbsence', isLoggedIn, getCtrl.getAbsence);
     app.get('/getOvertime', isLoggedIn, getCtrl.getOvertime);
     app.get('/getUserInfo', isLoggedIn, getCtrl.getUserInfo);
+    app.get('/getVaktoversiktSite', isLoggedIn, getCtrl.getVaktoversiktSite);
+    app.get('/getVaktliste', isLoggedIn, getCtrl.getVaktliste);
+    app.get('/getEmployeeShiftsToCurrent', isLoggedIn, getCtrl.getEmployee_shifts_toCurrentDate());
 
-//app.route('/getVaktoversikt').get(getCtrl.getVaktoversikt);
 
+    //Sites
+    app.get('/menu', getCtrl.getMenuSite());
+    app.get('/overviewForAdmin', getCtrl.getOverviewForAdminSite());
+    app.get('/myProfile', getCtrl.getMyProfileSite());
+    app.get('/vaktoversikt', getCtrl.getVaktoversiktSite());
+    app.get('/calendar', getCtrl.getCalendarSite());
+    app.get('/approvalAdmin', getCtrl.getApprovalAdminSite());
+    app.get('/frontpageAdmin', getCtrl.getFrontpageAdminSite());
 
-//post / put
+    //Images
+    app.get('IMG01', isLoggedIn, getCtrl.getLogo);
+
+    //post / put
     app.post('/login', passport.authenticate('login', {
         failureRedirect: '/login',
         failureFlash: true
@@ -33,6 +46,7 @@ module.exports = function (app, passport) {
         console.log("LOGIN OK?");
         res.redirect('/');
     });
+
     app.post('/postUser', isAdmin, postCtrl.postEmployee);
     app.post('/postDepartment', isAdmin, postCtrl.postDepartment);
     app.post('/postType', isAdmin, postCtrl.postType);
@@ -42,6 +56,15 @@ module.exports = function (app, passport) {
     app.post('/postAbsence', isLoggedIn, postCtrl.postAbsence);
     app.post('/postOvertime', isLoggedIn, postCtrl.postOvertime);
     app.post('/postLogInInfo', isLoggedIn, postCtrl.postLogInInfo);
+    app.post('/updateShift_has_employee', isLoggedIn, postCtrl.updateShift_has_employee);
+    app.post('/updateEmployee', isLoggedIn, postCtrl.updateEmployee);
+    app.post('/updateType', isLoggedIn, postCtrl.updateType);
+    app.post('/updateShift', isLoggedIn, postCtrl.updateShift);
+    app.post('/updateDepartment', isLoggedIn, postCtrl.updateDepartment);
+    app.post('/updateRequest', isLoggedIn, postCtrl.updateRequest);
+    app.post('/updateAbsence', isLoggedIn, postCtrl.updateAbsence);
+    app.post('/updateOvertime', isLoggedIn, postCtrl.updateOvertime);
+    app.post('/updateLogInInfo', isLoggedIn, postCtrl.updateLogInInfo);
 
 };
 
