@@ -95,7 +95,7 @@ module.exports = {
         dbMiddelware.getOvertime(req,res);
     },
     getEmployee_shifts_toCurrentDate:function(req,res){
-        //dbMiddelware.getEmployee_shifts_toCurrentDate(req,res);
+        dbMiddelware.getEmployee_shifts_toCurrentDate(req,res);
     },
     getVaktliste:function(req,res){
         dbMiddelware.getVaktliste(req,res);
@@ -103,8 +103,9 @@ module.exports = {
     getEvents : function (req,res) {
         dbMiddelware.getEvents(req,res);
     },
-
-
+    get403 : function (req, res) {
+        res.status(403).sendFile(path.join(__dirname + '/../views/403.html'));
+    },
     //404 må være sist
     get404 : function (req, res) {
         res.status(404).sendFile(path.join(__dirname + '/../views/404.html'));

@@ -50,7 +50,7 @@ module.exports =
                     connection.release();
                     if (!err) {
                         res.json(rows);
-                        console.log(rows);
+                        //console.log(rows);
                     } else {
                         console.log("error: Error reading database: " + err);
                         res.status(500);

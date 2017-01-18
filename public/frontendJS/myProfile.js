@@ -7,7 +7,7 @@ $(document).ready(function(){ // syntax for å hente data når dokument (html) e
 
     //$("#sortTable").tablesorter();
 
-    $.get('/getOneEmployee', {}, function(req, res, data){
+    $.get('/getEmployee', {}, function(req, res, data){
 
         console.log(data);
         console.log(data.responseJSON[0]);
@@ -25,20 +25,20 @@ $(document).ready(function(){ // syntax for å hente data når dokument (html) e
 var myList= [];
 
 
-/*$.get('/getVaktoversiktSite', {}, function(req, res, data){
-    //console.log(data);
-    //console.log(data.responseJSON[0]);
+$.get('/getEmployeeShiftsToCurrent', {}, function(req, res, data){
+    console.log(data);
+    console.log(data.responseJSON[0]);
     myList = data.responseJSON;
     //document.getElementById("data").innerHTML = myList;
 
-    buildHtmlTable('#histTable')
+    buildHtmlTable('#histTable');
     //tableCreate();
-});*/
+});
 
 
-/*function buildHtmlTable(selector) {
+function buildHtmlTable(selector) {
     var columns = addAllColumnHeaders(myList, selector);
-    var tbody$ = $('<tbody/>');
+    var tbody = $('<tbody/>');
     for (var i = 0; i < myList.length; i++) {
         var row$ = $('<tr/>');
         for (var colIndex = 0; colIndex < columns.length; colIndex++) {
@@ -47,16 +47,15 @@ var myList= [];
             row$.append($('<td/>').html(cellValue));
         }
         $(selector).append(row$);
+        $(tbody).append(row$);
     }
-    $(selector).append(tbody$);
+    $(selector).append(tbody);
 }
-
-
 function addAllColumnHeaders(myList, selector) {
+
     var columnSet = [];
     var headerThead$ = $('<thead/>');
     var headerTr$ = $('<tr/>');
-
     for (var i = 0; i < myList.length; i++) {
         var rowHash = myList[i];
         for (var key in rowHash) {
@@ -64,10 +63,12 @@ function addAllColumnHeaders(myList, selector) {
                 columnSet.push(key);
                 headerTr$.append($('<th/>').html(key));
             }
+
         }
+
     }
-    $(selector).append(headerTr$);
     $(selector).append(headerThead$);
+    $(headerThead$).append(headerTr$);
 
     return columnSet;
-}*/
+}

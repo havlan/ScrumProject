@@ -2,7 +2,11 @@
  * Created by torsku on 16.01.2017.
  */
 var myList = [];
+
 $.get('/getEmployee', {}, function(req, res, data){
+
+    $("#includedContent").load("menu");
+
     console.log(data);
     console.log(data.responseJSON[0]);
     myList = data.responseJSON;
@@ -113,7 +117,7 @@ function saveFunction() {
     }
 }
 //myModal info
-$('#excelDataTable').on('click',function(){
+$('#excelDataTable tr').click(function(id){
     alert("heihei");
     $("#myModal").modal("show");
     $("#nameModal").val($(this).closest('tr').children()[0].textContent);

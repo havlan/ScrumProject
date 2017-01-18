@@ -47,6 +47,10 @@ module.exports = {
     getSaltHash: function(req,res,next){
         dbHelper.getdbQWNext(req,res, "select password_hash, password_salt, is_admin from LoginInfo where Username = ?",[req.body.username],next);
     },
+    getEmployee_shifts_toCurrentDate: function (req, res) {
+        console.log("USER ID "+req.session.passport.user.id);
+        dbHelper.dbQuery(req, res, "select * from Employee_Shifts_toCurrentDate where employee_id =?",req.session.passport.user.id);
+    },
     /*simpleLogin : function(username){
         dbHelper.simpleLogin("select * from LoginInfo where Username = ?", [username]);
     },*/
@@ -57,9 +61,7 @@ module.exports = {
     getEmployeeOvertime: function (req, res) {
         dbHelper.dbQuery(req, res, "select * from Employee_Overtime");
     },
-    getEmployee_shifts_toCurrentDate: function (req, res) {
-        dbHelper.dbQuery(req, res, "select * from Employee_shifts_toCurrentDate where employee_id =?", req.params.employee_id);
-    },
+
     getVaktoversiktSite: function (req, res) {
         var get = {
             name: req.body.name,

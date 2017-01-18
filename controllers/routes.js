@@ -94,6 +94,7 @@ router.route('/frontpageAdmin').get(getCtrl.getFrontpageAdminSite);
 router.route('/IMG01').get(getCtrl.getLogo);
 
 //======== TEST ROUTE FERDIG ========
+router.route('/Employee').get(getCtrl.get403);
 router.route('/*').get(getCtrl.get404);
 
 function isLoggedIn (req, res, next) {
