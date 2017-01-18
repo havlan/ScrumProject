@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,18 +13,22 @@
     <script src="frontendJS/calendar.js"></script>
     <link rel="stylesheet" href="/css/calendar.css">
     <link rel="stylesheet" href="css/frontpageAdmin.css">
+    <div id="includedContent"></div>
 </head>
-
-<div id="includedContent"></div>
-
 <body>
+
     <div id='calendar' style="display:block"></div>
+
 <aside id="warning">
     <h4 class="titles"> VARSEL </h4>
 </aside>
-<aside id = "freeShifts" onclick="calendarFunction()">
+
+
+<aside id="freeShifts" onclick="calendarFunction()">
     <h4 class="titles"> LEDIGE VAKTER </h4>
 </aside>
+
+
 <section id="list" style="display:none">
     <h1> Dagens vakter </h1>
     <ul>
@@ -37,9 +40,13 @@
         <li>hei</li>
     </ul>
 </section>
-<button type="button" class="buttonsAdmin" id="calendarButton" onclick="calendarFunction()" autofocus><span> Kalender &#128197;</span></button>
-<button type="button" class="buttonsAdmin" id="buttonChangeTab" onclick="changeTabs()"> <span>Godkjenning&#10003;</span> </button>
-<button type="button" class="buttonsAdmin" id="listButton" onclick="listFunction()"> <span>Dagens vakter</span> </button>
+
+<button type="button" class="buttonsAdmin" id="calendarButton" onclick="calendarFunction()" autofocus><span> Kalender &#128197;</span>
+</button>
+<button type="button" class="buttonsAdmin" id="buttonChangeTab" onclick="changeTabs()"><span>Godkjenning&#10003;</span>
+</button>
+<button type="button" class="buttonsAdmin" id="listButton" onclick="listFunction()"><span>Dagens vakter</span></button>
+
 </body>
 <script>
 </script>
