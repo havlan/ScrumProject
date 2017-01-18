@@ -41,10 +41,7 @@ body {
     margin-top: 22%;
     font-family: Verdana, Geneva, sans-serif;
     text-align: center;
-    cursor: pointer;
-}
-#newShiftBox:hover{
-    background-color: lightyellow;
+
 }
 
 #newShifts{
