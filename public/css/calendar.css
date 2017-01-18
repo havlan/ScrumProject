@@ -6,6 +6,49 @@ body {
 
 
 #calendar {
-    max-width: 900px;
-    margin: 0 auto;
+    position: absolute;
+    width: 50%;
+    margin-left: 22%;
+}
+#nextShift {
+    position: absolute;
+    border: solid #f2f2f2 1px;
+    box-shadow: 10px 10px 5px #888888;
+    border-radius: 5px;
+    height: 30%;
+    width: 15%;
+    margin-left: 78%;
+    margin-top: 5%;
+
+}
+.shiftHeader{
+    font-family: Verdana, Geneva, sans-serif;
+    text-align: center;
+}
+#nextShiftInfo{
+    font-family: Verdana, Geneva, sans-serif;
+    text-align: center;
+    padding: 3%;
+}
+#newShiftBox {
+    position: absolute;
+    border: solid #f2f2f2 1px;
+    box-shadow: 10px 10px 5px #888888;
+    border-radius: 5px;
+    height: 30%;
+    width: 15%;
+    margin-left: 78%;
+    margin-top: 22%;
+    font-family: Verdana, Geneva, sans-serif;
+    text-align: center;
+    cursor: pointer;
+}
+#newShiftBox:hover{
+    background-color: lightyellow;
+}
+
+#newShifts{
+    font-family: Verdana, Geneva, sans-serif;
+    text-align: center;
+    padding:3%;
 }
