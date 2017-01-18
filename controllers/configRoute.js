@@ -23,7 +23,7 @@ module.exports = function (app, passport) {
     //app.get('/getUserInfo', isLoggedIn, getCtrl.getUserInfo);
     app.get('/getVaktoversiktSite', isLoggedIn, getCtrl.getVaktoversiktSite);
     app.get('/getVaktliste', isLoggedIn, getCtrl.getVaktliste);
-    app.get('/getEmployeeShiftsToCurrent', isLoggedIn, getCtrl.getEmployee_shifts_toCurrentDate);
+    app.get('/getEmployee_shifts_toCurrentDate', isLoggedIn, getCtrl.getEmployee_shifts_toCurrentDate);
 
 
     //Sites

@@ -49,7 +49,7 @@ module.exports = {
     },
     getEmployee_shifts_toCurrentDate: function (req, res) {
         console.log("USER ID "+req.session.passport.user.id);
-        dbHelper.dbQuery(req, res, "select * from Employee_Shifts_toCurrentDate where employee_id =?",req.session.passport.user.id);
+        dbHelper.getdbQuery(req, res, "select * from Employee_Shifts_toCurrentDate where employee_id = ?",[req.session.passport.user.id]);
     },
     /*simpleLogin : function(username){
         dbHelper.simpleLogin("select * from LoginInfo where Username = ?", [username]);
