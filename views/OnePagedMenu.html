@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Bootstrap Case</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href ="css/myProfile.css"         rel="stylesheet" type = "text/css" >
+    <link href ="css/frontpageAdmin.css"    rel="stylesheet" type = "text/css" >
+    <link href ="css/calendar.css"          rel="stylesheet" type = "text/css" >
+    <link href ="css/calendar.css"          rel="stylesheet" type = "text/css" >
+    <link href ="css/frontpageAdmin.css"    rel="stylesheet" type = "text/css" >
+
+    <link href ="css/fullcalendar.min.css" rel="stylesheet"/>
+    <link href ="css/fullcalendar.print.min.css" rel="stylesheet" media="print"/>
+
+    <link href ="css/calendar.css"rel="stylesheet" type = "text/css" >
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <!--<script type="text/javascript"src="frontendJS/tablesorter.js"></script>-->
+    <script src ="frontendJS/myProfile.js">                         </script>
+    <script src = "frontendJS/approvalAdmin.js">                    </script>
+
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">MinVakt</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+                <li class="active"  ><a data-toggle="tab" href="#Calendare">Calendar</a></li>
+                <li                 ><a data-toggle="tab" href="#MyProfil">My Profile</a></li>
+                <li                 ><a data-toggle="tab" href="#Administration">Administration </a></li>
+                <li                 ><a data-toggle="tab" href="#Approve">Approve</a></li>
+                <li                 ><a data-toggle="tab" href="#Exchange">Exchange Shifts </a></li>
+                <li                 ><a data-toggle="tab" href="#Example">Example </a></li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Approve <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a data-toggle="tab" href="#approvalLeave"  >Leave</a></li>
+                        <li><a data-toggle="tab" href="#approvalOvertime" >Overtime</a></li>
+                        <li><a data-toggle="tab" href="#approvalSwitch"  >Switch</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a data-toggle="tab" href="#Logout"><span class="glyphicon glyphicon-log-out"></span> Login out</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="tab-content">
+        <div id="Calendare" class="tab-pane fade in active">
+            <div id='calendar'></div>
+        </div>
+        <div id="MyProfil" class="tab-pane fade">
+            <h3>MyProfile tab will apear :)</h3>
+            <div class = MyProfile>
+                <main class="infoEmp">
+                    <h1 id = "navn">navn på ansatt FRADATABASE</h1>
+                    <table>
+                        <tr>
+                            <td class="info">Stillings Prosent</td>
+                            <td class="db" id = "stillingsprosent">FRADATABASE</td>
+                        </tr>
+                        <tr>
+                            <td class="info">Telefonnummer</td>
+                            <td class="db" id = "tlfnr">FRADATABASE</td>
+                        </tr>
+                        <tr>
+                            <td class="info">E-postadresse</td>
+                            <td class="db" id = "email">FRADATABASE</td>
+                        </tr>
+                        <tr>
+                            <td class="info">Adresse</td>
+                            <td class="db" id = "adresse">FRADATABASE</td>
+                        </tr>
+                    </table>
+                    <button type="button" id="editBtn" onclick="alert('Ring administrasjonen')">Rediger</button>
+                    <button type="button" id="historyBtn" data-toggle="modal" data-target="#historyModal">Historikk</button>
+
+                </main>
+                <figure>
+                    <img src="https://s3.amazonaws.com/whisperinvest-images/default.png" id="profilePic" alt = "Bilde av ansatt" size="width:100px height:100px;">
+                </figure>
+                <button type="button" id="picBtn" onclick="alert('Ring administrasjonen')">Rediger profilbilde</button>
+
+                <!-- Modal:history -->
+                <div class="modal fade" id="historyModal" role="dialog">
+                    <div class="modal-dialog modal-lg">
+                        <!-- Modal content-->
+                        <!-- Modal header-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h3 class="modal-title">Historikk</h3>
+                            </div>
+                            <!-- Modal body-->
+                            <div class="table-responsive">
+                                <table class = "histTable " id="sortTable">
+                                </table>
+                            </div>
+                            <!-- Modal footer-->
+                            <div class="modal-footer">
+                                <button type="button" class="close" data-dismiss="modal">Lukk</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="Administration" class="tab-pane fade">
+            <div>
+                <div id='calendar2' style="display:block"></div>
+                <aside id="warning">
+                    <h4 class="titles"> VARSEL </h4>
+                </aside>
+                <aside id = "freeShifts" onclick="calendarFunction()">
+                    <h4 class="titles"> LEDIGE VAKTER </h4>
+                </aside>
+                <section id="list" style="display:none">
+                    <h1> Dagens vakter </h1>
+                    <ul>
+                        <li>Bente</li>
+                        <li>Berit</li>
+                        <li>Bil</li>
+                        <li>Båt</li>
+                        <li>Bål</li>
+                        <li>hei</li>
+                    </ul>
+                </section>
+                <button type="button" class="buttonsAdmin" id="calendarButton" onclick="calendarFunction()" autofocus><span> Kalender &#128197;</span></button>
+                <button type="button" class="buttonsAdmin" id="buttonChangeTab" onclick="changeTabs()"> <span>Godkjenning&#10003;</span> </button>
+                <button type="button" class="buttonsAdmin" id="listButton" onclick="listFunction()"> <span>Dagens vakter</span> </button>
+
+            </div>
+        </div>
+        <div id="Approve" class="tab-pane fade ">
+            <div>
+                <h1 id="godkjenning">Godkjenning</h1>
+                <button type="button" class="approveButton" id ="leave" onclick="leaveFunction()" autofocus><span>Godkjenn fravær<span></button>
+                <button type="button" class="approveButton" id ="overtime" onclick="overtimeFunction()"><span>Godkjenn overtid<span></button>
+                <button type="button" class="approveButton" id ="switch" onclick="switchFunction()"><span>Godkjenn vaktbytte<span></button>
+
+                <button type="button" id ="save" onclick="saveFunction()"style="display:none">Godkjenn og lagre</button>
+            </div>
+        </div>
+        <div id="approvalLeave" class="tap-pane fade">
+            <h3>Fravær til godkjenning</h3>
+            <table id="mytable" class="table table-bordred table-striped">
+                <thead>
+                <th><input type="checkbox" id="checkall" /></th>
+                <th>Navn</th>
+                <th>Dato</th>
+                <th>Årsak</th>
+                </thead>
+                <tbody>
+                <tr>
+                    <td><input type="checkbox" class="checkthis"/></td>
+                    <td>Navn</td>
+                    <td>17.01.17</td>
+                    <td>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" class="checkthis"/></td>
+                    <td>Navn</td>
+                    <td>17.01.17</td>
+                    <td>Syk   </tr>
+                </tbody>
+            </table>
+            <button type="button" id ="save" onclick="saveFunction()"style="display:none">Godkjenn og lagre</button>
+        </div>
+        <div id="approvalOvertime" class="tap-pane fade">
+            <h3>Overtid til godkjenning</h3>
+            <table id="mytable" class="table table-bordred table-striped">
+                <thead>
+                <th><input type="checkbox" id="checkall" /></th>
+                <th>Navn</th>
+                <th>Dato</th>
+                <th>Fra</th>
+                <th>Til</th>
+                <th>Antall minutter</th>
+                <th>Årsak</th>
+                </thead>
+                <tbody>
+                <tr>
+                    <td><input type="checkbox" class="checkthis"/></td>
+                    <td>Navn</td>
+                    <td>17.01.17</td>
+                    <td> hei</td>
+                    <td> heo</td>
+                    <td>hei </td>
+                    <td>hallo </td>
+                <tr>
+                    <td><input type="checkbox" class="checkthis"/></td>
+                    <td>Navn</td>
+                    <td>17.01.17</td>
+                    <td> hei</td>
+                    <td> heo</td>
+                    <td>hei </td>
+                    <td>hallo </td>
+                </tbody>
+            </table>
+            <button type="button" id ="save" onclick="saveFunction()"style="display:none">Godkjenn og lagre</button>
+        </div>
+        <div id="approvalSwitch" class="tap-pane fade">
+            <h3>Vaktbytte til godkjenning</h3>
+            <h4>Enkeltbytte </h4>
+            <table id="mytable" class="table table-bordred table-striped">
+                <table id="mytable" class="table table-bordred table-striped">
+                    <thead>
+                    <th><input type="checkbox" id="checkall" /></th>
+                    <th>Navn</th>
+                    <th>Vakt</th>
+                    <th>Årsak</th>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td><input type="checkbox" class="checkthis"/></td>
+                        <td>Navn</td>
+                        <td>17.01.17</td>
+                        <td> hei</td>
+                    <tr>
+                        <td><input type="checkbox" class="checkthis"/></td>
+                        <td>Navn</td>
+                        <td>17.01.17</td>
+                        <td> hei</td>
+                    </tbody>
+                </table>
+                <h4>Dobbeltbytte</h4>
+                <table id="mytable" class="table table-bordred table-striped">
+                    <table id="mytable" class="table table-bordred table-striped">
+                        <thead>
+                        <th><input type="checkbox" id="checkall" /></th>
+                        <th>Fra</th>
+                        <th>Stilling (fra)</th>
+                        <th>Til</th>
+                        <th>Stilling (til)</th>
+                        <th>Dato</th>
+                        <th>Vakt</th>
+                        <th>Årsak</th>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td><input type="checkbox" class="checkthis"/></td>
+                            <td>Navn</td>
+                            <td>17.01.17</td>
+                            <td> hei</td>
+                            <td> heo</td>
+                            <td>hei </td>
+                            <td>hallo </td>
+                            <td>hallo </td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" class="checkthis"/></td>
+                            <td>Navn</td>
+                            <td>17.01.17</td>
+                            <td> hei</td>
+                            <td> heo</td>
+                            <td>hei </td>
+                            <td>hallo </td>
+                            <td>hallo </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </table>
+            <button type="button" id ="save" onclick="saveFunction()"style="display:none">Godkjenn og lagre</button>
+        </div>
+
+        <div id="Exchange" class="tab-pane fade ">
+        <h3>Exchange tab will apear :)</h3>
+    </div>
+        <div id="Example" class="tap-pane fade">
+            <h3>ExamplePane tab will apear :)</h3>
+        </div>
+        <div id="Logout" class="tap-pane fade">
+            <h3>You are have (NOT) successfully logged out :)</h3>
+        </div>
+    </div>
+</div>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<script src="/frontendJS/moment.min.js"></script>
+<script src="/frontendJS/jquery.min.js"></script>
+<script src="/frontendJS/fullcalendar.min.js"></script>
+<script src="/frontendJS/nb.js"></script>
+<script src="/frontendJS/calendar.js"></script>
+
+</body>
+</html>

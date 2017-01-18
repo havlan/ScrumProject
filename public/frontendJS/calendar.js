@@ -1,8 +1,11 @@
 /**
  * Created by LittleGpNator on 17.01.2017.
  */
+var events;
+
 $(document).ready(function() {
     $("#includedContent").load("menu");
+
     $('#calendar').fullCalendar({
         header: {
             left: 'prev,next today',

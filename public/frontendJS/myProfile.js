@@ -5,7 +5,7 @@ $(document).ready(function(){ // syntax for å hente data når dokument (html) e
 
     $("#includedContent").load("menu");
 
-    $("#sortTable").tablesorter();
+    //$("#sortTable").tablesorter();
 
     $.get('/getEmployee', {}, function(req, res, data){
 
