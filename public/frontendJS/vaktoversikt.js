@@ -36,8 +36,9 @@ function buildHtmlTable(selector) {
             row$.append($('<td/>').html(cellValue));
         }
         $(selector).append(row$);
+        $(tbody).append(row$);
     }
-    $(tbody).append(row$);
+    $(selector).append(tbody);
 }
 function addAllColumnHeaders(myList, selector) {
 
