@@ -16,9 +16,8 @@ var router = express.Router();
 
     //get
     router.route('/').get(isLoggedIn,getCtrl.getRoot);
-    router.route('/user').get(getCtrl.getUser);
+    router.route('/user').get(isLoggedIn,getCtrl.getUser);
     router.route('/user/:id').get(getCtrl.getUser);
-    router.route('/login').get(getCtrl.getLogin);
     router.route('/getEmployee').get(getCtrl.getEmployee);
     router.route('/getDepartment/:department_id').get(getCtrl.getDepartment);
     router.route('/getType').get(getCtrl.getType);
@@ -28,6 +27,7 @@ var router = express.Router();
     router.route('/getAbsence').get(getCtrl.getAbsence);
     router.route('/getOvertime').get(getCtrl.getOvertime);
     router.route('/getUserInfo').get(getCtrl.getUserInfo);
+    router.route('/logOut').get(logOut);
 
     //router.route('/getVaktoversikt').get(getCtrl.getVaktoversikt);
 
@@ -62,11 +62,11 @@ function isLoggedIn (req, res, next) {
     if (req.isAuthenticated()) {
         next();
     } else {
-        res.redirect('/login');
+        res.redirect('/loginMV');
     }
 }
 function logOut(req,res){
     req.logout();
-    res.redirect('/login');
+    res.redirect('/loginMV');
 }
 module.exports = router;

@@ -66,7 +66,6 @@ module.exports = function(passport) {
             passReqToCallback: true
         },
         function (req,username,password, done) {
-            console.log(req.passport);
             basseng.getConnection(function(err, connection){
                 connection.query("select * from LoginInfo where Username = ?", [username], function (err, rows) {
                     connection.release();

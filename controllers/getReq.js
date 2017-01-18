@@ -14,10 +14,9 @@ module.exports = {
     },
 
     getUser : function(req,res){
-        //get user functionality here
-        console.log("GETUSER",req.session);
-        res.json({"Params": "" + req.params.id});
-        console.log("GET user #" + ++totalgetReq + " " + JSON.stringify(req.body));
+        console.log("USER AT GETUSER");
+        console.log(req.session);
+        res.send(req.session);
     },
     getLogin : function (req,res){
         res.sendFile(path.join(__dirname + '/../views/Login.html'));
