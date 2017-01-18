@@ -69,6 +69,9 @@ module.exports = {
     getEmployee : function (req, res){
       dbMiddelware.getEmployee(req,res);
     },
+    getOneEmployee : function(req,res){
+        dbMiddelware.getOneEmployee(req,res);
+    },
     getDepartment : function (req, res){
         console.log("DEPARTMENT REQUEST" + req.params.department_id);
         dbMiddelware.getDepartment(req,res);

@@ -7,7 +7,7 @@ $(document).ready(function(){ // syntax for å hente data når dokument (html) e
 
     //$("#sortTable").tablesorter();
 
-    $.get('/getEmployee', {}, function(req, res, data){
+    $.get('/getOneEmployee', {}, function(req, res, data){
 
         console.log(data);
         console.log(data.responseJSON[0]);
@@ -25,18 +25,18 @@ $(document).ready(function(){ // syntax for å hente data når dokument (html) e
 var myList= [];
 
 
-$.get('/getVaktoversiktSite', {}, function(req, res, data){
-    console.log(data);
-    console.log(data.responseJSON[0]);
+/*$.get('/getVaktoversiktSite', {}, function(req, res, data){
+    //console.log(data);
+    //console.log(data.responseJSON[0]);
     myList = data.responseJSON;
     //document.getElementById("data").innerHTML = myList;
 
     buildHtmlTable('#histTable')
     //tableCreate();
-});
+});*/
 
 
-function buildHtmlTable(selector) {
+/*function buildHtmlTable(selector) {
     var columns = addAllColumnHeaders(myList, selector);
     var tbody$ = $('<tbody/>');
     for (var i = 0; i < myList.length; i++) {
@@ -70,4 +70,4 @@ function addAllColumnHeaders(myList, selector) {
     $(selector).append(headerThead$);
 
     return columnSet;
-}
+}*/

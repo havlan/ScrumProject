@@ -1,12 +1,16 @@
 //this file executes queries towards mysql
 
-var dbHelper = require('../helpers/db').getPool();
+var dbHelper = require('../helpers/db');
 
 module.exports = {
     //GET
     getEmployee: function (req, res) {
         console.log("Overview Employee");
         dbHelper.getdbQuery(req, res, "select * from Employee");
+    },
+    getOneEmployee: function (req, res) {
+        console.log("Overview Employee");
+        dbHelper.getdbQuery(req, res, "select * from Employee where employee_id = ?",req.session.passport.user.id);
     },
 
     getDepartment: function (req, res) {

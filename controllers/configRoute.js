@@ -12,6 +12,7 @@ module.exports = function (app, passport) {
     app.get('/login', getCtrl.getLogin);
     app.get('/logout', logOut);
     app.get('/getEmployee', isAdmin, getCtrl.getEmployee);
+    app.get('/getOneEmployee', isLoggedIn, getCtrl.getOneEmployee);
     //app.get('/getDepartment/:department_id').get(getCtrl.getDepartment);
     app.get('/getType', isLoggedIn, getCtrl.getType);
     app.get('/getShift', isLoggedIn, getCtrl.getShift);
@@ -64,6 +65,10 @@ module.exports = function (app, passport) {
     app.post('/updateAbsence', isLoggedIn, postCtrl.updateAbsence);
     app.post('/updateOvertime', isLoggedIn, postCtrl.updateOvertime);
     app.post('/updateLogInInfo', isLoggedIn, postCtrl.updateLogInInfo);
+
+
+    //MÅ VÆRE SIST
+    app.get('/*',getCtrl.get404);
 
 };
 
