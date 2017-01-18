@@ -61,7 +61,7 @@ module.exports = {
         dbHelper.dbQuery(req, res, "select * from TestVaktliste");
     },
     getEvents : function (req,res) {
-        dbHelper.dbQuery(req, res, "select * from Employee_Overtime");
+        dbHelper.dbQuery(req, res, "select * from JSON_VIEW");
     },
 /*
     getVaktliste : function (req, res){
