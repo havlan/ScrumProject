@@ -27,13 +27,13 @@ module.exports = function (app, passport) {
 
 
     //Sites
-    app.get('/menu', getCtrl.getMenuSite);
-    app.get('/overviewForAdmin', getCtrl.getOverviewForAdminSite);
-    app.get('/myProfile', getCtrl.getMyProfileSite);
-    app.get('/vaktoversikt', getCtrl.getVaktoversiktSite);
-    app.get('/calendar', getCtrl.getCalendarSite);
-    app.get('/approvalAdmin', getCtrl.getApprovalAdminSite);
-    app.get('/frontpageAdmin', getCtrl.getFrontpageAdminSite);
+    app.get('/menu', isLoggedIn, getCtrl.getMenuSite);
+    app.get('/overviewForAdmin', isLoggedIn, getCtrl.getOverviewForAdminSite);
+    app.get('/myProfile', isLoggedIn, getCtrl.getMyProfileSite);
+    app.get('/vaktoversikt', isLoggedIn, getCtrl.getVaktoversiktSite);
+    app.get('/calendar', isLoggedIn, getCtrl.getCalendarSite);
+    app.get('/approvalAdmin', isLoggedIn, getCtrl.getApprovalAdminSite);
+    app.get('/frontpageAdmin', isLoggedIn, getCtrl.getFrontpageAdminSite);
 
     //Images
     app.get('IMG01', isLoggedIn, getCtrl.getLogo);
@@ -68,7 +68,7 @@ module.exports = function (app, passport) {
 
 
     //MÅ VÆRE SIST
-    app.get('/*',getCtrl.get404);
+    app.get('/*', getCtrl.get404);
 
 };
 
