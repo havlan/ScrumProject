@@ -5,18 +5,13 @@
 
 
 
-table.sortable thead {
-    background-color:#eee;
-    color:#666666;
-    font-weight: bold;
-    cursor: default;
-}
-
 #excelDataTable {
     border-collapse: collapse;
     width: 100%;
     border: 1px solid #ddd;
     font-size: 18px;
+    height: 400px;
+    overflow: hidden;
 }
 
 #excelDataTable th, #excelDataTable td {
@@ -39,8 +34,15 @@ table.sortable thead {
     cursor: pointer;
 }
 
+#size{
+    height: 200px;
+    overflow: auto;
+}
 thead{
-    background-color: #4CAF50;
+}
+
+tbody{
+
 }
 
 /*
