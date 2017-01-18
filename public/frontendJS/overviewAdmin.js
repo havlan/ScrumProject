@@ -17,30 +17,33 @@ $(document).ready(function getInfo(){
      document.getElementById("usernamedb").innerHTML = data.responseJSON[0].username;
      })*/
 });
-
 $.get('/getEmployee', {}, function(req, res, data){
     console.log(data);
- //   console.log(data.responseJSON[0]);
+    console.log(data.responseJSON[0]);
     myList = data.responseJSON;
     //document.getElementById("data").innerHTML = myList;
-    buildHtmlTable('#excelDataTable');
+
+    buildHtmlTable('#excelDataTable')
     //tableCreate();
 });
+
 function buildHtmlTable(selector) {
     var columns = addAllColumnHeaders(myList, selector);
     var tbody = $('<tbody/>');
     for (var i = 0; i < myList.length; i++) {
-        var row$ = $('<tr/>');
+        var row$ = $('<tr data-toggle="modal" data-target="#myModal"/>');
         for (var colIndex = 0; colIndex < columns.length; colIndex++) {
             var cellValue = myList[i][columns[colIndex]];
             if (cellValue == null) cellValue = "";
             row$.append($('<td/>').html(cellValue));
         }
         $(selector).append(row$);
+        $(tbody).append(row$);
     }
     $(selector).append(tbody);
 }
 function addAllColumnHeaders(myList, selector) {
+
     var columnSet = [];
     var headerThead$ = $('<thead/>');
     var headerTr$ = $('<tr/>');
@@ -50,11 +53,16 @@ function addAllColumnHeaders(myList, selector) {
             if ($.inArray(key, columnSet) == -1) {
                 columnSet.push(key);
                 headerTr$.append($('<th/>').html(key));
+
+
             }
+
         }
+
     }
-    $(selector).append(headerTr$);
     $(selector).append(headerThead$);
+    $(headerThead$).append(headerTr$);
+
 
     return columnSet;
 }
@@ -127,7 +135,7 @@ function saveFunction() {
     }
 }
 
-$('table tbody tr  td').on('click',function(){
+$('table thead tr').on('click',function(){
     $("#myModal").modal("show");
     $("#nameModal").val($(this).closest('tr').children()[0].textContent);
     $("#positionModal").val($(this).closest('tr').children()[1].textContent);
