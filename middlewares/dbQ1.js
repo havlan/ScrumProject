@@ -58,7 +58,7 @@ module.exports = {
         dbHelper.simpleLogin("select * from LoginInfo where Username = ?", [username]);
     },*/
     getVaktliste : function(req,res){
-        dbHelper.getdbQuery(req, res, "select * from EMPLOYEE_GIVEN_SHIFT where ShiftStart like ? and department_id = ?;",[req.params.ShiftStart, req.params.department_id]);
+        dbHelper.getdbQuery(req, res, "select * from EMPLOYEE_GIVEN_SHIFT where ShiftStart like '2017-03-31%' and department_id = 5;"); //,[req.params.ShiftStart, req.params.department_id]
     },
     /**
     getVaktoversikt : function(req,res){
