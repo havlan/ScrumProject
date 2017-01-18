@@ -68,7 +68,7 @@ function searchNameFunction() {
 
     //Hide the rows that dont match the search
     for (i = 0; i < tr.length; i++) {
-        td = tr[i].getElementsByTagName("td")[7];
+        td = tr[i].getElementsByTagName("td")[1];
         if (td) {
             if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
                 tr[i].style.display = "";
@@ -86,7 +86,7 @@ function searchPositionFunction() {
     table = document.getElementById("excelDataTable");
     tr = table.getElementsByTagName("tr");
     for (i = 0; i < tr.length; i++) {
-        td = tr[i].getElementsByTagName("td")[6];
+        td = tr[i].getElementsByTagName("td")[2];
         if (td) {
             if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
                 tr[i].style.display = "";
