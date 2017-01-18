@@ -1,5 +1,5 @@
 var dbMiddelware = require('../middlewares/dbQ1');
-
+var session1;
 
 
 module.exports = {

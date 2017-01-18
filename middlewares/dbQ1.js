@@ -8,6 +8,10 @@ module.exports = {
         console.log("Overview Employee");
         dbHelper.getdbQuery(req, res, "select * from Employee");
     },
+    getOneEmployee: function (req, res) {
+        console.log("Overview Employee");
+        dbHelper.getdbQuery(req, res, "select * from Employee where employee_id = ?",req.session.passport.user.id);
+    },
 
     getDepartment: function (req, res) {
         //var get = {department_id:req.body.department_id};
@@ -40,6 +44,16 @@ module.exports = {
     getSaltHash: function (req, res) {
         dbHelper.getdbQuery(req, res, "select password_hash, password_salt, is_admin from LoginInfo where Username = ?", req.body.username);
     },
+    getSaltHash: function(req,res,next){
+        dbHelper.getdbQWNext(req,res, "select password_hash, password_salt, is_admin from LoginInfo where Username = ?",[req.body.username],next);
+    },
+    /*simpleLogin : function(username){
+        dbHelper.simpleLogin("select * from LoginInfo where Username = ?", [username]);
+    },*/
+    /**
+    getVaktoversikt : function(req,res){
+        var get = {name:req.body.name, type:req.body.type, department:req.body.department, responsibility_allowed:req.body.type, phone_nr:req.body.phone_nr};
+=======
     getEmployeeOvertime: function (req, res) {
         dbHelper.dbQuery(req, res, "select * from Employee_Overtime");
     },
@@ -54,6 +68,7 @@ module.exports = {
             responsibility_allowed: req.body.type,
             phone_nr: req.body.phone_nr
         };
+>>>>>>> remotes/origin/frontEnd
         console.log("Overview worklist");
         dbHelper.getdbQuery(req, res, "overview shifts ?", get);
     },

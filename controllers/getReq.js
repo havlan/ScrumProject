@@ -7,16 +7,19 @@ var totalgetReq = 0;
 module.exports = {
 
     getRoot : function(req,res){
-        res.redirect('/login');
-        //res.sendFile(path.join(__dirname + '/../index.html'));
+        //res.redirect('/login'); //
+        console.log("ROOT: ",req.session);
+        console.log("GET ROOT", req.isAuthenticated());
+        res.sendFile(path.join(__dirname + '/../views/hMenu.html'));
     },
 
     getUser : function(req,res){
         //get user functionality here
-        res.json({"Params": "" + req.params.id});
-        console.log("GET user #" + ++totalgetReq + " " + JSON.stringify(req.body));
+        res.sendFile(path.join(__dirname + '/../views/smashing.html'));
     },
-
+    getLogin : function (req,res) {
+        res.sendFile(path.join(__dirname + '/../views/login.html'));
+    },
 
     //Site
     getOnePagedMenu : function (req,res){
@@ -60,10 +63,14 @@ module.exports = {
         //res.json({"Msg":"Yodeliho"});
         //console.log("GET index.html #" + ++totalgetReq + " today.");
         dbMiddelware.getSaltHash(req,res);
+ remotes/origin/frontEnd
     },
 
     getEmployee : function (req, res){
       dbMiddelware.getEmployee(req,res);
+    },
+    getOneEmployee : function(req,res){
+        dbMiddelware.getOneEmployee(req,res);
     },
     getDepartment : function (req, res){
         console.log("DEPARTMENT REQUEST" + req.params.department_id);
@@ -88,7 +95,7 @@ module.exports = {
         dbMiddelware.getOvertime(req,res);
     },
     getEmployee_shifts_toCurrentDate:function(req,res){
-        dbMiddelware.getEmployee_shifts_toCurrentDate(req,res);
+        //dbMiddelware.getEmployee_shifts_toCurrentDate(req,res);
     },
     getVaktliste:function(req,res){
         dbMiddelware.getVaktliste(req,res);

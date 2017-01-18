@@ -7,11 +7,12 @@ var putCtrl = require('./putReq');
 var postCtrl = require('./postReq');
 var delCtrl = require('./delReq');
 var testCtrl = require('./testReq');
+var psSjekk = require('../middlewares/loginCheck');
 var router = express.Router();
 
 //ruting trenger ikke parameter eks: ikke blabla(req,res);
 //routing does not need parameter.
-// syntax - router.route(PATH).[REST METHOD](controller.controllerAccessName)
+// syntax - app.route(PATH).[REST METHOD](controller.controllerAccessName)
 
 //get
 router.route('/').get(getCtrl.getRoot);
@@ -56,7 +57,17 @@ router.route('/updateLogInInfo').post(postCtrl.updateLogInInfo);
 //delete
 
 
+//delete
+
 //===============  KEEP NodeETest for testing!!!  ====================
+    router.route('/NodeETest').get(testCtrl.getNodeETest);
+    router.route('/NodeETest/put').put(testCtrl.putNodeETest);
+    router.route('/NodeETest/post').post(testCtrl.postNodeETest);
+//app.route('NodeETest/post')
+//======== TEST ROUTE FERDIG ========
+
+
+//app.route('/*').get(getCtrl.get404);
 router.route('/NodeETest').get(testCtrl.getNodeETest);
 router.route('/NodeETest/put').put(testCtrl.putNodeETest);
 router.route('/NodeETest/post').post(testCtrl.postNodeETest);
@@ -85,4 +96,16 @@ router.route('/IMG01').get(getCtrl.getLogo);
 //======== TEST ROUTE FERDIG ========
 router.route('/*').get(getCtrl.get404);
 
+function isLoggedIn (req, res, next) {
+    console.log(req.session);
+    if (req.isAuthenticated()) {
+        next();
+    } else {
+        res.redirect('/login');
+    }
+}
+function logOut(req,res){
+    req.logout();
+    res.redirect('/login');
+}
 module.exports = router;
