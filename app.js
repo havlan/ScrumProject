@@ -34,15 +34,24 @@ app.use(session({
         maxAge: 60*60*24*1000*7
     }
 }));
-
 /*app.use(function(req,res,next){
-    console.log("JUST TO VERIFY ",req.session.);
+   //res.header('Content-Type', 'application/json');
     next();
 });*/
+
+app.use(function(req,res,err,next){
+    if(err){
+        res.body.error = err;
+        console.log("Error added to req.error");
+    }else{
+        next();
+    }
+})
 
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
+
 
 
 //pass passport auth and app to route config
@@ -56,6 +65,6 @@ var server = app.listen(3000, function(){
 
 
 //tests imports app
-//module.exports = server;
+module.exports = server;
 //other exports
 //module.exports = session;

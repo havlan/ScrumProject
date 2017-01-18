@@ -17,6 +17,7 @@ module.exports =
             return pool;
         },
         dbQuery: function (req, res, query) {
+
             pool.getConnection(function (err, connection) {
                 if (err) {
                     res.status(500); // Internal server error
@@ -28,7 +29,7 @@ module.exports =
                     connection.release(); // Legg tilbake i pool
                     if (!err) {
                         //console.log(rows);
-                        res.json(rows);
+                        res.status(200).json(rows);
                     } else {
                         console.log("error: Error reading database: " + err);
                         res.status(500);
@@ -49,7 +50,8 @@ module.exports =
                 connection.query(query, get, function (err, rows) {
                     connection.release();
                     if (!err) {
-                        res.json(rows);
+                        res.set('Application-Type','application/json');
+                        res.status(200).json(rows);
                         console.log(rows);
                     } else {
                         console.log("error: Error reading database: " + err);
@@ -71,7 +73,7 @@ module.exports =
                     connection.release();
                     if (!err) {
                         //res.json(rows);
-                        console.log(rows);
+                        //console.log(rows);
                         next();
                     } else {
                         console.log("error: Error reading database: " + err);
@@ -93,7 +95,7 @@ module.exports =
                 connection.query(query, post, function (err, rows) {
                     connection.release();
                     if (!err) {
-                        res.json(rows);
+                        res.status(200).json(rows);
                     } else {
                         console.log("error: Error reading database: " + err);
                         res.status(500);

@@ -6,10 +6,12 @@ module.exports = {
     //GET
     getEmployee: function (req, res) {
         console.log("Overview Employee");
+        res.type('json');
         dbHelper.getdbQuery(req, res, "select * from Employee");
     },
     getOneEmployee: function (req, res) {
         console.log("Overview Employee");
+        res.setHeader('Content-Type', 'application/json');
         dbHelper.getdbQuery(req, res, "select * from Employee where employee_id = ?",req.session.passport.user.id);
     },
 
@@ -20,10 +22,12 @@ module.exports = {
     },
     getType: function (req, res) {
         console.log("Overview Type");
+        res.setHeader('Content-Type', 'application/json');
         dbHelper.getdbQuery(req, res, "select * from Type");
     },
     getShift: function (req, res) {
         console.log("Overview Shift");
+        res.setHeader('Content-Type', 'application/json');
         dbHelper.getdbQuery(req, res, "select * from Shift");
     },
     getShift_has_employee: function (req, res) {

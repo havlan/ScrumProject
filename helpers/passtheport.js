@@ -17,14 +17,14 @@ module.exports = function (passport) {
      });*/
 
     passport.serializeUser(function (user, done) {
-        console.log("SERIALIZING");
-        console.log(JSON.stringify(user));
+        //console.log("SERIALIZING");
+        //console.log(JSON.stringify(user));
         done(null, {
             username: user.username,
             id: user.employee_id,
             is_admin: user.is_admin
         });
-        console.log("DONE SERIALIZING");
+        //console.log("DONE SERIALIZING");
     })
     /*passport.deserializeUser(function(username,done){
      pool.query("select * from LoginInfo where username = ?", [username],function(err,rader){
@@ -46,7 +46,7 @@ module.exports = function (passport) {
                 if (err) {
                     return done(err);
                 }
-                console.log(rows[0]);
+                //console.log(rows[0]);
                 done(err, rows[0]);
             });
         });
@@ -57,7 +57,7 @@ module.exports = function (passport) {
             passReqToCallback: true
         },
         function (req, username, password, done) {
-            console.log("I LOCAL", req.session);
+            //console.log("I LOCAL", req.session);
             pool.getConnection(function (err, connection) {
                 connection.query("select * from LoginInfo where Username = ?", [username], function (err, rows) {
                     connection.release();
@@ -71,10 +71,10 @@ module.exports = function (passport) {
                     if (!cryptoHash.sha512(req.body.password, rows[0].password_salt).passwordHash == rows[0].password_hash) {
                         return done(null, false, req.flash("loginMsg", "WHooooooooops, wrong password."));
                     }
-                    console.log("LOGIN OK");
+                    //console.log("LOGIN OK");
                     //req.login(); // wtf man
                     //req.login();
-                    console.log("IS AUTH? ", req.isAuthenticated());
+                    //console.log("IS AUTH? ", req.isAuthenticated());
                     return done(null, rows[0]);
                 })
             });

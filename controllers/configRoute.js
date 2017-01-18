@@ -6,8 +6,15 @@ var postCtrl = require('./postReq');
 
 
 module.exports = function (app, passport) {
+    if(process.env.NODE_ENV == 'dev'){
+        console.log("===DEV MODE===");
+        app.post('/login').send({
+            username:'Alfonso',
+            password:'pizza123'
+        });
+    }
     app.get('/', isLoggedIn, getCtrl.getRoot);
-    app.get('/user', isLoggedIn, getCtrl.getUser);
+    app.get('/user', isLoggedIn, getCtrl.getUser); // db
     app.get('/user/:id', isLoggedIn, getCtrl.getUser);
     app.get('/login', getCtrl.getLogin);
     app.get('/logout', logOut);
@@ -43,7 +50,7 @@ module.exports = function (app, passport) {
         failureRedirect: '/login',
         failureFlash: true
     }), function (req, res) {
-        console.log("LOGIN OK?");
+        console.log("LOGIN OK");
         res.redirect('/');
     });
 
@@ -75,11 +82,11 @@ module.exports = function (app, passport) {
 //app.route('/*').get(getCtrl.get404);
 
 function isLoggedIn(req, res, next) {
-    console.log(req.session);
+    //console.log(req.session);
     if (req.isAuthenticated()) {
         next();
     } else {
-        console.log(req.session, " not authorized.");
+        //console.log(req.session, " not authorized.");
         res.redirect('/login');
     }
 }

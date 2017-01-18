@@ -7,14 +7,10 @@ var totalgetReq = 0;
 module.exports = {
 
     getRoot : function(req,res){
-        //res.redirect('/login'); //
-        console.log("ROOT: ",req.session);
-        console.log("GET ROOT", req.isAuthenticated());
         res.sendFile(path.join(__dirname + '/../views/hMenu.html'));
     },
 
     getUser : function(req,res){
-        //get user functionality here
         res.sendFile(path.join(__dirname + '/../views/smashing.html'));
     },
     getLogin : function (req,res) {
@@ -59,11 +55,7 @@ module.exports = {
 
 
     submitLogin : function (req, res) {
-        //res.sendFile(path.join(__dirname + '/../index.html'));
-        //res.json({"Msg":"Yodeliho"});
-        //console.log("GET index.html #" + ++totalgetReq + " today.");
         dbMiddelware.getSaltHash(req,res);
- remotes/origin/frontEnd
     },
 
     getEmployee : function (req, res){
