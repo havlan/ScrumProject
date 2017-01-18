@@ -7,15 +7,15 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="frontendJS/overviewAdmin.js"></script>
-    
+    <div id="includedContent"></div>
+
 </head>
-<div id="includedContent"></div>
 
 <body>
 
 <div class = "flytt">
     <h1>Oversikt over ansatte</h1>
-    <input type="text" id="nameInput" onkeyup="searchNameFunction()" placeholder="Søk på ansatt">
+    <input autofocus type="text" id="nameInput" onkeyup="searchNameFunction()" placeholder="Søk på ansatt">
     <input type="text" id="positionInput" onkeyup="searchPositionFunction()" placeholder="Søk på stilling">
     <button type="button" id="add" data-toggle="modal" data-target="#addModal">Legg til ansatt</button>
 
