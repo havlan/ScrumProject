@@ -34,6 +34,8 @@ module.exports = function (app, passport) {
     app.get('/calendar', isLoggedIn, getCtrl.getCalendarSite);
     app.get('/approvalAdmin', isLoggedIn, getCtrl.getApprovalAdminSite);
     app.get('/frontpageAdmin', isLoggedIn, getCtrl.getFrontpageAdminSite);
+    app.get('/OnePagedMenu', isLoggedIn, getCtrl.getOnePagedMenu);
+
 
     //Images
     app.get('IMG01', isLoggedIn, getCtrl.getLogo);

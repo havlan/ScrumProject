@@ -1,6 +1,5 @@
 @charset "utf-8";
-/* CSS Document */
-/* Sortable tables */
+
 
 
 
@@ -10,13 +9,13 @@
     width: 100%;
     border: 1px solid #ddd;
     font-size: 18px;
-    height: 400px;
-    overflow: hidden;
+    table-layout: fixed;
 }
 
 #excelDataTable th, #excelDataTable td {
     text-align: left;
     padding: 12px;
+    width: 14.5vw;
 }
 
 #excelDataTable tr {
@@ -35,14 +34,18 @@
 }
 
 #size{
-    height: 200px;
-    overflow: auto;
+    width: 1500px;
+    display: block;
 }
-thead{
+thead {
+    width: 1500px;
+    display: block;
 }
-
-tbody{
-
+tbody {
+    height: 10em;
+    width: 100%;
+    display: block;
+    overflow-y: scroll;
 }
 
 /*
