@@ -60,6 +60,7 @@ module.exports = function (app, passport) {
     app.post('/postLogInInfo', isLoggedIn, postCtrl.postLogInInfo);
     app.post('/updateShift_has_employee', isLoggedIn, postCtrl.updateShift_has_employee);
     app.post('/updateEmployee', isLoggedIn, postCtrl.updateEmployee);
+    app.post('/updateEmployeePersonalInfo',isLoggedIn,postCtrl.updateEmployeePersonalInfo);
     app.post('/updateType', isLoggedIn, postCtrl.updateType);
     app.post('/updateShift', isLoggedIn, postCtrl.updateShift);
     app.post('/updateDepartment', isLoggedIn, postCtrl.updateDepartment);

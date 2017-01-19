@@ -202,6 +202,13 @@ module.exports = {
             pers_id: req.body.pers_id
         }, id]);
     },
+    updateEmployeePersonalInfo: function (req, res) {
+        dbHelper.postdbQuery(req,res,"update Employee set ? where employee_id = ?",[{
+            phone_nr: req.body.phone_nr,
+            email: req.body.email,
+            address: req.body.address,},
+            req.session.passport.user.id])
+    },
     updateType: function (req, res) {
         var pk = req.body.name;
         dbHelper.postdbQuery(req, res, "update Type set ? where name = ?", [{rank: req.body.rank}, pk]);

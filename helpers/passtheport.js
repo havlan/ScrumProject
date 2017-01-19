@@ -36,6 +36,7 @@ module.exports = function (passport) {
         console.log("DESERIALIZING");
         pool.getConnection(function (err, connection) {
             if (err) {
+
                 return done(err);
             }
             connection.query('select * from LoginInfo where username = ?', [user.username], function (err, rows) {
