@@ -18,6 +18,7 @@ $.get('/getVaktliste', {}, function(req, res, data){
     myList = data.responseJSON;
     //document.getElementById("data").innerHTML = myList;
 
+    $("#includedContent").load("menu");
 
     buildHtmlTable('#excelDataTable')
     //tableCreate();
