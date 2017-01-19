@@ -1,7 +1,6 @@
 .superbutton {
-    position: absolute;
-    margin-left: 5%;
-    width: 170px;
+    position: relative;
+    width: 200px;
     background-color: royalblue;
     border: none;
     border-radius: 5px;
