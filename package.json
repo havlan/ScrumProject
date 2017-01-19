@@ -2,7 +2,7 @@
   "name": "scrum2017",
   "version": "1.0.0",
   "description": "scrum prosjekt 2017",
-  "main": "server.js",
+  "main": "app.js",
   "scripts": {
     "test": "./node_modules/.bin/mocha --reporter spec",
     "doc": "./node_modules/.bin/"
@@ -54,6 +54,7 @@
   },
   "homepage": "https://github.com/hlongdayle/scrumLords2017#readme",
   "devDependencies": {
+    "coveralls": "^2.11.15",
     "mocha": "^3.2.0"
   }
 }
