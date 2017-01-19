@@ -6,27 +6,21 @@
     <script src="frontendJS/sorttable.js"></script>
     <!--<script src="vaktoversikt.js"></script>-->
     <link rel="stylesheet" href="css/Vaktoversiktstyle.css">
+
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <style src="//cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css"></style>
     <script src="//cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+    <script src="frontendJS/vaktoversikt.js"> </script>
+    <script src="frontendJS/jquery-tablesorter.js"></script>
+    <script src="frontendJS/jquery-latest.js"></script>
+<head/>
 
-
-
-</head>
+    <div id="includedContent"></div>
 
 <body>
-
-<div class="main-content">
+    <div class="main-content">
     <div class="toolbar">
-        <div class="left">
-            <button class="prevDay"> forrige </button>
-        </div>
-        <div class="center">
-            <span>Dato her</span>
-        </div>
-        <div class="right">
-            <button class="prevDay"> neste </button>
-        </div>
 
     </div>
     <div class="vaktbok-body">
@@ -34,19 +28,18 @@
             <div class="dagsvakt-text">
                 <h4>Dagsvakt 08:00-16:00</h4>
             </div>
-            <table id="excelDataTable" class="sortable">
+                <div id="size">
+                <table id="excelDataTable" class="tablesorter">
 
-            </table>
+                </table>
+                </div>
         </div>
     </div>
 </div>
 
-
-
 </body>
 </html>
 
-<script src="frontendJS/vaktoversikt.js"> </script>
 
 <table></table>
 

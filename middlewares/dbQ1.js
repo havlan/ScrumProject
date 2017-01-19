@@ -51,9 +51,19 @@ module.exports = {
     getSaltHash: function(req,res,next){
         dbHelper.getdbQWNext(req,res, "select password_hash, password_salt, is_admin from LoginInfo where Username = ?",[req.body.username],next);
     },
+    getEmployee_shifts_toCurrentDate: function (req, res) {
+        console.log("USER ID "+req.session.passport.user.id);
+        dbHelper.getdbQuery(req, res, "select * from Employee_Shifts_toCurrentDate where employee_id = ?",[req.session.passport.user.id]);
+    },
+    getEvents : function (req,res) {
+        dbHelper.dbQuery(req, res, "select * from JSON_EMPLOYEE_VIEW");
+    },
     /*simpleLogin : function(username){
         dbHelper.simpleLogin("select * from LoginInfo where Username = ?", [username]);
     },*/
+    getVaktliste : function(req,res){
+        dbHelper.getdbQuery(req, res, "select * from EMPLOYEE_GIVEN_SHIFT where ShiftStart like '2017-03-31%' and department_id = 5;"); //,[req.params.ShiftStart, req.params.department_id]
+    },
     /**
     getVaktoversikt : function(req,res){
         var get = {name:req.body.name, type:req.body.type, department:req.body.department, responsibility_allowed:req.body.type, phone_nr:req.body.phone_nr};
@@ -61,9 +71,7 @@ module.exports = {
     getEmployeeOvertime: function (req, res) {
         dbHelper.dbQuery(req, res, "select * from Employee_Overtime");
     },
-    getEmployee_shifts_toCurrentDate: function (req, res) {
-        dbHelper.dbQuery(req, res, "select * from Employee_shifts_toCurrentDate where employee_id =?", req.params.employee_id);
-    },
+
     getVaktoversiktSite: function (req, res) {
         var get = {
             name: req.body.name,
@@ -80,7 +88,7 @@ module.exports = {
         dbHelper.dbQuery(req, res, "select * from TestVaktliste");
     },
     getEvents : function (req,res) {
-        dbHelper.dbQuery(req, res, "select * from Employee_Overtime");
+        dbHelper.dbQuery(req, res, "select * from JSON_VIEW");
     },
 /*
     getVaktliste : function (req, res){

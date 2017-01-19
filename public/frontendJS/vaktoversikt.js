@@ -18,6 +18,8 @@ $.get('/getVaktliste', {}, function(req, res, data){
     myList = data.responseJSON;
     //document.getElementById("data").innerHTML = myList;
 
+    $("#includedContent").load("menu");
+
     buildHtmlTable('#excelDataTable')
     //tableCreate();
 });
@@ -35,8 +37,8 @@ function buildHtmlTable(selector) {
             if (cellValue == null) cellValue = "";
             row$.append($('<td/>').html(cellValue));
         }
-        $(selector).append(row$);
         $(tbody).append(row$);
+
     }
     $(selector).append(tbody);
 }
@@ -60,8 +62,7 @@ function addAllColumnHeaders(myList, selector) {
     }
     $(selector).append(headerThead$);
     $(headerThead$).append(headerTr$);
-
-
+    $("#cover").fadeOut(20);
     return columnSet;
 }
 

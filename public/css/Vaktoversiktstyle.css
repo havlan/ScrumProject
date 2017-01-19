@@ -1,27 +1,21 @@
 @charset "utf-8";
-/* CSS Document */
-/* Sortable tables */
 
 
 
 
-table.sortable thead {
-    background-color:#eee;
-    color:#666666;
-    font-weight: bold;
-    cursor: default;
-}
 
 #excelDataTable {
     border-collapse: collapse;
     width: 100%;
     border: 1px solid #ddd;
     font-size: 18px;
+    table-layout: fixed;
 }
 
 #excelDataTable th, #excelDataTable td {
     text-align: left;
     padding: 12px;
+    width: 14.5vw;
 }
 
 #excelDataTable tr {
@@ -39,8 +33,19 @@ table.sortable thead {
     cursor: pointer;
 }
 
-thead{
-    background-color: #4CAF50;
+#size{
+    width: 1500px;
+    display: block;
+}
+thead {
+    width: 1500px;
+    display: block;
+}
+tbody {
+    height: 10em;
+    width: 100%;
+    display: block;
+    overflow-y: scroll;
 }
 
 /*

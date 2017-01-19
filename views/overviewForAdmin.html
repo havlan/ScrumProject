@@ -7,13 +7,15 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="frontendJS/overviewAdmin.js"></script>
+    <div id="includedContent"></div>
 
 </head>
-<div id="includedContent"></div>
+
 <body>
-<div class = flytt>
+
+<div class = "flytt">
     <h1>Oversikt over ansatte</h1>
-    <input type="text" id="nameInput" onkeyup="searchNameFunction()" placeholder="Søk på ansatt">
+    <input autofocus type="text" id="nameInput" onkeyup="searchNameFunction()" placeholder="Søk på ansatt">
     <input type="text" id="positionInput" onkeyup="searchPositionFunction()" placeholder="Søk på stilling">
     <button type="button" id="add" data-toggle="modal" data-target="#addModal">Legg til ansatt</button>
 
@@ -121,7 +123,7 @@
                             <button type="button" id="back" onclick="hideForm()" display="none">&#8592;Tilbake</button>
                         </form>
                     </section>
-                    <section id="personInfo" style="display:block">
+                    <section id="personInfo" data-target="#myModal" style="display:block">
                         <table cellspacing="10">
                             <tr>
                                 <td class="info">Fornavn:</td>
@@ -159,7 +161,7 @@
                     </section>
                     <aside class="buttons">
                         <button type="button" id="edit" onclick="hideInfo()" display="inline">Rediger ansatt</button>
-                        <button type="button" id="remove" onclick="removeFunction()" display="inline">Fjern ansatt</button>
+                        <button type="button" id="remove" onclick="removeFunction()" data-dismiss="modal" display="inline">Fjern ansatt</button>
                     </aside>
                 </main>
 
@@ -167,7 +169,6 @@
                 <div class="modal-footer">
                     <button type="button" class="closeButton" data-dismiss="modal">Lukk</button>
                 </div>
-
             </div>
         </div>
     </div>

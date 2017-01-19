@@ -59,10 +59,12 @@ img {
 
 .flytt{
 
+
 }
 
 .container {
     padding: 2px 16px;
+
 }
 #edit{
     background-color: #f1f1f1;
@@ -87,7 +89,7 @@ img {
 }
 #add{
     margin-left: 10px;
-    background-color: #4CAF50;
+    background-color: #4273af;
     border: none;
     color: white;
     padding: 10px 20px;

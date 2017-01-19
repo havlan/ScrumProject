@@ -6,6 +6,120 @@ body {
 
 
 #calendar {
-    max-width: 900px;
-    margin: 0 auto;
+    position: absolute;
+    width: 50%;
+    margin-left: 22%;
+}
+#nextShift {
+    position: absolute;
+    border: solid #f2f2f2 1px;
+    box-shadow: 10px 10px 5px #888888;
+    border-radius: 5px;
+    height: 30%;
+    width: 15%;
+    margin-left: 78%;
+    margin-top: 5%;
+
+}
+.shiftHeader{
+    font-family: Verdana, Geneva, sans-serif;
+    text-align: center;
+}
+#nextShiftInfo{
+    font-family: Verdana, Geneva, sans-serif;
+    text-align: center;
+    padding: 3%;
+}
+#newShiftBox {
+    position: absolute;
+    border: solid #f2f2f2 1px;
+    box-shadow: 10px 10px 5px #888888;
+    border-radius: 5px;
+    height: 30%;
+    width: 15%;
+    margin-left: 78%;
+    margin-top: 22%;
+    font-family: Verdana, Geneva, sans-serif;
+    text-align: center;
+
+}
+
+#newShifts{
+    font-family: Verdana, Geneva, sans-serif;
+    text-align: center;
+    padding:5%;
+}
+
+.menuBtn{
+    background-color: royalblue;
+    position: absolute;
+    margin-left: 4%;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor:pointer;
+    width: 200px;
+}
+
+.menuBtn span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.3s;
+}
+
+.menuBtn span:after {
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.3s;
+}
+
+.menuBtn:hover span {
+    padding-right: 15px;
+}
+
+.menuBtn:hover span:after {
+    opacity: 1;
+    right: 0;
+}
+
+#availabilityB{
+    margin-top: 5%;
+}
+#availabilityB:hover{
+    background-color: #6585e7;
+}
+#extraB{
+    margin-top: 10%;
+}
+#extraB:hover{
+    background-color: #6585e7;
+}
+#shiftB{
+    margin-top: 15%;
+}
+#shiftB:hover{
+    background-color: #6585e7;
+}
+#acceptB{
+    background-color: #4CAF50;
+    position: relative;
+    margin-left: 70%;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    cursor:pointer;
+    width: 150px;
 }

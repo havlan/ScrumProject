@@ -1,5 +1,4 @@
 h1{
-    font: "verdana";
     font-size: 36px;
     text-align: center;
 }
@@ -49,6 +48,7 @@ h1{
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
+    border-radius: 5px;
 }
 
 #historyBtn{
@@ -63,6 +63,7 @@ h1{
     font-size: 16px;
     position: absolute;
     margin-left: 200px;
+    border-radius:5px;
 }
 
 #picBtn{

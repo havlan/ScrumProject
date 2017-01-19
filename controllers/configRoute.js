@@ -6,15 +6,8 @@ var postCtrl = require('./postReq');
 
 
 module.exports = function (app, passport) {
-    if(process.env.NODE_ENV == 'dev'){
-        console.log("===DEV MODE===");
-        app.post('/login').send({
-            username:'Alfonso',
-            password:'pizza123'
-        });
-    }
     app.get('/', isLoggedIn, getCtrl.getRoot);
-    app.get('/user', isLoggedIn, getCtrl.getUser); // db
+    app.get('/user', isLoggedIn, getCtrl.getUser);
     app.get('/user/:id', isLoggedIn, getCtrl.getUser);
     app.get('/login', getCtrl.getLogin);
     app.get('/logout', logOut);
@@ -28,9 +21,10 @@ module.exports = function (app, passport) {
     app.get('/getAbsence', isLoggedIn, getCtrl.getAbsence);
     app.get('/getOvertime', isLoggedIn, getCtrl.getOvertime);
     //app.get('/getUserInfo', isLoggedIn, getCtrl.getUserInfo);
+    app.get('/getVaktoversiktSite', isLoggedIn, getCtrl.getVaktoversiktSite);
     app.get('/getVaktliste', isLoggedIn, getCtrl.getVaktliste);
-    app.get('/getEmployeeShiftsToCurrent', isLoggedIn, getCtrl.getEmployee_shifts_toCurrentDate);
-
+    app.get('/getEmployee_shifts_toCurrentDate', isLoggedIn, getCtrl.getEmployee_shifts_toCurrentDate);
+    app.get('/getEvents',isLoggedIn, getCtrl.getEvents);
 
     //Sites
     app.get('/menu', isLoggedIn, getCtrl.getMenuSite);
@@ -40,7 +34,8 @@ module.exports = function (app, passport) {
     app.get('/calendar', isLoggedIn, getCtrl.getCalendarSite);
     app.get('/approvalAdmin', isLoggedIn, getCtrl.getApprovalAdminSite);
     app.get('/frontpageAdmin', isLoggedIn, getCtrl.getFrontpageAdminSite);
-    app.get('/getVaktoversiktSite', isLoggedIn, getCtrl.getVaktoversiktSite);
+    app.get('/OnePagedMenu', isLoggedIn, getCtrl.getOnePagedMenu);
+
 
     //Images
     app.get('IMG01', isLoggedIn, getCtrl.getLogo);
@@ -50,8 +45,8 @@ module.exports = function (app, passport) {
         failureRedirect: '/login',
         failureFlash: true
     }), function (req, res) {
-        console.log("LOGIN OK");
-        res.redirect('/');
+        console.log("LOGIN OK?");
+        res.redirect('/calendar');
     });
 
     app.post('/postUser', isAdmin, postCtrl.postEmployee);
@@ -75,18 +70,18 @@ module.exports = function (app, passport) {
 
 
     //MÅ VÆRE SIST
-    app.get('/*',getCtrl.get404);
+    app.get('/*', getCtrl.get404);
 
 };
 
 //app.route('/*').get(getCtrl.get404);
 
 function isLoggedIn(req, res, next) {
-    //console.log(req.session);
+    console.log(req.session);
     if (req.isAuthenticated()) {
         next();
     } else {
-        //console.log(req.session, " not authorized.");
+        console.log(req.session, " not authorized.");
         res.redirect('/login');
     }
 }

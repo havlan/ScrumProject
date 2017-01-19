@@ -31,7 +31,7 @@ router.route('/getOvertime').get(getCtrl.getOvertime);
 router.route('/getVaktoversiktSite').get(getCtrl.getVaktoversiktSite);
 router.route('/getVaktliste').get(getCtrl.getVaktliste);
 router.route('/getEmployeeShiftsToCurrent').get(getCtrl.getEmployee_shifts_toCurrentDate);
-//router.route('/getEvents').get(getCtrl.getEvents());
+router.route('/getEvents').get(getCtrl.getEvents);
 
 
 //post / put
@@ -94,6 +94,7 @@ router.route('/frontpageAdmin').get(getCtrl.getFrontpageAdminSite);
 router.route('/IMG01').get(getCtrl.getLogo);
 
 //======== TEST ROUTE FERDIG ========
+router.route('/Employee').get(getCtrl.get403);
 router.route('/*').get(getCtrl.get404);
 
 function isLoggedIn (req, res, next) {
