@@ -23,7 +23,7 @@ module.exports = function (app, passport) {
     //app.get('/getUserInfo', isLoggedIn, getCtrl.getUserInfo);
     app.get('/getVaktoversiktSite', isLoggedIn, getCtrl.getVaktoversiktSite);
     app.get('/getVaktliste', isLoggedIn, getCtrl.getVaktliste);
-    app.get('/getEmployee_shifts_toCurrentDate', isLoggedIn, getCtrl.getEmployee_shifts_toCurrentDate);
+    app.get('/getEmployeeShiftsToCurrent', isLoggedIn, getCtrl.getEmployee_shifts_toCurrentDate);
     app.get('/getEvents',isLoggedIn, getCtrl.getEvents);
 
     //Sites
@@ -77,11 +77,11 @@ module.exports = function (app, passport) {
 //app.route('/*').get(getCtrl.get404);
 
 function isLoggedIn(req, res, next) {
-    console.log(req.session);
+    //console.log(req.session);
     if (req.isAuthenticated()) {
         next();
     } else {
-        console.log(req.session, " not authorized.");
+        //console.log(req.session, " not authorized.");
         res.redirect('/login');
     }
 }

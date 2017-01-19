@@ -46,7 +46,7 @@ app.use(function(req,res,err,next){
     }else{
         next();
     }
-})
+});
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -57,7 +57,7 @@ app.use(flash());
 //pass passport auth and app to route config
 require('./controllers/configRoute')(app,passport);
 
-var server = app.listen(3030, function(){
+var server = app.listen(3000, function(){
     console.log("Live at ",this.address().port);
 });
 
