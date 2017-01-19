@@ -28,19 +28,19 @@ module.exports = function (app, passport) {
     app.get('/getAbsence', isLoggedIn, getCtrl.getAbsence);
     app.get('/getOvertime', isLoggedIn, getCtrl.getOvertime);
     //app.get('/getUserInfo', isLoggedIn, getCtrl.getUserInfo);
-    app.get('/getVaktoversiktSite', isLoggedIn, getCtrl.getVaktoversiktSite);
     app.get('/getVaktliste', isLoggedIn, getCtrl.getVaktliste);
     app.get('/getEmployeeShiftsToCurrent', isLoggedIn, getCtrl.getEmployee_shifts_toCurrentDate);
 
 
     //Sites
-    app.get('/menu', getCtrl.getMenuSite);
-    app.get('/overviewForAdmin', getCtrl.getOverviewForAdminSite);
-    app.get('/myProfile', getCtrl.getMyProfileSite);
-    app.get('/vaktoversikt', getCtrl.getVaktoversiktSite);
-    app.get('/calendar', getCtrl.getCalendarSite);
-    app.get('/approvalAdmin', getCtrl.getApprovalAdminSite);
-    app.get('/frontpageAdmin', getCtrl.getFrontpageAdminSite);
+    app.get('/menu', isLoggedIn, getCtrl.getMenuSite);
+    app.get('/overviewForAdmin', isLoggedIn, getCtrl.getOverviewForAdminSite);
+    app.get('/myProfile', isLoggedIn, getCtrl.getMyProfileSite);
+    app.get('/vaktoversikt', isLoggedIn, getCtrl.getVaktoversiktSite);
+    app.get('/calendar', isLoggedIn, getCtrl.getCalendarSite);
+    app.get('/approvalAdmin', isLoggedIn, getCtrl.getApprovalAdminSite);
+    app.get('/frontpageAdmin', isLoggedIn, getCtrl.getFrontpageAdminSite);
+    app.get('/getVaktoversiktSite', isLoggedIn, getCtrl.getVaktoversiktSite);
 
     //Images
     app.get('IMG01', isLoggedIn, getCtrl.getLogo);
