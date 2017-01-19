@@ -7,5 +7,4 @@ node_js:
 script: "npm test"
 
 #Send covage data to Coveralls
-
-after_script : "cat ./coverage/icov.info | ./node_modules/coveralls/biin/coveralls.js"
+after_success: 'npm run coveralls'
