@@ -52,7 +52,7 @@ module.exports =
                     if (!err) {
                         res.set('Application-Type','application/json');
                         res.status(200).json(rows);
-                        console.log(rows);
+                        //console.log(rows);
                     } else {
                         console.log("error: Error reading database: " + err);
                         res.status(500);

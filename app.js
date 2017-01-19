@@ -24,6 +24,10 @@ app.use(express.query());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 app.use(express.static (__dirname + '/public'));
+app.use(express.static (__dirname + '/client'));
+app.use(express.static (__dirname + '/client/app'));
+
+
 //app.use('/views',express.static(__dirname + '/views'));
 app.use(expressValidator());
 app.use(session({

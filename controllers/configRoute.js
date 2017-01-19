@@ -18,7 +18,7 @@ module.exports = function (app, passport) {
     app.get('/user/:id', isLoggedIn, getCtrl.getUser);
     app.get('/login', getCtrl.getLogin);
     app.get('/logout', logOut);
-    app.get('/getEmployee', isAdmin, getCtrl.getEmployee);
+    app.get('/getEmployee',  getCtrl.getEmployee);
     app.get('/getOneEmployee', isLoggedIn, getCtrl.getOneEmployee);
     //app.get('/getDepartment/:department_id').get(getCtrl.getDepartment);
     app.get('/getType', isLoggedIn, getCtrl.getType);
