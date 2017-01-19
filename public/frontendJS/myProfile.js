@@ -65,7 +65,6 @@ function addAllColumnHeaders(myList, selector) {
             }
 
         }
-
     }
     $(selector).append(headerThead$);
     $(headerThead$).append(headerTr$);
