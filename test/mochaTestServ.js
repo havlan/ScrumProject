@@ -12,8 +12,9 @@ describe('=====TESTING PATHS AND ROUTING OF GET=====', function(){
     });
 
 
-    after(function(res){
+    after(function(done){
         server.close();
+        done();
         //console.log("Req error after supertest: ", res.body.error) // undefined bcuz no errs
     });
 
@@ -53,7 +54,7 @@ describe('=====TESTING PATHS AND ROUTING OF GET=====', function(){
     it("GET /getEmployee", function(done){
        request(server)
            .get('/getEmployee')
-           .expect('Content-Type', 'application/json')
+           //.expect('Content-Type', /json/)
            .expect(302,done);
     });
     it("404 everything else",function testPath(done){
@@ -64,90 +65,88 @@ describe('=====TESTING PATHS AND ROUTING OF GET=====', function(){
     it("GET /getOneEmployee", function(done){
         request(server)
             .get('/getOneEmployee')
-            .expect('Content-Type', 'application/json')
+            //.expect('Content-Type', 'application/json')
             .expect(302,done);
     });
     it("GET /getType", function(done){
         request(server)
             .get('/getType')
-            .expect('Content-Type', 'application/json')
-            .expect(200,done);
-    })
+            //.expect('Content-Type', 'application/json')
+            .expect(302,done);
+    });
     it("GET /getShift", function(done){
         request(server)
             .get('/getShift')
             .expect(302,done);
-    })
+    });
     it("GET /getShift_has_employee", function(done){
         request(server)
             .get('/getShift_has_employee')
             .expect(302,done);
-    })
+    });
     it("GET /getRequest", function(done){
         request(server)
             .get('/getRequest')
             .expect(302,done);
-    })
+    });
     it("GET /getAbsence", function(done){
         request(server)
             .get('/getAbsence')
             .expect(302,done);
-    })
+    });
     it("GET /getOvertime", function(done){
         request(server)
             .get('/getOvertime')
             .expect(302,done);
-    })
+    });
     it("GET /getVaktliste", function(done){
         request(server)
             .get('/getVaktliste')
             .expect(302,done);
-    })
+    });
     it("GET /getEmployeeShiftsToCurrent", function(done){
         request(server)
             .get('/getEmployeeShiftsToCurrent')
             .expect(302,done);
-    })
+    });
     it("GET /menu", function(done){
         request(server)
             .get('/menu')
             .expect(302,done);
-    })
+    });
     it("GET /overviewForAdmin", function(done){
         request(server)
             .get('/overviewForAdmin')
             .expect(302,done);
-    })
+    });
     it("GET /myProfile", function(done){
         request(server)
             .get('/myProfile')
             .expect(302,done);
-    })
+    });
     it("GET /vaktoversikt", function(done){
         request(server)
             .get('/vaktoversikt')
             .expect(302,done);
-    })
+    });
     it("GET /calendar", function(done){
         request(server)
             .get('/calendar')
             .expect(302,done);
-    })
+    });
     it("GET /approvalAdmin", function(done){
         request(server)
             .get('/approvalAdmin')
             .expect(302,done);
-    })
+    });
     it("GET /frontpageAdmin", function(done){
         request(server)
             .get('/frontpageAdmin')
             .expect(302,done);
-    })
+    });
     it("GET /getVaktoversiktSite", function(done){
         request(server)
             .get('/getVaktoversiktSite')
             .expect(302,done);
-    })
-
-
+    });
 });
