@@ -16,16 +16,18 @@ $.get('/getEmployee', {}, function(req, res, data){
     //tableCreate();
 });
 //Build Table
+
 function buildHtmlTable(selector) {
     var columns = addAllColumnHeaders(myList, selector);
     var tbody = $('<tbody/>');
     for (var i = 0; i < myList.length; i++) {
-        var row$ = $('<tr/>');
+        var row$ = $('<tr id=' + i + '/>');
         for (var colIndex = 0; colIndex < columns.length; colIndex++) {
             var cellValue = myList[i][columns[colIndex]];
             if (cellValue == null) cellValue = "";
             row$.append($('<td/>').html(cellValue));
         }
+       // $(row$).setAttribute('id',"surprise maddafakka");
         $(selector).append(row$);
         $(tbody).append(row$);
     }
@@ -117,18 +119,19 @@ function saveFunction() {
     }
 }
 //myModal info
-$('#excelDataTable').click(function(){
+$(document).on('click','#excelDataTable tr',function(){
     alert("heihei");
-    document.getElementById("#myModal").modal("show");
+ /*   document.getElementById("#myModal").modal("show");
     ("#nameModal").val($(this).closest('tr').children()[0].textContent);
-    ("#firstnamedb").val($(this).closest('tr').children()[1].textContent);
-    ("#lastnamedb").val($(this).closest('tr').children()[2].textContent);
-    ("#posdb").val($(this).closest('tr').children()[3].textContent);
-    ("#phonedb").val($(this).closest('tr').children()[4].textContent);
-    ("#email").val($(this).closest('tr').children()[5].textContent);
-    ("#addressdb").val($(this).closest('tr').children()[6].textContent);
-    ("#persnodb").val($(this).closest('tr').children()[7].textContent);
-    ("#usernamedb").val($(this).closest('tr').children()[8].textContent);
+    ("#firstnamedb").val($(this).closest('tr').children()[0].textContent);
+    ("#lastnamedb").val($(this).closest('tr').children()[0].textContent);
+    ("#posdb").val($(this).closest('tr').children()[0].textContent);
+    ("#phonedb").val($(this).closest('tr').children()[0].textContent);
+    ("#email").val($(this).closest('tr').children()[0].textContent);
+    ("#addressdb").val($(this).closest('tr').children()[0].textContent);
+    ("#persnodb").val($(this).closest('tr').children()[0].textContent);
+    ("#usernamedb").val($(this).closest('tr').children()[0].textContent);
+    */
 });
 
 $(function(){
