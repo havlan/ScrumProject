@@ -1,7 +1,7 @@
 /**
  * Created by Lui on 20-Jan-17.
  */
-$(document).ready(function(){
+$(document).ready(function() {
     $("#includedContent").load("menu");
 
     $('#calendar').fullCalendar({
