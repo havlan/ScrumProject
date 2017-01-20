@@ -64,10 +64,10 @@ module.exports = {
         res.sendFile(path.join(__dirname + '/../public/img/MinVakt.png'));
     },
     getAdminShifts : function (req,res){
-        res.sendFile(path.join(__dirname + '/../public/img/adminShifts.html'));
+        res.sendFile(path.join(__dirname + '/../views/adminShifts.html'));
     },
     getAppeal : function (req,res){
-        res.sendFile(path.join(__dirname + '/../public/img/appeal.html'));
+        res.sendFile(path.join(__dirname + '/../views/appeal.html'));
     },
 
 
