@@ -122,7 +122,7 @@ function saveFunction() {
 }
 //myModal info
 $(document).on('click','#excelDataTable tr',function(){
-    var indeks = ($(this).index());
+    var indeks = $(this).closest("tr").find('td:eq(2)').text()-1;
     $.get('/getEmployee', {}, function(req, res, data) {
         //Fyll inn redigeringsfelt
         document.getElementById("navndb").value = (data.responseJSON[indeks].name);
