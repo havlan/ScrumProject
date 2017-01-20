@@ -90,7 +90,7 @@ function searchPositionFunction() {
 function removeFunction() {
     var x;
     if (confirm("Er du sikker på at du vil fjerne denne ansatte?") == true) {
-        //FJERN ANSATT FRA DATABASE
+        //TODO
     }
 }
 function hideForm() {
