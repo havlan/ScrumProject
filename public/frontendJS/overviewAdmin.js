@@ -33,7 +33,7 @@ function buildHtmlTable(selector) {
     }
     $(selector).append(tbody);
 }
-function addColumnHeaders(myList, selector) {
+function addAllColumnHeaders(myList, selector) {
     var columnSet = [];
     var headerThead$ = $('<thead/>');
     var headerTr$ = $('<tr/>');
@@ -120,18 +120,18 @@ function saveFunction() {
 }
 //myModal info
 $(document).on('click','#excelDataTable tr',function(){
-    alert("heihei");
- /*   document.getElementById("#myModal").modal("show");
-    ("#nameModal").val($(this).closest('tr').children()[0].textContent);
-    ("#firstnamedb").val($(this).closest('tr').children()[0].textContent);
-    ("#lastnamedb").val($(this).closest('tr').children()[0].textContent);
-    ("#posdb").val($(this).closest('tr').children()[0].textContent);
-    ("#phonedb").val($(this).closest('tr').children()[0].textContent);
-    ("#email").val($(this).closest('tr').children()[0].textContent);
-    ("#addressdb").val($(this).closest('tr').children()[0].textContent);
-    ("#persnodb").val($(this).closest('tr').children()[0].textContent);
-    ("#usernamedb").val($(this).closest('tr').children()[0].textContent);
-    */
+    //alert("heihei");
+    $('#myModal').modal("show");
+    $("#nameModal").val($(this).closest('tr').children()[0].textContent);
+    $("#firstnamedb").val($(this).closest('tr').children()[0].textContent);
+    $("#lastnamedb").val($(this).closest('tr').children()[0].textContent);
+    $("#posdb").val($(this).closest('tr').children()[0].textContent);
+    $("#phonedb").val($(this).closest('tr').children()[0].textContent);
+    $("#email").val($(this).closest('tr').children()[0].textContent);
+    $("#addressdb").val($(this).closest('tr').children()[0].textContent);
+    $("#persnodb").val($(this).closest('tr').children()[0].textContent);
+    $("#usernamedb").val($(this).closest('tr').children()[0].textContent);
+
 });
 
 $(function(){
