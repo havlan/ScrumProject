@@ -2,6 +2,7 @@
  * Created by torsku on 16.01.2017.
  */
 var myList = [];
+var typeNames =[];
 
 $.get('/getEmployee', {}, function(req, res, data){
 
@@ -163,5 +164,22 @@ $(function(){
     });
 });
 //heiehi
+
+$.get('/getTypeNames', {}, function(req, res, data){
+    console.log(data);
+    console.log(data.responseJSON[0]);
+
+    typeNames = data.responseJSON;
+
+    makeDropdown('#dropDownDest')
+});
+
+function makeDropdown(selector) {
+    var option = $('<Option/>');
+    for (var i = 0; i < typeNames.length; i++) {
+        console.log("hallo");
+    }
+    $(selector).append(option);
+}
 
 

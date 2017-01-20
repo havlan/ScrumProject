@@ -12,7 +12,6 @@ module.exports = {
         console.log("Overview Employee");
         dbHelper.getdbQuery(req, res, "select * from Employee where employee_id = ?",req.session.passport.user.id);
     },
-
     getDepartment: function (req, res) {
         //var get = {department_id:req.body.department_id};
         console.log("Overview Department");
@@ -59,6 +58,9 @@ module.exports = {
     },*/
     getVaktliste : function(req,res){
         dbHelper.getdbQuery(req, res, "select * from EMPLOYEE_GIVEN_SHIFT where ShiftStart like '2017-03-31%' and department_id = 5;"); //,[req.params.ShiftStart, req.params.department_id]
+    },
+    getTypeNames : function (req, res) {
+        dbHelper.getdbQuery(req,res,"Select name from Type;")
     },
     /**
     getVaktoversikt : function(req,res){
