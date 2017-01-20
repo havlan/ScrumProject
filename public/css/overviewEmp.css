@@ -14,29 +14,29 @@
     margin-bottom: 12px;
 }
 
-#excelDataTable {
+#dbDataTable {
     border-collapse: collapse;
     width: 100%;
     border: 1px solid #ddd;
     font-size: 16px;
 }
 
-#excelDataTable th, #excelDataTable td {
+#dbDataTable th, #dbDataTable td {
     text-align: left;
     padding: 5px;
 }
 
-#excelDataTable tr {
+#dbDataTable tr {
     border-bottom: 1px solid #ddd;
 }
-#excelDataTable td:hover{
+#dbDataTable td:hover{
     color: darkgray;
 }
 
-#excelDataTable tr.header{
+#dbDataTable tr.header{
     background-color: #f1f1f1;
 }
-#excelDataTable tr:hover{
+#dbDataTable tr:hover{
     background-color: aliceblue;
     cursor: pointer;
 }
@@ -58,7 +58,6 @@ img {
 }
 
 .flytt{
-
 
 }
 
@@ -154,4 +153,7 @@ img {
 
 .info{
     font-size: 18px;
+}
+.headerTable{
+    width:10%;
 }

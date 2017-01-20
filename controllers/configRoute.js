@@ -36,7 +36,7 @@ module.exports = function (app, passport) {
     app.get('/frontpageAdmin', isLoggedIn, getCtrl.getFrontpageAdminSite);
     app.get('/OnePagedMenu', isLoggedIn, getCtrl.getOnePagedMenu);
     app.get('/frontpageSuper', isLoggedIn, getCtrl.getFrontpageSuperSite);
-    app.get('/appeal', isLoggedIn, getCtrl.getAppealSite);
+    app.get('/overviewEmp', isLoggedIn, getCtrl.getOverviewEmpSite);
 
 
     //Images

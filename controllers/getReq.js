@@ -54,8 +54,8 @@ module.exports = {
     getFrontpageSuperSite : function (req,res){
         res.sendFile(path.join(__dirname + '/../views/frontpageSuper.html'));
     },
-    getAppealSite : function (req, res){
-        res.sendFile(path.join(__dirname + '/../views/appeal.html'));
+    getOverviewEmpSite : function (req, res) {
+        res.sendFile(path.join(__dirname + '/../views/overviewEmp.html'));
     },
     getLogo : function (req,res){
         res.sendFile(path.join(__dirname + '/../public/img/MinVakt.png'));

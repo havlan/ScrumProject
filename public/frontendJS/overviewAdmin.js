@@ -33,7 +33,7 @@ function buildHtmlTable(selector) {
     }
     $(selector).append(tbody);
 }
-function addAllColumnHeaders(myList, selector) {
+function addColumnHeaders(myList, selector) {
     var columnSet = [];
     var headerThead$ = $('<thead/>');
     var headerTr$ = $('<tr/>');
@@ -92,7 +92,7 @@ function searchPositionFunction() {
 function removeFunction() {
     var x;
     if (confirm("Er du sikker på at du vil fjerne denne ansatte?") == true) {
-        //FJERN ANSATT FRA DATABASE
+        //TODO
     }
 }
 function hideForm() {
