@@ -63,6 +63,12 @@ module.exports = {
     getLogo : function (req,res){
         res.sendFile(path.join(__dirname + '/../public/img/MinVakt.png'));
     },
+    getAdminShifts : function (req,res){
+        res.sendFile(path.join(__dirname + '/../public/img/adminShifts.html'));
+    },
+    getAppeal : function (req,res){
+        res.sendFile(path.join(__dirname + '/../public/img/appeal.html'));
+    },
 
 
 
