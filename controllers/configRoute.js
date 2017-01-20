@@ -25,6 +25,8 @@ module.exports = function (app, passport) {
     app.get('/getVaktliste', isLoggedIn, getCtrl.getVaktliste);
     app.get('/getEmployee_shifts_toCurrentDate', isLoggedIn, getCtrl.getEmployee_shifts_toCurrentDate);
     app.get('/getEvents',isLoggedIn, getCtrl.getEvents);
+    app.get('/getTypeNames',isLoggedIn, getCtrl.getTypeNames);
+
 
     //Sites
     app.get('/menu', isLoggedIn, getCtrl.getMenuSite);
@@ -37,6 +39,7 @@ module.exports = function (app, passport) {
     app.get('/OnePagedMenu', isLoggedIn, getCtrl.getOnePagedMenu);
     app.get('/frontpageSuper', isLoggedIn, getCtrl.getFrontpageSuperSite);
     app.get('/overviewEmp', isLoggedIn, getCtrl.getOverviewEmpSite);
+    app.get('/availability', isLoggedIn, getCtrl.getAvailabilitySite);
 
 
     //Images

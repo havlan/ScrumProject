@@ -20,7 +20,9 @@ $.get('/getVaktliste', {}, function(req, res, data){
 
     $("#includedContent").load("menu");
 
-    buildHtmlTable('#excelDataTable')
+    buildHtmlTable('#dayTable')
+    buildHtmlTable('#eveningTable')
+    buildHtmlTable('#nightTable')
     //tableCreate();
 });
 

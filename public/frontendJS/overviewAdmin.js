@@ -2,6 +2,7 @@
  * Created by torsku on 16.01.2017.
  */
 var myList = [];
+var typeNames =[];
 
 $.get('/getEmployee', {}, function(req, res, data){
 
@@ -173,6 +174,26 @@ $(function(){
         });
     });
 });
-//heiehi
+
+$.get('/getTypeNames', {}, function(req, res, data){
+    console.log(data);
+    console.log("Hallo1");
+    console.log(data.responseJSON);
+    console.log("hallo2");
+
+    typeNames = data.responseJSON;
+
+    makeDropdown('#stilling')
+});
+
+function makeDropdown(selector) {
+    var columns = addAllColumnHeaders(typeNames, selector);
+    for (var i = 0; i < typeNames.length; i++) {
+        var cellValue1 = typeNames[i][columns[0]];
+        if (cellValue1 == null) cellValue1 = "Ingen data fra DB";
+        var option = $('<option />').text(cellValue1);
+        $(selector).append(option);
+    }
+}
 
 

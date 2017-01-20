@@ -8,12 +8,16 @@ $(document).ready(function(){ // syntax for å hente data når dokument (html) e
     $.get('/getOneEmployee', {}, function(req, res, data){
         console.log(data);
         document.getElementById("navn").innerHTML               = data.responseJSON[0].name;
-        document.getElementById("stillingsprosent").innerHTML    = data.responseJSON[0].seniority;
+        document.getElementById("stillingsprosent").innerHTML   = data.responseJSON[0].seniority;
         document.getElementById("tlfnr").innerHTML              = data.responseJSON[0].phone_nr;
         document.getElementById("email").innerHTML              = data.responseJSON[0].email;
-        document.getElementById("adresse").innerHTML            = data.responseJSON[0].address;
+        document.getElementById("total_hours").innerHTML        = data.responseJSON[0].total_hours;
+        document.getElementById("type_name").innerHTML          = data.responseJSON[0].type_name;
+        document.getElementById("address").innerHTML            = data.responseJSON[0].address;
+
+
         document.getElementById("edittelefon").value = document.getElementById("tlfnr").innerHTML;
-        document.getElementById("editadresse").value = document.getElementById("adresse").innerHTML;
+        document.getElementById("editadresse").value = document.getElementById("address").innerHTML;
         document.getElementById("editepost").value = document.getElementById("email").innerHTML;
         $("#cover").fadeOut(10); <!-- MÅ ligge etter det som tar legst å loade-->
     });
@@ -49,6 +53,8 @@ function buildHtmlTable(selector) {
     }
     $(selector).append(tbody);
 }
+
+
 function addAllColumnHeaders(myList, selector) {
 
     var columnSet = [];
@@ -83,5 +89,3 @@ $(function(){
         });
     });
 });
-23456
-kjhgfds
