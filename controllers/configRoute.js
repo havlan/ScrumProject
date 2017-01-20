@@ -71,7 +71,17 @@ module.exports = function (app, passport) {
 
     app.post('/newUserMail', model.sendTestMail);
     app.post('/postTest', model.nyNodeETest);
-    app.post('/newSurnadaling', model.sendValidRegistration);
+    app.post('/newSurnadaling', function(req,res){
+        model.postNewUserQuery(req,res, function(err,res){
+            if(err){
+                console.log("\n\n===ERR===\n\n");
+            }else{
+                console.log(res);
+                res.json(res);
+            }
+
+        })
+    });
 
 
     //MÅ VÆRE SIST
