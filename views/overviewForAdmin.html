@@ -7,6 +7,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="frontendJS/overviewAdmin.js"></script>
+    <script type="text/javascript" language="javascript" src="js/jquery.dataTables.js"></script>
     <div id="includedContent"></div>
 
 </head>
@@ -19,7 +20,7 @@
     <input type="text" id="positionInput" onkeyup="searchPositionFunction()" placeholder="Søk på stilling">
     <button type="button" id="add" data-toggle="modal" data-target="#addModal">Legg til ansatt</button>
 
-    <table class="" id="excelDataTable">
+    <table class="" id="excelDataTable" data-toggle="modal" data-target="#myModal">
         <tr class="header">
     </table>
 
@@ -58,8 +59,6 @@
                         Personnummer:
                         <input required id="personnummer" type="text" name="persNo" placeholder="11 siffer">
                         <br>
-                        Brukernavn:
-                        <input required id="brukernavn" type="text" name="username" placeholder="eks: olanordmann">
                         <br>
                         <br>
                         <button id="save" type="submit" value="submit">Lagre</button>

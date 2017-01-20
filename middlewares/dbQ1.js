@@ -101,7 +101,6 @@ module.exports = {
             phone_nr: req.body.phone_nr,
             email: req.body.email,
             seniority: req.body.seniority,
-            username: req.body.username,
             address: req.body.address,
             type_name: req.body.type_name,
             responsibility_allowed: req.body.responsibility_allowed,

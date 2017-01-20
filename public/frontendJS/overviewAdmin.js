@@ -20,7 +20,7 @@ function buildHtmlTable(selector) {
     var columns = addAllColumnHeaders(myList, selector);
     var tbody = $('<tbody/>');
     for (var i = 0; i < myList.length; i++) {
-        var row$ = $('<tr data-toggle="modal" data-target="#myModal"/>');
+        var row$ = $('<tr/>');
         for (var colIndex = 0; colIndex < columns.length; colIndex++) {
             var cellValue = myList[i][columns[colIndex]];
             if (cellValue == null) cellValue = "";
@@ -117,20 +117,34 @@ function saveFunction() {
     }
 }
 //myModal info
-$('#excelDataTable tr').click(function(id){
+$('#excelDataTable').click(function(){
     alert("heihei");
-    $("#myModal").modal("show");
-    $("#nameModal").val($(this).closest('tr').children()[0].textContent);
-    $("#firstnamedb").val($(this).closest('tr').children()[1].textContent);
-    $("#lastnamedb").val($(this).closest('tr').children()[2].textContent);
-    $("#posdb").val($(this).closest('tr').children()[3].textContent);
-    $("#phonedb").val($(this).closest('tr').children()[4].textContent);
-    $("#email").val($(this).closest('tr').children()[5].textContent);
-    $("#addressdb").val($(this).closest('tr').children()[6].textContent);
-    $("#persnodb").val($(this).closest('tr').children()[7].textContent);
-    $("#usernamedb").val($(this).closest('tr').children()[8].textContent);
+    document.getElementById("#myModal").modal("show");
+    ("#nameModal").val($(this).closest('tr').children()[0].textContent);
+    ("#firstnamedb").val($(this).closest('tr').children()[1].textContent);
+    ("#lastnamedb").val($(this).closest('tr').children()[2].textContent);
+    ("#posdb").val($(this).closest('tr').children()[3].textContent);
+    ("#phonedb").val($(this).closest('tr').children()[4].textContent);
+    ("#email").val($(this).closest('tr').children()[5].textContent);
+    ("#addressdb").val($(this).closest('tr').children()[6].textContent);
+    ("#persnodb").val($(this).closest('tr').children()[7].textContent);
+    ("#usernamedb").val($(this).closest('tr').children()[8].textContent);
 });
 
+$(function(){
+    $('#addModal').on('submit', function(e){
+        alert('hei');
+        e.preventDefault();
+        $.ajax({
+            url: '/postUser', //this is the submit URL
+            type: 'POST',
+            data: {'name': $("#fornavn").val(),'address':$('#addresse').val(),'email':$('#epost').val(),'position':$('#stilling'),'pers_id':$('#personnummer'),'phonenummer':$('#telefonnummmer')},
+            success: function(data){
+                alert('successfully submitted')
+            }
+        });
+    });
+});
 //myModal edit
 $(function(){
     $('#editEmp').on('submit', function(e){
