@@ -2,10 +2,13 @@
 <html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>vaktoversikt</title>
     <script src="frontendJS/sorttable.js"></script>
     <!--<script src="vaktoversikt.js"></script>-->
     <link rel="stylesheet" href="css/Vaktoversiktstyle.css">
+    <link href="css/bootstrap.css" rel="stylesheet">
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -14,25 +17,84 @@
     <script src="frontendJS/vaktoversikt.js"> </script>
     <script src="frontendJS/jquery-tablesorter.js"></script>
     <script src="frontendJS/jquery-latest.js"></script>
+
+
 <head/>
 
     <div id="includedContent"></div>
 
+
+
+
 <body>
     <div class="main-content">
-    <div class="toolbar">
+        <div class="navbar-shift">
+            <div class="shift-left">
+                <div id="shift-buttons" class="btn-group">
+                    <button type="button" class="btn btn-default" id="shift-prev">
+                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                    </button>
+                    <button type="button" class="btn btn-default" id="shift-next">
+                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                    </button>
+                </div>
+            </div>
+            <div class="shift-right">
+                <div class="shift-buttons">
+                    <div class="dropdown">
+                        <button class="btn btn-default dropdown-toggle" type="button" id="department-dropdown" data-toggle="dropdown" aria-haspopup=		"true" aria-expanded="true">
+                            Avdeling
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="department-dropdown">
+                            <li><a href="#">Avdeling1</a></li>
+                            <li><a href="#">Avdeling2</a></li>
+                            <li><a href="#">Avdeling3</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="shift-center">
+                <h2>20.01.2017</h2>
+            </div>
+            <div class="shift-clear"></div>
+        </div>
 
     </div>
     <div class="vaktbok-body">
-        <div class="dagsvakt-content">
+        <div class="day-content">
             <div class="dagsvakt-text">
                 <h4>Dagsvakt 08:00-16:00</h4>
             </div>
                 <div id="size">
-                <table id="excelDataTable" class="tablesorter">
+                <table id="dayTable" class="tablesorter">
 
                 </table>
                 </div>
+        </div>
+
+        <div class="evening-content">
+            <div class="dagsvakt-text">
+                <h4>Kveldsvakt 16:00-24:00</h4>
+            </div>
+            <div id="size1">
+                <table id="eveningTable" class="tablesorter">
+
+                </table>
+            </div>
+        </div>
+
+        <div class="night-content">
+            <div class="dagsvakt-text">
+                <h4>Nattevakt 24:00-08:00</h4>
+            </div>
+            <div id="size2">
+                <table id="nightTable" class="tablesorter">
+
+                </table>
+            </div>
         </div>
     </div>
 </div>
