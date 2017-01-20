@@ -177,9 +177,7 @@ $(function(){
 
 $.get('/getTypeNames', {}, function(req, res, data){
     console.log(data);
-    console.log("Hallo1");
     console.log(data.responseJSON);
-    console.log("hallo2");
 
     typeNames = data.responseJSON;
 
