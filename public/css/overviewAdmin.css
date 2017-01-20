@@ -18,12 +18,12 @@
     border-collapse: collapse;
     width: 100%;
     border: 1px solid #ddd;
-    font-size: 18px;
+    font-size: 16px;
 }
 
 #excelDataTable th, #excelDataTable td {
     text-align: left;
-    padding: 12px;
+    padding: 5px;
 }
 
 #excelDataTable tr {

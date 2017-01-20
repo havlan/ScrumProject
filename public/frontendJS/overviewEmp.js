@@ -20,7 +20,7 @@ function buildHtmlTable(selector) {
     var columns = addAllColumnHeaders(myList, selector);
     var tbody = $('<tbody/>');
     for (var i = 0; i < myList.length; i++) {
-        var row$ = $('<tr data-toggle="modal" data-target="#myModal"/>');
+        var row$ = $('<tr data-toggle="modal" data-target="#infoModal"/>');
         for (var colIndex = 0; colIndex < columns.length; colIndex++) {
             var cellValue = myList[i][columns[colIndex]];
             if (cellValue == null) cellValue = "";
@@ -86,3 +86,15 @@ function searchPositionFunction() {
         }
     }
 }
+$.get('/getEmployee', {}, function(req, res, data){
+
+    console.log(data);
+    console.log(data.responseJSON[0]);
+
+    document.getElementById("nameEmp").innerHTML = data.responseJSON[0].name;
+    document.getElementById("tlfnrInfo").innerHTML = data.responseJSON[0].phone_nr;
+    document.getElementById("emailInfo").innerHTML = data.responseJSON[0].email;
+    document.getElementById("adresseInfo").innerHTML = data.responseJSON[0].address;
+
+    $("#cover").fadeOut(10); <!-- MÅ ligge etter det som tar legst å loade-->
+});

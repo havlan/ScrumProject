@@ -3,23 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <title>Oversikt over ansatte</title>
+    <link rel="stylesheet" type="text/css" href="css/overviewAdmin.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="frontendJS/overviewEmp.js"></script>
-    <div id="includedContent"></div>
+    <script type="text/javascript" language="javascript" src="js/jquery.dataTables.js"></script>
     <link rel="stylesheet" type="text/css" href="css/overviewEmp.css">
-
+    <div id="includedContent"></div>
 </head>
 <body>
+
 <h2>Oversikt over ansatte</h2>
 
     <input autofocus type="text" id="nameInput" onkeyup="searchNameFunction()" placeholder="Søk på ansatt">
     <input type="text" id="positionInput" onkeyup="searchPositionFunction()" placeholder="Søk på stilling">
 
-    <table class="" id="dbDataTable">
-        <tr class="header">
+    <table class="overtable table-striped" id="dbDataTable">
+        <tr class="headerTable"></tr>
     </table>
 
 <!-- Modal-Info -->
@@ -35,24 +37,24 @@
             <!-- Modal body-->
 
             <main class="modal-body">
-                <img id="picEmp" src="http://www.freeiconspng.com/uploads/profile-icon-9.png" alt="Bilde av ansatt"
+                <img id="picEmpInfo" src="http://www.freeiconspng.com/uploads/profile-icon-9.png" alt="Bilde av ansatt"
                      height="150px" width="150px"></img>
                 <table id = "infoTable">
                     <tr>
-                        <td class="info">Stillings Prosent</td>
-                        <td class="db" id = "stillingsprosent">FRADATABASE</td>
+                        <th class="info" id="nameEmp">Navn</th>
+
                     </tr>
                     <tr>
                         <td class="info">Telefonnummer</td>
-                        <td class="db" id = "tlfnr">FRADATABASE</td>
+                        <td class="db" id = "tlfnrInfo">FRADATABASE</td>
                     </tr>
                     <tr>
                         <td class="info">E-postadresse</td>
-                        <td class="db" id = "email">FRADATABASE</td>
+                        <td class="db" id = "emailInfo">FRADATABASE</td>
                     </tr>
                     <tr>
                         <td class="info">Adresse</td>
-                        <td class="db" id = "adresse">FRADATABASE</td>
+                        <td class="db" id = "adresseInfo">FRADATABASE</td>
                     </tr>
                 </table>
             </main>

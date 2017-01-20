@@ -31,7 +31,7 @@ function buildHtmlTable(selector) {
     }
     $(selector).append(tbody);
 }
-function addAllColumnHeaders(myList, selector) {
+function addColumnHeaders(myList, selector) {
     var columnSet = [];
     var headerThead$ = $('<thead/>');
     var headerTr$ = $('<tr/>');
