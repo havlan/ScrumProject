@@ -2,6 +2,7 @@
  * Created by torsku on 16.01.2017.
  */
 var myList = [];
+var typeNames =[];
 
 $.get('/getEmployee', {}, function(req, res, data){
 
@@ -16,16 +17,18 @@ $.get('/getEmployee', {}, function(req, res, data){
     //tableCreate();
 });
 //Build Table
+
 function buildHtmlTable(selector) {
     var columns = addAllColumnHeaders(myList, selector);
     var tbody = $('<tbody/>');
     for (var i = 0; i < myList.length; i++) {
-        var row$ = $('<tr data-toggle="modal" data-target="#myModal"/>');
+        var row$ = $('<tr id=' + i + '/>');
         for (var colIndex = 0; colIndex < columns.length; colIndex++) {
             var cellValue = myList[i][columns[colIndex]];
             if (cellValue == null) cellValue = "";
             row$.append($('<td/>').html(cellValue));
         }
+       // $(row$).setAttribute('id',"surprise maddafakka");
         $(selector).append(row$);
         $(tbody).append(row$);
     }
@@ -90,7 +93,7 @@ function searchPositionFunction() {
 function removeFunction() {
     var x;
     if (confirm("Er du sikker på at du vil fjerne denne ansatte?") == true) {
-        //FJERN ANSATT FRA DATABASE
+        //TODO
     }
 }
 function hideForm() {
@@ -117,20 +120,35 @@ function saveFunction() {
     }
 }
 //myModal info
-$('#excelDataTable tr').click(function(id){
-    alert("heihei");
-    $("#myModal").modal("show");
+$(document).on('click','#excelDataTable tr',function(){
+    //alert("heihei");
+    $('#myModal').modal("show");
     $("#nameModal").val($(this).closest('tr').children()[0].textContent);
-    $("#firstnamedb").val($(this).closest('tr').children()[1].textContent);
-    $("#lastnamedb").val($(this).closest('tr').children()[2].textContent);
-    $("#posdb").val($(this).closest('tr').children()[3].textContent);
-    $("#phonedb").val($(this).closest('tr').children()[4].textContent);
-    $("#email").val($(this).closest('tr').children()[5].textContent);
-    $("#addressdb").val($(this).closest('tr').children()[6].textContent);
-    $("#persnodb").val($(this).closest('tr').children()[7].textContent);
-    $("#usernamedb").val($(this).closest('tr').children()[8].textContent);
+    $("#firstnamedb").val($(this).closest('tr').children()[0].textContent);
+    $("#lastnamedb").val($(this).closest('tr').children()[0].textContent);
+    $("#posdb").val($(this).closest('tr').children()[0].textContent);
+    $("#phonedb").val($(this).closest('tr').children()[0].textContent);
+    $("#email").val($(this).closest('tr').children()[0].textContent);
+    $("#addressdb").val($(this).closest('tr').children()[0].textContent);
+    $("#persnodb").val($(this).closest('tr').children()[0].textContent);
+    $("#usernamedb").val($(this).closest('tr').children()[0].textContent);
+
 });
 
+$(function(){
+    $('#addModal').on('submit', function(e){
+        alert('hei');
+        e.preventDefault();
+        $.ajax({
+            url: '/postUser', //this is the submit URL
+            type: 'POST',
+            data: {'name': $("#fornavn").val(),'address':$('#addresse').val(),'email':$('#epost').val(),'position':$('#stilling'),'pers_id':$('#personnummer'),'phonenummer':$('#telefonnummmer')},
+            success: function(data){
+                alert('successfully submitted')
+            }
+        });
+    });
+});
 //myModal edit
 $(function(){
     $('#editEmp').on('submit', function(e){
@@ -145,5 +163,23 @@ $(function(){
         });
     });
 });
+//heiehi
+
+$.get('/getTypeNames', {}, function(req, res, data){
+    console.log(data);
+    console.log(data.responseJSON[0]);
+
+    typeNames = data.responseJSON;
+
+    makeDropdown('#dropDownDest')
+});
+
+function makeDropdown(selector) {
+    var option = $('<Option/>');
+    for (var i = 0; i < typeNames.length; i++) {
+        console.log("hallo");
+    }
+    $(selector).append(option);
+}
 
 

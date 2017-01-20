@@ -12,7 +12,6 @@ module.exports = {
         console.log("Overview Employee");
         dbHelper.getdbQuery(req, res, "select * from Employee where employee_id = ?",req.session.passport.user.id);
     },
-
     getDepartment: function (req, res) {
         //var get = {department_id:req.body.department_id};
         console.log("Overview Department");
@@ -58,7 +57,10 @@ module.exports = {
         dbHelper.simpleLogin("select * from LoginInfo where Username = ?", [username]);
     },*/
     getVaktliste : function(req,res){
-        dbHelper.getdbQuery(req, res, "select * from EMPLOYEE_GIVEN_SHIFT where ShiftStart like '2017-03-31%' and department_id = 5;"); //,[req.params.ShiftStart, req.params.department_id]
+        dbHelper.getdbQuery(req, res, "select * from WORKSHIFTTOGETHER where ShiftStart like ? and department_id = ?",[req.params.ShiftStart, req.params.department_id]);
+    },
+    getTypeNames : function (req, res) {
+        dbHelper.getdbQuery(req,res,"Select name from Type;")
     },
     /**
     getVaktoversikt : function(req,res){
@@ -101,7 +103,6 @@ module.exports = {
             phone_nr: req.body.phone_nr,
             email: req.body.email,
             seniority: req.body.seniority,
-            username: req.body.username,
             address: req.body.address,
             type_name: req.body.type_name,
             responsibility_allowed: req.body.responsibility_allowed,
@@ -202,6 +203,13 @@ module.exports = {
             pers_id: req.body.pers_id
         }, id]);
     },
+    updateEmployeePersonalInfo: function (req, res) {
+        dbHelper.postdbQuery(req,res,"update Employee set ? where employee_id = ?",[{
+            phone_nr: req.body.phone_nr,
+            email: req.body.email,
+            address: req.body.address,},
+            req.session.passport.user.id])
+    },
     updateType: function (req, res) {
         var pk = req.body.name;
         dbHelper.postdbQuery(req, res, "update Type set ? where name = ?", [{rank: req.body.rank}, pk]);
@@ -247,6 +255,16 @@ module.exports = {
     updateLogInInfo: function (req, res) {
         var pk = req.body.username;
         dbHelper.postdbQuery(req, res, "update LoginInfo set ? where Username=?", [{is_admin: req.body.is_admin}, pk]);
-    }
+    },
+    getVaktbytte: function(req, res){
+        dbHelper.getdbQuery(req, res, "select * from Shift where shift_id=?");
+    },
+    postnewVaktbytte: function (req, res){
+        var post = {
+
+        }
+    },
+
+
 }
 //heihei

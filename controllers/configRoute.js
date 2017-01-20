@@ -25,6 +25,8 @@ module.exports = function (app, passport) {
     app.get('/getVaktliste', isLoggedIn, getCtrl.getVaktliste);
     app.get('/getEmployee_shifts_toCurrentDate', isLoggedIn, getCtrl.getEmployee_shifts_toCurrentDate);
     app.get('/getEvents',isLoggedIn, getCtrl.getEvents);
+    app.get('/getTypeNames',isLoggedIn, getCtrl.getTypeNames);
+
 
     //Sites
     app.get('/menu', isLoggedIn, getCtrl.getMenuSite);
@@ -35,6 +37,8 @@ module.exports = function (app, passport) {
     app.get('/approvalAdmin', isLoggedIn, getCtrl.getApprovalAdminSite);
     app.get('/frontpageAdmin', isLoggedIn, getCtrl.getFrontpageAdminSite);
     app.get('/OnePagedMenu', isLoggedIn, getCtrl.getOnePagedMenu);
+    app.get('/frontpageSuper', isLoggedIn, getCtrl.getFrontpageSuperSite);
+    app.get('/overviewEmp', isLoggedIn, getCtrl.getOverviewEmpSite);
 
 
     //Images
@@ -60,6 +64,7 @@ module.exports = function (app, passport) {
     app.post('/postLogInInfo', isLoggedIn, postCtrl.postLogInInfo);
     app.post('/updateShift_has_employee', isLoggedIn, postCtrl.updateShift_has_employee);
     app.post('/updateEmployee', isLoggedIn, postCtrl.updateEmployee);
+    app.post('/updateEmployeePersonalInfo',isLoggedIn,postCtrl.updateEmployeePersonalInfo);
     app.post('/updateType', isLoggedIn, postCtrl.updateType);
     app.post('/updateShift', isLoggedIn, postCtrl.updateShift);
     app.post('/updateDepartment', isLoggedIn, postCtrl.updateDepartment);
@@ -87,7 +92,7 @@ function isLoggedIn(req, res, next) {
 }
 function isAdmin(req, res, next) {
     if (req.isAuthenticated() && req.session.passport) {
-        if (req.session.passport.user.is_admin == 1) {
+        if (req.session.passport.user.is_admin == 0) {
             next();
         }
     } else {

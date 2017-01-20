@@ -19,8 +19,7 @@
     <input type="text" id="positionInput" onkeyup="searchPositionFunction()" placeholder="Søk på stilling">
     <button type="button" id="add" data-toggle="modal" data-target="#addModal">Legg til ansatt</button>
 
-    <table class="" id="excelDataTable">
-        <tr class="header">
+    <table class="table-responsive" id="excelDataTable">
     </table>
 
     <!-- 1:Modal-Add -->
@@ -46,6 +45,10 @@
                         Stilling:
                         <input required id="stilling" type="text" name="position" placeholder="eks: sykepleier">
                         <br>
+                        Stilling:
+                        <select id= "dropDownDest">
+                        </select>
+                        <br>
                         Telefonnummer:
                         <input required id="telefon" type="number" name="phone" placeholder="eks: +47 12345678">
                         <br>
@@ -58,8 +61,6 @@
                         Personnummer:
                         <input required id="personnummer" type="text" name="persNo" placeholder="11 siffer">
                         <br>
-                        Brukernavn:
-                        <input required id="brukernavn" type="text" name="username" placeholder="eks: olanordmann">
                         <br>
                         <br>
                         <button id="save" type="submit" value="submit">Lagre</button>

@@ -38,6 +38,9 @@ module.exports = {
     updateEmployee : function (req, res) {
         dbMiddelware.updateEmployee(req,res);
     },
+    updateEmployeePersonalInfo : function (req, res) {
+        dbMiddelware.updateEmployeePersonalInfo(req,res);
+    },
     updateType : function (req, res) {
         dbMiddelware.updateType(req,res);
     },

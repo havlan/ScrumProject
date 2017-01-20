@@ -51,9 +51,16 @@ module.exports = {
     getFrontpageAdminSite : function (req,res){
         res.sendFile(path.join(__dirname + '/../views/frontpageAdmin.html'));
     },
+    getFrontpageSuperSite : function (req,res){
+        res.sendFile(path.join(__dirname + '/../views/frontpageSuper.html'));
+    },
+    getOverviewEmpSite : function (req, res) {
+        res.sendFile(path.join(__dirname + '/../views/overviewEmp.html'));
+    },
     getLogo : function (req,res){
         res.sendFile(path.join(__dirname + '/../public/img/MinVakt.png'));
     },
+
 
 
 
@@ -102,6 +109,9 @@ module.exports = {
     },
     getEvents : function (req,res) {
         dbMiddelware.getEvents(req,res);
+    },
+    getTypeNames : function (req, res) {
+        dbMiddelware.getTypeNames(req,res);
     },
     get403 : function (req, res) {
         res.status(403).sendFile(path.join(__dirname + '/../views/403.html'));

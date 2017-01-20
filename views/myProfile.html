@@ -16,11 +16,13 @@
 <div id="cover" style="position: fixed; height: 100%; width: 100%; top:0; left: 0; background: #ffffff; z-index:9999;"></div>
 <body class="profile">
 <div class = flytt>
+
+    <!-- Info Ansatt -->
     <main class="infoEmp">
         <h1 id = "navn">navn på ansatt FRADATABASE</h1>
         <table>
             <tr>
-                <td class="info">Stillings Prosent</td>
+                <td class="info">Stillingsprosent</td>
                 <td class="db" id = "stillingsprosent">FRADATABASE</td>
             </tr>
             <tr>
@@ -33,17 +35,60 @@
             </tr>
             <tr>
                 <td class="info">Adresse</td>
-                <td class="db" id = "adresse">FRADATABASE</td>
+                <td class="db" id = "address">FRADATABASE</td>
+            </tr>
+            <tr>
+                <td class="info">Stilling</td>
+                <td class="db" id = "type_name">FRADATABASE</td>
+            </tr>
+            <tr>
+                <td class="info">Timer</td>
+                <td class="db" id = "total_hours">FRADATABASE</td>
             </tr>
         </table>
-        <button type="button" id="editBtn" onclick="alert('Ring administrasjonen')">Rediger</button>
+        <button type="button" id="editBtn" data-toggle="modal" data-target="#editModal">Rediger</button>
         <button type="button" id="historyBtn" data-toggle="modal" data-target="#historyModal">Historikk</button>
-
     </main>
+
+    <!-- Bilde -->
     <figure>
         <img src="https://s3.amazonaws.com/whisperinvest-images/default.png" id="profilePic" alt = "Bilde av ansatt" size="width:100px height:100px;">
     </figure>
     <button type="button" id="picBtn" onclick="alert('Ring administrasjonen')">Rediger profilbilde</button>
+
+    <!-- Modal:Edit info -->
+    <div class="modal fade" id="editModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <!-- Modal header-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h3 class="modal-title">Rediger personlig info</h3>
+                </div>
+                <!-- Modal body-->
+                <main class="modal-body">
+                    <form id="editEmp">
+                        Telefonnummer:
+                        <input id="edittelefon" type="tel" name="phone" value="">
+                        <br>
+                        Adresse:
+                        <input id="editadresse" type="text" name="address" value="">
+                        <br>
+                        E-post:
+                        <input id="editepost" type="email" name="email" value="">
+                        <br>
+                        <br>
+                        <button id="save" type="submit" value="submit">Lagre</button>
+                    </form>
+                </main>
+                <!-- Modal footer-->
+                <div class="modal-footer">
+                    <button type="button" class="closeButton" data-dismiss="modal">Lukk</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Modal:history -->
     <div class="modal fade" id="historyModal" role="dialog">
@@ -65,6 +110,7 @@
             </div>
         </div>
     </div>
+
 </div>
 </body>
 </html>
