@@ -40,6 +40,8 @@ module.exports = function (app, passport) {
     app.get('/frontpageSuper', isLoggedIn, getCtrl.getFrontpageSuperSite);
     app.get('/overviewEmp', isLoggedIn, getCtrl.getOverviewEmpSite);
     app.get('/availability', isLoggedIn, getCtrl.getAvailabilitySite);
+    app.get('/appeal', isLoggedIn, getCtrl.getAppeal);
+    app.get('/adminShifts', isLoggedIn, getCtrl.getAdminShifts);
 
 
     //Images
