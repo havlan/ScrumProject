@@ -1,10 +1,13 @@
 language: node_js
 node_js:
-- "6.9"
 - "7.2"
-- "5.8"
 
 script: "npm test"
 
 #Send covage data to Coveralls
-after_success: 'npm run coveralls'
+
+after_script : "cat ../coverage/icov.info | ./node_modules/coveralls/biin/coveralls.js"
+notifications:
+  email:
+    on_success: never
+    on_failure: never
