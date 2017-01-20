@@ -57,53 +57,9 @@ img {
     border-radius: 5px 5px 0 0;
 }
 
-.flytt{
-
-}
-
 .container {
     padding: 2px 16px;
 
-}
-#edit{
-    background-color: #f1f1f1;
-    border: none;
-    color: black;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-}
-#remove{
-    margin-left: 10px;
-    background-color: indianred;
-    border: none;
-    color: white;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-}
-#add{
-    margin-left: 10px;
-    background-color: #4273af;
-    border: none;
-    color: white;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-}
-
-#personForm{
-    position: relative;
-    width: 50%;
-    margin-left: 45%;
-    text-align: right;
-    padding-bottom: 5%;
 }
 
 .buttons{
@@ -127,32 +83,10 @@ img {
     margin-left: 60%;
 }
 
-#addEmp{
-    position: relative;
-    text-align:right;
-    margin-right: 50%;
-}
-
-#addPicEmp{
-    position: absolute;
-    margin-left: 65%;
-    margin-top: 30%;
-}
-
-#save{
-    margin-left: 10px;
-    background-color: #4CAF50;
-    border: none;
-    color: white;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-}
-
 .info{
     font-size: 18px;
+    text-align: right;
+    padding-right: 10px;
 }
 .headerTable{
     width:10%;

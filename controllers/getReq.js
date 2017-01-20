@@ -57,6 +57,9 @@ module.exports = {
     getOverviewEmpSite : function (req, res) {
         res.sendFile(path.join(__dirname + '/../views/overviewEmp.html'));
     },
+    getAvailabilitySite : function(req,res){
+        res.sendFile(path.join(__dirname + '/../views/availability.html'));
+    },
     getLogo : function (req,res){
         res.sendFile(path.join(__dirname + '/../public/img/MinVakt.png'));
     },
