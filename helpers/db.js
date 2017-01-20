@@ -101,5 +101,75 @@ module.exports =
                     }
                 });
             });
-        }
+        },
+        createInQDone : function(req,res,query,done, idToPass){ // USAGE: ADD NEW USERS models / regWMail
+            pool.getConnection(function(err,connection){
+                if(err){
+                    res.status(500); // int
+                    res.json({"Error": "Couldnt connect to MYSQL" + err});
+                    return;
+                }
+                console.log("Connected to database");
+                connection.query(query, function(err,qres){
+                    connection.release();
+                    if(err){
+                        return done(err);
+                    }
+                   if(qres.affectedRows == 0){
+                       return done(null, false, req.flash("postUserMsg", "Creation of user failed."));
+                   }else if(qres.affectedRows == 1){
+                       req.body.passToNext = qres.insertId;
+                       return done(null, true); // went ok
+                   }else{
+                       return done(null, false, req.flash("postUserMsg", "Creation failed, more than 1 row affected"));
+                   }
+                });
+            })
+        },
+        createDone: function (req, res, query, get, next) {
+            pool.getConnection(function (err, connection) {
+                if (err) {
+                    res.status(500) //err
+                    res.json({"Error": "Couldnt connect to MYSQL" + err});
+                    return;
+                }
+                console.log("Connected to database");
+                connection.query(query, get, function (err, rows, next) {
+                    connection.release();
+                    if (!err) {
+                        res.json(rows);
+                        //console.log(rows);
+                        //next();
+                    } else {
+                        //console.log("error: Error reading database: " + err);
+                        res.status(500);
+                        console.log("Error reading database: createDone");
+                    }
+                });
+            });
+        }/*,
+        postQAGetId : function(req,res,query,done, idToPass){
+            pool.getConnection(function(err,connection){
+                if(err){
+                    res.status(500); // int
+                    res.json({"Error": "Couldnt connect to MYSQL" + err});
+                    return;
+                }
+                console.log("Connected to database");
+                connection.query(query, function(err,qres){
+                    connection.release();
+                    if(err){
+                        return done(err);
+                    }
+                    if(qres.affectedRows == 0){
+                        return done(null, false, req.flash("postUserMsg", "Creation of user failed."));
+                    }else if(qres.affectedRows == 1){
+                        idToPass = qres.insertId;
+                        return done(null, true); // went ok
+                    }else{
+                        return done(null, false, req.flash("postUserMsg", "Creation failed, more than 1 row affected"));
+                    }
+                });
+            })
+        }*/
     };

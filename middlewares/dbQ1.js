@@ -51,6 +51,9 @@ module.exports = {
     getSaltHash: function(req,res,next){
         dbHelper.getdbQWNext(req,res, "select password_hash, password_salt, is_admin from LoginInfo where Username = ?",[req.body.username],next);
     },
+    getLoginInfo : function(req,res){
+        dbHelper.getdbQuery(req,res, "select * from LoginInfo where username = ?", [req.body.username]);
+    },
     getEmployee_shifts_toCurrentDate: function (req, res) {
         console.log("USER ID "+req.session.passport.user.id);
         dbHelper.getdbQuery(req, res, "select * from Employee_Shifts_toCurrentDate where employee_id = ?",[req.session.passport.user.id]);

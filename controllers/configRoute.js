@@ -3,6 +3,7 @@
 
 var getCtrl = require('./getReq');
 var postCtrl = require('./postReq');
+var model = require('../models/regWMail');
 
 
 module.exports = function (app, passport) {
@@ -68,6 +69,10 @@ module.exports = function (app, passport) {
     app.post('/updateOvertime', isLoggedIn, postCtrl.updateOvertime);
     app.post('/updateLogInInfo', isLoggedIn, postCtrl.updateLogInInfo);
 
+    app.post('/newUserMail', model.sendTestMail);
+    app.post('/postTest', model.nyNodeETest);
+    app.post('/newSurnadaling', model.sendValidRegistration);
+
 
     //MÅ VÆRE SIST
     app.get('/*', getCtrl.get404);
@@ -87,7 +92,7 @@ function isLoggedIn(req, res, next) {
 }
 function isAdmin(req, res, next) {
     if (req.isAuthenticated() && req.session.passport) {
-        if (req.session.passport.user.is_admin == 1) {
+        if (req.session.passport.user.is_admin == 0) {
             next();
         }
     } else {

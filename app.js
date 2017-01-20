@@ -39,14 +39,14 @@ app.use(session({
     next();
 });*/
 
-app.use(function(req,res,err,next){
+/*app.use(function(req,res,err,next){
     if(err){
         res.body.error = err;
         console.log("Error added to req.error");
     }else{
         next();
     }
-});
+});*/
 
 app.use(passport.initialize());
 app.use(passport.session());
