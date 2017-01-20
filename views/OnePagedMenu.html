@@ -50,31 +50,34 @@
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
-                <li class="active"  ><a data-toggle="tab" href="#Calendare">Calendar</a></li>
-                <li                 ><a data-toggle="tab" href="#MyProfil">My Profile</a></li>
-                <!-- <li                 ><a data-toggle="tab" href="#Administration">Administration</a></li> -->
+                <!-- ansatt -->
                 <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Administration<span class="caret"></span></a>
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">AnsattHjem<span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a data-toggle="tab" href="#adminCalendar" >Calendar</a></li>
-                        <li><a data-toggle="tab" href="#adminDailyShifts" >Daily shifts</a></li>
-                        <li><a data-toggle="tab" href="#adminApproval" >Approval</a></li>
+                        <li><a data-toggle="tab" href="#userCalendar" >Kalender</a></li>
+                        <li><a data-toggle="tab" href="#appeal" >Søknader</a></li>
+                        <li><a data-toggle="tab" href="#disponibility">Tilgjengelighet</a></li>
+                        <li><a data-toggle="tab" href="#dailyShifts">Vaktbok</a></li>
                     </ul>
                 </li>
-                <!-- <li                 ><a data-toggle="tab" href="#Approve">Approve</a></li> -->
-                <!-- <li                 ><a data-toggle="tab" href="#Exchange">Exchange Shifts </a></li> -->
-                <!-- <li                 ><a data-toggle="tab" href="#Example">Example </a></li> -->
+                <li                 ><a data-toggle="tab" href="#myProfile">Min Profil</a></li>
+                <li                 ><a data-toggle="tab" href="#contact">KontaktInfo</a></li>
+                <!--admin-->
                 <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Approve <span class="caret"></span></a>
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">AdminHjem<span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a data-toggle="tab" href="#approvalLeave"  >Leave</a></li>
-                        <li><a data-toggle="tab" href="#approvalOvertime" >Overtime</a></li>
-                        <li><a data-toggle="tab" href="#approvalSwitch"  >Switch</a></li>
+                        <li><a data-toggle="tab" href="#adminCalendar" >Kalender</a></li>
+                        <li><a data-toggle="tab" href="#adminDailyShifts" >Vaktbok</a></li>
+                        <li><a data-toggle="tab" href="#approval" >Godkjenning</a></li>
                     </ul>
                 </li>
+                <li                 ><a data-toggle="tab" href="#shiftAdmin">VaktAdministrasjon</a></li>
+                <li                 ><a data-toggle="tab" href="#overview">AnsatteInfo</a></li>
+                <!--Komune-->
+                <li                 ><a data-toggle="tab" href="#changeUserType">oversiktKommune</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a data-toggle="tab" href="#Logout"><span class="glyphicon glyphicon-log-out"></span> Login out</a></li>
+                <li><a data-toggle="tab" href="#logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
             </ul>
         </div>
     </div>
@@ -82,74 +85,49 @@
 
 <div class="container">
     <div class="tab-content">
-        <div id="Calendare" class="tab-pane fade in active">
-            <h1>bruker's kalender</h1>
+        <div id="userCalendar" class="tab-pane fade in active">
+            <h3>bruker's kalender</h3>
         </div>
-        <div id="MyProfil" class="tab-pane fade">
+        <div id="appeal" class="tab-pane fade in active">
+            <h3>søknader</h3>
+        </div>
+        <div id="disponibility" class="tab-pane fade in active">
+            <h3>tilgjengelighet</h3>
+        </div>
+        <div id="dailyShifts" class="tab-pane fade in active">
+            <h3>dagbok bruker</h3>
+        </div>
+
+        <div id="myProfile" class="tab-pane fade">
             <h3>bruker's profil</h3>
         </div>
-        <!-- <div id="Administration" class="tab-pane fade">
-            <div>
-                <div id='calendar1' style="display:block"></div>
-                <aside id="warning">
-                    <h4 class="titles"> VARSEL </h4>
-                </aside>
-                <aside id = "freeShifts" onclick="calendarFunction()">
-                    <h4 class="titles"> LEDIGE VAKTER </h4>
-                </aside>
-                <section id="list" style="display:none">
-                    <h1> Dagens vakter </h1>
-                    <ul>
-                        <li>Bente</li>
-                        <li>Berit</li>
-                        <li>Bil</li>
-                        <li>Båt</li>
-                        <li>Bål</li>
-                        <li>hei</li>
-                    </ul>
-                </section>
-                <button type="button" class="buttonsAdmin" id="calendarButton" onclick="calendarFunction()" autofocus><span> Kalender &#128197;</span></button>
-                <button type="button" class="buttonsAdmin" id="buttonChangeTab" onclick="changeTabs()"> <span>Godkjenning&#10003;</span> </button>
-                <button type="button" class="buttonsAdmin" id="listButton" onclick="listFunction()"> <span>Dagens vakter</span> </button>
+        <div id="contact" class="tab-pane fade">
+            <h3>ansatt kontakt</h3>
+        </div>
 
-            </div>
-        </div> -->
         <div id="adminCalendar" class="tap-pane fade">
             <h3>administrator's kalender?</h3>
         </div>
         <div id="adminDailyShifts" class="tap-pane fade">
-            <div>oversikt over folk som jobber idag</div>
+            <div>dagbok admin</div>
         </div>
-        <div id="adminApproval" class="tap-pane fade">
-            <div>admin's godkjenning's side</div>
+        <div id="approval" class="tap-pane fade">
+            <h3>godjenning</h3>
         </div>
-        <!-- <div id="Approve" class="tab-pane fade ">
-            <div>
-                <h1 id="godkjenning">Godkjenning</h1>
-                <button type="button" class="approveButton" id ="leave" onclick="leaveFunction()" autofocus><span>Godkjenn fravær<span></button>
-                <button type="button" class="approveButton" id ="overtime" onclick="overtimeFunction()"><span>Godkjenn overtid<span></button>
-                <button type="button" class="approveButton" id ="switch" onclick="switchFunction()"><span>Godkjenn vaktbytte<span></button>
 
-                <button type="button" id ="save" onclick="saveFunction()"style="display:none">Godkjenn og lagre</button>
-            </div>
-        </div> -->
-        <div id="approvalLeave" class="tap-pane fade">
-            <h3>admin's godjenn fravær</h3>
+        <div id="shiftAdmin" class="tap-pane fade">
+            <div>vakt administrasjon</div>
         </div>
-        <div id="approvalOvertime" class="tap-pane fade">
-            <h3>Overtid til godkjenning</h3>
+        <div id="overview" class="tap-pane fade">
+            <div>oversikt over ansatte</div>
         </div>
-        <div id="approvalSwitch" class="tap-pane fade">
-            <h3>Vaktbytte til godkjenning</h3>
+
+        <div id="changeUserType" class="tap-pane fade">
+            <div>oversikt* komune</div>
         </div>
-        <div id="Exchange" class="tab-pane fade ">
-            <h3>bruker's bytting)</h3>
-        </div>
-        <!--<div id="Example" class="tap-pane fade">
-            <h3>ExamplePane tab will apear :)</h3>
-        </div>-->
-        <div id="Logout" class="tap-pane fade">
-            <h3>You are have (NOT) successfully logged out :)</h3>
+
+        <div id="logout" class="tap-pane fade">
+            <h3>Du er (IKKE) logget ut :)</h3>
         </div>
     </div>
 </div>

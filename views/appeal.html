@@ -6,36 +6,94 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/forespørsler.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="frontendJS/forespørsler.js"></script>
+    <script src="frontendJS/appeal.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/appeal.css">
 
 </head>
+
 <body>
-<button id="fravær">FRAVÆR</button>
-<button id="overtid">OVERTID</button>
-<button id="bytt">BYTT VAKT</button>
-<button id="bytt2">BYTT VAKT MED</button>
-<span id="mySpan"></span>
-<div id="1">
-    <div class="fravær-content">
+
+<div id="includedContent"></div>
+
+<h1 id="Appeal">Forespørsel</h1>
+<button type="button" class="approveButton" id ="absence" onclick="absenceFunction()" autofocus><span>Fravær</span></button>
+<button type="button" class="approveButton" id ="change" onclick="changeFunction()"><span>Bytt vakt</span></button>
+<button type="button" class="approveButton" id ="changeTo" onclick="changeToFunction()"><span>Bytt vakt med</span></button>
+
+<section class="approveSection" id="absenceAppeal" style="display:block">
+    <h3>Søk om fravær</h3>
+    <form>
+        <fieldset>
+
+            Fraværstype<br>
+            <select>
+                <option value="" disabled selected>Velg</option>
+                <option value="vacation">ferie</option>
+                <option value="disease">sykdom</option>
+                <option value="Religion">Religiøs høytid</option>
+                <option value="public-verv">Offentlig verv</option>
+                <option value="Military-service">Millitær tjeneste</option>
+                <option value="leave">Permisjon</option>
+                <option value="funeral">Begravelse</option>
+            </select><br>
+
+            Dato:<br>
+            fra:<input type="date">
+            til: <input type="date"><br>
+
+            Årsak:
+            <br>
+            <textarea></textarea><br>
+
+            <input type="submit">
+        </fieldset>
+    </form>
+</section>
+
+<section class="approveSection" id="changeAppeal" style="display:none">
+    <h3>Søk om vaktbytte</h3>
+    <form>
+        <fieldset>
+
+            Bytt vakt<br>
+            Velg vakt<br>
+            <select id="selectShift" size="5">
+            </select><br>
+            Årsak:
+            <br>
+            <textarea></textarea><br>
+
+            <input type="submit">
+        </fieldset>
+    </form>
+</section>
+
+<section class="approveSection" id="changeToAppeal" style="display:none">
+    <h3>Søk om vaktbytte med bestemt vakt</h3>
+    <form>
+        <fieldset>
+
+            Bytt vakt<br>
+            Velg vakt<br>
+            <select id="selectshiift" size="5">
+            </select><br>
+            Årsak:
+            <br>
+            <textarea></textarea><br>
+
+            <input type="submit">
+        </fieldset>
+    </form>
+<div id="3">
+    <div class="Byttvakt-content">
         <form>
             <fieldset>
 
-                Fraværstype<br>
-                <select>
-                    <option value="" disabled selected>Velg</option>
-                    <option value="vacation">ferie</option>
-                    <option value="disease">sykdom</option>
-                    <option value="Religion">Religiøs høytid</option>
-                    <option value="public-verv">Offentlig verv</option>
-                    <option value="Military-service">Millitær tjeneste</option>
-                    <option value="leave">Permisjon</option>
-                    <option value="funeral">Begravelse</option>
+                Bytt vakt<br>
+                Velg vakt<br>
+                <select id="selectvakt" size="5">
                 </select><br>
-
-                Dato:<br>
-                fra:<input type="date">
-                til: <input type="date"><br>
-
                 Årsak:
                 <br>
                 <textarea></textarea><br>
@@ -46,8 +104,9 @@
 
     </div>
 </div>
+</section>
 
-<div id="2">
+<!--<div id="2">
     <form id="overtimeform">
         <fieldset>
 
@@ -76,57 +135,6 @@
     </form>
 
 
-</div>
-<div id="3">
-    <div class="Byttvakt-content">
-        <form>
-            <fieldset>
-
-                Bytt vakt<br>
-                Velg vakt<br>
-                <select id="selectvakt" size="5">
-                </select><br>
-                Årsak:
-                <br>
-                <textarea></textarea><br>
-
-                <input type="submit">
-            </fieldset>
-        </form>
-
-    </div>
-</div>
-
-<div id="4">
-    <div class="Byttvakt-content">
-        <form>
-            <fieldset>
-
-                Bytt vakt med<br>
-                din vakt	ønsket vakt<br>
-                <select size="5">
-                    <option>something</option>
-                    <option>something</option>
-                    <option>something</option>
-                </select>
-                <select size="5">
-                    <option>something</option>
-                    <option>something</option>
-                    <option>something</option>
-                    <option>something</option>
-                </select><br>
-                Årsak:
-                <br>
-                <textarea></textarea><br>
-
-
-                <input type="submit">
-            </fieldset>
-        </form>
-
-    </div>
-
-</div>
-
+</div>-->
 </body>
 </html>
