@@ -95,64 +95,53 @@
                     <section id="personForm" style="display:none;">
                         <form id="editEmp" action="#">
                             Navn:
-                            <input required id="fornavn" type="text" name="name" placeholder="eks: Jan Skrotnes">
+                            <input required id="navndb" type="text" name="name" placeholder="eks: Jan Skrotnes">
                             <br>
                             Stilling:
-                            <input required id="stilling" type="text" name="position" placeholder="eks: sykepleier">
+                            <input required id="stillingdb" type="text" name="position" placeholder="eks: sykepleier">
                             <br>
                             Telefonnummer:
-                            <input required id="telefon" type="number" name="phone" placeholder="eks: +47 12345678">
+                            <input required id="telefondb" type="number" name="phone" placeholder="eks: +47 12345678">
                             <br>
                             E-postadresse:
-                            <input required id="epost" type="text" name="email" placeholder="eks: noen@mail.no">
+                            <input required id="epostdb" type="text" name="email" placeholder="eks: noen@mail.no">
                             <br>
                             Adresse:
-                            <input required id="adresse" type="text" name="address" placeholder="eks: Gateveien 1">
+                            <input required id="adressedb" type="text" name="address" placeholder="eks: Gateveien 1">
                             <br>
                             Personnummer:
-                            <input required id="personnummer" type="number" name="persNo" placeholder="11 siffer">
-                            <br>
-                            Brukernavn:
-                            <input required id="brukernavn" type="text" name="username" placeholder="eks: olanordmann">
+                            <input required id="personnummerdb" type="number" name="persNo" placeholder="11 siffer">
                             <br>
                             <br>
                             <button type="submit" value="submit" display="none">Lagre</button>
                             <button type="button" id="back" onclick="hideForm()" display="none">&#8592;Tilbake</button>
                         </form>
                     </section>
-                    <section id="personInfo" data-target="#myModal" style="display:block">
+                    <section id="personInfo" style="display:block">
                         <table cellspacing="10">
                             <tr>
-                                <td class="info">Fornavn:</td>
-                                <td id="firstnamedb">FRADATABASE</td>
+                                <td class="info">Navn:</td>
+                                <td id="navndb2"></td>
                             </tr>
                             <tr>
-                                <td class="info">Etternavn:</td>
-                                <td id="lastnamedb">FRADATABASE</td>
-                            </tr>
-                            <tr>
-                                <td class="info">Stilling:</td>
-                                <td id="posdb">FRADATABASE</td>
+                                <td class="info" id="">Stilling:</td>
+                                <td id="stillingdb2"></td>
                             </tr>
                             <tr>
                                 <td class="info">Telefonnummer:</td>
-                                <td id="phonedb">FRADATABASE</td>
+                                <td id="telefondb2"></td>
                             </tr>
                             <tr>
                                 <td class="info">E-postadresse:</td>
-                                <td id="emaildb">FRADATABASE</td>
+                                <td id="epostdb2"></td>
                             </tr>
                             <tr>
                                 <td class="info">Adresse:</td>
-                                <td id="addressdb">FRADATABASE</td>
+                                <td id="adressedb2"></td>
                             </tr>
                             <tr>
                                 <td class="info">Personnummer:</td>
-                                <td id="persnodb">FRADATABASE</td>
-                            </tr>
-                            <tr>
-                                <td class="info">Brukernavn:</td>
-                                <td id="usernamedb">FRADATABASE</td>
+                                <td id="personnummerdb2"></td>
                             </tr>
                         </table>
                     </section>

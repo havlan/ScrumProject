@@ -17,8 +17,9 @@ $.get('/getEmployee', {}, function(req, res, data){
 });
 //Build Table
 
-function buildHtmlTable(selector) {
-    var columns = addAllColumnHeaders(myList, selector);
+function buildHtmlTable(selector,list) {
+    list = myList;
+    var columns = addAllColumnHeaders(list, selector);
     var tbody = $('<tbody/>');
     for (var i = 0; i < myList.length; i++) {
         var row$ = $('<tr id=' + i + '/>');
@@ -120,18 +121,28 @@ function saveFunction() {
 }
 //myModal info
 $(document).on('click','#excelDataTable tr',function(){
-    //alert("heihei");
-    $('#myModal').modal("show");
-    $("#nameModal").val($(this).closest('tr').children()[0].textContent);
-    $("#firstnamedb").val($(this).closest('tr').children()[0].textContent);
-    $("#lastnamedb").val($(this).closest('tr').children()[0].textContent);
-    $("#posdb").val($(this).closest('tr').children()[0].textContent);
-    $("#phonedb").val($(this).closest('tr').children()[0].textContent);
-    $("#email").val($(this).closest('tr').children()[0].textContent);
-    $("#addressdb").val($(this).closest('tr').children()[0].textContent);
-    $("#persnodb").val($(this).closest('tr').children()[0].textContent);
-    $("#usernamedb").val($(this).closest('tr').children()[0].textContent);
-
+    var indeks = ($(this).index());
+    $.get('/getEmployee', {}, function(req, res, data) {
+        //Fyll inn redigeringsfelt
+        document.getElementById("navndb").value = (data.responseJSON[indeks].name);
+        document.getElementById("stillingdb").value = (data.responseJSON[indeks].type_name);
+        document.getElementById("telefondb").value = (data.responseJSON[indeks].phone_nr);
+        document.getElementById("epostdb").value = (data.responseJSON[indeks].email);
+        document.getElementById("adressedb").value = (data.responseJSON[indeks].address);
+        document.getElementById("personnummerdb").value = (data.responseJSON[indeks].pers_id);
+        //Fyll in oversiktsfelt
+        document.getElementById("navndb2").innerHTML = (data.responseJSON[indeks].name);
+        document.getElementById("stillingdb2").innerHTML = (data.responseJSON[indeks].type_name);
+        document.getElementById("telefondb2").innerHTML = (data.responseJSON[indeks].phone_nr);
+        document.getElementById("epostdb2").innerHTML = (data.responseJSON[indeks].email);
+        document.getElementById("adressedb2").innerHTML = (data.responseJSON[indeks].address);
+        document.getElementById("personnummerdb2").innerHTML = (data.responseJSON[indeks].pers_id);
+        //Trigge modal
+        $('#myModal').modal("show");
+        //Felt under profilbilde
+        $("#nameModal").val(data.responseJSON[indeks].name);
+        $("#positionModal").val(data.responseJSON[indeks].type_name);
+    });
 });
 
 $(function(){
