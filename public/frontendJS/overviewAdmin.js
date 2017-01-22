@@ -3,7 +3,7 @@
  */
 var myList = [];
 var typeNames =[];
-
+window.indeks = 0;
 $.get('/getEmployee', {}, function(req, res, data){
 
     $("#includedContent").load("menu");
@@ -92,9 +92,16 @@ function searchPositionFunction() {
 }
 // remove employee
 function removeFunction() {
-    var x;
-    if (confirm("Er du sikker på at du vil fjerne denne ansatte?") == true) {
-        //TODO
+    alert(indeks);
+    if (confirm("Er du sikker på at du vil fjerne denne ansatte?\n Informasjon om den ansatte vil fortsatt ligge i systemet\n Men den ansatte kan ikke lenger bruke det") == true) {
+        $.ajax({
+            url: '/delUser', //this is the submit URL
+            type: 'POST',
+            data: {'employee_id':indeks},
+            success: function(data){
+                alert('successfully submitted')
+            }
+        });
     }
 }
 function hideForm() {
@@ -115,12 +122,11 @@ function hideInfo() {
 }
 
 function saveFunction() {
-    var x;
     if (confirm("Er du sikker på at du vil lagre?") == true) {
-        //OPPDATER INFO I DATABASEN
+
     }
 }
-window.indeks = 0;
+
 //myModal info
 $(document).on('click','#excelDataTable tr',function(){
     indeks = $(this).closest("tr").find('td:eq(2)').text();
@@ -167,7 +173,7 @@ $(function(){
     $('#myModal').on('submit', function(e){
      //   alert($("#adressedb").val());
         e.preventDefault();
-        alert(indeks);
+       // alert(indeks);
         $.ajax({
             url: '/updateEmployee',
             type: 'POST',
@@ -179,7 +185,6 @@ $(function(){
         });
     });
 });
-
 
 $.get('/getTypeNames', {}, function(req, res, data){
     console.log(data);
