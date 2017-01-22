@@ -56,8 +56,14 @@ module.exports = {
     /*simpleLogin : function(username){
         dbHelper.simpleLogin("select * from LoginInfo where Username = ?", [username]);
     },*/
-    getVaktliste : function(req,res){
-        dbHelper.getdbQuery(req, res, "select * from WORKSHIFTTOGETHER where ShiftStart like ? and department_id = ?",[req.params.ShiftStart, req.params.department_id]);
+    getVaktliste1 : function(req,res){
+        dbHelper.getdbQuery(req, res, "select * from WORKTOGETHERTODAY1 where department_id = 7",[req.params.ShiftStart, req.params.department_id]);
+    },
+    getVaktliste2 : function(req,res){
+        dbHelper.getdbQuery(req, res, "select * from WORKTOGETHERTODAY2 where department_id = 7",[req.params.ShiftStart, req.params.department_id]);
+    },
+    getVaktliste3 : function(req,res){
+        dbHelper.getdbQuery(req, res, "select * from WORKTOGETHERTODAY3 where department_id = 7",[req.params.ShiftStart, req.params.department_id]);
     },
     getTypeNames : function (req, res) {
         dbHelper.getdbQuery(req,res,"Select name from Type;")
