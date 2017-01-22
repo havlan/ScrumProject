@@ -3,7 +3,7 @@
 
 var getCtrl = require('./getReq');
 var postCtrl = require('./postReq');
-
+var delCtrl = require('./delReq');
 
 module.exports = function (app, passport) {
     app.get('/', isLoggedIn, getCtrl.getRoot);
@@ -57,6 +57,7 @@ module.exports = function (app, passport) {
     });
 
     app.post('/postUser', isAdmin, postCtrl.postEmployee);
+    app.post('/delUser', isAdmin, delCtrl.delLogin); // office auth
     app.post('/postDepartment', isAdmin, postCtrl.postDepartment);
     app.post('/postType', isAdmin, postCtrl.postType);
     app.post('/postShift', isLoggedIn, postCtrl.postShift);

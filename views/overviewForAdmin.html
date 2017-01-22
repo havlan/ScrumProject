@@ -58,6 +58,12 @@
                         Personnummer:
                         <input required id="personnummer" type="text" name="persNo" placeholder="11 siffer">
                         <br>
+                        Seniority:
+                        <input required id="seniority" type="text" name="seniority" placeholder="eks: 69">
+                        <br>
+                        Responsibility:
+                        <input required id="responsibility" type="text" name="responsibility" placeholder="1 or 0">
+                        <br>
                         <br>
                         <br>
                         <button id="save" type="submit" value="submit">Lagre</button>
@@ -148,7 +154,8 @@
                     </section>
                     <aside class="buttons">
                         <button type="button" id="edit" onclick="hideInfo()" display="inline">Rediger ansatt</button>
-                        <button type="button" id="remove" onclick="removeFunction()" data-dismiss="modal" display="inline">Fjern ansatt</button>
+                        <button type="button" id="remove" onclick="removeFunction()" data-dismiss="modal" display="inline">Fjern loginInfo</button>
+                        <button type="button" id="addInfo" onclick="">Legg til loginInfo</button>
                     </aside>
                 </main>
 

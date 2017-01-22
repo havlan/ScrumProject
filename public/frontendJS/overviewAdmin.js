@@ -148,15 +148,14 @@ $(document).on('click','#excelDataTable tr',function(){
         $("#positionModal").val(data.responseJSON[hei].type_name);
     });
 });
-
+//addModal submit
 $(function(){
     $('#addModal').on('submit', function(e){
-        alert('hei');
         e.preventDefault();
         $.ajax({
             url: '/postUser', //this is the submit URL
             type: 'POST',
-            data: {'name': $("#fornavn").val(),'address':$('#addresse').val(),'email':$('#epost').val(),'position':$('#stilling'),'pers_id':$('#personnummer'),'phonenummer':$('#telefonnummmer')},
+            data: {'name': $("#fornavn").val(),'address':$('#adresse').val(),'email':$('#epost').val(),'type_name':$('#stilling').val(),'pers_id':$('#personnummer').val(),'phone_nr':$('#telefon').val(),'seniority':$('#seniority').val(),'responsibility_allowed':$('#responsibility').val(),'total_hours':0},
             success: function(data){
                 alert('successfully submitted')
             }
@@ -180,6 +179,7 @@ $(function(){
         });
     });
 });
+
 
 $.get('/getTypeNames', {}, function(req, res, data){
     console.log(data);
