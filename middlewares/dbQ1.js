@@ -192,16 +192,17 @@ module.exports = {
         dbHelper.postdbQuery(req, res, "update shift_has_employee set ? where employee_id = ? and shift_id = ?", [{avalibility: req.body.avalibility}, pk, pk2]);
     },
     updateEmployee: function (req, res) {
-        var id = req.body.employee_id;
         dbHelper.postdbQuery(req, res, "update Employee set ? where employee_id = ?", [{
+            name:req.body.name,
+            type_name:req.body.type_name,
             phone_nr: req.body.phone_nr,
             total_hours: req.body.total_hours,
             email: req.body.email,
             seniority: req.body.seniority,
             responsibility_allowed: req.body.responsibility_allowed,
             address: req.body.address,
-            pers_id: req.body.pers_id
-        }, id]);
+            pers_id: req.body.pers_id,
+        }, req.body.employee_id]);
     },
     updateEmployeePersonalInfo: function (req, res) {
         dbHelper.postdbQuery(req,res,"update Employee set ? where employee_id = ?",[{
@@ -266,5 +267,5 @@ module.exports = {
     },
 
 
-}
+};
 //heihei

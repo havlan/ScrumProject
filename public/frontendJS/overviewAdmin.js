@@ -120,29 +120,32 @@ function saveFunction() {
         //OPPDATER INFO I DATABASEN
     }
 }
+window.indeks = 0;
 //myModal info
 $(document).on('click','#excelDataTable tr',function(){
-    var indeks = $(this).closest("tr").find('td:eq(2)').text()-1;
+    indeks = $(this).closest("tr").find('td:eq(2)').text();
+    alert(indeks);
+    var hei = indeks-1;
     $.get('/getEmployee', {}, function(req, res, data) {
         //Fyll inn redigeringsfelt
-        document.getElementById("navndb").value = (data.responseJSON[indeks].name);
-        document.getElementById("stillingdb").value = (data.responseJSON[indeks].type_name);
-        document.getElementById("telefondb").value = (data.responseJSON[indeks].phone_nr);
-        document.getElementById("epostdb").value = (data.responseJSON[indeks].email);
-        document.getElementById("adressedb").value = (data.responseJSON[indeks].address);
-        document.getElementById("personnummerdb").value = (data.responseJSON[indeks].pers_id);
+        document.getElementById("navndb").value = (data.responseJSON[hei].name);
+        document.getElementById("stillingdb").value = (data.responseJSON[hei].type_name);
+        document.getElementById("telefondb").value = (data.responseJSON[hei].phone_nr);
+        document.getElementById("epostdb").value = (data.responseJSON[hei].email);
+        document.getElementById("adressedb").value = (data.responseJSON[hei].address);
+        document.getElementById("personnummerdb").value = (data.responseJSON[hei].pers_id);
         //Fyll in oversiktsfelt
-        document.getElementById("navndb2").innerHTML = (data.responseJSON[indeks].name);
-        document.getElementById("stillingdb2").innerHTML = (data.responseJSON[indeks].type_name);
-        document.getElementById("telefondb2").innerHTML = (data.responseJSON[indeks].phone_nr);
-        document.getElementById("epostdb2").innerHTML = (data.responseJSON[indeks].email);
-        document.getElementById("adressedb2").innerHTML = (data.responseJSON[indeks].address);
-        document.getElementById("personnummerdb2").innerHTML = (data.responseJSON[indeks].pers_id);
+        document.getElementById("navndb2").innerHTML = (data.responseJSON[hei].name);
+        document.getElementById("stillingdb2").innerHTML = (data.responseJSON[hei].type_name);
+        document.getElementById("telefondb2").innerHTML = (data.responseJSON[hei].phone_nr);
+        document.getElementById("epostdb2").innerHTML = (data.responseJSON[hei].email);
+        document.getElementById("adressedb2").innerHTML = (data.responseJSON[hei].address);
+        document.getElementById("personnummerdb2").innerHTML = (data.responseJSON[hei].pers_id);
         //Trigge modal
         $('#myModal').modal("show");
         //Felt under profilbilde
-        $("#nameModal").val(data.responseJSON[indeks].name);
-        $("#positionModal").val(data.responseJSON[indeks].type_name);
+        $("#nameModal").val(data.responseJSON[hei].name);
+        $("#positionModal").val(data.responseJSON[hei].type_name);
     });
 });
 
@@ -162,13 +165,16 @@ $(function(){
 });
 //myModal edit
 $(function(){
-    $('#editEmp').on('submit', function(e){
+    $('#myModal').on('submit', function(e){
+     //   alert($("#adressedb").val());
         e.preventDefault();
+        alert(indeks);
         $.ajax({
-            url: '/updateEmployee', //this is the submit URL
+            url: '/updateEmployee',
             type: 'POST',
-            data: $('#editEmp').serialize(),
+            data: {'name': $("#navndb").val(),'address':$('#adressedb').val(),'email':$('#epostdb').val(),'type_name':$('#stillingdb').val(),'pers_id':$('#personnummerdb').val(),'phone_nr':$('#telefondb').val(),'employee_id':indeks},
             success: function(data){
+                console.log(JSON.stringify(data));
                 alert('successfully submitted')
             }
         });
