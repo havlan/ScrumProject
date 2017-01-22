@@ -39,6 +39,12 @@
                          height="150px" width="150px"></img>
                     <button type="button" id="addPicEmp">Legg til bilde</button>
                     <form id="addEmp">
+                        Brukernavn:
+                        <input required id="brukernavn" type="text" name="username" placeholder="eks: småripshunter69">
+                        <br>
+                        Er_Admin:
+                        <input required id="admin" type="number" name="admin" placeholder="eks: 0 eller 1">
+                        <br>
                         Navn:
                         <input required id="fornavn" type="text" name="name" placeholder="eks: Jan Skrotnes">
                         <br>
@@ -66,6 +72,7 @@
                         <br>
                         <br>
                         <br>
+                        <p id="newUserFeedback"></p>
                         <button id="save" type="submit" value="submit">Lagre</button>
                     </form>
                 </main>

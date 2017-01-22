@@ -130,7 +130,7 @@ function saveFunction() {
 //myModal info
 $(document).on('click','#excelDataTable tr',function(){
     indeks = $(this).closest("tr").find('td:eq(2)').text();
-    alert(indeks);
+  //  alert(indeks);
     var hei = indeks-1;
     $.get('/getEmployee', {}, function(req, res, data) {
         //Fyll inn redigeringsfelt
@@ -159,11 +159,14 @@ $(function(){
     $('#addModal').on('submit', function(e){
         e.preventDefault();
         $.ajax({
-            url: '/postUser', //this is the submit URL
+            url: '/newEmployee', //this is the submit URL
             type: 'POST',
-            data: {'name': $("#fornavn").val(),'address':$('#adresse').val(),'email':$('#epost').val(),'type_name':$('#stilling').val(),'pers_id':$('#personnummer').val(),'phone_nr':$('#telefon').val(),'seniority':$('#seniority').val(),'responsibility_allowed':$('#responsibility').val(),'total_hours':0},
+            data: {'is_admin':$('#admin').val(),'username':$('#brukernavn').val(),'name': $("#fornavn").val(),'address':$('#adresse').val(),'email':$('#epost').val(),'type_name':$('#stilling').val(),'pers_id':$('#personnummer').val(),'phone_nr':$('#telefon').val(),'seniority':$('#seniority').val(),'responsibility_allowed':$('#responsibility').val(),'total_hours':0},
             success: function(data){
-                alert('successfully submitted')
+
+            },
+            failure: function(err){
+                console.log("ERR");
             }
         });
     });
@@ -180,7 +183,7 @@ $(function(){
             data: {'name': $("#navndb").val(),'address':$('#adressedb').val(),'email':$('#epostdb').val(),'type_name':$('#stillingdb').val(),'pers_id':$('#personnummerdb').val(),'phone_nr':$('#telefondb').val(),'employee_id':indeks},
             success: function(data){
                 console.log(JSON.stringify(data));
-                alert('successfully submitted')
+                document.getElementById('newUserFeedback').innerHTML("Success");
             }
         });
     });

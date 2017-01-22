@@ -41,6 +41,7 @@ module.exports = {
             con.beginTransaction(function(err){
                 if(err){
                     return con.rollback(function(){
+                        con.release();
                         throw err;
                     })
                 }
@@ -48,6 +49,7 @@ module.exports = {
                 con.query("insert into Employee set ?", emp, function(err,res1, done){
                     if(err){
                         return con.rollback(function(){
+                            con.release();
                             throw err;
                         })
                     }
@@ -58,6 +60,7 @@ module.exports = {
                     con.query("insert into LoginInfo set ?", usr, function(err,res2){
                         if(err){
                             return con.rollback(function(){
+                                con.release();
                                 throw err;
                             })
                         }
@@ -65,6 +68,7 @@ module.exports = {
                         transporter.sendMail(mailOptions, function (err,inf) {
                             if(err){
                                 return con.rollback(function(){
+                                    con.release();
                                     throw err;
                                 })
                             }else{
@@ -73,7 +77,7 @@ module.exports = {
                                     console.log("res exists", res.socket.TCP);
 
                                     con.commit(function (err) {
-                                        res.json({Melding: "Bruker lagd."}) // bruk
+                                        res.json({Message: "Bruker lagd."}) // bruk
                                     })
                                 }else{
                                     console.log("res does not exist")
