@@ -1,0 +1,34 @@
+#dbDataTableAvail{
+    width: 80%;
+    margin-left: 0%;
+}
+#dbDataTableAvail {
+    border-collapse: collapse;
+    width: 100%;
+    border: 1px solid #ddd;
+    font-size: 16px;
+}
+
+#dbDataTableAvail th, #dbDataTableAvail td {
+    text-align: left;
+    padding: 5px;
+}
+
+#dbDataTableAvail tr {
+    border-bottom: 1px solid #ddd;
+}
+#dbDataTableAvail td:hover{
+    color: darkgray;
+}
+
+#dbDataTableAvail tr.header{
+    background-color: #f1f1f1;
+}
+#dbDataTableAvail tr:hover{
+    background-color: aliceblue;
+    cursor: pointer;
+}
+#calendar{
+    width:50%;
+    margin-left: 25%;
+}

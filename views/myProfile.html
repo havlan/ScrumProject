@@ -58,28 +58,31 @@
 
     <!-- Modal:Edit info -->
     <div class="modal fade" id="editModal" role="dialog">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-sm">
             <!-- Modal content-->
             <!-- Modal header-->
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h3 class="modal-title">Rediger personlig info</h3>
+                    <h3 class="modal-title">Rediger informasjon</h3>
                 </div>
                 <!-- Modal body-->
                 <main class="modal-body">
                     <form id="editEmp">
+                        <p>
                         Telefonnummer:
-                        <input id="edittelefon" type="tel" name="phone" value="">
-                        <br>
+                        <input required class="inputEdit" id="edittelefon" type="tel" name="phone" value="" autofocus>
+                        </p>
+                        <p>
                         Adresse:
-                        <input id="editadresse" type="text" name="address" value="">
-                        <br>
+                        <input required class="inputEdit" id="editadresse" type="text" name="address" value="">
+                        </p>
+                        <p>
                         E-post:
-                        <input id="editepost" type="email" name="email" value="">
+                        <input required class="inputEdit" id="editepost" type="email" name="email" value="">
+                        </p>
                         <br>
-                        <br>
-                        <button id="save" type="submit" value="submit">Lagre</button>
+                        <button id="saveEdit" type="submit" value="submit" >Lagre</button>
                     </form>
                 </main>
                 <!-- Modal footer-->
@@ -101,8 +104,8 @@
                     <h3 class="modal-title">Historikk</h3>
                 </div>
                 <!-- Modal body-->
-                    <table class = "sortTable" id="histTable">
-                    </table>
+                <table class="table-striped" id="histTable">
+                </table>
                 <!-- Modal footer-->
                 <div class="modal-footer">
                     <button type="button" class="close" data-dismiss="modal">Lukk</button>
