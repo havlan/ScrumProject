@@ -1,10 +1,7 @@
-/**
- * Created by Lui on 20-Jan-17.
- */
 $(document).ready(function() {
     $("#includedContent").load("menu");
 
-    $('#calendar').fullCalendar({
+    $('#calendarx').fullCalendar({
         header: {
             left: 'prev,next today',
             center: 'title',
@@ -18,8 +15,8 @@ $(document).ready(function() {
         weekNumbers:true,
         navLinks: true,
         editable: false,
-        eventColor: '#aabfe0', //default event color //can be set individually
-        eventTextColor: '#000000', //default event text color
+        eventColor: '#000000', //default event color //can be set individually
+        eventTextColor: '#ffffff', //default event text color
         //GETTING EVENTS FROM JSON FEED; SHORT AND EXTENDED
         events: '/getEvents', //TODO
         eventClick: function(event) {
