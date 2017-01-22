@@ -7,13 +7,12 @@ h1{
     text-align: right;
     font-size: 24px;
     padding-right: 10px;
-    padding-top: 5px;
+
 }
 
 .db{
     text-align: left;
     font-size: 24px;
-    padding-top: 5px;
     padding-left: 20px;
 }
 
@@ -109,4 +108,32 @@ h1{
 
 .table-responsive{
     padding: 1%;
+}
+
+#saveEdit{
+    background-color: royalblue;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    position: relative;
+    margin-left: 70%;
+    border-radius:5px;
+}
+
+.inputEdit{
+    width:100%;
+}
+#navn{
+    text-align: left;
+    width: 100%;
+    border-bottom: solid 1px lightgrey;
+    padding: 2%;
+}
+#histTable{
+    width:90%;
+    margin-left: 5%;
 }
