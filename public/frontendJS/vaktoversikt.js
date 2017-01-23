@@ -23,9 +23,10 @@ $.get('/getDepartment', {}, function(req, res, data){
 function makeDropdown(selector) {
     var columns = addAllColumnHeaders(departments, selector);
     for (var i = 0; i < departments.length; i++) {
-        var cellValue1 = departments[i][columns[0]];
+        var cellValue0 = departments[i][columns[0]];
+        var cellValue1 = departments[i][columns[1]];
         if (cellValue1 == null) cellValue1 = "Ingen data fra DB";
-        var option = $('<option />').text(cellValue1);
+        var option = $('<option />').text(cellValue0 + "    " + cellValue1);
         $(selector).append(option);
     }
 }
