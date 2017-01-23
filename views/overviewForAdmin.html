@@ -102,7 +102,7 @@
                 <main class="modal-body">
                     <div class="infoCard">
                         <img id="empPic" src="http://www.freeiconspng.com/uploads/profile-icon-9.png" alt="Bilde av ansatt"
-                             style="width:80%">
+                             style="width:60%">
                         <div class="container">
                             <p><input type="text" id="nameModal" class="desc" readonly/></p>
                             <p><input type="text" id="positionModal" class="desc" readonly/></p>
@@ -110,23 +110,25 @@
                     </div>
                     <section id="personForm" style="display:none;">
                         <form id="editEmp">
+                            <p>
                             Navn:
-                            <input required id="navndb" type="text" name="name">
-                            <br>
+                            <input required  class="dbInfo"id="navndb" type="text" name="name">
+                            </p>
+                            <p>
                             Stilling:
-                            <input required id="stillingdb" type="text" name="position">
-                            <br>
+                            <input required  class="dbInfo" id="stillingdb" type="text" name="position">
+                            </p><br>
                             Telefonnummer:
-                            <input required id="telefondb" type="number" name="phone">
+                            <input required  class="dbInfo" id="telefondb" type="number" name="phone">
                             <br>
                             E-postadresse:
-                            <input required id="epostdb" type="text" name="email">
+                            <input required  class="dbInfo" id="epostdb" type="text" name="email">
                             <br>
                             Adresse:
-                            <input required id="adressedb" type="text" name="address">
+                            <input required  class="dbInfo" id="adressedb" type="text" name="address">
                             <br>
                             Personnummer:
-                            <input required id="personnummerdb" type="number" name="persNo">
+                            <input required  class="dbInfo" id="personnummerdb" type="number" name="persNo">
                             <br>
                             <br>
                             <button type="submit" value="submit" display="none">Lagre</button>
@@ -137,27 +139,27 @@
                         <table cellspacing="10">
                             <tr>
                                 <td class="info">Navn:</td>
-                                <td id="navndb2"></td>
+                                <td class="persInfodb"id="navndb2"></td>
                             </tr>
                             <tr>
                                 <td class="info" id="">Stilling:</td>
-                                <td id="stillingdb2"></td>
+                                <td class="persInfodb" id="stillingdb2"></td>
                             </tr>
                             <tr>
                                 <td class="info">Telefonnummer:</td>
-                                <td id="telefondb2"></td>
+                                <td class="persInfodb" id="telefondb2"></td>
                             </tr>
                             <tr>
                                 <td class="info">E-postadresse:</td>
-                                <td id="epostdb2"></td>
+                                <td  class="persInfodb" id="epostdb2"></td>
                             </tr>
                             <tr>
                                 <td class="info">Adresse:</td>
-                                <td id="adressedb2"></td>
+                                <td class="persInfodb" id="adressedb2"></td>
                             </tr>
                             <tr>
                                 <td class="info">Personnummer:</td>
-                                <td id="personnummerdb2"></td>
+                                <td class="persInfodb" id="personnummerdb2"></td>
                             </tr>
                         </table>
                     </section>
@@ -183,7 +185,7 @@
 
                 <!-- Modal footer-->
                 <div class="modal-footer">
-                    <button type="button" class="closeButton" data-dismiss="modal">Lukk</button>
+                    <button type="button" class="close" data-dismiss="modal">Lukk</button>
                 </div>
             </div>
         </div>
