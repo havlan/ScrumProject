@@ -11,6 +11,25 @@ $( document ).ready(function() {
 
 var myList= [];
 
+$.get('/getDepartment', {}, function(req, res, data){
+    console.log(data);
+    console.log(data.responseJSON);
+
+    departments = data.responseJSON;
+
+    makeDropdown('#departmentInput')
+});
+
+function makeDropdown(selector) {
+    var columns = addAllColumnHeaders(departments, selector);
+    for (var i = 0; i < departments.length; i++) {
+        var cellValue1 = departments[i][columns[0]];
+        if (cellValue1 == null) cellValue1 = "Ingen data fra DB";
+        var option = $('<option />').text(cellValue1);
+        $(selector).append(option);
+    }
+}
+
 
 $.get('/getVaktliste1', {}, function(req, res, data){
     console.log(data);

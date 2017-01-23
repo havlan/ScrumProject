@@ -15,7 +15,7 @@ module.exports = {
     getDepartment: function (req, res) {
         //var get = {department_id:req.body.department_id};
         console.log("Overview Department");
-        dbHelper.getdbQuery(req, res, "select * from Department where department_id = ?", req.params.department_id);
+        dbHelper.getdbQuery(req, res, "select * from Department where department_id = ?", req.body.department_id);
     },
     getType: function (req, res) {
         console.log("Overview Type");

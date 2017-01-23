@@ -30,6 +30,7 @@ module.exports = function (app, passport) {
     app.get('/getEmployee_shifts_toCurrentDate', isLoggedIn, getCtrl.getEmployee_shifts_toCurrentDate);
     app.get('/getEvents',isLoggedIn, getCtrl.getEvents);
     app.get('/getTypeNames',isLoggedIn, getCtrl.getTypeNames);
+    app.get('/getDepartment',isLoggedIn, getCtrl.getDepartment);
 
 
     //Sites
