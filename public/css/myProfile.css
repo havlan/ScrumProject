@@ -31,6 +31,7 @@ h1{
 
 .flytt{
     margin-left: 10%;
+    overflow: auto;
 }
 
 
@@ -155,4 +156,3 @@ h1{
 #passwordForm{
     padding:10px;
 }
-

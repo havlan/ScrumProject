@@ -26,7 +26,6 @@
     padding: 5px;
 }
 .input{
-    margin-left: 33%;
     text-align: left;
 }
 #excelDataTable tr {
@@ -103,10 +102,11 @@ img {
     display: inline-block;
     font-size: 16px;
 }
-#add{
+#addBtn{
     margin-left: 10px;
     background-color: #4273af;
     border: none;
+    border-radius: 5px;
     color: white;
     padding: 10px 20px;
     position: relative;
