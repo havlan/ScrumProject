@@ -76,6 +76,16 @@ img {
     display: inline-block;
     font-size: 16px;
 }
+#addInfo{
+    background-color: #f1f1f1;
+    border: none;
+    color: black;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
 #remove{
     margin-left: 10px;
     background-color: indianred;
