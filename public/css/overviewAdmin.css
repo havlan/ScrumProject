@@ -179,7 +179,6 @@ only screen and (max-width: 760px),
         left: -9999px;
     }
 
-    tr { border: 1px solid #ccc; }
 
 
     td:nth-child(3) {
