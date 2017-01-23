@@ -17,6 +17,7 @@ module.exports = {
         //get user functionality here
         res.sendFile(path.join(__dirname + '/../views/smashing.html'));
     },
+
     getLogin : function (req,res) {
         res.sendFile(path.join(__dirname + '/../views/login.html'));
     },
@@ -87,6 +88,9 @@ module.exports = {
     },
     getOneEmployee : function(req,res){
         dbMiddelware.getOneEmployee(req,res);
+    },
+    getAbsenceView : function (req, res) {
+        dbMiddelware.getAbsenceView(req,res);
     },
     getDepartment : function (req, res){
         dbMiddelware.getDepartment(req,res);

@@ -141,7 +141,7 @@ $(function() {
         if (confirm("Er du sikker på at du vil lagre?") == true) {
             e.preventDefault();
             $.ajax({
-                url: 'newUser',
+                url: '/newLogin',
                 type: 'POST',
                 data: {'username': $('#username').val(), 'is_admin': $('#is_admin').val(),'employee_id':indeks},
                 success: function (data) {

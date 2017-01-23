@@ -28,3 +28,4 @@ function changeToFunction(){
     document.getElementById('overtimeAppeal').style.display = "block";
     document.getElementById('saveAppeal').style.display = "block";
 }
+

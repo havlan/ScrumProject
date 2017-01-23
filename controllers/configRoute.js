@@ -31,7 +31,7 @@ module.exports = function (app, passport) {
     app.get('/getEvents',isLoggedIn, getCtrl.getEvents);
     app.get('/getTypeNames',isLoggedIn, getCtrl.getTypeNames);
     app.get('/getDepartment',isLoggedIn, getCtrl.getDepartment);
-
+    app.get('/getAbsenceView',isLoggedIn,getCtrl.getAbsenceView);
 
     //Sites
     app.get('/menu', isLoggedIn, getCtrl.getMenuSite);
@@ -84,7 +84,7 @@ module.exports = function (app, passport) {
   //  app.post('/newUser',isLoggedIn,postCtrl.postNewUser);
 
     app.post('/newEmployee',isAdmin, function(req,res){
-        model.postNewUserQuery(req,res, function(err,res){
+        model.postNewUserFall(req,res, function(err,res){
             if(err){
                 console.log("\n\n===ERR===\n\n");
             }else{
@@ -95,6 +95,10 @@ module.exports = function (app, passport) {
 
         })
     });
+    app.post('/forgotPassword',model.forgotPwMail, function(err){
+        console.log("SHOULD BE DONE=??????\n\n\n\n",err);
+    });
+    app.post('/newLogin',isLoggedIn,model.sendOnlyLogin);
 
 
     //MÅ VÆRE SIST

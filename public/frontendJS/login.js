@@ -7,14 +7,16 @@ $(function () {
     })
 });
 $(function () {
-    $('#forgot password').on('click',function () {
+    $('#saveEdit').on('click',function () {
+        alert($("#email").val());
         e.preventDefault();
         $.ajax({
-            url: '/updateEmployee',
+            url: '/forgotPassword',
             type: 'POST',
             data: {'email': $("#email").val(),'username': $("#username2").val()},
             success: function(data){
-                console.log(JSON.stringify(data));
+                console.log("HORSES FUCK YEAH",JSON.stringify(data));
+                alert("Success!");
                 //document.getElementById('newUserFeedback').innerHTML("Success");
             }
         });

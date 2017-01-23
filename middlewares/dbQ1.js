@@ -40,6 +40,9 @@ module.exports = {
     getOvertime: function (req, res) {
         dbHelper.getdbQuery(req, res, "select * from Overtime");
     },
+    getAbsenceView : function (req, res) {
+        dbHelper.getdbQuery(req,res,"select e.name as Navn,s.shift_id as Skift,s.date as Dato,a.explanation_absence as Årsak from Employee e,Shift s,shift_has_employee she,Absence a where e.employee_id = she.employee_id and s.shift_id = she.shift_id and a.shift_id = she.shift_id and a.checked_by_admin = 0 group by e.name");
+    },
     getSaltHash: function (req, res) {
         dbHelper.getdbQuery(req, res, "select password_hash, password_salt, is_admin from LoginInfo where Username = ?", req.body.username);
     },
