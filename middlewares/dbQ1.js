@@ -15,7 +15,7 @@ module.exports = {
     getDepartment: function (req, res) {
         //var get = {department_id:req.body.department_id};
         console.log("Overview Department");
-        dbHelper.getdbQuery(req, res, "select * from Department");
+        dbHelper.getdbQuery(req, res, "select * from Department"); // where department_id = ?",req.body.department_id);
     },
     getType: function (req, res) {
         console.log("Overview Type");
@@ -53,23 +53,31 @@ module.exports = {
         console.log("USER ID "+req.session.passport.user.id);
         dbHelper.getdbQuery(req, res, "select * from Employee_Shifts_toCurrentDate where employee_id = ?",[req.session.passport.user.id]);
     },
-    getEvents : function (req,res) {
-        dbHelper.dbQuery(req, res, "select * from JSON_EMPLOYEE_VIEW");
+    getPersonalShiftEvents : function (req, res) {
+        dbHelper.getdbQuery(req, res, "select * from JSON_EMPLOYEE_VIEW where employee_id = ? And start >= CURDATE()", req.session.passport.user.id);
     },
+    getPossibleSiftsEvents : function (req, res) {
+        console.log("USER ID "+req.session.passport.user.id);
+        dbHelper.getdbQuery(req,res,"select end, start, id, title from available_shift_emp where employee_id = ?", req.session.passport.user.id);
+    }
+        ,
     /*simpleLogin : function(username){
         dbHelper.simpleLogin("select * from LoginInfo where Username = ?", [username]);
     },*/
     getVaktliste1 : function(req,res){
-        dbHelper.getdbQuery(req, res, "select * from WORKTOGETHERTODAY1 where and department_id = ?",[req.params.department_id]); //req.params.ShiftStart,
+        dbHelper.getdbQuery(req, res, "select * from WORKTOGETHERTODAY1"); // where department_id = ?", req.params.department_id); //req.params.ShiftStart,
     },
     getVaktliste2 : function(req,res){
-        dbHelper.getdbQuery(req, res, "select * from WORKTOGETHERTODAY2 where s.date = ? and department_id = ?",[req.params.ShiftStart, req.params.department_id]);
+        dbHelper.getdbQuery(req, res, "select * from WORKTOGETHERTODAY2"); //,[req.params.department_id]); //req.params.ShiftStart,
     },
     getVaktliste3 : function(req,res){
-        dbHelper.getdbQuery(req, res, "select * from WORKTOGETHERTODAY3 where s.date = ? and department_id = ?",[req.params.ShiftStart, req.params.department_id]);
+        dbHelper.getdbQuery(req, res, "select * from WORKTOGETHERTODAY3"); //,[req.params.department_id]); //req.params.ShiftStart,
     },
     getTypeNames : function (req, res) {
         dbHelper.getdbQuery(req,res,"Select name from Type;")
+    },
+    getNextShiftForEmp : function (req, res) {
+        dbHelper.getdbQuery(req,res,"Select DATE_FORMAT(MIN(s.date), '%m/%d/%Y %H:%i') as ndate, e.employee_id, d.department_name From Employee e, shift_has_employee she, Shift s, Department d Where s.date > now() And e.employee_id = she.employee_id And she.shift_id = s.shift_id And s.department_id = d.department_id and e.employee_id = ?", [req.session.passport.user.id]);
     },
     /**
     getVaktoversikt : function(req,res){
@@ -94,7 +102,7 @@ module.exports = {
     getVaktliste : function (req, res) {
         dbHelper.dbQuery(req, res, "select * from TestVaktliste");
     },
-    getEvents : function (req,res) {
+    getPersonalShiftEvents : function (req,res) {
         dbHelper.dbQuery(req, res, "select * from JSON_VIEW");
     },
 /*

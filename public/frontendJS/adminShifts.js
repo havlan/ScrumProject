@@ -18,7 +18,7 @@ $(document).ready(function() {
         eventColor: '#000000', //default event color //can be set individually
         eventTextColor: '#ffffff', //default event text color
         //GETTING EVENTS FROM JSON FEED; SHORT AND EXTENDED
-        events: '/getEvents', //TODO
+        events: '/getPersonalShiftEvents', //TODO
         eventClick: function(event) {
             //TODO sumfin
             //elsempel, åpner event url

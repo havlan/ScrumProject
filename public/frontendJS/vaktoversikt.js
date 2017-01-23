@@ -1,7 +1,6 @@
 /**
  * Created by LittleGpNator on 13.01.2017.
  */
-
 $( document ).ready(function() {
     $(function(){
         $("#includedContent").load("troll");
@@ -15,22 +14,27 @@ $.get('/getDepartment', {}, function(req, res, data){
     console.log(data);
     console.log(data.responseJSON);
 
-    departments = data.responseJSON;
+    department = data.responseJSON;
 
     makeDropdown('#departmentInput')
 });
 
 function makeDropdown(selector) {
-    var columns = addAllColumnHeaders(departments, selector);
-    for (var i = 0; i < departments.length; i++) {
-        var cellValue0 = departments[i][columns[0]];
-        var cellValue1 = departments[i][columns[1]];
+    var columns = addAllColumnHeaders(department, selector);
+    for (var i = 0; i < department.length; i++) {
+        var cellValue0 = department[i][columns[0]];
+        var cellValue1 = department[i][columns[1]];
+        if (cellValue0 == null) cellValue0 = "Ingen data fra DB";
         if (cellValue1 == null) cellValue1 = "Ingen data fra DB";
-        var option = $('<option />').text(cellValue0 + "    " + cellValue1);
+        var option = $('<option />').text(cellValue0 + " - " + cellValue1);
         $(selector).append(option);
     }
 }
+/*
+$('#departmentInput').on('click',function () {
 
+});
+ */
 
 $.get('/getVaktliste1', {}, function(req, res, data){
     console.log(data);

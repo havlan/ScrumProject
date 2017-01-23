@@ -28,9 +28,12 @@ module.exports = function (app, passport) {
     app.get('/getVaktliste2', isLoggedIn, getCtrl.getVaktliste2);
     app.get('/getVaktliste3', isLoggedIn, getCtrl.getVaktliste3);
     app.get('/getEmployee_shifts_toCurrentDate', isLoggedIn, getCtrl.getEmployee_shifts_toCurrentDate);
-    app.get('/getEvents',isLoggedIn, getCtrl.getEvents);
+    app.get('/getPersonalShiftEvents',isLoggedIn, getCtrl.getPersonalShiftEvents);
     app.get('/getTypeNames',isLoggedIn, getCtrl.getTypeNames);
+    app.get('/getPossibleSiftsEvents',isLoggedIn,getCtrl.getPossibleSiftsEvents);
     app.get('/getDepartment',isLoggedIn, getCtrl.getDepartment);
+    app.get('/getNextShiftForEmp',isLoggedIn, getCtrl.getNextShiftForEmp);
+
     app.get('/getAbsenceView',isLoggedIn,getCtrl.getAbsenceView);
 
     //Sites
@@ -84,7 +87,7 @@ module.exports = function (app, passport) {
   //  app.post('/newUser',isLoggedIn,postCtrl.postNewUser);
 
     app.post('/newEmployee',isAdmin, function(req,res){
-        model.postNewUserFall(req,res, function(err,res){
+        model.postNewUserQuery(req,res, function(err,res){
             if(err){
                 console.log("\n\n===ERR===\n\n");
             }else{
@@ -95,10 +98,6 @@ module.exports = function (app, passport) {
 
         })
     });
-    app.post('/forgotPassword',model.forgotPwMail, function(err){
-        console.log("SHOULD BE DONE=??????\n\n\n\n",err);
-    });
-    app.post('/newLogin',isLoggedIn,model.sendOnlyLogin);
 
 
     //MÅ VÆRE SIST

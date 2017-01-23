@@ -26,7 +26,6 @@
     padding: 5px;
 }
 .input{
-    margin-left: 33%;
     text-align: left;
 }
 #excelDataTable tr {
@@ -103,10 +102,11 @@ img {
     display: inline-block;
     font-size: 16px;
 }
-#add{
+#addBtn{
     margin-left: 10px;
     background-color: #4273af;
     border: none;
+    border-radius: 5px;
     color: white;
     padding: 10px 20px;
     position: relative;
@@ -191,4 +191,46 @@ img {
     text-align: left;
     padding-left:5%;
     padding-bottom: 2%;
+}
+
+@media
+only screen and (max-width: 760px),
+(min-device-width: 768px) and (max-device-width: 1024px)  {
+
+
+    /* Hide table headers (but not display: none;, for accessibility) */
+    thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+
+    td:nth-child(3) {
+        display:none;
+    }
+    td:nth-child(4) {
+        display:none;
+    }
+    td:nth-child(5) {
+        display:none;
+    }
+    td:nth-child(6) {
+        display:none;
+    }
+    td:nth-child(9) {
+        display:none;
+    }
+    td:nth-child(10) {
+        display:none;
+    }
+}
+
+.table-responsive {
+    width: 100%;
+    margin-bottom: 15px;
+    overflow-y: hidden;
+    overflow-x: scroll;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+    border: 1px solid #DDD;
+    -webkit-overflow-scrolling: touch;
 }
