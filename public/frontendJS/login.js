@@ -7,9 +7,8 @@ $(function () {
     })
 });
 $(function () {
-    $('#saveEdit').on('click',function () {
-        alert($("#email").val());
-        e.preventDefault();
+    $('#saveEdit').on('click',function (e) {
+       // e.preventDefault();
         $.ajax({
             url: '/forgotPassword',
             type: 'POST',
@@ -17,7 +16,6 @@ $(function () {
             success: function(data){
                 console.log("HORSES FUCK YEAH",JSON.stringify(data));
                 alert("Success!");
-                //document.getElementById('newUserFeedback').innerHTML("Success");
             }
         });
     })

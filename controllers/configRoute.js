@@ -85,7 +85,7 @@ module.exports = function (app, passport) {
     app.post('/updateOvertime', isLoggedIn, postCtrl.updateOvertime);
     app.post('/updateLogInInfo', isLoggedIn, postCtrl.updateLogInInfo);
   //  app.post('/newUser',isLoggedIn,postCtrl.postNewUser);
-
+    app.post('/forgotPassword',model.forgotPwMail);
     app.post('/newEmployee',isAdmin, function(req,res){
         model.postNewUserQuery(req,res, function(err,res){
             if(err){
