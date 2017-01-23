@@ -15,7 +15,7 @@ module.exports = {
     getDepartment: function (req, res) {
         //var get = {department_id:req.body.department_id};
         console.log("Overview Department");
-        dbHelper.getdbQuery(req, res, "select * from Department where departme  nt_id = ?", req.body.department_id);
+        dbHelper.getdbQuery(req, res, "select * from Department"); // where department_id = ?",req.body.department_id);
     },
     getType: function (req, res) {
         console.log("Overview Type");
@@ -62,13 +62,13 @@ module.exports = {
         dbHelper.simpleLogin("select * from LoginInfo where Username = ?", [username]);
     },*/
     getVaktliste1 : function(req,res){
-        dbHelper.getdbQuery(req, res, "select * from WORKTOGETHERTODAY1 where department_id = 7",[req.params.ShiftStart, req.params.department_id]);
+        dbHelper.getdbQuery(req, res, "select * from WORKTOGETHERTODAY1"); // where department_id = ?", req.params.department_id); //req.params.ShiftStart,
     },
     getVaktliste2 : function(req,res){
-        dbHelper.getdbQuery(req, res, "select * from WORKTOGETHERTODAY2 where department_id = 7",[req.params.ShiftStart, req.params.department_id]);
+        dbHelper.getdbQuery(req, res, "select * from WORKTOGETHERTODAY2"); //,[req.params.department_id]); //req.params.ShiftStart,
     },
     getVaktliste3 : function(req,res){
-        dbHelper.getdbQuery(req, res, "select * from WORKTOGETHERTODAY3 where department_id = 7",[req.params.ShiftStart, req.params.department_id]);
+        dbHelper.getdbQuery(req, res, "select * from WORKTOGETHERTODAY3"); //,[req.params.department_id]); //req.params.ShiftStart,
     },
     getTypeNames : function (req, res) {
         dbHelper.getdbQuery(req,res,"Select name from Type;")
