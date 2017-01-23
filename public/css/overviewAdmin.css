@@ -44,9 +44,9 @@
 .infoCard {
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     transition: 0.3s;
-    width: 40%;
+    width: 30%;
     border-radius: 5px;
-    position: absolute;
+    position: fixed;
 }
 
 .infoCard:hover {
@@ -70,6 +70,7 @@ img {
     background-color: #f1f1f1;
     border: none;
     color: black;
+    position: relative;
     padding: 10px 20px;
     text-align: center;
     text-decoration: none;
@@ -80,6 +81,7 @@ img {
     background-color: #f1f1f1;
     border: none;
     color: black;
+    position: relative;
     padding: 10px 20px;
     text-align: center;
     text-decoration: none;
@@ -91,6 +93,7 @@ img {
     background-color: indianred;
     border: none;
     color: white;
+    position: relative;
     padding: 10px 20px;
     text-align: center;
     text-decoration: none;
@@ -103,12 +106,15 @@ img {
     border: none;
     color: white;
     padding: 10px 20px;
+    position: relative;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
 }
-
+#myModal .modal-dialog{
+    width: 800px;
+}
 #personForm {
     position: relative;
     width: 50%;

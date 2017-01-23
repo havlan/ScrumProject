@@ -132,6 +132,7 @@ function hideInfo() {
     document.getElementById("edit").style.display="none";
     document.getElementById("back").style.display="inline";
     document.getElementById("back").style.display="inline";
+    document.getElementById("addInfo").style.display="none";
 }
 
 $(function() {
