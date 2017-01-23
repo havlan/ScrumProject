@@ -110,6 +110,11 @@ function addAllColumnHeaders(myList, selector) {
     return columnSet;
 }
 
+
+// dato
+var dh2 = new Date();
+document.getElementById("date").innerHTML = dh2.toDateString();
+
 //function tableCreate(){
 //    var body = document.body,
 //        tbl  = document.createElement('table');
