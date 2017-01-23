@@ -106,14 +106,14 @@ function removeFunction() {
 }
 //add employee logininfo
 function addFunction() {
-        $.ajax({
-            url:'newUser',
-            type:'POST',
-            data:{'username':$('#username'),'is_admin':$('#is_admin')},
-            success:function (data) {
-                alert('Bruker lagt til systemet');
-            }
-        });
+    document.getElementById("personInfo").style.display = "none";
+    document.getElementById("personForm").style.display = "none";
+    document.getElementById("logInInfo").style.display = "block";
+    document.getElementById("remove").style.display = "none";
+    document.getElementById("edit").style.display="none";
+    document.getElementById("back").style.display="inline";
+    document.getElementById("addInfo").style.display="none";
+
 }
 function hideForm() {
     document.getElementById('personForm').style.display = "none";
@@ -121,6 +121,8 @@ function hideForm() {
     document.getElementById("edit").style.display = "inline";
     document.getElementById("remove").style.display = "inline";
     document.getElementById("back").style.display = "none";
+    document.getElementById("logInInfo").style.display = "none";
+    document.getElementById("addInfo").style.display="inline";
 }
 
 function hideInfo() {
@@ -132,11 +134,25 @@ function hideInfo() {
     document.getElementById("back").style.display="inline";
 }
 
-function saveFunction() {
-    if (confirm("Er du sikker på at du vil lagre?") == true) {
-
-    }
-}
+$(function() {
+    $('#logInInfo').on('submit', function (e) {
+        alert(indeks);
+        if (confirm("Er du sikker på at du vil lagre?") == true) {
+            e.preventDefault();
+            $.ajax({
+                url: 'newUser',
+                type: 'POST',
+                data: {'username': $('#username').val(), 'is_admin': $('#is_admin').val(),'employee_id':indeks},
+                success: function (data) {
+                    alert('Bruker lagt til systemet');
+                },
+                failure: function (data) {
+                    alert('Ansatt har allerede en bruker i systemet');
+                }
+            });
+        }
+    });
+});
 
 //myModal info
 $(document).on('click','#excelDataTable tr',function(){
@@ -194,7 +210,7 @@ $(function(){
             data: {'name': $("#navndb").val(),'address':$('#adressedb').val(),'email':$('#epostdb').val(),'type_name':$('#stillingdb').val(),'pers_id':$('#personnummerdb').val(),'phone_nr':$('#telefondb').val(),'employee_id':indeks},
             success: function(data){
                 console.log(JSON.stringify(data));
-                document.getElementById('newUserFeedback').innerHTML("Success");
+                //document.getElementById('newUserFeedback').innerHTML("Success");
             }
         });
     });

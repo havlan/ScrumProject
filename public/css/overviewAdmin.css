@@ -99,7 +99,14 @@ img {
     font-size: 16px;
 }
 
-#personForm{
+#personForm {
+    position: relative;
+    width: 50%;
+    margin-left: 45%;
+    text-align: right;
+    padding-bottom: 5%;
+}
+#logInInfo{
     position: relative;
     width: 50%;
     margin-left: 45%;

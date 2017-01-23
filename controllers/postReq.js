@@ -31,6 +31,9 @@ module.exports = {
     postLogInInfo : function (req, res) {
         dbMiddelware.postnewLogInInfo(req,res);
     },
+    postNewUser : function (req, res) {
+        dbMiddelware.postnewUser(req,res);
+    },
     //UPDATE
     updateShift_has_employee : function (req, res) {
         dbMiddelware.updateShift_has_employee(req,res);
