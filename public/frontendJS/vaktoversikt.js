@@ -1,14 +1,11 @@
 /**
  * Created by LittleGpNator on 13.01.2017.
  */
-$( document ).ready(function() {
-    $(function(){
-        $("#includedContent").load("troll");
-    });
-});
 
-
-var myList= [];
+var myList1= [];
+var myList2= [];
+var myList3= [];
+var department= [];
 
 $.get('/getDepartment', {}, function(req, res, data){
     console.log(data);
@@ -16,73 +13,50 @@ $.get('/getDepartment', {}, function(req, res, data){
 
     department = data.responseJSON;
 
-    makeDropdown('#departmentInput')
+    makeDropdown('#departmentInput',department);
 });
 
-function makeDropdown(selector) {
+function makeDropdown(selector,department) {
     var columns = addAllColumnHeaders(department, selector);
     for (var i = 0; i < department.length; i++) {
-        var cellValue0 = department[i][columns[0]];
-        var cellValue1 = department[i][columns[1]];
+        var cellValue0 = department[i][columns[1]];
         if (cellValue0 == null) cellValue0 = "Ingen data fra DB";
-        if (cellValue1 == null) cellValue1 = "Ingen data fra DB";
-        var option = $('<option />').text(cellValue0 + " - " + cellValue1);
+        var option = $('<option />').text(cellValue0);
         $(selector).append(option);
     }
 }
-/*
-$('#departmentInput').on('click',function () {
-
-});
- */
 
 $.get('/getVaktliste1', {}, function(req, res, data){
-    console.log(data);
-    console.log(data.responseJSON[0]);
-    myList = data.responseJSON;
-    //document.getElementById("data").innerHTML = myList;
+    myList1 = data.responseJSON;
 
-    $("#includedContent").load("menu");
+    buildHtmlTable('#dayTable',myList1);
 
-    buildHtmlTable('#dayTable')
-
-    //tableCreate();
 });
 
 $.get('/getVaktliste2', {}, function(req, res, data){
-    console.log(data);
-    console.log(data.responseJSON[0]);
-    myList = data.responseJSON;
-    //document.getElementById("data").innerHTML = myList;
 
-    $("#includedContent").load("menu");
+    myList2 = data.responseJSON;
 
-    buildHtmlTable('#eveningTable')
+    buildHtmlTable('#eveningTable',myList2);
 
-    //tableCreate();
 });
 
 $.get('/getVaktliste3', {}, function(req, res, data){
-    console.log(data);
-    console.log(data.responseJSON[0]);
-    myList = data.responseJSON;
-    //document.getElementById("data").innerHTML = myList;
 
-    $("#includedContent").load("menu");
+    myList3 = data.responseJSON;
 
-    buildHtmlTable('#nightTable')
+    buildHtmlTable('#nightTable',myList3);
 
-    //tableCreate();
 });
 
 
-function buildHtmlTable(selector) {
-    var columns = addAllColumnHeaders(myList, selector);
+function buildHtmlTable(selector,list) {
+    var columns = addAllColumnHeaders(list, selector);
     var tbody = $('<tbody/>');
-    for (var i = 0; i < myList.length; i++) {
+    for (var i = 0; i < list.length; i++) {
         var row$ = $('<tr/>');
         for (var colIndex = 0; colIndex < columns.length; colIndex++) {
-            var cellValue = myList[i][columns[colIndex]];
+            var cellValue = list[i][columns[colIndex]];
             if (cellValue == null) cellValue = "";
             row$.append($('<td/>').html(cellValue));
         }
@@ -91,13 +65,13 @@ function buildHtmlTable(selector) {
     }
     $(selector).append(tbody);
 }
-function addAllColumnHeaders(myList, selector) {
+function addAllColumnHeaders(list, selector) {
 
     var columnSet = [];
     var headerThead$ = $('<thead/>');
     var headerTr$ = $('<tr/>');
-    for (var i = 0; i < myList.length; i++) {
-        var rowHash = myList[i];
+    for (var i = 0; i < list.length; i++) {
+        var rowHash = list[i];
         for (var key in rowHash) {
             if ($.inArray(key, columnSet) == -1) {
                 columnSet.push(key);
@@ -114,32 +88,3 @@ function addAllColumnHeaders(myList, selector) {
     $("#cover").fadeOut(20);
     return columnSet;
 }
-
-
-// dato
-var dh2 = new Date();
-document.getElementById("date").innerHTML = dh2.toDateString();
-
-//function tableCreate(){
-//    var body = document.body,
-//        tbl  = document.createElement('table');
-//    tbl.style.width  = '100px';
-//    tbl.style.border = '1px solid black';
-//
-//    for(var i = 0; i < 3; i++){
-//        var tr = tbl.insertRow();
-//        for(var j = 0; j < 2; j++){
-//            if(i == 2 && j == 1){
-//                break;
-//            } else {
-//                var td = tr.insertCell();
-//                td.appendChild(document.createTextNode('Cell'));
-//                td.style.border = '1px solid black';
-//                if(i == 1 && j == 1){
-//                    td.setAttribute('rowSpan', '2');
-//                }
-//            }
-//        }
-//    }
-//    body.appendChild(tbl);
-//}
