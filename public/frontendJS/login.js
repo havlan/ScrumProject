@@ -8,11 +8,11 @@ $(function () {
 });
 $(function () {
     $('#saveEdit').on('click',function (e) {
-       // e.preventDefault();
+        e.preventDefault();
         $.ajax({
             url: '/forgotPassword',
             type: 'POST',
-            data: {'email': $("#email").val(),'username': $("#username2").val()},
+            data: $('#forgot').serialize(),
             success: function(data){
                 console.log("HORSES FUCK YEAH",JSON.stringify(data));
                 alert("Success!");
