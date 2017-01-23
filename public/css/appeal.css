@@ -24,6 +24,11 @@
     margin-top: 8%;
 }
 
+textarea{
+    width: 40%;
+    height: 100px;
+}
+
 .approveButton span {
     cursor: pointer;
     display: inline-block;
