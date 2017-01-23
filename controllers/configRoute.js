@@ -31,6 +31,7 @@ module.exports = function (app, passport) {
     app.get('/getEvents',isLoggedIn, getCtrl.getEvents);
     app.get('/getTypeNames',isLoggedIn, getCtrl.getTypeNames);
     app.get('/getDepartment',isLoggedIn, getCtrl.getDepartment);
+    app.get('/getNextShiftForEmp',isLoggedIn, getCtrl.getNextShiftForEmp);
 
 
     //Sites

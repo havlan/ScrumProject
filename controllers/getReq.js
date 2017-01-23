@@ -127,6 +127,9 @@ module.exports = {
     getTypeNames : function (req, res) {
         dbMiddelware.getTypeNames(req,res);
     },
+    getNextShiftForEmp : function (req, res) {
+        dbMiddelware.getNextShiftForEmp(req,res);
+    },
     get403 : function (req, res) {
         res.status(403).sendFile(path.join(__dirname + '/../views/403.html'));
     },
