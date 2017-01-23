@@ -19,18 +19,19 @@ $(document).ready(function() {
         //GETTING EVENTS FROM JSON FEED; SHORT AND EXTENDED
         eventSources: [
             {
-                url: '/getEvents', // use the `url` property
+                url: '/getPersonalShiftEvents', // use the `url` property
                 color: 'green',    // an option!
                 textColor: 'black'  // an option!
             },
             {
-                url: '/getEvents', // use the `url` property
+                url: '/getPossibleSiftsEvents', // use the `url` property
                 color: 'yellow',    // an option!
                 textColor: 'black'  // an option!
             }],
         eventClick: function(event) {
             //TODO sumfin
-            //elsempel, åpner event url
+            //elsempel, åpner event urle
+            //console.log(event.toString());
             window.open(event.url, 'gcalevent', 'width=700,height=600');
             return false;
         }
