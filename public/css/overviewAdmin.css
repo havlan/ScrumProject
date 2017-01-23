@@ -25,7 +25,10 @@
     text-align: left;
     padding: 5px;
 }
-
+.input{
+    margin-left: 33%;
+    text-align: left;
+}
 #excelDataTable tr {
     border-bottom: 1px solid #ddd;
 }
@@ -78,9 +81,9 @@ img {
     font-size: 16px;
 }
 #addInfo{
-    background-color: #f1f1f1;
+    background-color: lightgreen;
     border: none;
-    color: black;
+    color: white;
     position: relative;
     padding: 10px 20px;
     text-align: center;
@@ -141,8 +144,8 @@ img {
     padding-top: 10%;
 }
 #personInfo{
-    margin-left: 45%;
-    text-align: right;
+    margin-left: 33%;
+    text-align: left;
     font-size: 16px;
 }
 #picEmp{

@@ -42,35 +42,35 @@
                     <button type="button" id="addPicEmp">Legg til bilde</button>
                     <form id="addEmp">
                         Brukernavn:
-                        <input required id="brukernavn" type="text" name="username" placeholder="eks: småripshunter69">
+                        <input required class="input" id="brukernavn" type="text" name="username" placeholder="eks: ola_nordmann_96">
                         <br>
-                        Er_Admin:
-                        <input required id="admin" type="number" name="admin" placeholder="eks: 0 eller 1">
+                        Brukertype:
+                        <input required class="input" id="admin" type="number" name="admin" placeholder="eks: 0 eller 1">
                         <br>
                         Navn:
-                        <input required id="fornavn" type="text" name="name" placeholder="eks: Jan Skrotnes">
+                        <input required class="input" id="fornavn" type="text" name="name" placeholder="eks: Jan Skrotnes">
                         <br>
                         Stilling:
-                        <select id= "stilling">
+                        <select class="input" id= "stilling">
                         </select>
                         <br>
                         Telefonnummer:
-                        <input required id="telefon" type="number" name="phone" placeholder="eks: +47 12345678">
+                        <input required class="input" id="telefon" type="number" name="phone" placeholder="eks: +47 12345678">
                         <br>
                         E-postadresse:
-                        <input required id="epost" type="text" name="email" placeholder="eks: noen@mail.no">
+                        <input required class="input" id="epost" type="text" name="email" placeholder="eks: noen@mail.no">
                         <br>
                         Adresse:
-                        <input required id="adresse" type="text" name="address" placeholder="eks: Gateveien 1">
+                        <input required class="input" id="adresse" type="text" name="address" placeholder="eks: Gateveien 1">
                         <br>
                         Personnummer:
-                        <input required id="personnummer" type="text" name="persNo" placeholder="11 siffer">
+                        <input required class="input" id="personnummer" type="text" name="persNo" placeholder="11 siffer">
                         <br>
                         Seniority:
-                        <input required id="seniority" type="text" name="seniority" placeholder="eks: 69">
+                        <input required class="input" id="seniority" type="text" name="seniority" placeholder="eks: 69">
                         <br>
                         Responsibility:
-                        <input required id="responsibility" type="text" name="responsibility" placeholder="1 or 0">
+                        <input required class="input" id="responsibility" type="text" name="responsibility" placeholder="1 or 0">
                         <br>
                         <br>
                         <br>
@@ -165,11 +165,12 @@
                     </section>
                     <section id="logInInfo" style="display:none;">
                         <form id="loginForm">
+                            <p>Fungerer bare hvis ansatt ikke allerede har en bruker</p>
                             Brukernavn:
-                            <input required id="username" type="text" name="Brukernavn">
+                            <input required class="input" id="username" type="text" name="Brukernavn">
                             <br>
-                            Er_Admin:
-                            <input required id="is_admin" type="text" name="Admin?">
+                            Brukertype:
+                            <input required class="input" id="is_admin" type="text" name="Admin?">
                             <br>
                             <br>
                             <button type="submit" value="submit" display="none">Lagre</button>
