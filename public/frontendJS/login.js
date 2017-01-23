@@ -6,3 +6,17 @@ $(function () {
         $('#newPassword').modal("show");
     })
 });
+$(function () {
+    $('#forgot password').on('click',function () {
+        e.preventDefault();
+        $.ajax({
+            url: '/updateEmployee',
+            type: 'POST',
+            data: {'email': $("#email").val(),'username': $("#username2").val()},
+            success: function(data){
+                console.log(JSON.stringify(data));
+                //document.getElementById('newUserFeedback').innerHTML("Success");
+            }
+        });
+    })
+});

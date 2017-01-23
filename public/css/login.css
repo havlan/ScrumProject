@@ -22,6 +22,25 @@
 .etc-login-form p {
   margin-bottom: 5px;
 }
+.inputEdit{
+  width:100%;
+}
+#saveEdit{
+  background-color: royalblue;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  position: relative;
+  margin-left: 70%;
+  border-radius:5px;
+}
+#newPassword .modal-dialog{
+  width: 350px;
+}
 .form input {
   font-family: "Roboto", sans-serif;
   outline: 0;
