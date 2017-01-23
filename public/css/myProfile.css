@@ -61,8 +61,22 @@ h1{
     display: inline-block;
     font-size: 16px;
     position: absolute;
-    margin-left: 200px;
+    margin-left: 350px;
     border-radius:5px;
+}
+#passwordBtn{
+    background-color: royalblue ;
+    margin-top: 40px;
+    border:none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    position: absolute;
+    margin-left: 198px;
+    border-radius: 5px;
 }
 
 #picBtn{
@@ -110,7 +124,7 @@ h1{
     padding: 1%;
 }
 
-#saveEdit{
+.saveEdit{
     background-color: royalblue;
     border: none;
     color: white;
@@ -138,4 +152,7 @@ h1{
     margin-left: 5%;
 }
 
+#passwordForm{
+    padding:10px;
+}
 
