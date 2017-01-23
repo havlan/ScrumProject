@@ -159,10 +159,23 @@
                             </tr>
                         </table>
                     </section>
+                    <section id="logInInfo" style="display:none;">
+                        <form id="loginForm">
+                            Brukernavn:
+                            <input required id="username" type="text" name="Brukernavn">
+                            <br>
+                            Er_Admin:
+                            <input required id="is_admin" type="text" name="Admin?">
+                            <br>
+                            <br>
+                            <button type="submit" value="submit" display="none">Lagre</button>
+                            <button type="button" id="back2" onclick="hideForm()" display="none">&#8592;Tilbake</button>
+                        </form>
+                    </section>
                     <aside class="buttons">
                         <button type="button" id="edit" onclick="hideInfo()" display="inline">Rediger ansatt</button>
-                        <button type="button" id="remove" onclick="removeFunction()" data-dismiss="modal" display="inline">Fjern loginInfo</button>
-                        <button type="button" id="addInfo" onclick="">Legg til loginInfo</button>
+                        <button type="button" id="remove" onclick="removeFunction()" data-dismiss="modal" display="inline">Fjern bruker</button>
+                        <button type="button" id="addInfo" onclick="addFunction()" data-dismiss="modal" display="inline">Legg til bruker</button>
                     </aside>
                 </main>
 

@@ -6,6 +6,7 @@ var postCtrl = require('./postReq');
 var delCtrl = require('./delReq');
 var model = require('../models/regWMail');
 
+
 module.exports = function (app, passport) {
     app.get('/', isLoggedIn, getCtrl.getRoot);
     app.get('/user', isLoggedIn, getCtrl.getUser);
@@ -77,6 +78,7 @@ module.exports = function (app, passport) {
     app.post('/updateAbsence', isLoggedIn, postCtrl.updateAbsence);
     app.post('/updateOvertime', isLoggedIn, postCtrl.updateOvertime);
     app.post('/updateLogInInfo', isLoggedIn, postCtrl.updateLogInInfo);
+    app.post('/newUser',isLoggedIn,postCtrl.postNewUser);
 
     app.post('/newEmployee',isAdmin, function(req,res){
         model.postNewUserQuery(req,res, function(err,res){

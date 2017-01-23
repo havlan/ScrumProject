@@ -90,19 +90,30 @@ function searchPositionFunction() {
         }
     }
 }
-// remove employee
+// remove employee logininfo
 function removeFunction() {
-    alert(indeks);
+   // alert(indeks);
     if (confirm("Er du sikker på at du vil fjerne denne ansatte?\n Informasjon om den ansatte vil fortsatt ligge i systemet\n Men den ansatte kan ikke lenger bruke det") == true) {
         $.ajax({
             url: '/delUser', //this is the submit URL
             type: 'POST',
             data: {'employee_id':indeks},
             success: function(data){
-                alert('successfully submitted')
+                alert('Bruker fjernet fra systemet')
             }
         });
     }
+}
+//add employee logininfo
+function addFunction() {
+        $.ajax({
+            url:'',
+            type:'POST',
+            data:{'username':$('#username'),'is_admin':$('#is_admin')},
+            success:function (data) {
+                alert('Bruker lagt til systemet');
+            }
+        });
 }
 function hideForm() {
     document.getElementById('personForm').style.display = "none";
