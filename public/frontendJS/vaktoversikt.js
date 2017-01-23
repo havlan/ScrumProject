@@ -12,7 +12,7 @@ $( document ).ready(function() {
 var myList= [];
 
 
-$.get('/getVaktliste', {}, function(req, res, data){
+$.get('/getVaktliste1', {}, function(req, res, data){
     console.log(data);
     console.log(data.responseJSON[0]);
     myList = data.responseJSON;
@@ -21,12 +21,35 @@ $.get('/getVaktliste', {}, function(req, res, data){
     $("#includedContent").load("menu");
 
     buildHtmlTable('#dayTable')
-    buildHtmlTable('#eveningTable')
-    buildHtmlTable('#nightTable')
+
     //tableCreate();
 });
 
+$.get('/getVaktliste2', {}, function(req, res, data){
+    console.log(data);
+    console.log(data.responseJSON[0]);
+    myList = data.responseJSON;
+    //document.getElementById("data").innerHTML = myList;
 
+    $("#includedContent").load("menu");
+
+    buildHtmlTable('#eveningTable')
+
+    //tableCreate();
+});
+
+$.get('/getVaktliste3', {}, function(req, res, data){
+    console.log(data);
+    console.log(data.responseJSON[0]);
+    myList = data.responseJSON;
+    //document.getElementById("data").innerHTML = myList;
+
+    $("#includedContent").load("menu");
+
+    buildHtmlTable('#nightTable')
+
+    //tableCreate();
+});
 
 
 function buildHtmlTable(selector) {

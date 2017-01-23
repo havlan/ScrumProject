@@ -13,22 +13,29 @@
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
         <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
             <a class="navbar-brand" href="#">Min Vakt</a>
         </div>
-        <ul class="nav navbar-nav">
-            <li><a href="/calendar"         >Hjem</a></li>
-            <li><a href="/overviewForAdmin" >Oversikt for Admin</a></li>
-            <li><a href="/myProfile"        >Min Profil</a></li>
-            <li><a href="/frontpageAdmin"   >Admin</a></li>
-            <li><a href="/approvalAdmin"    >Godkjenning</a></li>
-            <li><a href="/appeal"           >Forespørsel</a></li>
-            <li><a href="/vaktoversikt"     >Shiftlist</a></li>
-            <li><a href="/adminShifts"      >Admin vakter</a></li>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+                <li><a href="/calendar"         >Hjem</a></li>
+                <li><a href="/overviewForAdmin" >Oversikt for Admin</a></li>
+                <li><a href="/myProfile"        >Min Profil</a></li>
+                <li><a href="/frontpageAdmin"   >Admin</a></li>
+                <li><a href="/approvalAdmin"    >Godkjenning</a></li>
+                <li><a href="/appeal"           >Forespørsel</a></li>
+                <li><a href="/vaktoversikt"     >Shiftlist</a></li>
+                <li><a href="/adminShifts"      >Admin vakter</a></li>
 
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-            <li><a href="#"><span class="glyphicon glyphicon-log-in"></span>Logout</a></li>
-        </ul>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/logout"><span class="glyphicon glyphicon-log-in"></span>Logout</a></li>
+            </ul>
+        </div>
     </div>
 </nav>
 

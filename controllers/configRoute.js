@@ -24,7 +24,9 @@ module.exports = function (app, passport) {
     app.get('/getOvertime', isLoggedIn, getCtrl.getOvertime);
     //app.get('/getUserInfo', isLoggedIn, getCtrl.getUserInfo);
     app.get('/getVaktoversiktSite', isLoggedIn, getCtrl.getVaktoversiktSite);
-    app.get('/getVaktliste', isLoggedIn, getCtrl.getVaktliste);
+    app.get('/getVaktliste1', isLoggedIn, getCtrl.getVaktliste1);
+    app.get('/getVaktliste2', isLoggedIn, getCtrl.getVaktliste2);
+    app.get('/getVaktliste3', isLoggedIn, getCtrl.getVaktliste3);
     app.get('/getEmployee_shifts_toCurrentDate', isLoggedIn, getCtrl.getEmployee_shifts_toCurrentDate);
     app.get('/getEvents',isLoggedIn, getCtrl.getEvents);
     app.get('/getTypeNames',isLoggedIn, getCtrl.getTypeNames);

@@ -113,8 +113,14 @@ module.exports = {
     getEmployee_shifts_toCurrentDate:function(req,res){
         dbMiddelware.getEmployee_shifts_toCurrentDate(req,res);
     },
-    getVaktliste:function(req,res){
-        dbMiddelware.getVaktliste(req,res);
+    getVaktliste1:function(req,res){
+        dbMiddelware.getVaktliste1(req,res);
+    },
+    getVaktliste2:function(req,res){
+        dbMiddelware.getVaktliste2(req,res);
+    },
+    getVaktliste3:function(req,res){
+        dbMiddelware.getVaktliste3(req,res);
     },
     getEvents : function (req,res) {
         dbMiddelware.getEvents(req,res);

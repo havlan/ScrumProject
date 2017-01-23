@@ -3,12 +3,6 @@
  */
 
 
-
-
-$(document).ready(function(){ // syntax for å hente data når dokument (html) er lastet inn
-    $("#includedContent").load("menu");
-});
-
 function calendarFunction(){
     document.getElementById('list').style.display = "none";
     document.getElementById('calendar').style.display = "block";

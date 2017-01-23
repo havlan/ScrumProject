@@ -16,8 +16,3 @@ function changeToFunction(){
     document.getElementById('changeToAppeal').style.display = "block";
     document.getElementById('saveAppeal').style.display = "block";
 }
-
-$(document).ready(function(){
-    $("#includedContent").load("menu");
-});
-

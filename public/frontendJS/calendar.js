@@ -1,5 +1,4 @@
 $(document).ready(function() {
-    $("#includedContent").load("menu");
 
     $('#calendar').fullCalendar({
         header: {
@@ -15,10 +14,20 @@ $(document).ready(function() {
         weekNumbers:true,
         navLinks: true,
         editable: false,
-        eventColor: '#ffffff', //default event color //can be set individually
+        eventColor: '#7bc7ff', //default event color //can be set individually
         eventTextColor: '#000000', //default event text color
         //GETTING EVENTS FROM JSON FEED; SHORT AND EXTENDED
-        events: '/getEvents', //TODO
+        eventSources: [
+            {
+                url: '/getEvents', // use the `url` property
+                color: 'green',    // an option!
+                textColor: 'black'  // an option!
+            },
+            {
+                url: '/getEvents', // use the `url` property
+                color: 'yellow',    // an option!
+                textColor: 'black'  // an option!
+            }],
         eventClick: function(event) {
             //TODO sumfin
             //elsempel, åpner event url
