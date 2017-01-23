@@ -32,6 +32,7 @@ module.exports = function (app, passport) {
     app.get('/getTypeNames',isLoggedIn, getCtrl.getTypeNames);
     app.get('/getPossibleSiftsEvents',isLoggedIn,getCtrl.getPossibleSiftsEvents);
     app.get('/getDepartment',isLoggedIn, getCtrl.getDepartment);
+    app.get('/getNextShiftForEmp',isLoggedIn, getCtrl.getNextShiftForEmp);
 
 
     //Sites

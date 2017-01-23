@@ -15,7 +15,7 @@ module.exports = {
     getDepartment: function (req, res) {
         //var get = {department_id:req.body.department_id};
         console.log("Overview Department");
-        dbHelper.getdbQuery(req, res, "select * from Department");
+        dbHelper.getdbQuery(req, res, "select * from Department where departme  nt_id = ?", req.body.department_id);
     },
     getType: function (req, res) {
         console.log("Overview Type");
@@ -62,16 +62,19 @@ module.exports = {
         dbHelper.simpleLogin("select * from LoginInfo where Username = ?", [username]);
     },*/
     getVaktliste1 : function(req,res){
-        dbHelper.getdbQuery(req, res, "select * from WORKTOGETHERTODAY1 where and department_id = ?",[req.params.department_id]); //req.params.ShiftStart,
+        dbHelper.getdbQuery(req, res, "select * from WORKTOGETHERTODAY1 where department_id = 7",[req.params.ShiftStart, req.params.department_id]);
     },
     getVaktliste2 : function(req,res){
-        dbHelper.getdbQuery(req, res, "select * from WORKTOGETHERTODAY2 where s.date = ? and department_id = ?",[req.params.ShiftStart, req.params.department_id]);
+        dbHelper.getdbQuery(req, res, "select * from WORKTOGETHERTODAY2 where department_id = 7",[req.params.ShiftStart, req.params.department_id]);
     },
     getVaktliste3 : function(req,res){
-        dbHelper.getdbQuery(req, res, "select * from WORKTOGETHERTODAY3 where s.date = ? and department_id = ?",[req.params.ShiftStart, req.params.department_id]);
+        dbHelper.getdbQuery(req, res, "select * from WORKTOGETHERTODAY3 where department_id = 7",[req.params.ShiftStart, req.params.department_id]);
     },
     getTypeNames : function (req, res) {
         dbHelper.getdbQuery(req,res,"Select name from Type;")
+    },
+    getNextShiftForEmp : function (req, res) {
+        dbHelper.getdbQuery(req,res,"Select DATE_FORMAT(MIN(s.date), '%m/%d/%Y %H:%i') as ndate, e.employee_id, d.department_name From Employee e, shift_has_employee she, Shift s, Department d Where s.date > now() And e.employee_id = she.employee_id And she.shift_id = s.shift_id And s.department_id = d.department_id and e.employee_id = ?", [req.session.passport.user.id]);
     },
     /**
     getVaktoversikt : function(req,res){
