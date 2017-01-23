@@ -62,13 +62,13 @@ module.exports = {
         dbHelper.simpleLogin("select * from LoginInfo where Username = ?", [username]);
     },*/
     getVaktliste1 : function(req,res){
-        dbHelper.getdbQuery(req, res, "select * from WORKTOGETHERTODAY1"); // where department_id = ?", req.params.department_id); //req.params.ShiftStart,
+        dbHelper.getdbQuery(req, res, "select * from WORKTOGETHERTODAY1 where department_id = 7"); // where department_id = ?", req.params.department_id); //req.params.ShiftStart,
     },
     getVaktliste2 : function(req,res){
-        dbHelper.getdbQuery(req, res, "select * from WORKTOGETHERTODAY2"); //,[req.params.department_id]); //req.params.ShiftStart,
+        dbHelper.getdbQuery(req, res, "select * from WORKTOGETHERTODAY2 where department_id = 7"); //,[req.params.department_id]); //req.params.ShiftStart,
     },
     getVaktliste3 : function(req,res){
-        dbHelper.getdbQuery(req, res, "select * from WORKTOGETHERTODAY3"); //,[req.params.department_id]); //req.params.ShiftStart,
+        dbHelper.getdbQuery(req, res, "select * from WORKTOGETHERTODAY3 where department_id = 7"); //,[req.params.department_id]); //req.params.ShiftStart,
     },
     getTypeNames : function (req, res) {
         dbHelper.getdbQuery(req,res,"Select name from Type;")
