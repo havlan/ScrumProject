@@ -35,4 +35,9 @@ $(document).ready(function() {
             return false;
         }
     });
+
+
+    $.get('/getNextShiftForEmp', {}, function(req, res, data){
+        document.getElementById("nextShiftInfo").innerHTML = "Din neste vakt: " +data.responseJSON[0].ndate + "\nSted: " + data.responseJSON[0].department_name;
+    });
 });

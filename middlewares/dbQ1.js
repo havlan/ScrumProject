@@ -69,7 +69,7 @@ module.exports = {
         dbHelper.getdbQuery(req,res,"Select name from Type;")
     },
     getNextShiftForEmp : function (req, res) {
-        dbHelper.getdbQuery(req,res,"Select MIN(s.date), e.employee_id From Employee e,  shift_has_employee she, Shift s Where s.date > now() And e.employee_id = she.employee_id And she.shift_id = s.shift_id And e.employee_id = ?", [req.session.passport.user.id]);
+        dbHelper.getdbQuery(req,res,"Select DATE_FORMAT(MIN(s.date), '%m/%d/%Y %H:%i') as ndate, e.employee_id, d.department_name From Employee e, shift_has_employee she, Shift s, Department d Where s.date > now() And e.employee_id = she.employee_id And she.shift_id = s.shift_id And s.department_id = d.department_id and e.employee_id = ?", [req.session.passport.user.id]);
     },
     /**
     getVaktoversikt : function(req,res){
