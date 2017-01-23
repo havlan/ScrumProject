@@ -7,6 +7,7 @@ var myList2= [];
 var myList3= [];
 var department= [];
 
+
 $.get('/getDepartment', {}, function(req, res, data){
     console.log(data);
     console.log(data.responseJSON);
