@@ -40,6 +40,12 @@ module.exports = function (app, passport) {
     app.get('/OnePagedMenu', isLoggedIn, getCtrl.getOnePagedMenu);
 
 
+    app.post('/getTest', function(req,res){
+        dbMet.getdbQuery(req,res,"select * from LoginInfo where username = ?",req.body.username, function(err,rows){
+            res.json(rows[0]);
+        })
+    })
+
     //Images
     app.get('IMG01', isLoggedIn, getCtrl.getLogo);
 

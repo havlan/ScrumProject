@@ -30,6 +30,7 @@ function sendMailUser(req,mail,pw){
     };
     transporter.sendMail(mailOptions, function(err,inf){
         if(!err) console.log(inf.response);
+        else console.log(err);
     })
 }
 
@@ -37,17 +38,18 @@ function sendMailUser(req,mail,pw){
 
 
 module.exports = {
-    forgotPwMail : function(request,res){ // email, username
+    forgotPwMail : function(request,response){ // email, username
         async.waterfall([
             function(done){
                 console.log("METHOD 1");
                 pool.getConnection(function(er,conn){
                     if(er){
-                        res.json(er);
+                        response.json(er);
                     }
-                    conn.query("select * from LoginInfo where username = ?",[request.body.username], function(err,rows){
-                        if(err){ res.json(404,err); conn.release();}
-                        else if(!rows.length){ res.json(404,err); conn.release();}
+                    console.log(request.body);
+                    conn.query('select * from LoginInfo where username = ?',request.body.username, function(err,rows){
+                        if(err){ response.status(404);conn.release();}
+                        else if(!rows.length){ response.status(404); conn.release();}
                         else{done(null, conn, rows[0])}
                     })
                 })
@@ -57,8 +59,8 @@ module.exports = {
                 conn.query("select * from Employee where employee_id = ? and email = ? ",[login.employee_id, request.body.email], function(err1,rows){
                     if(err1 || !rows.length){
                         console.log(err1);
-                        res.status(404);
-                        res.json(err1);
+                        response.status(404);
+                        response.json(err1);
                         conn.release();
                     }else{ // exists in login and employee
                         //var pw = crypt.generatePassword(), sh = crypt.genRandomString(16), pwobj = crypt.sha512(pw,sh);
@@ -69,20 +71,17 @@ module.exports = {
             function(conn,loginData, done){
                 console.log("METHOD 3");
                 var pw = crypt.generatePassword(), sh = crypt.genRandomString(16), pwobj = crypt.sha512(pw,sh);
-                var usr = {username : request.body.username,password_hash:pwobj.passwordHash, password_salt:pwobj.salt};
-                conn.query("insert into LoginInfo set ? where username = '?'",[usr, request.body.username], function(err2,rows) {
+                var usr = {password_hash:pwobj.passwordHash, password_salt:pwobj.salt};
+                conn.query("update  LoginInfo set ? where username = ?",[usr, request.body.username], function(err2,rows) {
                     if (err2){
                         console.log(err2);
-                    } else if(!rows.length){
-                        res.json(404);
-                        conn.release();
-                        done(err2);
                     }else{
-                        done(null,200);
+                        done(null,200, pw);
+                        response.json(200);
                     }
                 });
             }
-        ], function(err,ok){
+        ], function(err,ok,pw){
             if(ok == 200){
                 console.log("MAIL");
                 sendMailUser(request,request.body.email,pw);
@@ -137,7 +136,8 @@ module.exports = {
                         conn.commit(function(){
                             done(null,req.body.email,200);
                             conn.release();
-                            response.json(200);
+                            response.status(200);
+                            response.json({melding: "Mail på vei."});
                         })
                     }
                 })

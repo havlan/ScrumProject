@@ -29,6 +29,7 @@ module.exports =
                     connection.release(); // Legg tilbake i pool
                     if (!err) {
                         //console.log(rows);
+                        res.status(200);
                         res.json(rows);
                     } else {
                         console.log("error: Error reading database: " + err);
@@ -50,7 +51,8 @@ module.exports =
                 connection.query(query, get, function (err, rows) {
                     connection.release();
                     if (!err) {
-                        res.json(rows);
+
+                        res.json(200,rows);
                         //console.log(rows);
                     } else {
                         console.log("error: Error reading database: " + err);

@@ -7,6 +7,7 @@ module.exports = {
     getEmployee: function (req, res) {
         console.log("Overview Employee");
         res.type('json');
+        res.status(200);
         dbHelper.getdbQuery(req, res, "select * from Employee");
     },
     getOneEmployee: function (req, res) {
