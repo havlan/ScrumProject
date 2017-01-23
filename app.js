@@ -11,6 +11,7 @@ var auth = require('./middlewares/authenticatePLANB');
 var flash = require('connect-flash');
 var morgan = require('morgan');
 var cookieParser = require('cookie-parser');
+var helmet = require('helmet');
 
 require('./helpers/passtheport')(passport);
 
@@ -26,6 +27,7 @@ app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 app.use(express.static (__dirname + '/public'));
 //app.use('/views',express.static(__dirname + '/views'));
 app.use(expressValidator());
+app.use(helmet());
 app.use(session({
     secret: "hest",
     resave: false,

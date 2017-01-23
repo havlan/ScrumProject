@@ -3,7 +3,9 @@
 
 var getCtrl = require('./getReq');
 var postCtrl = require('./postReq');
+var delCtrl = require('./delReq');
 var model = require('../models/regWMail');
+var dbMet = require('../helpers/db');
 
 
 module.exports = function (app, passport) {
@@ -51,6 +53,7 @@ module.exports = function (app, passport) {
     });
 
     app.post('/postUser', isAdmin, postCtrl.postEmployee);
+    app.post('/delUser', delCtrl.delLogin);
     app.post('/postDepartment', isAdmin, postCtrl.postDepartment);
     app.post('/postType', isAdmin, postCtrl.postType);
     app.post('/postShift', isLoggedIn, postCtrl.postShift);
@@ -70,9 +73,9 @@ module.exports = function (app, passport) {
     app.post('/updateLogInInfo', isLoggedIn, postCtrl.updateLogInInfo);
 
     app.post('/newUserMail', model.sendTestMail);
-    app.post('/postTest', model.nyNodeETest);
-    app.post('/newSurnadaling', function(req,res){
-        model.postNewUserQuery(req,res, function(err,res){
+
+    app.post('/newEmployee', function(req,res){
+        model.postNewUserFall(req,res, function(err,res){
             if(err){
                 console.log("\n\n===ERR===\n\n");
             }else{
@@ -82,7 +85,8 @@ module.exports = function (app, passport) {
 
         })
     });
-
+    app.post('/forgotPw', model.forgotPwMail);
+    app.post('/newLoginTest', model.sendOnlyLogin);
 
     //MÅ VÆRE SIST
     app.get('/*', getCtrl.get404);
@@ -100,10 +104,19 @@ function isLoggedIn(req, res, next) {
         res.redirect('/login');
     }
 }
+function isOffice(req,res,next){
+    if(req.isAuthenticated() && req.session.passport){
+        if(req.session.passport.user.is_admin == 1){
+            next();
+        }
+    }
+}
 function isAdmin(req, res, next) {
     if (req.isAuthenticated() && req.session.passport) {
         if (req.session.passport.user.is_admin == 0) {
             next();
+        }else{
+            res.json(200);
         }
     } else {
         res.redirect('/user');

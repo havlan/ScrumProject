@@ -1,6 +1,7 @@
 var mysql = require('mysql');
 var cryptoHash = require('./../middlewares/cryptoHash');
 var localStrat = require('passport-local').Strategy;
+var async = require('async');
 
 var pool = mysql.createPool({
     connectionLimit: 27,
@@ -150,30 +151,63 @@ module.exports =
                     }
                 });
             });
-        }
-        /*,
-        postQAGetId : function(req,res,query,done, idToPass){
-            pool.getConnection(function(err,connection){
-                if(err){
-                    res.status(500); // int
-                    res.json({"Error": "Couldnt connect to MYSQL" + err});
-                    return;
+        },
+        fallDoubleQuery : function (tasks, cb) {
+        pool.getConnection(function (err, conn, done) {
+            if (err) {
+                return cb(err);
+            }
+            conn.beginTransaction(function (err) {
+                if (err) {
+                    done();
+                    return cb(err);
                 }
-                console.log("Connected to database");
-                connection.query(query, function(err,qres){
-                    connection.release();
+                conn.query(q1, function(err){
                     if(err){
-                        return done(err);
+                        done();
+                        return cb(err);
                     }
-                    if(qres.affectedRows == 0){
-                        return done(null, false, req.flash("postUserMsg", "Creation of user failed."));
-                    }else if(qres.affectedRows == 1){
-                        idToPass = qres.insertId;
-                        return done(null, true); // went ok
-                    }else{
-                        return done(null, false, req.flash("postUserMsg", "Creation failed, more than 1 row affected"));
-                    }
-                });
-            })
-        }*/
+                })
+
+                var wrapIterator = function (iterator) {
+                    return function (err) {
+                        if (err) {
+                            conn.rollback( function () {
+                                done();
+                                cb(err);
+                            });
+                        }
+                        else {
+                            var args = Array.prototype.slice.call(arguments, 1);
+                            var next = iterator.next();
+                            if (next) {
+                                args.unshift(conn);
+                                args.push(wrapIterator(next));
+                            }
+                            else {
+                                args.unshift(conn);
+                                args.push(function (err, results) {
+                                    var args = Array.prototype.slice.call(arguments, 0);
+                                    if (err) {
+                                        conn.rollback(function () {
+                                            done();
+                                            cb(err);
+                                        });
+                                    } else {
+                                        conn.commit( function () {
+                                            done();
+                                            cb.apply(null, args);
+                                        })
+                                    }
+                                })
+                            } async.setImmediate(function () {
+                                iterator.apply(null, args);
+                            });
+                        }
+                    };
+                };
+                wrapIterator(async.iterator(tasks))();
+            });
+        });
+        }
     };
