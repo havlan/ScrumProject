@@ -107,7 +107,7 @@ function removeFunction() {
 //add employee logininfo
 function addFunction() {
         $.ajax({
-            url:'',
+            url:'newUser',
             type:'POST',
             data:{'username':$('#username'),'is_admin':$('#is_admin')},
             success:function (data) {
