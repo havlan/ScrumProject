@@ -27,6 +27,8 @@
 }
 .input{
     text-align: left;
+    width: 160px;
+
 }
 #excelDataTable tr {
     border-bottom: 1px solid #ddd;
@@ -71,6 +73,7 @@ img {
 #edit{
     background-color: #f1f1f1;
     border: none;
+    border-radius: 5px;
     color: black;
     position: relative;
     padding: 10px 20px;
@@ -80,8 +83,9 @@ img {
     font-size: 16px;
 }
 #addInfo{
-    background-color: lightgreen;
+    background-color: #4CAF50;
     border: none;
+    border-radius: 5px;
     color: white;
     position: relative;
     padding: 10px 20px;
@@ -89,11 +93,13 @@ img {
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
+    margin-left: 10px;
 }
 #remove{
     margin-left: 10px;
     background-color: indianred;
     border: none;
+    border-radius: 5px;
     color: white;
     position: relative;
     padding: 10px 20px;
@@ -104,7 +110,7 @@ img {
 }
 #addBtn{
     margin-left: 10px;
-    background-color: #4273af;
+    background-color: royalblue;
     border: none;
     border-radius: 5px;
     color: white;
@@ -121,14 +127,14 @@ img {
 #personForm {
     position: relative;
     width: 50%;
-    margin-left: 45%;
+    margin-left: 35%;
     text-align: right;
     padding-bottom: 5%;
 }
 #logInInfo{
     position: relative;
     width: 50%;
-    margin-left: 45%;
+    margin-left: 30%;
     text-align: right;
     padding-bottom: 5%;
 }
@@ -144,14 +150,14 @@ img {
     padding-top: 10%;
 }
 #personInfo{
-    margin-left: 33%;
+    margin-left: 37%;
     text-align: left;
     font-size: 16px;
 }
 #picEmp{
     border: solid black 1px;
     position:absolute;
-    margin-left: 60%;
+    margin-left: 55%;
 }
 
 #addEmp{
@@ -163,7 +169,7 @@ img {
 #addPicEmp{
     position: absolute;
     margin-left: 65%;
-    margin-top: 30%;
+    margin-top: 37%;
 }
 
 #save{
@@ -176,6 +182,8 @@ img {
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
+    position: relative;
+    margin-top: 0px;
 }
 
 .info{
@@ -184,13 +192,44 @@ img {
     padding-bottom: 2%;
 }
 #stilling{
-    width: 154px;
+    width: 160px;
 }
 
 .persInfodb{
     text-align: left;
     padding-left:5%;
     padding-bottom: 2%;
+}
+.dbInfo{
+    width:70%;
+}
+.backBtn{
+    margin-left: 10px;
+    background-color: royalblue;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 8px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+.saveEdit{
+    margin-left: 10px;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 8px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+#back2{
+    position: relative;
+
 }
 
 @media
