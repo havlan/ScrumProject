@@ -18,6 +18,7 @@ body, html{
 #dayTable td, #nightTable td, #eveningTable td {
     text-align: left;
     width: 10%;
+    overflow-x: hidden;
 }
 #dayTable th, #nightTable th, #eveningTable th{
     text-align: left;
