@@ -20,8 +20,3 @@ function switchFunction(){
     document.getElementById('overtimeApproval').style.display = "none";
     document.getElementById('save').style.display = "block";
 }
-
-$(document).ready(function(){
-    $("#includedContent").load("menu");
-});
-

@@ -6,7 +6,7 @@ var typeNames =[];
 window.indeks = 0;
 $.get('/getEmployee', {}, function(req, res, data){
 
-    $("#includedContent").load("menu");
+    //$("#includedContent").load("menu");
 
     console.log(data);
     console.log(data.responseJSON[0]);
@@ -62,7 +62,7 @@ function searchNameFunction() {
 
     //Hide the rows that dont match the search
     for (i = 0; i < tr.length; i++) {
-        td = tr[i].getElementsByTagName("td")[1];
+        td = tr[i].getElementsByTagName("td")[7];
         if (td) {
             if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
                 tr[i].style.display = "";
@@ -80,7 +80,7 @@ function searchPositionFunction() {
     table = document.getElementById("excelDataTable");
     tr = table.getElementsByTagName("tr");
     for (i = 0; i < tr.length; i++) {
-        td = tr[i].getElementsByTagName("td")[2];
+        td = tr[i].getElementsByTagName("td")[6];
         if (td) {
             if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
                 tr[i].style.display = "";

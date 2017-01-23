@@ -1,5 +1,4 @@
 $(document).ready(function() {
-    $("#includedContent").load("menu");
 
     $('#calendar').fullCalendar({
         header: {
