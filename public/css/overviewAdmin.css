@@ -121,7 +121,7 @@ img {
 #personForm {
     position: relative;
     width: 50%;
-    margin-left: 30%;
+    margin-left: 45%;
     text-align: right;
     padding-bottom: 5%;
 }
@@ -204,8 +204,6 @@ only screen and (max-width: 760px),
         top: -9999px;
         left: -9999px;
     }
-
-
 
     td:nth-child(3) {
         display:none;
