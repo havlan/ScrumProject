@@ -11,6 +11,9 @@ var auth = require('./middlewares/authenticatePLANB');
 var flash = require('connect-flash');
 var morgan = require('morgan');
 var cookieParser = require('cookie-parser');
+var cron = require('cron');
+var mail = require('./models/regWMail');
+var schedulerMail = require('./models/schedulerSM');
 
 require('./helpers/passtheport')(passport);
 
@@ -61,8 +64,10 @@ var server = app.listen(3000, function(){
     console.log("Live at ",this.address().port);
 });
 
-
-
+var cronJob = cron.job("0 0 5 * * *", function(){
+    schedulerMail.sendAvailableShiftMail();
+});
+cronJob.start();
 
 //tests imports app
 module.exports = server;
