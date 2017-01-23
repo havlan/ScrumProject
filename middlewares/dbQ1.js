@@ -51,7 +51,7 @@ module.exports = {
         dbHelper.getdbQuery(req, res, "select * from Employee_Shifts_toCurrentDate where employee_id = ?",[req.session.passport.user.id]);
     },
     getPersonalShiftEvents : function (req, res) {
-        dbHelper.getdbQuery(req, res, "select * from JSON_EMPLOYEE_VIEW where employee_id = ? ", req.session.passport.user.id);
+        dbHelper.getdbQuery(req, res, "select * from JSON_EMPLOYEE_VIEW where employee_id = ? And start >= CURDATE()", req.session.passport.user.id);
     },
     getPossibleSiftsEvents : function (req, res) {
         console.log("USER ID "+req.session.passport.user.id);
