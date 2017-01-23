@@ -28,8 +28,9 @@ module.exports = function (app, passport) {
     app.get('/getVaktliste2', isLoggedIn, getCtrl.getVaktliste2);
     app.get('/getVaktliste3', isLoggedIn, getCtrl.getVaktliste3);
     app.get('/getEmployee_shifts_toCurrentDate', isLoggedIn, getCtrl.getEmployee_shifts_toCurrentDate);
-    app.get('/getEvents',isLoggedIn, getCtrl.getEvents);
+    app.get('/getPersonalShiftEvents',isLoggedIn, getCtrl.getPersonalShiftEvents);
     app.get('/getTypeNames',isLoggedIn, getCtrl.getTypeNames);
+    app.get('/getPossibleSiftsEvents',isLoggedIn,getCtrl.getPossibleSiftsEvents);
     app.get('/getDepartment',isLoggedIn, getCtrl.getDepartment);
 
 

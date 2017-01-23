@@ -121,9 +121,13 @@ module.exports = {
     getVaktliste3:function(req,res){
         dbMiddelware.getVaktliste3(req,res);
     },
-    getEvents : function (req,res) {
-        dbMiddelware.getEvents(req,res);
+    getPersonalShiftEvents : function (req, res) {
+        dbMiddelware.getPersonalShiftEvents(req,res);
     },
+    getPossibleSiftsEvents : function (req, res) {
+        dbMiddelware.getPossibleSiftsEvents(req,res);
+    }
+    ,
     getTypeNames : function (req, res) {
         dbMiddelware.getTypeNames(req,res);
     },

@@ -1,3 +1,4 @@
+
 $(document).ready(function() {
 
     $('#calendar').fullCalendar({
@@ -9,6 +10,7 @@ $(document).ready(function() {
         firstDay: 1,
         displayEventEnd: true,
         timeFormat: 'H:mm',
+        timezone: 'local',
         eventLimit: true,
         locale: 'nb',
         weekNumbers:true,
@@ -19,20 +21,27 @@ $(document).ready(function() {
         //GETTING EVENTS FROM JSON FEED; SHORT AND EXTENDED
         eventSources: [
             {
-                url: '/getEvents', // use the `url` property
+                url: '/getPersonalShiftEvents', // use the `url` property
                 color: 'green',    // an option!
                 textColor: 'black'  // an option!
             },
             {
-                url: '/getEvents', // use the `url` property
+                url: '/getPossibleSiftsEvents', // use the `url` property
                 color: 'yellow',    // an option!
                 textColor: 'black'  // an option!
             }],
         eventClick: function(event) {
             //TODO sumfin
-            //elsempel, åpner event url
-            window.open(event.url, 'gcalevent', 'width=700,height=600');
+            modualCall();
+            console.log("troll23452");
             return false;
         }
     });
+
+    function modualCall() {
+        $('#myModal').modal("show");
+    }
+
+
+
 });

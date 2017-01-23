@@ -50,9 +50,14 @@ module.exports = {
         console.log("USER ID "+req.session.passport.user.id);
         dbHelper.getdbQuery(req, res, "select * from Employee_Shifts_toCurrentDate where employee_id = ?",[req.session.passport.user.id]);
     },
-    getEvents : function (req,res) {
-        dbHelper.dbQuery(req, res, "select * from JSON_EMPLOYEE_VIEW");
+    getPersonalShiftEvents : function (req, res) {
+        dbHelper.getdbQuery(req, res, "select * from JSON_EMPLOYEE_VIEW where employee_id = ? ", req.session.passport.user.id);
     },
+    getPossibleSiftsEvents : function (req, res) {
+        console.log("USER ID "+req.session.passport.user.id);
+        dbHelper.getdbQuery(req,res,"select end, start, id, title from available_shift_emp where employee_id = ?", req.session.passport.user.id);
+    }
+        ,
     /*simpleLogin : function(username){
         dbHelper.simpleLogin("select * from LoginInfo where Username = ?", [username]);
     },*/
@@ -91,7 +96,7 @@ module.exports = {
     getVaktliste : function (req, res) {
         dbHelper.dbQuery(req, res, "select * from TestVaktliste");
     },
-    getEvents : function (req,res) {
+    getPersonalShiftEvents : function (req,res) {
         dbHelper.dbQuery(req, res, "select * from JSON_VIEW");
     },
 /*

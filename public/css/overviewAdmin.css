@@ -192,3 +192,37 @@ img {
     padding-left:5%;
     padding-bottom: 2%;
 }
+
+@media
+only screen and (max-width: 760px),
+(min-device-width: 768px) and (max-device-width: 1024px)  {
+
+
+    /* Hide table headers (but not display: none;, for accessibility) */
+    thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+
+
+
+    td:nth-child(3) {
+        display:none;
+    }
+    td:nth-child(4) {
+        display:none;
+    }
+    td:nth-child(5) {
+        display:none;
+    }
+    td:nth-child(6) {
+        display:none;
+    }
+    td:nth-child(9) {
+        display:none;
+    }
+    td:nth-child(10) {
+        display:none;
+    }
+}
