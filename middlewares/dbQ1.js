@@ -43,6 +43,9 @@ module.exports = {
     getAbsenceView : function (req, res) {
         dbHelper.getdbQuery(req,res,"select a.absence_id as Nr, e.employee_id as AnsattID, e.name as Navn,s.shift_id as Skift,s.date as Dato,a.explanation_absence as Årsak,d.department_name as Avdeling from Employee e,Shift s,shift_has_employee she,Absence a,Department d where e.employee_id = she.employee_id and s.shift_id = she.shift_id and a.shift_id = she.shift_id and s.department_id = d.department_id and a.checked_by_admin = 0 group by a.absence_id order by d.department_id, s.date");
     },
+    getOvertimeView : function (req, res) {
+        dbHelper.getdbQuery(req,res,"select o.overtime_id as Nr, e.employee_id as AnsattID, e.name as Navn,s.shift_id as Skift,s.date as Dato,o.overtime as Timer, o.explanation_overtime as Årsak,d.department_name as Avdeling from Employee e,Shift s,shift_has_employee she,Overtime o,Department d where e.employee_id = she.employee_id and s.shift_id = she.shift_id and o.shift_id = she.shift_id and s.department_id = d.department_id and o.checked_by_admin = 0 group by o.overtime_id order by d.department_id, s.date");
+    },
     getSaltHash: function (req, res) {
         dbHelper.getdbQuery(req, res, "select password_hash, password_salt, is_admin from LoginInfo where Username = ?", req.body.username);
     },
@@ -284,6 +287,12 @@ module.exports = {
             shift_id: req.body.shift_id,
             employee_id: req.body.employee_id,
             overtime: req.body.overtime
+        }, pk]);
+    },
+    updateOvertime2: function (req, res) {
+        var pk = req.body.overtime_id;
+        dbHelper.postdbQuery(req, res, "update Overtime set ? where overtime_id=?", [{
+            checked_by_admin: req.body.checked_by_admin,
         }, pk]);
     },
     updateLogInInfo: function (req, res) {

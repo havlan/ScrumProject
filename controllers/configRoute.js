@@ -30,7 +30,7 @@ module.exports = function (app, passport) {
     app.get('/getPossibleSiftsEvents',isLoggedIn,getCtrl.getPossibleSiftsEvents);
     app.get('/getDepartment',isLoggedIn, getCtrl.getDepartment);
     app.get('/getNextShiftForEmp',isLoggedIn, getCtrl.getNextShiftForEmp);
-
+    app.get('/getOvertimeView',isLoggedIn,getCtrl.getOvertimeView);
     app.get('/getAbsenceView',isLoggedIn,getCtrl.getAbsenceView);
 
 
@@ -87,6 +87,7 @@ module.exports = function (app, passport) {
     app.post('/updateRequest', isLoggedIn, postCtrl.updateRequest);
     app.post('/updateAbsence2', isLoggedIn, postCtrl.updateAbsence2);
     app.post('/updateOvertime', isLoggedIn, postCtrl.updateOvertime);
+    app.post('/updateOvertime2', isLoggedIn, postCtrl.updateOvertime2);
     app.post('/updateLogInInfo', isLoggedIn, postCtrl.updateLogInInfo);
   //  app.post('/newUser',isLoggedIn,postCtrl.postNewUser);
     app.post('/forgotPassword',model.forgotPwMail);

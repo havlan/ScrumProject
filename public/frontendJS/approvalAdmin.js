@@ -1,40 +1,32 @@
-/**
- * Created by LittleGpNator on 18.01.2017.
- */
-
 function leaveFunction(){
     document.getElementById('leaveApproval').style.display = "block";
     document.getElementById('switchApproval').style.display = "none";
     document.getElementById('overtimeApproval').style.display = "none";
-    document.getElementById('save').style.display = "block";
 }
 function overtimeFunction(){
     document.getElementById('leaveApproval').style.display = "none";
     document.getElementById('switchApproval').style.display = "none";
     document.getElementById('overtimeApproval').style.display = "block";
-    document.getElementById('save').style.display = "block";
 }
 function switchFunction(){
     document.getElementById('leaveApproval').style.display = "none";
     document.getElementById('switchApproval').style.display = "block";
     document.getElementById('overtimeApproval').style.display = "none";
-    document.getElementById('save').style.display = "block";
 }
 var myList = [];
 $.get('/getAbsenceView', {}, function(req, res, data){
-
     //$("#includedContent").load("menu");
-
     console.log(data);
     console.log(data.responseJSON[0]);
     myList = data.responseJSON;
     //document.getElementById("data").innerHTML = myList;
-
     buildHtmlTable('#leaveTable');
     //tableCreate();
 });
-//Build Table
-
+$.get('/getOvertimeView',{},function (req,res,data) {
+    myList = data.responseJSON;
+    buildHtmlTable('#overtimeTable');
+});
 function buildHtmlTable(selector,list) {
     list = myList;
     var columns = addAllColumnHeaders(list, selector);
@@ -74,12 +66,18 @@ function addAllColumnHeaders(myList, selector) {
     return columnSet;
 }
 
+
 //When pressing 'Lagre'-button any row that is checked will get checked_by_admin=1
 $(document).on('click','#Lagre',function (e) {
     e.preventDefault();
     var data = $("#leaveTable").find("input:checkbox:checked").map(function(){
         return $(this).closest("tr").find('td:eq(0)').text();
-      //  tabell += $(this).closest("tr").find('td:eq(0)').text();
+    }).toArray(); // <----
+    var data2 = $("#overtimeTable").find("input:checkbox:checked").map(function(){
+        return $(this).closest("tr").find('td:eq(0)').text();
+    }).toArray(); // <----
+    var data3 = $("#switchTable").find("input:checkbox:checked").map(function(){
+        return $(this).closest("tr").find('td:eq(0)').text();
     }).toArray(); // <----
   //  console.log(data);
     for(i=0; i<data.length; i++){
@@ -93,15 +91,27 @@ $(document).on('click','#Lagre',function (e) {
             }
         });
     }
-
+    for(i=0; i<data2.length; i++){
+        console.log(data2[i]);
+        $.ajax({
+            url: '/updateOvertime2',
+            type:'POST',
+            data:{'overtime_id':data2[i],'checked_by_admin':1},
+            success:function (data) {
+                alert("success!");
+            }
+        });
+    }/*
+    for(i=0; i<data3.length; i++){
+        console.log(data3[i]);
+        $.ajax({
+            url: '/',
+            type:'POST',
+            data:{'checked_by_admin':1},
+            success:function (data) {
+                alert("success!");
+            }
+        });
+    }
+*/
 });
-
-/*$(document).on('click','#leaveTable td',function(){
-    navn = $(this).closest("tr").find('td:eq(0)').text();
-    shift = $(this).closest("tr").find('td:eq(1)').text();
-    $.get('/getAbsenceView', {}, function(req, res, data) {
-        document.getElementById("navndb").innerHTML = (data.responseJSON[shift].Navn);
-        document.getElementById("årsakdb").innerHTML = (data.responseJSON[shift].Årsak);
-    });
-    $('#approveModal').modal("show");
-});*/

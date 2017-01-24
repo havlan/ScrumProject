@@ -93,6 +93,9 @@ module.exports = {
     getAbsenceView : function (req, res) {
         dbMiddelware.getAbsenceView(req,res);
     },
+    getOvertimeView : function (req, res) {
+        dbMiddelware.getOvertimeView(req,res);
+    },
     getDepartment : function (req, res){
         dbMiddelware.getDepartment(req,res);
     },
