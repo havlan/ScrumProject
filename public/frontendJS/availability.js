@@ -1,5 +1,50 @@
 
 
+var myList = [];
+var typeNames =[];
+window.indeks = 0;
+
+
+//Build Table
+
+function buildHtmlTable(selector,list) {
+    var columns = addAllColumnHeaders(list, selector);
+    var tbody = $('<tbody/>');
+    for (var i = 0; i < list.length; i++) {
+        var row$ = $('<tr id=' + i + '/>');
+        for (var colIndex = 0; colIndex < columns.length; colIndex++) {
+            var cellValue = list[i][columns[colIndex]];
+            if (cellValue == null) cellValue = "";
+            row$.append($('<td/>').html(cellValue));
+        }
+        // $(row$).setAttribute('id',"surprise maddafakka");
+        $(selector).append(row$);
+        $(tbody).append(row$);
+    }
+    $(selector).append(tbody);
+}
+function addAllColumnHeaders(list, selector) {
+    var columnSet = [];
+    var headerThead$ = $('<thead/>');
+    var headerTr$ = $('<tr/>');
+    for (var i = 0; i < list.length; i++) {
+        var rowHash = list[i];
+        for (var key in rowHash) {
+            if ($.inArray(key, columnSet) == -1) {
+                columnSet.push(key);
+                headerTr$.append($('<th/>').html(key));
+            }
+        }
+    }
+    $(selector).append(headerThead$);
+    $(headerThead$).append(headerTr$);
+    return columnSet;
+}
+
+
+
+
+
 
 
 $(function() {
