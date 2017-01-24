@@ -15,7 +15,7 @@ module.exports = {
     getDepartment: function (req, res) {
         //var get = {department_id:req.body.department_id};
         console.log("Overview Department");
-        dbHelper.getdbQuery(req, res, "select * from Department where departme  nt_id = ?", req.body.department_id);
+        dbHelper.getdbQuery(req, res, "select * from Department"); // where department_id = ?",req.body.department_id);
     },
     getType: function (req, res) {
         console.log("Overview Type");
@@ -40,6 +40,9 @@ module.exports = {
     getOvertime: function (req, res) {
         dbHelper.getdbQuery(req, res, "select * from Overtime");
     },
+    getAbsenceView : function (req, res) {
+        dbHelper.getdbQuery(req,res,"select e.name as Navn,s.shift_id as Skift,s.date as Dato,a.explanation_absence as Årsak from Employee e,Shift s,shift_has_employee she,Absence a where e.employee_id = she.employee_id and s.shift_id = she.shift_id and a.shift_id = she.shift_id and a.checked_by_admin = 0 group by e.name");
+    },
     getSaltHash: function (req, res) {
         dbHelper.getdbQuery(req, res, "select password_hash, password_salt, is_admin from LoginInfo where Username = ?", req.body.username);
     },
@@ -51,7 +54,7 @@ module.exports = {
         dbHelper.getdbQuery(req, res, "select * from Employee_Shifts_toCurrentDate where employee_id = ?",[req.session.passport.user.id]);
     },
     getPersonalShiftEvents : function (req, res) {
-        dbHelper.getdbQuery(req, res, "select * from JSON_EMPLOYEE_VIEW where employee_id = ? ", req.session.passport.user.id);
+        dbHelper.getdbQuery(req, res, "select * from JSON_EMPLOYEE_VIEW where employee_id = ? And start >= CURDATE()", req.session.passport.user.id);
     },
     getPossibleSiftsEvents : function (req, res) {
         console.log("USER ID "+req.session.passport.user.id);
@@ -62,16 +65,16 @@ module.exports = {
         dbHelper.simpleLogin("select * from LoginInfo where Username = ?", [username]);
     },*/
     getVaktliste1 : function(req,res){
-        dbHelper.getdbQuery(req, res, "select * from WORKTOGETHERTODAY1 where department_id = 7",[req.params.ShiftStart, req.params.department_id]);
+        dbHelper.getdbQuery(req, res, "select * from WORKTOGETHERTODAY1 where department_id = 7"); // where department_id = ?", req.params.department_id); //req.params.ShiftStart,
     },
     getVaktliste2 : function(req,res){
-        dbHelper.getdbQuery(req, res, "select * from WORKTOGETHERTODAY2 where department_id = 7",[req.params.ShiftStart, req.params.department_id]);
+        dbHelper.getdbQuery(req, res, "select * from WORKTOGETHERTODAY2 where department_id = 7"); //,[req.params.department_id]); //req.params.ShiftStart,
     },
     getVaktliste3 : function(req,res){
-        dbHelper.getdbQuery(req, res, "select * from WORKTOGETHERTODAY3 where department_id = 7",[req.params.ShiftStart, req.params.department_id]);
+        dbHelper.getdbQuery(req, res, "select * from WORKTOGETHERTODAY3 where department_id = 7"); //,[req.params.department_id]); //req.params.ShiftStart,
     },
     getTypeNames : function (req, res) {
-        dbHelper.getdbQuery(req,res,"Select name from Type;")
+        dbHelper.getdbQuery(req,res,"Select name from Type");
     },
     getNextShiftForEmp : function (req, res) {
         dbHelper.getdbQuery(req,res,"Select DATE_FORMAT(MIN(s.date), '%m/%d/%Y %H:%i') as ndate, e.employee_id, d.department_name From Employee e, shift_has_employee she, Shift s, Department d Where s.date > now() And e.employee_id = she.employee_id And she.shift_id = s.shift_id And s.department_id = d.department_id and e.employee_id = ?", [req.session.passport.user.id]);
@@ -193,6 +196,12 @@ module.exports = {
         };
         console.log("Posting new LogInInfo");
         dbHelper.postdbQuery(req, res, "insert into LogInInfo set ?", post);
+    },
+    postDepartment: function (req,res) {
+        var post = {
+            department_id: req.body.department_id
+        };
+        dbHelper.postdbQuery(req, res, "select * from WORKTOGETHERTODAY1 where department_id = ?", post);
     },
 
     //update

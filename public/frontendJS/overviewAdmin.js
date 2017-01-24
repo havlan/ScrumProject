@@ -93,7 +93,7 @@ function searchPositionFunction() {
 // remove employee logininfo
 function removeFunction() {
    // alert(indeks);
-    if (confirm("Er du sikker på at du vil fjerne denne brukeren?\n Informasjon om den ansatte vil fortsatt ligge i systemet\n Men den ansatte kan ikke lenger bruke det") == true) {
+    if (confirm("Er du sikker på at du vil fjerne denne brukeren?\n Informasjon om den ansatte vil fortsatt ligge i systemet,\n men den ansatte kan ikke lenger bruke det.") == true) {
         $.ajax({
             url: '/delUser', //this is the submit URL
             type: 'POST',
@@ -141,7 +141,7 @@ $(function() {
         if (confirm("Er du sikker på at du vil lagre?") == true) {
             e.preventDefault();
             $.ajax({
-                url: 'newUser',
+                url: '/newLogin',
                 type: 'POST',
                 data: {'username': $('#username').val(), 'is_admin': $('#is_admin').val(),'employee_id':indeks},
                 success: function (data) {

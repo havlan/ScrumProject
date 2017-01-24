@@ -11,6 +11,7 @@ $(document).ready(function() {
         timeFormat: 'H:mm',
         eventLimit: true,
         locale: 'nb',
+        timezone : 'local',
         weekNumbers:true,
         navLinks: true,
         editable: false,
@@ -27,18 +28,26 @@ $(document).ready(function() {
                 url: '/getPossibleSiftsEvents', // use the `url` property
                 color: 'yellow',    // an option!
                 textColor: 'black'  // an option!
-            }],
-        eventClick: function(event) {
-            //TODO sumfin
-            //elsempel, åpner event urle
-            //console.log(event.toString());
-            window.open(event.url, 'gcalevent', 'width=700,height=600');
-            return false;
+            }]
+        ,
+        eventClick: function(calEvent, jsEvent, view) {
+            alert(event.title);
+            // change the border color just for fun
+            $(this).css('border-color', 'red');
+
         }
     });
+
+
 
 
     $.get('/getNextShiftForEmp', {}, function(req, res, data){
         document.getElementById("nextShiftInfo").innerHTML = "Din neste vakt: " +data.responseJSON[0].ndate + "\nSted: " + data.responseJSON[0].department_name;
     });
+
+
+    function getA() {
+        return "something";
+    }
 });
+

@@ -21,7 +21,9 @@
 
 <head/>
 
-    <div id="includedContent"></div>
+
+<div id="includedContent"></div>
+<script> $("#includedContent").load("menu"); </script>
 
 
 
@@ -42,8 +44,9 @@
             <div class="shift-right">
                 <div class="shift-buttons">
 
+                    Velg avdeling:
+                    <select id="departmentInput" class="input">
 
-                    <select id="departmentInput">
                     </select>
                         <!-- <div class="dropdown">
                             </select>
@@ -72,8 +75,8 @@
             <div class="dagsvakt-text">
                 <h4>Dagsvakt 08:00-16:00</h4>
             </div>
-                <div id="size">
-                <table id="dayTable" class="tablesorter">
+                <div class="table-responsive">
+                <table id="dayTable" class="table table-striped table-bordered">
 
                 </table>
                 </div>
@@ -83,8 +86,8 @@
             <div class="dagsvakt-text">
                 <h4>Kveldsvakt 16:00-24:00</h4>
             </div>
-            <div id="size1">
-                <table id="eveningTable" class="tablesorter">
+            <div class="table-responsive">
+                <table id="eveningTable" class="table table-striped table-bordered">
 
                 </table>
             </div>
@@ -94,8 +97,8 @@
             <div class="dagsvakt-text">
                 <h4>Nattevakt 24:00-08:00</h4>
             </div>
-            <div id="size2">
-                <table id="nightTable" class="tablesorter">
+            <div class="table-responsive">
+                <table id="nightTable" class="table table-striped table-bordered">
 
                 </table>
             </div>
