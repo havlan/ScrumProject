@@ -55,7 +55,7 @@ module.exports = {
     getSaltHash: function(req,res,next){
         dbHelper.getdbQWNext(req,res, "select password_hash, password_salt, is_admin from LoginInfo where Username = ?",[req.body.username],next);
     },
-    getEmployee_shifts_toCurrentDate: function (req, res) {
+    getEmployee_Shifts_toCurrentDate: function (req, res) {
         console.log("USER ID "+req.session.passport.user.id);
         dbHelper.getdbQuery(req, res, "select * from Employee_Shifts_toCurrentDate where employee_id = ?",[req.session.passport.user.id]);
     },
@@ -81,38 +81,10 @@ module.exports = {
         dbHelper.getdbQuery(req, res, "Select day, availability From Availability Where employee_id = ?",req.session.passport.user.id);
 
     },
-
-    /**
-    getVaktoversikt : function(req,res){
-        var get = {name:req.body.name, type:req.body.type, department:req.body.department, responsibility_allowed:req.body.type, phone_nr:req.body.phone_nr};
-=======
-    getEmployeeOvertime: function (req, res) {
-        dbHelper.dbQuery(req, res, "select * from Employee_Overtime");
+    getShiftChange : function (req, res){
+        dbHelper.getdbQuery(req, res, "select * from WORKSHIFTTOGETHER");
     },
 
-    getVaktoversiktSite: function (req, res) {
-        var get = {
-            name: req.body.name,
-            type: req.body.type,
-            department: req.body.department,
-            responsibility_allowed: req.body.type,
-            phone_nr: req.body.phone_nr
-        };
->>>>>>> remotes/origin/frontEnd
-        console.log("Overview worklist");
-        dbHelper.getdbQuery(req, res, "overview shifts ?", get);
-    },
-    getVaktliste : function (req, res) {
-        dbHelper.dbQuery(req, res, "select * from TestVaktliste");
-    },
-    getPersonalShiftEvents : function (req,res) {
-        dbHelper.dbQuery(req, res, "select * from JSON_VIEW");
-    },
-/*
-    getVaktliste : function (req, res){
-        dbHelper.dbQuery(req, res, "select * from TestVaktliste2 where date = ?", req.params.date);
-    },
-*/
 
     //POST/PUT
 
@@ -213,6 +185,12 @@ module.exports = {
         dbHelper.getdbQuery(req, res, "select * from WORKTOGETHERTODAY3 where department_name = ?", [req.body.department_name]);
     },
 
+    /*
+    postShiftChange: function (req,res){
+        console.log("Posting new ShiftChange");
+        dbHelper.postdbQuery(req, res, "insert into Request (request_id, shift-id, employee_id, checked_by_admin) select null, r4.shift_id, r4.employee_id, null from ready_shift_change_rank4, Request r where r.employee_id = r4.employee_id order by r4.shift_id");
+    },
+    */
     //update
     //SYNTAKS
     //var pk = req.body.primarykey;
@@ -307,14 +285,6 @@ module.exports = {
     updateLogInInfo: function (req, res) {
         var pk = req.body.username;
         dbHelper.postdbQuery(req, res, "update LoginInfo set ? where Username=?", [{is_admin: req.body.is_admin}, pk]);
-    },
-    getVaktbytte: function(req, res){
-        dbHelper.getdbQuery(req, res, "select * from Shift where shift_id=?");
-    },
-    postnewVaktbytte: function (req, res){
-        var post = {
-
-        }
     },
 
 
