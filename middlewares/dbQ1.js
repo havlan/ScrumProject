@@ -202,7 +202,7 @@ module.exports = {
             department_name: req.body.department_name
         };
         console.log("Posting new Departments");
-        dbHelper.getdbQuery(req, res, "select * from WORKTOGETHERTODAY1 where department_id = ?", post);
+        dbHelper.getdbQuery(req, res, "select * from WORKTOGETHERTODAY1 where department_id = ?", [req.body.department_id]);
     },
 
     //update

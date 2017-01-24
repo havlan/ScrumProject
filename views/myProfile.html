@@ -127,18 +127,18 @@
                 </div>
                 <!-- Modal body-->
                 <section id="passwordBody">
-                    <form id="passwordForm">
+                    <form id="passwordForm" action="/changePassword" method="post">
                         <p>
                         Gammelt passord:
-                            <input required class="inputEdit"type="password" placeholder="eks: katt123" value="">
+                            <input required class="inputEdit"type="password" placeholder="eks: katt123" value="" name="oldpw">
                         </p>
                         <p>
                         Nytt passord:
-                            <input required class="inputEdit" type="password" placeholder="eks: xxxxxxxx" value="">
+                            <input required class="inputEdit" type="password" placeholder="eks: xxxxxxxx" value="" name="newpw">
                         </p>
                         <p>
                         Gjenta nytt passord:
-                            <input required class="inputEdit" type="password" placeholder="eks: xxxxxxxx" value="">
+                            <input required class="inputEdit" type="password" placeholder="eks: xxxxxxxx" value="" name="newpw2">
                         </p>
                         <br>
                         <input type="submit" class="saveEdit" value="Lagre">
