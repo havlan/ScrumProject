@@ -75,10 +75,27 @@ function addAllColumnHeaders(myList, selector) {
 }
 window.navn =""; //Name from selected row
 window.shift = 0;//Shift ID from selected row
-$(document).on('click','#leaveTable input',function () {
-    navn = $(this).closest("tr").find('td:eq(2)').text();
-    shift = $(this).closest("tr").find('td:eq(1)').text();
-    alert(navn);
+$(document).on('click','#Lagre',function (e) {
+    var tabell =[];
+    alert("hei");
+    e.preventDefault();
+    var data = $("#leaveTable").find("input:checkbox:checked").map(function(){
+        return $(this).closest("tr").find('td:eq(0)').text();
+      //  tabell += $(this).closest("tr").find('td:eq(0)').text();
+    }).toArray(); // <----
+  //  console.log(data);
+    for(i=0; i<data.length; i++){
+        console.log(data[i]);
+        $.ajax({
+            url: '/updateAbsence2',
+            type:'POST',
+            data:{'absence_id':data[i],'checked_by_admin':1},
+            success:function (data) {
+                alert("success!");
+            }
+        });
+    }
+
 });
 
 /*$(document).on('click','#leaveTable td',function(){

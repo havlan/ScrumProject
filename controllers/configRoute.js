@@ -82,7 +82,7 @@ module.exports = function (app, passport) {
     app.post('/updateShift', isLoggedIn, postCtrl.updateShift);
     app.post('/updateDepartment', isLoggedIn, postCtrl.updateDepartment);
     app.post('/updateRequest', isLoggedIn, postCtrl.updateRequest);
-    app.post('/updateAbsence', isLoggedIn, postCtrl.updateAbsence);
+    app.post('/updateAbsence2', isLoggedIn, postCtrl.updateAbsence2);
     app.post('/updateOvertime', isLoggedIn, postCtrl.updateOvertime);
     app.post('/updateLogInInfo', isLoggedIn, postCtrl.updateLogInInfo);
   //  app.post('/newUser',isLoggedIn,postCtrl.postNewUser);

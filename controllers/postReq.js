@@ -68,6 +68,9 @@ module.exports = {
     updateAbsence : function (req, res) {
         dbMiddelware.updateAbsence(req,res);
     },
+    updateAbsence2 : function (req, res) {
+        dbMiddelware.updateAbsence2(req,res);
+    },
     updateOvertime : function (req, res) {
         dbMiddelware.updateOvertime(req,res);
     },

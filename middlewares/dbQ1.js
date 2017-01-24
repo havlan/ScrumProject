@@ -265,7 +265,14 @@ module.exports = {
         dbHelper.postdbQuery(req, res, "update Absence set ? where absence_id =?", [{
             checked_by_admin: req.body.checked_by_admin,
             shift_id: req.body.shift_id,
-            employee_id: req.body.employee_id
+            employee_id: req.body.employee_id,
+            explanation_absence:req.body.explanation_absence
+        }, pk]);
+    },
+    updateAbsence2: function (req, res) {
+        var pk = req.body.absence_id;
+        dbHelper.postdbQuery(req, res, "update Absence set ? where absence_id =?", [{
+            checked_by_admin: req.body.checked_by_admin
         }, pk]);
     },
     updateOvertime: function (req, res) {
