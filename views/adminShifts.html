@@ -23,7 +23,7 @@
 
         <div class="modal-header">
             <span class="close">&times;</span>
-            <h2 id="organizeShiftTitle">Organiser ny vakt</h2>
+            <h2 id="organizeShiftTitle">Header</h2>
         </div>
 
         <div id="adminNewShiftModalContent" class="modal-body">
@@ -33,13 +33,15 @@
             </div>
             <div id="numberBox">
                 <p>Antall</p>
-                <select id= "chooseNumber" onchange="createPeopleDropdown(this)"></select>
+                <select id= "chooseNumber" onchange="getDispersion(this)"></select>
             </div>
-            <div id="peopleBox"></div>
+            <div id="peopleBox">
+                <table id="peopleTable"></table>
+            </div>
         </div>
 
         <div class="modal-footer">
-            <h3>Modal Footer</h3>
+            <button type="button" class="close" data-dismiss="modal">Lukk</button>
         </div>
 
     </div>
