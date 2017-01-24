@@ -4,9 +4,7 @@ var myList = [];
 var typeNames =[];
 window.indeks = 0;
 
-$.get('getAvailability', {}, function(req, res, data){
-
-    //$("#includedContent").load("menu");
+$.get('/getAvailability', {}, function(req, res, data){
 
     console.log(data);
     console.log(data.responseJSON);
@@ -186,6 +184,10 @@ $(function() {
         e.preventDefault(); return false;
     });
 
+
+    function placeAvalability(selector, list) {
+
+    }
 });
 
 

@@ -75,7 +75,7 @@ module.exports = {
     },
 
     getAvailability : function (req, res) {
-        dbHelper.getdbQuery(req, res, "Select * From Availability Where employee_id = ?",req.session.passport.user.id);
+        dbHelper.getdbQuery(req, res, "Select day, availability From Availability Where employee_id = ?",req.session.passport.user.id);
 
     },
 

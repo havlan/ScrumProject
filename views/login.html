@@ -10,24 +10,24 @@
     <script src="frontendJS/login.js"></script>
     <meta charset='utf-8'/>
 </head>
-<body>
+<body id="loginbody">
 <div id="includedContent"></div>
 <div class="login-page">
-    <img src="/img/MinVakt.png" style=" -webkit-filter: drop-shadow(5px 5px 5px #222); filter: drop-shadow(5px 5px 5px #222); width:304px; " >
+    <img id="logoPic" src="/img/MinVakt.png" style=" -webkit-filter: drop-shadow(1px 1px 1px #222); filter: drop-shadow(1px 1px 1px #222); width:200px; " >
     <div class="form">
         <form action="/login" method="post">
             <div class="input">
-                <label for="username">Username</label>
-                <input type="text" id="username" name="username">
+                <label for="username" >Username</label>
+                <input type="text" id="username" name="username" placeholder="eks: janskrotnes">
             </div>
             <div class="input">
                 <label for="password">Password</label>
-                <input type="password" id="password" name="password">
+                <input type="password" id="password" name="password" placeholder="eks: katt123">
             </div>
             <button type="submit" style="font-size-adjust: 0.5;">Login</button>
         </form>
         <div class="etc-login-form">
-            <p>Glemt passord? <a id="klikk" href="#newPassword">Klikk her</a></p>
+            <p id="passwordClick"><a id="klikk" href="#newPassword"> Glemt passord? Klikk her</a></p>
         </div>
     </div>
 </div>

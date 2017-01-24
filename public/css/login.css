@@ -5,19 +5,39 @@
   padding: 8% 0 0;
   margin: auto;
 }
+
+#loginbody{
+    background: #91a8ee; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(left top, #91a8ee, #c2f0f0, #e9eefc,#4169e1); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(bottom right, #91a8ee, #c2f0f0, #e9eefc,#4169e1); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(bottom right, #91a8ee, #c2f0f0, #e9eefc,#4169e1); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(to bottom right,  #91a8ee, #c2f0f0, #e9eefc,#4169e1); /* Standard syntax (must be last) */
+    background-repeat:no-repeat;
+    background-size:100% 150%;
+}
+
+#logoPic{
+    margin-left: calc(50% - 100px);
+}
 .form {
   position: relative;
   z-index: 1;
-  background: royalblue;
+  background: #f2f2f2;
   max-width: 360px;
   margin: 0 auto 100px;
   padding: 45px;
-  text-align: center;
+  text-align: left;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
 .etc-login-form {
-  color: #919191;
+  color: white;
   padding: 10px 20px;
+}
+#klikk{
+  color: royalblue;
+}
+#passwordClick{
+    text-align: center;
 }
 .etc-login-form p {
   margin-bottom: 5px;
@@ -44,9 +64,10 @@
 .form input {
   font-family: "Roboto", sans-serif;
   outline: 0;
-  background: ThreeDDarkShadow;
+  background: white;
   width: 100%;
   border: 0;
+    border-radius: 5px;
   margin: 0 0 15px;
   padding: 15px;
   box-sizing: border-box;
@@ -62,16 +83,14 @@
   padding: 15px;
   color: #FFFFFF;
   font-size: 14px;
-  -webkit-transition: all 0.3 ease;
-  transition: all 0.3 ease;
   cursor: pointer;
 }
 .form button:hover,.form button:active,.form button:focus {
-  background: #4273af;
+  background: #7c7bd1;
 }
 .form .message {
   margin: 15px 0 0;
-  color: #b3b3b3;
+  color: red;
   font-size: 12px;
 }
 .form .message a {
@@ -113,14 +132,4 @@
 }
 .container .info span .fa {
   color: #EF3B3A;
-}
-body {
-  background: hotpink ; /* fallback for old browsers */
-  background: -webkit-linear-gradient(right, hotpink, lightpink);
-  background: -moz-linear-gradient(right, hotpink, lightpink);
-  background: -o-linear-gradient(right, hotpink, lightpink);
-  background: linear-gradient(to left, royalblue,lightblue);
-  font-family: "Roboto", sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;      
 }
