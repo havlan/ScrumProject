@@ -41,7 +41,7 @@ function buildHtmlTable(selector,list) {
     var tbody = $('<tbody/>');
     for (var i = 0; i < myList.length; i++) {
         var row$ = $('<tr id=' + i + '/>');
-        var check$ = $('<div class="checkbox"><label><input type="checkbox" id='+ i +' value=""></label></div>');
+        var check$ = $('<div class="checkbox radio-margin"><label><input type="checkbox" id='+ i +' value=""><span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span></label></div>');
         for (var colIndex = 0; colIndex < columns.length; colIndex++) {
             var cellValue = myList[i][columns[colIndex]];
             if (cellValue == null) cellValue = "";
@@ -73,11 +73,9 @@ function addAllColumnHeaders(myList, selector) {
     $(headerThead$).append(headerTr$);
     return columnSet;
 }
-window.navn =""; //Name from selected row
-window.shift = 0;//Shift ID from selected row
+
+//When pressing 'Lagre'-button any row that is checked will get checked_by_admin=1
 $(document).on('click','#Lagre',function (e) {
-    var tabell =[];
-    alert("hei");
     e.preventDefault();
     var data = $("#leaveTable").find("input:checkbox:checked").map(function(){
         return $(this).closest("tr").find('td:eq(0)').text();
