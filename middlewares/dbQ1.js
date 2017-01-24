@@ -64,15 +64,6 @@ module.exports = {
     /*simpleLogin : function(username){
         dbHelper.simpleLogin("select * from LoginInfo where Username = ?", [username]);
     },*/
-    getVaktliste1 : function(req,res){
-        dbHelper.getdbQuery(req, res, "select * from WORKTOGETHERTODAY1 where department_id = 7"); // where department_id = ?", req.params.department_id); //req.params.ShiftStart,
-    },
-    getVaktliste2 : function(req,res){
-        dbHelper.getdbQuery(req, res, "select * from WORKTOGETHERTODAY2 where department_id = 7"); //,[req.params.department_id]); //req.params.ShiftStart,
-    },
-    getVaktliste3 : function(req,res){
-        dbHelper.getdbQuery(req, res, "select * from WORKTOGETHERTODAY3 where department_id = 7"); //,[req.params.department_id]); //req.params.ShiftStart,
-    },
     getTypeNames : function (req, res) {
         dbHelper.getdbQuery(req,res,"Select name from Type");
     },
@@ -203,12 +194,17 @@ module.exports = {
         console.log("Posting new LogInInfo");
         dbHelper.postdbQuery(req, res, "insert into LogInInfo set ?", post);
     },
-    postDepartment: function (req,res) {
-        var post = {
-            department_name: req.body.department_name
-        };
+    getVaktliste1: function (req,res) {
         console.log("Posting new Departments");
-        dbHelper.getdbQuery(req, res, "select * from WORKTOGETHERTODAY1 where department_id = ?", [req.body.department_id]);
+        dbHelper.getdbQuery(req, res, "select * from WORKTOGETHERTODAY1 where department_name = ?", [req.body.department_name]);
+    },
+    getVaktliste2: function (req,res) {
+        console.log("Posting new Departments");
+        dbHelper.getdbQuery(req, res, "select * from WORKTOGETHERTODAY2 where department_name = ?", [req.body.department_name]);
+    },
+    getVaktliste3: function (req,res) {
+        console.log("Posting new Departments");
+        dbHelper.getdbQuery(req, res, "select * from WORKTOGETHERTODAY3 where department_name = ?", [req.body.department_name]);
     },
 
     //update

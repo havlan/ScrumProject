@@ -2,7 +2,6 @@
 
 
 $(document).ready(function(){ // syntax for å hente data når dokument (html) er lastet inn
-    $("#includedContent").load("menu");
     $("#sortTable").tablesorter();
 
     $.get('/getOneEmployee', {}, function(req, res, data){
@@ -19,7 +18,6 @@ $(document).ready(function(){ // syntax for å hente data når dokument (html) e
         document.getElementById("edittelefon").value = document.getElementById("tlfnr").innerHTML;
         document.getElementById("editadresse").value = document.getElementById("address").innerHTML;
         document.getElementById("editepost").value = document.getElementById("email").innerHTML;
-        $("#cover").fadeOut(10); <!-- MÅ ligge etter det som tar legst å loade-->
     });
 });
 

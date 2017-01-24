@@ -64,9 +64,9 @@ module.exports = function (app, passport) {
         res.redirect('/calendar');
     });
 
-    app.post('/postVaktliste1', isLoggedIn, postCtrl.postVaktliste1);
-    app.post('/postVaktliste2', isLoggedIn, postCtrl.postVaktliste2);
-    app.post('/postVaktliste3', isLoggedIn, postCtrl.postVaktliste3);
+    app.get('/getVaktliste1', isLoggedIn, getCtrl.getVaktliste1);
+    app.get('/getVaktliste2', isLoggedIn, getCtrl.getVaktliste2);
+    app.get('/getVaktliste3', isLoggedIn, getCtrl.getVaktliste3);
 
     app.post('/postUser', isAdmin, postCtrl.postEmployee);
     app.post('/delUser', isAdmin, delCtrl.delLogin); // office auth
