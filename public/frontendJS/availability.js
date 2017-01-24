@@ -4,7 +4,18 @@ var myList = [];
 var typeNames =[];
 window.indeks = 0;
 
+$.get('getAvailability', {}, function(req, res, data){
 
+    //$("#includedContent").load("menu");
+
+    console.log(data);
+    console.log(data.responseJSON);
+    myList = data.responseJSON;
+    //document.getElementById("data").innerHTML = myList;
+
+    buildHtmlTable('#TingTang',myList);
+    //tableCreate();
+});
 //Build Table
 
 function buildHtmlTable(selector,list) {
