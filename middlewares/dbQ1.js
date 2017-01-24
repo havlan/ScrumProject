@@ -72,7 +72,7 @@ module.exports = {
     },
 
     getAvailability : function (req, res) {
-        dbHelper.getdbQuery(req, res, "Select * From Availability Where employee_id = ?",req.session.passport.employee_id);
+        dbHelper.getdbQuery(req, res, "Select * From Availability Where employee_id = ?",req.session.passport.user.id);
 
     },
 
