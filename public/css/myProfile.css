@@ -17,10 +17,13 @@ h1{
 }
 
 .infoEmp{
-    margin-left: 350px;
-    margin-top: 80px;
+    margin-left: 70%;
+    margin-top: 5%;
     position: absolute;
-
+    width:auto;
+}
+#imgBtn{
+    border:solid 1px red;
 }
 
 .profile{
@@ -33,7 +36,10 @@ h1{
     margin-left: 10%;
     overflow: auto;
 }
-
+#pictureEmp{
+    width:100px;
+    height:100px;
+}
 
 
 #editBtn{
@@ -81,9 +87,6 @@ h1{
 }
 
 #picBtn{
-    position: absolute;
-    margin-left: 90px;
-    margin-top: 380px;
     padding: 5px;
     color:black;
     background-color: white;
@@ -92,8 +95,8 @@ h1{
 }
 
 #profilePic{
-    margin-left: 40px;
-    margin-top: 100px;
+    margin-left: 10%;
+    margin-top: 5%;
     position: absolute;
 }
 .histTable tr:nth-child(odd):not(:first-child){
