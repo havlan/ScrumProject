@@ -9,6 +9,7 @@
     <script src="/frontendJS/fullcalendar.min.js"></script>
     <script src="/frontendJS/nb.js"></script>
     <script src="/frontendJS/adminShifts.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link href="/css/adminShifts.css" rel="stylesheet"/>
     <script type="text/javascript" src="events.json"></script>
 </head>
@@ -17,7 +18,36 @@
 
 <div id="includedContent"></div>
 
-<div id='calendarx' style="display:block"></div>
+<div id="adminNewShiftModal" class="modal">
+    <div class="modal-content">
+
+        <div class="modal-header">
+            <span class="close">&times;</span>
+            <h2 id="organizeShiftTitle">Organiser ny vakt</h2>
+        </div>
+
+        <div id="adminNewShiftModalContent" class="modal-body">
+            <div id="departmentBox">
+                <p>Avdeling</p>
+                <select id= "chooseDepartment"></select>
+            </div>
+            <div id="numberBox">
+                <p>Antall</p>
+                <select id= "chooseNumber" onchange="createPeopleDropdown(this)"></select>
+            </div>
+            <div id="peopleBox"></div>
+        </div>
+
+        <div class="modal-footer">
+            <h3>Modal Footer</h3>
+        </div>
+
+    </div>
+</div>
+
+
+
+<div id='calendarx'></div>
 
 </body>
 </html>
