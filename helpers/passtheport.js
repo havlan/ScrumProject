@@ -69,7 +69,7 @@ module.exports = function (passport) {
                     if (err) {
                         return done(err);
                     }
-                    if (!cryptoHash.sha512(req.body.password, rows[0].password_salt).passwordHash == rows[0].password_hash) {
+                    if (!(cryptoHash.sha512(req.body.password, rows[0].password_salt).passwordHash == rows[0].password_hash)) {
                         return done(null, false, req.flash("loginMsg", "WHooooooooops, wrong password."));
                     }
                     console.log("LOGIN OK");
