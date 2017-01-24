@@ -17,8 +17,8 @@ h1{
 }
 
 .infoEmp{
-    margin-left: 70%;
-    margin-top: 5%;
+    margin-left: 30%;
+    margin-top: 3%;
     position: absolute;
     width:auto;
 }
@@ -87,15 +87,18 @@ h1{
 }
 
 #picBtn{
+    position: relative;
     padding: 5px;
     color:black;
     background-color: white;
     border: solid black 1px;
     border-radius: 5px;
+    margin-left: 9%;
+    margin-top: 21%;
 }
 
 #profilePic{
-    margin-left: 10%;
+    margin-left: 3%;
     margin-top: 5%;
     position: absolute;
 }
