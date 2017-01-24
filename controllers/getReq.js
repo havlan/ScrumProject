@@ -138,6 +138,11 @@ module.exports = {
     getNextShiftForEmp : function (req, res) {
         dbMiddelware.getNextShiftForEmp(req,res);
     },
+
+    getAvailability : function (req, res) {
+      dbMiddelware.getAvailability(req,res);
+    },
+
     get403 : function (req, res) {
         res.status(403).sendFile(path.join(__dirname + '/../views/403.html'));
     },

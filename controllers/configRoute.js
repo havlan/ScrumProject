@@ -33,6 +33,9 @@ module.exports = function (app, passport) {
 
     app.get('/getAbsenceView',isLoggedIn,getCtrl.getAbsenceView);
 
+
+    app.get('/getAvailability',isLoggedIn, getCtrl.getAvailability);
+
     //Sites
     app.get('/menu', isLoggedIn, getCtrl.getMenuSite);
     app.get('/overviewForAdmin', isLoggedIn, getCtrl.getOverviewForAdminSite);

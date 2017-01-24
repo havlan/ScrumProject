@@ -4,11 +4,14 @@
     <meta charset="UTF-8">
     <title>Tilgjengelighet</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
     <script src="/frontendJS/moment.min.js"></script>
     <script src="/frontendJS/jquery.min.js"></script>
     <script src="/frontendJS/fullcalendar.min.js"></script>
     <script src="/frontendJS/nb.js"></script>
     <script src="frontendJS/calendar.js"></script>
+    <script src="frontendJS/availability.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -17,14 +20,70 @@
     <link rel="stylesheet" href="css/availability.css">
 </head>
 <body>
-<div id="includedContent"></div>
 
-    <h1>Tilgjengelighet</h1>
-    <table class="dbAvailTable table-striped" id="dbDataTableAvail">
-    <tr class="headerTable"></tr>
 
-</table>
-<body>
-<div id='calendar'></div>
+<div id="shift-buttons" class="btn-group">
+    <button type="button" class="btn btn-default" id="available-prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+    </button>
+    <button type="button" class="btn btn-default" id="available-next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+    </button>
+</div>
+
+<p id="demo"></p>
+
+
+
+        <table id="available-table" border="1">
+            <tr>
+                <th>Vakt</th>
+                <th>man</th>
+                <th>tir</th>
+                <th>ons</th>
+                <th>tor</th>
+                <th>fre</th>
+                <th>lør</th>
+                <th>søn</th>
+            </tr>
+            <tr id="2">
+                <td id ="1">Dagvakt</td>
+                <td id="man1"></td>
+                <td id="tir1"></td>
+                <td id="ons1"></td>
+                <td id="tor1"></td>
+                <td id="fre1"></td>
+                <td id="lør1"></td>
+                <td id="søn1"></td>
+
+            </tr>
+            <tr id="4">
+                <td id="3">Kveldsvakt </td>
+                <td id="man2"></td>
+                <td id="tir2"></td>
+                <td id="ons2"></td>
+                <td id="tor2"></td>
+                <td id="fre2"></td>
+                <td id="lør2"></td>
+                <td id="søn2"></td>
+            </tr>
+            <tr id="6">
+                <td id="5">Nattevakt</td>
+                <td id="man3"></td>
+                <td id="tir3"></td>
+                <td id="ons3"></td>
+                <td id="tor3"></td>
+                <td id="fre3"></td>
+                <td id="lør3"></td>
+                <td id="søn3"></td>
+            </tr>
+        </table>
+
+        <button id="available">tilgjengelig
+        </button>
+
+        <button id="unavailable">utilgjengelig
+        </button>
+
 </body>
 </html>
