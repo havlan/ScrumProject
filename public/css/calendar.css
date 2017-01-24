@@ -4,15 +4,15 @@ body {
     font-size: 14px;
 }
 
-
 #calendar {
     position: absolute;
     width: 50%;
     margin-left: 22%;
 }
+
 #nextShift {
     border: solid #f2f2f2 1px;
-    box-shadow: 10px 10px 5px #888888;
+    box-shadow: 2px 2px 5px #888888;
     border-radius: 5px;
     height: 30%;
     width: 15%;
@@ -21,30 +21,26 @@ body {
 
 }
 .shiftHeader{
-    font-family: Verdana, Geneva, sans-serif;
     text-align: center;
 }
 #nextShiftInfo{
-    font-family: Verdana, Geneva, sans-serif;
     text-align: center;
     padding: 3%;
 }
+
 #newShiftBox {
     position: absolute;
     border: solid #f2f2f2 1px;
-    box-shadow: 10px 10px 5px #888888;
+    box-shadow: 1px 1px 1px #888888;
     border-radius: 5px;
     height: 30%;
     width: 15%;
     margin-left: 78%;
     margin-top: 22%;
-    font-family: Verdana, Geneva, sans-serif;
     text-align: center;
 
 }
-
 #newShifts{
-    font-family: Verdana, Geneva, sans-serif;
     text-align: center;
     padding:5%;
 }
@@ -63,15 +59,14 @@ body {
     font-size: 16px;
     cursor:pointer;
     width: 200px;
+    box-shadow: 2px 2px 5px #888888;
 }
-
 .menuBtn span {
     cursor: pointer;
     display: inline-block;
     position: relative;
     transition: 0.3s;
 }
-
 .menuBtn span:after {
     position: absolute;
     opacity: 0;
@@ -79,11 +74,9 @@ body {
     right: -20px;
     transition: 0.3s;
 }
-
 .menuBtn:hover span {
     padding-right: 15px;
 }
-
 .menuBtn:hover span:after {
     opacity: 1;
     right: 0;
@@ -92,21 +85,16 @@ body {
 #availabilityB{
     margin-top: 5%;
 }
-#availabilityB:hover{
-    background-color: #6585e7;
-}
 #extraB{
     margin-top: 10%;
-}
-#extraB:hover{
-    background-color: #6585e7;
 }
 #shiftB{
     margin-top: 15%;
 }
-#shiftB:hover{
+#availabilityB:hover, #shiftB:hover, #extraB:hover{
     background-color: #6585e7;
 }
+
 #acceptB{
     background-color: #4CAF50;
     position: relative;
@@ -127,6 +115,40 @@ body {
 only screen and (max-width: 760px),
 (min-device-width: 768px) and (max-device-width: 1024px)  {
     #calendar {
-        display: none;
+        position:relative;
+        width:calc(100% - 1em);
+        margin-top:0;
+        margin-left:0.5em;
+        margin-right:0.5em;
+        float:left;
     }
+    #nextShift {
+        float:right;
+        height: 10em;
+        width: calc(50% - 1em);
+        margin:0;
+        margin-top:0.5em;
+        margin-left:0.5em;
+        margin-right:0.5em;
+    }
+    .menuBtn{
+        float:left;
+        font-size: 1em;
+        width: calc(50% - 1em);
+        box-sizing:border-box;
+        position:relative;
+        margin-right: 0.5em;
+        margin-left: 0.5em;
+        height: 3em;
+    }
+    #availabilityB, #extraB, #shiftB {
+        margin-top: 0.5em;
+    }
+    .shiftHeader {
+        font-size: 1.5em;
+    }
+    #nextShiftInfo {
+        font-size: 1em;
+    }
+
 }
