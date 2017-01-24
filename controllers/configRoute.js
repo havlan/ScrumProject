@@ -32,6 +32,8 @@ module.exports = function (app, passport) {
     app.get('/getNextShiftForEmp',isLoggedIn, getCtrl.getNextShiftForEmp);
     app.get('/getOvertimeView',isLoggedIn,getCtrl.getOvertimeView);
     app.get('/getAbsenceView',isLoggedIn,getCtrl.getAbsenceView);
+    app.get('/getRequestView',isLoggedIn,getCtrl.getRequestView);
+
 
 
     app.get('/getAvailability',isLoggedIn, getCtrl.getAvailability);
@@ -85,6 +87,7 @@ module.exports = function (app, passport) {
     app.post('/updateShift', isLoggedIn, postCtrl.updateShift);
     app.post('/updateDepartment', isLoggedIn, postCtrl.updateDepartment);
     app.post('/updateRequest', isLoggedIn, postCtrl.updateRequest);
+    app.post('/updateRequest2', isLoggedIn, postCtrl.updateRequest2);
     app.post('/updateAbsence2', isLoggedIn, postCtrl.updateAbsence2);
     app.post('/updateOvertime', isLoggedIn, postCtrl.updateOvertime);
     app.post('/updateOvertime2', isLoggedIn, postCtrl.updateOvertime2);

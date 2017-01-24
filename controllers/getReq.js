@@ -96,6 +96,9 @@ module.exports = {
     getOvertimeView : function (req, res) {
         dbMiddelware.getOvertimeView(req,res);
     },
+    getRequestView : function (req, res) {
+        dbMiddelware.getRequestView(req,res);
+    },
     getDepartment : function (req, res){
         dbMiddelware.getDepartment(req,res);
     },

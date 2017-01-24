@@ -68,6 +68,9 @@ module.exports = {
     updateOvertime2 : function (req, res) {
         dbMiddelware.updateOvertime2(req,res);
     },
+    updateRequest2 : function (req, res) {
+        dbMiddelware.updateRequest2(req,res);
+    },
     updateLogInInfo : function (req, res) {
         dbMiddelware.updateLogInInfo(req,res);
     }

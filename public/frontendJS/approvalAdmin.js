@@ -15,17 +15,18 @@ function switchFunction(){
 }
 var myList = [];
 $.get('/getAbsenceView', {}, function(req, res, data){
-    //$("#includedContent").load("menu");
     console.log(data);
     console.log(data.responseJSON[0]);
     myList = data.responseJSON;
-    //document.getElementById("data").innerHTML = myList;
     buildHtmlTable('#leaveTable');
-    //tableCreate();
 });
 $.get('/getOvertimeView',{},function (req,res,data) {
     myList = data.responseJSON;
     buildHtmlTable('#overtimeTable');
+});
+$.get('/getRequestView',{},function (req,res,data) {
+    myList = data.responseJSON;
+    buildHtmlTable('#switchTable');
 });
 function buildHtmlTable(selector,list) {
     list = myList;
@@ -101,17 +102,17 @@ $(document).on('click','#Lagre',function (e) {
                 alert("success!");
             }
         });
-    }/*
+    }
     for(i=0; i<data3.length; i++){
         console.log(data3[i]);
         $.ajax({
-            url: '/',
+            url: '/updateRequest2',
             type:'POST',
-            data:{'checked_by_admin':1},
+            data:{'request_id':data3[i],'checked_by_admin':1},
             success:function (data) {
                 alert("success!");
             }
         });
     }
-*/
+
 });
