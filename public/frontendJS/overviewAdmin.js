@@ -226,6 +226,7 @@ $.get('/getTypeNames', {}, function(req, res, data){
     makeDropdown('#stilling')
 });
 
+
 function makeDropdown(selector) {
     var columns = addAllColumnHeaders(typeNames, selector);
     for (var i = 0; i < typeNames.length; i++) {
