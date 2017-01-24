@@ -13,19 +13,18 @@ $.get('/getEmployee', {}, function(req, res, data){
     myList = data.responseJSON;
     //document.getElementById("data").innerHTML = myList;
 
-    buildHtmlTable('#excelDataTable');
+    buildHtmlTable('#excelDataTable',myList);
     //tableCreate();
 });
 //Build Table
 
 function buildHtmlTable(selector,list) {
-    list = myList;
     var columns = addAllColumnHeaders(list, selector);
     var tbody = $('<tbody/>');
-    for (var i = 0; i < myList.length; i++) {
+    for (var i = 0; i < list.length; i++) {
         var row$ = $('<tr id=' + i + '/>');
         for (var colIndex = 0; colIndex < columns.length; colIndex++) {
-            var cellValue = myList[i][columns[colIndex]];
+            var cellValue = list[i][columns[colIndex]];
             if (cellValue == null) cellValue = "";
             row$.append($('<td/>').html(cellValue));
         }

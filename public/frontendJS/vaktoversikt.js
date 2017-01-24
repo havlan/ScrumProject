@@ -12,7 +12,6 @@ var dropdownInput = $("#departmentInput").find(":selected").text();
 $.get('/getDepartment', {}, function(req, res, data){
     console.log(data);
     console.log(data.responseJSON);
-    console.log($("#departmentInput").val());
     department = data.responseJSON;
 
     makeDropdown('#departmentInput',department);
@@ -32,19 +31,20 @@ function makeDropdown(selector,list) {
 
 function myFunction(){
     $('#departmentInput').change(function(){
+        console.log($("#departmentInput").find(":selected").text());
         $.ajax({
-            url: '/postVaktliste1', //this is the submit URL
-            type: 'POST',
-            data: {'department_id': dropdownInput},
+            url: '/getVaktliste1', //this is the submit URL
+            type: 'GET',
+            data: {'department_name': $("#departmentInput").find(":selected").text()},
             success: function(data){
                 console.log('successfully submitted');
+                console.log(data);
                 myList1 = data.responseJSON;
-                buildHtmlTable('#dayTable',myList1);
-            }
+            },
+            failure: function(err) {console.log("Error"+err);}
         });
     });
 };
-
 
 
 

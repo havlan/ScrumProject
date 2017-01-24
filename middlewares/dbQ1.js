@@ -64,21 +64,18 @@ module.exports = {
     /*simpleLogin : function(username){
         dbHelper.simpleLogin("select * from LoginInfo where Username = ?", [username]);
     },*/
-    getVaktliste1 : function(req,res){
-        dbHelper.getdbQuery(req, res, "select * from WORKTOGETHERTODAY1 where department_id = 7"); // where department_id = ?", req.params.department_id); //req.params.ShiftStart,
-    },
-    getVaktliste2 : function(req,res){
-        dbHelper.getdbQuery(req, res, "select * from WORKTOGETHERTODAY2 where department_id = 7"); //,[req.params.department_id]); //req.params.ShiftStart,
-    },
-    getVaktliste3 : function(req,res){
-        dbHelper.getdbQuery(req, res, "select * from WORKTOGETHERTODAY3 where department_id = 7"); //,[req.params.department_id]); //req.params.ShiftStart,
-    },
     getTypeNames : function (req, res) {
         dbHelper.getdbQuery(req,res,"Select name from Type");
     },
     getNextShiftForEmp : function (req, res) {
         dbHelper.getdbQuery(req,res,"Select DATE_FORMAT(MIN(s.date), '%m/%d/%Y %H:%i') as ndate, e.employee_id, d.department_name From Employee e, shift_has_employee she, Shift s, Department d Where s.date > now() And e.employee_id = she.employee_id And she.shift_id = s.shift_id And s.department_id = d.department_id and e.employee_id = ?", [req.session.passport.user.id]);
     },
+
+    getAvailability : function (req, res) {
+        dbHelper.getdbQuery(req, res, "Select * From Availability Where employee_id = ?",req.session.passport.employee_id);
+
+    },
+
     /**
     getVaktoversikt : function(req,res){
         var get = {name:req.body.name, type:req.body.type, department:req.body.department, responsibility_allowed:req.body.type, phone_nr:req.body.phone_nr};
@@ -197,12 +194,17 @@ module.exports = {
         console.log("Posting new LogInInfo");
         dbHelper.postdbQuery(req, res, "insert into LogInInfo set ?", post);
     },
-    postDepartment: function (req,res) {
-        var post = {
-            department_name: req.body.department_name
-        };
+    getVaktliste1: function (req,res) {
         console.log("Posting new Departments");
-        dbHelper.getdbQuery(req, res, "select * from WORKTOGETHERTODAY1 where department_id = ?", [req.body.department_id]);
+        dbHelper.getdbQuery(req, res, "select * from WORKTOGETHERTODAY1 where department_name = ?", [req.body.department_name]);
+    },
+    getVaktliste2: function (req,res) {
+        console.log("Posting new Departments");
+        dbHelper.getdbQuery(req, res, "select * from WORKTOGETHERTODAY2 where department_name = ?", [req.body.department_name]);
+    },
+    getVaktliste3: function (req,res) {
+        console.log("Posting new Departments");
+        dbHelper.getdbQuery(req, res, "select * from WORKTOGETHERTODAY3 where department_name = ?", [req.body.department_name]);
     },
 
     //update

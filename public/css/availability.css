@@ -1,34 +1,17 @@
-#dbDataTableAvail{
-    width: 80%;
-    margin-left: 0%;
-}
-#dbDataTableAvail {
-    border-collapse: collapse;
-    width: 100%;
-    border: 1px solid #ddd;
-    font-size: 16px;
+
+
+#available-table th{
+    text-align: center;
+
 }
 
-#dbDataTableAvail th, #dbDataTableAvail td {
-    text-align: left;
-    padding: 5px;
+#available-table td{
+    width: 50px;
+    height: 35px;
 }
 
-#dbDataTableAvail tr {
-    border-bottom: 1px solid #ddd;
-}
-#dbDataTableAvail td:hover{
-    color: darkgray;
-}
+tr { cursor: default; }
+.highlight { background: yellow; }
 
-#dbDataTableAvail tr.header{
-    background-color: #f1f1f1;
-}
-#dbDataTableAvail tr:hover{
-    background-color: aliceblue;
-    cursor: pointer;
-}
-#calendar{
-    width:50%;
-    margin-left: 25%;
-}
+.available { background: #b1d9b3; }
+.unavailable { background: #ffdbcf; }
