@@ -24,9 +24,6 @@ module.exports = function (app, passport) {
     app.get('/getOvertime', isLoggedIn, getCtrl.getOvertime);
     //app.get('/getUserInfo', isLoggedIn, getCtrl.getUserInfo);
     app.get('/getVaktoversiktSite', isLoggedIn, getCtrl.getVaktoversiktSite);
-    app.get('/getVaktliste1', isLoggedIn, getCtrl.getVaktliste1);
-    app.get('/getVaktliste2', isLoggedIn, getCtrl.getVaktliste2);
-    app.get('/getVaktliste3', isLoggedIn, getCtrl.getVaktliste3);
     app.get('/getEmployee_shifts_toCurrentDate', isLoggedIn, getCtrl.getEmployee_shifts_toCurrentDate);
     app.get('/getPersonalShiftEvents',isLoggedIn, getCtrl.getPersonalShiftEvents);
     app.get('/getTypeNames',isLoggedIn, getCtrl.getTypeNames);
@@ -63,6 +60,10 @@ module.exports = function (app, passport) {
         console.log("LOGIN OK?");
         res.redirect('/calendar');
     });
+
+    app.post('/postVaktliste1', isLoggedIn, postCtrl.postVaktliste1);
+    app.post('/postVaktliste2', isLoggedIn, postCtrl.postVaktliste2);
+    app.post('/postVaktliste3', isLoggedIn, postCtrl.postVaktliste3);
 
     app.post('/postUser', isAdmin, postCtrl.postEmployee);
     app.post('/delUser', isAdmin, delCtrl.delLogin); // office auth

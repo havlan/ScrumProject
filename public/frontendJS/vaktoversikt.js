@@ -11,7 +11,7 @@ var department= [];
 $.get('/getDepartment', {}, function(req, res, data){
     console.log(data);
     console.log(data.responseJSON);
-
+    console.log($("#departmentInput").val());
     department = data.responseJSON;
 
     makeDropdown('#departmentInput',department);
@@ -27,28 +27,32 @@ function makeDropdown(selector,department) {
     }
 }
 
-$.get('/getVaktliste1', {}, function(req, res, data){
-    myList1 = data.responseJSON;
+//$.post('/getVaktliste1', {}, function(req, res, data){
+//
+//    myList2 = data.responseJSON;
+//
+//    buildHtmlTable('#eveningTable',myList2);
+//
+//});
 
-    buildHtmlTable('#dayTable',myList1);
 
+$(function(){
+    $('#departmentInput').on("click",function(){
+        $.ajax({
+            url: '/postVaktliste1', //this is the submit URL
+            type: 'POST',
+            data: {'department_id': $("#departmentInput").val()},
+            success: function(data){
+                console.log('successfully submitted');
+                myList1 = data.responseJSON;
+                buildHtmlTable('#dayTable',myList1);
+            }
+        });
+    });
 });
 
-$.get('/getVaktliste2', {}, function(req, res, data){
 
-    myList2 = data.responseJSON;
 
-    buildHtmlTable('#eveningTable',myList2);
-
-});
-
-$.get('/getVaktliste3', {}, function(req, res, data){
-
-    myList3 = data.responseJSON;
-
-    buildHtmlTable('#nightTable',myList3);
-
-});
 
 
 function buildHtmlTable(selector,list) {

@@ -197,6 +197,12 @@ module.exports = {
         console.log("Posting new LogInInfo");
         dbHelper.postdbQuery(req, res, "insert into LogInInfo set ?", post);
     },
+    postDepartment: function (req,res) {
+        var post = {
+            department_id: req.body.department_id
+        };
+        dbHelper.postdbQuery(req, res, "select * from WORKTOGETHERTODAY1 where department_id = ?", post);
+    },
 
     //update
     //SYNTAKS
