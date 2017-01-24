@@ -45,15 +45,11 @@ function buildHtmlTable(selector,list) {
         for (var colIndex = 0; colIndex < columns.length; colIndex++) {
             var cellValue = myList[i][columns[colIndex]];
             if (cellValue == null) cellValue = "";
-            if (i==columns.length){
-                row$.append($('<td/>').html(check$));
-            }else {
-                row$.append($('<td/>').html(cellValue));
-            }
+            row$.append($('<td/>').html(cellValue));
         }
+        row$.append($('<td/>').html(check$));
         // $(row$).setAttribute('id',"surprise maddafakka");
         $(selector).append(row$);
-
         $(tbody).append(row$);
     }
     $(selector).append(tbody);
@@ -70,7 +66,9 @@ function addAllColumnHeaders(myList, selector) {
                 headerTr$.append($('<th/>').html(key));
             }
         }
+
     }
+    headerTr$.append($('<th/>'));
     $(selector).append(headerThead$);
     $(headerThead$).append(headerTr$);
     return columnSet;
