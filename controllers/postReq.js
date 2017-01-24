@@ -31,6 +31,15 @@ module.exports = {
     postLogInInfo : function (req, res) {
         dbMiddelware.postnewLogInInfo(req,res);
     },
+    postVaktliste1 : function (req, res) {
+        dbMiddelware.postVaktliste1(req,res);
+    },
+    postVaktliste2 : function (req, res) {
+        dbMiddelware.postVaktliste2(req,res);
+    },
+    postVaktliste3 : function (req, res) {
+        dbMiddelware.postVaktliste3(req,res);
+    },
     postNewUser : function (req, res) {
         dbMiddelware.postnewUser(req,res);
     },

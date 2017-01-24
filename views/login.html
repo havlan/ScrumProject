@@ -26,11 +26,9 @@
             </div>
             <button type="submit" style="font-size-adjust: 0.5;">Login</button>
         </form>
-        <form action="/forgotpassword" method="post">
-            <div class="etc-login-form">
+        <div class="etc-login-form">
             <p>Glemt passord? <a id="klikk" href="#newPassword">Klikk her</a></p>
-            </div>
-        </form>
+        </div>
     </div>
 </div>
 <!-- 1:Modal-Add -->
@@ -42,16 +40,12 @@
                 <h3 class="modal-title">Glemt Passord</h3>
             </div>
             <main class="modal-body">
-                <section id="forgot password">
+                <section id="forgotpassword">
                 <form id="forgot">
-                    <p>
                     epost:
-                    <input required class = "inputEdit"  id="email" type="text" name="email" placeholder="eks: noen@noko.com" autofocus>
-                    </p>
-                    <p>
+                    <input required class = "inputEdit"  id="email" type="email" name="email" placeholder="eks: noen@noko.com" autofocus>
                     brukernavn:
                     <input required class = "inputEdit" id="username2" type="text" name="username" placeholder="eks: ola_nordmann_96">
-                    </p>
                     <p id = "varsel"></p>
                     <br>
                     <button id="saveEdit" type="submit" value="submit">Send</button>

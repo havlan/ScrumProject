@@ -44,49 +44,68 @@
 
                 <main class="modal-body">
                     <img id="picEmp" src="http://www.freeiconspng.com/uploads/profile-icon-9.png" alt="Bilde av ansatt"
-                         height="150px" width="150px"></img>
+                         height="200px" width="200px"></img>
                     <button type="button" id="addPicEmp">Legg til bilde</button>
                     <form id="addEmp">
+                        <p>
+                            Navn:
+                            <input required class="input" id="fornavn" type="text" name="name" placeholder="eks: Jan Skrotnes">
+                            <br>
+                        </p>
+                        <p>
                         Brukernavn:
                         <input required class="input" id="brukernavn" type="text" name="username" placeholder="eks: ola_nordmann_96">
                         <br>
+                        </p>
+                        <p>
                         Brukertype:
                         <input required class="input" id="admin" type="number" name="admin" placeholder="eks: 0 eller 1">
                         <br>
-                        Navn:
-                        <input required class="input" id="fornavn" type="text" name="name" placeholder="eks: Jan Skrotnes">
-                        <br>
+                        </p>
+                        <p>
                         Stilling:
                         <select class="input" id= "stilling">
                         </select>
                         <br>
+                        </p>
+                        <p>
                         Telefonnummer:
                         <input required class="input" id="telefon" type="number" name="phone" placeholder="eks: +47 12345678">
                         <br>
+                        </p>
+                        <p>
                         E-postadresse:
                         <input required class="input" id="epost" type="text" name="email" placeholder="eks: noen@mail.no">
                         <br>
+                        </p>
+                        <p>
                         Adresse:
                         <input required class="input" id="adresse" type="text" name="address" placeholder="eks: Gateveien 1">
                         <br>
+                        </p>
+                        <p>
                         Personnummer:
                         <input required class="input" id="personnummer" type="text" name="persNo" placeholder="11 siffer">
                         <br>
-                        Seniority:
+                        </p>
+                        <p>
+                        Ansiennitet:
                         <input required class="input" id="seniority" type="text" name="seniority" placeholder="eks: 69">
                         <br>
-                        Responsibility:
+                        </p>
+                        <p>
+                        Ansvar:
                         <input required class="input" id="responsibility" type="text" name="responsibility" placeholder="1 or 0">
                         <br>
-                        <br>
+                        </p>
                         <br>
                         <p id="newUserFeedback"></p>
-                        <button id="save" type="submit" value="submit">Lagre</button>
+                        <button class="saveEdit" id="save" type="submit" value="submit">Lagre &#10003;</button>
                     </form>
                 </main>
                 <!-- Modal footer-->
                 <div class="modal-footer">
-                    <button type="button" class="closeButton" data-dismiss="modal">Lukk</button>
+                    <button type="button" class="close" data-dismiss="modal">Lukk</button>
                 </div>
             </div>
         </div>
@@ -123,22 +142,28 @@
                             <p>
                             Stilling:
                             <input required  class="dbInfo" id="stillingdb" type="text" name="position">
-                            </p><br>
+                            </p>
+                            <p>
                             Telefonnummer:
                             <input required  class="dbInfo" id="telefondb" type="number" name="phone">
-                            <br>
+                            </p>
+                            <p>
                             E-postadresse:
                             <input required  class="dbInfo" id="epostdb" type="text" name="email">
-                            <br>
+                            </p>
+                            <p>
                             Adresse:
                             <input required  class="dbInfo" id="adressedb" type="text" name="address">
-                            <br>
+                            </p>
+                            <p>
                             Personnummer:
                             <input required  class="dbInfo" id="personnummerdb" type="number" name="persNo">
                             <br>
+                            </p>
                             <br>
-                            <button type="submit" value="submit" display="none">Lagre</button>
-                            <button type="button" id="back" onclick="hideForm()" display="none">&#8592;Tilbake</button>
+                            <button type="button" class="backBtn" id="back" onclick="hideForm()" display="none">&#8592;Tilbake</button>
+                            <button type="submit" class="saveEdit"id="saveEditBtn"value="submit" display="none">Lagre &#10003;</button>
+
                         </form>
                     </section>
                     <section id="personInfo" style="display:block">
@@ -171,7 +196,9 @@
                     </section>
                     <section id="logInInfo" style="display:none;">
                         <form id="loginForm">
+
                             <p>Fungerer bare hvis ansatt ikke allerede har en bruker</p>
+
                             Brukernavn:
                             <input required class="input" id="username" type="text" name="Brukernavn">
                             <br>
@@ -179,14 +206,15 @@
                             <input required class="input" id="is_admin" type="text" name="Admin?">
                             <br>
                             <br>
-                            <button type="submit" value="submit" display="none">Lagre</button>
-                            <button type="button" id="back2" onclick="hideForm()" display="none">&#8592;Tilbake</button>
+                            <button type="button" class="backBtn"id="back2" onclick="hideForm()" display="none">&#8592;Tilbake</button>
+                            <button type="submit" class="saveEdit"value="submit" id="saveLogin" display="none">Lagre</button>
                         </form>
+
                     </section>
                     <aside class="buttons">
-                        <button type="button" id="edit" onclick="hideInfo()" display="inline">Rediger ansatt</button>
-                        <button type="button" id="remove" onclick="removeFunction()" data-dismiss="modal" display="inline">Fjern bruker</button>
-                        <button type="button" id="addInfo" onclick="addFunction()" display="inline">Legg til bruker</button>
+                        <button type="button" id="edit" onclick="hideInfo()" display="inline">Rediger</button>
+                        <button type="button" id="remove" onclick="removeFunction()" data-dismiss="modal" display="inline">Deaktiver bruker</button>
+                        <button type="button" id="addInfo" onclick="addFunction()" display="inline">Aktiver bruker</button>
                     </aside>
                 </main>
 
@@ -199,6 +227,6 @@
     </div>
     <!-- End all modal -->
 
-</>
+</div>
 </body>
 </html>
