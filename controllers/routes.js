@@ -37,7 +37,7 @@ router.route('/getPersonalShiftEvents').get(getCtrl.getPersonalShiftEvents);
 //post / put
 router.route('/login').post(getCtrl.submitLogin);
 router.route('/postUser').post(postCtrl.postEmployee);
-router.route('/postDepartment').post(postCtrl.postDepartment);
+//router.route('/postDepartment').post(postCtrl.postDepartment);
 router.route('/postType').post(postCtrl.postType);
 router.route('/postShift').post(postCtrl.postShift);
 router.route('/postShift_has_employee').post(postCtrl.postShift_has_employee);

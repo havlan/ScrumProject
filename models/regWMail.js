@@ -2,6 +2,7 @@ var queries = require('../middlewares/dbQ1');
 var crypt = require('../middlewares/cryptoHash');
 var nodemailer = require('nodemailer');
 var async = require('async');
+var pool = require('../helpers/db').getPool();
 
 var transporter = nodemailer.createTransport({
     pool: true,
@@ -264,9 +265,9 @@ module.exports = {
                     res.json(404, err);
                     conn.release();
                 } else {
-                    var pwCheckHash = crypt.sha512(req.body.oldPw, rows[0].password_salt);
+                    var pwCheckHash = crypt.sha512(req.body.oldpw, rows[0].password_salt);
                     if (pwCheckHash.passwordHash == rows[0].password_hash) {
-                        var newSaltHash = crypt.sha512(req.body.newPw, crypt.genRandomString(16));
+                        var newSaltHash = crypt.sha512(req.body.newpw, crypt.genRandomString(16));
                     } else {
                         res.status(404);
                         res.json("feil pw");

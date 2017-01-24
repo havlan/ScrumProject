@@ -32,7 +32,7 @@ module.exports = {
         dbMiddelware.postnewLogInInfo(req,res);
     },
     postVaktliste1 : function (req, res) {
-        dbMiddelware.postVaktliste1(req,res);
+        dbMiddelware.postDepartment(req,res);
     },
     postVaktliste2 : function (req, res) {
         dbMiddelware.postVaktliste2(req,res);

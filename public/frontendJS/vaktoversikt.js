@@ -6,6 +6,7 @@ var myList1= [];
 var myList2= [];
 var myList3= [];
 var department= [];
+var dropdownInput = $("#departmentInput").find(":selected").text();
 
 
 $.get('/getDepartment', {}, function(req, res, data){
@@ -27,21 +28,14 @@ function makeDropdown(selector,list) {
     }
 }
 
-//$.post('/getVaktliste1', {}, function(req, res, data){
-//
-//    myList2 = data.responseJSON;
-//
-//    buildHtmlTable('#eveningTable',myList2);
-//
-//});
 
 
-$(function(){
-    $('#departmentInput').on("click",function(){
+function myFunction(){
+    $('#departmentInput').change(function(){
         $.ajax({
             url: '/postVaktliste1', //this is the submit URL
             type: 'POST',
-            data: {'department_id': $("#departmentInput").val()},
+            data: {'department_id': dropdownInput},
             success: function(data){
                 console.log('successfully submitted');
                 myList1 = data.responseJSON;
@@ -49,7 +43,7 @@ $(function(){
             }
         });
     });
-});
+};
 
 
 

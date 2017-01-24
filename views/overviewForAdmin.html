@@ -7,9 +7,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="frontendJS/overviewAdmin.js"></script>
-
-     <script src = "https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"         ></script>
-     <script src = "https://cdn.datatables.net/1.10.13/js/dataTables.bootstrap.min.js"      ></script>
+    <script src = "https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+    <script src = "https://cdn.datatables.net/1.10.13/js/dataTables.bootstrap.min.js"></script>
 
 
 </head>
@@ -141,7 +140,7 @@
                             </p>
                             <p>
                             Stilling:
-                                <select class="input" id= "stillingdb">
+                                <select class="dbInfo" id= "stillingDropdown">
                                 </select>
                             </p>
                             <p>
@@ -213,9 +212,9 @@
 
                     </section>
                     <aside class="buttons">
-                        <button type="button" id="edit" onclick="hideInfo()" display="inline">Rediger</button>
-                        <button type="button" id="remove" onclick="removeFunction()" data-dismiss="modal" display="inline">Deaktiver bruker</button>
-                        <button type="button" id="addInfo" onclick="addFunction()" display="inline">Aktiver bruker</button>
+                        <button type="button" id="edit" onclick="hideInfo()" display="inline"> &#x2710; Rediger </button>
+                        <button type="button" id="remove" onclick="removeFunction()" data-dismiss="modal" display="inline"> Deaktiver bruker</button>
+                        <button type="button" id="addInfo" onclick="addFunction()" display="inline"> Aktiver bruker</button>
                     </aside>
                 </main>
 

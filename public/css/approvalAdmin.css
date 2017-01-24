@@ -51,7 +51,18 @@
 #overtime{
     margin-top: 15%;
 }
-
+#approveAbsence{
+    margin-left: 10px;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 8px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
 #switch{
     margin-top: 22%;
 }

@@ -21,7 +21,6 @@ function switchFunction(){
     document.getElementById('save').style.display = "block";
 }
 var myList = [];
-window.indeks = 0;
 $.get('/getAbsenceView', {}, function(req, res, data){
 
     //$("#includedContent").load("menu");
@@ -42,11 +41,13 @@ function buildHtmlTable(selector,list) {
     var tbody = $('<tbody/>');
     for (var i = 0; i < myList.length; i++) {
         var row$ = $('<tr id=' + i + '/>');
+        var check$ = $('<div class="checkbox"><label><input type="checkbox" id='+ i +' value=""></label></div>');
         for (var colIndex = 0; colIndex < columns.length; colIndex++) {
             var cellValue = myList[i][columns[colIndex]];
             if (cellValue == null) cellValue = "";
             row$.append($('<td/>').html(cellValue));
         }
+        row$.append($('<td/>').html(check$));
         // $(row$).setAttribute('id',"surprise maddafakka");
         $(selector).append(row$);
         $(tbody).append(row$);
@@ -57,7 +58,7 @@ function addAllColumnHeaders(myList, selector) {
     var columnSet = [];
     var headerThead$ = $('<thead/>');
     var headerTr$ = $('<tr/>');
-    for (var i = 0; i < myList.length; i++) {
+    for (var i = 0; i < myList.length+1; i++) {
         var rowHash = myList[i];
         for (var key in rowHash) {
             if ($.inArray(key, columnSet) == -1) {
@@ -65,8 +66,27 @@ function addAllColumnHeaders(myList, selector) {
                 headerTr$.append($('<th/>').html(key));
             }
         }
+
     }
+    headerTr$.append($('<th/>'));
     $(selector).append(headerThead$);
     $(headerThead$).append(headerTr$);
     return columnSet;
 }
+window.navn =""; //Name from selected row
+window.shift = 0;//Shift ID from selected row
+$(document).on('click','#leaveTable input',function () {
+    navn = $(this).closest("tr").find('td:eq(2)').text();
+    shift = $(this).closest("tr").find('td:eq(1)').text();
+    alert(navn);
+});
+
+/*$(document).on('click','#leaveTable td',function(){
+    navn = $(this).closest("tr").find('td:eq(0)').text();
+    shift = $(this).closest("tr").find('td:eq(1)').text();
+    $.get('/getAbsenceView', {}, function(req, res, data) {
+        document.getElementById("navndb").innerHTML = (data.responseJSON[shift].Navn);
+        document.getElementById("årsakdb").innerHTML = (data.responseJSON[shift].Årsak);
+    });
+    $('#approveModal').modal("show");
+});*/
