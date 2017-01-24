@@ -163,7 +163,7 @@ $(document).on('click','#excelDataTable td',function(){
     $.get('/getEmployee', {}, function(req, res, data) {
         //Fyll inn redigeringsfelt
         document.getElementById("navndb").value = (data.responseJSON[hei].name);
-        document.getElementById("stillingdb").value = (data.responseJSON[hei].type_name);
+        document.getElementById("stillingDropdown").value = (data.responseJSON[hei].type_name);
         document.getElementById("telefondb").value = (data.responseJSON[hei].phone_nr);
         document.getElementById("epostdb").value = (data.responseJSON[hei].email);
         document.getElementById("adressedb").value = (data.responseJSON[hei].address);
@@ -224,7 +224,9 @@ $.get('/getTypeNames', {}, function(req, res, data){
     typeNames = data.responseJSON;
 
     makeDropdown('#stilling')
+    makeDropdown('#stillingDropdown')
 });
+
 
 
 function makeDropdown(selector) {
