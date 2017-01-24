@@ -199,9 +199,10 @@ module.exports = {
     },
     postDepartment: function (req,res) {
         var post = {
-            department_id: req.body.department_id
+            department_name: req.body.department_name
         };
-        dbHelper.postdbQuery(req, res, "select * from WORKTOGETHERTODAY1 where department_id = ?", post);
+        console.log("Posting new Departments");
+        dbHelper.getdbQuery(req, res, "select * from WORKTOGETHERTODAY1 where department_id = ?", post);
     },
 
     //update
