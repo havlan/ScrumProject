@@ -156,7 +156,7 @@ $(function() {
 });
 
 //myModal info
-$(document).on('click','#excelDataTable tr',function(){
+$(document).on('click','#excelDataTable td',function(){
     indeks = $(this).closest("tr").find('td:eq(2)').text();
   //  alert(indeks);
     var hei = indeks-1;
