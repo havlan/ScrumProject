@@ -145,6 +145,50 @@ module.exports = {
     nyNodeETest : function(req,res){
         var obj = {notat:"Villsvin er 90 % vilt og 10% svin"};
         dbMethods.createDone(req,res,"insert into NodeETest set ?", obj);
-    }
+    },
 
+
+    changePassword: function (req, res) {
+        console.log("changePassword()");
+
+        pool.getConnection(function (er, conn) {
+            if (er) {
+                res.json(er);
+            }
+            console.log("query 1")
+            conn.query("select * from LoginInfo where username = ?", [req.session.passport.user.username], function (err, rows) {
+
+                if (err) {
+                    res.json(404, err);
+                    conn.release();
+                } else if (!rows.length) {
+                    res.json(404, err);
+                    conn.release();
+                } else {
+                    var pwCheckHash = crypt.sha512(req.body.oldPw, rows[0].password_salt);
+                    if (pwCheckHash.passwordHash == rows[0].password_hash) {
+                        var newSaltHash = crypt.sha512(req.body.newPw, crypt.genRandomString(16));
+                    } else {
+                        res.status(404);
+                        res.json("feil pw");
+                        conn.release();
+                    }
+                    console.log("query 2");
+                    conn.query("update LoginInfo set ? where ?", [{password_hash:newSaltHash.passwordHash, password_salt:newSaltHash.salt},{username: req.session.passport.user.username}], function (err2, rows2) {
+                        if (err2) {
+                            console.log(err2);
+                            res.status(404);
+                            res.json(err2);
+                            conn.release();
+                        } else {
+                            res.status(200);
+                            res.redirect("/myProfile");
+                            conn.release();
+                        }
+                    })
+                }
+
+            })
+        })
+    }
 };

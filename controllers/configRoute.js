@@ -98,6 +98,8 @@ module.exports = function (app, passport) {
         })
     });
 
+    app.post('/changePassword', isLoggedIn, model.changePassword);
+
 
     //MÅ VÆRE SIST
     app.get('/*', getCtrl.get404);
