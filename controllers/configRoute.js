@@ -51,7 +51,7 @@ module.exports = function (app, passport) {
 
     //post / put
     app.post('/login', passport.authenticate('login', {
-        failureRedirect: '/login',
+        failureRedirect:'/login',
         failureFlash: true
     }), function (req, res) {
         console.log("LOGIN OK?");
@@ -85,7 +85,6 @@ module.exports = function (app, passport) {
             if(err){
                 console.log("\n\n===ERR===\n\n");
             }else{
-                console.log(res);
                 res.json(res);
             }
 

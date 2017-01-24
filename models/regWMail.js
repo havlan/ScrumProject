@@ -41,15 +41,17 @@ module.exports = {
     forgotPwMail : function(request,response){ // email, username
         async.waterfall([
             function(done){
+                console.log(request.body);
                 console.log("METHOD 1");
                 pool.getConnection(function(er,conn){
                     if(er){
                         response.json(er);
                     }
-                    console.log(request.body);
+                    //console.log(request.body);
                     conn.query('select * from LoginInfo where username = ?',request.body.username, function(err,rows){
-                        if(err){ response.status(404);conn.release();}
-                        else if(!rows.length){ response.status(404); conn.release();}
+                        if(err){ response.status(404);
+                        }
+
                         else{done(null, conn, rows[0])}
                     })
                 })
@@ -57,19 +59,19 @@ module.exports = {
             function(conn,login,call){
                 console.log("METHOD 2");
                 conn.query("select * from Employee where employee_id = ? and email = ? ",[login.employee_id, request.body.email], function(err1,rows){
-                    if(err1 || !rows.length){
+                    if(err1){
                         console.log(err1);
                         response.status(404);
                         response.json(err1);
                         conn.release();
                     }else{ // exists in login and employee
-                        //var pw = crypt.generatePassword(), sh = crypt.genRandomString(16), pwobj = crypt.sha512(pw,sh);
+                        console.log("Before call method");
                         call(null,conn,login);
                     }
                 })
             },
             function(conn,loginData, done){
-                console.log("METHOD 3");
+                console.log(loginData);
                 var pw = crypt.generatePassword(), sh = crypt.genRandomString(16), pwobj = crypt.sha512(pw,sh);
                 var usr = {password_hash:pwobj.passwordHash, password_salt:pwobj.salt};
                 conn.query("update  LoginInfo set ? where username = ?",[usr, request.body.username], function(err2,rows) {
