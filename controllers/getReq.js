@@ -166,6 +166,10 @@ module.exports = {
     getAvailableShifts : function (req, res) {
         dbMiddelware.getAvailableShifts(req,res);
     },
+    getClearenceLevel : function (req, res) {
+        res.json(req.session.passport.user.is_admin);
+    },
+
 
 
     get403 : function (req, res) {
