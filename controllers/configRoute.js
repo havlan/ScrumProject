@@ -96,7 +96,7 @@ module.exports = function (app, passport) {
   //  app.post('/newUser',isLoggedIn,postCtrl.postNewUser);
     app.post('/forgotPassword',model.forgotPwMail);
     app.post('/newEmployee',isAdmin, function(req,res){
-        model.postNewUserQuery(req,res, function(err,res){
+        model.postNewUserFall(req,res, function(err,res){
             if(err){
                 console.log("\n\n===ERR===\n\n");
             }else{
@@ -108,7 +108,7 @@ module.exports = function (app, passport) {
         })
     });
 
-    app.post('/changePassword', isLoggedIn, model.changePassword);
+    //app.post('/changePassword', isLoggedIn, model.changePassword);
 
 
     //MÅ VÆRE SIST
@@ -118,10 +118,25 @@ module.exports = function (app, passport) {
 
 //app.route('/*').get(getCtrl.get404);
 
+function isOfficeIn (req, res, next){
+    if(req.isAuthenticated() && req.session.passport.user){
+        if(req.session.passport.user.is_admin == 1){
+            console.log(req.session.passport.username, " logged in as an office employee.");
+            next();
+        }
+        return;
+    }else{
+        res.redirect('/login');
+    }
+}
+
 function isLoggedIn(req, res, next) {
-    console.log(req.session);
-    if (req.isAuthenticated()) {
-        next();
+    //console.log(req.session);
+    if (req.isAuthenticated() && req.session.passport.user) {
+        if(req.session.passport.user.is_admin == 2){
+            next();
+        }
+        return;
     } else {
         console.log(req.session, " not authorized.");
         res.redirect('/login');

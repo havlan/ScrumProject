@@ -1,0 +1,18 @@
+<h1>{{ title }}</h1>
+{{# if success }}
+    <section class="success">
+        <h2>Successful Validation!</h2>
+    </section>
+{{ else }}
+    {{# if errors }}
+
+    {{/if}}
+    <form action="/horses" method="post">
+        <input type="hidden" name="_csrf" value="{{csrfToken}}">
+        <div class="input">
+            <label for="tekst">Tekst</label>
+            <input type="text" id="tekst" name="tekst">
+        </div>
+        <button type="submit">Login</button>
+    </form>
+{{/if}}

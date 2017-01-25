@@ -15,8 +15,8 @@ module.exports = {
     },
 
     getLogin : function (req,res) {
-        //res.sendFile(path.join(__dirname + '/../views/login.html'));
-        res.render(path.join(__dirname + '/../views/login'));
+        res.sendFile(path.join(__dirname + '/../views/login.html'));
+        //res.render(path.join(__dirname + '/../views/login'));
     },
 
     //Site
