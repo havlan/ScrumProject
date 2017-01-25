@@ -1,6 +1,4 @@
 
-//kjhladkjsfljasdfkjasdlfk
-//adhfakj.s
 
 var departments     = [];
 var employeesSyk    = [];
