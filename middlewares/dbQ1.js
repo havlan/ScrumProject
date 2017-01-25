@@ -6,23 +6,29 @@ module.exports = {
     //GET
     getEmployee: function (req, res) {
         console.log("Overview Employee");
-        dbHelper.getdbQuery(req, res, "select phone_nr as Tlf,total_hours as Timer, employee_id as AnsattID,email as Epost,seniority as Stillingsprosent,responsibility_allowed as Ansvarsvakt, type_name as Stilling, name as Navn, address as Adresse, pers_id as PersNr from Employee");
+        res.type('json');
+        res.status(200);
+        dbHelper.getdbQuery(req, res, "select * from Employee");
     },
     getOneEmployee: function (req, res) {
         console.log("Overview Employee");
+        res.setHeader('Content-Type', 'application/json');
         dbHelper.getdbQuery(req, res, "select * from Employee where employee_id = ?",req.session.passport.user.id);
     },
+
     getDepartment: function (req, res) {
         //var get = {department_id:req.body.department_id};
         console.log("Overview Department");
-        dbHelper.getdbQuery(req, res, "select * from Department"); // where department_id = ?",req.body.department_id);
+        dbHelper.getdbQuery(req, res, "select * from Department where department_id = ?", req.params.department_id);
     },
     getType: function (req, res) {
         console.log("Overview Type");
+        res.setHeader('Content-Type', 'application/json');
         dbHelper.getdbQuery(req, res, "select * from Type");
     },
     getShift: function (req, res) {
         console.log("Overview Shift");
+        res.setHeader('Content-Type', 'application/json');
         dbHelper.getdbQuery(req, res, "select * from Shift");
     },
     getShift_has_employee: function (req, res) {
@@ -40,51 +46,59 @@ module.exports = {
     getOvertime: function (req, res) {
         dbHelper.getdbQuery(req, res, "select * from Overtime");
     },
-    getAbsenceView : function (req, res) {
-        dbHelper.getdbQuery(req,res,"select a.absence_id as Nr, e.employee_id as AnsattID, e.name as Navn,s.shift_id as Skift,s.date as Dato,a.explanation_absence as Årsak,d.department_name as Avdeling from Employee e,Shift s,shift_has_employee she,Absence a,Department d where e.employee_id = she.employee_id and s.shift_id = she.shift_id and a.shift_id = she.shift_id and s.department_id = d.department_id and a.checked_by_admin = 0 group by a.absence_id order by d.department_id, s.date");
-    },
-    getOvertimeView : function (req, res) {
-        dbHelper.getdbQuery(req,res,"select o.overtime_id as Nr, e.employee_id as AnsattID, e.name as Navn,s.shift_id as Skift,s.date as Dato,o.overtime as Timer, o.explanation_overtime as Årsak,d.department_name as Avdeling from Employee e,Shift s,shift_has_employee she,Overtime o,Department d where e.employee_id = she.employee_id and s.shift_id = she.shift_id and o.shift_id = she.shift_id and s.department_id = d.department_id and o.checked_by_admin = 0 group by o.overtime_id order by d.department_id, s.date");
-    },
-    getRequestView : function (req, res) {
-        dbHelper.getdbQuery(req,res,"select r.request_id as Nr, e.employee_id as AnsattID, e.name as Navn,s.shift_id as Skift,s.date as Dato, r.explanation_request as Årsak,d.department_name as Avdeling from Employee e,Shift s,shift_has_employee she,Request r,Department d where e.employee_id = she.employee_id and s.shift_id = she.shift_id and r.shift_id = she.shift_id and s.department_id = d.department_id and r.checked_by_admin = 0 group by r.request_id order by d.department_id, s.date");
-    },
     getSaltHash: function (req, res) {
         dbHelper.getdbQuery(req, res, "select password_hash, password_salt, is_admin from LoginInfo where Username = ?", req.body.username);
     },
     getSaltHash: function(req,res,next){
         dbHelper.getdbQWNext(req,res, "select password_hash, password_salt, is_admin from LoginInfo where Username = ?",[req.body.username],next);
     },
-    getEmployee_Shifts_toCurrentDate: function (req, res) {
+    getLoginInfo : function(req,res){
+        dbHelper.getdbQuery(req,res, "select * from LoginInfo where username = ?", [req.body.username]);
+    },
+    getEmployee_shifts_toCurrentDate: function (req, res) {
         console.log("USER ID "+req.session.passport.user.id);
         dbHelper.getdbQuery(req, res, "select * from Employee_Shifts_toCurrentDate where employee_id = ?",[req.session.passport.user.id]);
     },
-    getPersonalShiftEvents : function (req, res) {
-        dbHelper.getdbQuery(req, res, "select * from JSON_EMPLOYEE_VIEW where employee_id = ? And start >= CURDATE()", req.session.passport.user.id);
+    getEvents : function (req,res) {
+        dbHelper.dbQuery(req, res, "select * from JSON_EMPLOYEE_VIEW");
     },
-    getPossibleSiftsEvents : function (req, res) {
-        console.log("USER ID "+req.session.passport.user.id);
-        dbHelper.getdbQuery(req,res,"select end, start, id, title from available_shift_emp where employee_id = ?", req.session.passport.user.id);
-    }
-        ,
     /*simpleLogin : function(username){
         dbHelper.simpleLogin("select * from LoginInfo where Username = ?", [username]);
     },*/
-    getTypeNames : function (req, res) {
-        dbHelper.getdbQuery(req,res,"Select name from Type");
+    getVaktliste : function(req,res){
+        dbHelper.getdbQuery(req, res, "select * from EMPLOYEE_GIVEN_SHIFT where ShiftStart like '2017-03-31%' and department_id = 5;"); //,[req.params.ShiftStart, req.params.department_id]
     },
-    getNextShiftForEmp : function (req, res) {
-        dbHelper.getdbQuery(req,res,"Select DATE_FORMAT(MIN(s.date), '%m/%d/%Y %H:%i') as ndate, e.employee_id, d.department_name From Employee e, shift_has_employee she, Shift s, Department d Where s.date > now() And e.employee_id = she.employee_id And she.shift_id = s.shift_id And s.department_id = d.department_id and e.employee_id = ?", [req.session.passport.user.id]);
-    },
-
-    getAvailability : function (req, res) {
-        dbHelper.getdbQuery(req, res, "Select day, availability From Availability Where employee_id = ?",req.session.passport.user.id);
-
-    },
-    getShiftChange : function (req, res){
-        dbHelper.getdbQuery(req, res, "select * from WORKSHIFTTOGETHER");
+    /**
+    getVaktoversikt : function(req,res){
+        var get = {name:req.body.name, type:req.body.type, department:req.body.department, responsibility_allowed:req.body.type, phone_nr:req.body.phone_nr};
+=======
+    getEmployeeOvertime: function (req, res) {
+        dbHelper.dbQuery(req, res, "select * from Employee_Overtime");
     },
 
+    getVaktoversiktSite: function (req, res) {
+        var get = {
+            name: req.body.name,
+            type: req.body.type,
+            department: req.body.department,
+            responsibility_allowed: req.body.type,
+            phone_nr: req.body.phone_nr
+        };
+>>>>>>> remotes/origin/frontEnd
+        console.log("Overview worklist");
+        dbHelper.getdbQuery(req, res, "overview shifts ?", get);
+    },
+    getVaktliste : function (req, res) {
+        dbHelper.dbQuery(req, res, "select * from TestVaktliste");
+    },
+    getEvents : function (req,res) {
+        dbHelper.dbQuery(req, res, "select * from JSON_VIEW");
+    },
+/*
+    getVaktliste : function (req, res){
+        dbHelper.dbQuery(req, res, "select * from TestVaktliste2 where date = ?", req.params.date);
+    },
+*/
 
     //POST/PUT
 
@@ -95,6 +109,7 @@ module.exports = {
             phone_nr: req.body.phone_nr,
             email: req.body.email,
             seniority: req.body.seniority,
+            username: req.body.username,
             address: req.body.address,
             type_name: req.body.type_name,
             responsibility_allowed: req.body.responsibility_allowed,
@@ -172,25 +187,7 @@ module.exports = {
         console.log("Posting new LogInInfo");
         dbHelper.postdbQuery(req, res, "insert into LogInInfo set ?", post);
     },
-    getVaktliste1: function (req,res) {
-        console.log("Posting new Departments");
-        dbHelper.getdbQuery(req, res, "select * from WORKTOGETHERTODAY1 where department_name = ?", [req.body.department_name]);
-    },
-    getVaktliste2: function (req,res) {
-        console.log("Posting new Departments");
-        dbHelper.getdbQuery(req, res, "select * from WORKTOGETHERTODAY2 where department_name = ?", [req.body.department_name]);
-    },
-    getVaktliste3: function (req,res) {
-        console.log("Posting new Departments");
-        dbHelper.getdbQuery(req, res, "select * from WORKTOGETHERTODAY3 where department_name = ?", [req.body.department_name]);
-    },
 
-    /*
-    postShiftChange: function (req,res){
-        console.log("Posting new ShiftChange");
-        dbHelper.postdbQuery(req, res, "insert into Request (request_id, shift-id, employee_id, checked_by_admin) select null, r4.shift_id, r4.employee_id, null from ready_shift_change_rank4, Request r where r.employee_id = r4.employee_id order by r4.shift_id");
-    },
-    */
     //update
     //SYNTAKS
     //var pk = req.body.primarykey;
@@ -202,24 +199,16 @@ module.exports = {
         dbHelper.postdbQuery(req, res, "update shift_has_employee set ? where employee_id = ? and shift_id = ?", [{avalibility: req.body.avalibility}, pk, pk2]);
     },
     updateEmployee: function (req, res) {
+        var id = req.body.employee_id;
         dbHelper.postdbQuery(req, res, "update Employee set ? where employee_id = ?", [{
-            name:req.body.name,
-            type_name:req.body.type_name,
             phone_nr: req.body.phone_nr,
             total_hours: req.body.total_hours,
             email: req.body.email,
             seniority: req.body.seniority,
             responsibility_allowed: req.body.responsibility_allowed,
             address: req.body.address,
-            pers_id: req.body.pers_id,
-        }, req.body.employee_id]);
-    },
-    updateEmployeePersonalInfo: function (req, res) {
-        dbHelper.postdbQuery(req,res,"update Employee set ? where employee_id = ?",[{
-            phone_nr: req.body.phone_nr,
-            email: req.body.email,
-            address: req.body.address,},
-            req.session.passport.user.id])
+            pers_id: req.body.pers_id
+        }, id]);
     },
     updateType: function (req, res) {
         var pk = req.body.name;
@@ -251,14 +240,7 @@ module.exports = {
         dbHelper.postdbQuery(req, res, "update Absence set ? where absence_id =?", [{
             checked_by_admin: req.body.checked_by_admin,
             shift_id: req.body.shift_id,
-            employee_id: req.body.employee_id,
-            explanation_absence:req.body.explanation_absence
-        }, pk]);
-    },
-    updateAbsence2: function (req, res) {
-        var pk = req.body.absence_id;
-        dbHelper.postdbQuery(req, res, "update Absence set ? where absence_id =?", [{
-            checked_by_admin: req.body.checked_by_admin
+            employee_id: req.body.employee_id
         }, pk]);
     },
     updateOvertime: function (req, res) {
@@ -270,23 +252,9 @@ module.exports = {
             overtime: req.body.overtime
         }, pk]);
     },
-    updateOvertime2: function (req, res) {
-        var pk = req.body.overtime_id;
-        dbHelper.postdbQuery(req, res, "update Overtime set ? where overtime_id=?", [{
-            checked_by_admin: req.body.checked_by_admin,
-        }, pk]);
-    },
-    updateRequest2: function (req, res) {
-        var pk = req.body.request_id;
-        dbHelper.postdbQuery(req, res, "update Request set ? where request_id=?", [{
-            checked_by_admin: req.body.checked_by_admin,
-        }, pk]);
-    },
     updateLogInInfo: function (req, res) {
         var pk = req.body.username;
         dbHelper.postdbQuery(req, res, "update LoginInfo set ? where Username=?", [{is_admin: req.body.is_admin}, pk]);
-    },
-
-
-};
+    }
+}
 //heihei

@@ -33,7 +33,7 @@ module.exports = {
 module.exports = function(passport) {
     passport.serializeUser(function(user,done){
         console.log("SERIALIZING");
-        console.log(JSON.stringify(user));
+        //console.log(JSON.stringify(user));
         done(null, {
             username : user.username,
             id: user.employee_id,
