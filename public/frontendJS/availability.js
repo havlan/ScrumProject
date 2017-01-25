@@ -13,6 +13,12 @@ $.get('/getAvailability', {}, function(req, res, data){
     //tableCreate();
 
 
+    var currentDay = new Date();
+    var currentWeek = getWeekNumber(currentDay);
+    console.log(currentWeek);
+    document.getElementById("weeknr").innerHTML = currentWeek;
+
+
     for(i=0; i<7; i++){
 
         var tableDay = data.responseJSON[i].day;
@@ -27,13 +33,9 @@ $.get('/getAvailability', {}, function(req, res, data){
         console.log(jsDate);
 
     console.log(jsDate);
-    var currentDay = new Date();
+    var weekNr = getWeekNumber(jsDate);
     var weekDay = jsDate.getDay();
-
     var hour = jsDate.getHours();
-
-    document.getElementById("demo1").innerHTML = weekDay;
-    document.getElementById("demo2").innerHTML = hour;
     console.log(weekDay);
 
     if (weekDay == 1) {
@@ -306,8 +308,29 @@ function addAllColumnHeaders(list, selector) {
 }
 
 
+function getWeekNumber(d) {
+    // Copy date so don't modify original
+    d = new Date(+d);
+    d.setHours(0,0,0,0);
+    // Set to nearest Thursday: current date + 4 - current day number
+    // Make Sunday's day number 7
+    d.setDate(d.getDate() + 4 - (d.getDay()||7));
+    // Get first day of year
+    var yearStart = new Date(d.getFullYear(),0,1);
+    // Calculate full weeks to nearest Thursday
+    var weekNo = Math.ceil(( ( (d - yearStart) / 86400000) + 1)/7);
+    // Return array of year and week number
+    return [d.getFullYear(), weekNo];
+}
 
 
+$( "#available-next" ).click(function() {
+
+});
+
+$( "#available-prev" ).click(function() {
+
+});
 
 
 
