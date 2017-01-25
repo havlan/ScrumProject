@@ -24,6 +24,7 @@ $(document).ready(function() {
         weekNumbers:true,
         navLinks: true,
         editable: false,
+        height: 'auto',
         eventColor: '#000000', //default event color //can be set individually
         eventTextColor: '#ffffff', //default event text color
         //GETTING EVENTS FROM JSON FEED; SHORT AND EXTENDED
