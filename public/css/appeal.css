@@ -19,13 +19,13 @@ html, body {
     float:left;
     width: 200px;
     margin:0 calc(99% - 200px) 1% 1%;
+    height:40px;
 
     background-color: royalblue;
     border: none;
     border-radius: 5px;
     box-shadow: 2px 2px 5px #888888;
     color: white;
-    padding: 15px 32px;
     text-align: center;
     cursor: pointer;
 }
@@ -46,6 +46,9 @@ html, body {
     border: solid #f2f2f2 1px;
     border-radius: 5px;
     box-shadow: 2px 2px 5px #888888;
+}
+.formTitle {
+    font-weight: bold;
 }
 
 /*
@@ -82,6 +85,7 @@ only screen and (max-width: 760px),
         margin:0 calc(49% - 100px) 0.5em calc(49% - 100px);
     }
     .appealButton{
+        height:3em;
         width: calc(50% - 1em);
         margin:0 0.5em 0.5em 0.5em;
     }
@@ -92,5 +96,6 @@ only screen and (max-width: 760px),
         position: relative;
         margin:0 0.5em 0.5em 0.5em;
         padding: 0.5em 0.5em 0.5em 0.5em;
+        text-align: center;
     }
 }
