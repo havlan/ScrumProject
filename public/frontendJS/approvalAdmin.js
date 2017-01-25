@@ -12,6 +12,7 @@ function switchFunction(){
     document.getElementById('leaveApproval').style.display = "none";
     document.getElementById('switchApproval').style.display = "block";
     document.getElementById('overtimeApproval').style.display = "none";
+    document.getElementById('Lagre').style.display = "none";
 }
 var myList = [];
 $.get('/getAbsenceView', {}, function(req, res, data){
@@ -34,7 +35,7 @@ function buildHtmlTable(selector,list) {
     var tbody = $('<tbody/>');
     for (var i = 0; i < myList.length; i++) {
         var row$ = $('<tr id=' + i + '/>');
-        var check$ = $('<div class="checkbox radio-margin"><label><input type="checkbox" id='+ i +' value=""><span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span></label></div>');
+        var check$ = $('<div class="checkbox radio-margin"><label><input type="checkbox" class="openModal" id='+ i +' value=""><span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span></label></div>');
         for (var colIndex = 0; colIndex < columns.length; colIndex++) {
             var cellValue = myList[i][columns[colIndex]];
             if (cellValue == null) cellValue = "";
@@ -66,8 +67,15 @@ function addAllColumnHeaders(myList, selector) {
     $(headerThead$).append(headerTr$);
     return columnSet;
 }
-
-
+$(document).on('click','.openModal',function (e) {
+        if ($(this).is(':checked')) {
+            alert("HEST ER LIVET!");
+            //$('#myModal').modal('show');
+        } else {
+            alert("HEST ER BEST SOM PÅLEGG!");
+            //$('#myModal').modal('hide');
+        }
+});
 //When pressing 'Lagre'-button any row that is checked will get checked_by_admin=1
 $(document).on('click','#Lagre',function (e) {
     e.preventDefault();

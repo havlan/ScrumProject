@@ -110,7 +110,7 @@ $(document).on('click','#sendForespørsel',function (e) {
             data: {'shift_id': data[i], 'checked_by_admin': 0},
             success: function (data) {
                 alert("success!");
-                console.log(data.JSON.stringify());
+                console.log(data);
             }
         });
     }
