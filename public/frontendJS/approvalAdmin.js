@@ -20,6 +20,8 @@ function switchFunction(){
 
 }
 var myList = [];
+window.ansattid = 0;
+window.shift_id = 0;
 $.get('/getAbsenceView', {}, function(req, res, data){
     console.log(data);
     console.log(data.responseJSON[0]);
@@ -76,16 +78,18 @@ var noe =[];
 var i = 0;
 $(document).on('click','#switchTable .openModal',function (e) {
     indeks = $(this).closest("tr").find('td:eq(0)').text();
+    ansattid = $(this).closest("tr").find('td:eq(1)').text();
     document.getElementById("skiftdb").innerHTML = indeks;
     $.ajax({
         url: '/getAvailableEmpForShift',
         type:'POST',
         data:{'shift_id':indeks},
         success: function (req,res,data) {
+            //$('#ansattDropdown').reset();
            $.each(data, function () {
-               var option = $('<option />').text("Ansatt: " + data.responseJSON[i].employee_id + "  " + data.responseJSON[i].name);
+               var option = $('<option />').text(data.responseJSON[i].employee_id);
                $('#ansattDropdown').append(option);
-               console.log(data.responseJSON[i].name);
+              // console.log(data);
                i++;
             });
         }
@@ -94,7 +98,7 @@ $(document).on('click','#switchTable .openModal',function (e) {
     if ($(this).is(':checked')) {
         //alert("HEST ER LIVET!");
         $('#approveModal').modal('show');
-        makeDropdown("#ansattDropdown",noe);
+      //  makeDropdown("#ansattDropdown",noe);
     } else {
         //alert("HEST ER BEST SOM PÅLEGG!");
         $('#approveModal').modal('hide');
@@ -102,7 +106,7 @@ $(document).on('click','#switchTable .openModal',function (e) {
     $('#closeModal').on('click',function () {
      //alert("hei");
         $('input[class=openModal]').prop('checked', false);
-     });
+    });
 });
 
 //When pressing 'Lagre'-button any row that is checked will get checked_by_admin=1
@@ -154,5 +158,26 @@ $(document).on('click','#Lagre',function (e) {
 
 });
 function funkyfunc() {
-    console.log($("#ansattDropdown option:selected").text());
+  //  console.log($("#ansattDropdown option:selected").text());
+}
+function fjernAnsatt(){
+    ansattid = $("#ansattDropdown option:selected").text();
+}
+function erstattAnsatt() {
+    nyansattid = $("#ansattDropdown option:selected").text();
+    var skiftid = indeks;
+    console.log(ansattid);
+    console.log(nyansattid);
+    console.log(skiftid);
+    $.ajax({
+        url: '/updateShift_has_employee',
+        type:'POST',
+        data:{'employee_id':ansattid,'shift_id':skiftid,'employee_id2':nyansattid},
+        success:function (data) {
+            alert("success!");
+        }
+    });
+
+
+
 }

@@ -212,7 +212,7 @@ module.exports = {
     updateShift_has_employee: function (req, res) {
         var pk = req.body.shift_id;
         var pk2 = req.body.employee_id;
-        dbHelper.postdbQuery(req, res, "update shift_has_employee set ? where employee_id = ? and shift_id = ?", [{avalibility: req.body.avalibility}, pk, pk2]);
+        dbHelper.postdbQuery(req, res, "update shift_has_employee set ? where shift_id = ? and employee_id = ?", [{employee_id:req.body.employee_id2}, pk, pk2]);
     },
     updateEmployee: function (req, res) {
         dbHelper.postdbQuery(req, res, "update Employee set ? where employee_id = ?", [{
@@ -224,7 +224,7 @@ module.exports = {
             seniority: req.body.seniority,
             responsibility_allowed: req.body.responsibility_allowed,
             address: req.body.address,
-            pers_id: req.body.pers_id,
+            pers_id: req.body.pers_id
         }, req.body.employee_id]);
     },
     updateEmployeePersonalInfo: function (req, res) {
