@@ -109,6 +109,7 @@ module.exports = function (app, passport) {
     });
 
     app.post('/changePassword', isLoggedIn, model.changePassword);
+    app.post('/acceptRequestWith', isAdmin, model.acceptRequestWith);
 
 
     //MÅ VÆRE SIST
@@ -127,6 +128,7 @@ function isLoggedIn(req, res, next) {
         res.redirect('/login');
     }
 }
+
 function isAdmin(req, res, next) {
     if (req.isAuthenticated() && req.session.passport) {
         if (req.session.passport.user.is_admin == 0) {

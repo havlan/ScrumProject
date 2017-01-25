@@ -8,7 +8,6 @@
     <link rel="stylesheet" type="text/css" href="css/forespørsler.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="frontendJS/appeal.js"></script>
-
     <link rel="stylesheet" href="css/appeal.css">
 
 </head>
@@ -19,18 +18,17 @@
 <body>
 
 <h1 id="Appeal">Forespørsel</h1>
-<button type="button" class="approveButton" id ="absence" onclick="absenceFunction()" autofocus><span>Fravær</span></button>
-<button type="button" class="approveButton" id ="change" onclick="changeFunction()"><span>Bytt vakt</span></button>
-<button type="button" class="approveButton" id ="changeTo" onclick="changeToFunction()"><span>Bytt vakt med</span></button>
-<button type="button" class="approveButton" id ="overtime" onclick="changeToFunction()"><span>Overtid</span></button>
-
+<button type="button" class="appealButton" id ="absence" onclick="absenceFunction()" autofocus><span>Fravær</span></button>
+<button type="button" class="appealButton" id ="change" onclick="changeFunction()"><span>Bytt vakt</span></button>
+<button type="button" class="appealButton" id ="changeTo" onclick="changeToFunction()"><span>Bytt vakt med</span></button>
+<button type="button" class="appealButton" id ="overtime" onclick="overtimeFunction()"><span>Overtid</span></button>
 
 <!--
     TODO get navn, vakter
     TODO post forespørsel
 -->
 
-<section class="approveSection" id="absenceAppeal" style="display:block">
+<section class="appealSection" id="absenceAppeal" style="display:block">
     <h3>Søk om fravær</h3>
     <form>
         <fieldset>
@@ -60,7 +58,7 @@
     </form>
 </section>
 
-<section class="approveSection" id="changeAppeal" style="display:none">
+<section class="appealSection" id="changeAppeal" style="display:none">
     <h3>Søk om vaktbytte</h3>
     <form>
         <fieldset>
@@ -78,7 +76,7 @@
     </form>
 </section>
 
-<section class="approveSection" id="changeToAppeal" style="display:none">
+<section class="appealSection" id="changeToAppeal" style="display:none">
     <h3>Søk om vaktbytte med bestemt vakt</h3>
     <form>
         <fieldset>
@@ -115,8 +113,7 @@
 </div>
 </section>
 
-
-<section class="approveSection" id="overtimeAppeal" style="display:none">
+<section class="appealSection" id="overtimeAppeal" style="display:none">
 <div id="2">
     <form id="overtimeform">
         <fieldset>
@@ -151,5 +148,6 @@
 </div>
 
 </section>
+
 </body>
 </html>
