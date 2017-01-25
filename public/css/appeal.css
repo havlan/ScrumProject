@@ -51,29 +51,6 @@ html, body {
     font-weight: bold;
 }
 
-/*
-.approveButton span {
-    cursor: pointer;
-    display: inline-block;
-    position: relative;
-    transition: 0.3s;
-}
-.approveButton span:after {
-    position: absolute;
-    opacity: 0;
-    top: 0;
-    right: -20px;
-    transition: 0.3s;
-}
-.approveButton:hover span {
-    padding-right: 15px;
-}
-.approveButton:hover span:after {
-    opacity: 1;
-    right: 0;
-}
-*/
-
 @media
 only screen and (max-width: 760px),
 (min-device-width: 768px) and (max-device-width: 1024px)  {
