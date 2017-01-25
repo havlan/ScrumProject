@@ -5,21 +5,22 @@ h1{
 
 .info{
     text-align: right;
-    font-size: 24px;
+    font-size: 1em;
     padding-right: 10px;
 }
 
 .db{
     text-align: left;
-    font-size: 24px;
+    font-size: 1em;
     padding-left: 20px;
 }
 
 .infoEmp{
-    margin-left: 30%;
+
     margin-top: 3%;
     position: absolute;
-    width:auto;
+    width:30%;
+    height:auto;
 }
 
 .profile{
@@ -89,14 +90,16 @@ h1{
     background-color: white;
     border: solid black 1px;
     border-radius: 5px;
-    margin-left: 9%;
-    margin-top: 37%;
+    margin-left: 64%;
+    margin-top: 33%;
 }
 
 #profilePic{
-    margin-left: 3%;
+    margin-left: 53%;
     margin-top: 7%;
     position: absolute;
+    width: 20%;
+    height: auto;
 }
 .histTable tr:nth-child(odd):not(:first-child){
     background-color: white;
@@ -157,43 +160,4 @@ h1{
 
 #passwordForm{
     padding:10px;
-}
-@media
-only screen and (max-width: 760px),
-(min-device-width: 768px) and (max-device-width: 1024px)  {
-
-    #navn{
-        font-size: 1.5em;
-    }
-    .info{
-        font-size: 0.9em;
-    }
-    .db{
-        font-size: 0.9em;
-    }
-    .fc-basic-view .fc-body .fc-row{
-        height:10vw;
-    }
-    #profilePic {
-        position: relative;
-        float:right;
-        height: auto;
-        width: 70px;
-        margin: 0.5em 0.5em 0.5em 0.5em;
-    }
-    .picBtn{
-        display:none;
-        float:left;
-        position: relative;
-        font-size: 0.7em;
-        box-sizing:border-box;
-        margin-right: 0.5em;
-        margin-left: 0.5em;
-        height: 3em;
-    }
-
-    #infoEmp {
-        font-size: 12px;
-    }
-
 }
