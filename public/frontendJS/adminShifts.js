@@ -9,7 +9,6 @@ var eventId;
 
 
 $(document).ready(function() {
-    $("#includedContent").load("menu");
 
     $('#calendarx').fullCalendar({
         header: {
@@ -118,21 +117,27 @@ $.ajax({
     failure: function(err) {console.log("Error"+err);}
 });
 
-$.ajax({
-    url: '/getVaktliste1', //this is the submit URL
-    type: 'POST',
-    data: {'shift_id': eventId,'type_name':"Sykepleier"},
-    success: function(data){
-        console.log('successfully submitted');
-        console.log(data);
-        employeesSyk = data.responseJSON;
-    },
-    failure: function(err) {console.log("Error"+err);}
+$(function close() {
+    $(".custom-close").on('click', function() {
+        $('#adminNewShiftModal').modal('hide');
+    });
 });
-//$.get('/getEmployee', {}, function(req, res, data){
-//    employeesSyk = data.responseJSON;
-//    console.log(data);
+
+//$.ajax({
+//    url: '/getVaktliste1', //this is the submit URL
+//    type: 'POST',
+//    data: {'shift_id': eventId,'type_name':"Sykepleier"},
+//    success: function(data){
+//        console.log('successfully submitted');
+//        console.log(data);
+//        employeesSyk = data.responseJSON;
+//    },
+//    failure: function(err) {console.log("Error"+err);}
 //});
+$.get('/getEmployee', {}, function(req, res, data){
+    employeesSyk = data.responseJSON;
+    console.log(data);
+});
 
 $.get('/getEmployee', {}, function(req, res, data){
     employeesHelp = data.responseJSON;

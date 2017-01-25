@@ -50,7 +50,7 @@ function buildHtmlTable(selector,list, index2) {
     if(index2 < 0) {
 
     }
-    $("#tbodyid").empty();
+    $("#").empty();
     var columns = addAllColumnHeaders(list, selector);
     var tbody = $('<tbody '+ "id= tbodyid"+'/>');
     for (var i = 0; i < list.length; i++) {
@@ -106,5 +106,4 @@ function addAllColumnHeaders2(list, selector) {
         $(selector).append(headerThead$);
         $(headerThead$).append(headerTr$);
         index++;
-    }
-}
+    };

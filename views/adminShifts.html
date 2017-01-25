@@ -14,8 +14,10 @@
     <script type="text/javascript" src="events.json"></script>
 </head>
 
-<body>
 <div id="includedContent"></div>
+<script>$("#includedContent").load("menu");</script>
+
+<body>
 
 <!-- Modal: shifts-->
 <div class="modal" id="adminNewShiftModal" role="dialog">
@@ -49,13 +51,6 @@
 </div>
 </div>
 
-<script>
-    $(function close() {
-        $(".custom-close").on('click', function() {
-            $('#adminNewShiftModal').modal('hide');
-        });
-    });
-</script>
 
 <div id='calendarx'></div>
 
