@@ -17,10 +17,14 @@ $.get('/getAvailability', {}, function(req, res, data){
 
         var tableDay = data.responseJSON[i].day;
         var available1 = data.responseJSON[i].availability;
+        console.log(tableDay);
+        // Split timestamp into [ Y, M, D, h, m, s ]
+        var t = tableDay.split(/[- T : . Z]/);
 
+        // Apply each element to the Date function
+        var jsDate = new Date(Date.UTC(t[0], t[1]-1, t[2], t[3], t[4], t[5]));
 
-    var dateParts = tableDay.split("-");
-    var jsDate = new Date(dateParts[0], dateParts[1] - 1, dateParts[2].substr(0, 2));
+        console.log(jsDate);
 
     console.log(jsDate);
     var currentDay = new Date();
@@ -73,7 +77,7 @@ $.get('/getAvailability', {}, function(req, res, data){
                 start.classList.add("unavailable");
             }
 
-        } else if (hour == 16) {
+        } else if (hour >= 16 && hour < 24) {
             if (available1 == 0) {
                 var start = document.getElementById("tir2");
                 start.classList.add("available");
@@ -83,7 +87,7 @@ $.get('/getAvailability', {}, function(req, res, data){
             }
 
 
-        } else if (hour == 0) {
+        } else if (hour >= 0 && hour < 8) {
             if (available1 == 0) {
                 var start = document.getElementById("tir3");
                 start.classList.add("available");
@@ -104,7 +108,7 @@ $.get('/getAvailability', {}, function(req, res, data){
                 start.classList.add("unavailable");
             }
 
-        } else if (hour == 16) {
+        } else if (hour >= 16 && hour < 24) {
             if (available1 == 0) {
                 var start = document.getElementById("ons2");
                 start.classList.add("available");
@@ -114,7 +118,7 @@ $.get('/getAvailability', {}, function(req, res, data){
             }
 
 
-        } else if (hour == 0) {
+        } else if (hour >= 0 && hour < 8) {
             if (available1 == 0) {
                 var start = document.getElementById("ons3");
                 start.classList.add("available");
@@ -135,7 +139,7 @@ $.get('/getAvailability', {}, function(req, res, data){
                 start.classList.add("unavailable");
             }
 
-        } else if (hour == 16) {
+        } else if (hour >= 16 && hour < 24) {
             if (available1 == 0) {
                 var start = document.getElementById("tor2");
                 start.classList.add("available");
@@ -145,7 +149,7 @@ $.get('/getAvailability', {}, function(req, res, data){
             }
 
 
-        } else if (hour == 0) {
+        } else if (hour >= 0 && hour < 8) {
             if (available1 == 0) {
                 var start = document.getElementById("tor3");
                 start.classList.add("available");
@@ -166,7 +170,7 @@ $.get('/getAvailability', {}, function(req, res, data){
                 start.classList.add("unavailable");
             }
 
-        } else if (hour == 16) {
+        } else if (hour >= 16 && hour < 24) {
             if (available1 == 0) {
                 var start = document.getElementById("fre2");
                 start.classList.add("available");
@@ -176,7 +180,7 @@ $.get('/getAvailability', {}, function(req, res, data){
             }
 
 
-        } else if (hour == 0) {
+        } else if (hour >= 0 && hour < 8) {
             if (available1 == 0) {
                 var start = document.getElementById("fre3");
                 start.classList.add("available");
@@ -197,7 +201,7 @@ $.get('/getAvailability', {}, function(req, res, data){
                 start.classList.add("unavailable");
             }
 
-        } else if (hour == 16) {
+        } else if (hour >= 16 && hour < 24) {
             if (available1 == 0) {
                 var start = document.getElementById("lør2");
                 start.classList.add("available");
@@ -207,7 +211,7 @@ $.get('/getAvailability', {}, function(req, res, data){
             }
 
 
-        } else if (hour == 0) {
+        } else if (hour >= 0 && hour < 8) {
             if (available1 == 0) {
                 var start = document.getElementById("lør3");
                 start.classList.add("available");
@@ -228,7 +232,7 @@ $.get('/getAvailability', {}, function(req, res, data){
                 start.classList.add("unavailable");
             }
 
-        } else if (hour == 16) {
+        } else if (hour >= 16 && hour < 24) {
             if (available1 == 0) {
                 var start = document.getElementById("søn2");
                 start.classList.add("available");
@@ -238,7 +242,7 @@ $.get('/getAvailability', {}, function(req, res, data){
             }
 
 
-        } else if (hour == 0) {
+        } else if (hour >= 0 && hour < 8) {
             if (available1 == 0) {
                 var start = document.getElementById("søn3");
                 start.classList.add("available");

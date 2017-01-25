@@ -22,25 +22,22 @@ $(document).ready(function() {
         eventSources: [
             {
                 url: '/getPersonalShiftEvents', // use the `url` property
-                color: 'green',    // an option!
+                color: '#8cd9ad',    // an option!
                 textColor: 'black'  // an option!
             },
             {
                 url: '/getPossibleSiftsEvents', // use the `url` property
-                color: 'yellow',    // an option!
+                color: '#ffe066',    // an option!
                 textColor: 'black'  // an option!
             }]
         ,
-        eventClick: function(calEvent, jsEvent, view) {
-            alert(event.title);
-            // change the border color just for fun
-            $(this).css('border-color', 'red');
-
+        eventClick:  function(event, jsEvent, view) {
+            $('#modalShift').html(event.title);
+            $('#begin').html("Starter: " + moment(event.start).format('MMM Do h:mm A'));
+            $('#end').html("Slutter: " + moment(event.end || event.start).format('MMM Do h:mm A'));
+            $('#fullCalModal').modal();
         }
     });
-
-
-
 
     $.get('/getNextShiftForEmp', {}, function(req, res, data){
         document.getElementById("nextShiftInfo").innerHTML = "Din neste vakt: " +data.responseJSON[0].ndate + "\nSted: " + data.responseJSON[0].department_name;
