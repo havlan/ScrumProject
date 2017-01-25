@@ -35,7 +35,6 @@ module.exports = function (app, passport) {
     app.get('/getAbsenceView',isLoggedIn,getCtrl.getAbsenceView);
     app.get('/getRequestView',isLoggedIn,getCtrl.getRequestView);
     app.get('/getShiftChange', isLoggedIn,getCtrl.getShiftChange);
-    app.post('/getAvailableEmpForShift', getCtrl.getAvailableEmpForShift);
     app.get('/getEmployee2',isLoggedIn,getCtrl.getEmployee2);
 
 
@@ -113,6 +112,8 @@ module.exports = function (app, passport) {
 
     app.post('/changePassword', isLoggedIn, model.changePassword);
     app.post('/acceptRequestWith', isAdmin, model.acceptRequestWith);
+    app.post('/getAvailableEmpForShift', getCtrl.getAvailableEmpForShift);
+
 
     //MÅ VÆRE SIST
     app.get('/*', getCtrl.get404);
