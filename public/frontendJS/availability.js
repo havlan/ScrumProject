@@ -13,23 +13,29 @@ $.get('/getAvailability', {}, function(req, res, data){
     //tableCreate();
 
 
+    var currentDay = new Date();
+    var currentWeek = getWeekNumber(currentDay);
+    console.log(currentWeek);
+    document.getElementById("weeknr").innerHTML = currentWeek;
+
+
     for(i=0; i<7; i++){
 
         var tableDay = data.responseJSON[i].day;
         var available1 = data.responseJSON[i].availability;
+        console.log(tableDay);
+        // Split timestamp into [ Y, M, D, h, m, s ]
+        var t = tableDay.split(/[- T : . Z]/);
 
+        // Apply each element to the Date function
+        var jsDate = new Date(Date.UTC(t[0], t[1]-1, t[2], t[3], t[4], t[5]));
 
-    var dateParts = tableDay.split("-");
-    var jsDate = new Date(dateParts[0], dateParts[1] - 1, dateParts[2].substr(0, 2));
+        console.log(jsDate);
 
     console.log(jsDate);
-    var currentDay = new Date();
+    var weekNr = getWeekNumber(jsDate);
     var weekDay = jsDate.getDay();
-
     var hour = jsDate.getHours();
-
-    document.getElementById("demo1").innerHTML = weekDay;
-    document.getElementById("demo2").innerHTML = hour;
     console.log(weekDay);
 
     if (weekDay == 1) {
@@ -73,7 +79,7 @@ $.get('/getAvailability', {}, function(req, res, data){
                 start.classList.add("unavailable");
             }
 
-        } else if (hour == 16) {
+        } else if (hour >= 16 && hour < 24) {
             if (available1 == 0) {
                 var start = document.getElementById("tir2");
                 start.classList.add("available");
@@ -83,7 +89,7 @@ $.get('/getAvailability', {}, function(req, res, data){
             }
 
 
-        } else if (hour == 0) {
+        } else if (hour >= 0 && hour < 8) {
             if (available1 == 0) {
                 var start = document.getElementById("tir3");
                 start.classList.add("available");
@@ -104,7 +110,7 @@ $.get('/getAvailability', {}, function(req, res, data){
                 start.classList.add("unavailable");
             }
 
-        } else if (hour == 16) {
+        } else if (hour >= 16 && hour < 24) {
             if (available1 == 0) {
                 var start = document.getElementById("ons2");
                 start.classList.add("available");
@@ -114,7 +120,7 @@ $.get('/getAvailability', {}, function(req, res, data){
             }
 
 
-        } else if (hour == 0) {
+        } else if (hour >= 0 && hour < 8) {
             if (available1 == 0) {
                 var start = document.getElementById("ons3");
                 start.classList.add("available");
@@ -135,7 +141,7 @@ $.get('/getAvailability', {}, function(req, res, data){
                 start.classList.add("unavailable");
             }
 
-        } else if (hour == 16) {
+        } else if (hour >= 16 && hour < 24) {
             if (available1 == 0) {
                 var start = document.getElementById("tor2");
                 start.classList.add("available");
@@ -145,7 +151,7 @@ $.get('/getAvailability', {}, function(req, res, data){
             }
 
 
-        } else if (hour == 0) {
+        } else if (hour >= 0 && hour < 8) {
             if (available1 == 0) {
                 var start = document.getElementById("tor3");
                 start.classList.add("available");
@@ -166,7 +172,7 @@ $.get('/getAvailability', {}, function(req, res, data){
                 start.classList.add("unavailable");
             }
 
-        } else if (hour == 16) {
+        } else if (hour >= 16 && hour < 24) {
             if (available1 == 0) {
                 var start = document.getElementById("fre2");
                 start.classList.add("available");
@@ -176,7 +182,7 @@ $.get('/getAvailability', {}, function(req, res, data){
             }
 
 
-        } else if (hour == 0) {
+        } else if (hour >= 0 && hour < 8) {
             if (available1 == 0) {
                 var start = document.getElementById("fre3");
                 start.classList.add("available");
@@ -197,7 +203,7 @@ $.get('/getAvailability', {}, function(req, res, data){
                 start.classList.add("unavailable");
             }
 
-        } else if (hour == 16) {
+        } else if (hour >= 16 && hour < 24) {
             if (available1 == 0) {
                 var start = document.getElementById("lør2");
                 start.classList.add("available");
@@ -207,7 +213,7 @@ $.get('/getAvailability', {}, function(req, res, data){
             }
 
 
-        } else if (hour == 0) {
+        } else if (hour >= 0 && hour < 8) {
             if (available1 == 0) {
                 var start = document.getElementById("lør3");
                 start.classList.add("available");
@@ -228,7 +234,7 @@ $.get('/getAvailability', {}, function(req, res, data){
                 start.classList.add("unavailable");
             }
 
-        } else if (hour == 16) {
+        } else if (hour >= 16 && hour < 24) {
             if (available1 == 0) {
                 var start = document.getElementById("søn2");
                 start.classList.add("available");
@@ -238,7 +244,7 @@ $.get('/getAvailability', {}, function(req, res, data){
             }
 
 
-        } else if (hour == 0) {
+        } else if (hour >= 0 && hour < 8) {
             if (available1 == 0) {
                 var start = document.getElementById("søn3");
                 start.classList.add("available");
@@ -302,8 +308,29 @@ function addAllColumnHeaders(list, selector) {
 }
 
 
+function getWeekNumber(d) {
+    // Copy date so don't modify original
+    d = new Date(+d);
+    d.setHours(0,0,0,0);
+    // Set to nearest Thursday: current date + 4 - current day number
+    // Make Sunday's day number 7
+    d.setDate(d.getDate() + 4 - (d.getDay()||7));
+    // Get first day of year
+    var yearStart = new Date(d.getFullYear(),0,1);
+    // Calculate full weeks to nearest Thursday
+    var weekNo = Math.ceil(( ( (d - yearStart) / 86400000) + 1)/7);
+    // Return array of year and week number
+    return [d.getFullYear(), weekNo];
+}
 
 
+$( "#available-next" ).click(function() {
+
+});
+
+$( "#available-prev" ).click(function() {
+
+});
 
 
 

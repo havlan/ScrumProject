@@ -16,7 +16,6 @@ function switchFunction(){
     document.getElementById('leaveApproval').style.display = "none";
     document.getElementById('switchApproval').style.display = "block";
     document.getElementById('overtimeApproval').style.display = "none";
-    document.getElementById('Lagre').style.display = "none";
 }
 var myList = [];
 var liste = [];

@@ -16,6 +16,19 @@ body, html {
     margin-right: 13%;
     width:74%;
 }
+.fc-basic-view .fc-body .fc-row{
+    min-height:3.5em;
+    height:7vw;
+    max-height:14vh;
+}
+.fc-toolbar.fc-header-toolbar {
+    margin-bottom: 0.7em;
+}
+.fc-center h2{
+    height:auto;
+    font-size:1.8em;
+    line-height:0;
+}
 .fc-event {
     cursor: pointer !important;
 }
@@ -85,29 +98,30 @@ body, html {
     margin-top: 15px;
 }
 
-/*!! ASSUMING PHONE WIDTH ALWAYS BIGGER THAN 340px !!*/
-/* control height of calendar */
-@media screen and (min-width: 130vh) {
-    #calendarx {
-        width:110vh;
-        margin-left:calc((100% - 110vh)/2);
-        margin-right:calc((100% - 110vh)/2);
-    }
-}
-/* control width of big element */
-@media screen and (max-width: 800px) {
+@media
+only screen and (max-width: 760px),
+(min-device-width: 768px) and (max-device-width: 1024px)  {
     #calendarx {
         width:98%;
         margin-left:1%;
         margin-right: 1%;
     }
+    #calendar {
+        position:relative;
+        width:calc(100% - 1em);
+        margin-top:0;
+        margin-left:0.5em;
+        margin-right:0.5em;
+        float:left;
+    }
+    .fc-basic-view .fc-body .fc-row{
+        height:10vw;
+    }
     #adminNewShiftModal{
         width:90%;
         margin-left:5%;
+        font-size:1em;
     }
-}
-/* control size of small element */
-@media screen and (max-width: 400px) {
     #chooseDepartment {
         width:90%;
         margin-left:calc(5%);

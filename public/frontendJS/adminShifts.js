@@ -24,6 +24,7 @@ $(document).ready(function() {
         weekNumbers:true,
         navLinks: true,
         editable: false,
+        height: 'auto',
         eventColor: '#000000', //default event color //can be set individually
         eventTextColor: '#ffffff', //default event text color
         //GETTING EVENTS FROM JSON FEED; SHORT AND EXTENDED
@@ -34,7 +35,7 @@ $(document).ready(function() {
                 textColor: 'black'  // an option!
             },
             {
-                url: '/getPossibleSiftsEvents', // use the `url` property
+                url: '/getPossibleShiftsEvents', // use the `url` property
                 color: 'yellow',    // an option!
                 textColor: 'black'  // an option!
             }],
@@ -90,20 +91,34 @@ function getDispersion(res) {
     createPeopleDropdown(syk, hjelp, annet);
 }
 
+$.get('/getEmployee', {}, function(req, res, data){
+    employeesSyk = data.responseJSON;
+    console.log(data);
+});
+
+$.get('/getEmployee', {}, function(req, res, data){
+    employeesHelp = data.responseJSON;
+});
+
+$.get('/getEmployee', {}, function(req, res, data){
+    employeesAnnet = data.responseJSON;
+});
+
 function createPeopleDropdown(antSyk, antHjelp, antAnnet) {
+    console.log("data hentet");
     //alert(antSyk + " sykepleiere, " + antHjelp + " hjelpere, " + antAnnet + " annet");
     document.getElementById('peopleTable').innerHTML = "<tr><th  class='peopleTablecat'>Kategori</th><th class='peopleTableSel'>Ansatt</th></tr>";
     for(var i=0; i<antSyk; i++){
         document.getElementById('peopleTable').innerHTML += "<tr><td class='peopleTableCat'>Sykepleier</td><td class='peopleTableSel'><select id='syk" + i + "' class='peopleDropdown'></select></td></tr>";
-        makeDropdown("#syk" + i,employeesSyk);
+        makeDropdownS("#syk"+i,employeesSyk);
     }
     for(var i=0; i<antHjelp; i++){
         document.getElementById('peopleTable').innerHTML += "<tr><td class='peopleTableCat'>Hjelpepleier</td><td class='peopleTableSel'><select id='hjelp" + i + "' class='peopleDropdown'></select></td></tr>";
-        makeDropdown("#hjelp" + i,employeesHelp);
+        makeDropdownS("#hjelp" + i,employeesHelp);
     }
     for(var i=0; i<antAnnet; i++){
         document.getElementById('peopleTable').innerHTML += "<tr><td class='peopleTableCat'>Annet</td><td class='peopleTableSel'><select id='annet" + i + "' class='peopleDropdown'></select></td></tr>";
-        makeDropdown("#annet" + i,employeesAnnet);
+        makeDropdownS("#annet" + i,employeesAnnet);
     }
 }
 
@@ -112,16 +127,20 @@ $.get('/getDepartment', {}, function(req, res, data){
     makeDropdown('#chooseDepartment',departments)
 });
 
-$.get('/getEmployee', {}, function(req, res, data){
-    employeesSyk = data.responseJSON;
-});
-$.get('/getEmployee', {}, function(req, res, data){
-    employeesHelp = data.responseJSON;
-});
-$.get('/getEmployee', {}, function(req, res, data){
-    employeesAnnet = data.responseJSON;
-});
 
+
+
+function makeDropdownS(selector,list) {
+    console.log("Prøver å lage dropdown");
+    var columns = ["name"];
+    for (var i = 0; i < list.length; i++) {
+        var cellValue = list[i][columns[0]];
+        console.log("troll"+cellValue);
+        if (cellValue == null) cellValue = "Ingen data fra DB";
+        var option = $('<option />').text(cellValue);
+        $(selector).append(option);
+    }
+}
 
 function makeDropdown(selector,list) {
     var columns = addAllColumnHeaders(list, selector);

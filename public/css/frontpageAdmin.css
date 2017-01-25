@@ -27,6 +27,9 @@ html, body {
     font-size:1.8em;
     line-height:0;
 }
+.fc-event {
+    cursor: pointer !important;
+}
 
 #warning, #freeShifts {
     float:right;
