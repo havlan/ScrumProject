@@ -90,12 +90,12 @@ h1{
     border: solid black 1px;
     border-radius: 5px;
     margin-left: 9%;
-    margin-top: 21%;
+    margin-top: 37%;
 }
 
 #profilePic{
     margin-left: 3%;
-    margin-top: 5%;
+    margin-top: 7%;
     position: absolute;
 }
 .histTable tr:nth-child(odd):not(:first-child){
@@ -158,11 +158,49 @@ h1{
 #passwordForm{
     padding:10px;
 }
-
 @media
 only screen and (max-width: 760px),
-(min-device-width: 768px) and (max-device-width: 1024px) {
-
-
-
+(min-device-width: 768px) and (max-device-width: 1024px)  {
+    #infoEmp {
+        position:relative;
+        width:calc(100% - 1em);
+        margin-top:0;
+        margin-left:0.5em;
+        margin-right:0.5em;
+        float:left;
+    }
+    .fc-basic-view .fc-body .fc-row{
+        height:10vw;
+    }
+    #profilePic {
+        float:right;
+        height: 10em;
+        width: calc(50% - 1em);
+        margin: 0.5em 0.5em 0.5em 0.5em;
+    }
+    .menuBtn{
+        float:left;
+        font-size: 1em;
+        width: calc(50% - 1em);
+        box-sizing:border-box;
+        position:relative;
+        margin-right: 0.5em;
+        margin-left: 0.5em;
+        height: 3em;
+    }
+    #availabilityB, #extraB, #shiftB {
+        margin-top: 0.5em;
+    }
+    #extraB {
+        margin-bottom:0.5em;
+    }
+    .shiftHeader {
+        font-size: 1.5em;
+    }
+    #nextShiftInfo {
+        font-size: 1em;
+    }
+    #switchTable{
+        font-size: 0.8em;
+    }
 }
