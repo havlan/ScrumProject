@@ -87,8 +87,8 @@ $(document).on('click','#switchTable .openModal',function (e) {
         success: function (req,res,data) {
             //$('#ansattDropdown').reset();
            $.each(data, function () {
-               var option = $('<option />').text(data.responseJSON[i].employee_id);
-               $('#ansattDropdown').append(option);
+               var option = $('<option />').text(data.responseJSON[i].employee_id+ " Navn: "+data.responseJSON[i].name);
+               $('#ansattDropdown').text(option);
               // console.log(data);
                i++;
             });
@@ -164,7 +164,7 @@ function fjernAnsatt(){
     ansattid = $("#ansattDropdown option:selected").text();
 }
 function erstattAnsatt() {
-    nyansattid = $("#ansattDropdown option:selected").text();
+    nyansattid = parseInt($("#ansattDropdown option:selected").text());
     var skiftid = indeks;
     console.log(ansattid);
     console.log(nyansattid);
@@ -177,7 +177,4 @@ function erstattAnsatt() {
             alert("success!");
         }
     });
-
-
-
 }
