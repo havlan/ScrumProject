@@ -203,13 +203,15 @@ $(function(){
     $('#myModal').on('submit', function(e){
      //   alert($("#adressedb").val());
         e.preventDefault();
-       // alert(indeks);
+        var drpdn  = document.getElementById("stillingDropdown");
+        var strUser = drpdn.options[drpdn.selectedIndex].text;
         $.ajax({
             url: '/updateEmployee',
             type: 'POST',
-            data: {'name': $("#navndb").val(),'address':$('#adressedb').val(),'email':$('#epostdb').val(),'type_name':$('#stillingdb').val(),'pers_id':$('#personnummerdb').val(),'phone_nr':$('#telefondb').val(),'employee_id':indeks},
+            data: {'name': $("#navndb").val(),'address':$('#adressedb').val(),'email':$('#epostdb').val(),'type_name':strUser,'pers_id':$('#personnummerdb').val(),'phone_nr':$('#telefondb').val(),'employee_id':indeks},
             success: function(data){
                 console.log(JSON.stringify(data));
+                alert("HEST ER BEST! HEST ER LIVET");
                 //document.getElementById('newUserFeedback').innerHTML("Success");
             }
         });
