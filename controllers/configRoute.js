@@ -35,11 +35,8 @@ module.exports = function (app, passport) {
     app.get('/getAbsenceView',isLoggedIn,getCtrl.getAbsenceView);
     app.get('/getRequestView',isLoggedIn,getCtrl.getRequestView);
     app.get('/getShiftChange', isLoggedIn,getCtrl.getShiftChange);
-<<<<<<< HEAD
     app.post('/getAvailableEmpForShift', getCtrl.getAvailableEmpForShift);
-=======
     app.get('/getEmployee2',isLoggedIn,getCtrl.getEmployee2);
->>>>>>> dc6524508b0e43d55a4b877ba0417a2a9a13c62a
 
 
 
