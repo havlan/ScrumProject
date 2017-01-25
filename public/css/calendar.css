@@ -3,6 +3,10 @@ body {
     font-family: "Lucida Grande","Helvetica","Arial","Verdana",sans-serif;
     font-size: 14px;
 }
+html, body {
+    height:100%;
+    width:100%;
+}
 
 #calendar {
     float:left;
@@ -26,7 +30,6 @@ body {
 
 #nextShift {
     float:right;
-    height: 30%;
     width: 28%;
     margin-top: 40px;
     margin-left: 1%;
@@ -127,18 +130,16 @@ only screen and (max-width: 760px),
         width: calc(50% - 1em);
         box-sizing:border-box;
         position:relative;
+        margin-top:0.5em;
         margin-right: 0.5em;
         margin-left: 0.5em;
         height: 3.33em;
-    }
-    #availabilityB, #extraB, #shiftB {
-        margin-top: 0.5em;
     }
     #extraB {
         margin-bottom:0.5em;
     }
     .shiftHeader {
-        font-size: 1.5em;
+        font-size: 1.4em;
     }
     #nextShiftInfo {
         font-size: 1em;
