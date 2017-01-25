@@ -293,6 +293,57 @@ module.exports = {
 
             })
         })
-    }
+    },
 
+    acceptRequestWith: function (req, res) {
+        console.log("AcceptWith");
+        pool.getConnection(function (err, conn) {
+            if (err) {
+                res.json(err);
+                conn.release();
+                return;
+            }
+            console.log("begintransaction");
+            conn.beginTransaction(function () {
+                if (err) {
+                    return conn.rollback(function () {
+                        conn.release();
+                        console.log(err);
+                        res.json(err);
+                        throw err;
+                    })
+                } else {
+                    console.log("q1: " + req.body.emp_id1 + " " + req.body.shift_id1);
+                    conn.query("Update shift_has_employee set employee_id = ? where shift_id = ?", [req.body.emp_id1, req.body.shift_id1], function (err2,rows) {
+                        if (err2 || rows.affectedRows != 1) {
+                            return conn.rollback(function () {
+                                conn.release();
+                                throw err2;
+                            })
+                        } else {
+                            console.log("q2: "  + req.body.emp_id2 + " " + req.body.shift_id2);
+                            conn.query("update shift_has_employee set employee_id = ? where shift_id = ?", [req.body.emp_id2, req.body.shift_id2], function (err3, rows2) {
+                                if (err3 || rows2.affectedRows != 1) {
+                                    return conn.rollback(function () {
+                                        conn.release();
+                                        throw(err3);
+                                    })
+                                } else {
+                                    conn.release();
+                                    conn.commit(function () {
+                                        res.status(200);
+                                        console.log(rows2);
+                                        res.json(rows2);
+                                    })
+                                }
+                            })
+                        }
+                    })
+                }
+            })
+
+
+        })
+
+    }
 };
