@@ -86,7 +86,6 @@ body {
     background-color: #6585e7;
 }
 
-
 #acceptB{
     background-color: #4CAF50;
     margin-left:calc(100% - 150px);
@@ -120,10 +119,7 @@ only screen and (max-width: 760px),
         float:right;
         height: 10em;
         width: calc(50% - 1em);
-        margin:0;
-        margin-top:0.5em;
-        margin-left:0.5em;
-        margin-right:0.5em;
+        margin: 0.5em 0.5em 0.5em 0.5em;
     }
     .menuBtn{
         float:left;
@@ -137,6 +133,9 @@ only screen and (max-width: 760px),
     }
     #availabilityB, #extraB, #shiftB {
         margin-top: 0.5em;
+    }
+    #extraB {
+        margin-bottom:0.5em;
     }
     .shiftHeader {
         font-size: 1.5em;
