@@ -83,11 +83,14 @@ $(document).on('click','#switchTable .openModal',function (e) {
         data:{'shift_id':indeks},
         success: function (req,res,data) {
            $.each(data, function () {
+
                var option = $('<option />').text("Ansatt: " + data.responseJSON[i].employee_id + "  " + data.responseJSON[i].name);
                $('#ansattDropdown').append(option);
                console.log(data.responseJSON[i].name);
                i++;
             });
+
+
         }
     });
 
