@@ -50,6 +50,9 @@ html, body {
 #Lagre{
     background-color: #4CAF50;
 }
+#ansattDropdown{
+    width:100%
+}
 
 .radio,
 .checkbox {

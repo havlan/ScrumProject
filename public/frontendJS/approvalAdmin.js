@@ -73,7 +73,7 @@ function addAllColumnHeaders(myList, selector) {
     return columnSet;
 }
 var noe =[];
-
+var i = 0;
 $(document).on('click','#switchTable .openModal',function (e) {
     indeks = $(this).closest("tr").find('td:eq(0)').text();
     document.getElementById("skiftdb").innerHTML = indeks;
@@ -81,9 +81,13 @@ $(document).on('click','#switchTable .openModal',function (e) {
         url: '/getAvailableEmpForShift',
         type:'POST',
         data:{'shift_id':indeks},
-        success: function (data) {
-          noe =  data.responseJSON;
-          console.log(data);
+        success: function (req,res,data) {
+           $.each(data, function () {
+               var option = $('<option />').text("Ansatt: " + data.responseJSON[i].employee_id + "  " + data.responseJSON[i].name);
+               $('#ansattDropdown').append(option);
+               console.log(data.responseJSON[i].name);
+               i++;
+            });
         }
     });
 
@@ -149,13 +153,6 @@ $(document).on('click','#Lagre',function (e) {
     }
 
 });
-
-function makeDropdown(selector,liste) {
-    var columns = addAllColumnHeaders(liste, selector);
-    for (var i = 0; i < liste.length; i++) {
-        var cellValue1 = liste[i][columns[0]];
-        if (cellValue1 == null) cellValue1 = "Ingen data fra DB";
-        var option = $('<option />').text(cellValue1);
-        $(selector).append(option);
-    }
+function funkyfunc() {
+    console.log($("#ansattDropdown option:selected").text());
 }
