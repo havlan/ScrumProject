@@ -2,12 +2,29 @@
  * Created by LittleGpNator on 13.01.2017.
  */
 
-var myList1= [];
-var myList2= [];
-var myList3= [];
 var department= [];
+var today = new Date();
+
+function currentDay(today1) {
+    var dd = today1.getDate();
+    var mm = today1.getMonth()+1; //January is 0!
+
+    var yyyy = today1.getFullYear();
+    if(dd<10){
+        dd='0'+dd;
+    }
+    if(mm<10){
+        mm='0'+mm;
+    }
+    today1 = yyyy+'-'+mm+'-'+dd;
+    console.log(today1);
+    return today1;
+}
 
 $(document).ready(function(){
+    console.log(document.getElementById("datePicker").value);
+    document.getElementById("datePicker").value = currentDay(today);
+    console.log(document.getElementById("datePicker").value);
     myfunc();
 });
 
@@ -31,8 +48,9 @@ function makeDropdown(selector,list) {
 
 
 function myfunc(){
+    $(".table").empty();
     $.ajax({
-        url: '/getVaktliste1', //this is the submit URL
+        url: '/getVaktliste2', //this is the submit URL
         type: 'POST',
         data: {'department_name': $("#departmentInput").find(":selected").text()},
         success: function(req,res,data){
@@ -42,15 +60,35 @@ function myfunc(){
         },
         failure: function(err) {console.log("Error"+err);}
     });
+
+    $.ajax({
+        url: '/getVaktliste3', //this is the submit URL
+        type: 'POST',
+        data: {'department_name': $("#departmentInput").find(":selected").text()},
+        success: function(req,res,data){
+            console.log('successfully submitted');
+            console.log(data);
+            buildHtmlTable('#eveningTable',data.responseJSON);
+        },
+        failure: function(err) {console.log("Error"+err);}
+    });
+
+    $.ajax({
+        url: '/getVaktliste1', //this is the submit URL
+        type: 'POST',
+        data: {'department_name': $("#departmentInput").find(":selected").text()},
+        success: function(req,res,data){
+            console.log('successfully submitted');
+            console.log(data);
+            buildHtmlTable('#nightTable',data.responseJSON);
+        },
+        failure: function(err) {console.log("Error"+err);}
+    });
 };
 
 
 
 function buildHtmlTable(selector,list, index2) {
-    if(index2 < 0) {
-
-    }
-    $("#").empty();
     var columns = addAllColumnHeaders(list, selector);
     var tbody = $('<tbody '+ "id= tbodyid"+'/>');
     for (var i = 0; i < list.length; i++) {
@@ -65,6 +103,7 @@ function buildHtmlTable(selector,list, index2) {
     }
     $(selector).append(tbody);
 }
+
 function addAllColumnHeaders(list, selector) {
 
     var columnSet = [];

@@ -7,39 +7,6 @@ body, html{
 }
 
 
-#dayTable, #nightTable, #eveningTable {
-
-    width: 100%;
-    border: 1px solid #ddd;
-    font-size: 12px;
-    table-layout: fixed;
-}
-
-#dayTable td, #nightTable td, #eveningTable td {
-    text-align: left;
-    width: 10%;
-    overflow-x: hidden;
-}
-#dayTable th, #nightTable th, #eveningTable th{
-    text-align: left;
-    width: 20%;
-}
-
-#dayTable tr #nightTable tr #eveningTable tr {
-    border-bottom: 1px solid #ddd;
-}
-#dayTable td:hover, #nightTable td:hover, #eveningTable td:hover{
-    color: darkgray;
-}
-
-#dayTable tr.header, #nightTable tr.header, #eveningTable tr.header{
-    background-color: #f1f1f1;
-}
-#dayTable tr:hover, #nightTable tr:hover, #eveningTable tr:hover{
-    background-color: aliceblue;
-    cursor: pointer;
-}
-
 #size, #size1, #size2{
     width: 100%;
     display: block;

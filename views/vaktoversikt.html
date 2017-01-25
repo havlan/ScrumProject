@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <head>
     <title>vaktoversikt</title>
-    <link rel="stylesheet" type="text/css" href="css/overviewAdmin.css">
+    <link rel="stylesheet" type="text/css" href="css/shiftOverview.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -25,20 +25,22 @@
         <div class="navbar-shift">
             <div class="shift-left">
                 <div id="shift-buttons" class="btn-group">
-                <button type="button" class="btn btn-default" id="shift-prev">
-                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                </button>
-                <button type="button" class="btn btn-default" id="shift-next">
-                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                </button>
+                    <div class="form-group">
+                        <label for="datePicker">Date</label>
+                        <input id = datePicker type="date">
+                    </div>
+                    <button type="button" class="btn btn-default" id="shift-prev">
+                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                    </button>
+                    <button type="button" class="btn btn-default" id="shift-next">
+                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                    </button>
             </div>
             </div>
             <div class="shift-right">
                 <div class="shift-buttons">
-
                     <select id="departmentInput" class="input" onchange="myfunc()">
                     </select>
-                    <button onclick="removeTable()">troll</button>
                 </div>
 
             </div>

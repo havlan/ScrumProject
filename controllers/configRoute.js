@@ -70,8 +70,8 @@ module.exports = function (app, passport) {
     });
 
     app.post('/getVaktliste1', isLoggedIn, getCtrl.getVaktliste1);
-    app.get('/getVaktliste2', isLoggedIn, getCtrl.getVaktliste2);
-    app.get('/getVaktliste3', isLoggedIn, getCtrl.getVaktliste3);
+    app.post('/getVaktliste2', isLoggedIn, getCtrl.getVaktliste2);
+    app.post('/getVaktliste3', isLoggedIn, getCtrl.getVaktliste3);
 
     app.post('/postUser', isAdmin, postCtrl.postEmployee);
     app.post('/delUser', isAdmin, delCtrl.delLogin); // office auth
