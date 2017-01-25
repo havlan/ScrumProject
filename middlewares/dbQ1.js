@@ -8,6 +8,10 @@ module.exports = {
         console.log("Overview Employee");
         dbHelper.getdbQuery(req, res, "select phone_nr as Tlf,total_hours as Timer, employee_id as AnsattID,email as Epost,seniority as Stillingsprosent,responsibility_allowed as Ansvarsvakt, type_name as Stilling, name as Navn, address as Adresse, pers_id as PersNr from Employee");
     },
+    getEmployee2: function (req, res) {
+        console.log("Overview Employee2");
+        dbHelper.getdbQuery(req,res,"select name from Employee");
+    },
     getOneEmployee: function (req, res) {
         console.log("Overview Employee");
         dbHelper.getdbQuery(req, res, "select * from Employee where employee_id = ?",req.session.passport.user.id);
@@ -58,6 +62,10 @@ module.exports = {
     getEmployee_Shifts_toCurrentDate: function (req, res) {
         console.log("USER ID "+req.session.passport.user.id);
         dbHelper.getdbQuery(req, res, "select * from Employee_Shifts_toCurrentDate where employee_id = ?",[req.session.passport.user.id]);
+    },
+    getEmployee_Shifts_fromCurrentDate: function (req, res) {
+        console.log("USER ID "+req.session.passport.user.id);
+        dbHelper.getdbQuery(req, res, "select * from Employee_Shifts_fromCurrentDate where employee_id = ?",[req.session.passport.user.id]);
     },
     getPersonalShiftEvents : function (req, res) {
         dbHelper.getdbQuery(req, res, "select * from JSON_EMPLOYEE_VIEW where employee_id = ? And start >= CURDATE()", req.session.passport.user.id);
@@ -132,9 +140,8 @@ module.exports = {
     },
     postNewRequest: function (req, res) {
         var post = {
-            request_id: req.body.request_id,
             shift_id: req.body.shift_id,
-            employee_id: req.body.employee_id,
+            employee_id: req.session.passport.user.id,
             checked_by_admin: req.body.checked_by_admin
         };
         console.log("Posting new request");

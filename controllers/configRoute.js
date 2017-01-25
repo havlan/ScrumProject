@@ -25,6 +25,7 @@ module.exports = function (app, passport) {
     //app.get('/getUserInfo', isLoggedIn, getCtrl.getUserInfo);
     app.get('/getVaktoversiktSite', isLoggedIn, getCtrl.getVaktoversiktSite);
     app.get('/getEmployee_Shifts_toCurrentDate', isLoggedIn, getCtrl.getEmployee_Shifts_toCurrentDate);
+    app.get('/getEmployee_Shifts_fromCurrentDate', isLoggedIn, getCtrl.getEmployee_Shifts_fromCurrentDate);
     app.get('/getPersonalShiftEvents',isLoggedIn, getCtrl.getPersonalShiftEvents);
     app.get('/getTypeNames',isLoggedIn, getCtrl.getTypeNames);
     app.get('/getPossibleSiftsEvents',isLoggedIn,getCtrl.getPossibleSiftsEvents);
@@ -34,6 +35,7 @@ module.exports = function (app, passport) {
     app.get('/getAbsenceView',isLoggedIn,getCtrl.getAbsenceView);
     app.get('/getRequestView',isLoggedIn,getCtrl.getRequestView);
     app.get('/getShiftChange', isLoggedIn,getCtrl.getShiftChange);
+    app.get('/getEmployee2',isLoggedIn,getCtrl.getEmployee2);
 
 
 

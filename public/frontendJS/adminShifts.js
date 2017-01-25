@@ -108,17 +108,21 @@ function createPeopleDropdown(antSyk, antHjelp, antAnnet) {
     }
 }
 
-
 $.get('/getDepartment', {}, function(req, res, data){
     departments = data.responseJSON;
-    makeDropdown('#chooseDepartment')
+    makeDropdown(departments,'#chooseDepartment');
 });
 
-function makeDropdown(selector) {
-    var columns = addAllColumnHeaders(departments, selector);
-    for (var i = 0; i < departments.length; i++) {
-        var cellValue0 = departments[i][columns[0]];
-        var cellValue1 = departments[i][columns[1]];
+$.get('/getEmployee2',{},function (req, res, data) {
+    var employees = data.responseJSON;
+    makeDropdown(employees,'.peopleDropdown');
+});
+
+function makeDropdown(data,selector) {
+    var columns = addAllColumnHeaders(data, selector);
+    for (var i = 0; i < data.length; i++) {
+        var cellValue0 = data[i][columns[0]];
+        var cellValue1 = data[i][columns[1]];
         if (cellValue1 == null) cellValue1 = "Ingen data fra DB";
         var option = $('<option />').text(cellValue0 + "    " + cellValue1);
         $(selector).append(option);

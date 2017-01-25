@@ -48,34 +48,11 @@
                 <!-- Modal body-->
 
                 <main class="modal-body">
-                    <table id="switchTable" class="table table-bordred table-striped">
-                        <thead>
-                        <th><input type="checkbox"/></th>
-                        <th>Stilling</th>
-                        <th>Dato</th>
-                        <th>Fra</th>
-                        <th>Til</th>
-                        <th>Ansvar</th>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td><input type="checkbox" class="checkthis"/></td>
-                            <td>Sykepleier</td>
-                            <td>21.01.17</td>
-                            <td> 16:00</td>
-                            <td> 22:00</td>
-                            <td> Ja</td>
-                        <tr>
-                            <td><input type="checkbox" class="checkthis"/></td>
-                            <td>Sykepleier</td>
-                            <td>25.01.17</td>
-                            <td> 16:00</td>
-                            <td> 22:00</td>
-                            <td> Nei</td>
-                        </tbody>
-                    </table>
-
-                    <button type="button" id="acceptB" data-dismiss="modal">Godkjenn vakter</button>
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered" id="vaktTable">
+                        </table>
+                    </div>
+                    <button type="button" id="sendForespørsel" data-dismiss="modal">Send</button>
 
                 </main>
                 <!-- Modal footer-->
