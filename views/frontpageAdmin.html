@@ -26,6 +26,11 @@
 
 <aside id="warning">
     <h4 class="titles" onclick="buttonChangeTab()"> VARSEL </h4>
+    <div id="absenceWarning"></div>
+    <div id="overTimeWarning"></div>
+    <div id="changWarning"></div>
+    <div id="exchangeWarning"></div>
+
 </aside>
 <aside id="freeShifts" onclick="location.href='/adminShifts';" >
     <h4 class="titles"> LEDIGE VAKTER </h4>
@@ -46,11 +51,9 @@
     </ul>
 </section>
 
-<button type="button" class="buttonsAdmin" id="calendarButton" onclick="calendarFunction()" autofocus><span> Kalender &#128197;</span>
-</button>
-<button type="button" class="buttonsAdmin" id="buttonChangeTab" onclick="changeTabs()"><span>Godkjenning&#10003;</span>
-</button>
-<button type="button" class="buttonsAdmin" id="listButton" onclick="listFunction()"><span>Dagens vakter</span></button>
+<button type="button" class="buttonsAdmin" id="calendarButton" onclick="calendarFunction()" autofocus><span> Kalender &#128197;</span></button>
+<button type="button" class="buttonsAdmin" id="buttonChangeTab"  onclick="location.href='/approvalAdmin';"><span>Godkjenning&#10003;</span></button>
+<button type="button" class="buttonsAdmin" id="listButton"  onclick="location.href='/vaktoversikt';"><span>Dagens vakter</span></button>
 
 </body>
 <script>

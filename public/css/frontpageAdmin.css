@@ -47,6 +47,9 @@ html, body {
     background-color: lightyellow;
     cursor: pointer;
 }
+#absenceWarning, #overTimeWarning, #changWarning, #exchangeWarning {
+
+}
 #freeShifts{
     margin-bottom:1%;
     color:white;
