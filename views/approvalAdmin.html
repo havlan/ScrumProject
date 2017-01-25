@@ -52,7 +52,7 @@
         <!-- Modal header-->
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <button type="button" class="close" id="closeModal" data-dismiss="modal">&times;</button>
                 <h3 class="modal-title">Rediger informasjon</h3>
             </div>
             <!-- Modal body-->
@@ -61,18 +61,19 @@
                     <table cellspacing="10">
                         <tr>
                             <td class="info">Navn:</td>
-                            <td class="navn" id="navndb"></td>
+                            <td class="skift" id="skiftdb"></td>
                         </tr>
                         <tr>
-                            <td class="info" id="">Årsak:</td>
-                            <td class="årsak" id="årsakdb"></td>
+                        <select class="dbInfo" id= "ansattDropdown">
+                        </select>
                         </tr>
-                    </table>
                     <br>
+                    </table>
                 </form>
             </main>
             <div class="modal-footer">
-                <button type="button" id ="approveAbsence" onclick="saveFunction()" style="display:inline">Godkjenn og lagre</button>
+                <button type="button" id="erstatt" onclick="hideInfo()" display="inline">Erstatt</button>
+                <button type="button" id="fjern" onclick="removeFunction()" data-dismiss="modal" display="inline">Fjern</button>
             </div>
         </div>
     </div>

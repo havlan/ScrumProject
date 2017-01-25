@@ -122,6 +122,33 @@
 .radio label input[type="radio"] {
     display: none;
 }
+#fjern{
+    margin-left: 10px;
+    background-color: indianred;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    position: relative;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+#erstatt{
+    margin-left: 10px;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    position: relative;
+    margin-top: 0px;
+}
 #dank {
     background: #e5e5e5;
     color: #454545;
