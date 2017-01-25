@@ -6,14 +6,15 @@ var myList1= [];
 var myList2= [];
 var myList3= [];
 var department= [];
-var dropdownInput = $("#departmentInput").find(":selected").text();
 
+$(document).ready(function(){
+    myfunc();
+});
 
 $.get('/getDepartment', {}, function(req, res, data){
     console.log(data);
     console.log(data.responseJSON);
     department = data.responseJSON;
-
     makeDropdown('#departmentInput',department);
 });
 
@@ -29,29 +30,29 @@ function makeDropdown(selector,list) {
 
 
 
-function myFunction(){
-    $('#departmentInput').change(function(){
-        console.log($("#departmentInput").find(":selected").text());
-        $.ajax({
-            url: '/getVaktliste1', //this is the submit URL
-            type: 'POST',
-            data: {'department_name': $("#departmentInput").find(":selected").text()},
-            success: function(data){
-                console.log('successfully submitted');
-                console.log(data);
-                myList1 = data.responseJSON;
-            },
-            failure: function(err) {console.log("Error"+err);}
-        });
+function myfunc(){
+    $.ajax({
+        url: '/getVaktliste1', //this is the submit URL
+        type: 'POST',
+        data: {'department_name': $("#departmentInput").find(":selected").text()},
+        success: function(req,res,data){
+            console.log('successfully submitted');
+            console.log(data);
+            buildHtmlTable('#dayTable',data.responseJSON);
+        },
+        failure: function(err) {console.log("Error"+err);}
     });
 };
 
 
 
+function buildHtmlTable(selector,list, index2) {
+    if(index2 < 0) {
 
-function buildHtmlTable(selector,list) {
+    }
+    $("#tbodyid").empty();
     var columns = addAllColumnHeaders(list, selector);
-    var tbody = $('<tbody/>');
+    var tbody = $('<tbody '+ "id= tbodyid"+'/>');
     for (var i = 0; i < list.length; i++) {
         var row$ = $('<tr/>');
         for (var colIndex = 0; colIndex < columns.length; colIndex++) {
@@ -75,8 +76,6 @@ function addAllColumnHeaders(list, selector) {
             if ($.inArray(key, columnSet) == -1) {
                 columnSet.push(key);
                 headerTr$.append($('<th/>').html(key));
-
-
             }
 
         }
@@ -84,6 +83,28 @@ function addAllColumnHeaders(list, selector) {
     }
     $(selector).append(headerThead$);
     $(headerThead$).append(headerTr$);
-    $("#cover").fadeOut(20);
     return columnSet;
+}
+
+
+function addAllColumnHeaders2(list, selector) {
+        var headerThead$ = $('<thead/>');
+        var headerTr$ = $('<tr/>');
+        for (var i = 0; i < list.length; i++) {
+            var rowHash = list[i];
+            for (var key in rowHash) {
+                if ($.inArray(key, columnSet) == -1) {
+                    columnSet.push(key);
+                    headerTr$.append($('<th/>').html(key));
+
+
+                }
+
+            }
+
+        }
+        $(selector).append(headerThead$);
+        $(headerThead$).append(headerTr$);
+        index++;
+    }
 }

@@ -9,8 +9,7 @@
     <script src ="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
 
-    <!--<script src="frontendJS/hmenu.js"></script>-->
-
+    <script src="frontendJS/hmenu.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" >
@@ -31,29 +30,29 @@
             <ul class="nav navbar-nav">
 
                 <!-- ANNSATT -->
-                <li class="dropdown">
+                <li class="dropdown" id = "dropdown1">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">AnsattHjem<span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="/calendar"         >Hjem</a></li>
-                        <li><a href="/appeal"           >Forespørsel</a></li>
-                        <li><a href="/availability"     >Tilgjengelighet</a></li>
-                        <li><a href="/vaktoversikt"     >Shiftlist</a></li>
+                        <li><a href="/calendar"        >Hjem</a></li>
+                        <li><a href="/appeal"          >Forespørsel</a></li>
+                        <li><a href="/availability"    >Tilgjengelighet</a></li>
+                        <li><a href="/vaktoversikt"    >Vaktoversikt</a></li>
                     </ul>
                 </li>
                 <li><a href="/myProfile"        >Min Profil</a></li>
-                <li><a href="/overviewForAdmin" >annsattoversikt</a></li>
+                <li><a href="/overviewEmp" >Annsattoversikt</a></li>
 
                 <!-- ADMIN -->
-                <li class="dropdown">
+                <li class="dropdown" id = "dropdown2">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">AdminHjem<span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="/frontpageAdmin"   >Admin</a></li>
-                        <li><a href="/vaktoversikt"     >Shiftlist</a></li>
+                        <li><a href="/vaktoversikt"     >vaktoversikt</a></li>
                         <li><a href="/approvalAdmin"    >Godkjenning</a></li>
                     </ul>
                 </li>
                 <li><a href="/adminShifts"      >Admin vakter</a></li>
-                <li><a href="/overviewForAdmin" >Oversikt for Admin</a></li>
+                <li><a href="/overviewForAdmin" >Oversikt for Administrasjonen</a></li>
 
                 <!-- SUPER -->
                 <li><a href="/frontpageSuper" >Super</a></li>
