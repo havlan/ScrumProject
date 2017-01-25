@@ -161,24 +161,24 @@ $(document).on('click','#excelDataTable td',function(){
     var hei = indeks-1;
     $.get('/getEmployee', {}, function(req, res, data) {
         //Fyll inn redigeringsfelt
-        document.getElementById("navndb").value = (data.responseJSON[hei].name);
-        document.getElementById("stillingDropdown").value = (data.responseJSON[hei].type_name);
-        document.getElementById("telefondb").value = (data.responseJSON[hei].phone_nr);
-        document.getElementById("epostdb").value = (data.responseJSON[hei].email);
-        document.getElementById("adressedb").value = (data.responseJSON[hei].address);
-        document.getElementById("personnummerdb").value = (data.responseJSON[hei].pers_id);
+        document.getElementById("navndb").value = (data.responseJSON[hei].Navn);
+        document.getElementById("stillingDropdown").value = (data.responseJSON[hei].Stilling);
+        document.getElementById("telefondb").value = (data.responseJSON[hei].Tlf);
+        document.getElementById("epostdb").value = (data.responseJSON[hei].Epost);
+        document.getElementById("adressedb").value = (data.responseJSON[hei].Adresse);
+        document.getElementById("personnummerdb").value = (data.responseJSON[hei].PersNr);
         //Fyll in oversiktsfelt
-        document.getElementById("navndb2").innerHTML = (data.responseJSON[hei].name);
-        document.getElementById("stillingdb2").innerHTML = (data.responseJSON[hei].type_name);
-        document.getElementById("telefondb2").innerHTML = (data.responseJSON[hei].phone_nr);
-        document.getElementById("epostdb2").innerHTML = (data.responseJSON[hei].email);
-        document.getElementById("adressedb2").innerHTML = (data.responseJSON[hei].address);
-        document.getElementById("personnummerdb2").innerHTML = (data.responseJSON[hei].pers_id);
+        document.getElementById("navndb2").innerHTML = (data.responseJSON[hei].Navn);
+        document.getElementById("stillingdb2").innerHTML = (data.responseJSON[hei].Stilling);
+        document.getElementById("telefondb2").innerHTML = (data.responseJSON[hei].Tlf);
+        document.getElementById("epostdb2").innerHTML = (data.responseJSON[hei].Epost);
+        document.getElementById("adressedb2").innerHTML = (data.responseJSON[hei].Adresse);
+        document.getElementById("personnummerdb2").innerHTML = (data.responseJSON[hei].PersNr);
         //Trigge modal
         $('#myModal').modal("show");
         //Felt under profilbilde
-        $("#nameModal").val(data.responseJSON[hei].name);
-        $("#positionModal").val(data.responseJSON[hei].type_name);
+        $("#nameModal").val(data.responseJSON[hei].Navn);
+        $("#positionModal").val(data.responseJSON[hei].Stilling);
     });
 });
 //addModal submit
@@ -203,13 +203,15 @@ $(function(){
     $('#myModal').on('submit', function(e){
      //   alert($("#adressedb").val());
         e.preventDefault();
-       // alert(indeks);
+        var drpdn  = document.getElementById("stillingDropdown");
+        var strUser = drpdn.options[drpdn.selectedIndex].text;
         $.ajax({
             url: '/updateEmployee',
             type: 'POST',
-            data: {'name': $("#navndb").val(),'address':$('#adressedb').val(),'email':$('#epostdb').val(),'type_name':$('#stillingdb').val(),'pers_id':$('#personnummerdb').val(),'phone_nr':$('#telefondb').val(),'employee_id':indeks},
+            data: {'name': $("#navndb").val(),'address':$('#adressedb').val(),'email':$('#epostdb').val(),'type_name':strUser,'pers_id':$('#personnummerdb').val(),'phone_nr':$('#telefondb').val(),'employee_id':indeks},
             success: function(data){
                 console.log(JSON.stringify(data));
+                alert("HEST ER BEST! HEST ER LIVET");
                 //document.getElementById('newUserFeedback').innerHTML("Success");
             }
         });
@@ -222,8 +224,8 @@ $.get('/getTypeNames', {}, function(req, res, data){
 
     typeNames = data.responseJSON;
 
-    makeDropdown('#stilling')
-    makeDropdown('#stillingDropdown')
+    makeDropdown('#stilling');
+    makeDropdown('#stillingDropdown');
 });
 
 

@@ -13,10 +13,11 @@ $(document).ready(function() {
         locale: 'nb',
         timezone : 'local',
         weekNumbers:true,
-        navLinks: true,
+        navLinks: false,
         editable: false,
         eventColor: '#7bc7ff', //default event color //can be set individually
         eventTextColor: '#000000', //default event text color
+        height: 'auto',
         //GETTING EVENTS FROM JSON FEED; SHORT AND EXTENDED
         eventSources: [
             {

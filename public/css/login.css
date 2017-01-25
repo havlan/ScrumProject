@@ -13,7 +13,7 @@
     background: -moz-linear-gradient(bottom right, #91a8ee, #c2f0f0, #e9eefc,#4169e1); /* For Firefox 3.6 to 15 */
     background: linear-gradient(to bottom right,  #91a8ee, #c2f0f0, #e9eefc,#4169e1); /* Standard syntax (must be last) */
     background-repeat:no-repeat;
-    background-size:100% 150%;
+    background-size: 150%;
 }
 
 #logoPic{
@@ -132,4 +132,11 @@
 }
 .container .info span .fa {
   color: #EF3B3A;
+}
+
+@media screen and (min-width: 480px)  {
+    #loginbody {
+        background-size: 100% 250%;
+    }
+
 }

@@ -3,130 +3,148 @@ body {
     font-family: "Lucida Grande","Helvetica","Arial","Verdana",sans-serif;
     font-size: 14px;
 }
-
+html, body {
+    height:100%;
+    width:100%;
+}
 
 #calendar {
-    position: absolute;
-    width: 50%;
-    margin-left: 22%;
+    float:left;
+    width: 69%;
+    margin-left:1%;
+    overflow:hidden;
 }
-#nextShift {
-    border: solid #f2f2f2 1px;
-    box-shadow: 10px 10px 5px #888888;
-    border-radius: 5px;
-    height: 30%;
-    width: 15%;
-    margin-left: 78%;
-    margin-top: 5%;
+.fc-basic-view .fc-body .fc-row{
+    min-height:3.5em;
+    height:7vw;
+    max-height:14vh;
+}
+.fc-toolbar.fc-header-toolbar {
+    margin-bottom: 0.7em;
+}
+.fc-center h2{
+    height:auto;
+    font-size:1.8em;
+    line-height:0;
+}
 
+#nextShift {
+    float:right;
+    width: 28%;
+    margin-top: 40px;
+    margin-left: 1%;
+    margin-right: 1%;
+
+    border: solid #f2f2f2 1px;
+    border-radius: 5px;
+    box-shadow: -2px 2px 5px #888888;
 }
 .shiftHeader{
-    font-family: Verdana, Geneva, sans-serif;
     text-align: center;
 }
 #nextShiftInfo{
-    font-family: Verdana, Geneva, sans-serif;
     text-align: center;
     padding: 3%;
 }
+/*
 #newShiftBox {
     position: absolute;
     border: solid #f2f2f2 1px;
-    box-shadow: 10px 10px 5px #888888;
+    box-shadow: 1px 1px 1px #888888;
     border-radius: 5px;
     height: 30%;
     width: 15%;
     margin-left: 78%;
     margin-top: 22%;
-    font-family: Verdana, Geneva, sans-serif;
     text-align: center;
 
 }
-
 #newShifts{
-    font-family: Verdana, Geneva, sans-serif;
     text-align: center;
     padding:5%;
 }
-
+*/
 .menuBtn{
+    float:right;
+    width: 207px;
+    margin-left: calc(15% - 104px);
+    margin-right: calc(15% - 104px);
+    margin-top: 1%;
+    box-sizing: border-box;
+    padding: 10px 20px;
+
     background-color: royalblue;
-    position: absolute;
-    margin-left: 4%;
     border: none;
     border-radius: 5px;
+
     color: white;
-    padding: 10px 20px;
     text-align: center;
     text-decoration: none;
-    display: inline-block;
     font-size: 16px;
     cursor:pointer;
-    width: 200px;
-}
 
-.menuBtn span {
-    cursor: pointer;
-    display: inline-block;
-    position: relative;
-    transition: 0.3s;
+    box-shadow: 2px 2px 5px #888888;
 }
-
-.menuBtn span:after {
-    position: absolute;
-    opacity: 0;
-    top: 0;
-    right: -20px;
-    transition: 0.3s;
-}
-
-.menuBtn:hover span {
-    padding-right: 15px;
-}
-
-.menuBtn:hover span:after {
-    opacity: 1;
-    right: 0;
-}
-
-#availabilityB{
-    margin-top: 5%;
-}
-#availabilityB:hover{
+.menuBtn:hover{
     background-color: #6585e7;
 }
-#extraB{
-    margin-top: 10%;
-}
-#extraB:hover{
-    background-color: #6585e7;
-}
-#shiftB{
-    margin-top: 15%;
-}
-#shiftB:hover{
-    background-color: #6585e7;
-}
+
 #acceptB{
     background-color: #4CAF50;
-    position: relative;
-    margin-left: 70%;
+    margin-left:calc(100% - 150px);
     border: none;
     border-radius: 5px;
     color: white;
     padding: 5px 10px;
     text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 14px;
     cursor:pointer;
     width: 150px;
+}
+#acceptB:hover {
+    background-color: #7CbF70;
 }
 
 @media
 only screen and (max-width: 760px),
 (min-device-width: 768px) and (max-device-width: 1024px)  {
     #calendar {
-        display: none;
+        position:relative;
+        width:calc(100% - 1em);
+        margin-top:0;
+        margin-left:0.5em;
+        margin-right:0.5em;
+        float:left;
+    }
+    .fc-basic-view .fc-body .fc-row{
+        height:10vw;
+    }
+    #nextShift {
+        float:right;
+        height: 11em;
+        width: calc(50% - 1em);
+        margin: 0.5em 0.5em 0.5em 0.5em;
+    }
+    .menuBtn{
+        float:left;
+        font-size: 1em;
+        width: calc(50% - 1em);
+        box-sizing:border-box;
+        position:relative;
+        margin-top:0.5em;
+        margin-right: 0.5em;
+        margin-left: 0.5em;
+        height: 3.33em;
+    }
+    #extraB {
+        margin-bottom:0.5em;
+    }
+    .shiftHeader {
+        font-size: 1.4em;
+    }
+    #nextShiftInfo {
+        font-size: 1em;
+    }
+    #switchTable{
+        font-size: 0.8em;
     }
 }

@@ -90,12 +90,12 @@ h1{
     border: solid black 1px;
     border-radius: 5px;
     margin-left: 9%;
-    margin-top: 21%;
+    margin-top: 37%;
 }
 
 #profilePic{
     margin-left: 3%;
-    margin-top: 5%;
+    margin-top: 7%;
     position: absolute;
 }
 .histTable tr:nth-child(odd):not(:first-child){
@@ -158,11 +158,42 @@ h1{
 #passwordForm{
     padding:10px;
 }
-
 @media
 only screen and (max-width: 760px),
-(min-device-width: 768px) and (max-device-width: 1024px) {
+(min-device-width: 768px) and (max-device-width: 1024px)  {
 
+    #navn{
+        font-size: 1.5em;
+    }
+    .info{
+        font-size: 0.9em;
+    }
+    .db{
+        font-size: 0.9em;
+    }
+    .fc-basic-view .fc-body .fc-row{
+        height:10vw;
+    }
+    #profilePic {
+        position: relative;
+        float:right;
+        height: auto;
+        width: 70px;
+        margin: 0.5em 0.5em 0.5em 0.5em;
+    }
+    .picBtn{
+        display:none;
+        float:left;
+        position: relative;
+        font-size: 0.7em;
+        box-sizing:border-box;
+        margin-right: 0.5em;
+        margin-left: 0.5em;
+        height: 3em;
+    }
 
+    #infoEmp {
+        font-size: 12px;
+    }
 
 }

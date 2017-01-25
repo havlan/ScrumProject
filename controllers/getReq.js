@@ -120,8 +120,8 @@ module.exports = {
     getOvertime : function (req, res){
         dbMiddelware.getOvertime(req,res);
     },
-    getEmployee_shifts_toCurrentDate:function(req,res){
-        dbMiddelware.getEmployee_shifts_toCurrentDate(req,res);
+    getEmployee_Shifts_toCurrentDate:function(req,res){
+        dbMiddelware.getEmployee_Shifts_toCurrentDate(req,res);
     },
     getVaktliste1:function(req,res){
         dbMiddelware.getVaktliste1(req,res);
@@ -148,6 +148,9 @@ module.exports = {
 
     getAvailability : function (req, res) {
       dbMiddelware.getAvailability(req,res);
+    },
+    getShiftChange : function (req, res){
+        dbMiddelware.getShiftChange(req,res);
     },
 
     get403 : function (req, res) {
