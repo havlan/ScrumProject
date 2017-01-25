@@ -18,6 +18,12 @@
 <body class="profile">
 <div class = flytt>
 
+    <!-- Bilde -->
+    <div id="pictureEmp">
+        <img src="https://s3.amazonaws.com/whisperinvest-images/default.png" id="profilePic" alt = "Bilde av ansatt">
+        <button type="button" id="picBtn" onclick="alert('Ring administrasjonen')">Rediger profilbilde</button>
+    </div>
+
     <!-- Info Ansatt -->
     <main class="infoEmp">
         <h1 id = "navn">navn på ansatt FRADATABASE</h1>
@@ -51,13 +57,6 @@
         <button type="button" id="passwordBtn" data-toggle="modal" data-target="#password">Endre passord</button>
         <button type="button" id="historyBtn" data-toggle="modal" data-target="#historyModal">Historikk</button>
     </main>
-
-    <!-- Bilde -->
-
-    <div id="bildeogknapp">
-        <img src="https://s3.amazonaws.com/whisperinvest-images/default.png" id="profilePic" alt = "Bilde av ansatt">
-    <button type="button" id="picBtn" onclick="alert('Ring administrasjonen')">Rediger profilbilde</button>
-    </div>
 
     <!-- Modal:Edit info -->
     <div class="modal fade" id="editModal" role="dialog">

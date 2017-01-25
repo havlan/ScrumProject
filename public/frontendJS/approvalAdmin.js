@@ -2,16 +2,21 @@ function leaveFunction(){
     document.getElementById('leaveApproval').style.display = "block";
     document.getElementById('switchApproval').style.display = "none";
     document.getElementById('overtimeApproval').style.display = "none";
+    document.getElementById('Lagre').style.display = "block";
+
 }
 function overtimeFunction(){
     document.getElementById('leaveApproval').style.display = "none";
     document.getElementById('switchApproval').style.display = "none";
     document.getElementById('overtimeApproval').style.display = "block";
+    document.getElementById('Lagre').style.display = "block";
+
 }
 function switchFunction(){
     document.getElementById('leaveApproval').style.display = "none";
     document.getElementById('switchApproval').style.display = "block";
     document.getElementById('overtimeApproval').style.display = "none";
+    document.getElementById('Lagre').style.display = "none";
 }
 var myList = [];
 $.get('/getAbsenceView', {}, function(req, res, data){
@@ -34,7 +39,7 @@ function buildHtmlTable(selector,list) {
     var tbody = $('<tbody/>');
     for (var i = 0; i < myList.length; i++) {
         var row$ = $('<tr id=' + i + '/>');
-        var check$ = $('<div class="checkbox radio-margin"><label><input type="checkbox" id='+ i +' value=""><span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span></label></div>');
+        var check$ = $('<div class="checkbox radio-margin"><label><input type="checkbox" class="openModal" id='+ i +' value=""><span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span></label></div>');
         for (var colIndex = 0; colIndex < columns.length; colIndex++) {
             var cellValue = myList[i][columns[colIndex]];
             if (cellValue == null) cellValue = "";
@@ -66,7 +71,21 @@ function addAllColumnHeaders(myList, selector) {
     $(headerThead$).append(headerTr$);
     return columnSet;
 }
-
+$(document).on('click','#switchTable .openModal',function (e) {
+    indeks = $(this).closest("tr").find('td:eq(0)').text();
+    document.getElementById("skiftdb").innerHTML = indeks;
+    if ($(this).is(':checked')) {
+        //alert("HEST ER LIVET!");
+        $('#approveModal').modal('show');
+    } else {
+        //alert("HEST ER BEST SOM PÅLEGG!");
+        $('#approveModal').modal('hide');
+    }
+    $('#closeModal').on('click',function () {
+     //alert("hei");
+        $('input[class=openModal]').prop('checked', false);
+     });
+});
 
 //When pressing 'Lagre'-button any row that is checked will get checked_by_admin=1
 $(document).on('click','#Lagre',function (e) {
@@ -116,3 +135,22 @@ $(document).on('click','#Lagre',function (e) {
     }
 
 });
+
+$.get('/getTypeNames', {}, function(req, res, data){
+    console.log(data);
+    console.log(data.responseJSON);
+
+    typeNames = data.responseJSON;
+
+    makeDropdown('#ansattDropdown');
+});
+
+function makeDropdown(selector) {
+    var columns = addAllColumnHeaders(typeNames, selector);
+    for (var i = 0; i < typeNames.length; i++) {
+        var cellValue1 = typeNames[i][columns[0]];
+        if (cellValue1 == null) cellValue1 = "Ingen data fra DB";
+        var option = $('<option />').text(cellValue1);
+        $(selector).append(option);
+    }
+}

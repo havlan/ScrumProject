@@ -4,9 +4,16 @@
     <meta charset="UTF-8">
     <title>Trondheim kommune</title>
     <link rel="stylesheet" href="css/frontpageSuper.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 
+
+
 <body>
+    <div id="includedContent"></div>
+    <script>$("#includedContent").load("menu");</script>
+
     <button type="button" class="superbutton" id="userB">LOGG INN SOM BRUKER</button>
     <button type="button" class="superbutton" id="administrationB">LOGG INN SOM ADMINISTRASJON</button>
 </body>

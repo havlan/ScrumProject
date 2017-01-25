@@ -87,6 +87,9 @@ module.exports = {
     getEmployee : function (req, res){
       dbMiddelware.getEmployee(req,res);
     },
+    getEmployee2 : function (req, res) {
+        dbMiddelware.getEmployee2(req,res);
+    },
     getOneEmployee : function(req,res){
         dbMiddelware.getOneEmployee(req,res);
     },
@@ -122,6 +125,9 @@ module.exports = {
     },
     getEmployee_Shifts_toCurrentDate:function(req,res){
         dbMiddelware.getEmployee_Shifts_toCurrentDate(req,res);
+    },
+    getEmployee_Shifts_fromCurrentDate:function(req,res){
+        dbMiddelware.getEmployee_Shifts_fromCurrentDate(req,res);
     },
     getVaktliste1:function(req,res){
         dbMiddelware.getVaktliste1(req,res);
