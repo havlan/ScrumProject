@@ -21,7 +21,7 @@ function changeToFunction(){
     document.getElementById('saveAppeal').style.display = "block";
 }
 
-function changeToFunction(){
+function overtimeFunction(){
     document.getElementById('absenceAppeal').style.display = "none";
     document.getElementById('changeAppeal').style.display = "none";
     document.getElementById('changeToAppeal').style.display = "none";

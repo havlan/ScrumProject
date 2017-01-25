@@ -1,41 +1,60 @@
-#Appeal{
-    position: absolute;
-    font-size: 42px;
-    margin-left: 2%;
+body {
+    padding: 0;
+    font-family: "Lucida Grande","Helvetica","Arial","Verdana",sans-serif;
+    font-size: 14px;
 }
-.approveButton{
-    position: absolute;
-    margin-left: 5%;
-    width: 170px;
+html, body {
+    height:100%;
+    width:100%;
+}
+
+#Appeal{
+    width:200px;
+    margin:1% calc(99% - 200px) 1% 1%;
+    height:60px;
+    float:left;
+}
+
+.appealButton{
+    float:left;
+    width: 200px;
+    margin:0 calc(99% - 200px) 1% 1%;
+
     background-color: royalblue;
     border: none;
     border-radius: 5px;
+    box-shadow: 2px 2px 5px #888888;
     color: white;
     padding: 15px 32px;
     text-align: center;
-    font-size: 16px;
     cursor: pointer;
-    transition: all 0.3s;
 }
-.approveButton:hover{
+.appealButton:hover{
     background-color: #6585e7;
 }
-#absence{
-    margin-top: 8%;
+
+.appealSection{
+    width: calc(97% - 200px);
+    height: calc(100% - 100px);
+    position: absolute;
+    margin:0 1% 1% calc(200px + 2%);
+
+    box-sizing:border-box;
+    padding: 10px 10px 10px 10px;
+    background-color: white;
+
+    border: solid #f2f2f2 1px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px #888888;
 }
 
-textarea{
-    width: 40%;
-    height: 100px;
-}
-
+/*
 .approveButton span {
     cursor: pointer;
     display: inline-block;
     position: relative;
     transition: 0.3s;
 }
-
 .approveButton span:after {
     position: absolute;
     opacity: 0;
@@ -43,50 +62,35 @@ textarea{
     right: -20px;
     transition: 0.3s;
 }
-
 .approveButton:hover span {
     padding-right: 15px;
 }
-
 .approveButton:hover span:after {
     opacity: 1;
     right: 0;
 }
+*/
 
-#change{
-    margin-top: 15%;
-}
-
-#changeTo{
-    margin-top: 22%;
-}
-
-#overtime{
-    margin-top: 29%;
-}
-.approveSection{
-    position: absolute;
-    background-color: white;
-    width: 70%;
-    height: 80%;
-    margin-left: 23%;
-    margin-top: 3%;
-    padding-left: 2%;
-    padding-right: 2%;
-    overflow: scroll;
-
-}
-#saveAppeal{
-    position: absolute;
-    margin-left: 65%;
-    margin-top: 40%;
-    width: 200px;
-    background-color: #4CAF50;
-    border: none;
-    border-radius: 5px;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    font-size: 16px;
-    cursor: pointer;
+@media
+only screen and (max-width: 760px),
+(min-device-width: 768px) and (max-device-width: 1024px)  {
+    #Appeal{
+        text-align: center;
+        height:auto;
+        width:8em;
+        font-size: 2em;
+        margin:0 calc(49% - 100px) 0.5em calc(49% - 100px);
+    }
+    .appealButton{
+        width: calc(50% - 1em);
+        margin:0 0.5em 0.5em 0.5em;
+    }
+    .appealSection{
+        float:left;
+        width: calc(100% - 1em);
+        height: auto;
+        position: relative;
+        margin:0 0.5em 0.5em 0.5em;
+        padding: 0.5em 0.5em 0.5em 0.5em;
+    }
 }
