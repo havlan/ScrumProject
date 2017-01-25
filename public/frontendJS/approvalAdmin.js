@@ -19,19 +19,20 @@ function switchFunction(){
     document.getElementById('Lagre').style.display = "none";
 }
 var myList = [];
+var liste = [];
 $.get('/getAbsenceView', {}, function(req, res, data){
     console.log(data);
     console.log(data.responseJSON[0]);
     myList = data.responseJSON;
-    buildHtmlTable('#leaveTable');
+    buildHtmlTable('#leaveTable',myList);
 });
 $.get('/getOvertimeView',{},function (req,res,data) {
     myList = data.responseJSON;
-    buildHtmlTable('#overtimeTable');
+    buildHtmlTable('#overtimeTable',myList);
 });
 $.get('/getRequestView',{},function (req,res,data) {
     myList = data.responseJSON;
-    buildHtmlTable('#switchTable');
+    buildHtmlTable('#switchTable',myList);
 });
 function buildHtmlTable(selector,list) {
     list = myList;
@@ -71,12 +72,25 @@ function addAllColumnHeaders(myList, selector) {
     $(headerThead$).append(headerTr$);
     return columnSet;
 }
+var noe =[];
+
 $(document).on('click','#switchTable .openModal',function (e) {
     indeks = $(this).closest("tr").find('td:eq(0)').text();
     document.getElementById("skiftdb").innerHTML = indeks;
+    $.ajax({
+        url: '/getAvailableEmpForShift',
+        type:'POST',
+        data:{'shift_id':indeks},
+        success: function (data) {
+          noe =  data.responseJSON;
+          console.log(data);
+        }
+    });
+
     if ($(this).is(':checked')) {
         //alert("HEST ER LIVET!");
         $('#approveModal').modal('show');
+        makeDropdown("#ansattDropdown",noe);
     } else {
         //alert("HEST ER BEST SOM PÅLEGG!");
         $('#approveModal').modal('hide');
@@ -136,19 +150,10 @@ $(document).on('click','#Lagre',function (e) {
 
 });
 
-$.get('/getTypeNames', {}, function(req, res, data){
-    console.log(data);
-    console.log(data.responseJSON);
-
-    typeNames = data.responseJSON;
-
-    makeDropdown('#ansattDropdown');
-});
-
-function makeDropdown(selector) {
-    var columns = addAllColumnHeaders(typeNames, selector);
-    for (var i = 0; i < typeNames.length; i++) {
-        var cellValue1 = typeNames[i][columns[0]];
+function makeDropdown(selector,liste) {
+    var columns = addAllColumnHeaders(liste, selector);
+    for (var i = 0; i < liste.length; i++) {
+        var cellValue1 = liste[i][columns[0]];
         if (cellValue1 == null) cellValue1 = "Ingen data fra DB";
         var option = $('<option />').text(cellValue1);
         $(selector).append(option);
