@@ -295,12 +295,52 @@ module.exports = {
         })
     },
 
-    acceptRequestWith: function (req, res) {
-        console.log("AcceptWith");
+    acceptRequest : function () {
         pool.getConnection(function (err, conn) {
             if (err) {
                 res.json(err);
                 conn.release();
+                return;
+            }
+            console.log("begintransaction");
+            conn.beginTransaction(function () {
+                if (err) {
+                    return conn.rollback(function () {
+                        conn.release();
+                        console.log(err);
+                        res.json(err);
+                        throw err;
+                    })
+                } else {
+                    console.log("q1: " + req.body.emp_id + " " + req.body.shift_id);
+                    conn.query("update shift_has_employee set employee_id = ? where shift_id = ?", [req.body.emp_id, req.body.shift_id], function (err3, rows2) {
+                        if (err3 || rows2.affectedRows != 1) {
+                            return conn.rollback(function () {
+                                conn.release();
+                                throw(err3);
+                            })
+                        } else {
+                            conn.release();
+                            conn.commit(function () {
+                                res.status(200);
+                                console.log(rows2);
+                                res.json(rows2);
+                            })
+                        }
+                    })
+                }
+            })
+
+
+        })
+    },
+
+    acceptRequestWith: function (req, res) {
+        console.log("AcceptWith");
+        pool.getConnection(function (err, conn) {
+            if (err) {
+                conn.release();
+                res.json(err);
                 return;
             }
             console.log("begintransaction");

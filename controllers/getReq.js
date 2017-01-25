@@ -153,6 +153,11 @@ module.exports = {
         dbMiddelware.getShiftChange(req,res);
     },
 
+    getAvailableEmpForShift : function (req, res) {
+        dbMiddelware.getAvailableEmpForShift(req,res);
+    },
+
+
     get403 : function (req, res) {
         res.status(403).sendFile(path.join(__dirname + '/../views/403.html'));
     },
