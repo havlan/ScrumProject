@@ -1,4 +1,11 @@
 
+var departments     = [];
+var employeesSyk    = [];
+var employeesHelp   = [];
+var employeesAnnet  = [];
+
+
+
 $(document).ready(function() {
     $("#includedContent").load("menu");
 
@@ -87,50 +94,50 @@ function createPeopleDropdown(antSyk, antHjelp, antAnnet) {
     document.getElementById('peopleTable').innerHTML = "<tr><th  class='peopleTablecat'>Kategori</th><th class='peopleTableSel'>Ansatt</th></tr>";
     for(var i=0; i<antSyk; i++){
         document.getElementById('peopleTable').innerHTML += "<tr><td class='peopleTableCat'>Sykepleier</td><td class='peopleTableSel'><select id='syk" + i + "' class='peopleDropdown'></select></td></tr>";
-        $.get('/getDepartment', {}, function(req, res, data){
-            departments = data.responseJSON;
-            makeDropdown("#syk" + i);
-        });
+        makeDropdown("#syk" + i,employeesSyk);
     }
     for(var i=0; i<antHjelp; i++){
         document.getElementById('peopleTable').innerHTML += "<tr><td class='peopleTableCat'>Hjelpepleier</td><td class='peopleTableSel'><select id='hjelp" + i + "' class='peopleDropdown'></select></td></tr>";
-        $.get('/getDepartment', {}, function(req, res, data){
-            departments = data.responseJSON;
-            makeDropdown("#hjelp" + i);
-        });
+        makeDropdown("#hjelp" + i,employeesHelp);
     }
     for(var i=0; i<antAnnet; i++){
         document.getElementById('peopleTable').innerHTML += "<tr><td class='peopleTableCat'>Annet</td><td class='peopleTableSel'><select id='annet" + i + "' class='peopleDropdown'></select></td></tr>";
-        $.get('/getDepartment', {}, function(req, res, data){
-            departments = data.responseJSON;
-            makeDropdown("#annet" + i);
-        });
+        makeDropdown("#annet" + i,employeesAnnet);
     }
 }
 
-
 $.get('/getDepartment', {}, function(req, res, data){
     departments = data.responseJSON;
-    makeDropdown('#chooseDepartment')
+    makeDropdown('#chooseDepartment',departments)
 });
 
-function makeDropdown(selector) {
-    var columns = addAllColumnHeaders(departments, selector);
-    for (var i = 0; i < departments.length; i++) {
-        var cellValue0 = departments[i][columns[0]];
-        var cellValue1 = departments[i][columns[1]];
-        if (cellValue1 == null) cellValue1 = "Ingen data fra DB";
-        var option = $('<option />').text(cellValue0 + "    " + cellValue1);
+$.get('/getEmployee', {}, function(req, res, data){
+    employeesSyk = data.responseJSON;
+});
+$.get('/getEmployee', {}, function(req, res, data){
+    employeesHelp = data.responseJSON;
+});
+$.get('/getEmployee', {}, function(req, res, data){
+    employeesAnnet = data.responseJSON;
+});
+
+
+function makeDropdown(selector,list) {
+    var columns = addAllColumnHeaders(list, selector);
+    for (var i = 0; i < list.length; i++) {
+        var cellValue = list[i][columns[1]];
+        if (cellValue == null) cellValue = "Ingen data fra DB";
+        var option = $('<option />').text(cellValue);
         $(selector).append(option);
     }
 }
 
-function addAllColumnHeaders(myList, selector) {
+function addAllColumnHeaders(list, selector) {
     var columnSet = [];
     var headerThead$ = $('<thead/>');
     var headerTr$ = $('<tr/>');
-    for (var i = 0; i < myList.length; i++) {
-        var rowHash = myList[i];
+    for (var i = 0; i < list.length; i++) {
+        var rowHash = list[i];
         for (var key in rowHash) {
             if ($.inArray(key, columnSet) == -1) {
                 columnSet.push(key);
@@ -140,6 +147,5 @@ function addAllColumnHeaders(myList, selector) {
     }
     $(selector).append(headerThead$);
     $(headerThead$).append(headerTr$);
-    $("#cover").fadeOut(20);
     return columnSet;
 }
