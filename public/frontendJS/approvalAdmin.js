@@ -2,21 +2,18 @@ function leaveFunction(){
     document.getElementById('leaveApproval').style.display = "block";
     document.getElementById('switchApproval').style.display = "none";
     document.getElementById('overtimeApproval').style.display = "none";
-    document.getElementById('Lagre').style.display = "block";
 
 }
 function overtimeFunction(){
     document.getElementById('leaveApproval').style.display = "none";
     document.getElementById('switchApproval').style.display = "none";
     document.getElementById('overtimeApproval').style.display = "block";
-    document.getElementById('Lagre').style.display = "block";
 
 }
 function switchFunction(){
     document.getElementById('leaveApproval').style.display = "none";
     document.getElementById('switchApproval').style.display = "block";
     document.getElementById('overtimeApproval').style.display = "none";
-    document.getElementById('Lagre').style.display = "none";
 
 }
 var myList = [];
