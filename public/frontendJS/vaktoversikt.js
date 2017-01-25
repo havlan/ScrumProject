@@ -34,7 +34,7 @@ function myFunction(){
         console.log($("#departmentInput").find(":selected").text());
         $.ajax({
             url: '/getVaktliste1', //this is the submit URL
-            type: 'GET',
+            type: 'POST',
             data: {'department_name': $("#departmentInput").find(":selected").text()},
             success: function(data){
                 console.log('successfully submitted');

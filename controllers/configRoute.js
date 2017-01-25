@@ -69,7 +69,7 @@ module.exports = function (app, passport) {
         res.redirect('/calendar');
     });
 
-    app.get('/getVaktliste1', isLoggedIn, getCtrl.getVaktliste1);
+    app.post('/getVaktliste1', isLoggedIn, getCtrl.getVaktliste1);
     app.get('/getVaktliste2', isLoggedIn, getCtrl.getVaktliste2);
     app.get('/getVaktliste3', isLoggedIn, getCtrl.getVaktliste3);
 
