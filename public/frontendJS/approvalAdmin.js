@@ -16,9 +16,10 @@ function switchFunction(){
     document.getElementById('leaveApproval').style.display = "none";
     document.getElementById('switchApproval').style.display = "block";
     document.getElementById('overtimeApproval').style.display = "none";
+    document.getElementById('Lagre').style.display = "none";
+
 }
 var myList = [];
-var liste = [];
 $.get('/getAbsenceView', {}, function(req, res, data){
     console.log(data);
     console.log(data.responseJSON[0]);

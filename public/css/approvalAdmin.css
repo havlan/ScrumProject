@@ -46,11 +46,7 @@ html, body {
     box-shadow: 2px 2px 5px #888888;
     overflow:auto;
 }
-.table-responsive {
-    width:auto;
-    overflow-y:scroll !important;
-    height:80vh;
-}
+
 #Lagre{
     background-color: #4CAF50;
 }
