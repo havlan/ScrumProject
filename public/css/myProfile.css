@@ -73,7 +73,7 @@ h1{
     background-color: white;
     border: solid black 1px;
     border-radius: 5px;
-    margin-top:3%;
+    margin-top:10%;
     font-size: calc(10px + 0.5vw);
 }
 
@@ -172,11 +172,14 @@ only screen and (max-width: 760px),
         padding-left:0;
     }
     #editBtn, #passwordBtn, #historyBtn {
-        width:calc(33% - 1em);
+        width:calc(32.5% - 1em);
         padding: 0.5em 0;
         margin:3% 0 3% 2%;
         border-radius: 5px;
         background-color: royalblue;
         font-size: calc(10px + 0.5vw);
+    }
+    #histTable{
+        font-size:0.7em;
     }
 }
