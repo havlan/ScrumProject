@@ -163,7 +163,7 @@ module.exports = {
         dbMiddelware.getAvailableEmpForShift(req,res);
     },
 
-    getAvailableEmpForShift : function (req, res) {
+    getAvailableShifts : function (req, res) {
         dbMiddelware.getAvailableShifts(req,res);
     },
 
