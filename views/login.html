@@ -1,0 +1,62 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <script type="text/javascript" src="events.json"></script>
+    <link rel ="stylesheet" type = "text/css" href="css/login.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="frontendJS/login.js"></script>
+    <meta charset='utf-8'/>
+</head>
+<body id="loginbody">
+<div id="includedContent"></div>
+<div class="login-page">
+    <img id="logoPic" src="/img/MinVakt.png" style=" -webkit-filter: drop-shadow(1px 1px 1px #222); filter: drop-shadow(1px 1px 1px #222); width:200px; " >
+    <div class="form">
+        <form action="/login" method="post">
+            <div class="input">
+                <label for="username" >Username</label>
+                <input type="text" id="username" name="username" placeholder="eks: janskrotnes">
+            </div>
+            <div class="input">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="eks: katt123">
+            </div>
+            <button type="submit" style="font-size-adjust: 0.5;">Login</button>
+        </form>
+        <div class="etc-login-form">
+            <p id="passwordClick"><a id="klikk" href="#newPassword"> Glemt passord? Klikk her</a></p>
+        </div>
+    </div>
+</div>
+<!-- 1:Modal-Add -->
+<div class="modal fade" id="newPassword" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h3 class="modal-title">Glemt Passord</h3>
+            </div>
+            <main class="modal-body">
+                <section id="forgotpassword">
+                <form id="forgot">
+                    epost:
+                    <input required class = "inputEdit"  id="email" type="email" name="email" placeholder="eks: noen@noko.com" autofocus>
+                    brukernavn:
+                    <input required class = "inputEdit" id="username2" type="text" name="username" placeholder="eks: ola_nordmann_96">
+                    <p id = "varsel"></p>
+                    <br>
+                    <button id="saveEdit" type="submit" value="submit">Send</button>
+                </form>
+                </section>
+            </main>
+            <div class="modal-footer">
+                <button type="button" class="closeButton" data-dismiss="modal">Lukk</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

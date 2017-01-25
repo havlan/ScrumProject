@@ -1,5 +1,4 @@
 h1{
-    font: "verdana";
     font-size: 36px;
     text-align: center;
 }
@@ -7,30 +6,43 @@ h1{
 .info{
     text-align: right;
     font-size: 24px;
+    padding-right: 10px;
 }
 
 .db{
     text-align: left;
     font-size: 24px;
+    padding-left: 20px;
 }
 
-main{
-    margin-left: 350px;
-    margin-top: 80px;
+.infoEmp{
+    margin-left: 30%;
+    margin-top: 3%;
     position: absolute;
-
+    width:auto;
 }
 
-body{
+.profile{
     position: absolute;
     width: 100%;
     height: 100%;
-
 }
-button {
-    margin-left: 200px;
-    margin-top: 30px;
-    background-color: 	#008080; /* Green */
+
+.flytt{
+    margin-left: 10%;
+    overflow: auto;
+}
+#pictureEmp{
+    width:100px;
+    height:100px;
+}
+
+
+#editBtn{
+    position: absolute;
+    margin-left: 90px;
+    background-color: royalblue;
+    margin-top: 40px;
     border: none;
     color: white;
     padding: 10px 20px;
@@ -38,8 +50,157 @@ button {
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
+    border-radius: 5px;
 }
-figure{
-    margin-top: 100px;
+
+#historyBtn{
+    background-color: #808080;
+    margin-top: 40px;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
     position: absolute;
+    margin-left: 350px;
+    border-radius:5px;
+}
+#passwordBtn{
+    background-color: royalblue ;
+    margin-top: 40px;
+    border:none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    position: absolute;
+    margin-left: 198px;
+    border-radius: 5px;
+}
+
+#picBtn{
+    position: relative;
+    padding: 5px;
+    color:black;
+    background-color: white;
+    border: solid black 1px;
+    border-radius: 5px;
+    margin-left: 9%;
+    margin-top: 37%;
+}
+
+#profilePic{
+    margin-left: 3%;
+    margin-top: 7%;
+    position: absolute;
+}
+.histTable tr:nth-child(odd):not(:first-child){
+    background-color: white;
+}
+
+.histTable tr:nth-child(even):not(:first-child){
+    background-color: #f1f1f1;
+}
+.histTable tr:hover:not(:first-child){
+    background-color: aliceblue;
+}
+.headerTable th{
+    text-align: center;
+    background-color: royalblue;
+    color:white;
+    padding-top: 1%;
+    padding-bottom: 1%;
+}
+.histTable{
+    width: 100%;
+}
+
+.histTable td{
+    text-align: center;
+}
+
+.table-responsive{
+    padding: 1%;
+}
+
+.saveEdit{
+    background-color: royalblue;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    position: relative;
+    margin-left: 70%;
+    border-radius:5px;
+}
+
+.inputEdit{
+    width:100%;
+}
+#navn{
+    text-align: left;
+    width: 100%;
+    border-bottom: solid 1px lightgrey;
+    padding: 2%;
+}
+#histTable{
+    width:90%;
+    margin-left: 5%;
+}
+
+#passwordForm{
+    padding:10px;
+}
+@media
+only screen and (max-width: 760px),
+(min-device-width: 768px) and (max-device-width: 1024px)  {
+    #infoEmp {
+        position:relative;
+        width:calc(100% - 1em);
+        margin-top:0;
+        margin-left:0.5em;
+        margin-right:0.5em;
+        float:left;
+    }
+    .fc-basic-view .fc-body .fc-row{
+        height:10vw;
+    }
+    #profilePic {
+        float:right;
+        height: 10em;
+        width: calc(50% - 1em);
+        margin: 0.5em 0.5em 0.5em 0.5em;
+    }
+    .menuBtn{
+        float:left;
+        font-size: 1em;
+        width: calc(50% - 1em);
+        box-sizing:border-box;
+        position:relative;
+        margin-right: 0.5em;
+        margin-left: 0.5em;
+        height: 3em;
+    }
+    #availabilityB, #extraB, #shiftB {
+        margin-top: 0.5em;
+    }
+    #extraB {
+        margin-bottom:0.5em;
+    }
+    .shiftHeader {
+        font-size: 1.5em;
+    }
+    #nextShiftInfo {
+        font-size: 1em;
+    }
+    #switchTable{
+        font-size: 0.8em;
+    }
 }

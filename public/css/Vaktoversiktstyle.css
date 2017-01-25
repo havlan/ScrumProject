@@ -1,49 +1,120 @@
 @charset "utf-8";
-/* CSS Document */
 
-thead{
+
+body, html{
+    width:100%;
+    height:100%;
+}
+
+
+#dayTable, #nightTable, #eveningTable {
+
+    width: 100%;
+    border: 1px solid #ddd;
+    font-size: 12px;
+    table-layout: fixed;
+}
+
+#dayTable td, #nightTable td, #eveningTable td {
+    text-align: left;
+    width: 10%;
+    overflow-x: hidden;
+}
+#dayTable th, #nightTable th, #eveningTable th{
+    text-align: left;
+    width: 20%;
+}
+
+#dayTable tr #nightTable tr #eveningTable tr {
+    border-bottom: 1px solid #ddd;
+}
+#dayTable td:hover, #nightTable td:hover, #eveningTable td:hover{
+    color: darkgray;
+}
+
+#dayTable tr.header, #nightTable tr.header, #eveningTable tr.header{
+    background-color: #f1f1f1;
+}
+#dayTable tr:hover, #nightTable tr:hover, #eveningTable tr:hover{
+    background-color: aliceblue;
+    cursor: pointer;
+}
+
+#size, #size1, #size2{
+    width: 100%;
+    display: block;
+}
+thead {
+    width: 100%;
+    display: table-header-group;
+}
+tbody {
+    height: 10vw;
+    width: 100%;
+    overflow-y: scroll;
+}
+
+
+/*toolbar*/
+.navbar-shift{
+    width: 100%;
+}
+
+div{
+    display: block;
+}
+
+button{
+    position: relative;
+}
+
+#shift-buttons{
+    display: inline-block;
+}
+#shift-prev{
+    float:left;
+}
+
+#shift-next{
+    float:left;
+}
+
+.navbar-shift{
+    float: left;
+    text-align:center;
+}
+
+.shift-left{
+    float: left;
+}
+
+.shift-right{
+    float: right;
+}
+
+.shift-center{
+    display: inline-block;
+}
+
+.shift-clear{
+    clear: both;
+}
+
+#department-dropdown{
+    width: 170px;
+}
+
+/*
+table.sortable thead:nth-child(odd) {
     background-color:#bf946f;
 }
-th{
-    width: 100px;
-    height: 30px;
-    cursor:pointer;
-}
-td{
+
+
+table.sortable td:nth-child(even) {
     text-align:center;
     height: 30px;
     border:#CBCBCB 1px;
     background-color:#E5E5E5;
     width: 100px;
 }
-h4{
-    margin: 0px;
-}
-
-.tbody-container{
-    height: 240px;
-    overflow-y: scroll;
-}
-
-table tbody,table thead{
-    display:block;
-}
-
-table tbody {
-    overflow: auto;
-    height: 100px;
-}
-.left{
-    position:relative;
-    float: left;
-}
-.right{
-    position: relative;
-    float: left;
-}
-
-.center{
-
-    text-align:center;
-}
-
+*/

@@ -1,5 +1,5 @@
 var dbMiddelware = require('../middlewares/dbQ1');
-
+var session1;
 
 
 module.exports = {
@@ -31,12 +31,18 @@ module.exports = {
     postLogInInfo : function (req, res) {
         dbMiddelware.postnewLogInInfo(req,res);
     },
+    postNewUser : function (req, res) {
+        dbMiddelware.postnewUser(req,res);
+    },
     //UPDATE
     updateShift_has_employee : function (req, res) {
         dbMiddelware.updateShift_has_employee(req,res);
     },
     updateEmployee : function (req, res) {
         dbMiddelware.updateEmployee(req,res);
+    },
+    updateEmployeePersonalInfo : function (req, res) {
+        dbMiddelware.updateEmployeePersonalInfo(req,res);
     },
     updateType : function (req, res) {
         dbMiddelware.updateType(req,res);
@@ -53,8 +59,17 @@ module.exports = {
     updateAbsence : function (req, res) {
         dbMiddelware.updateAbsence(req,res);
     },
+    updateAbsence2 : function (req, res) {
+        dbMiddelware.updateAbsence2(req,res);
+    },
     updateOvertime : function (req, res) {
         dbMiddelware.updateOvertime(req,res);
+    },
+    updateOvertime2 : function (req, res) {
+        dbMiddelware.updateOvertime2(req,res);
+    },
+    updateRequest2 : function (req, res) {
+        dbMiddelware.updateRequest2(req,res);
     },
     updateLogInInfo : function (req, res) {
         dbMiddelware.updateLogInInfo(req,res);

@@ -1,0 +1,92 @@
+#Appeal{
+    position: absolute;
+    font-size: 42px;
+    margin-left: 2%;
+}
+.approveButton{
+    position: absolute;
+    margin-left: 5%;
+    width: 170px;
+    background-color: royalblue;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+.approveButton:hover{
+    background-color: #6585e7;
+}
+#absence{
+    margin-top: 8%;
+}
+
+textarea{
+    width: 40%;
+    height: 100px;
+}
+
+.approveButton span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.3s;
+}
+
+.approveButton span:after {
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.3s;
+}
+
+.approveButton:hover span {
+    padding-right: 15px;
+}
+
+.approveButton:hover span:after {
+    opacity: 1;
+    right: 0;
+}
+
+#change{
+    margin-top: 15%;
+}
+
+#changeTo{
+    margin-top: 22%;
+}
+
+#overtime{
+    margin-top: 29%;
+}
+.approveSection{
+    position: absolute;
+    background-color: white;
+    width: 70%;
+    height: 80%;
+    margin-left: 23%;
+    margin-top: 3%;
+    padding-left: 2%;
+    padding-right: 2%;
+    overflow: scroll;
+
+}
+#saveAppeal{
+    position: absolute;
+    margin-left: 65%;
+    margin-top: 40%;
+    width: 200px;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+}

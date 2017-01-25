@@ -1,6 +1,13 @@
 /**
  * Created by Lui on 14-Jan-17.
  */
+
+
+$(document).ready(function() {
+    $("#includedContent").load("login");
+});
+
+
 function openMenu() {
     if (document.getElementById("dropdown_box").className.match("hidden")) {
         document.getElementById("dropdown_box").className = "shown";

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>Godkjenning</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+    <script src = "frontendJS/approvalAdmin.js"></script>
+    <link rel="stylesheet" href="css/approvalAdmin.css">
+</head>
+<body>
+
+<div id="includedContent"></div>
+<script>$("#includedContent").load("menu");</script>
+
+<h1 id="godkjenning">Godkjenning</h1>
+<section class="buttonsSection">
+    <button type="button" class="approveButton" id ="leave" onclick="leaveFunction()" autofocus><span>Godkjenn fravær</span></button>
+    <button type="button" class="approveButton" id ="overtime" onclick="overtimeFunction()"><span>Godkjenn overtid</span></button>
+    <button type="button" class="approveButton" id ="switch" onclick="switchFunction()"><span>Godkjenn vaktbytte</span></button>
+    <button type="button" class="approveButton" id ="Lagre" autofocus><span>Lagre</span></button>
+</section>
+
+
+<section class="approveSection" id="leaveApproval" style="display:block">
+    <h3>Fravær til godkjenning</h3>
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered" id="leaveTable">
+        </table>
+    </div>
+
+</section>
+
+<section class="approveSection" id="overtimeApproval" style="display:none">
+    <h3>Overtid til godkjenning</h3>
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered" id="overtimeTable">
+        </table>
+    </div>
+</section>
+
+<section class="approveSection" id="switchApproval" style="display:none">
+    <h3>Vaktbytte til godkjenning</h3>
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered" id="switchTable">
+        </table>
+    </div>
+    </table>
+</section>
+<div class="modal fade" id="approveModal" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <!-- Modal content-->
+        <!-- Modal header-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h3 class="modal-title">Rediger informasjon</h3>
+            </div>
+            <!-- Modal body-->
+            <main class="modal-body">
+                <form id="approveForm">
+                    <table cellspacing="10">
+                        <tr>
+                            <td class="info">Navn:</td>
+                            <td class="navn" id="navndb"></td>
+                        </tr>
+                        <tr>
+                            <td class="info" id="">Årsak:</td>
+                            <td class="årsak" id="årsakdb"></td>
+                        </tr>
+                    </table>
+                    <br>
+                </form>
+            </main>
+            <div class="modal-footer">
+                <button type="button" id ="approveAbsence" onclick="saveFunction()" style="display:inline">Godkjenn og lagre</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+<!-- hei -->

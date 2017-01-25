@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>MinVakt</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" >
+    <link href ="css/myProfile.css"         rel="stylesheet" type = "text/css" >    <!--profile-->
+    <link href ="css/frontpageAdmin.css"    rel="stylesheet" type = "text/css" >    <!--frontpage-->
+    <link href ="css/calendar.css"          rel="stylesheet" type = "text/css" >    <!--calendar-->
+    <link href ="css/fullcalendar.min.css"  rel="stylesheet" type = "text/css">
+    <link href ="css/fullcalendar.print.min.css" rel="stylesheet" media="print">
+    <link href ="css/Vaktoversiktstyle.css" rel="stylesheet" type = "text/css">     <!--shift overview-->
+    <link href="css/approvalAdmin.css" rel="stylesheet" type = "text/css">          <!--approval-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">    <!--bootstrap-->
+
+    <style src="//cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css"></style>
+
+    <script src ="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src ="//cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="frontendJS/tablesorter.js"></script>
+    <script src ="frontendJS/sendPassword.js"></script>
+    <script src ="frontendJS/myProfile.js"></script>
+    <script src ="frontendJS/approvalAdmin.js"></script>
+    <script src ="frontendJS/sorttable.js"></script>
+    <script src ="frontendJS/vaktoversikt.js"> </script>
+    <script src ="frontendJS/jquery-tablesorter.js"></script>
+    <script src ="frontendJS/jquery-latest.js"></script>
+    <script src ="frontendJS/moment.min.js"></script>
+    <script src ="frontendJS/jquery.min.js"></script>
+    <script src ="frontendJS/fullcalendar.min.js"></script>
+    <script src ="frontendJS/nb.js"></script>
+    <script src ="frontendJS/calendar.js"></script>
+    <!--<script type="text/javascript"src="frontendJS/tablesorter.js"></script>-->
+
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">MinVakt</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+
+                <!-- ansatt -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">AnsattHjem<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a data-toggle="tab" href="#userCalendar" >Kalender</a></li>
+                        <li><a data-toggle="tab" href="#appeal" >Søknader</a></li>
+                        <li><a data-toggle="tab" href="#disponibility">Tilgjengelighet</a></li>
+                        <li><a data-toggle="tab" href="#dailyShifts">Vaktbok</a></li>
+                    </ul>
+                </li>
+                <li                 ><a data-toggle="tab" href="#myProfile">Min Profil</a></li>
+                <li                 ><a data-toggle="tab" href="#contact">KontaktInfo</a></li>
+
+                <!--admin-->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">AdminHjem<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a data-toggle="tab" href="#adminCalendar" >Kalender</a></li>
+                        <li><a data-toggle="tab" href="#adminDailyShifts" >Vaktbok</a></li>
+                        <li><a data-toggle="tab" href="#approval" >Godkjenning</a></li>
+                    </ul>
+                </li>
+                <li                 ><a data-toggle="tab" href="#shiftAdmin">VaktAdministrasjon</a></li>
+                <li                 ><a data-toggle="tab" href="#overview">AnsatteInfo</a></li>
+
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a data-toggle="tab" href="#logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="tab-content">
+        <div id="userCalendar" class="tab-pane fade in active">
+            <h3>bruker's kalender</h3>
+        </div>
+        <div id="appeal" class="tab-pane fade in active">
+            <h3>søknader</h3>
+        </div>
+        <div id="disponibility" class="tab-pane fade in active">
+            <h3>tilgjengelighet</h3>
+        </div>
+        <div id="dailyShifts" class="tab-pane fade in active">
+            <h3>dagbok bruker</h3>
+        </div>
+
+        <div id="myProfile" class="tab-pane fade">
+            <h3>bruker's profil</h3>
+        </div>
+        <div id="contact" class="tab-pane fade">
+            <h3>ansatt kontakt</h3>
+        </div>
+
+        <div id="adminCalendar" class="tap-pane fade">
+            <h3>administrator's kalender?</h3>
+        </div>
+        <div id="adminDailyShifts" class="tap-pane fade">
+            <div>dagbok admin</div>
+        </div>
+        <div id="approval" class="tap-pane fade">
+            <h3>godjenning</h3>
+        </div>
+
+        <div id="shiftAdmin" class="tap-pane fade">
+            <div>vakt administrasjon</div>
+        </div>
+        <div id="overview" class="tap-pane fade">
+            <div>oversikt over ansatte</div>
+        </div>
+
+        <div id="changeUserType" class="tap-pane fade">
+            <div>oversikt* komune</div>
+        </div>
+
+        <div id="logout" class="tap-pane fade">
+            <h3>Du er (IKKE) logget ut :)</h3>
+        </div>
+    </div>
+</div>
+</body>
+</html>

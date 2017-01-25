@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="/css/fullcalendar.min.css" rel="stylesheet"/>
+    <link href="/css/fullcalendar.print.min.css" rel="stylesheet" media="print"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/frontendJS/moment.min.js"></script>
+    <script src="/frontendJS/jquery.min.js"></script>
+    <script src="/frontendJS/fullcalendar.min.js"></script>
+    <script src="/frontendJS/nb.js"></script>
+    <script src="/frontendJS/adminShifts.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="/css/adminShifts.css" rel="stylesheet"/>
+    <script type="text/javascript" src="events.json"></script>
+</head>
+
+<body>
+
+<div id="includedContent"></div>
+
+<div id="adminNewShiftModal" class="modal">
+    <div class="modal-content">
+
+        <div class="modal-header">
+            <span class="close">&times;</span>
+            <h2 id="organizeShiftTitle">Header</h2>
+        </div>
+
+        <div id="adminNewShiftModalContent" class="modal-body">
+            <div id="departmentBox">
+                <p>Avdeling</p>
+                <select id= "chooseDepartment"></select>
+            </div>
+            <div id="numberBox">
+                <p>Antall</p>
+                <select id= "chooseNumber" onchange="getDispersion(this)"></select>
+            </div>
+            <div id="peopleBox">
+                <table id="peopleTable"></table>
+            </div>
+            <input type="submit" value="Lagre" id="saveNewShift">
+        </div>
+
+        <div class="modal-footer">
+            <button type="button" class="close" data-dismiss="modal">Lukk</button>
+        </div>
+
+    </div>
+</div>
+
+
+
+<div id='calendarx'></div>
+
+</body>
+</html>

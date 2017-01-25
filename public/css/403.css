@@ -1,0 +1,39 @@
+@import url('//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css');
+body {
+    background-image: url(https://cdn4.img.sputniknews.com/images/103067/11/1030671175.jpg);
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+.error {
+    margin: 0 auto;
+    text-align: center;
+    color: GrayText;
+}
+
+.error-code {
+    bottom: 60%;
+    color: ThreeDDarkShadow;
+    font-size: 96px;
+    line-height: 100px;
+}
+
+.error-desc {
+    font-size: 18px;
+    font-family: "Century Gothic";
+    color: GrayText;
+}
+
+.m-b-10 {
+    margin-bottom: 0px!important;
+}
+
+.m-b-20 {
+    margin-bottom: 20px!important;
+}
+
+.m-t-20 {
+    margin-top: 80px!important;
+}
+
