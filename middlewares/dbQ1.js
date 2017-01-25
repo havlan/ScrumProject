@@ -6,7 +6,7 @@ module.exports = {
     //GET
     getEmployee: function (req, res) {
         console.log("Overview Employee");
-        dbHelper.getdbQuery(req, res, "select * from Employee");
+        dbHelper.getdbQuery(req, res, "select phone_nr as Tlf,total_hours as Timer, employee_id as AnsattID,email as Epost,seniority as Stillingsprosent,responsibility_allowed as Ansvarsvakt, type_name as Stilling, name as Navn, address as Adresse, pers_id as PersNr from Employee");
     },
     getOneEmployee: function (req, res) {
         console.log("Overview Employee");
