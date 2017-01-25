@@ -34,7 +34,7 @@ $(document).ready(function() {
                 textColor: 'black'  // an option!
             },
             {
-                url: '/getPossibleSiftsEvents', // use the `url` property
+                url: '/getPossibleShiftsEvents', // use the `url` property
                 color: 'yellow',    // an option!
                 textColor: 'black'  // an option!
             }],
