@@ -117,7 +117,7 @@ only screen and (max-width: 760px),
     }
     #nextShift {
         float:right;
-        height: 10em;
+        height: 11em;
         width: calc(50% - 1em);
         margin: 0.5em 0.5em 0.5em 0.5em;
     }
@@ -129,7 +129,7 @@ only screen and (max-width: 760px),
         position:relative;
         margin-right: 0.5em;
         margin-left: 0.5em;
-        height: 3em;
+        height: 3.33em;
     }
     #availabilityB, #extraB, #shiftB {
         margin-top: 0.5em;
