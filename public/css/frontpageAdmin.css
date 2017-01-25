@@ -48,10 +48,29 @@ html, body {
     cursor: pointer;
 }
 #freeShifts{
-    margin-top:1%;
+    margin-bottom:1%;
+    color:white;
+}
+#freeShiftsNumber {
+    color:black;
+    text-align: center;
+    font-size: 40px;
+    font-weight: bold;
+}
+#freeShiftsText {
+    color:inherit;
+    text-align: center;
+    font-size:14px;
+    font-weight:normal;
+}
+#freeShifts:hover{
+    color:black;
+    cursor:pointer;
+    background-color:lightyellow;
 }
 
 .titles{
+    color:black;
     text-align: center;
 }
 
@@ -60,7 +79,7 @@ html, body {
     width: 207px;
     margin-left: calc(15% - 104px);
     margin-right: calc(15% - 104px);
-    margin-top: 1%;
+    margin-bottom: 1%;
     box-sizing: border-box;
     padding: 10px 20px;
 
@@ -115,5 +134,14 @@ only screen and (max-width: 760px),
         position:relative;
         margin: 0 0.5em 0.5em 0.5em;
         height: 3.33em;
+    }
+    #freeShiftsNumber {
+        margin-top: 0.5em;
+        margin-bottom: 0.4em;
+        font-size: 3em;
+    }
+    #freeShiftsText {
+        color:black;
+        font-size:1em;
     }
 }
