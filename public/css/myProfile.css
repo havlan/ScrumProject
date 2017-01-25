@@ -161,46 +161,39 @@ h1{
 @media
 only screen and (max-width: 760px),
 (min-device-width: 768px) and (max-device-width: 1024px)  {
-    #infoEmp {
-        position:relative;
-        width:calc(100% - 1em);
-        margin-top:0;
-        margin-left:0.5em;
-        margin-right:0.5em;
-        float:left;
+
+    #navn{
+        font-size: 1.5em;
+    }
+    .info{
+        font-size: 0.9em;
+    }
+    .db{
+        font-size: 0.9em;
     }
     .fc-basic-view .fc-body .fc-row{
         height:10vw;
     }
     #profilePic {
+        position: relative;
         float:right;
-        height: 10em;
-        width: calc(50% - 1em);
+        height: auto;
+        width: 70px;
         margin: 0.5em 0.5em 0.5em 0.5em;
     }
-    .menuBtn{
+    .picBtn{
+        display:none;
         float:left;
-        font-size: 1em;
-        width: calc(50% - 1em);
+        position: relative;
+        font-size: 0.7em;
         box-sizing:border-box;
-        position:relative;
         margin-right: 0.5em;
         margin-left: 0.5em;
         height: 3em;
     }
-    #availabilityB, #extraB, #shiftB {
-        margin-top: 0.5em;
+
+    #infoEmp {
+        font-size: 12px;
     }
-    #extraB {
-        margin-bottom:0.5em;
-    }
-    .shiftHeader {
-        font-size: 1.5em;
-    }
-    #nextShiftInfo {
-        font-size: 1em;
-    }
-    #switchTable{
-        font-size: 0.8em;
-    }
+
 }
