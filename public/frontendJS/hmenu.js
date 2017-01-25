@@ -4,15 +4,20 @@
 
 
 
-//$(document).ready(function(){
-//    console.log("kjører");
-//    var isAdmin = req.session.passport.user.is_admin;
-//    console.log(isAdmin);
-//    if (isAdmin == 0) {
-//        console.log(isAdmin + "Denne brukeren er admin og har tilgang til alle sidene");
-//    } else if (isAdmin == 1) {
-//        console.log(isAdmin + "hallo");
-//    } else if (isAdmin == 2) {
-//        console.log(isAdmin + "oale");
-//    }
-//});
+
+$.get('/getClearenceLevel', {}, function(req, res, data){
+    console.log(data);
+
+    var clearence = data.responseJSON;
+
+    console.log(clearence);
+
+    if (clearence == 0) {
+        console.log(clearence + "Denne brukeren er admin og har tilgang til alle sidene");
+        document.getElementById("#dropdown1").style.display = 'none';
+    } else if (clearence == 1) {
+
+    } else if (clearence == 2) {
+        console.log(clearence + "oale");
+    }
+});

@@ -1,22 +1,14 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>vaktoversikt</title>
-    <script src="frontendJS/sorttable.js"></script>
-    <!--<script src="vaktoversikt.js"></script>-->
-    <link rel="stylesheet" href="css/Vaktoversiktstyle.css">
-    <link href="css/bootstrap.css" rel="stylesheet">
-
-
+    <link rel="stylesheet" type="text/css" href="css/overviewAdmin.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <style src="//cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css"></style>
-    <script src="//cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
-    <script src="frontendJS/vaktoversikt.js"> </script>
-    <script src="frontendJS/jquery-tablesorter.js"></script>
-    <script src="frontendJS/jquery-latest.js"></script>
+    <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+    <script src="frontendJS/vaktoversikt.js"></script>
+    <script src = "https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+    <script src = "https://cdn.datatables.net/1.10.13/js/dataTables.bootstrap.min.js"></script>
 
 
 <head/>
@@ -44,20 +36,9 @@
             <div class="shift-right">
                 <div class="shift-buttons">
 
-                    Velg avdeling:
-                    <select id="departmentInput" class="input" onclick="myFunction()">
-
+                    <select id="departmentInput" class="input" onchange="myfunc()">
                     </select>
-                        <!-- <div class="dropdown">
-                            </select>
-                            <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="department-dropdown">
-                            <li><a href="#">Avdeling1</a></li>
-                            <li><a href="#">Avdeling2</a></li>
-                            <li><a href="#">Avdeling3</a></li>
-                        </ul>
-                    </div>-->
+                    <button onclick="removeTable()">troll</button>
                 </div>
 
             </div>

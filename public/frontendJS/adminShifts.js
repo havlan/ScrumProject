@@ -4,6 +4,7 @@ var departments     = [];
 var employeesSyk    = [];
 var employeesHelp   = [];
 var employeesAnnet  = [];
+var eventId;
 
 
 
@@ -42,6 +43,8 @@ $(document).ready(function() {
         eventClick: function(event) {
             document.getElementById('adminNewShiftModal').style.display = "block";
             document.getElementById('organizeShiftTitle').innerHTML = event.start;
+            eventId = event.id;
+            console.log(event.id);
             return false;
         }
     });
@@ -91,10 +94,45 @@ function getDispersion(res) {
     createPeopleDropdown(syk, hjelp, annet);
 }
 
-$.get('/getEmployee', {}, function(req, res, data){
-    employeesSyk = data.responseJSON;
-    console.log(data);
+$.ajax({
+    url: '/getVaktliste1', //this is the submit URL
+    type: 'POST',
+    data: {'shift_id': eventId,'type_name':"Sykepleier"},
+    success: function(data){
+        console.log('successfully submitted');
+        console.log(data);
+        employeesSyk = data.responseJSON;
+    },
+    failure: function(err) {console.log("Error"+err);}
 });
+
+$.ajax({
+    url: '/getVaktliste1', //this is the submit URL
+    type: 'POST',
+    data: {'shift_id': eventId,'type_name':"Sykepleier"},
+    success: function(data){
+        console.log('successfully submitted');
+        console.log(data);
+        employeesSyk = data.responseJSON;
+    },
+    failure: function(err) {console.log("Error"+err);}
+});
+
+$.ajax({
+    url: '/getVaktliste1', //this is the submit URL
+    type: 'POST',
+    data: {'shift_id': eventId,'type_name':"Sykepleier"},
+    success: function(data){
+        console.log('successfully submitted');
+        console.log(data);
+        employeesSyk = data.responseJSON;
+    },
+    failure: function(err) {console.log("Error"+err);}
+});
+//$.get('/getEmployee', {}, function(req, res, data){
+//    employeesSyk = data.responseJSON;
+//    console.log(data);
+//});
 
 $.get('/getEmployee', {}, function(req, res, data){
     employeesHelp = data.responseJSON;
@@ -132,10 +170,9 @@ $.get('/getDepartment', {}, function(req, res, data){
 
 function makeDropdownS(selector,list) {
     console.log("Prøver å lage dropdown");
-    var columns = ["name"];
+    var columns = ["Navn"];
     for (var i = 0; i < list.length; i++) {
         var cellValue = list[i][columns[0]];
-        console.log("troll"+cellValue);
         if (cellValue == null) cellValue = "Ingen data fra DB";
         var option = $('<option />').text(cellValue);
         $(selector).append(option);
