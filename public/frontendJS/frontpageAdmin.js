@@ -20,3 +20,8 @@ $(function changeTabs(){
     })
 
 })
+
+$.get('/getAvailableShifts', {}, function(req, res, data){
+    console.log( data );
+    document.getElementById("freeShiftsNumber").innerHTML = data.responseJSON[0].total;
+});
