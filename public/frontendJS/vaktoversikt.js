@@ -48,9 +48,11 @@ function oppdateTable(){
     $.ajax({
         url: '/getVaktliste2', //this is the submit URL
         type: 'POST',
-        data: {'department_name': $("#departmentInput").find(":selected").text()},
+        data: {'department_name': $("#departmentInput").find(":selected").text(),
+            'date': document.getElementById("datePicker").value},
         success: function(req,res,data){
             console.log('successfully submitted');
+
             console.log(data);
             buildHtmlTable('#dayTable',data.responseJSON);
         },
@@ -60,22 +62,24 @@ function oppdateTable(){
     $.ajax({
         url: '/getVaktliste3', //this is the submit URL
         type: 'POST',
-        data: {'department_name': $("#departmentInput").find(":selected").text()},
+        data: {'department_name': $("#departmentInput").find(":selected").text(),
+            'date': document.getElementById("datePicker").value},
         success: function(req,res,data){
             console.log('successfully submitted');
+
             console.log(data);
-            buildHtmlTable('#eveningTable',data.responseJSON);
+            buildHtmlTable('#evningTable',data.responseJSON);
         },
         failure: function(err) {console.log("Error"+err);}
     });
-
     $.ajax({
         url: '/getVaktliste1', //this is the submit URL
         type: 'POST',
         data: {'department_name': $("#departmentInput").find(":selected").text(),
-                          'date': document.getElementById("datePicker").text},
+                          'date': document.getElementById("datePicker").value},
         success: function(req,res,data){
             console.log('successfully submitted');
+
             console.log(data);
             buildHtmlTable('#nightTable',data.responseJSON);
         },
