@@ -12,6 +12,7 @@ $.get('/getClearenceLevel', {}, function(req, res, data){
     }
 });
 function showA() {
+    document.getElementById("navButt1").style.display = 'block';
     document.getElementById("dropdown2").style.display = 'block';
     document.getElementById("dropdown1").style.display = 'block';
 }

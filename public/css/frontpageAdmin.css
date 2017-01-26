@@ -143,11 +143,18 @@ only screen and (max-width: 760px),
         margin:0;
         width:100%;
     }
-
+    #adminHomeTitle {
+        width: calc(100% - 1em);
+        margin-left:0.5em;
+        position:absolute;
+        top:52px;
+        font-size: 1.5em;
+        padding:0.5em 0;
+    }
     #calendar {
         position:relative;
         width:calc(100% - 1em);
-        margin-top:0;
+        margin-top:3em;
         margin-left:0.5em;
         margin-right:0.5em;
         float:left;
@@ -168,9 +175,13 @@ only screen and (max-width: 760px),
         width: calc(50% - 1em);
         box-sizing:border-box;
         position:relative;
-        margin: 0 0.5em 0.5em 0.5em;
+        margin: 0.5em 0.5em 0.5em 0.5em;
         height: 3.33em;
     }
+    #buttonChangeTab {
+        margin-top: 0.5em;
+    }
+
     #freeShiftsNumber {
         margin-top: 0.5em;
         margin-bottom: 0.4em;
@@ -183,6 +194,6 @@ only screen and (max-width: 760px),
     #absenceWarning, #overtimeWarning, #changeWarning {
         padding:0.3em 0 0.3em 0;
         margin:0.3em 0.15em 0.3em 0.15em;
-        font-size:1.2em;
+        font-size:1.1em;
     }
 }
