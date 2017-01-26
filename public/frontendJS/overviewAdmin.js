@@ -207,7 +207,7 @@ $(function(){
         $.ajax({
             url: '/updateEmployee',
             type: 'POST',
-            data: {'name': $("#navndb").val(),'address':$('#adressedb').val(),'email':$('#epostdb').val(),'type_name':$('#stillingdb').val(),'pers_id':$('#personnummerdb').val(),'phone_nr':$('#telefondb').val(),'employee_id':indeks},
+            data: {'name': $("#navndb").text(),'address':$('#adressedb').text(),'email':$('#epostdb').text(),'type_name':$('#stillingdb').val(),'pers_id':parseInt($('#personnummerdb').val(),10),'phone_nr':$('#telefondb').text(),'employee_id':indeks},
             success: function(data){
                 console.log(JSON.stringify(data));
                 //document.getElementById('newUserFeedback').innerHTML("Success");

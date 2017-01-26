@@ -51,8 +51,8 @@ module.exports =
                 connection.query(query, get, function (err, rows) {
                     connection.release();
                     if (!err) {
-
-                        res.json(200,rows);
+                        res.setHeader('Content-Type', 'application/json');
+                        res.status(200).json(rows);
                         //console.log(rows);
                     } else {
                         console.log("error: Error reading database: " + err);
@@ -154,6 +154,23 @@ module.exports =
                 });
             });
         },
+        revertTest : function(query){
+            pool.getConnection(function(err,conn){
+                if(err) {
+                    throw err;
+                }
+              conn.query(query, function(err){
+                  conn.release();
+                  if(!err){
+                      console.log("Reverted test.");
+                  }else{
+                      throw err;
+                      console.log("Test results went to db.");
+                  }
+              })
+            })
+        },
+
         fallDoubleQuery : function (tasks, cb) {
         pool.getConnection(function (err, conn, done) {
             if (err) {

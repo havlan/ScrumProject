@@ -1,6 +1,7 @@
 var path = require('path');
 var bodyParser = require('body-parser');
 var dbMiddelware = require('../middlewares/dbQ1');
+var dbHelper = require('../helpers/db');
 var totalgetReq = 0;
 
 
@@ -78,10 +79,11 @@ module.exports = {
     },
 
     getEmployee : function (req, res){
-      dbMiddelware.getEmployee(req,res);
+        dbHelper.getdbQuery(req, res, "select phone_nr as Tlf,total_hours as Timer, employee_id as AnsattID,email as Epost,seniority as Stillingsprosent,responsibility_allowed as Ansvarsvakt, type_name as Stilling, name as Navn, address as Adresse, pers_id as PersNr from Employee");
     },
     getOneEmployee : function(req,res){
-        dbMiddelware.getOneEmployee(req,res);
+        dbHelper.getdbQuery(req, res, "select * from Employee where employee_id = ?",req.session.passport.user.id);
+
     },
     getAbsenceView : function (req, res) {
         dbMiddelware.getAbsenceView(req,res);
@@ -93,40 +95,40 @@ module.exports = {
         dbMiddelware.getRequestView(req,res);
     },
     getDepartment : function (req, res){
-        dbMiddelware.getDepartment(req,res);
+        dbHelper.getdbQuery(req, res, "select * from Department"); // where department_id = ?",req.body.department_id);
     },
     getType : function (req, res){
-        dbMiddelware.getType(req,res);
+        dbHelper.getdbQuery(req, res, "select * from Type");
     },
     getShift : function (req, res) {
-        dbMiddelware.getShift(req,res);
+        dbHelper.getdbQuery(req, res, "select * from Shift");
     },
     getShift_has_employee : function (req, res){
-        dbMiddelware.getShift_has_employee(req,res);
+        dbHelper.getdbQuery(req, res, "select * from shift_has_employee");
     },
     getRequest : function (req, res){
-        dbMiddelware.getRequest(req,res);
+        dbHelper.getdbQuery(req, res, "select * from Request");
     },
     getAbsence : function (req, res){
-        dbMiddelware.getAbsence(req,res);
+        dbHelper.getdbQuery(req, res, "select * from Absence");
     },
     getOvertime : function (req, res){
-        dbMiddelware.getOvertime(req,res);
+        dbHelper.getdbQuery(req, res, "select * from Overtime");
     },
     getEmployee_Shifts_toCurrentDate:function(req,res){
-        dbMiddelware.getEmployee_Shifts_toCurrentDate(req,res);
+        dbHelper.getdbQuery(req, res, "select * from Employee_Shifts_toCurrentDate where employee_id = ?",[req.session.passport.user.id]);
     },
     getVaktliste1:function(req,res){
-        dbMiddelware.getVaktliste1(req,res);
+        dbHelper.getdbQuery(req, res, "select * from WORKTOGETHERTODAY1 where department_name = ?", [req.body.department_name]);
     },
     getVaktliste2:function(req,res){
-        dbMiddelware.getVaktliste2(req,res);
+        dbHelper.getdbQuery(req, res, "select * from WORKTOGETHERTODAY2 where department_name = ?", [req.body.department_name]);
     },
     getVaktliste3:function(req,res){
-        dbMiddelware.getVaktliste3(req,res);
+        dbHelper.getdbQuery(req, res, "select * from WORKTOGETHERTODAY3 where department_name = ?", [req.body.department_name]);
     },
     getPersonalShiftEvents : function (req, res) {
-        dbMiddelware.getPersonalShiftEvents(req,res);
+        dbHelper.getdbQuery(req, res, "select * from JSON_EMPLOYEE_VIEW where employee_id = ? And start >= CURDATE()", req.session.passport.user.id);
     },
     getPossibleSiftsEvents : function (req, res) {
         dbMiddelware.getPossibleSiftsEvents(req,res);

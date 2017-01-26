@@ -67,7 +67,7 @@ module.exports = function (app, passport) {
         res.redirect('/calendar');
     });
 
-    app.get('/getVaktliste1', isLoggedIn, getCtrl.getVaktliste1);
+    app.post('/getVaktliste1',  getCtrl.getVaktliste1);
     app.get('/getVaktliste2', isLoggedIn, getCtrl.getVaktliste2);
     app.get('/getVaktliste3', isLoggedIn, getCtrl.getVaktliste3);
 
@@ -118,12 +118,13 @@ module.exports = function (app, passport) {
 
 //app.route('/*').get(getCtrl.get404);
 
-function isOfficeIn (req, res, next){
+function isOfficeIn (req, res, next){ // office = 0 || 1  __users = 2 || 0 __ admin = 0
     if(req.isAuthenticated() && req.session.passport.user){
-        if(req.session.passport.user.is_admin == 1){
+        if(req.session.passport.user.is_admin == 1 || req.session.passport.is_admin == 0){
             console.log(req.session.passport.username, " logged in as an office employee.");
             next();
         }
+        console.log("RETURN? 1");
         return;
     }else{
         res.redirect('/login');
@@ -133,20 +134,24 @@ function isOfficeIn (req, res, next){
 function isLoggedIn(req, res, next) {
     //console.log(req.session);
     if (req.isAuthenticated() && req.session.passport.user) {
-        if(req.session.passport.user.is_admin == 2){
+        if(req.session.passport.user.is_admin == 2 || req.session.passport.user.is_admin ==0){
+            console.log(req.session.passport.username, " logged in as an user employee.");
             next();
         }
+        console.log("RETURN? 2");
         return;
     } else {
-        console.log(req.session, " not authorized.");
+        //console.log(req.session, " not authorized.");
         res.redirect('/login');
     }
 }
 function isAdmin(req, res, next) {
     if (req.isAuthenticated() && req.session.passport) {
         if (req.session.passport.user.is_admin == 0) {
+            console.log(req.session.passport.username, " logged in as an admin.");
             next();
         }
+        return;
     } else {
         res.redirect('/user');
     }

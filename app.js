@@ -12,6 +12,8 @@ var flash = require('connect-flash');
 var morgan = require('morgan');
 var cookieParser = require('cookie-parser');
 var helmet = require('helmet');
+var xxlFilter = require('x-xss-protection');
+var escape = require('escape-html');
 
 require('./helpers/passtheport')(passport);
 
@@ -28,6 +30,8 @@ app.use(express.static (__dirname + '/public'));
 //app.use('/views',express.static(__dirname + '/views'));
 app.use(expressValidator());
 app.use(helmet());
+app.use(xxlFilter());
+
 app.use(session({
     secret: "hest",
     resave: false,

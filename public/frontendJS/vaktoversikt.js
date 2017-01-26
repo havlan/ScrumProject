@@ -9,15 +9,15 @@ var department= [];
 var dropdownInput = $("#departmentInput").find(":selected").text();
 
 
-$.get('/getDepartment', {}, function(req, res, data){
-    console.log(data);
-    console.log(data.responseJSON);
+$.get('/getDepartment', {}, function(req, res, data){ // dropdown
+    //console.log(data);
+    //console.log(data.responseJSON);
     department = data.responseJSON;
 
     makeDropdown('#departmentInput',department);
 });
 
-function makeDropdown(selector,list) {
+function makeDropdown(selector,list) { //
     var columns = addAllColumnHeaders(list, selector);
     for (var i = 0; i < list.length; i++) {
         var cellValue0 = list[i][columns[1]];
@@ -31,15 +31,19 @@ function makeDropdown(selector,list) {
 
 function myFunction(){
     $('#departmentInput').change(function(){
-        console.log($("#departmentInput").find(":selected").text());
+        console.log($("#departmentInput").find(":selected").text()); // get department etc
         $.ajax({
             url: '/getVaktliste1', //this is the submit URL
-            type: 'GET',
+            type: 'POST',
             data: {'department_name': $("#departmentInput").find(":selected").text()},
             success: function(data){
-                console.log('successfully submitted');
-                console.log(data);
-                myList1 = data.responseJSON;
+                if(data){
+                    console.log("Data arrived?");
+                    console.log(data);
+                    //myList1 = data.responseJSON;
+                }else{
+                    console.log("IFDATA -> ELSE");
+                }
             },
             failure: function(err) {console.log("Error"+err);}
         });

@@ -89,7 +89,7 @@ module.exports = {
     //POST/PUT
 
 
-    postNewEmployee: function (req, res) {
+    postNewEmployee: function (req, res) { // blir ikke brukt
         var post = {
             name: req.body.name,
             phone_nr: req.body.phone_nr,
@@ -104,7 +104,7 @@ module.exports = {
         console.log("Posting new Employee");
         dbHelper.postdbQuery(req, res, "insert into Employee set ?", post);
     },
-    postNewDepartment: function (req, res) {
+    postNewDepartment: function (req, res) { //
         var post = {department_id: req.body.department_id, department_name: req.body.department_name};
         console.log("Posting new Department");
         dbHelper.postdbQuery(req, res, "insert into Department set ?", post);
@@ -215,6 +215,7 @@ module.exports = {
         }, req.body.employee_id]);
     },
     updateEmployeePersonalInfo: function (req, res) {
+        console.log("BODY",req.body);
         dbHelper.postdbQuery(req,res,"update Employee set ? where employee_id = ?",[{
             phone_nr: req.body.phone_nr,
             email: req.body.email,

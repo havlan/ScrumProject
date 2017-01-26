@@ -57,7 +57,7 @@ module.exports = function (passport) {
             passReqToCallback: true
         },
         function (req, username, password, done) {
-            //console.log("I LOCAL", req.session);
+            console.log("Checking xss filter: ", username);
             pool.getConnection(function (err, connection) {
                 connection.query("select * from LoginInfo where Username = ?", [username], function (err, rows) {
                     connection.release();
@@ -68,7 +68,7 @@ module.exports = function (passport) {
                     if (err) {
                         return done(err);
                     }
-                    if (!cryptoHash.sha512(req.body.password, rows[0].password_salt).passwordHash == rows[0].password_hash) {
+                    if (!(cryptoHash.sha512(req.body.password, rows[0].password_salt).passwordHash == rows[0].password_hash)) {
                         return done(null, false, req.flash("loginMsg", "WHooooooooops, wrong password."));
                     }
                     //console.log("LOGIN OK");
