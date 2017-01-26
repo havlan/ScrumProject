@@ -120,6 +120,7 @@ module.exports = function (app, passport) {
     app.post('/getEmpForShiftDate', isAdmin, getCtrl.getEmpForShiftDate);
 
     //MÅ VÆRE SIST
+    app.get('/forbudt',getCtrl.get403);
     app.get('/*', getCtrl.get404);
 
 };
@@ -139,6 +140,8 @@ function isOfficeEmp (req,res,next){
     if(req.isAuthenticated() && req.session.passport){
         if(req.session.passport.user.is_admin == 1 || req.session.passport.user.is_admin == 0){
             next();
+        }else{
+            res.status(403).redirect('/forbudt');
         }
     }else{
         res.redirect('/login');

@@ -1,11 +1,11 @@
 @import url('//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css');
-body {
+/*body {
     background-image: url(https://cdn4.img.sputniknews.com/images/103067/11/1030671175.jpg);
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-}
+}*/
 .error {
     margin: 0 auto;
     text-align: center;
