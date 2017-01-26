@@ -33,11 +33,11 @@ $(document).ready(function() {
         ,
         eventClick:  function(event, jsEvent, view) {
 
+                console.log("hei potet "+ event.color);
                 $('#modalShift').html(event.title);
                 $('#begin').html("Starter: " + moment(event.start).format('MMM Do h:mm A'));
                 $('#end').html("Slutter: " + moment(event.end || event.start).format('MMM Do h:mm A'));
                 $('#fullCalModal').modal();
-
         }
     });
 
