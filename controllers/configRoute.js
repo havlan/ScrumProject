@@ -59,7 +59,7 @@ module.exports = function (app, passport) {
     app.get('/availability', isLoggedIn, getCtrl.getAvailabilitySite);
     app.get('/appeal', isLoggedIn, getCtrl.getAppeal);
     app.get('/adminShifts', isOfficeEmp, getCtrl.getAdminShifts);
-
+    app.get('/getRequestShift/:id',isOfficeEmp,getCtrl.getRequestShift);
 
     //Images
     app.get('IMG01', isLoggedIn, getCtrl.getLogo);

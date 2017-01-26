@@ -55,7 +55,7 @@ module.exports = {
         dbHelper.getdbQuery(req,res,"select o.overtime_id as Nr, e.employee_id as AnsattID, e.name as Navn,s.shift_id as Skift,s.date as Dato,o.overtime as Timer, o.explanation_overtime as Årsak,d.department_name as Avdeling from Employee e,Shift s,shift_has_employee she,Overtime o,Department d where e.employee_id = she.employee_id and s.shift_id = she.shift_id and o.shift_id = she.shift_id and s.department_id = d.department_id and o.checked_by_admin = 0 group by o.overtime_id order by d.department_id, s.date");
     },
     getRequestView : function (req, res) {
-        dbHelper.getdbQuery(req,res,"select r.request_id as Nr, e.employee_id as AnsattID, e.name as Navn,s.shift_id as Skift,s.date as Dato, r.explanation_request as Årsak,d.department_name as Avdeling from Employee e,Shift s,shift_has_employee she,Request r,Department d where e.employee_id = she.employee_id and s.shift_id = she.shift_id and r.shift_id = she.shift_id and s.department_id = d.department_id and r.checked_by_admin = 0 group by r.request_id order by r.request_id");
+        dbHelper.getdbQuery(req,res,"select r.shift_id as Skift, e.employee_id as AnsattID, e.name as Navn,s.shift_id as Skift,s.date as Dato, r.explanation_request as Årsak,d.department_name as Avdeling from Employee e,Shift s,shift_has_employee she,Request r,Department d where e.employee_id = she.employee_id and s.shift_id = she.shift_id and r.shift_id = she.shift_id and s.department_id = d.department_id and r.checked_by_admin = 0 group by r.request_id order by r.request_id");
     },
     getSaltHash: function (req, res) {
         dbHelper.getdbQuery(req, res, "select password_hash, password_salt, is_admin from LoginInfo where Username = ?", req.body.username);
@@ -99,6 +99,9 @@ module.exports = {
 
     getAvailableEmpForShift : function (req, res){
         dbHelper.getdbQuery(req, res, "SELECT e.employee_id, e.name FROM Employee e, Shift s WHERE (SELECT rank FROM Type t WHERE t.name = s.type_name)<=(SELECT rank FROM Type t WHERE t.name = e.type_name) AND s.date NOT IN(SELECT a.day FROM Availability a WHERE a.employee_id = e.employee_id AND availability = 1) AND s.date NOT IN(SELECT date FROM Shift ss, shift_has_employee she WHERE ss.shift_id = she.shift_id AND she.employee_id = e.employee_id) AND s.shift_id = ?", [req.params.id]);
+    },
+    getRequestShift : function (req, res) {
+        dbHelper.getdbQuery(req,res,"select e.employee_id, e.name from Employee e, Request_shift rs where e.employee_id = rs.employee_id and shift_id = ?",[req.params.id])
     },
     getAvailableShifts : function (req, res){
         dbHelper.getdbQuery(req, res, "select count(*) as total From available_shift");

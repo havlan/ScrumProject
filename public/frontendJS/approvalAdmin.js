@@ -85,7 +85,7 @@ $(document).on('click','#switchTable .openModal',function (e) {
     if ($(this).is(':checked')) {
         ansattid = $(this).closest("tr").find('td:eq(1)').text();
         document.getElementById("skiftdb").innerHTML = "Skift: "+indeks;
-        $.get('/getAvailableEmpForShift/'+parseInt(indeks),function(req,res,data1){
+        $.get('/getRequestShift/'+parseInt(indeks),function(req,res,data1){
             $('#hei').append('<table class="table table-striped table-bordered" id="ansattTable"></table>');
             buildHtmlTable("#ansattTable",data1.responseJSON);
             console.log(data1.responseJSON);
