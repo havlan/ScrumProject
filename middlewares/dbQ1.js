@@ -188,15 +188,15 @@ module.exports = {
     },
     getVaktliste1: function (req,res) {
         console.log("Posting new Departments");
-        dbHelper.getdbQuery(req, res, "select * from WORKTOGETHERDAY1 where department_name = ?", [req.body.department_name]);
+        dbHelper.getdbQuery(req, res, "select * from WORKTOGETHERDAY1 where department_name = ? and DATE(date) = '2017-01-25'", [req.body.department_name]);
     },
     getVaktliste2: function (req,res) {
         console.log("Posting new Departments");
-        dbHelper.getdbQuery(req, res, "select * from WORKTOGETHERDAY2 where department_name = ?", [req.body.department_name]);
+        dbHelper.getdbQuery(req, res, "select * from WORKTOGETHERDAY2 where department_name = ? and DATE(date) = '2017-01-25'", [req.body.department_name]);
     },
     getVaktliste3: function (req,res) {
         console.log("Posting new Departments");
-        dbHelper.getdbQuery(req, res, "select * from WORKTOGETHERDAY3 where department_name = ?", [req.body.department_name]);
+        dbHelper.getdbQuery(req, res, "select * from WORKTOGETHERDAY3 where department_name = ? and DATE(date) = '2017-01-25'", [req.body.department_name]);
     },
 
     /*

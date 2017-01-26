@@ -75,7 +75,8 @@ function myfunc(){
     $.ajax({
         url: '/getVaktliste1', //this is the submit URL
         type: 'POST',
-        data: {'department_name': $("#departmentInput").find(":selected").text()},
+        data: {'department_name': $("#departmentInput").find(":selected").text(),
+            'date': document.getElementById("datePicker").value},
         success: function(req,res,data){
             console.log('successfully submitted');
             console.log(data);
