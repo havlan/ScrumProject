@@ -39,12 +39,8 @@ $(document).ready(function() {
                 color: 'yellow',    // an option!
                 textColor: 'black'  // an option!
             }],
-        eventClick: function(event) {
-            document.getElementById('adminNewShiftModal').style.display = "block";
-            document.getElementById('organizeShiftTitle').innerHTML = event.start;
-            eventId = event.id;
-            console.log(event.id);
-            return false;
+        eventClick:  function(event, jsEvent, view) {
+            $('#adminNewShiftModal').modal();
         }
     });
 
