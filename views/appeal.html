@@ -8,7 +8,6 @@
     <link rel="stylesheet" type="text/css" href="css/forespørsler.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="frontendJS/appeal.js"></script>
-
     <link rel="stylesheet" href="css/appeal.css">
 
 </head>
@@ -19,23 +18,22 @@
 <body>
 
 <h1 id="Appeal">Forespørsel</h1>
-<button type="button" class="approveButton" id ="absence" onclick="absenceFunction()" autofocus><span>Fravær</span></button>
-<button type="button" class="approveButton" id ="change" onclick="changeFunction()"><span>Bytt vakt</span></button>
-<button type="button" class="approveButton" id ="changeTo" onclick="changeToFunction()"><span>Bytt vakt med</span></button>
-<button type="button" class="approveButton" id ="overtime" onclick="changeToFunction()"><span>Overtid</span></button>
-
+<button type="button" class="appealButton" id ="absence" onclick="absenceFunction()" autofocus><span>Fravær</span></button>
+<button type="button" class="appealButton" id ="change" onclick="changeFunction()"><span>Bytt vakt</span></button>
+<button type="button" class="appealButton" id ="changeTo" onclick="changeToFunction()"><span>Bytt vakt med</span></button>
+<button type="button" class="appealButton" id ="overtime" onclick="overtimeFunction()"><span>Overtid</span></button>
 
 <!--
     TODO get navn, vakter
     TODO post forespørsel
 -->
 
-<section class="approveSection" id="absenceAppeal" style="display:block">
+<section class="appealSection" id="absenceAppeal" style="display:block">
     <h3>Søk om fravær</h3>
     <form>
         <fieldset>
 
-            Fraværstype<br>
+            <span class="formTitle">Fraværstype</span><br>
             <select>
                 <option value="" disabled selected>Velg</option>
                 <option value="vacation">ferie</option>
@@ -47,11 +45,11 @@
                 <option value="funeral">Begravelse</option>
             </select><br>
 
-            Dato:<br>
-            fra:<input type="date">
-            til: <input type="date"><br>
+            <span class="formTitle">Dato:</span><br>
+            fra:<br><input type="date"><br>
+            til: <br><input type="date"><br>
 
-            Årsak:
+            <span class="formTitle">Årsak:</span>
             <br>
             <textarea></textarea><br>
 
@@ -60,16 +58,14 @@
     </form>
 </section>
 
-<section class="approveSection" id="changeAppeal" style="display:none">
+<section class="appealSection" id="changeAppeal" style="display:none">
     <h3>Søk om vaktbytte</h3>
     <form>
         <fieldset>
-
-            Bytt vakt<br>
-            Velg vakt<br>
+            <span class="formTitle">Velg vakt</span><br>
             <select id="selectShift" size="5">
             </select><br>
-            Årsak:
+            <span class="formTitle">Årsak:</span>
             <br>
             <textarea></textarea><br>
 
@@ -78,36 +74,21 @@
     </form>
 </section>
 
-<section class="approveSection" id="changeToAppeal" style="display:none">
+<section class="appealSection" id="changeToAppeal" style="display:none">
     <h3>Søk om vaktbytte med bestemt vakt</h3>
     <form>
         <fieldset>
-
-            Bytt vakt<br>
-            Velg vakt<br>
+            <span class="formTitle">Bytt fra</span><br>
             <select id="selectshiift" size="5">
             </select><br>
-            Årsak:
+            <span class="formTitle">Bytt til</span><br>
+            <select id="selectvakt" size="5">
+            </select><br>
+            <span class="formTitle">Årsak:</span>
             <br>
             <textarea></textarea><br>
 
             <input type="submit">
-        </fieldset>
-    </form>
-<div id="3">
-    <div class="Byttvakt-content">
-        <form>
-            <fieldset>
-
-                Bytt vakt<br>
-                Velg vakt<br>
-                <select id="selectvakt" size="5">
-                </select><br>
-                Årsak:
-                <br>
-                <textarea></textarea><br>
-
-                <input type="submit">
             </fieldset>
         </form>
 
@@ -115,15 +96,12 @@
 </div>
 </section>
 
-
-<section class="approveSection" id="overtimeAppeal" style="display:none">
+<section class="appealSection" id="overtimeAppeal" style="display:none">
 <div id="2">
     <form id="overtimeform">
         <fieldset>
-
             <h3>Søk om overtid</h3>
-
-            Vakttype<br>
+            <span class="formTitle">Vakttype</span><br>
             <select>
                 <option value="" disabled selected>Velg</option>
                 <option value="Dayshift">Dagvakt</option>
@@ -131,16 +109,14 @@
                 <option value="nightshift">nattevakt</option>
             </select><br>
 
-            Dato:<br>
-            <input type="date" >
-            <br>
+            <span class="formTitle">Dato:</span><br>
+            <input type="date" ><br>
+            kom: <br>
+            <input type="time" id="overtimeinput1"><br>
+            dro:<br>
+            <input type="time" id="overtimeinput2"><br>
 
-            kom: <input type="time" id="overtimeinput1">
-            dro: <input type="time" id="overtimeinput2">
-            <br>
-
-            Årsak:
-            <br>
+            <span class="formTitle">Årsak:</span><br>
             <textarea></textarea><br>
 
             <input type="submit" id="overtimesubmit">
@@ -151,5 +127,6 @@
 </div>
 
 </section>
+
 </body>
 </html>

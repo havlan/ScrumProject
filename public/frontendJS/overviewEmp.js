@@ -2,30 +2,24 @@
  * Created by rebekkaheggebo on 20.01.2017.
  */
 var myList = [];
-
-$.get('/getEmployee', {}, function(req, res, data){
-
-    $("#includedContent").load("menu");
-
+$.get('/getEmployeeRestricted', {}, function(req, res, data){
     console.log(data);
     console.log(data.responseJSON[0]);
     myList = data.responseJSON;
-    //document.getElementById("data").innerHTML = myList;
-
-    buildHtmlTable('#dbDataTable');
-    //tableCreate();
+    buildHtmlTable('#dbDataTable',myList);
 });
 //Build Table
-function buildHtmlTable(selector) {
-    var columns = addAllColumnHeaders(myList, selector);
+function buildHtmlTable(selector,list) {
+    var columns = addAllColumnHeaders(list, selector);
     var tbody = $('<tbody/>');
-    for (var i = 0; i < myList.length; i++) {
-        var row$ = $('<tr data-toggle="modal" data-target="#infoModal"/>');
+    for (var i = 0; i < list.length; i++) {
+        var row$ = $('<tr id=' + i + '/>');
         for (var colIndex = 0; colIndex < columns.length; colIndex++) {
-            var cellValue = myList[i][columns[colIndex]];
+            var cellValue = list[i][columns[colIndex]];
             if (cellValue == null) cellValue = "";
             row$.append($('<td/>').html(cellValue));
         }
+        // $(row$).setAttribute('id',"surprise maddafakka");
         $(selector).append(row$);
         $(tbody).append(row$);
     }
@@ -86,6 +80,7 @@ function searchPositionFunction() {
         }
     }
 }
+/*
 $.get('/getEmployee', {}, function(req, res, data){
 
     console.log(data);
@@ -97,4 +92,4 @@ $.get('/getEmployee', {}, function(req, res, data){
     document.getElementById("adresseInfo").innerHTML = data.responseJSON[0].address;
 
     $("#cover").fadeOut(10); <!-- MÅ ligge etter det som tar legst å loade-->
-});
+});*/

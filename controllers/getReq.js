@@ -81,9 +81,15 @@ module.exports = {
     getEmployee : function (req, res){
         dbHelper.getdbQuery(req, res, "select phone_nr as Tlf,total_hours as Timer, employee_id as AnsattID,email as Epost,seniority as Stillingsprosent,responsibility_allowed as Ansvarsvakt, type_name as Stilling, name as Navn, address as Adresse, pers_id as PersNr from Employee");
     },
+    getEmployee2 : function (req, res) {
+        dbMiddelware.getEmployee2(req,res);
+    },
     getOneEmployee : function(req,res){
         dbHelper.getdbQuery(req, res, "select * from Employee where employee_id = ?",req.session.passport.user.id);
 
+    },
+    getEmployeeRestricted : function (req, res) {
+        dbMiddelware.getEmployeeRestricted(req,res);
     },
     getAbsenceView : function (req, res) {
         dbMiddelware.getAbsenceView(req,res);
@@ -118,6 +124,9 @@ module.exports = {
     getEmployee_Shifts_toCurrentDate:function(req,res){
         dbHelper.getdbQuery(req, res, "select * from Employee_Shifts_toCurrentDate where employee_id = ?",[req.session.passport.user.id]);
     },
+    getEmployee_Shifts_fromCurrentDate:function(req,res){
+        dbMiddelware.getEmployee_Shifts_fromCurrentDate(req,res);
+    },
     getVaktliste1:function(req,res){
         dbHelper.getdbQuery(req, res, "select * from WORKTOGETHERTODAY1 where department_name = ?", [req.body.department_name]);
     },
@@ -147,6 +156,28 @@ module.exports = {
     getShiftChange : function (req, res){
         dbMiddelware.getShiftChange(req,res);
     },
+
+    getAvailableEmpForShift : function (req, res) {
+        dbMiddelware.getAvailableEmpForShift(req,res);
+    },
+
+    getAvailableShifts : function (req, res) {
+        dbMiddelware.getAvailableShifts(req,res);
+    },
+    getClearenceLevel : function (req, res) {
+        res.json(req.session.passport.user.is_admin);
+    },
+    getAbsenceNum : function (req, res) {
+        dbMiddelware.getAbsenceNum(req,res);
+    },
+    getOvertimeNum : function (req, res) {
+        dbMiddelware.getOvertimeNum(req,res);
+    },
+    getChangeNum : function (req, res) {
+        dbMiddelware.getChangeNum(req,res);
+    },
+
+
 
     get403 : function (req, res) {
         res.status(403).sendFile(path.join(__dirname + '/../views/403.html'));

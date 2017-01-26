@@ -1,40 +1,55 @@
+var noe =[];
+var i = 0;
+var myList = [];
+window.ansattid = 0;
+window.shift_id = 0;
+
 function leaveFunction(){
     document.getElementById('leaveApproval').style.display = "block";
     document.getElementById('switchApproval').style.display = "none";
     document.getElementById('overtimeApproval').style.display = "none";
+    document.getElementById('Lagre').style.display = "block";
+
 }
 function overtimeFunction(){
     document.getElementById('leaveApproval').style.display = "none";
     document.getElementById('switchApproval').style.display = "none";
     document.getElementById('overtimeApproval').style.display = "block";
+    document.getElementById('Lagre').style.display = "block";
+
 }
 function switchFunction(){
     document.getElementById('leaveApproval').style.display = "none";
     document.getElementById('switchApproval').style.display = "block";
     document.getElementById('overtimeApproval').style.display = "none";
+    document.getElementById('Lagre').style.display = "none";
+
 }
-var myList = [];
+
+//Gets data for tables
 $.get('/getAbsenceView', {}, function(req, res, data){
     console.log(data);
     console.log(data.responseJSON[0]);
     myList = data.responseJSON;
-    buildHtmlTable('#leaveTable');
+    buildHtmlTable('#leaveTable',myList);
 });
 $.get('/getOvertimeView',{},function (req,res,data) {
     myList = data.responseJSON;
-    buildHtmlTable('#overtimeTable');
+    buildHtmlTable('#overtimeTable',myList);
 });
 $.get('/getRequestView',{},function (req,res,data) {
     myList = data.responseJSON;
-    buildHtmlTable('#switchTable');
+    buildHtmlTable('#switchTable',myList);
 });
+
+//Builds a table in HTML document for a specific table id from a list
 function buildHtmlTable(selector,list) {
     list = myList;
     var columns = addAllColumnHeaders(list, selector);
     var tbody = $('<tbody/>');
     for (var i = 0; i < myList.length; i++) {
         var row$ = $('<tr id=' + i + '/>');
-        var check$ = $('<div class="checkbox radio-margin"><label><input type="checkbox" id='+ i +' value=""><span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span></label></div>');
+        var check$ = $('<div class="checkbox radio-margin"><label><input type="checkbox" class="openModal" id='+ i +' value=""><span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span></label></div>');
         for (var colIndex = 0; colIndex < columns.length; colIndex++) {
             var cellValue = myList[i][columns[colIndex]];
             if (cellValue == null) cellValue = "";
@@ -67,6 +82,38 @@ function addAllColumnHeaders(myList, selector) {
     return columnSet;
 }
 
+$(document).on('click','#switchTable .openModal',function (e) {
+    indeks = $(this).closest("tr").find('td:eq(0)').text();
+    ansattid = $(this).closest("tr").find('td:eq(1)').text();
+    document.getElementById("skiftdb").innerHTML = indeks;
+    $.ajax({
+        url: '/getAvailableEmpForShift',
+        type:'POST',
+        data:{'shift_id':indeks},
+        success: function (req,res,data) {
+            //$('#ansattDropdown').reset();
+           $.each(data, function () {
+               var option = $('<option />').text(data.responseJSON[i].employee_id+ " Navn: "+data.responseJSON[i].name);
+               $('#ansattDropdown').text(option);
+              // console.log(data);
+               i++;
+            });
+        }
+    });
+
+    if ($(this).is(':checked')) {
+        //alert("HEST ER LIVET!");
+        $('#approveModal').modal('show');
+      //  makeDropdown("#ansattDropdown",noe);
+    } else {
+        //alert("HEST ER BEST SOM PÅLEGG!");
+        $('#approveModal').modal('hide');
+    }
+    $('#closeModal').on('click',function () {
+     //alert("hei");
+        $('input[class=openModal]').prop('checked', false);
+    });
+});
 
 //When pressing 'Lagre'-button any row that is checked will get checked_by_admin=1
 $(document).on('click','#Lagre',function (e) {
@@ -116,3 +163,24 @@ $(document).on('click','#Lagre',function (e) {
     }
 
 });
+function funkyfunc() {
+  //  console.log($("#ansattDropdown option:selected").text());
+}
+function fjernAnsatt(){
+    ansattid = $("#ansattDropdown option:selected").text();
+}
+function erstattAnsatt() {
+    nyansattid = parseInt($("#ansattDropdown option:selected").text());
+    var skiftid = indeks;
+    console.log(ansattid);
+    console.log(nyansattid);
+    console.log(skiftid);
+    $.ajax({
+        url: '/updateShift_has_employee',
+        type:'POST',
+        data:{'employee_id':ansattid,'shift_id':skiftid,'employee_id2':nyansattid},
+        success:function (data) {
+            alert("success!");
+        }
+    });
+}

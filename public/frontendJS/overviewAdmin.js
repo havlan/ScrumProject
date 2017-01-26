@@ -188,28 +188,31 @@ $(function(){
         $.ajax({
             url: '/newEmployee', //this is the submit URL
             type: 'POST',
-            data: {'is_admin':$('#admin').val(),'username':$('#brukernavn').val(),'name': $("#fornavn").val(),'address':$('#adresse').val(),'email':$('#epost').val(),'type_name':$('#stilling').val(),'pers_id':$('#personnummer').val(),'phone_nr':$('#telefon').val(),'seniority':$('#seniority').val(),'responsibility_allowed':$('#responsibility').val(),'total_hours':0},
+            data: {'is_admin':parseInt($('#admin').text()),'username':$('#brukernavn').text(),'name': $("#fornavn").text(),'address':$('#adresse').text(),'email':$('#epost').text(),'type_name':$('#stilling').text(),'pers_id':parseInt($('#personnummer').text(),10),'phone_nr':parseInt($('#telefon').text(),10),'seniority':parseInt($('#seniority').text()),'responsibility_allowed':$('#responsibility').val(),'total_hours':0},
             success: function(data){
-
             },
             failure: function(err){
                 console.log("ERR");
             }
         });
+        $('#addModal').modal('toggle');
     });
+
 });
 //myModal edit
 $(function(){
     $('#myModal').on('submit', function(e){
      //   alert($("#adressedb").val());
         e.preventDefault();
-       // alert(indeks);
+        var drpdn  = document.getElementById("stillingDropdown");
+        var strUser = drpdn.options[drpdn.selectedIndex].text;
         $.ajax({
             url: '/updateEmployee',
             type: 'POST',
-            data: {'name': $("#navndb").text(),'address':$('#adressedb').text(),'email':$('#epostdb').text(),'type_name':$('#stillingdb').val(),'pers_id':parseInt($('#personnummerdb').val(),10),'phone_nr':$('#telefondb').text(),'employee_id':indeks},
+            data: {'name': $("#navndb").val(),'address':$('#adressedb').val(),'email':$('#epostdb').val(),'type_name':strUser,'pers_id':$('#personnummerdb').val(),'phone_nr':$('#telefondb').val(),'employee_id':indeks},
             success: function(data){
                 console.log(JSON.stringify(data));
+                alert("HEST ER BEST! HEST ER LIVET");
                 //document.getElementById('newUserFeedback').innerHTML("Success");
             }
         });

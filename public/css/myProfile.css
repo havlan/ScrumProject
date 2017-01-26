@@ -1,107 +1,95 @@
+body {
+    padding: 0;
+    font-family: "Lucida Grande","Helvetica","Arial","Verdana",sans-serif;
+    font-size: 14px;
+}
+html, body {
+    height:100%;
+    width:100%;
+}
 h1{
     font-size: 36px;
     text-align: center;
 }
 
+.flytt{
+    margin-left: 8%;
+    margin-right:8%;
+    margin-top:5%;
+}
+
+.infoEmp {
+    float:left;
+    margin-left:5%;
+    border: solid #f2f2f2 1px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px #888888;
+    width:calc(95% - 180px - 10vw);
+}
+#navn{
+    text-align: left;
+    width: 100%;
+    border-bottom: solid 1px lightgrey;
+    padding: 2%;
+    margin:0;
+}
 .info{
+    font-size: calc(10px + 0.5vw);
     text-align: right;
-    font-size: 24px;
     padding-right: 10px;
 }
-
 .db{
+    font-size: calc(10px + 0.5vw);
     text-align: left;
-    font-size: 24px;
     padding-left: 20px;
 }
-
-.infoEmp{
-    margin-left: 30%;
-    margin-top: 3%;
-    position: absolute;
-    width:auto;
-}
-
-.profile{
-    position: absolute;
-    width: 100%;
-    height: 100%;
-}
-
-.flytt{
-    margin-left: 10%;
-    overflow: auto;
-}
-#pictureEmp{
-    width:100px;
-    height:100px;
-}
-
-
-#editBtn{
-    position: absolute;
-    margin-left: 90px;
-    background-color: royalblue;
-    margin-top: 40px;
+#editBtn, #passwordBtn, #historyBtn {
     border: none;
     color: white;
-    padding: 10px 20px;
     text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
+    padding: 10px 20px;
+    margin:3% 0 3% 2%;
     border-radius: 5px;
+    background-color: royalblue;
+    font-size: calc(10px + 0.5vw);
 }
-
 #historyBtn{
     background-color: #808080;
-    margin-top: 40px;
-    border: none;
-    color: white;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    position: absolute;
-    margin-left: 350px;
-    border-radius:5px;
-}
-#passwordBtn{
-    background-color: royalblue ;
-    margin-top: 40px;
-    border:none;
-    color: white;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    position: absolute;
-    margin-left: 198px;
-    border-radius: 5px;
 }
 
+#pictureEmp{
+    width: calc(180px + 10vw);
+    float:left;
+}
+#profilePic{
+    width: 100%;
+    height: auto;
+}
 #picBtn{
-    position: relative;
+    width:calc(130px + 5vw);
+    margin-left:calc(50% - 65px - 2.5vw);
     padding: 5px;
     color:black;
     background-color: white;
     border: solid black 1px;
     border-radius: 5px;
-    margin-left: 9%;
-    margin-top: 37%;
+    margin-top:10%;
+    font-size: calc(10px + 0.5vw);
 }
 
-#profilePic{
-    margin-left: 3%;
-    margin-top: 7%;
-    position: absolute;
+#histTable{
+    width:90%;
+    margin-left: 5%;
+}
+.histTable{
+    width: 100%;
+}
+.histTable td{
+    text-align: center;
 }
 .histTable tr:nth-child(odd):not(:first-child){
     background-color: white;
 }
-
 .histTable tr:nth-child(even):not(:first-child){
     background-color: #f1f1f1;
 }
@@ -115,18 +103,9 @@ h1{
     padding-top: 1%;
     padding-bottom: 1%;
 }
-.histTable{
-    width: 100%;
-}
-
-.histTable td{
-    text-align: center;
-}
-
 .table-responsive{
     padding: 1%;
 }
-
 .saveEdit{
     background-color: royalblue;
     border: none;
@@ -140,67 +119,62 @@ h1{
     margin-left: 70%;
     border-radius:5px;
 }
-
 .inputEdit{
     width:100%;
 }
-#navn{
-    text-align: left;
-    width: 100%;
-    border-bottom: solid 1px lightgrey;
-    padding: 2%;
-}
-#histTable{
-    width:90%;
-    margin-left: 5%;
-}
-
 #passwordForm{
     padding:10px;
 }
+
 @media
 only screen and (max-width: 760px),
 (min-device-width: 768px) and (max-device-width: 1024px)  {
-    #infoEmp {
-        position:relative;
-        width:calc(100% - 1em);
-        margin-top:0;
-        margin-left:0.5em;
-        margin-right:0.5em;
-        float:left;
+    .flytt{
+        margin:0;
+        box-sizing: border-box;
+        height:calc(100% - 30px);
+        width:100%;
+        padding: 0.5em 0.5em 0.5em 0.5em;
     }
-    .fc-basic-view .fc-body .fc-row{
-        height:10vw;
+    #pictureEmp{
+        width: 100%;
     }
-    #profilePic {
-        float:right;
-        height: 10em;
-        width: calc(50% - 1em);
-        margin: 0.5em 0.5em 0.5em 0.5em;
+    #profilePic{
+        width: 60%;
+        margin-left:20%;
+        margin-right:20%;
     }
-    .menuBtn{
-        float:left;
+    #picBtn{
+        width:12em;
+        margin-left:calc(50% - 65px - 2.5vw);
+        padding: 0.5em;
+        margin-top:0.5em;
         font-size: 1em;
-        width: calc(50% - 1em);
-        box-sizing:border-box;
-        position:relative;
-        margin-right: 0.5em;
-        margin-left: 0.5em;
-        height: 3em;
     }
-    #availabilityB, #extraB, #shiftB {
+    .infoEmp {
+        float:left;
+        margin:0;
         margin-top: 0.5em;
+        width:100%;
     }
-    #extraB {
-        margin-bottom:0.5em;
+    .info{
+        padding-left: 0.25em;
+        padding-right: 0.25em;
+        font-size: 0.9em;
     }
-    .shiftHeader {
-        font-size: 1.5em;
+    .db{
+        font-size: 0.9em;
+        padding-left:0;
     }
-    #nextShiftInfo {
-        font-size: 1em;
+    #editBtn, #passwordBtn, #historyBtn {
+        width:calc(32.5% - 1em);
+        padding: 0.5em 0;
+        margin:3% 0 3% 2%;
+        border-radius: 5px;
+        background-color: royalblue;
+        font-size: calc(10px + 0.5vw);
     }
-    #switchTable{
-        font-size: 0.8em;
+    #histTable{
+        font-size:0.7em;
     }
 }

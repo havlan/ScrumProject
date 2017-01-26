@@ -1,6 +1,14 @@
 
+
+var departments     = [];
+var employeesSyk    = [];
+var employeesHelp   = [];
+var employeesAnnet  = [];
+var eventId;
+
+
+
 $(document).ready(function() {
-    $("#includedContent").load("menu");
 
     $('#calendarx').fullCalendar({
         header: {
@@ -16,6 +24,7 @@ $(document).ready(function() {
         weekNumbers:true,
         navLinks: true,
         editable: false,
+        height: 'auto',
         eventColor: '#000000', //default event color //can be set individually
         eventTextColor: '#ffffff', //default event text color
         //GETTING EVENTS FROM JSON FEED; SHORT AND EXTENDED
@@ -26,13 +35,15 @@ $(document).ready(function() {
                 textColor: 'black'  // an option!
             },
             {
-                url: '/getPossibleSiftsEvents', // use the `url` property
+                url: '/getPossibleShiftsEvents', // use the `url` property
                 color: 'yellow',    // an option!
                 textColor: 'black'  // an option!
             }],
         eventClick: function(event) {
             document.getElementById('adminNewShiftModal').style.display = "block";
             document.getElementById('organizeShiftTitle').innerHTML = event.start;
+            eventId = event.id;
+            console.log(event.id);
             return false;
         }
     });
@@ -82,55 +93,81 @@ function getDispersion(res) {
     createPeopleDropdown(syk, hjelp, annet);
 }
 
+$.ajax({
+    url: '/getVaktliste1', //this is the submit URL
+    type: 'POST',
+    data: {'shift_id': eventId,'type_name':"Sykepleier"},
+    success: function(data){
+        console.log('successfully submitted');
+        console.log(data);
+        employeesSyk = data.responseJSON;
+    },
+    failure: function(err) {console.log("Error"+err);}
+});
+
+
+$.get('/getEmployee', {}, function(req, res, data){
+    employeesHelp = data.responseJSON;
+});
+
+$.get('/getEmployee', {}, function(req, res, data){
+    employeesAnnet = data.responseJSON;
+});
+
 function createPeopleDropdown(antSyk, antHjelp, antAnnet) {
+    console.log("data hentet");
     //alert(antSyk + " sykepleiere, " + antHjelp + " hjelpere, " + antAnnet + " annet");
     document.getElementById('peopleTable').innerHTML = "<tr><th  class='peopleTablecat'>Kategori</th><th class='peopleTableSel'>Ansatt</th></tr>";
     for(var i=0; i<antSyk; i++){
         document.getElementById('peopleTable').innerHTML += "<tr><td class='peopleTableCat'>Sykepleier</td><td class='peopleTableSel'><select id='syk" + i + "' class='peopleDropdown'></select></td></tr>";
-        $.get('/getDepartment', {}, function(req, res, data){
-            departments = data.responseJSON;
-            makeDropdown("#syk" + i);
-        });
+        makeDropdownS("#syk"+i,employeesSyk);
     }
     for(var i=0; i<antHjelp; i++){
         document.getElementById('peopleTable').innerHTML += "<tr><td class='peopleTableCat'>Hjelpepleier</td><td class='peopleTableSel'><select id='hjelp" + i + "' class='peopleDropdown'></select></td></tr>";
-        $.get('/getDepartment', {}, function(req, res, data){
-            departments = data.responseJSON;
-            makeDropdown("#hjelp" + i);
-        });
+        makeDropdownS("#hjelp" + i,employeesHelp);
     }
     for(var i=0; i<antAnnet; i++){
         document.getElementById('peopleTable').innerHTML += "<tr><td class='peopleTableCat'>Annet</td><td class='peopleTableSel'><select id='annet" + i + "' class='peopleDropdown'></select></td></tr>";
-        $.get('/getDepartment', {}, function(req, res, data){
-            departments = data.responseJSON;
-            makeDropdown("#annet" + i);
-        });
+        makeDropdownS("#annet" + i,employeesAnnet);
     }
 }
 
-
 $.get('/getDepartment', {}, function(req, res, data){
     departments = data.responseJSON;
-    makeDropdown('#chooseDepartment')
+    makeDropdown('#chooseDepartment',departments)
 });
 
-function makeDropdown(selector) {
-    var columns = addAllColumnHeaders(departments, selector);
-    for (var i = 0; i < departments.length; i++) {
-        var cellValue0 = departments[i][columns[0]];
-        var cellValue1 = departments[i][columns[1]];
-        if (cellValue1 == null) cellValue1 = "Ingen data fra DB";
-        var option = $('<option />').text(cellValue0 + "    " + cellValue1);
+
+
+
+function makeDropdownS(selector,list) {
+    console.log("Prøver å lage dropdown");
+    var columns = ["Navn"];
+    console.log(list);
+    for (var i = 0; i < list.length; i++) {
+        var cellValue = list[i][columns[0]];
+        if (cellValue == null) cellValue = "Ingen data fra DB";
+        var option = $('<option />').text(cellValue);
         $(selector).append(option);
     }
 }
 
-function addAllColumnHeaders(myList, selector) {
+function makeDropdown(selector,list) {
+    var columns = addAllColumnHeaders(list, selector);
+    for (var i = 0; i < list.length; i++) {
+        var cellValue = list[i][columns[1]];
+        if (cellValue == null) cellValue = "Ingen data fra DB";
+        var option = $('<option />').text(cellValue);
+        $(selector).append(option);
+    }
+}
+
+function addAllColumnHeaders(list, selector) {
     var columnSet = [];
     var headerThead$ = $('<thead/>');
     var headerTr$ = $('<tr/>');
-    for (var i = 0; i < myList.length; i++) {
-        var rowHash = myList[i];
+    for (var i = 0; i < list.length; i++) {
+        var rowHash = list[i];
         for (var key in rowHash) {
             if ($.inArray(key, columnSet) == -1) {
                 columnSet.push(key);
@@ -140,6 +177,12 @@ function addAllColumnHeaders(myList, selector) {
     }
     $(selector).append(headerThead$);
     $(headerThead$).append(headerTr$);
-    $("#cover").fadeOut(20);
     return columnSet;
 }
+
+
+$(function close() {
+    $(".custom-close").on('click', function() {
+        $('#adminNewShiftModal').modal('hide');
+    });
+});
