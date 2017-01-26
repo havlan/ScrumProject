@@ -18,7 +18,7 @@ module.exports = {
     },
     getEmployeeRestricted : function (req, res) {
         console.log("Overview Employee restricted");
-        dbHelper.getdbQuery(req,res,"select e.employee_id as ID,e.name as Name,e.type_name as Stilling,e.seniority as Stillingsprosent,e.phone_nr as Telefon,e.email as E-post from Employee e group by e.employee_id");
+        dbHelper.getdbQuery(req,res,"select employee_id as ID,name as Navn,phone_nr as Tlf,email as Epost,type_name as Stilling from Employee");
     },
     getDepartment: function (req, res) {
         //var get = {department_id:req.body.department_id};
