@@ -93,6 +93,9 @@ module.exports = {
     getOneEmployee : function(req,res){
         dbMiddelware.getOneEmployee(req,res);
     },
+    getEmployeeRestricted : function (req, res) {
+        dbMiddelware.getEmployeeRestricted(req,res);
+    },
     getAbsenceView : function (req, res) {
         dbMiddelware.getAbsenceView(req,res);
     },

@@ -16,6 +16,10 @@ module.exports = {
         console.log("Overview Employee");
         dbHelper.getdbQuery(req, res, "select * from Employee where employee_id = ?",req.session.passport.user.id);
     },
+    getEmployeeRestricted : function (req, res) {
+        console.log("Overview Employee restricted");
+        dbHelper.getdbQuery(req,res,"select e.employee_id as ID,e.name as Name,e.type_name as Stilling,e.seniority as Stillingsprosent,e.phone_nr as Telefon,e.email as E-post from Employee group by e.employee_id");
+    },
     getDepartment: function (req, res) {
         //var get = {department_id:req.body.department_id};
         console.log("Overview Department");
