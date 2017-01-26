@@ -19,7 +19,7 @@
 
 <body>
 
-<div class="modal fade" id="switchModal" role="dialog">
+<div class="modal fade" id="newShiftModal" role="dialog">
     <div class="modal-dialog">
 
         <div class="modal-content">
@@ -30,8 +30,9 @@
 
             <main class="modal-body">
                 <div id="selectDateBox">
-                    <p>Dato og tid</p>
+                    <p>Dato</p>
                     <select id="selectDate"></select>
+                    <p>Tidspunkt</p>
                     <select id="selectShift"></select>
                 </div>
                 <div id="selectdepartmentBox">
@@ -86,7 +87,7 @@
 </div>
 
 <div id="container">
-    <button type="button" class="menuBtn" id="createNewShift" data-toggle="modal" data-target="#switchModal"><span>Opprett ny vakt</span></button>
+    <button type="button" class="menuBtn" id="createNewShift" data-toggle="modal" data-target="#newShiftModal"><span>Opprett ny vakt</span></button>
     <div id='calendarx'></div>
 </div>
 

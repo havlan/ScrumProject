@@ -25,6 +25,9 @@ body, html {
     cursor:pointer;
     box-shadow: 2px 2px 5px #888888;
 }
+#createNewShift:hover{
+    background-color: #6585e7;
+}
 
 #calendarx {
     float:right;
@@ -50,6 +53,10 @@ body, html {
     cursor: pointer !important;
 }
 /* MODAL */
+#newShiftModal{
+    text-align:center;
+}
+
 #organizeShiftTitle {
     text-align: center;
 }
