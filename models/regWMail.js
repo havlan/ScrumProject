@@ -45,12 +45,9 @@ module.exports = {
                     }
                     console.log(request.body);
                     conn.query('select * from LoginInfo where username = ?', request.body.username, function (err, rows) {
-                        if (err) {
-                            response.status(404);
-                            conn.release();
-                        }
-                        else if (!rows.length) {
-                            response.status(404);
+                        console.log(rows);
+                        if (err || !rows.length) {
+                            response.status(404).json({melding:err});
                             conn.release();
                         }
                         else {
@@ -62,11 +59,9 @@ module.exports = {
             function (conn, login, call) {
                 console.log("METHOD 2");
                 conn.query("select * from Employee where employee_id = ? and email = ? ", [login.employee_id, request.body.email], function (err1, rows) {
-                    if (err1 || !rows.length) {
-                        console.log(err1);
-                        response.status(404);
-                        response.json(err1);
+                    if (err1) {
                         conn.release();
+                        response.status(404).json(err1);
                     } else { // exists in login and employee
                         //var pw = crypt.generatePassword(), sh = crypt.genRandomString(16), pwobj = crypt.sha512(pw,sh);
                         call(null, conn, login);
@@ -79,7 +74,7 @@ module.exports = {
                 var usr = {password_hash: pwobj.passwordHash, password_salt: pwobj.salt};
                 conn.query("update  LoginInfo set ? where username = ?", [usr, request.body.username], function (err2, rows) {
                     if (err2) {
-                        console.log(err2);
+                        response.status(404).json({melding:err});
                     } else {
                         done(null, 200, pw);
                         response.json(200);
@@ -180,6 +175,7 @@ module.exports = {
                         if (err) {
                             return conn.rollback(function () {
                                 console.log(err);
+                                response.status(500).json({melding:err});
                                 throw err;
                             })
                         } else {
@@ -187,7 +183,7 @@ module.exports = {
                             conn.query("select email from Employee where employee_id = ?", [req.body.employee_id], function (err, res) {
                                 if (err) {
                                     return conn.rollback(function () {
-                                        //console.log("ERROR FROM Q1",err);
+                                        response.status(500).json({melding:err});
                                         throw err;
                                     })
                                 } else {

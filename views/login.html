@@ -18,7 +18,7 @@
 <div class="login-page">
     <img id="logoPic" src="/img/MinVakt.png" style=" -webkit-filter: drop-shadow(1px 1px 1px #222); filter: drop-shadow(1px 1px 1px #222); width:200px; " >
     <div class="form">
-        <form action="/login" method="post">
+        <form action="/login" method="post" id="loginform">
             <div class="input">
                 <label for="username" >Username</label>
                 <input type="text" id="username" name="username" placeholder="eks: janskrotnes">
@@ -27,6 +27,7 @@
                 <label for="password">Password</label>
                 <input type="password" id="password" name="password" placeholder="eks: katt123">
             </div>
+            <p id="loginfeedback"></p>
             <button type="submit" style="font-size-adjust: 0.5;">Login</button>
         </form>
         <div class="etc-login-form">
@@ -51,6 +52,7 @@
                     <input required class = "inputEdit" id="username2" type="text" name="username" placeholder="eks: ola_nordmann_96">
                     <p id = "varsel"></p>
                     <br>
+                    <p id="forgotpwfeedback"></p>
                     <button id="saveEdit" type="submit" value="submit">Send</button>
                 </form>
                 </section>

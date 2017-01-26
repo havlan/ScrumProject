@@ -2,6 +2,7 @@ var mysql = require('mysql');
 var cryptoHash = require('./../middlewares/cryptoHash');
 var localStrat = require('passport-local').Strategy;
 var pool = require('./db').getPool();
+var safereg = require('safe-regex');
 
 //passport configuration
 module.exports = function (passport) {
@@ -41,7 +42,7 @@ module.exports = function (passport) {
             connection.query('select * from LoginInfo where username = ?', [user.username], function (err, rows) {
                 connection.release();
                 if (!rows) {
-                    return done(null, false, {message: "Incorrect username"});
+                    return done(null, false, {status:404, melding: "Sjekk brukernavn."});
                 }
                 if (err) {
                     return done(err);
@@ -57,24 +58,20 @@ module.exports = function (passport) {
             passReqToCallback: true
         },
         function (req, username, password, done) {
-            console.log("Checking xss filter: ", username);
+            console.log("USERNAME SAFE REG ", safereg(username));
             pool.getConnection(function (err, connection) {
                 connection.query("select * from LoginInfo where Username = ?", [username], function (err, rows) {
                     connection.release();
                     //console.log(rows);
                     if (!rows.length) {
-                        return done(null, false, req.flash("loginMsg", "No user found."));
+                        return done(null, false, {status:404, melding : "Feil brukernavn."});
                     }
                     if (err) {
                         return done(err);
                     }
                     if (!(cryptoHash.sha512(req.body.password, rows[0].password_salt).passwordHash == rows[0].password_hash)) {
-                        return done(null, false, req.flash("loginMsg", "WHooooooooops, wrong password."));
+                        return done(null, false, {status: 404, melding : "Feil passord."});
                     }
-                    //console.log("LOGIN OK");
-                    //req.login(); // wtf man
-                    //req.login();
-                    //console.log("IS AUTH? ", req.isAuthenticated());
                     return done(null, rows[0]);
                 })
             });

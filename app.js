@@ -13,7 +13,7 @@ var morgan = require('morgan');
 var cookieParser = require('cookie-parser');
 var helmet = require('helmet');
 var xxlFilter = require('x-xss-protection');
-var escape = require('escape-html');
+//var escape = require('escape-html');
 
 require('./helpers/passtheport')(passport);
 
@@ -37,7 +37,8 @@ app.use(session({
     resave: false,
     saveUninitialized: true,
     cookie: {
-        maxAge: 60*60*24*1000*7
+        maxAge: 60*60*24*1000*7,
+        httpOnly:true
     }
 }));
 /*app.use(function(req,res,next){

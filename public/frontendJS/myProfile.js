@@ -80,9 +80,12 @@ $(function(){
         $.ajax({
             url: '/updateEmployeePersonalInfo', //this is the submit URL
             type: 'POST',
-            data: {'phone_nr': $("#edittelefon").val(),'address':$('#editadresse').val(),'email':$('#editepost').val()},
+            data: {'phone_nr': parseInt($("#edittelefon").val(),10),'address':$('#editadresse').val(),'email':$('#editepost').val()},
             success: function(data){
-                alert('successfully submitted')
+                document.getElementById('editfeedback').innerHTML = "<strong>Data lagret.</strong>";
+            },
+            error:function (xhr, ajaxOptions, thrownError) {
+                document.getElementById('editfeedback').innerHTML = thrownError;
             }
         });
     });

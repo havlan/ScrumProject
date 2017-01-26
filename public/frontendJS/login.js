@@ -10,6 +10,21 @@ $(function () {
 $( document ).ready(function() {
     getRandomColor();
 });
+window.onload = function(){
+    function handleinput(){
+        if(document.loginform.username.value == ""){
+            document.getElementById("loginfeedback").innerHTML = "You must enter a username";
+            return false;
+        }
+
+        if(document.loginform.password.value == ""){
+            document.getElementById("loginfeedback").innerHTML = "You must enter a password";
+            return false;
+        }
+    }
+
+    document.getElementById("loginform").onsubmit = handleinput;
+}
 
 $(function () {
     $('#saveEdit').on('click',function (e) {
@@ -19,8 +34,14 @@ $(function () {
             type: 'POST',
             data: $('#forgot').serialize(),
             success: function(data){
-                console.log("HORSES FUCK YEAH",JSON.stringify(data));
-                alert("Success!");
+                document.getElementById('forgotpwfeedback').innerHTML = "<strong>Dette gikk bra.</strong>";
+            },
+            error:function (xhr, ajaxOptions, thrownError) {
+                if (xhr.status == 404) {
+                    document.getElementById('forgotpwfeedback').innerHTML = "<strong>Sjekk brukernavn og epost.</strong>";
+                } else {
+                    document.getElementById('forgotpwfeedback').innerHTML = "<strong>Sjekk brukernavn og epost, eller kontakt administrator.</strong>";
+                }
             }
         });
     })

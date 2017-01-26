@@ -120,6 +120,7 @@ module.exports = function (app, passport) {
 
 
     //MÅ VÆRE SIST
+    app.get('/forbudt', getCtrl.get403);
     app.get('/*', getCtrl.get404);
 
 };
@@ -131,7 +132,8 @@ function isLoggedIn(req, res, next) {
     if (req.isAuthenticated()) {
         next();
     } else {
-        console.log(req.session, " not authorized.");
+        //console.log(req.session, " not authorized.");
+        console.log("Ikke godkjent log.");
         res.redirect('/login');
     }
 }
@@ -139,6 +141,8 @@ function isOfficeEmp (req,res,next){
     if(req.isAuthenticated() && req.session.passport){
         if(req.session.passport.user.is_admin == 1 || req.session.passport.user.is_admin == 0){
             next();
+        }else{
+            res.status(403).redirect('/forbudt');
         }
     }else{
         res.redirect('/login');
@@ -149,9 +153,11 @@ function isAdmin(req, res, next) {
     if (req.isAuthenticated() && req.session.passport) {
         if (req.session.passport.user.is_admin == 0) {
             next();
+        }else{
+            res.status(403).redirect('/forbudt');
         }
     } else {
-        res.redirect('/user');
+        res.status(403).redirect('/login');
     }
 }
 function logOut(req, res) {
