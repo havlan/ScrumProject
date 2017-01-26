@@ -190,13 +190,14 @@ $(function(){
             type: 'POST',
             data: {'is_admin':$('#admin').val(),'username':$('#brukernavn').val(),'name': $("#fornavn").val(),'address':$('#adresse').val(),'email':$('#epost').val(),'type_name':$('#stilling').val(),'pers_id':$('#personnummer').val(),'phone_nr':$('#telefon').val(),'seniority':$('#seniority').val(),'responsibility_allowed':$('#responsibility').val(),'total_hours':0},
             success: function(data){
-
             },
             failure: function(err){
                 console.log("ERR");
             }
         });
+        $('#addModal').modal('toggle');
     });
+
 });
 //myModal edit
 $(function(){

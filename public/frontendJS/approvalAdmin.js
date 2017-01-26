@@ -1,3 +1,9 @@
+var noe =[];
+var i = 0;
+var myList = [];
+window.ansattid = 0;
+window.shift_id = 0;
+
 function leaveFunction(){
     document.getElementById('leaveApproval').style.display = "block";
     document.getElementById('switchApproval').style.display = "none";
@@ -19,9 +25,8 @@ function switchFunction(){
     document.getElementById('Lagre').style.display = "none";
 
 }
-var myList = [];
-window.ansattid = 0;
-window.shift_id = 0;
+
+//Gets data for tables
 $.get('/getAbsenceView', {}, function(req, res, data){
     console.log(data);
     console.log(data.responseJSON[0]);
@@ -36,6 +41,8 @@ $.get('/getRequestView',{},function (req,res,data) {
     myList = data.responseJSON;
     buildHtmlTable('#switchTable',myList);
 });
+
+//Builds a table in HTML document for a specific table id from a list
 function buildHtmlTable(selector,list) {
     list = myList;
     var columns = addAllColumnHeaders(list, selector);
@@ -74,8 +81,7 @@ function addAllColumnHeaders(myList, selector) {
     $(headerThead$).append(headerTr$);
     return columnSet;
 }
-var noe =[];
-var i = 0;
+
 $(document).on('click','#switchTable .openModal',function (e) {
     indeks = $(this).closest("tr").find('td:eq(0)').text();
     ansattid = $(this).closest("tr").find('td:eq(1)').text();
