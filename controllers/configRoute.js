@@ -37,6 +37,9 @@ module.exports = function (app, passport) {
     app.get('/getShiftChange', isLoggedIn,getCtrl.getShiftChange);
     app.get('/getEmployee2',isLoggedIn,getCtrl.getEmployee2);
     app.get('/getAvailableShifts',isAdmin,getCtrl.getAvailableShifts);
+    app.get('/getAbsenceNum',isAdmin,getCtrl.getAbsenceNum);
+    app.get('/getOvertimeNum',isAdmin,getCtrl.getOvertimeNum);
+    app.get('/getChangeNum',isAdmin,getCtrl.getChangeNum);
     app.get('/getClearenceLevel',isLoggedIn,getCtrl.getClearenceLevel);
 
     app.get('/getAvailability',isLoggedIn, getCtrl.getAvailability);

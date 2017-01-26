@@ -169,6 +169,15 @@ module.exports = {
     getClearenceLevel : function (req, res) {
         res.json(req.session.passport.user.is_admin);
     },
+    getAbsenceNum : function (req, res) {
+        dbMiddelware.getAbsenceNum(req,res);
+    },
+    getOvertimeNum : function (req, res) {
+        dbMiddelware.getOvertimeNum(req,res);
+    },
+    getChangeNum : function (req, res) {
+        dbMiddelware.getChangeNum(req,res);
+    },
 
 
 
