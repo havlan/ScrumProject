@@ -4,7 +4,6 @@ $.get('/getClearenceLevel', {}, function(req, res, data){
     var clearence = data.responseJSON;
     console.log(clearence);
     if (clearence == 0) {
-        //console.log(clearence + "Denne brukeren er admin og har tilgang til alle sidene");
         document.getElementById("element12").style.display = 'block';
         showB();
         showK();

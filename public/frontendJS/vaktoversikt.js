@@ -22,9 +22,6 @@ function currentDay(today1) {
 }
 
 $(document).ready(function(){
-    console.log(document.getElementById("datePicker").value);
-    document.getElementById("datePicker").value = currentDay(today);
-    console.log(document.getElementById("datePicker").value);
     myfunc();
 });
 
@@ -45,7 +42,9 @@ function makeDropdown(selector,list) {
     }
 }
 
-
+function mdlFunc() {
+    alert("Nå oppdaterer jeg tabelen med hensyn til : "+document.getElementById("datePicker").value);
+}
 
 function myfunc(){
     $(".table").empty();
