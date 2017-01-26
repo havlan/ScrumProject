@@ -73,7 +73,7 @@ function oppdateTable(){
         url: '/getVaktliste1', //this is the submit URL
         type: 'POST',
         data: {'department_name': $("#departmentInput").find(":selected").text(),
-            'date': document.getElementById("datePicker").value},
+                          'date': document.getElementById("datePicker").text},
         success: function(req,res,data){
             console.log('successfully submitted');
             console.log(data);
