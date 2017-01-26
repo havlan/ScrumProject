@@ -168,7 +168,7 @@ module.exports = {
         var post = {
             shift_id: req.body.shift_id,
             employee_id: req.session.passport.user.id,
-            checked_by_admin: req.body.checked_by_admin
+            explanation_request: req.body.explanation.request
         };
         console.log("Posting new request");
         dbHelper.postdbQuery(req, res, "insert into Request set ?", post);
