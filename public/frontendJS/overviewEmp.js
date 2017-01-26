@@ -3,7 +3,7 @@
  */
 var myList = [];
 
-$.get('/getEmployee', {}, function(req, res, data){
+$.get('/getEmployeeRestricted', {}, function(req, res, data){
 
     $("#includedContent").load("menu");
 
