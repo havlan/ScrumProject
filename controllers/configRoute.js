@@ -127,11 +127,20 @@ module.exports = function (app, passport) {
 //app.route('/*').get(getCtrl.get404);
 
 function isLoggedIn(req, res, next) {
-    console.log(req.session);
+    //console.log(req.session);
     if (req.isAuthenticated()) {
         next();
     } else {
         console.log(req.session, " not authorized.");
+        res.redirect('/login');
+    }
+}
+function isOfficeEmp (req,res,next){
+    if(req.isAuthenticated() && req.session.passport){
+        if(req.session.passport.user.is_admin == 1 || req.session.passport.user.is_admin == 0){
+            next();
+        }
+    }else{
         res.redirect('/login');
     }
 }
