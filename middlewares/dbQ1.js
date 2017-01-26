@@ -112,6 +112,9 @@ module.exports = {
     getChangeNum : function (req, res){
         dbHelper.getdbQuery(req, res, "select count(*) as total From Request Where checked_by_admin=0");
     },
+    getEmpForShiftDate : function (req,res) {
+        dbHelper.getdbQuery(req,res, "SELECT ase.employee_id, ase.emp_name FROM available_shift_emp ase Where ase.id = ? AND ase.title = ?", [req.body.shift_id, req.body.type_name]);
+    },
 
 
     //POST/PUT

@@ -181,6 +181,9 @@ module.exports = {
     getChangeNum : function (req, res) {
         dbMiddelware.getChangeNum(req,res);
     },
+    getEmpForShiftDate : function (req,res) {
+        dbMiddelware.getEmpForShiftDate(req,res);
+    },
 
 
 
