@@ -3,6 +3,11 @@
 var myList = [];
 var typeNames =[];
 window.indeks = 0;
+var currentDay = new Date();
+var currentWeek = getWeekNumber(currentDay);
+console.log(currentWeek);
+var selectedWeek = currentWeek[1];
+
 
 $.get('/getAvailability', {}, function(req, res, data){
 
@@ -13,253 +18,293 @@ $.get('/getAvailability', {}, function(req, res, data){
     //tableCreate();
 
 
-    var currentDay = new Date();
-    var currentWeek = getWeekNumber(currentDay);
-    console.log(currentWeek);
-    document.getElementById("weeknr").innerHTML = currentWeek;
 
 
-    for(i=0; i<7; i++){
+    $( "#available-next" ).click(function neste() {
+        selectedWeek++;
+        console.log(selectedWeek);
+
+
+
+    });
+
+    $( "#available-prev" ).click(function forrige() {
+        selectedWeek--;
+    });
+
+
+
+    $('#available').on('click', function(){
+        if ( $(boxs).hasClass( 'highlight' ) ) {
+            $('.highlight').removeClass('unavailable');
+            $('.highlight').each(function() {
+                var aval1 = 1;
+                var date;
+
+            });
+
+
+
+        }
+
+    });
+
+    $('#unavailable').on('click', function(){
+        if ( $(boxs).hasClass( 'highlight' ) ) {
+            $('.highlight').removeClass('available');
+            $('.highlight').each(function() {
+                alert( this.id );
+            });
+            $('.highlight').addClass('unavailable').removeClass('highlight');
+        }
+
+    });
+
+
+    for(i=0; i<myList.length; i++) {
 
         var tableDay = data.responseJSON[i].day;
         var available1 = data.responseJSON[i].availability;
-        console.log(tableDay);
         // Split timestamp into [ Y, M, D, h, m, s ]
         var t = tableDay.split(/[- T : . Z]/);
 
         // Apply each element to the Date function
-        var jsDate = new Date(Date.UTC(t[0], t[1]-1, t[2], t[3], t[4], t[5]));
+        var jsDate = new Date(Date.UTC(t[0], t[1] - 1, t[2], t[3], t[4], t[5]));
 
         console.log(jsDate);
+        var weekNr = getWeekNumber(jsDate);
+        console.log(weekNr)
+        var weekDay = jsDate.getDay();
+        var hour = jsDate.getHours();
 
-    console.log(jsDate);
-    var weekNr = getWeekNumber(jsDate);
-    var weekDay = jsDate.getDay();
-    var hour = jsDate.getHours();
-    console.log(weekDay);
 
-    if (weekDay == 1) {
-        if (hour >= 8 && hour < 16) {
-            if (available1 == 0) {
-                var start = document.getElementById("man1");
-                start.classList.add("available");
-            } else if (available1 == 1) {
-                var start = document.getElementById("man1");
-                start.classList.add("unavailable");
+
+
+
+
+        if (selectedWeek == weekNr[1]) {
+            if (weekDay == 1) {
+                if (hour >= 8 && hour < 16) {
+                    if (available1 == 0) {
+                        var start = document.getElementById("man1");
+                        start.classList.add("available");
+                    } else if (available1 == 1) {
+                        var start = document.getElementById("man1");
+                        start.classList.add("unavailable");
+                    }
+
+                } else if (hour >= 16 && hour < 24) {
+                    if (available1 == 0) {
+                        var start = document.getElementById("man2");
+                        start.classList.add("available");
+                    } else if (available1 == 1) {
+                        var start = document.getElementById("man2");
+                        start.classList.add("unavailable");
+                    }
+
+
+                } else if (hour >= 0 && hour < 8) {
+                    if (available1 == 0) {
+                        var start = document.getElementById("man3");
+                        start.classList.add("available");
+                    } else if (available1 == 1) {
+                        var start = document.getElementById("man3");
+                        start.classList.add("unavailable");
+                    }
+                }
             }
 
-        } else if (hour >= 16 && hour < 24) {
-            if (available1 == 0) {
-                var start = document.getElementById("man2");
-                start.classList.add("available");
-            } else if (available1 == 1) {
-                var start = document.getElementById("man2");
-                start.classList.add("unavailable");
+            if (weekDay == 2) {
+                if (hour >= 8 && hour < 16) {
+                    if (available1 == 0) {
+                        var start = document.getElementById("tir1");
+                        start.classList.add("available");
+                    } else if (available1 == 1) {
+                        var start = document.getElementById("tir1");
+                        start.classList.add("unavailable");
+                    }
+
+                } else if (hour >= 16 && hour < 24) {
+                    if (available1 == 0) {
+                        var start = document.getElementById("tir2");
+                        start.classList.add("available");
+                    } else if (available1 == 1) {
+                        var start = document.getElementById("tir2");
+                        start.classList.add("unavailable");
+                    }
+
+
+                } else if (hour >= 0 && hour < 8) {
+                    if (available1 == 0) {
+                        var start = document.getElementById("tir3");
+                        start.classList.add("available");
+                    } else if (available1 == 1) {
+                        var start = document.getElementById("tir3");
+                        start.classList.add("unavailable");
+                    }
+                }
+            }
+
+            if (weekDay == 3) {
+                if (hour >= 8 && hour < 16) {
+                    if (available1 == 0) {
+                        var start = document.getElementById("ons1");
+                        start.classList.add("available");
+                    } else if (available1 == 1) {
+                        var start = document.getElementById("ons1");
+                        start.classList.add("unavailable");
+                    }
+
+                } else if (hour >= 16 && hour < 24) {
+                    if (available1 == 0) {
+                        var start = document.getElementById("ons2");
+                        start.classList.add("available");
+                    } else if (available1 == 1) {
+                        var start = document.getElementById("ons2");
+                        start.classList.add("unavailable");
+                    }
+
+
+                } else if (hour >= 0 && hour < 8) {
+                    if (available1 == 0) {
+                        var start = document.getElementById("ons3");
+                        start.classList.add("available");
+                    } else if (available1 == 1) {
+                        var start = document.getElementById("ons3");
+                        start.classList.add("unavailable");
+                    }
+                }
+            }
+
+            if (weekDay == 4) {
+                if (hour >= 8 && hour < 16) {
+                    if (available1 == 0) {
+                        var start = document.getElementById("tor1");
+                        start.classList.add("available");
+                    } else if (available1 == 1) {
+                        var start = document.getElementById("tor1");
+                        start.classList.add("unavailable");
+                    }
+
+                } else if (hour >= 16 && hour < 24) {
+                    if (available1 == 0) {
+                        var start = document.getElementById("tor2");
+                        start.classList.add("available");
+                    } else if (available1 == 1) {
+                        var start = document.getElementById("tor2");
+                        start.classList.add("unavailable");
+                    }
+
+
+                } else if (hour >= 0 && hour < 8) {
+                    if (available1 == 0) {
+                        var start = document.getElementById("tor3");
+                        start.classList.add("available");
+                    } else if (available1 == 1) {
+                        var start = document.getElementById("tor3");
+                        start.classList.add("unavailable");
+                    }
+                }
+            }
+
+            if (weekDay == 5) {
+                if (hour >= 8 && hour < 16) {
+                    if (available1 == 0) {
+                        var start = document.getElementById("fre1");
+                        start.classList.add("available");
+                    } else if (available1 == 1) {
+                        var start = document.getElementById("fre1");
+                        start.classList.add("unavailable");
+                    }
+
+                } else if (hour >= 16 && hour < 24) {
+                    if (available1 == 0) {
+                        var start = document.getElementById("fre2");
+                        start.classList.add("available");
+                    } else if (available1 == 1) {
+                        var start = document.getElementById("fre2");
+                        start.classList.add("unavailable");
+                    }
+
+
+                } else if (hour >= 0 && hour < 8) {
+                    if (available1 == 0) {
+                        var start = document.getElementById("fre3");
+                        start.classList.add("available");
+                    } else if (available1 == 1) {
+                        var start = document.getElementById("fre3");
+                        start.classList.add("unavailable");
+                    }
+                }
+            }
+
+            if (weekDay == 6) {
+                if (hour >= 8 && hour < 16) {
+                    if (available1 == 0) {
+                        var start = document.getElementById("lør1");
+                        start.classList.add("available");
+                    } else if (available1 == 1) {
+                        var start = document.getElementById("lør1");
+                        start.classList.add("unavailable");
+                    }
+
+                } else if (hour >= 16 && hour < 24) {
+                    if (available1 == 0) {
+                        var start = document.getElementById("lør2");
+                        start.classList.add("available");
+                    } else if (available1 == 1) {
+                        var start = document.getElementById("lør2");
+                        start.classList.add("unavailable");
+                    }
+
+
+                } else if (hour >= 0 && hour < 8) {
+                    if (available1 == 0) {
+                        var start = document.getElementById("lør3");
+                        start.classList.add("available");
+                    } else if (available1 == 1) {
+                        var start = document.getElementById("lør3");
+                        start.classList.add("unavailable");
+                    }
+                }
+            }
+
+            if (weekDay == 0) {
+                if (hour >= 8 && hour < 16) {
+                    if (available1 == 0) {
+                        var start = document.getElementById("søn1");
+                        start.classList.add("available");
+                    } else if (available1 == 1) {
+                        var start = document.getElementById("søn1");
+                        start.classList.add("unavailable");
+                    }
+
+                } else if (hour >= 16 && hour < 24) {
+                    if (available1 == 0) {
+                        var start = document.getElementById("søn2");
+                        start.classList.add("available");
+                    } else if (available1 == 1) {
+                        var start = document.getElementById("søn2");
+                        start.classList.add("unavailable");
+                    }
+
+
+                } else if (hour >= 0 && hour < 8) {
+                    if (available1 == 0) {
+                        var start = document.getElementById("søn3");
+                        start.classList.add("available");
+                    } else if (available1 == 1) {
+                        var start = document.getElementById("søn3");
+                        start.classList.add("unavailable");
+                    }
+                }
             }
 
 
-        } else if (hour >= 0 && hour < 8) {
-            if (available1 == 0) {
-                var start = document.getElementById("man3");
-                start.classList.add("available");
-            } else if (available1 == 1) {
-                var start = document.getElementById("man3");
-                start.classList.add("unavailable");
-            }
         }
+
+
     }
-
-    if (weekDay == 2) {
-        if (hour >= 8 && hour < 16) {
-            if (available1 == 0) {
-                var start = document.getElementById("tir1");
-                start.classList.add("available");
-            } else if (available1 == 1) {
-                var start = document.getElementById("tir1");
-                start.classList.add("unavailable");
-            }
-
-        } else if (hour >= 16 && hour < 24) {
-            if (available1 == 0) {
-                var start = document.getElementById("tir2");
-                start.classList.add("available");
-            } else if (available1 == 1) {
-                var start = document.getElementById("tir2");
-                start.classList.add("unavailable");
-            }
-
-
-        } else if (hour >= 0 && hour < 8) {
-            if (available1 == 0) {
-                var start = document.getElementById("tir3");
-                start.classList.add("available");
-            } else if (available1 == 1) {
-                var start = document.getElementById("tir3");
-                start.classList.add("unavailable");
-            }
-        }
-    }
-
-    if (weekDay == 3) {
-        if (hour >= 8 && hour < 16) {
-            if (available1 == 0) {
-                var start = document.getElementById("ons1");
-                start.classList.add("available");
-            } else if (available1 == 1) {
-                var start = document.getElementById("ons1");
-                start.classList.add("unavailable");
-            }
-
-        } else if (hour >= 16 && hour < 24) {
-            if (available1 == 0) {
-                var start = document.getElementById("ons2");
-                start.classList.add("available");
-            } else if (available1 == 1) {
-                var start = document.getElementById("ons2");
-                start.classList.add("unavailable");
-            }
-
-
-        } else if (hour >= 0 && hour < 8) {
-            if (available1 == 0) {
-                var start = document.getElementById("ons3");
-                start.classList.add("available");
-            } else if (available1 == 1) {
-                var start = document.getElementById("ons3");
-                start.classList.add("unavailable");
-            }
-        }
-    }
-
-    if (weekDay == 4) {
-        if (hour >= 8 && hour < 16) {
-            if (available1 == 0) {
-                var start = document.getElementById("tor1");
-                start.classList.add("available");
-            } else if (available1 == 1) {
-                var start = document.getElementById("tor1");
-                start.classList.add("unavailable");
-            }
-
-        } else if (hour >= 16 && hour < 24) {
-            if (available1 == 0) {
-                var start = document.getElementById("tor2");
-                start.classList.add("available");
-            } else if (available1 == 1) {
-                var start = document.getElementById("tor2");
-                start.classList.add("unavailable");
-            }
-
-
-        } else if (hour >= 0 && hour < 8) {
-            if (available1 == 0) {
-                var start = document.getElementById("tor3");
-                start.classList.add("available");
-            } else if (available1 == 1) {
-                var start = document.getElementById("tor3");
-                start.classList.add("unavailable");
-            }
-        }
-    }
-
-    if (weekDay == 5) {
-        if (hour >= 8 && hour < 16) {
-            if (available1 == 0) {
-                var start = document.getElementById("fre1");
-                start.classList.add("available");
-            } else if (available1 == 1) {
-                var start = document.getElementById("fre1");
-                start.classList.add("unavailable");
-            }
-
-        } else if (hour >= 16 && hour < 24) {
-            if (available1 == 0) {
-                var start = document.getElementById("fre2");
-                start.classList.add("available");
-            } else if (available1 == 1) {
-                var start = document.getElementById("fre2");
-                start.classList.add("unavailable");
-            }
-
-
-        } else if (hour >= 0 && hour < 8) {
-            if (available1 == 0) {
-                var start = document.getElementById("fre3");
-                start.classList.add("available");
-            } else if (available1 == 1) {
-                var start = document.getElementById("fre3");
-                start.classList.add("unavailable");
-            }
-        }
-    }
-
-    if (weekDay == 6) {
-        if (hour >= 8 && hour < 16) {
-            if (available1 == 0) {
-                var start = document.getElementById("lør1");
-                start.classList.add("available");
-            } else if (available1 == 1) {
-                var start = document.getElementById("lør1");
-                start.classList.add("unavailable");
-            }
-
-        } else if (hour >= 16 && hour < 24) {
-            if (available1 == 0) {
-                var start = document.getElementById("lør2");
-                start.classList.add("available");
-            } else if (available1 == 1) {
-                var start = document.getElementById("lør2");
-                start.classList.add("unavailable");
-            }
-
-
-        } else if (hour >= 0 && hour < 8) {
-            if (available1 == 0) {
-                var start = document.getElementById("lør3");
-                start.classList.add("available");
-            } else if (available1 == 1) {
-                var start = document.getElementById("lør3");
-                start.classList.add("unavailable");
-            }
-        }
-    }
-
-    if (weekDay == 0) {
-        if (hour >= 8 && hour < 16) {
-            if (available1 == 0) {
-                var start = document.getElementById("søn1");
-                start.classList.add("available");
-            } else if (available1 == 1) {
-                var start = document.getElementById("søn1");
-                start.classList.add("unavailable");
-            }
-
-        } else if (hour >= 16 && hour < 24) {
-            if (available1 == 0) {
-                var start = document.getElementById("søn2");
-                start.classList.add("available");
-            } else if (available1 == 1) {
-                var start = document.getElementById("søn2");
-                start.classList.add("unavailable");
-            }
-
-
-        } else if (hour >= 0 && hour < 8) {
-            if (available1 == 0) {
-                var start = document.getElementById("søn3");
-                start.classList.add("available");
-            } else if (available1 == 1) {
-                var start = document.getElementById("søn3");
-                start.classList.add("unavailable");
-            }
-        }
-    }
-
-
-}
-
-
-
 
 
 
@@ -268,44 +313,6 @@ $.get('/getAvailability', {}, function(req, res, data){
 });
 
 
-
-
-
-//Build Table
-
-function buildHtmlTable(selector,list) {
-    var columns = addAllColumnHeaders(list, selector);
-    var tbody = $('<tbody/>');
-    for (var i = 0; i < list.length; i++) {
-        var row$ = $('<tr id=' + i + '/>');
-        for (var colIndex = 0; colIndex < columns.length; colIndex++) {
-            var cellValue = list[i][columns[colIndex]];
-            if (cellValue == null) cellValue = "";
-            row$.append($('<td/>').html(cellValue));
-        }
-        // $(row$).setAttribute('id',"surprise maddafakka");
-        $(selector).append(row$);
-        $(tbody).append(row$);
-    }
-    $(selector).append(tbody);
-}
-function addAllColumnHeaders(list, selector) {
-    var columnSet = [];
-    var headerThead$ = $('<thead/>');
-    var headerTr$ = $('<tr/>');
-    for (var i = 0; i < list.length; i++) {
-        var rowHash = list[i];
-        for (var key in rowHash) {
-            if ($.inArray(key, columnSet) == -1) {
-                columnSet.push(key);
-                headerTr$.append($('<th/>').html(key));
-            }
-        }
-    }
-    $(selector).append(headerThead$);
-    $(headerThead$).append(headerTr$);
-    return columnSet;
-}
 
 
 function getWeekNumber(d) {
@@ -324,13 +331,10 @@ function getWeekNumber(d) {
 }
 
 
-$( "#available-next" ).click(function() {
 
-});
 
-$( "#available-prev" ).click(function() {
 
-});
+
 
 
 
@@ -424,28 +428,7 @@ $(function() {
 
     });
 
-    $('#available').on('click', function(){
-        if ( $(boxs).hasClass( 'highlight' ) ) {
-            $('.highlight').removeClass('unavailable');
-            $('.highlight').each(function() {
-                alert( this.id );
-            });
-            $('.highlight').addClass('available').removeClass('highlight');
 
-        }
-
-    });
-
-    $('#unavailable').on('click', function(){
-        if ( $(boxs).hasClass( 'highlight' ) ) {
-            $('.highlight').removeClass('available');
-            $('.highlight').each(function() {
-                alert( this.id );
-            });
-            $('.highlight').addClass('unavailable').removeClass('highlight');
-        }
-
-    });
 
 
 
@@ -468,5 +451,14 @@ $(function() {
     }
 });
 
+
+function assignDate() {
+
+    var dag = "tir1";
+
+
+
+
+}
 
 
