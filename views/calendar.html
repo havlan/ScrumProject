@@ -28,8 +28,13 @@
         <button type="button" class="menuBtn" id="shiftB" data-toggle="modal" data-target="#switchModal"><span>Ledige vakter</span></button>
         <button type="button" class="menuBtn" onclick="location.href='/appeal';" id="extraB" ><span>Fravær og overtid</span></button>
     </aside>
+
+    <aside id="nextShift">
+        <h4 class="shiftHeader"> NESTE VAKT</h4>
+        <p id="nextShiftInfo"></p>
+    </aside>
     <aside id="warning">
-        <h4 class="shiftHeader" onclick="buttonChangeTab()"> INFORMASJON </h4>
+        <h4 class="shiftHeader" onclick="buttonChangeTab()"> FORKLARING </h4>
         <div>
             <div id="myShifts"></div>
             <p id="myShiftsText">De grønne vaktene er vakter du har godkjent. Trykk på disse for å få oversikt over den enkelte vakten. </p>
@@ -37,11 +42,6 @@
             <p id="availShiftsText">De gule vaktene er ledige vakter du kan ta. Trykk på vaktene for å sende inn forespørsel om å ta den enkelte vakten.</p>
         </div>
     </aside>
-    <aside id="nextShift">
-        <h4 class="shiftHeader"> NESTE VAKT</h4>
-        <p id="nextShiftInfo"></p>
-    </aside>
-
 
 
     <!-- 1:Modal-switch -->
