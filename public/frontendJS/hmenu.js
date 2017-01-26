@@ -11,13 +11,11 @@ $.get('/getClearenceLevel', {}, function(req, res, data){
         showB();
     }
 });
-/*
 function showA() {
     document.getElementById("navButt1").style.display = 'block';
     document.getElementById("dropdown2").style.display = 'block';
     document.getElementById("dropdown1").style.display = 'block';
 }
-*/
 function showK() {
     document.getElementById("navButt2").style.display = 'block';
     document.getElementById("element7").style.display = 'block';

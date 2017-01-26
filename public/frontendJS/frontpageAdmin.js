@@ -2,7 +2,6 @@
 $(document).ready (function(){
     $("#successMessageBox").hide();
     $("#testButton").click(function showAlert() { //TODO
-        $("#successMessageBox").alert();
         $("#successMessageBox").fadeTo(2000, 500).slideUp(500, function(){
             $("#success-alert").slideUp(500);
         });
