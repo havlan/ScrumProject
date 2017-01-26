@@ -84,6 +84,7 @@ module.exports = function (app, passport) {
     app.post('/postShift', isOfficeEmp, postCtrl.postShift);
     app.post('/postShift_has_employee', isOfficeEmp, postCtrl.postShift_has_employee);
     app.post('/postRequest', isLoggedIn, postCtrl.postRequest);
+    app.post('/postRequestShift', isLoggedIn, postCtrl.postRequestShift);
     app.post('/postAbsence', isLoggedIn, postCtrl.postAbsence);
     app.post('/postOvertime', isLoggedIn, postCtrl.postOvertime);
     app.post('/postLogInInfo', isOfficeEmp, postCtrl.postLogInInfo);

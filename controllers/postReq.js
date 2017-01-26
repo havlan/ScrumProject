@@ -22,6 +22,9 @@ module.exports = {
     postRequest : function (req, res) {
         dbMiddelware.postNewRequest(req,res);
     },
+    postRequestShift : function (req, res) {
+        dbMiddelware.postNewRequestShift(req,res);
+    },
     postAbsence : function (req,res) {
         dbMiddelware.postNewAbsence(req,res);
     },
