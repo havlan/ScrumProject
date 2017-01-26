@@ -19,7 +19,41 @@
 
 <body>
 
-<!-- Modal: shifts-->
+<div class="modal fade" id="switchModal" role="dialog">
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h3 class="modal-title">Opprett ny vakt</h3>
+            </div>
+
+            <main class="modal-body">
+                <div id="selectDateBox">
+                    <p>Dato og tid</p>
+                    <select id="selectDate"></select>
+                    <select id="selectShift"></select>
+                </div>
+                <div id="selectdepartmentBox">
+                    <p>Avdeling</p>
+                    <select id= "selectDepartment"></select>
+                </div>
+                <div id="selectNumberBox">
+                    <p>Antall</p>
+                    <select id= "selectNumber" onchange="getDispersion(this)"></select>
+                </div>
+                <div id="selectPeopleBox">
+                    <table id="selectPeopleTable"></table>
+                </div>
+                <button type="button" id="lagreNyVakt" data-dismiss="modal">Lagre</button>
+            </main>
+
+            <div class="modal-footer">
+                <button type="button" class="closeButton" data-dismiss="modal">Lukk</button>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="modal" id="adminNewShiftModal" role="dialog">
     <div class="modal-dialog">
     <div class="modal-content">
@@ -51,8 +85,10 @@
 </div>
 </div>
 
-
-<div id='calendarx'></div>
+<div id="container">
+    <button type="button" class="menuBtn" id="createNewShift" data-toggle="modal" data-target="#switchModal"><span>Opprett ny vakt</span></button>
+    <div id='calendarx'></div>
+</div>
 
 </body>
 </html>

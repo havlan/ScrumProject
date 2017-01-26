@@ -3,9 +3,14 @@ body {
     font-family: "Lucida Grande","Helvetica","Arial","Verdana",sans-serif;
     font-size: 14px;
 }
-html, body {
+html, body{
     height:100%;
     width:100%;
+}
+
+#container {
+    width:96%;
+    margin: 0 2% 0 2%;
 }
 
 #calendar {
@@ -111,6 +116,11 @@ html, body {
 @media
 only screen and (max-width: 760px),
 (min-device-width: 768px) and (max-device-width: 1024px)  {
+    #container {
+        margin:0;
+        width:100%;
+    }
+
     #calendar {
         position:relative;
         width:calc(100% - 1em);
