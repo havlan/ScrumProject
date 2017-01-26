@@ -42,6 +42,7 @@ module.exports = function (app, passport) {
     app.get('/getOvertimeNum',isOfficeEmp,getCtrl.getOvertimeNum);
     app.get('/getChangeNum',isOfficeEmp,getCtrl.getChangeNum);
     app.get('/getClearenceLevel',isLoggedIn,getCtrl.getClearenceLevel);
+    app.get('/getPersonalShiftEventsDone', isLoggedIn, getCtrl.getPersonalShiftEventsDone);
 
     app.get('/getAvailability',isLoggedIn, getCtrl.getAvailability);
 
