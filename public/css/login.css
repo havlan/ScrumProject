@@ -140,7 +140,7 @@ element {
 
 @media screen and (min-width: 480px)  {
     #loginbody {
-        background-size: 100% 250%;
+        background-size: 100%;
     }
 
 }
