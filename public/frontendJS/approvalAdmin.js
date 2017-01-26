@@ -78,9 +78,11 @@ function addAllColumnHeaders(list, selector) {
     return columnSet;
 }
 
+//when you press a checkbox in switchtable
 $(document).on('click','#switchTable .openModal',function (e) {
+    indeks = $(this).closest("tr").find('td:eq(0)').text();
+    //if checkbox is checked
     if ($(this).is(':checked')) {
-        indeks =
         ansattid = $(this).closest("tr").find('td:eq(1)').text();
         document.getElementById("skiftdb").innerHTML = "Skift: "+indeks;
         $.get('/getAvailableEmpForShift/'+parseInt(indeks),function(req,res,data1){
@@ -89,14 +91,17 @@ $(document).on('click','#switchTable .openModal',function (e) {
             console.log(data1.responseJSON);
         });
         $('#approveModal').modal('show');
+        //if checkbox is unchecked
     } else {
         $('#approveModal').modal('hide');
     }
+    //on modal close
     $('#closeModal').on('click',function () {
         $('input[class=openModal]').prop('checked', false);
         $('#ansattTable').remove();
     });
-    $('input[type="checkbox"]').on('change', function() {
+    //when one checkbox is checked the remaining are left unchecked
+       $('input[type="checkbox"]').on('change', function() {
         $('input[type="checkbox"]').not(this).prop('checked', false);
     });
 });
@@ -115,9 +120,6 @@ $(document).on('click','#Lagre',function (e) {
         return $(this).closest("tr").find('td:eq(0)').text();
     }).toArray(); // <----
     var data2 = $("#overtimeTable").find("input:checkbox:checked").map(function(){
-        return $(this).closest("tr").find('td:eq(0)').text();
-    }).toArray(); // <----
-    var data3 = $("#switchTable").find("input:checkbox:checked").map(function(){
         return $(this).closest("tr").find('td:eq(0)').text();
     }).toArray(); // <----
   //  console.log(data);
@@ -143,17 +145,6 @@ $(document).on('click','#Lagre',function (e) {
             }
         });
     }
-    for(i=0; i<data3.length; i++){
-        console.log(data3[i]);
-        $.ajax({
-            url: '/updateRequest2',
-            type:'POST',
-            data:{'request_id':data3[i],'checked_by_admin':1},
-            success:function (data) {
-                alert("success!");
-            }
-        });
-    }
 
 });
 function fjernAnsatt(){
@@ -170,6 +161,14 @@ function erstattAnsatt() {
         data:{'employee_id':ansattid,'shift_id':skiftid,'employee_id2':nyansattid},
         success:function (data) {
             alert("success!");
+        }
+    });
+    $.ajax({
+        url: '/updateRequest2',
+        type:'POST',
+        data:{'request_id':indeks,'checked_by_admin':1},
+        success:function (data) {
+          //  alert("success!");
         }
     });
 }
