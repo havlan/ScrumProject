@@ -32,12 +32,19 @@ $(document).ready(function() {
             }]
         ,
         eventClick:  function(event, jsEvent, view) {
-
-                console.log("hei potet "+ event.color);
+            if(event.phone_nr) {
                 $('#modalShift').html(event.title);
+                $('#department').html("Avdeling: " + event.description);
                 $('#begin').html("Starter: " + moment(event.start).format('MMM Do h:mm A'));
                 $('#end').html("Slutter: " + moment(event.end || event.start).format('MMM Do h:mm A'));
                 $('#fullCalModal').modal();
+            } else{
+                $('#modalShiftFree').html(event.title);
+                $('#departmentFree').html("Avdeling: " + event.description);
+                $('#beginFree').html("Starter: " + moment(event.start).format('MMM Do h:mm A'));
+                $('#endFree').html("Slutter: " + moment(event.end || event.start).format('MMM Do h:mm A'));
+                $('#fullCalModalFree').modal();
+            }
         }
     });
 
