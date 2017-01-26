@@ -8,7 +8,6 @@ html, body{
     width:100%;
 }
 
-
 #container {
     width:96%;
     margin: 0 2% 0 2%;
@@ -50,10 +49,7 @@ html, body{
 #warning{
     margin-top: 40px;
 }
-#warning:hover{
-    background-color: lightyellow;
-    cursor: pointer;
-}
+
 .shiftHeader{
     text-align: center;
 }
@@ -152,6 +148,8 @@ only screen and (max-width: 760px),
         margin-left:0.5em;
         margin-right:0.5em;
         float:left;
+        padding: 5%;
+        overflow: visible;
     }
     .fc-basic-view .fc-body .fc-row{
         height:10vw;

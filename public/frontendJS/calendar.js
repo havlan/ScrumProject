@@ -15,27 +15,29 @@ $(document).ready(function() {
         weekNumbers:true,
         navLinks: false,
         editable: false,
-        eventColor: '#7bc7ff', //default event color //can be set individually
-        eventTextColor: '#000000', //default event text color
+        eventColor: '#7bc7ff',
+        eventTextColor: '#000000',
         height: 'auto',
         //GETTING EVENTS FROM JSON FEED; SHORT AND EXTENDED
         eventSources: [
             {
-                url: '/getPersonalShiftEvents', // use the `url` property
-                color: '#8cd9ad',    // an option!
-                textColor: 'black'  // an option!
+                url: '/getPersonalShiftEvents',
+                color: '#8cd9ad',
+                textColor: 'black'
             },
             {
-                url: '/getPossibleSiftsEvents', // use the `url` property
-                color: '#ffe066',    // an option!
-                textColor: 'black'  // an option!
+                url: '/getPossibleSiftsEvents',
+                color: '#ffe066',
+                textColor: 'black'
             }]
         ,
         eventClick:  function(event, jsEvent, view) {
-            $('#modalShift').html(event.title);
-            $('#begin').html("Starter: " + moment(event.start).format('MMM Do h:mm A'));
-            $('#end').html("Slutter: " + moment(event.end || event.start).format('MMM Do h:mm A'));
-            $('#fullCalModal').modal();
+
+                console.log("hei potet "+ event.color);
+                $('#modalShift').html(event.title);
+                $('#begin').html("Starter: " + moment(event.start).format('MMM Do h:mm A'));
+                $('#end').html("Slutter: " + moment(event.end || event.start).format('MMM Do h:mm A'));
+                $('#fullCalModal').modal();
         }
     });
 

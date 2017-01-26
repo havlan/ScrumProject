@@ -23,6 +23,7 @@ function showK() {
     document.getElementById("element9").style.display = 'block';
     document.getElementById("element10").style.display = 'block';
     document.getElementById("element11").style.display = 'block';
+    document.getElementById("element12").style.display = 'block';
 }
 function showB() {
     document.getElementById("navButt1").style.display = 'block';
