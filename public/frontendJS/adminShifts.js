@@ -51,19 +51,15 @@ $(document).ready(function() {
         modal.style.display = "none";
     };
 
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    };
-
     createNumberDropdown();
 });
 
 
 
 
+
 function createNumberDropdown(){
+    console.log("kjører num drop");
     $('#chooseNumber').append($('<option />').text(0));
     for (var i = 4; i < 21; i++) {
         var option = $('<option />').text(i);
@@ -86,21 +82,28 @@ function getDispersion(res) {
         hjelp = Math.round(ant*0.3);
     }
     var annet = Math.round(ant/2);
-    createPeopleDropdown(syk, hjelp, annet);
+    getData(syk, hjelp, annet);
 }
 
-$.ajax({
-    url: '/getVaktliste1', //this is the submit URL
-    type: 'POST',
-    data: {'shift_id': eventId,'type_name':"Sykepleier"},
-    success: function(data){
-        console.log('successfully submitted');
-        console.log(data);
-        employeesSyk = data.responseJSON;
-    },
-    failure: function(err) {console.log("Error"+err);}
-});
+function closeModal() {
+    console("asdfasdfa");
+    $("#adminNewShiftModal").modal('hide');
+}
 
+function getData(antSyk, antHjelp, antAnnet) {
+    $.ajax({
+        url: '/getEmpForShiftDate', //this is the submit URL
+        type: 'POST',
+        data: {'shift_id': eventId,'type_name': "Sykepleier"},
+        success: function(data){
+            console.log("event id = "+eventId);
+            console.log(data);
+            employeesSyk = data.responseJSON;
+            createPeopleDropdown(antSyk, antHjelp, antAnnet);
+        },
+        failure: function(err) {console.log("Error"+err);}
+    });
+}
 
 $.get('/getEmployee', {}, function(req, res, data){
     employeesHelp = data.responseJSON;
