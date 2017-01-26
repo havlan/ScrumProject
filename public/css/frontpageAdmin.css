@@ -47,8 +47,17 @@ html, body {
     background-color: lightyellow;
     cursor: pointer;
 }
-#absenceWarning, #overTimeWarning, #changWarning, #exchangeWarning {
-
+#absenceWarning, #overtimeWarning, #changeWarning {
+    padding:1% 0 1% 0;
+    margin:1% 2% 1% 2%;
+    text-align: center;
+    background-color: #efefef;
+    border: solid #dedede 1px;
+    border-radius: 5px;
+    box-shadow: inset 0 0 10px 1px #dedede;
+}
+#warning:hover #absenceWarning, #warning:hover #overtimeWarning, #warning:hover #changeWarning {
+    background-color: #fcf8e3;
 }
 #freeShifts{
     margin-bottom:1%;
@@ -146,5 +155,10 @@ only screen and (max-width: 760px),
     #freeShiftsText {
         color:black;
         font-size:1em;
+    }
+    #absenceWarning, #overtimeWarning, #changeWarning {
+        padding:0.3em 0 0.3em 0;
+        margin:0.3em 0.15em 0.3em 0.15em;
+        font-size:1.2em;
     }
 }

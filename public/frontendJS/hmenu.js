@@ -8,9 +8,9 @@ $.get('/getClearenceLevel', {}, function(req, res, data){
         showB();
         showK();
     } else if (clearence == 1) {
-        showK()
+        showK();
     } else if (clearence == 2) {
-        showB()
+        showB();
     }
 });
 

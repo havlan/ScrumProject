@@ -101,7 +101,16 @@ module.exports = {
         dbHelper.getdbQuery(req, res, "SELECT e.employee_id, e.name FROM Employee e, Shift s WHERE (SELECT rank FROM Type t WHERE t.name = s.type_name)<=(SELECT rank FROM Type t WHERE t.name = e.type_name) AND s.date NOT IN(SELECT a.day FROM Availability a WHERE a.employee_id = e.employee_id AND availability = 1) AND s.date NOT IN(SELECT date FROM Shift ss, shift_has_employee she WHERE ss.shift_id = she.shift_id AND she.employee_id = e.employee_id) AND s.shift_id = ?", [req.body.shift_id]);
     },
     getAvailableShifts : function (req, res){
-        dbHelper.getdbQuery(req, res, "select count(*) as total from available_shift");
+        dbHelper.getdbQuery(req, res, "select count(*) as total From available_shift");
+    },
+    getAbsenceNum : function (req, res){
+        dbHelper.getdbQuery(req, res, "select count(*) as total From Absence Where checked_by_admin=0");
+    },
+    getOvertimeNum : function (req, res){
+        dbHelper.getdbQuery(req, res, "select count(*) as total From Overtime Where checked_by_admin=0");
+    },
+    getChangeNum : function (req, res){
+        dbHelper.getdbQuery(req, res, "select count(*) as total From Request Where checked_by_admin=0");
     },
 
 
@@ -192,15 +201,15 @@ module.exports = {
     },
     getVaktliste1: function (req,res) {
         console.log("Posting new Departments");
-        dbHelper.getdbQuery(req, res, "select * from WORKTOGETHERDAY1 where department_name = ? and DATE(date) = '2017-01-25'", [req.body.department_name]);
+        dbHelper.getdbQuery(req, res, "select * from WORKTOGETHERDAY1 where department_name = ? and DATE(date) = ?", [req.body.department_name,req.body.date]);
     },
     getVaktliste2: function (req,res) {
         console.log("Posting new Departments");
-        dbHelper.getdbQuery(req, res, "select * from WORKTOGETHERDAY2 where department_name = ? and DATE(date) = '2017-01-25'", [req.body.department_name]);
+        dbHelper.getdbQuery(req, res, "select * from WORKTOGETHERDAY2 where department_name = ? and DATE(date) = ?", [req.body.department_name,req.body.date]);
     },
     getVaktliste3: function (req,res) {
         console.log("Posting new Departments");
-        dbHelper.getdbQuery(req, res, "select * from WORKTOGETHERDAY3 where department_name = ? and DATE(date) = '2017-01-25'", [req.body.department_name]);
+        dbHelper.getdbQuery(req, res, "select * from WORKTOGETHERDAY3 where department_name = ? and DATE(date) = ?", [req.body.department_name,req.body.date]);
     },
 
     /*
