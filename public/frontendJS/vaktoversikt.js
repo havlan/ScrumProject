@@ -22,7 +22,7 @@ function currentDay(today1) {
 }
 
 $(document).ready(function(){
-    myfunc();
+    oppdateTable();
 });
 
 $.get('/getDepartment', {}, function(req, res, data){
@@ -42,11 +42,8 @@ function makeDropdown(selector,list) {
     }
 }
 
-function mdlFunc() {
-    alert("Nå oppdaterer jeg tabelen med hensyn til : "+document.getElementById("datePicker").value);
-}
 
-function myfunc(){
+function oppdateTable(){
     $(".table").empty();
     $.ajax({
         url: '/getVaktliste2', //this is the submit URL
