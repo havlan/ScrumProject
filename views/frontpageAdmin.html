@@ -22,37 +22,40 @@
 <script>$("#includedContent").load("menu");</script>
 
 <body>
-<div id='calendar' style="display:block"></div>
+<div id="container">
+    <div id='calendar' style="display:block"></div>
 
-<aside id="warning">
-    <h4 class="titles" onclick="buttonChangeTab()"> VARSEL </h4>
-    <div id="absenceWarning"></div>
-    <div id="overtimeWarning"></div>
-    <div id="changeWarning"></div>
+    <aside id="warning">
+        <h4 class="titles" onclick="buttonChangeTab()"> VARSEL </h4>
+        <div id="absenceWarning"></div>
+        <div id="overtimeWarning"></div>
+        <div id="changeWarning"></div>
 
-</aside>
-<aside id="freeShifts" onclick="location.href='/adminShifts';" >
-    <h4 class="titles"> LEDIGE VAKTER </h4>
-    <div id="freeShiftsNumber"></div>
-    <div id="freeShiftsText">Administrer vakter</div>
-</aside>
+    </aside>
+    <aside id="freeShifts" onclick="location.href='/adminShifts';" >
+        <h4 class="titles"> LEDIGE VAKTER </h4>
+        <div id="freeShiftsNumber"></div>
+        <div id="freeShiftsText">Administrer vakter</div>
+    </aside>
 
 
-<section id="list" style="display:none">
-    <h1> Dagens vakter </h1>
-    <ul>
-        <li>Bente</li>
-        <li>Berit</li>
-        <li>Bil</li>
-        <li>Båt</li>
-        <li>Bål</li>
-        <li>hei</li>
-    </ul>
-</section>
+    <section id="list" style="display:none">
+        <h1> Dagens vakter </h1>
+        <ul>
+            <li>Bente</li>
+            <li>Berit</li>
+            <li>Bil</li>
+            <li>Båt</li>
+            <li>Bål</li>
+            <li>hei</li>
+        </ul>
+    </section>
 
-<button type="button" class="buttonsAdmin" id="calendarButton" onclick="calendarFunction()" autofocus><span> Kalender &#128197;</span></button>
-<button type="button" class="buttonsAdmin" id="buttonChangeTab"  onclick="location.href='/approvalAdmin';"><span>Godkjenning&#10003;</span></button>
-<button type="button" class="buttonsAdmin" id="listButton"  onclick="location.href='/vaktoversikt';"><span>Dagens vakter</span></button>
+    <button type="button" class="buttonsAdmin" id="calendarButton" onclick="calendarFunction()" autofocus><span> Kalender &#128197;</span></button>
+    <button type="button" class="buttonsAdmin" id="buttonChangeTab"  onclick="location.href='/approvalAdmin';"><span>Godkjenning&#10003;</span></button>
+    <button type="button" class="buttonsAdmin" id="listButton"  onclick="location.href='/vaktoversikt';"><span>Dagens vakter</span></button>
+
+</div>
 
 </body>
 <script>
