@@ -2,8 +2,7 @@
  * Created by rebekkaheggebo on 20.01.2017.
  */
 var myList = [];
-//hei
-$.get('/getEmployee', {}, function(req, res, data){
+$.get('/getEmployeeRestricted', {}, function(req, res, data){
     console.log(data);
     console.log(data.responseJSON[0]);
     myList = data.responseJSON;
