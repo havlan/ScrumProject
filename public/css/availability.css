@@ -11,7 +11,7 @@
 }
 
 tr { cursor: default; }
-.highlight { background: yellow; }
+.highlight { background: yellow !important; }
 
 .available { background: #b1d9b3; }
 .unavailable { background: #ffdbcf; }

@@ -6,7 +6,8 @@
 
     <link href="/css/fullcalendar.min.css" rel="stylesheet"/>
     <link href="/css/fullcalendar.print.min.css" rel="stylesheet" media="print"/>
-
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="/frontendJS/moment.min.js"></script>
     <script src="/frontendJS/jquery.min.js"></script>
@@ -22,38 +23,33 @@
 <script>$("#includedContent").load("menu");</script>
 
 <body>
+<div class="alert alert-success fade in" id="successMessageBox"> <!-- TAG #successMessage FOR ALERTS -->
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <span id="successMessage">This is the default warning text</span>
+</div>
+
+
 <div id="container">
+    <div id="adminHomeTitle">HJEM</div>
+
     <div id='calendar' style="display:block"></div>
 
-    <aside id="warning">
-        <h4 class="titles" onclick="buttonChangeTab()"> VARSEL </h4>
-        <div id="absenceWarning"></div>
-        <div id="overtimeWarning"></div>
-        <div id="changeWarning"></div>
+    <button type="button" class="buttonsAdmin" id="buttonChangeTab"  onclick="location.href='/approvalAdmin';"><span>Godkjenning &#10003;</span></button>
+    <button type="button" class="buttonsAdmin" id="listButton"  onclick="location.href='/vaktoversikt';"><span>Dagens vakter</span></button>
 
-    </aside>
     <aside id="freeShifts" onclick="location.href='/adminShifts';" >
         <h4 class="titles"> LEDIGE VAKTER </h4>
         <div id="freeShiftsNumber"></div>
         <div id="freeShiftsText">Administrer vakter</div>
     </aside>
+    <aside id="warning" onclick="location.href='/approvalAdmin';">
+        <h4 class="titles" onclick="buttonChangeTab()"> VARSEL </h4>
+        <div id="absenceWarning"></div>
+        <div id="overtimeWarning"></div>
+        <div id="changeWarning"></div>
+    </aside>
 
-
-    <section id="list" style="display:none">
-        <h1> Dagens vakter </h1>
-        <ul>
-            <li>Bente</li>
-            <li>Berit</li>
-            <li>Bil</li>
-            <li>Båt</li>
-            <li>Bål</li>
-            <li>hei</li>
-        </ul>
-    </section>
-
-    <button type="button" class="buttonsAdmin" id="calendarButton" onclick="calendarFunction()" autofocus><span> Kalender &#128197;</span></button>
-    <button type="button" class="buttonsAdmin" id="buttonChangeTab"  onclick="location.href='/approvalAdmin';"><span>Godkjenning&#10003;</span></button>
-    <button type="button" class="buttonsAdmin" id="listButton"  onclick="location.href='/vaktoversikt';"><span>Dagens vakter</span></button>
+    <button type="button" id="testButton">warning test</button>
 
 </div>
 

@@ -28,14 +28,20 @@
         <button type="button" class="menuBtn" id="shiftB" data-toggle="modal" data-target="#switchModal"><span>Ledige vakter</span></button>
         <button type="button" class="menuBtn" onclick="location.href='/appeal';" id="extraB" ><span>Fravær og overtid</span></button>
     </aside>
-    <aside id="warning">
-        <h4 class="shiftHeader" onclick="buttonChangeTab()"> VARSEL </h4>
-    </aside>
+
     <aside id="nextShift">
         <h4 class="shiftHeader"> NESTE VAKT</h4>
-        <p id="nextShiftInfo">:)</p>
+        <p id="nextShiftInfo"></p>
     </aside>
-
+    <aside id="warning">
+        <h4 class="shiftHeader" onclick="buttonChangeTab()"> FORKLARING </h4>
+        <div>
+            <div id="myShifts"></div>
+            <p id="myShiftsText">De grønne vaktene er vakter du har godkjent. Trykk på disse for å få oversikt over den enkelte vakten. </p>
+            <div id="availShifts"></div>
+            <p id="availShiftsText">De gule vaktene er ledige vakter du kan ta. Trykk på vaktene for å sende inn forespørsel om å ta den enkelte vakten.</p>
+        </div>
+    </aside>
 
 
     <!-- 1:Modal-switch -->
@@ -67,66 +73,6 @@
     </div>
 </div>
 
-<div class="modal fade" id="addModal" role="dialog">
-    <div class="modal-dialog">
-        <!-- Modal content-->
-        <!-- Modal header-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h3 class="modal-title">Legg til ansatt</h3>
-            </div>
-            <!-- Modal body-->
-
-            <main class="modal-body">
-                <img id="picEmp" src="http://www.freeiconspng.com/uploads/profile-icon-9.png" alt="Bilde av ansatt"
-                     height="150px" width="150px"></img>
-                <button type="button" id="addPicEmp">Legg til bilde</button>
-                <form id="addEmp">
-                    Brukernavn:
-                    <input required id="brukernavn" type="text" name="username" placeholder="eks: småripshunter69">
-                    <br>
-                    Er_Admin:
-                    <input required id="admin" type="number" name="admin" placeholder="eks: 0 eller 1">
-                    <br>
-                    Navn:
-                    <input required id="fornavn" type="text" name="name" placeholder="eks: Jan Skrotnes">
-                    <br>
-                    Stilling:
-                    <select id= "stilling">
-                    </select>
-                    <br>
-                    Telefonnummer:
-                    <input required id="telefon" type="number" name="phone" placeholder="eks: +47 12345678">
-                    <br>
-                    E-postadresse:
-                    <input required id="epost" type="text" name="email" placeholder="eks: noen@mail.no">
-                    <br>
-                    Adresse:
-                    <input required id="adresse" type="text" name="address" placeholder="eks: Gateveien 1">
-                    <br>
-                    Personnummer:
-                    <input required id="personnummer" type="text" name="persNo" placeholder="11 siffer">
-                    <br>
-                    Seniority:
-                    <input required id="seniority" type="text" name="seniority" placeholder="eks: 69">
-                    <br>
-                    Responsibility:
-                    <input required id="responsibility" type="text" name="responsibility" placeholder="1 or 0">
-                    <br>
-                    <br>
-                    <br>
-                    <p id="newUserFeedback"></p>
-                    <button id="save" type="submit" value="submit">Lagre</button>
-                </form>
-            </main>
-            <!-- Modal footer-->
-            <div class="modal-footer">
-                <button type="button" class="closeButton" data-dismiss="modal">Lukk</button>
-            </div>
-        </div>
-    </div>
-</div>
 
 <div id="fullCalModal" class="modal fade">
     <div class="modal-dialog">
@@ -136,8 +82,28 @@
                 <h4 id="modalShift" class="modal-title"></h4>
             </div>
             <div id="modalBody" class="modal-body">
-                <p id ="begin">hei</p>
-                <p id="end">hadet</p>
+                <p id ="begin"></p>
+                <p id="end"></p>
+                <p id="department"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="close" data-dismiss="modal">Lukk</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="fullCalModalFree" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 id="modalShiftFree" class="modal-title"></h4>
+            </div>
+            <div id="modalBodyFree" class="modal-body">
+                <p id ="beginFree"></p>
+                <p id="endFree"></p>
+                <p id="departmentFree"></p>
                 <button type="button" id="sendRequest" data-dismiss="modal" onclick="saveReq()">Send forespørsel</button>
             </div>
             <div class="modal-footer">

@@ -49,10 +49,7 @@ html, body{
 #warning{
     margin-top: 40px;
 }
-#warning:hover{
-    background-color: lightyellow;
-    cursor: pointer;
-}
+
 .shiftHeader{
     text-align: center;
 }
@@ -112,6 +109,29 @@ html, body{
     cursor:pointer;
     width: 150px;
 }
+#save{
+    background-color: #4CAF50;
+    margin-left:calc(100% - 150px);
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 5px 10px;
+    text-align: center;
+    cursor:pointer;
+    width: 150px;
+}
+#myShifts{
+    width: 10px;
+    height: auto;
+}
+#availShiftsText{
+    background-color: #ffe066;
+    padding: 2%;
+}
+#myShiftsText{
+    background-color:  #8cd9ad;
+    padding: 2%;
+}
 
 @media
 only screen and (max-width: 760px),
@@ -128,17 +148,25 @@ only screen and (max-width: 760px),
         margin-left:0.5em;
         margin-right:0.5em;
         float:left;
+        padding: 5%;
+        overflow: visible;
     }
     .fc-basic-view .fc-body .fc-row{
         height:10vw;
     }
-    #nextShift, #warning {
+    #nextShift{
         float:right;
         height: 11em;
         width: calc(50% - 1em);
         margin: 0.5em 0.5em 0.5em 0.5em;
     }
-    .menuBtn{
+     #warning{
+         float:right;
+         height: auto;
+         width: calc(50% - 1em);
+         margin: 0.5em 0.5em 0.5em 0.5em;
+     }
+  .menuBtn{
         float:left;
         font-size: 1em;
         width: calc(50% - 1em);
