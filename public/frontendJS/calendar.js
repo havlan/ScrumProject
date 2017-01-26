@@ -153,7 +153,7 @@ $(document).on('click','#sendRequest',function () {
             }
         });
     }else {
-        console.log("an error occurred");
+        console.log("an error occurred 2B|!2B");
     }
 });
 
