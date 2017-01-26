@@ -28,7 +28,7 @@ function showK() {
 function showB() {
     document.getElementById("navButt1").style.display = 'block';
     document.getElementById("element1").style.display = 'block';
-    document.getElementById("element2").style.display = 'block';
+    //document.getElementById("element2").style.display = 'block';
     document.getElementById("element3").style.display = 'block';
     document.getElementById("element4").style.display = 'block';
     document.getElementById("element5").style.display = 'block';
