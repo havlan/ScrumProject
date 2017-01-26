@@ -23,7 +23,11 @@
 <body>
 <div id="container">
     <div id='calendar'></div>
-
+    <aside id="menuEmp">
+        <button type="button" class="menuBtn" onclick="location.href='/availability';" id="availabilityB"><span>Tilgjengelighet</span></button>
+        <button type="button" class="menuBtn" id="shiftB" data-toggle="modal" data-target="#switchModal"><span>Ledige vakter</span></button>
+        <button type="button" class="menuBtn" onclick="location.href='/appeal';" id="extraB" ><span>Fravær og overtid</span></button>
+    </aside>
     <aside id="warning">
         <h4 class="shiftHeader" onclick="buttonChangeTab()"> VARSEL </h4>
     </aside>
@@ -32,11 +36,7 @@
         <p id="nextShiftInfo">:)</p>
     </aside>
 
-    <aside id="menuEmp">
-        <button type="button" class="menuBtn" onclick="location.href='/availability';" id="availabilityB"><span>Tilgjengelighet</span></button>
-        <button type="button" class="menuBtn" id="shiftB" data-toggle="modal" data-target="#switchModal"><span>Vaktforespørsler</span></button>
-        <button type="button" class="menuBtn" onclick="location.href='/appeal';" id="extraB" ><span>Fravær og overtid</span></button>
-    </aside>
+
 
     <!-- 1:Modal-switch -->
     <div class="modal fade" id="switchModal" role="dialog">
@@ -46,7 +46,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h3 class="modal-title">Vakter til godkjenning</h3>
+                    <h3 class="modal-title">Ledige vakter</h3>
                 </div>
                 <!-- Modal body-->
 
@@ -60,7 +60,7 @@
                 </main>
                 <!-- Modal footer-->
                 <div class="modal-footer">
-                    <button type="button" class="closeButton" data-dismiss="modal">Lukk</button>
+                    <button type="button" class="close" data-dismiss="modal">Lukk</button>
                 </div>
             </div>
         </div>
