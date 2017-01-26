@@ -1,3 +1,6 @@
+
+var event_id;
+
 $(document).ready(function() {
 
     $('#calendar').fullCalendar({
@@ -32,6 +35,7 @@ $(document).ready(function() {
             }]
         ,
         eventClick:  function(event, jsEvent, view) {
+            event_id = event.id;
             if(event.phone_nr) {
                 $('#modalShift').html(event.title);
                 $('#department').html("Avdeling: " + event.description);
@@ -52,10 +56,6 @@ $(document).ready(function() {
         document.getElementById("nextShiftInfo").innerHTML = "Dato: " +data.responseJSON[0].ndate + "<br><br>Sted: " + data.responseJSON[0].department_name;
     });
 
-
-    function getA() {
-        return "something";
-    }
 });
 
 $.get('/getEmployee_Shifts_fromCurrentDate',{},function (req,res,data) {
@@ -113,7 +113,7 @@ $(document).on('click','#sendForespørsel',function (e) {
         $.ajax({
             url: '/postRequest',
             type: 'POST',
-            data: {'shift_id': data[i], 'checked_by_admin': 0},
+            data: {'shift_id': data[i], 'checked_by_admin': 0,'explanation_request': ""},
             success: function (data) {
                 alert("success!");
                 console.log(data);
@@ -122,5 +122,38 @@ $(document).on('click','#sendForespørsel',function (e) {
     }
 });
 
+$(document).on('click','#sendShiftRequest',function (e) {
+    var textinput = $("#explanation").val;
+    if(textinput.length<300){
+        $.ajax({
+            url: '/postRequest',
+            type: 'POST',
+            data: {'shift_id': event_id,'explanation_request': textinput, 'checked_by_admin': 0},
+            success: function (data) {
+                alert("success!");
+                console.log(data);
+            }
+        });
+    }else{
+        alert("Grensen er 300 tegn!");
+    }
+});
 
+
+$(document).on('click','#sendRequest',function () {
+    console.log(event_id);
+    if (event_id!=null){
+        $.ajax({
+            url: '/postRequestShift',
+            type: 'POST',
+            data: {'shift_id': event_id},
+            success: function (data) {
+                alert("success!");
+                console.log(data);
+            }
+        });
+    }else {
+        console.log("an error occurred");
+    }
+});
 

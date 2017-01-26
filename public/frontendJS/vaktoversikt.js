@@ -22,6 +22,7 @@ function currentDay(today1) {
 }
 
 $(document).ready(function(){
+    $("#datepicker").val(currentDay());
     oppdateTable();
 });
 
