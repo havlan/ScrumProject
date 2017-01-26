@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "async": "^2.1.4",
+    "bluebird": "^3.4.7",
     "body-parser": "^1.15.2",
     "chai": "^3.5.0",
     "connect-flash": "^0.1.1",

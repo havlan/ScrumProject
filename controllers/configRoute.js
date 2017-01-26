@@ -5,6 +5,7 @@ var getCtrl = require('./getReq');
 var postCtrl = require('./postReq');
 var delCtrl = require('./delReq');
 var model = require('../models/regWMail');
+var sche = require('../models/schedulerSM');
 
 
 module.exports = function (app, passport) {
@@ -113,6 +114,8 @@ module.exports = function (app, passport) {
 
         })
     });
+
+    app.post('/postMailShift', sche.sendMailOnFree);
 
     app.post('/changePassword', isLoggedIn, model.changePassword);
     app.post('/acceptRequestWith', isOfficeEmp, model.acceptRequestWith);
