@@ -173,6 +173,14 @@ module.exports = {
         console.log("Posting new request");
         dbHelper.postdbQuery(req, res, "insert into Request set ?", post);
     },
+    postNewRequestShift: function (req, res) {
+        var post = {
+            Shift_shift_id: req.body.shift_id,
+            Employee_employee_id: req.session.passport.user.id
+        };
+        console.log("Posting new request");
+        dbHelper.postdbQuery(req, res, "insert into Request_shift set ?", post);
+    },
     postNewAbsence: function (req, res) {
         var post = {
             absence_id: req.body.absence_id,

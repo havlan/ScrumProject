@@ -109,6 +109,17 @@ html, body{
     cursor:pointer;
     width: 150px;
 }
+#changeBtn{
+    background-color: darkred;
+    margin-left:calc(100% - 150px);
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 5px 10px;
+    text-align: center;
+    cursor:pointer;
+    width: 150px;
+}
 #save{
     background-color: #4CAF50;
     margin-left:calc(100% - 150px);
@@ -120,6 +131,7 @@ html, body{
     cursor:pointer;
     width: 150px;
 }
+
 #myShifts{
     width: 10px;
     height: auto;
