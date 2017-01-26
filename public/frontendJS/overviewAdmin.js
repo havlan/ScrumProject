@@ -188,7 +188,7 @@ $(function(){
         $.ajax({
             url: '/newEmployee', //this is the submit URL
             type: 'POST',
-            data: {'is_admin':parseInt($('#admin').text()),'username':$('#brukernavn').text(),'name': $("#fornavn").text(),'address':$('#adresse').text(),'email':$('#epost').text(),'type_name':$('#stilling').text(),'pers_id':parseInt($('#personnummer').text()),'phone_nr':parseInt($('#telefon').text()),'seniority':parseInt($('#seniority').text()),'responsibility_allowed':$('#responsibility').val(),'total_hours':0},
+            data: {'is_admin':parseInt($('#admin').text()),'username':$('#brukernavn').text(),'name': $("#fornavn").text(),'address':$('#adresse').text(),'email':$('#epost').text(),'type_name':$('#stilling').text(),'pers_id':parseInt($('#personnummer').text(),10),'phone_nr':parseInt($('#telefon').text(),10),'seniority':parseInt($('#seniority').text()),'responsibility_allowed':$('#responsibility').val(),'total_hours':0},
             success: function(data){
             },
             failure: function(err){
