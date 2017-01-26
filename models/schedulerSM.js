@@ -34,7 +34,7 @@ function sendMailShift(rec) {
 
 module.exports = {
     sendMailOnFree : function(requ,resp){
-        var mailRecp ="'";
+        var mailRecp ="";
         async.waterfall([
             function(done){
                 poolparty.getConnection(function(err,conn){
