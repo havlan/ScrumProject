@@ -4,7 +4,7 @@
     <title>Godkjenning</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src = "frontendJS/approvalAdmin.js"></script>
     <link rel="stylesheet" href="css/approvalAdmin.css">
 </head>
@@ -58,17 +58,11 @@
             <!-- Modal body-->
             <main class="modal-body">
                 <form id="approveForm">
-                    <table cellspacing="10">
-                        <tr>
-                            <td class="info">Skift:</td>
-                            <td class="skift" id="skiftdb"></td>
-                        </tr>
-                        <tr>
-                        <select class="dbInfo" id= "ansattDropdown" onclick="funkyfunc()">
-                        </select>
-                        </tr>
+                    <p id="skiftdb">Skift: </p>
                     <br>
-                    </table>
+                    <div class="table-responsive" id="hei">
+                    </div>
+                     <!--   <select class="dbInfo" id= "ansattDropdown"> </select>-->
                 </form>
             </main>
             <div class="modal-footer">

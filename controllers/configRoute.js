@@ -116,7 +116,7 @@ module.exports = function (app, passport) {
 
     app.post('/changePassword', isLoggedIn, model.changePassword);
     app.post('/acceptRequestWith', isOfficeEmp, model.acceptRequestWith);
-    app.post('/getAvailableEmpForShift',isOfficeEmp, getCtrl.getAvailableEmpForShift);
+    app.get('/getAvailableEmpForShift/:id',isOfficeEmp, getCtrl.getAvailableEmpForShift);
     app.post('/getEmpForShiftDate', isAdmin, getCtrl.getEmpForShiftDate);
 
     //MÅ VÆRE SIST
