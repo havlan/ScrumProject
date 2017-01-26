@@ -52,7 +52,7 @@ module.exports = function (app, passport) {
     app.get('/vaktoversikt', isOfficeEmp, getCtrl.getVaktoversiktSite);
     app.get('/calendar', isLoggedIn, getCtrl.getCalendarSite);
     app.get('/approvalAdmin', isOfficeEmp, getCtrl.getApprovalAdminSite);
-    app.get('/frontpageAdmin', isAdmin, getCtrl.getFrontpageAdminSite);
+    app.get('/frontpageAdmin', isOfficeEmp, getCtrl.getFrontpageAdminSite);
     app.get('/OnePagedMenu', isLoggedIn, getCtrl.getOnePagedMenu);
     app.get('/frontpageSuper', isAdmin, getCtrl.getFrontpageSuperSite);
     app.get('/overviewEmp', isLoggedIn, getCtrl.getOverviewEmpSite);
@@ -69,9 +69,13 @@ module.exports = function (app, passport) {
         failureRedirect: '/login',
         failureFlash: true
     }), function (req, res) {
-        console.log("LOGIN OK?");
-        res.redirect('/calendar');
-    });
+        if(req.session.passport.user.is_admin == 1){
+            res.redirect('/frontpageAdmin');
+        }else {
+            console.log("LOGIN OK?");
+            res.redirect('/calendar');
+        }
+        });
 
     app.post('/getVaktliste1', isLoggedIn, getCtrl.getVaktliste1); //sjekk
     app.post('/getVaktliste2', isLoggedIn, getCtrl.getVaktliste2);
