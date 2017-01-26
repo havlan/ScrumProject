@@ -105,39 +105,6 @@ $.ajax({
     failure: function(err) {console.log("Error"+err);}
 });
 
-$.ajax({
-    url: '/getVaktliste1', //this is the submit URL
-    type: 'POST',
-    data: {'shift_id': eventId,'type_name':"Sykepleier"},
-    success: function(data){
-        console.log('successfully submitted');
-        console.log(data);
-        employeesSyk = data.responseJSON;
-    },
-    failure: function(err) {console.log("Error"+err);}
-});
-
-$(function close() {
-    $(".custom-close").on('click', function() {
-        $('#adminNewShiftModal').modal('hide');
-    });
-});
-
-//$.ajax({
-//    url: '/getVaktliste1', //this is the submit URL
-//    type: 'POST',
-//    data: {'shift_id': eventId,'type_name':"Sykepleier"},
-//    success: function(data){
-//        console.log('successfully submitted');
-//        console.log(data);
-//        employeesSyk = data.responseJSON;
-//    },
-//    failure: function(err) {console.log("Error"+err);}
-//});
-$.get('/getEmployee', {}, function(req, res, data){
-    employeesSyk = data.responseJSON;
-    console.log(data);
-});
 
 $.get('/getEmployee', {}, function(req, res, data){
     employeesHelp = data.responseJSON;
@@ -176,6 +143,7 @@ $.get('/getDepartment', {}, function(req, res, data){
 function makeDropdownS(selector,list) {
     console.log("Prøver å lage dropdown");
     var columns = ["Navn"];
+    console.log(list);
     for (var i = 0; i < list.length; i++) {
         var cellValue = list[i][columns[0]];
         if (cellValue == null) cellValue = "Ingen data fra DB";
@@ -211,3 +179,10 @@ function addAllColumnHeaders(list, selector) {
     $(headerThead$).append(headerTr$);
     return columnSet;
 }
+
+
+$(function close() {
+    $(".custom-close").on('click', function() {
+        $('#adminNewShiftModal').modal('hide');
+    });
+});
