@@ -97,7 +97,6 @@ function getDispersion(res) {
 }
 
 function closeModal() {
-    console("asdfasdfa");
     $("#adminNewShiftModal").modal('hide');
 }
 
