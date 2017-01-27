@@ -51,7 +51,6 @@
             <p id="availShiftsText">De gule vaktene er ledige vakter du kan ta. Trykk på vaktene for å sende inn forespørsel om å ta den enkelte vakten.</p>
             <div id="doneShifts"></div>
             <p id="doneShiftsText">De blå vaktene er vakter du allerede har hatt. Du kan finne fullsteding oversikt over disse i historikken under Min profil.</p>
-
         </div>
     </aside>
 
@@ -141,6 +140,25 @@
     </div>
 </div>
 
+<!-- Modal: Tidligere vakt -->
+<div id="fullCalModalDone" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 id="modalShiftDone" class="modal-title"></h4>
+            </div>
+            <div id="modalBodyDone" class="modal-body">
+                <p id ="beginDone"></p>
+                <p id="endDone"></p>
+                <p id="departmentDone"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="close" data-dismiss="modal">Lukk</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>

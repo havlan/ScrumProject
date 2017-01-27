@@ -47,12 +47,19 @@ $(document).ready(function() {
                 $('#begin').html("Starter: " + moment(event.start).format('MMM Do h:mm A'));
                 $('#end').html("Slutter: " + moment(event.end || event.start).format('MMM Do h:mm A'));
                 $('#fullCalModal').modal();
+            } else if(event.email){
+                $('#modalShiftDone').html(event.title);
+                $('#departmentDone').html("Avdeling: " + event.description);
+                $('#beginDone').html("Startet: " + moment(event.start).format('MMM Do h:mm A'));
+                $('#endDone').html("Sluttet: " + moment(event.end || event.start).format('MMM Do h:mm A'));
+                $('#fullCalModalDone').modal();
             } else{
                 $('#modalShiftFree').html(event.title);
                 $('#departmentFree').html("Avdeling: " + event.description);
                 $('#beginFree').html("Starter: " + moment(event.start).format('MMM Do h:mm A'));
                 $('#endFree').html("Slutter: " + moment(event.end || event.start).format('MMM Do h:mm A'));
                 $('#fullCalModalFree').modal();
+
             }
         }
     });
