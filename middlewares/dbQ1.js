@@ -215,10 +215,10 @@ module.exports = {
     },
     postnewOvertime2: function (req, res) {
         var post = {
-            shift_id: req.session.passport.user.id,
-            employee_id: req.body.employee_id,
+            shift_id: req.body.shift_id,
+            employee_id: req.session.passport.user.id,
             overtime: req.body.overtime,
-            explanation: req.body.explanation
+            explanation_overtime: req.body.explanation
         };
         console.log("Posting new overtime");
         dbHelper.postdbQuery(req, res, "insert into Overtime set ?", post);
