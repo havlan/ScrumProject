@@ -86,17 +86,21 @@ html, body {
     background-color: lightyellow;
     cursor: pointer;
 }
+#warningBox {
+    box-shadow: inset 0 0 10px 1px #dedede;
+    background-color: #fbfbfb;
+    border: solid #dedede 1px;
+    margin-bottom: 2%;
+}
+#warning:hover #warningBox{
+    box-shadow: inset 0 0 10px 1px #ee9;
+    border: solid #ee9 1px;
+    background-color: #ffc;
+}
 #absenceWarning, #overtimeWarning, #changeWarning {
     padding:1% 0 1% 0;
-    margin:1% 2% 1% 2%;
+    margin:0;
     text-align: center;
-    background-color: #efefef;
-    border: solid #dedede 1px;
-    border-radius: 5px;
-    box-shadow: inset 0 0 10px 1px #dedede;
-}
-#warning:hover #absenceWarning, #warning:hover #overtimeWarning, #warning:hover #changeWarning {
-    background-color: #fcf8e3;
 }
 
 #freeShiftsNumber {
