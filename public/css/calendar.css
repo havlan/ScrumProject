@@ -142,15 +142,16 @@ html, body{
     cursor:pointer;
     width: 150px;
 }
-#sendRequest{
+#sendRequest {
     background-color: #4CAF50;
     border: none;
     border-radius: 5px;
     color: white;
     padding: 5px 10px;
     text-align: center;
-    cursor:pointer;
+    cursor: pointer;
     width: 150px;
+}
 #changeBtn{
     background-color: darkred;
     margin-left:calc(100% - 150px);
