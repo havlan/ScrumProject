@@ -32,6 +32,11 @@ $(document).ready(function() {
                 url: '/getPossibleSiftsEvents',
                 color: '#ffe066',
                 textColor: 'black'
+            },
+            {
+                url: '/getPersonalShiftsEventsDone',
+                color: '#af2a91',
+                textColor: 'black'
             }]
         ,
         eventClick:  function(event, jsEvent, view) {
