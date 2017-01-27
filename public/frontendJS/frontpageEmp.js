@@ -187,7 +187,10 @@ $(document).on('click','#sendRequest',function () {
                 if(xhr.status==404){
                     document.getElementById("errorMessage").innerHTML = "ikke funnet";
                     showErrorMessage();
-                } else {
+                } else if (xhr.status==409) {
+                    document.getElementById("warningMessage").innerHTML = "Du har alt sendt forespørsel";
+                    showWarningError();
+                }else {
                     document.getElementById("errorMessage").innerHTML = "Det har oppstått en feil";
                     showErrorMessage();
                 }
@@ -256,6 +259,14 @@ function showSuccessMessage() {
 }
 function showErrorMessage() {
     var element = document.getElementById('errorMessageBox');
+    element.style.display = "block";
+    setTimeout(function() {
+        element.style.display = "none";
+    }, 3000);
+}
+
+function showWarningError() {
+    var element = document.getElementById('warningMessageBox');
     element.style.display = "block";
     setTimeout(function() {
         element.style.display = "none";
