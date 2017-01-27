@@ -94,10 +94,13 @@ html, body{
     font-size: 16px;
     cursor:pointer;
 
-    box-shadow: 2px 2px 5px #888888;
+    box-shadow: 1px 1px 4px #888888;
 }
 .menuBtn:hover{
     background-color: #6585e7;
+}
+#shiftB{
+    background: linear-gradient(to right, royalblue 85%, #8cd9ad 15% )
 }
 
 #acceptB{
@@ -114,9 +117,8 @@ html, body{
 #acceptB:hover {
     background-color: #7CbF70;
 }
-#sendRequest{
+#sendForespørsel{
     background-color: #4CAF50;
-    margin-left:calc(100% - 150px);
     border: none;
     border-radius: 5px;
     color: white;
@@ -125,9 +127,18 @@ html, body{
     cursor:pointer;
     width: 150px;
 }
-#changeBtn{
-    background-color: darkred;
-    margin-left:calc(100% - 150px);
+#sendShiftRequest{
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 5px 10px;
+    text-align: center;
+    cursor:pointer;
+    width: 150px;
+}
+#sendRequest{
+    background-color: #4CAF50;
     border: none;
     border-radius: 5px;
     color: white;
@@ -160,7 +171,12 @@ html, body{
     background-color:  #8cd9ad;
     padding: 2%;
 }
-
+#explanation{
+    width: 50%;
+}
+#reason{
+    width: 70%;
+}
 @media
 only screen and (max-width: 760px),
 (min-device-width: 768px) and (max-device-width: 1024px)  {
