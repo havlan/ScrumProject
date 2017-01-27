@@ -64,6 +64,7 @@ $(document).ready(function() {
     $("#successMessageBox").hide();
     $("#errorMessageBox").hide();
 
+    //test
 });
 
 $.get('/getEmployee_Shifts_fromCurrentDate2',{},function (req,res,data) {
