@@ -8,15 +8,32 @@ html, body{
     width:100%;
 }
 
+#successMessageBox {
+    position:fixed;
+    bottom:0;
+    width:100%;
+    margin:0;
+    z-index:99999;
+}
+#sideTitle {
+    font-weight: bold;
+    font-size: 25px;
+    padding-bottom:10px;
+    margin-bottom:20px;
+    text-align:center;
+    border-bottom: 1px #bbb solid;
+    width:100%;
+}
 #container {
     width:96%;
     margin: 0 2% 0 2%;
 }
 
 #calendar {
-    float:left;
+    float:right;
     width: 69%;
-    margin-left:1%;
+    margin-right:1%;
+    margin-left:0;
     overflow:hidden;
 }
 .fc-basic-view .fc-body .fc-row{
@@ -37,22 +54,17 @@ html, body{
 }
 
 #warning, #nextShift {
-    float:right;
-    width: 28%;
-    margin-left: 1%;
-    margin-right: 1%;
-    margin-bottom: 1%;
+    float:left;
+    width: 26%;
+    margin: 0.5% 3% 0.5% 1%;
     border: solid #f2f2f2 1px;
     border-radius: 5px;
     box-shadow: 2px 2px 5px #888888;
 }
-#warning{
-    margin-top: 40px;
+#nextShift{
+    margin-top: 20px;
 }
-#warning:hover{
-    background-color: lightyellow;
-    cursor: pointer;
-}
+
 .shiftHeader{
     text-align: center;
 }
@@ -61,26 +73,23 @@ html, body{
     padding: 3%;
 }
 
+#availabilityB {
+    margin-top: 40px;
+}
 .menuBtn{
-    float:right;
-    width: 207px;
-    margin-left: calc(15% - 104px);
-    margin-right: calc(15% - 104px);
-    margin-bottom: 1%;
-    margin-top:0;
+    float:left;
+    width: 26%;
+    margin:0 3% 0.5% 1%;
     box-sizing: border-box;
     padding: 10px 20px;
-
     background-color: royalblue;
     border: none;
     border-radius: 5px;
-
     color: white;
     text-align: center;
     text-decoration: none;
     font-size: 16px;
     cursor:pointer;
-
     box-shadow: 2px 2px 5px #888888;
 }
 .menuBtn:hover{
@@ -101,6 +110,17 @@ html, body{
 #acceptB:hover {
     background-color: #7CbF70;
 }
+
+#sendForespørsel{
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 5px 10px;
+    text-align: center;
+    cursor:pointer;
+    width: 150px;
+}
 #sendRequest{
     background-color: #4CAF50;
     margin-left:calc(100% - 150px);
@@ -112,7 +132,67 @@ html, body{
     cursor:pointer;
     width: 150px;
 }
+#sendShiftRequest{
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 5px 10px;
+    text-align: center;
+    cursor:pointer;
+    width: 150px;
+}
+#sendRequest {
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 5px 10px;
+    text-align: center;
+    cursor: pointer;
+    width: 150px;
+}
+#changeBtn{
+    background-color: darkred;
+    margin-left:calc(100% - 150px);
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 5px 10px;
+    text-align: center;
+    cursor:pointer;
+    width: 150px;
+}
+#save{
+    background-color: #4CAF50;
+    margin-left:calc(100% - 150px);
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 5px 10px;
+    text-align: center;
+    cursor:pointer;
+    width: 150px;
+}
 
+#myShifts{
+    width: 10px;
+    height: auto;
+}
+#availShiftsText{
+    background-color: #ffe066;
+    padding: 2%;
+}
+#myShiftsText{
+    background-color:  #8cd9ad;
+    padding: 2%;
+}
+#explanation{
+    width: 50%;
+}
+#reason{
+    width: 70%;
+}
 @media
 only screen and (max-width: 760px),
 (min-device-width: 768px) and (max-device-width: 1024px)  {
@@ -120,32 +200,50 @@ only screen and (max-width: 760px),
         margin:0;
         width:100%;
     }
+    #sideTitle {
+        width: calc(100% - 1em);
+        margin-left:0.5em;
+        margin-bottom:0.5em;
+        font-size: 1.5em;
+        padding-bottom:0.5em;
+    }
 
     #calendar {
         position:relative;
         width:calc(100% - 1em);
-        margin-top:0;
+        padding:0;
         margin-left:0.5em;
         margin-right:0.5em;
         float:left;
+        overflow: visible;
     }
     .fc-basic-view .fc-body .fc-row{
         height:10vw;
     }
-    #nextShift, #warning {
+
+    #nextShift{
         float:right;
         height: 11em;
         width: calc(50% - 1em);
         margin: 0.5em 0.5em 0.5em 0.5em;
     }
+    #warning{
+         float:right;
+         height: auto;
+         width: calc(50% - 1em);
+         margin: 0.5em 0.5em 0.5em 0.5em;
+     }
     .menuBtn{
         float:left;
         font-size: 1em;
         width: calc(50% - 1em);
         box-sizing:border-box;
         position:relative;
-        margin: 0 0.5em 0.5em 0.5em;
+        margin: 0.5em 0.5em 0.5em 0.5em;
         height: 3.33em;
+    }
+    #availabilityB {
+        margin-top: 0.5em;
     }
     #extraB {
         margin-bottom:0.5em;

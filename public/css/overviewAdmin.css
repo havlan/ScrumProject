@@ -27,7 +27,7 @@
 }
 .input{
     text-align: left;
-    width: 160px;
+    width: 60%;
 
 }
 #excelDataTable tr {
@@ -43,27 +43,6 @@
 #excelDataTable tr:hover{
     background-color: aliceblue;
     cursor: pointer;
-}
-
-.infoCard {
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    transition: 0.3s;
-    width: 30%;
-    border-radius: 5px;
-    position: fixed;
-}
-
-.infoCard:hover {
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-}
-
-img {
-    border-radius: 5px 5px 0 0;
-}
-
-.flytt{
-
-
 }
 
 .container {
@@ -124,12 +103,11 @@ img {
 #myModal .modal-dialog{
     width: 800px;
 }
-#personForm {
+#editEmp {
     position: relative;
-    width: 50%;
-    margin-left: 35%;
+    width: 70%;
     text-align: right;
-    padding-bottom: 5%;
+    margin-left: 10%;
 }
 #logInInfo{
     position: relative;
@@ -150,26 +128,15 @@ img {
     padding-top: 10%;
 }
 #personInfo{
-    margin-left: 37%;
+    margin-left: 10%;
     text-align: left;
     font-size: 16px;
-}
-#picEmp{
-    border: solid black 1px;
-    position:absolute;
-    margin-left: 55%;
 }
 
 #addEmp{
     position: relative;
     text-align:right;
-    margin-right: 50%;
-}
-
-#addPicEmp{
-    position: absolute;
-    margin-left: 65%;
-    margin-top: 37%;
+    margin-right: 23%;
 }
 
 #save{
@@ -192,7 +159,7 @@ img {
     padding-bottom: 2%;
 }
 #stilling{
-    width: 160px;
+    width: 60%;
 }
 
 .persInfodb{
@@ -205,7 +172,7 @@ img {
 }
 
 .backBtn{
-    margin-left: 10px;
+
     background-color: royalblue;
     border: none;
     border-radius: 5px;
@@ -216,8 +183,12 @@ img {
     display: inline-block;
     font-size: 16px;
 }
+#back{
+    position: absolute;
+    margin-left: 20%;
+}
 .saveEdit{
-    margin-left: 10px;
+    margin-left: 40%;
     background-color: #4CAF50;
     border: none;
     border-radius: 5px;
@@ -229,7 +200,8 @@ img {
     font-size: 16px;
 }
 #back2{
-    position: relative;
+    position: absolute;
+    margin-left: 10%;
 
 }
 

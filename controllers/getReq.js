@@ -139,8 +139,8 @@ module.exports = {
     getPersonalShiftEvents : function (req, res) {
         dbHelper.getdbQuery(req, res, "select * from JSON_EMPLOYEE_VIEW where employee_id = ? And start >= CURDATE()", req.session.passport.user.id);
     },
-    getPossibleSiftsEvents : function (req, res) {
-        dbMiddelware.getPossibleSiftsEvents(req,res);
+    getPossibleShiftsEvents : function (req, res) {
+        dbMiddelware.getPossibleShiftsEvents(req,res);
     }
     ,
     getTypeNames : function (req, res) {
@@ -160,7 +160,9 @@ module.exports = {
     getAvailableEmpForShift : function (req, res) {
         dbMiddelware.getAvailableEmpForShift(req,res);
     },
-
+    getRequestShift : function (req, res) {
+        dbMiddelware.getRequestShift(req,res);
+    },
     getAvailableShifts : function (req, res) {
         dbMiddelware.getAvailableShifts(req,res);
     },
@@ -176,7 +178,12 @@ module.exports = {
     getChangeNum : function (req, res) {
         dbMiddelware.getChangeNum(req,res);
     },
-
+    getEmpForShiftDate : function (req,res) {
+        dbMiddelware.getEmpForShiftDate(req,res);
+    },
+    getPersonalShiftEventsDone : function (req,res) {
+        dbMiddelware.getPersonalShiftEventsDone(req,res);
+    },
 
 
     get403 : function (req, res) {

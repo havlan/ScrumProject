@@ -7,6 +7,7 @@ $.get('/getEmployeeRestricted', {}, function(req, res, data){
     console.log(data.responseJSON[0]);
     myList = data.responseJSON;
     buildHtmlTable('#dbDataTable',myList);
+    $("#cover").fadeOut(10); <!-- MÅ ligge etter det som tar legst å loade-->
 });
 //Build Table
 function buildHtmlTable(selector,list) {
@@ -70,7 +71,7 @@ function searchPositionFunction() {
     table = document.getElementById("dbDataTable");
     tr = table.getElementsByTagName("tr");
     for (i = 0; i < tr.length; i++) {
-        td = tr[i].getElementsByTagName("td")[2];
+        td = tr[i].getElementsByTagName("td")[4];
         if (td) {
             if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
                 tr[i].style.display = "";
@@ -80,16 +81,3 @@ function searchPositionFunction() {
         }
     }
 }
-/*
-$.get('/getEmployee', {}, function(req, res, data){
-
-    console.log(data);
-    console.log(data.responseJSON[0]);
-
-    document.getElementById("nameEmp").innerHTML = data.responseJSON[0].name;
-    document.getElementById("tlfnrInfo").innerHTML = data.responseJSON[0].phone_nr;
-    document.getElementById("emailInfo").innerHTML = data.responseJSON[0].email;
-    document.getElementById("adresseInfo").innerHTML = data.responseJSON[0].address;
-
-    $("#cover").fadeOut(10); <!-- MÅ ligge etter det som tar legst å loade-->
-});*/

@@ -1,7 +1,7 @@
 
 
 var departments     = [];
-var employeesSyk    = [];
+var employeesSyk;
 var employeesHelp   = [];
 var employeesAnnet  = [];
 var eventId;
@@ -39,13 +39,12 @@ $(document).ready(function() {
                 color: 'yellow',    // an option!
                 textColor: 'black'  // an option!
             }],
-        eventClick: function(event) {
-            document.getElementById('adminNewShiftModal').style.display = "block";
-            document.getElementById('organizeShiftTitle').innerHTML = event.start;
+        eventClick:  function(event, jsEvent, view) {
+            $('#fillShiftModal').modal();
             eventId = event.id;
-            console.log(event.id);
-            return false;
         }
+
+
     });
 
     var modal = document.getElementById('adminNewShiftModal');
@@ -55,19 +54,22 @@ $(document).ready(function() {
         modal.style.display = "none";
     };
 
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    };
-
     createNumberDropdown();
+
+    $("#successMessageBox").hide();
+    $("#testButton").click(function showAlert() { //TODO
+        $("#successMessageBox").fadeTo(2000, 500).slideUp(500, function(){
+            $("#success-alert").slideUp(500);
+        });
+    });
 });
 
 
 
 
+
 function createNumberDropdown(){
+    console.log("kjører num drop");
     $('#chooseNumber').append($('<option />').text(0));
     for (var i = 4; i < 21; i++) {
         var option = $('<option />').text(i);
@@ -77,6 +79,7 @@ function createNumberDropdown(){
 //finds dispersion and calls createPeopleDropdown with correct numbers
 function getDispersion(res) {
     var ant = Number(res.value);
+    console.log(ant);
     var syk;
     if(ant%10 == 3 || (ant/5)%1<0.5) {
         syk = Math.floor(ant/5);
@@ -90,21 +93,33 @@ function getDispersion(res) {
         hjelp = Math.round(ant*0.3);
     }
     var annet = Math.round(ant/2);
-    createPeopleDropdown(syk, hjelp, annet);
+    getData(syk, hjelp, annet, createPeopleDropdown);
 }
 
-$.ajax({
-    url: '/getVaktliste1', //this is the submit URL
-    type: 'POST',
-    data: {'shift_id': eventId,'type_name':"Sykepleier"},
-    success: function(data){
-        console.log('successfully submitted');
-        console.log(data);
-        employeesSyk = data.responseJSON;
-    },
-    failure: function(err) {console.log("Error"+err);}
-});
+function closeModal() {
+    console("asdfasdfa");
+    $("#adminNewShiftModal").modal('hide');
+}
 
+function getData(antSyk, antHjelp, antAnnet, cb) {
+    $.ajax({
+        url: '/getEmpForShiftDate', //this is the submit URL
+        type: 'POST',
+        data: {'shift_id': eventId,'type_name': "Sykepleier"},
+        success: function(data){
+            console.log("event id = "+eventId);
+            console.log(data);
+            employeesSyk = data;
+
+            console.log(employeesSyk);
+
+
+            createPeopleDropdown(antSyk, antHjelp, antAnnet);
+
+        },
+        failure: function(err) {console.log("Error"+err);}
+    });
+}
 
 $.get('/getEmployee', {}, function(req, res, data){
     employeesHelp = data.responseJSON;
@@ -116,11 +131,12 @@ $.get('/getEmployee', {}, function(req, res, data){
 
 function createPeopleDropdown(antSyk, antHjelp, antAnnet) {
     console.log("data hentet");
+    console.log(this.employeesSyk);
     //alert(antSyk + " sykepleiere, " + antHjelp + " hjelpere, " + antAnnet + " annet");
     document.getElementById('peopleTable').innerHTML = "<tr><th  class='peopleTablecat'>Kategori</th><th class='peopleTableSel'>Ansatt</th></tr>";
     for(var i=0; i<antSyk; i++){
         document.getElementById('peopleTable').innerHTML += "<tr><td class='peopleTableCat'>Sykepleier</td><td class='peopleTableSel'><select id='syk" + i + "' class='peopleDropdown'></select></td></tr>";
-        makeDropdownS("#syk"+i,employeesSyk);
+        makeDropdownS("#syk"+i,this.employeesSyk);
     }
     for(var i=0; i<antHjelp; i++){
         document.getElementById('peopleTable').innerHTML += "<tr><td class='peopleTableCat'>Hjelpepleier</td><td class='peopleTableSel'><select id='hjelp" + i + "' class='peopleDropdown'></select></td></tr>";

@@ -2,27 +2,25 @@ var noe =[];
 var i = 0;
 var myList = [];
 window.ansattid = 0;
+window.nyansattid = 0;
 window.shift_id = 0;
 
 function leaveFunction(){
     document.getElementById('leaveApproval').style.display = "block";
     document.getElementById('switchApproval').style.display = "none";
     document.getElementById('overtimeApproval').style.display = "none";
-    document.getElementById('Lagre').style.display = "block";
 
 }
 function overtimeFunction(){
     document.getElementById('leaveApproval').style.display = "none";
     document.getElementById('switchApproval').style.display = "none";
     document.getElementById('overtimeApproval').style.display = "block";
-    document.getElementById('Lagre').style.display = "block";
 
 }
 function switchFunction(){
     document.getElementById('leaveApproval').style.display = "none";
     document.getElementById('switchApproval').style.display = "block";
     document.getElementById('overtimeApproval').style.display = "none";
-    document.getElementById('Lagre').style.display = "none";
 
 }
 
@@ -44,30 +42,28 @@ $.get('/getRequestView',{},function (req,res,data) {
 
 //Builds a table in HTML document for a specific table id from a list
 function buildHtmlTable(selector,list) {
-    list = myList;
     var columns = addAllColumnHeaders(list, selector);
     var tbody = $('<tbody/>');
-    for (var i = 0; i < myList.length; i++) {
+    for (var i = 0; i < list.length; i++) {
         var row$ = $('<tr id=' + i + '/>');
         var check$ = $('<div class="checkbox radio-margin"><label><input type="checkbox" class="openModal" id='+ i +' value=""><span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span></label></div>');
         for (var colIndex = 0; colIndex < columns.length; colIndex++) {
-            var cellValue = myList[i][columns[colIndex]];
+            var cellValue = list[i][columns[colIndex]];
             if (cellValue == null) cellValue = "";
             row$.append($('<td/>').html(cellValue));
         }
         row$.append($('<td/>').html(check$));
-        // $(row$).setAttribute('id',"surprise maddafakka");
         $(selector).append(row$);
         $(tbody).append(row$);
     }
     $(selector).append(tbody);
 }
-function addAllColumnHeaders(myList, selector) {
+function addAllColumnHeaders(list, selector) {
     var columnSet = [];
     var headerThead$ = $('<thead/>');
     var headerTr$ = $('<tr/>');
-    for (var i = 0; i < myList.length+1; i++) {
-        var rowHash = myList[i];
+    for (var i = 0; i < list.length+1; i++) {
+        var rowHash = list[i];
         for (var key in rowHash) {
             if ($.inArray(key, columnSet) == -1) {
                 columnSet.push(key);
@@ -81,38 +77,57 @@ function addAllColumnHeaders(myList, selector) {
     $(headerThead$).append(headerTr$);
     return columnSet;
 }
-
+//Different checkbox class, should only be able to select one at a time
+function buildHtmlTable2(selector,list) {
+    var columns = addAllColumnHeaders(list, selector);
+    var tbody = $('<tbody/>');
+    for (var i = 0; i < list.length; i++) {
+        var row$ = $('<tr id=' + i + '/>');
+        var check$ = $('<div class="checkbox radio-margin"><label><input type="checkbox" class="openModal2" id='+ i +' value=""><span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span></label></div>');
+        for (var colIndex = 0; colIndex < columns.length; colIndex++) {
+            var cellValue = list[i][columns[colIndex]];
+            if (cellValue == null) cellValue = "";
+            row$.append($('<td/>').html(cellValue));
+        }
+        row$.append($('<td/>').html(check$));
+        $(selector).append(row$);
+        $(tbody).append(row$);
+    }
+    $(selector).append(tbody);
+}
+//when you press a checkbox in switchtable
 $(document).on('click','#switchTable .openModal',function (e) {
     indeks = $(this).closest("tr").find('td:eq(0)').text();
-    ansattid = $(this).closest("tr").find('td:eq(1)').text();
-    document.getElementById("skiftdb").innerHTML = indeks;
-    $.ajax({
-        url: '/getAvailableEmpForShift',
-        type:'POST',
-        data:{'shift_id':indeks},
-        success: function (req,res,data) {
-            //$('#ansattDropdown').reset();
-           $.each(data, function () {
-               var option = $('<option />').text(data.responseJSON[i].employee_id+ " Navn: "+data.responseJSON[i].name);
-               $('#ansattDropdown').text(option);
-              // console.log(data);
-               i++;
-            });
-        }
-    });
-
+    //if checkbox is checked
     if ($(this).is(':checked')) {
-        //alert("HEST ER LIVET!");
+        ansattid = $(this).closest("tr").find('td:eq(1)').text();
+        document.getElementById("skiftdb").innerHTML = "Skift: "+indeks;
+        $.get('/getRequestShift/'+parseInt(indeks),function(req,res,data1){
+            $('#hei').append('<table class="table table-striped table-bordered" id="ansattTable"></table>');
+            buildHtmlTable2("#ansattTable",data1.responseJSON);
+            console.log(data1.responseJSON);
+        });
         $('#approveModal').modal('show');
-      //  makeDropdown("#ansattDropdown",noe);
+        //if checkbox is unchecked
     } else {
-        //alert("HEST ER BEST SOM PÅLEGG!");
         $('#approveModal').modal('hide');
     }
+    //on modal close
     $('#closeModal').on('click',function () {
-     //alert("hei");
         $('input[class=openModal]').prop('checked', false);
+        $('#ansattTable').remove();
     });
+    //when one checkbox is checked the remaining are left unchecked
+       $('input[type="checkbox"]').on('change', function() {
+        $('input[type="checkbox"]').not(this).prop('checked', false);
+    });
+});
+
+$(document).on('click','#ansattTable .openModal2',function (e) {
+    if ($(this).is(':checked')) {
+        $('input[class="openModal2"]').not(this).prop('checked', false);
+        nyansattid = $(this).closest("tr").find('td:eq(0)').text();
+    }
 });
 
 //When pressing 'Lagre'-button any row that is checked will get checked_by_admin=1
@@ -124,18 +139,16 @@ $(document).on('click','#Lagre',function (e) {
     var data2 = $("#overtimeTable").find("input:checkbox:checked").map(function(){
         return $(this).closest("tr").find('td:eq(0)').text();
     }).toArray(); // <----
-    var data3 = $("#switchTable").find("input:checkbox:checked").map(function(){
-        return $(this).closest("tr").find('td:eq(0)').text();
-    }).toArray(); // <----
   //  console.log(data);
     for(i=0; i<data.length; i++){
+        fjernAnsatt(i);
         console.log(data[i]);
         $.ajax({
             url: '/updateAbsence2',
             type:'POST',
             data:{'absence_id':data[i],'checked_by_admin':1},
             success:function (data) {
-                alert("success!");
+                //alert("success!");
             }
         });
     }
@@ -146,31 +159,27 @@ $(document).on('click','#Lagre',function (e) {
             type:'POST',
             data:{'overtime_id':data2[i],'checked_by_admin':1},
             success:function (data) {
-                alert("success!");
-            }
-        });
-    }
-    for(i=0; i<data3.length; i++){
-        console.log(data3[i]);
-        $.ajax({
-            url: '/updateRequest2',
-            type:'POST',
-            data:{'request_id':data3[i],'checked_by_admin':1},
-            success:function (data) {
-                alert("success!");
+               // alert("success!");
             }
         });
     }
 
 });
-function funkyfunc() {
-  //  console.log($("#ansattDropdown option:selected").text());
-}
-function fjernAnsatt(){
-    ansattid = $("#ansattDropdown option:selected").text();
+function fjernAnsatt(skiftid){
+    var id;
+    if(skiftid==null) {//if method is called from 'Godkjenn vaktbytte'
+        id = indeks;
+    } else id = skiftid;//If method is called from 'Godkjenn fravær'
+    $.ajax({
+        url:'/deleteShift_has_employee',
+        type: 'DELETE',
+        data:{'shift_id':id,'employee_id':ansattid},
+        success:function (data) {
+            alert("vi bør lage en varsel her og");
+        }
+    });
 }
 function erstattAnsatt() {
-    nyansattid = parseInt($("#ansattDropdown option:selected").text());
     var skiftid = indeks;
     console.log(ansattid);
     console.log(nyansattid);
@@ -180,7 +189,27 @@ function erstattAnsatt() {
         type:'POST',
         data:{'employee_id':ansattid,'shift_id':skiftid,'employee_id2':nyansattid},
         success:function (data) {
-            alert("success!");
+            fjernAnsatteRequestShift(skiftid);
         }
     });
 }
+function fjernAnsatteRequestShift(skiftid){
+    $.ajax({
+        url:'/deleteRequest_shift',
+        type:'DELETE',
+        data:{'shift_id':skiftid},
+        success:function (data) {
+            $.ajax({
+            url: '/deleteRequest',
+            type:'DELETE',
+            data:{'request_id':indeks},
+            success:function (data) {
+                 alert("success!");
+            }
+        });
+        }
+    });
+}
+
+
+

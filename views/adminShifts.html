@@ -18,77 +18,77 @@
 <script>$("#includedContent").load("menu");</script>
 
 <body>
+<div class="alert alert-success fade in" id="successMessageBox"> <!-- TAG #successMessage FOR ALERTS -->
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <span id="successMessage">This is the default warning text</span>
+</div>
 
-<div class="modal fade" id="switchModal" role="dialog">
+<div id="adminNewShiftModal" class="modal fade">
     <div class="modal-dialog">
-
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h3 class="modal-title">Opprett ny vakt</h3>
+                <h4 id="modalShift" class="modal-title">Legg til vakter</h4>
             </div>
-
-            <main class="modal-body">
-                <div id="selectDateBox">
-                    <p>Dato og tid</p>
-                    <select id="selectDate"></select>
-                    <select id="selectShift"></select>
+            <!-- Modal body-->
+            <div id="adminNewShiftModalContent" class="modal-body">
+                <div id="timeBox">
+                    <label for="datePicker">Dato</label><br>
+                    <input id = datePicker type="date" onchange="oppdateTable()">
+                    <form action="">
+                        <label>Vakt</label><br>
+                        <input type="radio" name="time" value="day"> Dag<br>
+                        <input type="radio" name="time" value="evening"> Kveld<br>
+                        <input type="radio" name="time" value="night"> Natt
+                    </form>
                 </div>
-                <div id="selectdepartmentBox">
-                    <p>Avdeling</p>
-                    <select id= "selectDepartment"></select>
+                <div id="departmentBox">
+                    <label for="chooseDepartment">Avdeling</label>
+                    <select id="chooseDepartment"></select>
                 </div>
-                <div id="selectNumberBox">
-                    <p>Antall</p>
-                    <select id= "selectNumber" onchange="getDispersion(this)"></select>
+                <div id="numberBox">
+                    <label for="chooseNumber">Antall folk</label>
+                    <select id="chooseNumber" onchange="getDispersion(this)"></select>
                 </div>
-                <div id="selectPeopleBox">
-                    <table id="selectPeopleTable"></table>
+                <div id="peopleBox">
+                    <table id="peopleTable"></table>
                 </div>
-                <button type="button" id="lagreNyVakt" data-dismiss="modal">Lagre</button>
-            </main>
-
+                <input type="submit" value="Lagre" id="saveNewShift">
+            </div>
             <div class="modal-footer">
-                <button type="button" class="closeButton" data-dismiss="modal">Lukk</button>
+                <button type="button" class="close" data-dismiss="modal">Lukk</button>
             </div>
         </div>
     </div>
 </div>
-<div class="modal" id="adminNewShiftModal" role="dialog">
+
+<div id="fillShiftModal" class="modal fade">
     <div class="modal-dialog">
-    <div class="modal-content">
-        <!-- Modal header-->
-        <div class="modal-header">
-            <span class="close">&times;</span>
-            <h2 id="organizeShiftTitle">Header</h2>
-        </div>
-        <!-- Modal body-->
-        <div id="adminNewShiftModalContent" class="modal-body">
-            <div id="departmentBox">
-                <p>Avdeling</p>
-                <select id= "chooseDepartment"></select>
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 id="fillShift" class="modal-title">Legg til person</h4>
             </div>
-            <div id="numberBox">
-                <p>Antall</p>
-                <select id= "chooseNumber" onchange="getDispersion(this)"></select>
+            <!-- Modal body-->
+            <div id="fillShiftModalContent" class="modal-body">
+                <label for="chooseDepartment">Velg ansatt</label><br>
+                <select id="choosePerson"></select><br>
+                <input type="submit" value="Lagre" id="saveFillShift">
             </div>
-            <div id="peopleBox">
-                <table id="peopleTable"></table>
+            <div class="modal-footer">
+                <button type="button" class="close" data-dismiss="modal">Lukk</button>
             </div>
-            <input type="submit" value="Lagre" id="saveNewShift">
-        </div>
-        <!-- Modal footer-->
-        <div class="modal-footer">
-            <button type="button" class="close" >Lukk</button>
         </div>
     </div>
-</div>
 </div>
 
 <div id="container">
-    <button type="button" class="menuBtn" id="createNewShift" data-toggle="modal" data-target="#switchModal"><span>Opprett ny vakt</span></button>
+    <div id="sideTitle">Administrer vakter</div>
+    <button type="button" class="menuBtn" id="createNewShift" data-toggle="modal" data-target="#adminNewShiftModal"><span>Opprett ny vakt</span>
+    </button>
     <div id='calendarx'></div>
 </div>
+
 
 </body>
 </html>

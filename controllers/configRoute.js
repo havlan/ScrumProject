@@ -5,7 +5,6 @@ var getCtrl = require('./getReq');
 var postCtrl = require('./postReq');
 var delCtrl = require('./delReq');
 var model = require('../models/regWMail');
-var sche = require('../models/schedulerSM');
 
 
 module.exports = function (app, passport) {
@@ -30,7 +29,7 @@ module.exports = function (app, passport) {
     app.get('/getEmployee_Shifts_fromCurrentDate', isLoggedIn, getCtrl.getEmployee_Shifts_fromCurrentDate);
     app.get('/getPersonalShiftEvents',isLoggedIn, getCtrl.getPersonalShiftEvents);
     app.get('/getTypeNames',isLoggedIn, getCtrl.getTypeNames);
-    app.get('/getPossibleSiftsEvents',isLoggedIn,getCtrl.getPossibleSiftsEvents);
+    app.get('/getPossibleShiftsEvents',isLoggedIn,getCtrl.getPossibleShiftsEvents);
     app.get('/getDepartment',isLoggedIn, getCtrl.getDepartment);
     app.get('/getNextShiftForEmp',isLoggedIn, getCtrl.getNextShiftForEmp);
     app.get('/getOvertimeView',isOfficeEmp,getCtrl.getOvertimeView);
@@ -43,6 +42,7 @@ module.exports = function (app, passport) {
     app.get('/getOvertimeNum',isOfficeEmp,getCtrl.getOvertimeNum);
     app.get('/getChangeNum',isOfficeEmp,getCtrl.getChangeNum);
     app.get('/getClearenceLevel',isLoggedIn,getCtrl.getClearenceLevel);
+    app.get('/getPersonalShiftEventsDone', isLoggedIn, getCtrl.getPersonalShiftEventsDone);
 
     app.get('/getAvailability',isLoggedIn, getCtrl.getAvailability);
 
@@ -53,14 +53,14 @@ module.exports = function (app, passport) {
     app.get('/vaktoversikt', isOfficeEmp, getCtrl.getVaktoversiktSite);
     app.get('/calendar', isLoggedIn, getCtrl.getCalendarSite);
     app.get('/approvalAdmin', isOfficeEmp, getCtrl.getApprovalAdminSite);
-    app.get('/frontpageAdmin', isAdmin, getCtrl.getFrontpageAdminSite);
+    app.get('/frontpageAdmin', isOfficeEmp, getCtrl.getFrontpageAdminSite);
     app.get('/OnePagedMenu', isLoggedIn, getCtrl.getOnePagedMenu);
     app.get('/frontpageSuper', isAdmin, getCtrl.getFrontpageSuperSite);
     app.get('/overviewEmp', isLoggedIn, getCtrl.getOverviewEmpSite);
     app.get('/availability', isLoggedIn, getCtrl.getAvailabilitySite);
     app.get('/appeal', isLoggedIn, getCtrl.getAppeal);
     app.get('/adminShifts', isOfficeEmp, getCtrl.getAdminShifts);
-
+    app.get('/getRequestShift/:id',isOfficeEmp,getCtrl.getRequestShift);
 
     //Images
     app.get('IMG01', isLoggedIn, getCtrl.getLogo);
@@ -70,32 +70,37 @@ module.exports = function (app, passport) {
         failureRedirect: '/login',
         failureFlash: true
     }), function (req, res) {
-        console.log("LOGIN OK?");
-        res.redirect('/calendar');
-    });
+        if(req.session.passport.user.is_admin == 1){
+            res.redirect('/frontpageAdmin');
+        }else {
+            console.log("LOGIN OK?");
+            res.redirect('/calendar');
+        }
+        });
 
     app.post('/getVaktliste1', isLoggedIn, getCtrl.getVaktliste1); //sjekk
     app.post('/getVaktliste2', isLoggedIn, getCtrl.getVaktliste2);
     app.post('/getVaktliste3', isLoggedIn, getCtrl.getVaktliste3);
 
     app.post('/postUser', isOfficeEmp, postCtrl.postEmployee);
-    app.post('/delUser', isOfficeEmp, delCtrl.delLogin); // office auth
+    app.delete('/delUser', isOfficeEmp, delCtrl.delLogin); // office auth
     app.post('/postDepartment', isOfficeEmp, postCtrl.postDepartment);
     app.post('/postType', isOfficeEmp, postCtrl.postType);
     app.post('/postShift', isOfficeEmp, postCtrl.postShift);
     app.post('/postShift_has_employee', isOfficeEmp, postCtrl.postShift_has_employee);
     app.post('/postRequest', isLoggedIn, postCtrl.postRequest);
+    app.post('/postRequestShift', isLoggedIn, postCtrl.postRequestShift);
     app.post('/postAbsence', isLoggedIn, postCtrl.postAbsence);
     app.post('/postOvertime', isLoggedIn, postCtrl.postOvertime);
     app.post('/postLogInInfo', isOfficeEmp, postCtrl.postLogInInfo);
-    app.post('/updateShift_has_employee', isOfficeEmp, postCtrl.updateShift_has_employee);
+    app.post('/updateShift_has_employee', isOfficeEmp, model.confirmShiftChange); // 1
     app.post('/updateEmployee', isOfficeEmp, postCtrl.updateEmployee);
     app.post('/updateEmployeePersonalInfo',isLoggedIn,postCtrl.updateEmployeePersonalInfo);
     app.post('/updateType', isOfficeEmp, postCtrl.updateType);
     app.post('/updateShift', isOfficeEmp, postCtrl.updateShift);
     app.post('/updateDepartment', isOfficeEmp, postCtrl.updateDepartment);
     app.post('/updateRequest', isOfficeEmp, postCtrl.updateRequest);
-    app.post('/updateRequest2', isOfficeEmp, postCtrl.updateRequest2);
+    app.post('/updateRequest2', isOfficeEmp, postCtrl.updateRequest2); // 2
     app.post('/updateAbsence2', isOfficeEmp, postCtrl.updateAbsence2);
     app.post('/updateOvertime', isOfficeEmp, postCtrl.updateOvertime);
     app.post('/updateOvertime2', isOfficeEmp, postCtrl.updateOvertime2);
@@ -115,15 +120,15 @@ module.exports = function (app, passport) {
         })
     });
 
-    app.post('/postMailShift', sche.sendMailOnFree);
-
     app.post('/changePassword', isLoggedIn, model.changePassword);
     app.post('/acceptRequestWith', isOfficeEmp, model.acceptRequestWith);
-    app.post('/getAvailableEmpForShift',isOfficeEmp, getCtrl.getAvailableEmpForShift);
-
-
+    app.get('/getAvailableEmpForShift/:id',isOfficeEmp, getCtrl.getAvailableEmpForShift);
+    app.post('/getEmpForShiftDate', isAdmin, getCtrl.getEmpForShiftDate);
+    app.delete('/deleteShift_has_employee',isOfficeEmp,delCtrl.delShift_has_employee);
+    app.delete('/deleteRequest_shift',isOfficeEmp,delCtrl.delRequest_shift);
+    app.delete('/deleteRequest',isOfficeEmp,delCtrl.delRequest);
     //MÅ VÆRE SIST
-    app.get('/forbudt', getCtrl.get403);
+    app.get('/forbudt',getCtrl.get403);
     app.get('/*', getCtrl.get404);
 
 };
@@ -135,8 +140,7 @@ function isLoggedIn(req, res, next) {
     if (req.isAuthenticated()) {
         next();
     } else {
-        //console.log(req.session, " not authorized.");
-        console.log("Ikke godkjent log.");
+        console.log(req.session, " not authorized.");
         res.redirect('/login');
     }
 }
@@ -156,11 +160,9 @@ function isAdmin(req, res, next) {
     if (req.isAuthenticated() && req.session.passport) {
         if (req.session.passport.user.is_admin == 0) {
             next();
-        }else{
-            res.status(403).redirect('/forbudt');
         }
     } else {
-        res.status(403).redirect('/login');
+        res.redirect('/user');
     }
 }
 function logOut(req, res) {
