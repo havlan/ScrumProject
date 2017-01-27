@@ -41,7 +41,7 @@
         <p id="nextShiftInfo"></p>
     </aside>
     <aside id="warning">
-        <h4 class="shiftHeader" onclick="buttonChangeTab()"> FORKLARING </h4>
+        <h4 class="shiftHeader" > FORKLARING </h4>
         <div>
             <div id="myShifts"></div>
             <p id="myShiftsText">De grønne vaktene er vakter du har godkjent. Trykk på disse for å få oversikt over den enkelte vakten, be om fri eller søke om overtid. På "frigjør vakter" kan man be om fri fra flere vakter samtidig. </p>
@@ -99,7 +99,7 @@
                     <button type="button" class="sendShiftRequest" onclick="showExplanationField()" >Be om fri</button>
                     <p id="spaceFree" style="visibility:hidden">
                     <input class="explanation" id="expField"placeholder="Begrunnelse for avspasering" >
-                    <button type="button" id="freeSave" onclick="showExplanationField()">Send </button>
+                    <button type="button" id="freeSave">Send </button>
                     </p>
                 </div>
                 <div id="overtimeDiv">
@@ -107,7 +107,7 @@
                     <p id="spaceOver" style="visibility:hidden">
                     <input type="number" id="overTime" name="overtimeClock" min="0" max="10"step="0.25" placeholder="Antall timer">
                     <input class="explanation" id="overField" placeholder="Begrunnelse for overtid"  >
-                    <button type="button" id="overSave" onclick="showExplanationField()">Send</button>
+                    <button type="button" id="overSave" onclick="">Send</button>
                     </p>
                 </div>
             </div>
@@ -117,17 +117,6 @@
         </div>
     </div>
 </div>
-<script>
-    function showExplanationField(){
-        document.getElementById('spaceFree').style.visibility = "visible";
-        document.getElementById('spaceOver').style.visibility="hidden";
-    }
-    function showOverField(){
-        document.getElementById('spaceFree').style.visibility = "hidden";
-        document.getElementById('spaceOver').style.visibility="visible";
-    }
-
-</script>
 
 <!-- Modal: Be om vakt -->
 <div id="fullCalModalFree" class="modal fade">

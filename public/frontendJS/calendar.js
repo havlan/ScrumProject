@@ -24,18 +24,18 @@ $(document).ready(function() {
         //GETTING EVENTS FROM JSON FEED; SHORT AND EXTENDED
         eventSources: [
             {
-                url: '/getPersonalShiftEvents',
-                color: '#8cd9ad',
-                textColor: 'black'
-            },
-            {
                 url: '/getPossibleShiftsEvents',
                 color: '#ffe066',
                 textColor: 'black'
             },
             {
+                url: '/getPersonalShiftEvents',
+                color: '#8cd9ad',
+                textColor: 'black'
+            },
+            {
                 url: '/getPersonalShiftEventsDone',
-                color: '#bdc8cb',
+                color: '#608fe0',
                 textColor: 'black'
             }]
         ,
@@ -137,8 +137,8 @@ $(document).on('click','#sendForespørsel',function (e) {
     }
 });
 
-$(document).on('click','#sendShiftRequest',function (e) {
-    var textinput = $("#explanation").val;
+$(document).on('click','#freeSave',function (e) {
+    var textinput = $("#expField").val();
     if(textinput.length<300){
         $.ajax({
             url: '/postRequest',
@@ -193,6 +193,53 @@ $(document).on('click','#sendRequest',function () {
     }
 });
 
+$(document).on('click','#overSave',function () {
+
+    var numberinput = $("#overTime").val();
+    var explenation = $("#overField").val();
+    console.log(numberinput);
+    console.log(explenation);
+
+    if (event_id!=null){
+        if (numberinput){
+            $.ajax({
+                url: '/postOvertime',
+                type: 'POST',
+                data: {'shift_id': event_id,
+                    'overtime': numberinput,
+                    'explanation': explenation},
+                success: function (data) {
+                    alert("success!");
+                    console.log(data);
+                },
+                error: function(xhr){
+                    if(xhr.status==404){
+                        document.getElementById("errorMessage").innerHTML = "ikke funnet";
+                        showErrorMessage();
+                    } else {
+                        document.getElementById("errorMessage").innerHTML = "Det har oppstått en feil";
+                        showErrorMessage();
+                    }
+                }
+            });
+        }else{
+            console.log("Du må legge til et nummer i overtidnummer feltet.")
+        }
+    }else {
+        console.log("Systemet fant ikke event_id");
+    }
+});
+
+
+function showExplanationField(){
+    document.getElementById('spaceFree').style.visibility = "visible";
+    document.getElementById('spaceOver').style.visibility="hidden";
+}
+function showOverField(){
+    document.getElementById('spaceFree').style.visibility = "hidden";
+    document.getElementById('spaceOver').style.visibility="visible";
+}
+
 function showSuccessMessage() {
     var element = document.getElementById('successMessageBox');
     element.style.display = "block";
@@ -207,15 +254,3 @@ function showErrorMessage() {
         element.style.display = "none";
     }, 3000);
 }
-/*function showSuccessMessage() {
-    $("#successMessageBox").alert();
-    $("#successMessageBox").fadeTo(2000, 500).slideUp(500, function () {
-        $("#success-alert").slideUp(500);
-    })
-}
-function showErrorMessage(){
-    $("#errorMessageBox").alert();
-    $("#errorMessageBox").fadeTo(5000, 500).slideUp(500, function(){
-        $("#success-alert").slideUp(500);
-    })
-}*/
