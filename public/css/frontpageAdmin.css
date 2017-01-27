@@ -15,7 +15,7 @@ html, body {
     margin:0;
     z-index:99999;
 }
-#adminHomeTitle {
+#sideTitle {
     font-weight: bold;
     font-size: 25px;
     padding-bottom:10px;
@@ -143,18 +143,22 @@ only screen and (max-width: 760px),
         margin:0;
         width:100%;
     }
-    #adminHomeTitle {
-        width: 100%;
+    #sideTitle {
+        width: calc(100% - 1em);
+        margin-left:0.5em;
         margin-bottom:0.5em;
         font-size: 1.5em;
         padding-bottom:0.5em;
     }
+
     #calendar {
         position:relative;
         width:calc(100% - 1em);
+        padding:0;
         margin-left:0.5em;
         margin-right:0.5em;
         float:left;
+        overflow: visible;
     }
     .fc-basic-view .fc-body .fc-row{
         height:10vw;

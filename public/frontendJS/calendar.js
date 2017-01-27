@@ -61,6 +61,13 @@ $(document).ready(function() {
         document.getElementById("nextShiftInfo").innerHTML = "Dato: " +data.responseJSON[0].ndate + "<br><br>Sted: " + data.responseJSON[0].department_name;
     });
 
+    $("#successMessageBox").hide();
+    $("#testButton").click(function showAlert() { //TODO
+        $("#successMessageBox").fadeTo(2000, 500).slideUp(500, function(){
+            $("#success-alert").slideUp(500);
+        });
+    });
+
 });
 
 $.get('/getEmployee_Shifts_fromCurrentDate',{},function (req,res,data) {

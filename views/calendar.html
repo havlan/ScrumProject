@@ -21,7 +21,14 @@
 <script>$("#includedContent").load("menu");</script>
 
 <body>
+<div class="alert alert-success fade in" id="successMessageBox"> <!-- TAG #successMessage FOR ALERTS -->
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <span id="successMessage">This is the default warning text</span>
+</div>
+
 <div id="container">
+    <div id="sideTitle">HJEM</div>
+
     <div id='calendar'></div>
     <aside id="menuEmp">
         <button type="button" class="menuBtn" onclick="location.href='/availability';" id="availabilityB"><span>Tilgjengelighet</span></button>
