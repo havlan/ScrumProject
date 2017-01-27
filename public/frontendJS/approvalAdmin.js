@@ -4,7 +4,7 @@ var myList = [];
 window.ansattid = 0;
 window.nyansattid = 0;
 window.shift_id = 0;
-
+window.indeks = 0;
 function leaveFunction(){
     document.getElementById('leaveApproval').style.display = "block";
     document.getElementById('switchApproval').style.display = "none";
@@ -133,39 +133,29 @@ $(document).on('click','#ansattTable .openModal2',function (e) {
 //When pressing 'Lagre'-button any row that is checked will get checked_by_admin=1
 $(document).on('click','#Lagre',function (e) {
     e.preventDefault();
-    var data = $("#leaveTable").find("input:checkbox:checked").map(function(){
+    var absenceIDArray = $("#leaveTable").find("input:checkbox:checked").map(function(){
         return $(this).closest("tr").find('td:eq(0)').text();
     }).toArray(); // <----
-    var data2 = $("#overtimeTable").find("input:checkbox:checked").map(function(){
+    var skiftIDArray = $("#leaveTable").find("input:checkbox:checked").map(function(){
+        return $(this).closest("tr").find('td:eq(3)').text();
+    }).toArray(); // <----
+    var employeeIDArray = $("#leaveTable").find("input:checkbox:checked").map(function(){
+        return $(this).closest("tr").find('td:eq(1)').text();
+    }).toArray(); // <----
+    var overtimeIDArray = $("#overtimeTable").find("input:checkbox:checked").map(function(){
         return $(this).closest("tr").find('td:eq(0)').text();
     }).toArray(); // <----
   //  console.log(data);
-    for(i=0; i<data.length; i++){
-        fjernAnsatt(i);
-        console.log(data[i]);
-        $.ajax({
-            url: '/updateAbsence2',
-            type:'POST',
-            data:{'absence_id':data[i],'checked_by_admin':1},
-            success:function (data) {
-                //alert("success!");
-            }
-        });
+    for(i=0; i<skiftIDArray.length; i++){
+        //alert("success!");
+        fjernAnsatt(skiftIDArray[i],employeeIDArray[i]); //Removes employee from shift when approving absence
+        deleteAbsence(absenceIDArray[i]);
     }
-    for(i=0; i<data2.length; i++){
-        console.log(data2[i]);
-        $.ajax({
-            url: '/updateOvertime2',
-            type:'POST',
-            data:{'overtime_id':data2[i],'checked_by_admin':1},
-            success:function (data) {
-               // alert("success!");
-            }
-        });
+    for(i=0; i<overtimeIDArray.length; i++){
+        deleteOvertime(overtimeIDArray[i]);
     }
-
 });
-function fjernAnsatt(skiftid){
+function fjernAnsatt(skiftid,ansatt){
     var id;
     if(skiftid==null) {//if method is called from 'Godkjenn vaktbytte'
         id = indeks;
@@ -173,7 +163,7 @@ function fjernAnsatt(skiftid){
     $.ajax({
         url:'/deleteShift_has_employee',
         type: 'DELETE',
-        data:{'shift_id':id,'employee_id':ansattid},
+        data:{'shift_id':id,'employee_id':ansatt},
         success:function (data) {
             alert("vi bør lage en varsel her og");
         }
@@ -199,17 +189,39 @@ function fjernAnsatteRequestShift(skiftid){
         type:'DELETE',
         data:{'shift_id':skiftid},
         success:function (data) {
-            $.ajax({
-            url: '/deleteRequest',
-            type:'DELETE',
-            data:{'request_id':indeks},
-            success:function (data) {
-                 alert("success!");
-            }
-        });
+           deleteRequest(indeks);
         }
     });
 }
-
+function deleteRequest(id) {
+    $.ajax({
+        url: '/deleteRequest',
+        type:'DELETE',
+        data:{'request_id':id},
+        success:function (data) {
+            alert("Request slettet.");
+        }
+    });
+}
+function deleteAbsence(id) {
+    $.ajax({
+        url: '/deleteAbsence',
+        type:'DELETE',
+        data:{'absence_id':id},
+        success:function (data) {
+            alert("Absence slettet.");
+        }
+    });
+}
+function deleteOvertime(id) {
+    $.ajax({
+        url: '/deleteOvertime',
+        type:'DELETE',
+        data:{'overtime_id':id},
+        success:function (data) {
+            alert("Overtime slettet.");
+        }
+    });
+}
 
 
