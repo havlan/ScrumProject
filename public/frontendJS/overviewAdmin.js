@@ -18,12 +18,6 @@ $.get('/getEmployee', {}, function(req, res, data){
 });
 //Build Table
 
-
-$(document).ready (function(){
-    $("#successMessageBox").hide();
-    $("#errorMessageBox").hide();
-});
-
 function buildHtmlTable(selector,list) {
     var columns = addAllColumnHeaders(list, selector);
     var tbody = $('<tbody/>');

@@ -26,11 +26,6 @@ $(document).ready(function () {
     oppdateTable();
 });
 
-$(document).ready (function(){
-    $("#successMessageBox").hide();
-    $("#errorMessageBox").hide();
-});
-
 $.get('/getDepartment', {}, function (req, res, data) {
     console.log(data);
     console.log(data.responseJSON);

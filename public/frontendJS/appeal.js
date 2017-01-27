@@ -24,8 +24,3 @@ function overtimeFunction(){
     document.getElementById('changeToAppeal').style.display = "none";
     document.getElementById('overtimeAppeal').style.display = "block";
 }
-
-$(document).ready(function() {
-    $("#successMessageBox").hide();
-    $("#errorMessageBox").hide();
-});

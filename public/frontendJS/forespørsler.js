@@ -2,11 +2,6 @@
  * Created by Knut-Egil on 17.01.2017.
  */
 
-$(document).ready (function(){
-    $("#successMessageBox").hide();
-    $("#errorMessageBox").hide();
-});
-
 //hide functions
 $(document).ready(function(){
     $("#fravær").click(function(){
