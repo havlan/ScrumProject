@@ -23,15 +23,27 @@
 
 <div id="sideTitle">TILGJENGELIGHET</div>
 
-<div id="shift-buttons" class="btn-group">
-    <button type="button" class="btn btn-default" id="available-prev">
-        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-    </button>
-    <button type="button" class="btn btn-default" id="available-next">
-        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-    </button>
-</div>
-<p id="weeknr"></p>
+<ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#home">Sett tilgjengelighet</a></li>
+    <li><a data-toggle="tab" href="#menu1">Din tilgjengelighet </a></li>
+</ul>
+
+<div class="tab-content">
+    <div id="home" class="tab-pane fade in active">
+        <h3>Sett tilgjengelighet</h3>
+        <p>Some content.</p>
+    </div>
+    <div id="menu1" class="tab-pane fade">
+        <h3>Din tilgjengelighet</h3>
+        <div id="shift-buttons" class="btn-group">
+            <button type="button" class="btn btn-default" id="available-prev">
+                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+            </button>
+            <button type="button" class="btn btn-default" id="available-next">
+                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+            </button>
+        </div>
+        <p id="weeknr"></p>
 
         <table id="TingTang"></table>
 
@@ -84,6 +96,15 @@
 
         <button id="unavailable">utilgjengelig
         </button>
+    </div>
+</div>
+
+
+
+<div id="availabilityTab1"></div>
+
+<div id="availabilityTab2">
+</div>
 
 </body>
 
