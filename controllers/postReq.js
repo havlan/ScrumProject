@@ -1,6 +1,5 @@
 var dbMiddelware = require('../middlewares/dbQ1');
-var session1;
-
+var dbMethods = require('../helpers/db');
 
 module.exports = {
     //POST
@@ -76,5 +75,13 @@ module.exports = {
     },
     updateLogInInfo : function (req, res) {
         dbMiddelware.updateLogInInfo(req,res);
+    },
+    insertBulkAvailability : function(req,res){ // får inn en array med json obj
+        for(var i=0;i<req.body.availarray.length;i++){
+            req.body.availarray[i][2] = req.session.passport.user.id;
+            console.log(req.body.availarray[i]);
+        }
+
+        dbMethods.postdbQuery(req,res,"insert into Availability (day, availability, employee_id) values ?", [req.body.availarray]); // insert into Availability (day,availability,employee_id) values ('2017-03-25 00:00:00', 1,1);
     }
 }
