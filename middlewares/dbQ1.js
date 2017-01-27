@@ -74,11 +74,13 @@ module.exports = {
     getPersonalShiftEvents : function (req, res) {
         dbHelper.getdbQuery(req, res, "select * from JSON_EMPLOYEE_VIEW where employee_id = ? And start >= CURDATE()", req.session.passport.user.id);
     },
-    getPossibleSiftsEvents : function (req, res) {
+    getPersonalShiftEventsDone : function (req, res) {
+        dbHelper.getdbQuery(req, res, "select * from JSON_EMPLOYEE_VIEW where employee_id = ? And start < CURDATE()", req.session.passport.user.id);
+    },
+    getPossibleShiftsEvents : function (req, res) {
         console.log("USER ID "+req.session.passport.user.id);
         dbHelper.getdbQuery(req,res,"select end, start, id, title,description from available_emp_for_shift where employee_id = ?", req.session.passport.user.id);
-    }
-        ,
+    },
     /*simpleLogin : function(username){
         dbHelper.simpleLogin("select * from LoginInfo where Username = ?", [username]);
     },*/
@@ -101,7 +103,7 @@ module.exports = {
         dbHelper.getdbQuery(req, res, "SELECT e.employee_id, e.name FROM Employee e, Shift s WHERE (SELECT rank FROM Type t WHERE t.name = s.type_name)<=(SELECT rank FROM Type t WHERE t.name = e.type_name) AND s.date NOT IN(SELECT a.day FROM Availability a WHERE a.employee_id = e.employee_id AND availability = 1) AND s.date NOT IN(SELECT date FROM Shift ss, shift_has_employee she WHERE ss.shift_id = she.shift_id AND she.employee_id = e.employee_id) AND s.shift_id = ?", [req.params.id]);
     },
     getRequestShift : function (req, res) {
-        dbHelper.getdbQuery(req,res,"select e.employee_id, e.name from Employee e, Request_shift rs where e.employee_id = rs.employee_id and shift_id = ?",[req.params.id])
+        dbHelper.getdbQuery(req,res,"select e.employee_id, e.name from Employee e, Request_shift rs where e.employee_id = rs.Employee_employee_id and rs.Shift_shift_id = ?",[req.params.id])
     },
     getAvailableShifts : function (req, res){
         dbHelper.getdbQuery(req, res, "select count(*) as total From available_shift");
@@ -314,13 +316,13 @@ module.exports = {
     updateOvertime2: function (req, res) {
         var pk = req.body.overtime_id;
         dbHelper.postdbQuery(req, res, "update Overtime set ? where overtime_id=?", [{
-            checked_by_admin: req.body.checked_by_admin,
+            checked_by_admin: req.body.checked_by_admin
         }, pk]);
     },
     updateRequest2: function (req, res) {
         var pk = req.body.request_id;
         dbHelper.postdbQuery(req, res, "update Request set ? where request_id=?", [{
-            checked_by_admin: req.body.checked_by_admin,
+            checked_by_admin: req.body.checked_by_admin
         }, pk]);
     },
     updateLogInInfo: function (req, res) {

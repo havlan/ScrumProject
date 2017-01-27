@@ -77,7 +77,24 @@ function addAllColumnHeaders(list, selector) {
     $(headerThead$).append(headerTr$);
     return columnSet;
 }
-
+//Different checkbox class, should only be able to select one at a time
+function buildHtmlTable2(selector,list) {
+    var columns = addAllColumnHeaders(list, selector);
+    var tbody = $('<tbody/>');
+    for (var i = 0; i < list.length; i++) {
+        var row$ = $('<tr id=' + i + '/>');
+        var check$ = $('<div class="checkbox radio-margin"><label><input type="checkbox" class="openModal2" id='+ i +' value=""><span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span></label></div>');
+        for (var colIndex = 0; colIndex < columns.length; colIndex++) {
+            var cellValue = list[i][columns[colIndex]];
+            if (cellValue == null) cellValue = "";
+            row$.append($('<td/>').html(cellValue));
+        }
+        row$.append($('<td/>').html(check$));
+        $(selector).append(row$);
+        $(tbody).append(row$);
+    }
+    $(selector).append(tbody);
+}
 //when you press a checkbox in switchtable
 $(document).on('click','#switchTable .openModal',function (e) {
     indeks = $(this).closest("tr").find('td:eq(0)').text();
@@ -87,7 +104,7 @@ $(document).on('click','#switchTable .openModal',function (e) {
         document.getElementById("skiftdb").innerHTML = "Skift: "+indeks;
         $.get('/getRequestShift/'+parseInt(indeks),function(req,res,data1){
             $('#hei').append('<table class="table table-striped table-bordered" id="ansattTable"></table>');
-            buildHtmlTable("#ansattTable",data1.responseJSON);
+            buildHtmlTable2("#ansattTable",data1.responseJSON);
             console.log(data1.responseJSON);
         });
         $('#approveModal').modal('show');
@@ -106,9 +123,9 @@ $(document).on('click','#switchTable .openModal',function (e) {
     });
 });
 
-$(document).on('click','#ansattTable .openModal',function (e) {
+$(document).on('click','#ansattTable .openModal2',function (e) {
     if ($(this).is(':checked')) {
-        $('input[type="checkbox"]').not(this).prop('checked', false);
+        $('input[class="openModal2"]').not(this).prop('checked', false);
         nyansattid = $(this).closest("tr").find('td:eq(0)').text();
     }
 });
@@ -124,13 +141,14 @@ $(document).on('click','#Lagre',function (e) {
     }).toArray(); // <----
   //  console.log(data);
     for(i=0; i<data.length; i++){
+        fjernAnsatt(i);
         console.log(data[i]);
         $.ajax({
             url: '/updateAbsence2',
             type:'POST',
             data:{'absence_id':data[i],'checked_by_admin':1},
             success:function (data) {
-                alert("success!");
+                //alert("success!");
             }
         });
     }
@@ -141,14 +159,25 @@ $(document).on('click','#Lagre',function (e) {
             type:'POST',
             data:{'overtime_id':data2[i],'checked_by_admin':1},
             success:function (data) {
-                alert("success!");
+               // alert("success!");
             }
         });
     }
 
 });
-function fjernAnsatt(){
-    ansattid = $("#ansattDropdown option:selected").text();
+function fjernAnsatt(skiftid){
+    var id;
+    if(skiftid==null) {//if method is called from 'Godkjenn vaktbytte'
+        id = indeks;
+    } else id = skiftid;//If method is called from 'Godkjenn fravær'
+    $.ajax({
+        url:'/deleteShift_has_employee',
+        type: 'DELETE',
+        data:{'shift_id':id,'employee_id':ansattid},
+        success:function (data) {
+            alert("vi bør lage en varsel her og");
+        }
+    });
 }
 function erstattAnsatt() {
     var skiftid = indeks;
@@ -160,15 +189,27 @@ function erstattAnsatt() {
         type:'POST',
         data:{'employee_id':ansattid,'shift_id':skiftid,'employee_id2':nyansattid},
         success:function (data) {
-            alert("success!");
-        }
-    });
-    $.ajax({
-        url: '/updateRequest2',
-        type:'POST',
-        data:{'request_id':indeks,'checked_by_admin':1},
-        success:function (data) {
-          //  alert("success!");
+            fjernAnsatteRequestShift(skiftid);
         }
     });
 }
+function fjernAnsatteRequestShift(skiftid){
+    $.ajax({
+        url:'/deleteRequest_shift',
+        type:'DELETE',
+        data:{'shift_id':skiftid},
+        success:function (data) {
+            $.ajax({
+            url: '/deleteRequest',
+            type:'DELETE',
+            data:{'request_id':indeks},
+            success:function (data) {
+                 alert("success!");
+            }
+        });
+        }
+    });
+}
+
+
+

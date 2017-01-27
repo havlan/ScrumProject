@@ -29,7 +29,7 @@ module.exports = function (app, passport) {
     app.get('/getEmployee_Shifts_fromCurrentDate', isLoggedIn, getCtrl.getEmployee_Shifts_fromCurrentDate);
     app.get('/getPersonalShiftEvents',isLoggedIn, getCtrl.getPersonalShiftEvents);
     app.get('/getTypeNames',isLoggedIn, getCtrl.getTypeNames);
-    app.get('/getPossibleSiftsEvents',isLoggedIn,getCtrl.getPossibleSiftsEvents);
+    app.get('/getPossibleShiftsEvents',isLoggedIn,getCtrl.getPossibleShiftsEvents);
     app.get('/getDepartment',isLoggedIn, getCtrl.getDepartment);
     app.get('/getNextShiftForEmp',isLoggedIn, getCtrl.getNextShiftForEmp);
     app.get('/getOvertimeView',isOfficeEmp,getCtrl.getOvertimeView);
@@ -42,6 +42,7 @@ module.exports = function (app, passport) {
     app.get('/getOvertimeNum',isOfficeEmp,getCtrl.getOvertimeNum);
     app.get('/getChangeNum',isOfficeEmp,getCtrl.getChangeNum);
     app.get('/getClearenceLevel',isLoggedIn,getCtrl.getClearenceLevel);
+    app.get('/getPersonalShiftEventsDone', isLoggedIn, getCtrl.getPersonalShiftEventsDone);
 
     app.get('/getAvailability',isLoggedIn, getCtrl.getAvailability);
 
@@ -123,7 +124,9 @@ module.exports = function (app, passport) {
     app.post('/acceptRequestWith', isOfficeEmp, model.acceptRequestWith);
     app.get('/getAvailableEmpForShift/:id',isOfficeEmp, getCtrl.getAvailableEmpForShift);
     app.post('/getEmpForShiftDate', isAdmin, getCtrl.getEmpForShiftDate);
-
+    app.delete('/deleteShift_has_employee',isOfficeEmp,delCtrl.delShift_has_employee);
+    app.delete('/deleteRequest_shift',isOfficeEmp,delCtrl.delRequest_shift);
+    app.delete('/deleteRequest',isOfficeEmp,delCtrl.delRequest);
     //MÅ VÆRE SIST
     app.get('/forbudt',getCtrl.get403);
     app.get('/*', getCtrl.get404);

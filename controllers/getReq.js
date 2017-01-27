@@ -144,8 +144,8 @@ module.exports = {
     getPersonalShiftEvents : function (req, res) {
         dbMiddelware.getPersonalShiftEvents(req,res);
     },
-    getPossibleSiftsEvents : function (req, res) {
-        dbMiddelware.getPossibleSiftsEvents(req,res);
+    getPossibleShiftsEvents : function (req, res) {
+        dbMiddelware.getPossibleShiftsEvents(req,res);
     }
     ,
     getTypeNames : function (req, res) {
@@ -186,7 +186,9 @@ module.exports = {
     getEmpForShiftDate : function (req,res) {
         dbMiddelware.getEmpForShiftDate(req,res);
     },
-
+    getPersonalShiftEventsDone : function (req,res) {
+        dbMiddelware.getPersonalShiftEventsDone(req,res);
+    },
 
 
     get403 : function (req, res) {

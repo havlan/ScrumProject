@@ -6,6 +6,22 @@ body, html {
     height:100%;
 }
 
+#successMessageBox {
+    position:fixed;
+    bottom:0;
+    width:100%;
+    margin:0;
+    z-index:99999;
+}
+#sideTitle {
+    font-weight: bold;
+    font-size: 25px;
+    padding-bottom:10px;
+    margin-bottom:20px;
+    text-align:center;
+    border-bottom: 1px #bbb solid;
+    width:100%;
+}
 #container {
     width:96%;
     margin: 0 2% 0 2%;
@@ -53,19 +69,11 @@ body, html {
     cursor: pointer !important;
 }
 /* MODAL */
-#newShiftModal{
-    text-align:center;
-}
-
-#organizeShiftTitle {
+#adminNewShiftModal {
     text-align: center;
 }
-#adminNewShiftModal {
-    width:700px;
-    min-width:300px;
-    height:80%;
-    margin-top:52px;
-    margin-left:calc(50% - 350px);
+#fillShiftModal {
+    text-align: center;
 }
 /* DEPARTMENT AND NUMBER CHOICE */
 #departmentBox p, #numberBox p {
@@ -128,6 +136,13 @@ only screen and (max-width: 760px),
     #container {
         margin:0;
         width:100%;
+    }
+    #sideTitle {
+        width: calc(100% - 1em);
+        margin-left:0.5em;
+        margin-bottom:0.5em;
+        font-size: 1.5em;
+        padding-bottom:0.5em;
     }
     #createNewShift {
         float:left;
