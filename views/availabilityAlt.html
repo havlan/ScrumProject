@@ -58,12 +58,26 @@
         }
 
 
+        var dates = [];
+        console.log(dates);
+        var availabilities = [];
+        console.log(availabilities);
+
+        function makeJsonArray() {
+            var AvailabilityJson;
+            AvailabilityJson = {
+            "day":dates,
+            "availability":availabilities
+            };
+            console.log(AvailabilityJson);
+        }
+
 
         function getAvailable() {
             var dagvakt = document.getElementById("AvaDay");
             var kveldsvakt = document.getElementById("AvaEvening");
             var nattevakt = document.getElementById("AvaNight");
-
+            var availability = 0;
             var checkboxes = [dagvakt,kveldsvakt,nattevakt];
 
             AvaDate = document.getElementById("AvaDate").value;
@@ -77,6 +91,8 @@
                         var vakt = "dagvakt";
                         if (typeof AvaDate !== 'undefined' && typeof vakt !== 'undefined'){
                             addRow(vakt,Dato, "ja");
+                            dates.push(Dato);
+                            availabilities.push(availability);
                         }
 
                     }
@@ -86,6 +102,8 @@
                         var vakt = "kveldsvakt";
                         if (typeof AvaDate !== 'undefined' && typeof vakt !== 'undefined'){
                             addRow(vakt,Dato, "ja");
+                            dates.push(Dato);
+                            availabilities.push(availability);
                         }
                     }
 
@@ -95,6 +113,8 @@
                         var vakt = "nattevakt";
                         if (typeof AvaDate !== 'undefined' && typeof vakt !== 'undefined'){
                             addRow(vakt,Dato, "ja");
+                            dates.push(Dato);
+                            availabilities.push(availability);
                         }
                     }
                 }
@@ -111,7 +131,7 @@
             var dagvakt = document.getElementById("AvaDay");
             var kveldsvakt = document.getElementById("AvaEvening");
             var nattevakt = document.getElementById("AvaNight");
-
+            var availability = 1;
             var checkboxes = [dagvakt,kveldsvakt,nattevakt];
 
             AvaDate = document.getElementById("AvaDate").value;
@@ -125,6 +145,8 @@
                         var vakt = "dagvakt";
                         if (typeof AvaDate !== 'undefined' && typeof vakt !== 'undefined'){
                             addRow(vakt,Dato, "nei");
+                            dates.push(Dato);
+                            availabilities.push(availability);
                         }
                     }
                     else if (checkboxes[i]== kveldsvakt){
@@ -133,6 +155,8 @@
                         var vakt = "kveldsvakt";
                         if (typeof AvaDate !== 'undefined' && typeof vakt !== 'undefined'){
                             addRow(vakt,Dato, "nei");
+                            dates.push(Dato);
+                            availabilities.push(availability);
                         }
                     }
 
@@ -142,11 +166,28 @@
                         var vakt = "nattevakt";
                         if (typeof AvaDate !== 'undefined' && typeof vakt !== 'undefined'){
                             addRow(vakt,Dato, "nei");
+                            dates.push(Dato);
+                            availabilities.push(availability);
                         }
                     }
                 }
 
             }
+
+
+
+
+        }
+
+
+        function fillAvailabilityArray(date, availablity){
+            var AvalabilityJson;
+            AvalabilityJson = {
+                "availability": [availablity],
+                "day": ""[date]
+            };
+
+
 
 
 
@@ -191,7 +232,7 @@
                 </tbody>
 
             </table>
-            <button>submit</button>
+            <button onclick="makeJsonArray()">submit</button>
         </div>
 
 

@@ -121,6 +121,7 @@ module.exports = function (app, passport) {
 
         })
     });
+    app.post('/bulkAvail', postCtrl.insertBulkAvailability);
 
     app.post('/getEmpForShiftDateAll', isAdmin, getCtrl.getEmpForShiftDateAll);
 
