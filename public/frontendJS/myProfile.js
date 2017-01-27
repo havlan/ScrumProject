@@ -21,6 +21,14 @@ $(document).ready(function(){ // syntax for å hente data når dokument (html) e
     });
 });
 
+$(document).ready (function(){
+    $("#successMessageBox").hide();
+    $("#testButton").click(function showAlert() { //TODO
+        $("#successMessageBox").fadeTo(2000, 500).slideUp(500, function(){
+            $("#success-alert").slideUp(500);
+        });
+    });
+});
 
 var myList= [];
 

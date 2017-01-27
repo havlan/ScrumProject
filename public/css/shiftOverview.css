@@ -1,5 +1,25 @@
 @charset "utf-8";
 
+#container {
+    width:96%;
+    margin: 0 2% 0 2%;
+}
+#successMessageBox {
+    position:fixed;
+    bottom:0;
+    width:100%;
+    margin:0;
+    z-index:99999;
+}
+#sideTitle {
+    font-weight: bold;
+    font-size: 25px;
+    padding-bottom:10px;
+    text-align:center;
+    border-bottom: 1px #bbb solid;
+    margin:0 0 20px 0;
+    width:100%;
+}
 
 body, html{
     width:100%;
@@ -85,3 +105,14 @@ table.sortable td:nth-child(even) {
     width: 100px;
 }
 */
+@media
+only screen and (max-width: 760px),
+(min-device-width: 768px) and (max-device-width: 1024px)  {
+    #sideTitle {
+        width: calc(100% - 1em);
+        margin-left:0.5em;
+        margin-bottom:0.5em;
+        font-size: 1.5em;
+        padding-bottom:0.5em;
+    }
+}

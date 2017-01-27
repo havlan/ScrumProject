@@ -2,6 +2,15 @@
  * Created by Knut-Egil on 17.01.2017.
  */
 
+$(document).ready (function(){
+    $("#successMessageBox").hide();
+    $("#testButton").click(function showAlert() { //TODO
+        $("#successMessageBox").fadeTo(2000, 500).slideUp(500, function(){
+            $("#success-alert").slideUp(500);
+        });
+    });
+});
+
 //hide functions
 $(document).ready(function(){
     $("#fravær").click(function(){

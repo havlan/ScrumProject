@@ -14,8 +14,14 @@
 </head>
 <div id="includedContent"></div>
 <script>$("#includedContent").load("menu");</script>
-<body>
 
+<body>
+<div class="alert alert-success fade in" id="successMessageBox"> <!-- TAG #successMessage FOR ALERTS -->
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <span id="successMessage">This is the default warning text</span>
+</div>
+
+<div id="sideTitle">TILGJENGELIGHET</div>
 
 <div id="shift-buttons" class="btn-group">
     <button type="button" class="btn btn-default" id="available-prev">

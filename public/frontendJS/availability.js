@@ -1,5 +1,4 @@
 
-
 var myList = [];
 var typeNames =[];
 window.indeks = 0;
@@ -8,6 +7,14 @@ var currentWeek = getWeekNumber(currentDay);
 console.log(currentWeek);
 var selectedWeek = currentWeek[1];
 
+$(document).ready (function(){
+    $("#successMessageBox").hide();
+    $("#testButton").click(function showAlert() { //TODO
+        $("#successMessageBox").fadeTo(2000, 500).slideUp(500, function(){
+            $("#success-alert").slideUp(500);
+        });
+    });
+});
 
 $.get('/getAvailability', {}, function(req, res, data){
 

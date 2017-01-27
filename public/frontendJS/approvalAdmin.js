@@ -27,6 +27,16 @@ function switchFunction(){
 
 }
 
+
+$(document).ready (function(){
+    $("#successMessageBox").hide();
+    $("#testButton").click(function showAlert() { //TODO
+        $("#successMessageBox").fadeTo(2000, 500).slideUp(500, function(){
+            $("#success-alert").slideUp(500);
+        });
+    });
+});
+
 //Gets data for tables
 $.get('/getAbsenceView', {}, function(req, res, data){
     console.log(data);

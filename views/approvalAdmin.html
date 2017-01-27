@@ -8,12 +8,16 @@
     <script src = "frontendJS/approvalAdmin.js"></script>
     <link rel="stylesheet" href="css/approvalAdmin.css">
 </head>
-<body>
-
 <div id="includedContent"></div>
 <script>$("#includedContent").load("menu");</script>
+<body>
+<div class="alert alert-success fade in" id="successMessageBox"> <!-- TAG #successMessage FOR ALERTS -->
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <span id="successMessage">This is the default warning text</span>
+</div>
 
-<h1 id="godkjenning">Godkjenning</h1>
+<div id="sideTitle">GODKJENNING</div>
+
 <section class="buttonsSection">
     <button type="button" class="approveButton" id ="leave" onclick="leaveFunction()" autofocus><span>Godkjenn fravær</span></button>
     <button type="button" class="approveButton" id ="overtime" onclick="overtimeFunction()"><span>Godkjenn overtid</span></button>
@@ -29,7 +33,6 @@
     </div>
 
 </section>
-
 <section class="approveSection" id="overtimeApproval" style="display:none">
     <h3>Overtid til godkjenning</h3>
     <div class="table-responsive">
@@ -37,7 +40,6 @@
         </table>
     </div>
 </section>
-
 <section class="approveSection" id="switchApproval" style="display:none">
     <h3>Vaktbytte til godkjenning</h3>
     <div class="table-responsive">
@@ -45,6 +47,7 @@
         </table>
     </div>
 </section>
+
 
 <div class="modal fade" id="approveModal" data-backdrop="static" data-keyboard="false" role="dialog">
     <div class="modal-dialog modal-sm">
