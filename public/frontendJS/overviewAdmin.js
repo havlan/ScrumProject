@@ -180,6 +180,11 @@ $(document).on('click','#excelDataTable td',function(){
     indeks = $(this).closest("tr").find('td:eq(2)').text();
   //  alert(indeks);
     var hei = indeks-1;
+    var check = [];
+    $.get('/getLoginInfoEmployee/'+indeks,{},function (req, res, data) {
+        check = data.responseJSON;
+        console.log(check);
+    });
     $.get('/getEmployee', {}, function(req, res, data) {
         //Fyll inn redigeringsfelt
         document.getElementById("navndb").value = (data.responseJSON[hei].Navn);
@@ -195,6 +200,13 @@ $(document).on('click','#excelDataTable td',function(){
         document.getElementById("epostdb2").innerHTML = (data.responseJSON[hei].Epost);
         document.getElementById("adressedb2").innerHTML = (data.responseJSON[hei].Adresse);
         document.getElementById("personnummerdb2").innerHTML = (data.responseJSON[hei].PersNr);
+        if(check.length == 0){
+            document.getElementById('addInfo').style.display = "inline";
+            document.getElementById('remove').style.display = "none";
+        }else{
+            document.getElementById('addInfo').style.display = "none";
+            document.getElementById('remove').style.display = "inline";
+        }
         //Trigge modal
         $('#myModal').modal("show");
         //Felt under profilbilde
@@ -245,7 +257,7 @@ $(function(){
             data: {'name': $("#navndb").val(),'address':$('#adressedb').val(),'email':$('#epostdb').val(),'type_name':strUser,'pers_id':$('#personnummerdb').val(),'phone_nr':$('#telefondb').val(),'employee_id':indeks},
             success: function(data){
                 console.log(JSON.stringify(data));
-                document.getElementById("successMessage").innerHTML = "HEST ER BEST! HEST ER LIVE";
+                document.getElementById("successMessage").innerHTML = "HEST ER BEST! HEST ER LIVET";
                 showSuccessMessage();
             },
             error: function(xhr){

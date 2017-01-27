@@ -51,6 +51,11 @@ html, body {
     width:100%;
 }
 
+#home {
+    width:100%;
+    height:auto;
+}
+
 #available-table th{
     text-align: center;
 }
@@ -67,6 +72,7 @@ tr { cursor: default; }
 .unavailable { background: #ffdbcf; }
 
 .ava-content {
+    height:auto;
 }
 .ava-content th{
     width: 20%;
@@ -88,6 +94,7 @@ tr { cursor: default; }
     box-shadow: 2px 2px 5px #888888;
     min-height: 215px;
     width:60%;
+    max-width: 600px;
 }
 .availableButton{
     background-color: #4CAF50;
@@ -112,11 +119,29 @@ tr { cursor: default; }
 @media
 only screen and (max-width: 760px),
 (min-device-width: 768px) and (max-device-width: 1024px)  {
+    #container {
+        width:calc(100% - 1em);
+        height:auto;
+        margin:0.5em;
+    }
     #sideTitle {
-        width: calc(100% - 1em);
-        margin-left:0.5em;
-        margin-bottom:0.5em;
+        width:100%;
+        margin:0 0 0.5em 0;
         font-size: 1.5em;
         padding-bottom:0.5em;
+    }
+    .ava-content {
+        width: 100%;
+    }
+    .ava-content-left{
+        width:15em;
+        padding: 10px;
+        margin:1em calc(50% - 7.5em) 1em calc(50% - 7.5em);
+    }
+    .ava-content-right{
+        max-width:none;
+        width: 100%;
+        margin:0 0 0.5em 0;
+        padding: 1em;
     }
 }
