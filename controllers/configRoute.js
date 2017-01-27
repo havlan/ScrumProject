@@ -102,6 +102,7 @@ module.exports = function (app, passport) {
     app.post('/updateDepartment', isOfficeEmp, postCtrl.updateDepartment);
     app.post('/updateRequest', isOfficeEmp, postCtrl.updateRequest);
     app.post('/updateRequest2', isOfficeEmp, postCtrl.updateRequest2); // 2
+    app.post('/newLogin', isOfficeEmp , model.sendOnlyLogin);
     app.post('/updateAbsence2', isOfficeEmp, postCtrl.updateAbsence2);
     app.post('/updateOvertime', isOfficeEmp, postCtrl.updateOvertime);
     app.post('/updateOvertime2', isOfficeEmp, postCtrl.updateOvertime2);

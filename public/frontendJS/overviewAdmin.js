@@ -18,16 +18,6 @@ $.get('/getEmployee', {}, function(req, res, data){
 });
 //Build Table
 
-
-$(document).ready (function(){
-    $("#successMessageBox").hide();
-    $("#testButton").click(function showAlert() { //TODO
-        $("#successMessageBox").fadeTo(2000, 500).slideUp(500, function(){
-            $("#success-alert").slideUp(500);
-        });
-    });
-});
-
 function buildHtmlTable(selector,list) {
     var columns = addAllColumnHeaders(list, selector);
     var tbody = $('<tbody/>');
@@ -107,8 +97,18 @@ function removeFunction() {
             url: '/delUser', //this is the submit URL
             type: 'POST',
             data: {'employee_id':indeks},
-            success: function(data){
-                alert('Bruker fjernet fra systemet')
+            success: function (data) {
+                document.getElementById("successMessage").innerHTML = "Brukeren er fjernet fra systemet";
+                showSuccessMessage();
+            },
+            error: function(xhr){
+                if(xhr.status==404){
+                    document.getElementById("errorMessage").innerHTML = "ikke funnet";
+                    showErrorMessage();
+                } else {
+                    document.getElementById("errorMessage").innerHTML = "Det har oppstått en feil";
+                    showErrorMessage();
+                }
             }
         });
     }
@@ -154,11 +154,22 @@ $(function() {
                 type: 'POST',
                 data: {'username': $('#username').val(), 'is_admin': $('#is_admin').val(),'employee_id':indeks},
                 success: function (data) {
-                    alert('Bruker lagt til systemet');
+                    document.getElementById("successMessage").innerHTML = "Bruker lagt til systemet";
+                    showSuccessMessage();
+                },
+                error: function(xhr){
+                    if(xhr.status==404){
+                        document.getElementById("errorMessage").innerHTML = "ikke funnet";
+                        showErrorMessage();
+                    } else {
+                        document.getElementById("errorMessage").innerHTML = "Det har oppstått en feil";
+                        showErrorMessage();
+                    }
                 },
                 failure: function (data) {
                     alert('Ansatt har allerede en bruker i systemet');
                 }
+
             });
         }
     });
@@ -200,10 +211,22 @@ $(function(){
             type: 'POST',
             data: {'is_admin':parseInt($('#admin').text()),'username':$('#brukernavn').text(),'name': $("#fornavn").text(),'address':$('#adresse').text(),'email':$('#epost').text(),'type_name':$('#stilling').text(),'pers_id':parseInt($('#personnummer').text(),10),'phone_nr':parseInt($('#telefon').text(),10),'seniority':parseInt($('#seniority').text()),'responsibility_allowed':$('#responsibility').val(),'total_hours':0},
             success: function(data){
+                document.getElementById("successMessage").innerHTML = "sendt";
+                showSuccessMessage();
             },
             failure: function(err){
                 console.log("ERR");
+            },
+            error: function(xhr){
+                if(xhr.status==404){
+                    document.getElementById("errorMessage").innerHTML = "ikke funnet";
+                    showErrorMessage();
+                } else {
+                    document.getElementById("errorMessage").innerHTML = "Det har oppstått en feil";
+                    showErrorMessage();
+                }
             }
+
         });
         $('#addModal').modal('toggle');
     });
@@ -222,8 +245,17 @@ $(function(){
             data: {'name': $("#navndb").val(),'address':$('#adressedb').val(),'email':$('#epostdb').val(),'type_name':strUser,'pers_id':$('#personnummerdb').val(),'phone_nr':$('#telefondb').val(),'employee_id':indeks},
             success: function(data){
                 console.log(JSON.stringify(data));
-                alert("HEST ER BEST! HEST ER LIVET");
-                //document.getElementById('newUserFeedback').innerHTML("Success");
+                document.getElementById("successMessage").innerHTML = "HEST ER BEST! HEST ER LIVE";
+                showSuccessMessage();
+            },
+            error: function(xhr){
+                if(xhr.status==404){
+                    document.getElementById("errorMessage").innerHTML = "ikke funnet";
+                    showErrorMessage();
+                } else {
+                    document.getElementById("errorMessage").innerHTML = "Det har oppstått en feil";
+                    showErrorMessage();
+                }
             }
         });
     });
@@ -251,4 +283,17 @@ function makeDropdown(selector) {
     }
 }
 
-
+function showSuccessMessage() {
+    var element = document.getElementById('successMessageBox');
+    element.style.display = "block";
+    setTimeout(function() {
+        element.style.display = "none";
+    }, 3000);
+}
+function showErrorMessage() {
+    var element = document.getElementById('successMessageBox');
+    element.style.display = "block";
+    setTimeout(function() {
+        element.style.display = "none";
+    }, 3000);
+}

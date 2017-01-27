@@ -49,7 +49,7 @@ module.exports = {
         dbHelper.getdbQuery(req, res, "select * from Overtime");
     },
     getAbsenceView : function (req, res) {
-        dbHelper.getdbQuery(req,res,"select a.absence_id as Nr, e.employee_id as AnsattID, e.name as Navn,s.shift_id as Skift,s.date as Dato,a.explanation_absence as Årsak,d.department_name as Avdeling from Employee e,Shift s,shift_has_employee she,Absence a,Department d where e.employee_id = she.employee_id and s.shift_id = she.shift_id and a.shift_id = she.shift_id and s.department_id = d.department_id and a.checked_by_admin = 0 group by a.absence_id order by d.department_id, s.date");
+        dbHelper.getdbQuery(req,res,"select a.absence_id as Nr, e.employee_id as AnsattID, e.name as Navn,s.shift_id as Skift,s.date as Dato,a.explanation_absence as Årsak,d.department_name as Avdeling from Employee e,Shift s,shift_has_employee she,Absence a,Department d where e.employee_id = she.employee_id and s.shift_id = she.shift_id and a.shift_id = she.shift_id and s.department_id = d.department_id and a.checked_by_admin = 0 group by a.absence_id order by a.absence_id");
     },
     getOvertimeView : function (req, res) {
         dbHelper.getdbQuery(req,res,"select o.overtime_id as Nr, e.employee_id as AnsattID, e.name as Navn,s.shift_id as Skift,s.date as Dato,o.overtime as Timer, o.explanation_overtime as Årsak,d.department_name as Avdeling from Employee e,Shift s,shift_has_employee she,Overtime o,Department d where e.employee_id = she.employee_id and s.shift_id = she.shift_id and o.shift_id = she.shift_id and s.department_id = d.department_id and o.checked_by_admin = 0 group by o.overtime_id order by d.department_id, s.date");
@@ -76,10 +76,10 @@ module.exports = {
         dbHelper.getdbQuery(req, res, "select e.employee_id as AnsattID,e.name as Navn, e.date as Dato,e.shift_id as Skift,e.type_name as Stilling,e.responsibility_allowed as Ansvarsvakt from Employee_Shifts_fromCurrentDate e where e.shift_id not in(select r.shift_id from Request r) and e.employee_id = ?",[req.session.passport.user.id]);
     },
     getPersonalShiftEvents : function (req, res) {
-        dbHelper.getdbQuery(req, res, "select * from JSON_EMPLOYEE_VIEW where employee_id = ? And start >= CURDATE()", req.session.passport.user.id);
+        dbHelper.getdbQuery(req, res, "select * from JSON_EMPLOYEE_VIEW where employee_id = ? And start >= NOW()", req.session.passport.user.id);
     },
     getPersonalShiftEventsDone : function (req, res) {
-        dbHelper.getdbQuery(req, res, "select * from JSON_EMPLOYEE_VIEW where employee_id = ? And start < CURDATE()", req.session.passport.user.id);
+        dbHelper.getdbQuery(req, res, "select * from JSON_EMPLOYEE_VIEW where employee_id = ? And start < NOW()", req.session.passport.user.id);
     },
     getPossibleShiftsEvents : function (req, res) {
         console.log("USER ID "+req.session.passport.user.id);
@@ -208,6 +208,13 @@ module.exports = {
             employee_id: req.body.employee_id,
             overtime: req.body.overtime,
             explanation: req.body.explanation
+        };
+        console.log("Posting new overtime");
+        dbHelper.postdbQuery(req, res, "insert into Overtime set ?", post);
+    },
+    postnewOvertime2: function (req, res) {
+        var post = {
+            postRequest
         };
         console.log("Posting new overtime");
         dbHelper.postdbQuery(req, res, "insert into Overtime set ?", post);

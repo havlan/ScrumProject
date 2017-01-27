@@ -26,15 +26,6 @@ $(document).ready(function () {
     oppdateTable();
 });
 
-$(document).ready (function(){
-    $("#successMessageBox").hide();
-    $("#testButton").click(function showAlert() { //TODO
-        $("#successMessageBox").fadeTo(2000, 500).slideUp(500, function(){
-            $("#success-alert").slideUp(500);
-        });
-    });
-});
-
 $.get('/getDepartment', {}, function (req, res, data) {
     console.log(data);
     console.log(data.responseJSON);
@@ -63,10 +54,19 @@ function oppdateTable() {
             'date': document.getElementById("datePicker").value
         },
         success: function (req, res, data) {
-            console.log('successfully submitted');
-
             console.log(data);
             buildHtmlTable('#dayTable', data.responseJSON);
+            document.getElementById("successMessage").innerHTML = "Success!";
+            showSuccessMessage();
+        },
+        error: function(xhr){
+            if(xhr.status==404){
+                document.getElementById("errorMessage").innerHTML = "ikke funnet";
+                showErrorMessage();
+            } else {
+                document.getElementById("errorMessage").innerHTML = "Det har oppstått en feil";
+                showErrorMessage();
+            }
         },
         failure: function (err) {
             console.log("Error" + err);
@@ -81,10 +81,19 @@ function oppdateTable() {
             'date': document.getElementById("datePicker").value
         },
         success: function (req, res, data) {
-            console.log('successfully submitted');
-
             console.log(data);
             buildHtmlTable('#evningTable', data.responseJSON);
+            document.getElementById("successMessage").innerHTML = "Success!";
+            showSuccessMessage();
+        },
+        error: function(xhr){
+            if(xhr.status==404){
+                document.getElementById("errorMessage").innerHTML = "ikke funnet";
+                showErrorMessage();
+            } else {
+                document.getElementById("errorMessage").innerHTML = "Det har oppstått en feil";
+                showErrorMessage();
+            }
         },
         failure: function (err) {
             console.log("Error" + err);
@@ -98,10 +107,19 @@ function oppdateTable() {
             'date': document.getElementById("datePicker").value
         },
         success: function (req, res, data) {
-            console.log('successfully submitted');
-
             console.log(data);
             buildHtmlTable('#nightTable', data.responseJSON);
+            document.getElementById("successMessage").innerHTML = "Success!";
+            showSuccessMessage();
+        },
+        error: function(xhr){
+            if(xhr.status==404){
+                document.getElementById("errorMessage").innerHTML = "ikke funnet";
+                showErrorMessage();
+            } else {
+                document.getElementById("errorMessage").innerHTML = "Det har oppstått en feil";
+                showErrorMessage();
+            }
         },
         failure: function (err) {
             console.log("Error" + err);
@@ -145,4 +163,17 @@ function addAllColumnHeaders(list, selector) {
     return columnSet;
 }
 
-
+function showSuccessMessage() {
+    var element = document.getElementById('successMessageBox');
+    element.style.display = "block";
+    setTimeout(function() {
+        element.style.display = "none";
+    }, 3000);
+}
+function showErrorMessage() {
+    var element = document.getElementById('successMessageBox');
+    element.style.display = "block";
+    setTimeout(function() {
+        element.style.display = "none";
+    }, 3000);
+}

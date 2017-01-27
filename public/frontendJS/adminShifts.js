@@ -54,12 +54,6 @@ $(document).ready(function() {
 
     createNumberDropdown();
 
-    $("#successMessageBox").hide();
-    $("#testButton").click(function showAlert() { //TODO
-        $("#successMessageBox").fadeTo(2000, 500).slideUp(500, function(){
-            $("#success-alert").slideUp(500);
-        });
-    });
 });
 
 function getAvailableEmpForShift(id) {
