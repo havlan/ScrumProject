@@ -63,12 +63,26 @@ only screen and (max-width: 760px),
 
 /* fane 2*/
 
+.ava-content th{
+    width: 20%;
+}
+
+
 .ava-content-left{
+    padding: 10px;
     float: left;
+    border: solid #f2f2f2 1px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px #888888;
 }
 
 .ava-content-right{
+    margin-left: 10px;
+    padding: 10px;
     float: left;
+    border: solid #f2f2f2 1px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px #888888;
 }
 
 .availableButton{
@@ -82,10 +96,9 @@ only screen and (max-width: 760px),
     height: 50px;
 }
 
-#ava-choices{
+#ava-choices {
     display: block;
     overflow-y: auto;
-    height: 150px;
     border: 1px;
-    width: 300px;
+    border-color: #4B4B4B
 }
