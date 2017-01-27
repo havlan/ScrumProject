@@ -124,7 +124,9 @@ module.exports = function (app, passport) {
     app.post('/acceptRequestWith', isOfficeEmp, model.acceptRequestWith);
     app.get('/getAvailableEmpForShift/:id',isOfficeEmp, getCtrl.getAvailableEmpForShift);
     app.post('/getEmpForShiftDate', isAdmin, getCtrl.getEmpForShiftDate);
-
+    app.delete('/deleteShift_has_employee',isOfficeEmp,delCtrl.delShift_has_employee);
+    app.delete('/deleteRequest_shift',isOfficeEmp,delCtrl.delRequest_shift);
+    app.delete('/deleteRequest',isOfficeEmp,delCtrl.delRequest);
     //MÅ VÆRE SIST
     app.get('/forbudt',getCtrl.get403);
     app.get('/*', getCtrl.get404);
