@@ -187,12 +187,17 @@ html, body{
     background-color:  #8cd9ad;
     padding: 2%;
 }
+#doneShiftsText{
+    background-color:  #bdc8cb;
+    padding: 2%;
+}
 #explanation{
     width: 50%;
 }
 #reason{
     width: 70%;
 }
+
 @media
 only screen and (max-width: 760px),
 (min-device-width: 768px) and (max-device-width: 1024px)  {

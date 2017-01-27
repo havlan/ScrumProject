@@ -58,7 +58,7 @@ $(document).ready(function() {
     });
 
     $.get('/getNextShiftForEmp', {}, function(req, res, data){
-        document.getElementById("nextShiftInfo").innerHTML = "Dato: " +data.responseJSON[0].ndate + "<br><br>Sted: " + data.responseJSON[0].department_name;
+        document.getElementById("nextShiftInfo").innerHTML = "Dato: " +data.responseJSON[0].ndate + "<br>Sted: " + data.responseJSON[0].department_name;
     });
 
     $("#successMessageBox").hide();

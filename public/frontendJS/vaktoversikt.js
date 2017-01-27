@@ -144,3 +144,5 @@ function addAllColumnHeaders(list, selector) {
     $(headerThead$).append(headerTr$);
     return columnSet;
 }
+
+
