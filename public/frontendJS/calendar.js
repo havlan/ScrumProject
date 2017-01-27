@@ -1,8 +1,5 @@
-
 var event_id;
-
 $(document).ready(function() {
-
     $('#calendar').fullCalendar({
         header: {
             left: 'prev,next today',
@@ -56,26 +53,17 @@ $(document).ready(function() {
             }
         }
     });
-
     $.get('/getNextShiftForEmp', {}, function(req, res, data){
         document.getElementById("nextShiftInfo").innerHTML = "Dato: " +data.responseJSON[0].ndate + "<br>Sted: " + data.responseJSON[0].department_name;
     });
-
     $("#successMessageBox").hide();
-    $("#testButton").click(showAlert());
-
+    $("#errorMessageBox").hide();
     //test
 });
-
 $.get('/getEmployee_Shifts_fromCurrentDate2',{},function (req,res,data) {
     myList = data.responseJSON;
     buildHtmlTable('#vaktTable');
 });
-function showAlert() {
-    $("#successMessageBox").fadeTo(2000, 500).slideUp(500, function(){
-        $("#success-alert").slideUp(500);
-    });
-}
 function buildHtmlTable(selector,list) {
     list = myList;
     var columns = addAllColumnHeaders(list, selector);
@@ -107,7 +95,6 @@ function addAllColumnHeaders(myList, selector) {
                 headerTr$.append($('<th/>').html(key));
             }
         }
-
     }
     headerTr$.append($('<th/>'));
     $(selector).append(headerThead$);
@@ -121,20 +108,29 @@ $(document).on('click','#sendForespørsel',function (e) {
         return $(this).closest("tr").find('td:eq(3)').text();
     }).toArray(); // <----
     console.log(data);
-     for (i = 0; i < data.length; i++) {
+    for (i = 0; i < data.length; i++) {
         console.log(data[i]);
         $.ajax({
             url: '/postRequest',
             type: 'POST',
             data: {'shift_id': data[i], 'checked_by_admin': 0,'explanation_request': ""},
             success: function (data) {
-                alert("success!");
                 console.log(data);
+                document.getElementById("successMessage").innerHTML = "Success!";
+                showSuccessMessage();
+            },
+            error: function(xhr){
+                if(xhr.status==404){
+                    document.getElementById("errorMessage").innerHTML = "ikke funnet";
+                    showErrorMessage();
+                } else {
+                    document.getElementById("errorMessage").innerHTML = "Det har oppstått en feil";
+                    showErrorMessage();
+                }
             }
         });
     }
 });
-
 $(document).on('click','#sendShiftRequest',function (e) {
     var textinput = $("#explanation").val;
     if(textinput.length<300){
@@ -143,16 +139,24 @@ $(document).on('click','#sendShiftRequest',function (e) {
             type: 'POST',
             data: {'shift_id': event_id,'explanation_request': textinput, 'checked_by_admin': 0},
             success: function (data) {
-                alert("success!");
                 console.log(data);
+                document.getElementById("successMessage").innerHTML = "Success!";
+                showSuccessMessage();
+            },
+            error: function(xhr){
+                if(xhr.status==404){
+                    document.getElementById("errorMessage").innerHTML = "ikke funnet";
+                    showErrorMessage();
+                } else {
+                    document.getElementById("errorMessage").innerHTML = "Det har oppstått en feil";
+                    showErrorMessage();
+                }
             }
         });
     }else{
         alert("Grensen er 300 tegn!");
     }
 });
-
-
 $(document).on('click','#sendRequest',function () {
     console.log(event_id);
     if (event_id!=null){
@@ -161,12 +165,48 @@ $(document).on('click','#sendRequest',function () {
             type: 'POST',
             data: {'shift_id': event_id},
             success: function (data) {
-                alert("success!");
-                console.log(data);
+                document.getElementById("successMessage").innerHTML = "Success!";
+                showSuccessMessage();
+            },
+            error: function(xhr){
+                if(xhr.status==404){
+                    document.getElementById("errorMessage").innerHTML = "ikke funnet";
+                    showErrorMessage();
+                } else {
+                    document.getElementById("errorMessage").innerHTML = "Det har oppstått en feil";
+                    showErrorMessage();
+                }
             }
         });
     }else {
         console.log("an error occurred 2B|!2B");
+        document.getElementById("errorMessage").innerHTML = "Det har oppstått en feil";
+        showErrorMessage();
     }
 });
-
+function showSuccessMessage() {
+    var element = document.getElementById('successMessageBox');
+    element.style.display = "block";
+    setTimeout(function() {
+        element.style.display = "none";
+    }, 3000);
+}
+function showErrorMessage() {
+    var element = document.getElementById('errorMessageBox');
+    element.style.display = "block";
+    setTimeout(function() {
+        element.style.display = "none";
+    }, 3000);
+}
+/*function showSuccessMessage() {
+ $("#successMessageBox").alert();
+ $("#successMessageBox").fadeTo(2000, 500).slideUp(500, function () {
+ $("#success-alert").slideUp(500);
+ })
+ }
+ function showErrorMessage(){
+ $("#errorMessageBox").alert();
+ $("#errorMessageBox").fadeTo(5000, 500).slideUp(500, function(){
+ $("#success-alert").slideUp(500);
+ })
+ }*/
