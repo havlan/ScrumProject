@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Availability</title>
+    <style>
+        .ava-content-left{
+            float: left;
+        }
+
+        .ava-content-right{
+            float: left;
+        }
+
+        .availableButton{
+            background-color: #4CAF50;
+            width: 100px;
+            height: 50px;
+        }
+        .unavailableButton{
+            background-color: #ffcccc;
+            width: 100px;
+            height: 50px;
+        }
+
+        #ava-choices{
+            display: block;
+            overflow-y: auto;
+            height: 150px;
+            border: 1px;
+            width: 300px;
+        }
+
+
+    </style>
+
+    <script type="text/javascript">
+        function addRow(content,morecontent,evenmorecontent)
+        {
+            if (!document.getElementsByTagName) return;
+            tabBody=document.getElementsByTagName("tbody").item(0);
+            row=document.createElement("tr");
+            cell1 = document.createElement("td");
+            cell2 = document.createElement("td");
+            cell3 = document.createElement("td");
+            textnode1=document.createTextNode(content);
+            textnode2=document.createTextNode(morecontent);
+            textnode3=document.createTextNode(evenmorecontent);
+            cell1.appendChild(textnode1);
+            cell2.appendChild(textnode2);
+            cell3.appendChild(textnode3);
+            row.appendChild(cell1);
+            row.appendChild(cell2);
+            row.appendChild(cell3);
+            tabBody.appendChild(row);
+
+
+        }
+
+
+
+        function getAvailable() {
+            var dagvakt = document.getElementById("AvaDay");
+            var kveldsvakt = document.getElementById("AvaEvening");
+            var nattevakt = document.getElementById("AvaNight");
+
+            var checkboxes = [dagvakt,kveldsvakt,nattevakt];
+
+            AvaDate = document.getElementById("AvaDate").value;
+            console.log(AvaDate);
+
+            for (i=0; i<checkboxes.length; i++){
+                if(checkboxes[i].checked == true) {
+                    if (checkboxes[i] == dagvakt) {
+                        var Dato = AvaDate + " 08:00:00";
+                        console.log(Dato);
+                        var vakt = "dagvakt";
+                        if (typeof AvaDate !== 'undefined' && typeof vakt !== 'undefined'){
+                            addRow(vakt,Dato, "ja");
+                        }
+
+                    }
+                    else if (checkboxes[i]== kveldsvakt){
+                        var Dato = AvaDate + " 16:00:00";
+                        console.log(Dato);
+                        var vakt = "kveldsvakt";
+                        if (typeof AvaDate !== 'undefined' && typeof vakt !== 'undefined'){
+                            addRow(vakt,Dato, "ja");
+                        }
+                    }
+
+                    else if (checkboxes[i] == nattevakt){
+                        var Dato = AvaDate + " 00:00:00";
+                        console.log(Dato);
+                        var vakt = "nattevakt";
+                        if (typeof AvaDate !== 'undefined' && typeof vakt !== 'undefined'){
+                            addRow(vakt,Dato, "ja");
+                        }
+                    }
+                }
+
+
+            }
+
+
+
+
+        }
+
+        function getUnavailable() {
+            var dagvakt = document.getElementById("AvaDay");
+            var kveldsvakt = document.getElementById("AvaEvening");
+            var nattevakt = document.getElementById("AvaNight");
+
+            var checkboxes = [dagvakt,kveldsvakt,nattevakt];
+
+            AvaDate = document.getElementById("AvaDate").value;
+            console.log(AvaDate);
+
+            for (i=0; i<checkboxes.length; i++){
+                if(checkboxes[i].checked == true) {
+                    if (checkboxes[i] == dagvakt) {
+                        var Dato = AvaDate + " 08:00:00";
+                        console.log(Dato);
+                        var vakt = "dagvakt";
+                        if (typeof AvaDate !== 'undefined' && typeof vakt !== 'undefined'){
+                            addRow(vakt,Dato, "nei");
+                        }
+                    }
+                    else if (checkboxes[i]== kveldsvakt){
+                        var Dato = AvaDate + " 16:00:00";
+                        console.log(Dato);
+                        var vakt = "kveldsvakt";
+                        if (typeof AvaDate !== 'undefined' && typeof vakt !== 'undefined'){
+                            addRow(vakt,Dato, "nei");
+                        }
+                    }
+
+                    else if (checkboxes[i] == nattevakt){
+                        var Dato = AvaDate + " 00:00:00";
+                        console.log(Dato);
+                        var vakt = "nattevakt";
+                        if (typeof AvaDate !== 'undefined' && typeof vakt !== 'undefined'){
+                            addRow(vakt,Dato, "nei");
+                        }
+                    }
+                }
+
+            }
+
+
+
+
+        }
+
+    </script>
+</head>
+
+
+<body>
+
+    <div class="ava-content">
+
+        <div class="ava-content-left">
+
+            <input id="AvaDate" type="date"><br>
+            <input id="AvaDay" value="08:00" type="checkbox">
+            <span>Dagvakt</span><br>
+            <input id="AvaEvening" value="16:00" type="checkbox">
+            <span>Kveldsvakt</span><br>
+            <input id="AvaNight" value="00:00" type="checkbox">
+            <span>Nattevakt</span><br>
+            <input id="AvaAllday"  type="checkbox">
+            <span>Alle</span><br>
+            <button onclick="getAvailable()">Tilgjengelig</button>
+            <button onclick="getUnavailable()">Utilgjengelig</button>
+
+        </div>
+        <div class="ava-content-right">
+            <table id="ava-choices">
+
+                <thead>
+                    <tr>
+                        <th>Vakttype</th>
+                        <th>Dato</th>
+                        <th>Tilgjengelig???</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+
+            </table>
+            <button>submit</button>
+        </div>
+
+
+
+    </div>
+
+</body>
+
+
+</html>
+
+
+</body>
+</html>
