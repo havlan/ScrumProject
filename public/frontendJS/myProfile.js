@@ -21,11 +21,6 @@ $(document).ready(function(){ // syntax for å hente data når dokument (html) e
     });
 });
 
-$(document).ready (function(){
-    $("#successMessageBox").hide();
-    $("#errorMessageBox").hide();
-});
-
 var myList= [];
 
 

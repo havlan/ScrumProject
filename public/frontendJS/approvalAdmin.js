@@ -27,12 +27,6 @@ function switchFunction(){
 
 }
 
-
-$(document).ready (function(){
-    $("#successMessageBox").hide();
-    $("#errorMessageBox").hide();
-});
-
 //Gets data for tables
 $.get('/getAbsenceView', {}, function(req, res, data){
     console.log(data);

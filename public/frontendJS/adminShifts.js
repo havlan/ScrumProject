@@ -54,8 +54,6 @@ $(document).ready(function() {
 
     createNumberDropdown();
 
-    $("#successMessageBox").hide();
-    $("#errorMessageBox").hide();
 });
 
 function getAvailableEmpForShift(id) {

@@ -7,11 +7,6 @@ var currentWeek = getWeekNumber(currentDay);
 console.log(currentWeek);
 var selectedWeek = currentWeek[1];
 
-$(document).ready (function(){
-    $("#successMessageBox").hide();
-    $("#errorMessageBox").hide();
-});
-
 $.get('/getAvailability', {}, function(req, res, data){
 
     console.log(data);

@@ -10,12 +10,6 @@ $.get('/getEmployeeRestricted', {}, function(req, res, data){
     $("#cover").fadeOut(10); <!-- MÅ ligge etter det som tar legst å loade-->
 });
 
-$(document).ready (function(){
-    $("#successMessageBox").hide();
-    $("#errorMessageBox").hide();
-});
-
-
 //Build Table
 function buildHtmlTable(selector,list) {
     var columns = addAllColumnHeaders(list, selector);

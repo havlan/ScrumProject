@@ -1,5 +1,8 @@
+
 var event_id;
+
 $(document).ready(function() {
+
     $('#calendar').fullCalendar({
         header: {
             left: 'prev,next today',
@@ -53,17 +56,18 @@ $(document).ready(function() {
             }
         }
     });
+
     $.get('/getNextShiftForEmp', {}, function(req, res, data){
         document.getElementById("nextShiftInfo").innerHTML = "Dato: " +data.responseJSON[0].ndate + "<br>Sted: " + data.responseJSON[0].department_name;
     });
-    $("#successMessageBox").hide();
-    $("#errorMessageBox").hide();
-    //test
+
 });
+
 $.get('/getEmployee_Shifts_fromCurrentDate2',{},function (req,res,data) {
     myList = data.responseJSON;
     buildHtmlTable('#vaktTable');
 });
+
 function buildHtmlTable(selector,list) {
     list = myList;
     var columns = addAllColumnHeaders(list, selector);
@@ -95,6 +99,7 @@ function addAllColumnHeaders(myList, selector) {
                 headerTr$.append($('<th/>').html(key));
             }
         }
+
     }
     headerTr$.append($('<th/>'));
     $(selector).append(headerThead$);
@@ -108,7 +113,7 @@ $(document).on('click','#sendForespørsel',function (e) {
         return $(this).closest("tr").find('td:eq(3)').text();
     }).toArray(); // <----
     console.log(data);
-    for (i = 0; i < data.length; i++) {
+     for (i = 0; i < data.length; i++) {
         console.log(data[i]);
         $.ajax({
             url: '/postRequest',
@@ -131,6 +136,7 @@ $(document).on('click','#sendForespørsel',function (e) {
         });
     }
 });
+
 $(document).on('click','#sendShiftRequest',function (e) {
     var textinput = $("#explanation").val;
     if(textinput.length<300){
@@ -157,6 +163,8 @@ $(document).on('click','#sendShiftRequest',function (e) {
         alert("Grensen er 300 tegn!");
     }
 });
+
+
 $(document).on('click','#sendRequest',function () {
     console.log(event_id);
     if (event_id!=null){
@@ -184,6 +192,7 @@ $(document).on('click','#sendRequest',function () {
         showErrorMessage();
     }
 });
+
 function showSuccessMessage() {
     var element = document.getElementById('successMessageBox');
     element.style.display = "block";
@@ -199,14 +208,14 @@ function showErrorMessage() {
     }, 3000);
 }
 /*function showSuccessMessage() {
- $("#successMessageBox").alert();
- $("#successMessageBox").fadeTo(2000, 500).slideUp(500, function () {
- $("#success-alert").slideUp(500);
- })
- }
- function showErrorMessage(){
- $("#errorMessageBox").alert();
- $("#errorMessageBox").fadeTo(5000, 500).slideUp(500, function(){
- $("#success-alert").slideUp(500);
- })
- }*/
+    $("#successMessageBox").alert();
+    $("#successMessageBox").fadeTo(2000, 500).slideUp(500, function () {
+        $("#success-alert").slideUp(500);
+    })
+}
+function showErrorMessage(){
+    $("#errorMessageBox").alert();
+    $("#errorMessageBox").fadeTo(5000, 500).slideUp(500, function(){
+        $("#success-alert").slideUp(500);
+    })
+}*/
