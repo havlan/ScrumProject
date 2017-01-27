@@ -32,7 +32,7 @@ $(document).ready(function() {
         eventSources: [
             {
                 url: '/getPossibleShiftsEvents', // use the `url` property
-                color: 'yellow',    // an option!
+                color: '#ffe066',    // an option!
                 textColor: 'black'  // an option!
             }],
         eventClick:  function(event, jsEvent, view) {
