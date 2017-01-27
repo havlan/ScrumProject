@@ -188,8 +188,9 @@ module.exports = {
             Employee_employee_id: req.session.passport.user.id
         };
         console.log("Posting new request");
-        dbHelper.postdbQuery(req, res, "insert into Request_shift set ?", post);
+        dbHelper.postdbQuery(req, res, "insert into Request_shift set ? ", post);
     },
+    //hei
     postNewAbsence: function (req, res) {
         var post = {
             absence_id: req.body.absence_id,
@@ -213,7 +214,12 @@ module.exports = {
         dbHelper.postdbQuery(req, res, "insert into Overtime set ?", post);
     },
     postnewOvertime2: function (req, res) {
-
+        var post = {
+            shift_id: req.session.passport.user.id,
+            employee_id: req.body.employee_id,
+            overtime: req.body.overtime,
+            explanation: req.body.explanation
+        };
         console.log("Posting new overtime");
         dbHelper.postdbQuery(req, res, "insert into Overtime set ?", post);
     },
