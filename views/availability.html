@@ -17,6 +17,7 @@
 <script>$("#includedContent").load("menu");</script>
 
 <body>
+
 <div id="successMessageBox">
     <span id="successMessage">default success</span>
 </div>
@@ -27,21 +28,23 @@
     <span id="warningMessage">default error</span>
 </div>
 
+<div id="container">
+
 <div id="sideTitle">TILGJENGELIGHET</div>
 
 <ul class="nav nav-tabs">
     <li class="active"><a data-toggle="tab" href="#home">Sett tilgjengelighet</a></li>
     <li><a data-toggle="tab" href="#menu1">Din tilgjengelighet </a></li>
 </ul>
-
 <div class="tab-content">
     <div id="home" class="tab-pane fade in active">
 
         <div class="ava-content">
 
             <div class="ava-content-left">
-
+                <label for="AvaDate">Dato</label><br>
                 <input id="AvaDate" type="date"><br>
+                <label>Tidspunkt</label><br>
                 <input id="AvaDay" value="08:00" type="checkbox">
                 <span>Dagvakt</span><br>
                 <input id="AvaEvening" value="16:00" type="checkbox">
@@ -50,30 +53,25 @@
                 <span>Nattevakt</span><br>
                 <input id="AvaAllday"  type="checkbox">
                 <span>Alle</span><br>
-                <button onclick="getAvailable()">Tilgjengelig</button>
-                <button onclick="getUnavailable()">Utilgjengelig</button>
-
+                <button onclick="getAvailable()" id="avaButton1">Tilgjengelig</button>
+                <button onclick="getUnavailable()" id="avaButton2">Utilgjengelig</button>
             </div>
             <div class="ava-content-right">
                 <table id="ava-choices">
-
                     <thead>
                     <tr>
-                        <th>Vakttype</th>
-                        <th>Dato</th>
-                        <th>Tilgjengelig</th>
+                        <th style="width:25%;">Vakttype</th>
+                        <th style="width:50%;">Dato</th>
+                        <th style="width:25%;">Tilgjengelig</th>
                     </tr>
                     </thead>
                     <tbody>
-
                     </tbody>
 
                 </table>
-                <button onclick="makeJsonArray()">submit</button>
+                <button onclick="makeJsonArray()" id="avaButton3">submit</button>
                 <button onclick="emptyTable()">tøm</button>
             </div>
-
-
 
         </div>
     </div>
@@ -143,11 +141,6 @@
     </div>
 </div>
 
-
-
-<div id="availabilityTab1"></div>
-
-<div id="availabilityTab2">
 </div>
 
 </body>

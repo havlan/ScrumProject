@@ -1,4 +1,14 @@
-#successMessageBox, #errorMessageBox {
+body {
+    padding: 0;
+    font-family: "Lucida Grande","Helvetica","Arial","Verdana",sans-serif;
+    font-size: 14px;
+}
+html, body {
+    height:100%;
+    width:100%;
+}
+
+#successMessageBox, #errorMessageBox, #warningMessageBox {
     display:none;
     padding: 10px 0;
     font-size:20px;
@@ -21,20 +31,28 @@
     border: 1px solid #ff7777;
     color: #ff7777;
 }
+#warningMessageBox {
+    background-color: #ffb;
+    border: 1px solid #bb2;
+    color: #bb2;
+}
 
+#container {
+    width:96%;
+    margin: 0 2% 0 2%;
+}
 #sideTitle {
     font-weight: bold;
     font-size: 25px;
     padding-bottom:10px;
+    margin-bottom:20px;
     text-align:center;
     border-bottom: 1px #bbb solid;
-    margin:0 1% 20px 1%;
-    width:98%;
+    width:100%;
 }
 
 #available-table th{
     text-align: center;
-
 }
 
 #available-table td{
@@ -48,43 +66,29 @@ tr { cursor: default; }
 .available { background: #b1d9b3; }
 .unavailable { background: #ffdbcf; }
 
-@media
-only screen and (max-width: 760px),
-(min-device-width: 768px) and (max-device-width: 1024px)  {
-    #sideTitle {
-        width: calc(100% - 1em);
-        margin-left:0.5em;
-        margin-bottom:0.5em;
-        font-size: 1.5em;
-        padding-bottom:0.5em;
-    }
+.ava-content {
 }
-
-
-/* fane 2*/
-
 .ava-content th{
     width: 20%;
 }
-
-
 .ava-content-left{
     padding: 10px;
+    margin:3% 1.5% 3% 3%;
     float: left;
     border: solid #f2f2f2 1px;
     border-radius: 5px;
     box-shadow: 2px 2px 5px #888888;
 }
-
 .ava-content-right{
-    margin-left: 10px;
+    margin: 3% 3% 3% 1.5%;
     padding: 10px;
     float: left;
     border: solid #f2f2f2 1px;
     border-radius: 5px;
     box-shadow: 2px 2px 5px #888888;
+    min-height: 215px;
+    width:60%;
 }
-
 .availableButton{
     background-color: #4CAF50;
     width: 100px;
@@ -95,10 +99,24 @@ only screen and (max-width: 760px),
     width: 100px;
     height: 50px;
 }
-
 #ava-choices {
-    display: block;
+    width:100%;
     overflow-y: auto;
     border: 1px;
     border-color: #4B4B4B
+}
+#avaButton3 {
+
+}
+
+@media
+only screen and (max-width: 760px),
+(min-device-width: 768px) and (max-device-width: 1024px)  {
+    #sideTitle {
+        width: calc(100% - 1em);
+        margin-left:0.5em;
+        margin-bottom:0.5em;
+        font-size: 1.5em;
+        padding-bottom:0.5em;
+    }
 }
