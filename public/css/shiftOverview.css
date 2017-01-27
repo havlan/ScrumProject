@@ -63,8 +63,10 @@ tbody {
 
 
 #obsWarning{
-    border: solid 0.2em royalblue ;
-    padding:1%;
+    padding:2%;
+    width: 100%;
+    background-color: #c4e6ff;
+    border-radius: 5px;
 }
 /*toolbar*/
 .navbar-shift{
