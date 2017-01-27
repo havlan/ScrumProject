@@ -35,7 +35,7 @@ $(document).ready(function() {
             },
             {
                 url: '/getPersonalShiftEventsDone',
-                color: '#a6dbff',
+                color: '#acb7ff',
                 textColor: 'black'
             }]
         ,
