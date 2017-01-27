@@ -57,12 +57,6 @@ module.exports = {
     getRequestView : function (req, res) {
         dbHelper.getdbQuery(req,res,"select r.shift_id as Skift, e.employee_id as AnsattID, e.name as Navn,s.shift_id as Skift,s.date as Dato, r.explanation_request as Årsak,d.department_name as Avdeling from Employee e,Shift s,shift_has_employee she,Request r,Department d where e.employee_id = she.employee_id and s.shift_id = she.shift_id and r.shift_id = she.shift_id and s.department_id = d.department_id group by r.request_id order by r.request_id");
     },
-    getSaltHash: function (req, res) {
-        dbHelper.getdbQuery(req, res, "select password_hash, password_salt, is_admin from LoginInfo where Username = ?", req.body.username);
-    },
-    getSaltHash: function(req,res,next){
-        dbHelper.getdbQWNext(req,res, "select password_hash, password_salt, is_admin from LoginInfo where Username = ?",[req.body.username],next);
-    },
     getEmployee_Shifts_toCurrentDate: function (req, res) {
         console.log("USER ID "+req.session.passport.user.id);
         dbHelper.getdbQuery(req, res, "select * from Employee_Shifts_toCurrentDate where employee_id = ?",[req.session.passport.user.id]);
@@ -144,17 +138,14 @@ module.exports = {
             pers_id: req.body.pers_id,
             total_hours: req.body.total_hours
         };
-        console.log("Posting new Employee");
         dbHelper.postdbQuery(req, res, "insert into Employee set ?", post);
     },
     postNewDepartment: function (req, res) {
         var post = {department_id: req.body.department_id, department_name: req.body.department_name};
-        console.log("Posting new Department");
         dbHelper.postdbQuery(req, res, "insert into Department set ?", post);
     },
     postNewType: function (req, res) {
         var post = {name: req.body.name, rank: req.body.rank};
-        console.log("Posting new Type");
         dbHelper.postdbQuery(req, res, "insert into Type set ?", post);
     },
     postNewShift: function (req, res) {
@@ -165,12 +156,10 @@ module.exports = {
             department_id: req.body.department_id,
             type_name: req.body.type_name
         };
-        console.log("Posting new Shift");
         dbHelper.postdbQuery(req, res, "insert into Shift set ?", post);
     },
     postNewShift_has_employee: function (req, res) {
         var post = {shift_id: req.body.shift_id, employee_id: req.body.employee_id};
-        console.log("Posting new shift_has_employee");
         dbHelper.postdbQuery(req, res, "insert into shift_has_employee set ?", post);
     },
     postNewRequest: function (req, res) {
@@ -179,7 +168,6 @@ module.exports = {
             employee_id: req.session.passport.user.id,
             explanation_request: req.body.explanation.request
         };
-        console.log("Posting new request");
         dbHelper.postdbQuery(req, res, "insert into Request set ?", post);
     },
     postNewRequestShift: function (req, res) {
@@ -187,7 +175,6 @@ module.exports = {
             Shift_shift_id: req.body.shift_id,
             Employee_employee_id: req.session.passport.user.id
         };
-        console.log("Posting new request");
         dbHelper.postdbQuery(req, res, "insert into Request_shift set ? ", post);
     },
     //hei
@@ -198,7 +185,6 @@ module.exports = {
             shift_id: req.body.shift_id,
             employee_id: req.body.employee_id
         };
-        console.log("Posting new absence");
         dbHelper.postdbQuery(req, res, "insert into Absence set ?", post);
     },
     postnewOvertime: function (req, res) {
@@ -210,7 +196,6 @@ module.exports = {
             overtime: req.body.overtime,
             explanation: req.body.explanation
         };
-        console.log("Posting new overtime");
         dbHelper.postdbQuery(req, res, "insert into Overtime set ?", post);
     },
     postnewOvertime2: function (req, res) {
@@ -220,7 +205,6 @@ module.exports = {
             overtime: req.body.overtime,
             explanation_overtime: req.body.explanation
         };
-        console.log("Posting new overtime");
         dbHelper.postdbQuery(req, res, "insert into Overtime set ?", post);
     },
     postnewLogInInfo: function (req, res) {
@@ -230,7 +214,6 @@ module.exports = {
             password_salt: req.body.password_salt,
             employee_id: req.body.employee_id
         };
-        console.log("Posting new LogInInfo");
         dbHelper.postdbQuery(req, res, "insert into LogInInfo set ?", post);
     },
     getVaktliste1: function (req,res) {

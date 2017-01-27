@@ -3,7 +3,6 @@
 
 var express = require('express');
 var getCtrl = require('./getReq');
-var putCtrl = require('./putReq');
 var postCtrl = require('./postReq');
 var delCtrl = require('./delReq');
 var testCtrl = require('./testReq');
