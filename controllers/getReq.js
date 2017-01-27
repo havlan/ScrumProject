@@ -186,6 +186,9 @@ module.exports = {
     getEmpForShiftDate : function (req,res) {
         dbMiddelware.getEmpForShiftDate(req,res);
     },
+    getEmpForShiftDateAll : function (req,res) {
+        dbMiddelware.getEmpForShiftDateAll(req,res);
+    },
     getPersonalShiftEventsDone : function (req,res) {
         dbMiddelware.getPersonalShiftEventsDone(req,res);
     },
