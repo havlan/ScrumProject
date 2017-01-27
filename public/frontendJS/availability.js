@@ -463,6 +463,7 @@ function makeJsonArray() {
     }
 
 
+
     /*for(i=0;i<dates.length;i++){
      console.log("DATES: ",dates[i], " AVAILABILIRIES: ",availabilities[i]);
      yarr[i][0] = dates[i];
@@ -481,7 +482,27 @@ function makeJsonArray() {
             alert("nei,hest er best som pålegg");
         }
     })
+
+
+
+    dates.length = 0;
+    availabilities.length = 0;
+    var new_tbody = document.createElement('tbody');
+    var old_tbody = tabBody;
+    old_tbody.parentNode.replaceChild(new_tbody, old_tbody)
+
+
+
 }
+
+    function emptyTable() {
+        dates.length = 0;
+        availabilities.length = 0;
+        var new_tbody = document.createElement('tbody');
+        var old_tbody = tabBody;
+        old_tbody.parentNode.replaceChild(new_tbody, old_tbody)
+
+    }
 
     function getAvailable() {
         var dagvakt = document.getElementById("AvaDay");
