@@ -70,7 +70,7 @@ $(document).ready(function() {
 
 });
 
-$.get('/getEmployee_Shifts_fromCurrentDate',{},function (req,res,data) {
+$.get('/getEmployee_Shifts_fromCurrentDate2',{},function (req,res,data) {
     myList = data.responseJSON;
     buildHtmlTable('#vaktTable');
 });
