@@ -31,7 +31,6 @@
     <div id='calendar'></div>
     <aside id="menuEmp">
         <button type="button" class="menuBtn" onclick="location.href='/availability';" id="availabilityB"><span>Tilgjengelighet</span></button>
-        <button type="button" class="menuBtn" onclick="location.href='/appeal';" id="extraB" ><span>Fravær og overtid</span></button>
         <button type="button" class="menuBtn" id="shiftB" data-toggle="modal" data-target="#switchModal"><span>Frigjør vakter</span></button>
     </aside>
 
@@ -43,7 +42,7 @@
         <h4 class="shiftHeader" onclick="buttonChangeTab()"> FORKLARING </h4>
         <div>
             <div id="myShifts"></div>
-            <p id="myShiftsText">De grønne vaktene er vakter du har godkjent. Trykk på disse for å få oversikt over den enkelte vakten, eller trykk "Frigjør vakter" for å frigjøre flere vakter. </p>
+            <p id="myShiftsText">De grønne vaktene er vakter du har godkjent. Trykk på disse for å få oversikt over den enkelte vakten, be om fri eller søke om overtid. På "frigjør vakter" kan man be om fri fra flere vakter samtidig. </p>
             <div id="availShifts"></div>
             <p id="availShiftsText">De gule vaktene er ledige vakter du kan ta. Trykk på vaktene for å sende inn forespørsel om å ta den enkelte vakten.</p>
             <div id="doneShifts"></div>
@@ -82,6 +81,7 @@
     </div>
 </div>
 
+<!-- Modal: Be om fri -->
 <div id="fullCalModal" class="modal fade">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -93,8 +93,21 @@
                 <p id ="begin"></p>
                 <p id="end"></p>
                 <p id="department"></p>
-                <input id="explanation" placeholder="Begrunnelse" required>
-                <button type="button" id="sendShiftRequest" data-dismiss="modal">Be om fri</button>
+                <div id="freeDiv">
+                    <button type="button" class="sendShiftRequest" onclick="showExplanationField()" >Be om fri</button>
+                    <p id="spaceFree" style="visibility:hidden">
+                    <input class="explanation" id="expField"placeholder="Begrunnelse for avspasering" >
+                    <button type="button" id="freeSave" onclick="showExplanationField()">Send </button>
+                    </p>
+                </div>
+                <div id="overtimeDiv">
+                    <button type="button" id="overBtn"class="sendShiftRequest" onclick="showOverField()" >Søk om overtid</button>
+                    <p id="spaceOver" style="visibility:hidden">
+                    <input type="number" id="overTime" name="overtimeClock" min="0" max="10"step="0.25" placeholder="Antall timer">
+                    <input class="explanation" id="overField" placeholder="Begrunnelse for overtid"  >
+                    <button type="button" id="overSave" onclick="showExplanationField()">Send</button>
+                    </p>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="close" data-dismiss="modal">Lukk</button>
@@ -102,7 +115,19 @@
         </div>
     </div>
 </div>
+<script>
+    function showExplanationField(){
+        document.getElementById('spaceFree').style.visibility = "visible";
+        document.getElementById('spaceOver').style.visibility="hidden";
+    }
+    function showOverField(){
+        document.getElementById('spaceFree').style.visibility = "hidden";
+        document.getElementById('spaceOver').style.visibility="visible";
+    }
 
+</script>
+
+<!-- Modal: Be om vakt -->
 <div id="fullCalModalFree" class="modal fade">
     <div class="modal-dialog">
         <div class="modal-content">

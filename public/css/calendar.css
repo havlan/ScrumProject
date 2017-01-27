@@ -132,8 +132,8 @@ html, body{
     cursor:pointer;
     width: 150px;
 }
-#sendShiftRequest{
-    background-color: #4CAF50;
+.sendShiftRequest{
+    background-color: royalblue;
     border: none;
     border-radius: 5px;
     color: white;
@@ -141,6 +141,7 @@ html, body{
     text-align: center;
     cursor:pointer;
     width: 150px;
+    padding-bottom: 1%;
 }
 #sendRequest {
     background-color: #4CAF50;
@@ -191,11 +192,49 @@ html, body{
     background-color:  #bdc8cb;
     padding: 2%;
 }
-#explanation{
+.explanation{
     width: 50%;
 }
 #reason{
     width: 70%;
+}
+#overTime{
+    width: 30%;
+}
+#fri{
+    padding: 2%;
+}
+#overtid{
+    padding: 2%;
+}
+#spaceOver{
+    padding: 2%;
+}
+#spaceFree{
+    padding:2%;
+}
+#freeSave{
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 5px 10px;
+    text-align: center;
+    cursor:pointer;
+    width: 150px;
+    position: relative;
+}
+#overSave{
+    margin-top: 1%;
+    position: relative;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 5px 10px;
+    text-align: center;
+    cursor:pointer;
+    width: 150px;
 }
 
 @media
@@ -238,6 +277,7 @@ only screen and (max-width: 760px),
          width: calc(50% - 1em);
          margin: 0.5em 0.5em 0.5em 0.5em;
      }
+
     .menuBtn{
         float:left;
         font-size: 1em;
@@ -340,5 +380,4 @@ only screen and (max-width: 760px),
 .radio label input[type="radio"]:disabled + .cr{
     opacity: .5;
 }
-
 
