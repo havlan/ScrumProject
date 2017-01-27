@@ -131,6 +131,34 @@ table.sortable td:nth-child(even) {
     width: 100px;
 }
 */
+
+#dbDataTable {
+    border-collapse: collapse;
+    width: 100%;
+    border: 1px solid #ddd;
+    font-size: 16px;
+
+}
+
+#dbDataTable th, #dbDataTable td {
+    text-align: left;
+    padding: 5px;
+}
+
+#dbDataTable tr {
+    border-bottom: 1px solid #ddd;
+}
+#dbDataTable td:hover{
+    color: darkgray;
+}
+
+#dbDataTable tr.header{
+    background-color: #f1f1f1;
+}
+#dbDataTable tr:hover{
+    background-color: aliceblue;
+    cursor: pointer;
+}
 @media
 only screen and (max-width: 760px),
 (min-device-width: 768px) and (max-device-width: 1024px)  {
