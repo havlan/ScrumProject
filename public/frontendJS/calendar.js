@@ -62,11 +62,7 @@ $(document).ready(function() {
     });
 
     $("#successMessageBox").hide();
-    $("#testButton").click(function showAlert() { //TODO
-        $("#successMessageBox").fadeTo(2000, 500).slideUp(500, function(){
-            $("#success-alert").slideUp(500);
-        });
-    });
+    $("#errorMessageBox").hide();
 
 });
 
@@ -127,8 +123,18 @@ $(document).on('click','#sendForespørsel',function (e) {
             type: 'POST',
             data: {'shift_id': data[i], 'checked_by_admin': 0,'explanation_request': ""},
             success: function (data) {
-                alert("success!");
                 console.log(data);
+                document.getElementById("successMessage").innerHTML = "Success!";
+                showSuccessMessage();
+            },
+            error: function(xhr){
+                if(xhr.status==404){
+                    document.getElementById("errorMessage").innerHTML = "ikke funnet";
+                    showErrorMessage();
+                } else {
+                    document.getElementById("errorMessage").innerHTML = "Det har oppstått en feil";
+                    showErrorMessage();
+                }
             }
         });
     }
@@ -142,8 +148,18 @@ $(document).on('click','#sendShiftRequest',function (e) {
             type: 'POST',
             data: {'shift_id': event_id,'explanation_request': textinput, 'checked_by_admin': 0},
             success: function (data) {
-                alert("success!");
                 console.log(data);
+                document.getElementById("successMessage").innerHTML = "Success!";
+                showSuccessMessage();
+            },
+            error: function(xhr){
+                if(xhr.status==404){
+                    document.getElementById("errorMessage").innerHTML = "ikke funnet";
+                    showErrorMessage();
+                } else {
+                    document.getElementById("errorMessage").innerHTML = "Det har oppstått en feil";
+                    showErrorMessage();
+                }
             }
         });
     }else{
@@ -160,12 +176,49 @@ $(document).on('click','#sendRequest',function () {
             type: 'POST',
             data: {'shift_id': event_id},
             success: function (data) {
-                alert("success!");
-                console.log(data);
+                document.getElementById("successMessage").innerHTML = "Success!";
+                showSuccessMessage();
+            },
+            error: function(xhr){
+                if(xhr.status==404){
+                    document.getElementById("errorMessage").innerHTML = "ikke funnet";
+                    showErrorMessage();
+                } else {
+                    document.getElementById("errorMessage").innerHTML = "Det har oppstått en feil";
+                    showErrorMessage();
+                }
             }
         });
     }else {
         console.log("an error occurred 2B|!2B");
+        document.getElementById("errorMessage").innerHTML = "Det har oppstått en feil";
+        showErrorMessage();
     }
 });
 
+function showSuccessMessage() {
+    var element = document.getElementById('successMessageBox');
+    element.style.display = "block";
+    setTimeout(function() {
+        element.style.display = "none";
+    }, 3000);
+}
+function showErrorMessage() {
+    var element = document.getElementById('errorMessageBox');
+    element.style.display = "block";
+    setTimeout(function() {
+        element.style.display = "none";
+    }, 3000);
+}
+/*function showSuccessMessage() {
+    $("#successMessageBox").alert();
+    $("#successMessageBox").fadeTo(2000, 500).slideUp(500, function () {
+        $("#success-alert").slideUp(500);
+    })
+}
+function showErrorMessage(){
+    $("#errorMessageBox").alert();
+    $("#errorMessageBox").fadeTo(5000, 500).slideUp(500, function(){
+        $("#success-alert").slideUp(500);
+    })
+}*/

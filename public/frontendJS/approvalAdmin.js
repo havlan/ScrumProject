@@ -30,11 +30,7 @@ function switchFunction(){
 
 $(document).ready (function(){
     $("#successMessageBox").hide();
-    $("#testButton").click(function showAlert() { //TODO
-        $("#successMessageBox").fadeTo(2000, 500).slideUp(500, function(){
-            $("#success-alert").slideUp(500);
-        });
-    });
+    $("#errorMessageBox").hide();
 });
 
 //Gets data for tables
@@ -177,8 +173,18 @@ function fjernAnsatt(skiftid,ansatt){
         url:'/deleteShift_has_employee',
         type: 'DELETE',
         data:{'shift_id':id,'employee_id':ansatt},
-        success:function (data) {
-            alert("vi bør lage en varsel her og");
+        success: function (data) {
+            document.getElementById("successMessage").innerHTML = "Ansatt er fjernet";
+            showSuccessMessage();
+        },
+        error: function(xhr){
+            if(xhr.status==404){
+                document.getElementById("errorMessage").innerHTML = "ikke funnet";
+                showErrorMessage();
+            } else {
+                document.getElementById("errorMessage").innerHTML = "Det har oppstått en feil";
+                showErrorMessage();
+            }
         }
     });
 }
@@ -193,6 +199,17 @@ function erstattAnsatt() {
         data:{'employee_id':ansattid,'shift_id':skiftid,'employee_id2':nyansattid},
         success:function (data) {
             fjernAnsatteRequestShift(skiftid);
+            document.getElementById("successMessage").innerHTML = "Ansatt er erstattet";
+            showSuccessMessage();
+        },
+        error: function(xhr){
+            if(xhr.status==404){
+                document.getElementById("errorMessage").innerHTML = "ikke funnet";
+                showErrorMessage();
+            } else {
+                document.getElementById("errorMessage").innerHTML = "Det har oppstått en feil";
+                showErrorMessage();
+            }
         }
     });
 }
@@ -202,7 +219,18 @@ function fjernAnsatteRequestShift(skiftid){
         type:'DELETE',
         data:{'shift_id':skiftid},
         success:function (data) {
-           deleteRequest(indeks);
+            deleteRequest(indeks);
+            document.getElementById("successMessage").innerHTML = "TODO er fjernet";//TODO
+            showSuccessMessage();
+        },
+        error: function(xhr){
+            if(xhr.status==404){
+                document.getElementById("errorMessage").innerHTML = "ikke funnet";
+                showErrorMessage();
+            } else {
+                document.getElementById("errorMessage").innerHTML = "Det har oppstått en feil";
+                showErrorMessage();
+            }
         }
     });
 }
@@ -213,6 +241,17 @@ function deleteRequest(id) {
         data:{'request_id':id},
         success:function (data) {
             alert("Request slettet.");
+            document.getElementById("successMessage").innerHTML = "TODO er fjernet"; //TODO
+            showSuccessMessage();
+        },
+        error: function(xhr){
+            if(xhr.status==404){
+                document.getElementById("errorMessage").innerHTML = "ikke funnet";
+                showErrorMessage();
+            } else {
+                document.getElementById("errorMessage").innerHTML = "Det har oppstått en feil";
+                showErrorMessage();
+            }
         }
     });
 }
@@ -223,6 +262,17 @@ function deleteAbsence(id) {
         data:{'absence_id':id},
         success:function (data) {
             alert("Absence slettet.");
+            document.getElementById("successMessage").innerHTML = "fravær er fjernet";
+            showSuccessMessage();
+        },
+        error: function(xhr){
+            if(xhr.status==404){
+                document.getElementById("errorMessage").innerHTML = "ikke funnet";
+                showErrorMessage();
+            } else {
+                document.getElementById("errorMessage").innerHTML = "Det har oppstått en feil";
+                showErrorMessage();
+            }
         }
     });
 }
@@ -232,9 +282,32 @@ function updateOvertime(id) {
         type:'POST',
         data:{'overtime_id':id},
         success:function (data) {
-            //alert("Overtime oppdatert.");
+            document.getElementById("successMessage").innerHTML = "Overtid er oppdatert";
+            showSuccessMessage();
+        },
+        error: function(xhr){
+            if(xhr.status==404){
+                document.getElementById("errorMessage").innerHTML = "ikke funnet";
+                showErrorMessage();
+            } else {
+                document.getElementById("errorMessage").innerHTML = "Det har oppstått en feil";
+                showErrorMessage();
+            }
         }
     });
 }
 
-
+function showSuccessMessage() {
+    var element = document.getElementById('successMessageBox');
+    element.style.display = "block";
+    setTimeout(function() {
+        element.style.display = "none";
+    }, 3000);
+}
+function showErrorMessage() {
+    var element = document.getElementById('successMessageBox');
+    element.style.display = "block";
+    setTimeout(function() {
+        element.style.display = "none";
+    }, 3000);
+}

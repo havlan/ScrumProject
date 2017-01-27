@@ -8,13 +8,29 @@ html, body{
     width:100%;
 }
 
-#successMessageBox {
+#successMessageBox, #errorMessageBox {
+    padding: 10px 0;
+    font-size:20px;
+    text-align: center;
     position:fixed;
-    bottom:0;
-    width:100%;
+    top:52px;
+    width:calc(100% - 2px);
     margin:0;
     z-index:99999;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px #888888;
 }
+#successMessageBox {
+    background-color: #ccffcc;
+    border: 1px solid #7CbF70;
+    color: #7CbF70;
+}
+#errorMessageBox {
+    background-color: #ffcccc;
+    border: 1px solid #ff7777;
+    color: #ff7777;
+}
+
 #sideTitle {
     font-weight: bold;
     font-size: 25px;
