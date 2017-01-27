@@ -20,10 +20,12 @@
 
 <body>
 <div id="container">
-<div class="alert alert-success fade in" id="successMessageBox"> <!-- TAG #successMessage FOR ALERTS -->
-    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-    <span id="successMessage">This is the default warning text</span>
-</div>
+    <div id="successMessageBox">
+        <span id="successMessage">default success</span>
+    </div>
+    <div id="errorMessageBox">
+        <span id="errorMessage">default error</span>
+    </div>
 
 <div id="sideTitle">VAKTOVERSIKT</div>
 
@@ -41,6 +43,10 @@
                     <button type="button" class="btn btn-default" id="shift-next">
                         <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
                     </button>-->
+                    <div id="obs">
+                        <p id= "obsWarning">OBS! Hvis siden til en valgt dato er tom er dette fordi det ikke er lagt inn vakter på denne datoen enda</p>
+                    </div>
+
             </div>
             </div>
             <div class="shift-right">
@@ -74,6 +80,7 @@
                 <div class="day-content">
                     <div class="table-responsive" style="overflow:scroll;">
                         <table id="dayTable" class="table table-striped table-bordered">
+                            <span id="gåvekkda"></span>
 
                         </table>
                     </div>

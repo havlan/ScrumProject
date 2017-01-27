@@ -124,6 +124,9 @@ module.exports = {
     getEmpForShiftDate : function (req,res) {
         dbHelper.getdbQuery(req,res, "SELECT ase.employee_id, ase.emp_name FROM available_shift_emp ase Where ase.id = ? AND ase.title = ?", [req.body.shift_id, req.body.type_name]);
     },
+    getEmpForShiftDateAll : function (req,res) {
+        dbHelper.getdbQuery(req,res, "SELECT ase.employee_id, ase.name FROM available_emp_for_shift ase Where ase.id = ?", [req.body.shift_id]);
+    },
 
 
     //POST/PUT
@@ -166,7 +169,7 @@ module.exports = {
         dbHelper.postdbQuery(req, res, "insert into Shift set ?", post);
     },
     postNewShift_has_employee: function (req, res) {
-        var post = {shift_id: req.body.shift_id, employee_id: req.body.employee_id, avalibility: req.body.avalibility};
+        var post = {shift_id: req.body.shift_id, employee_id: req.body.employee_id};
         console.log("Posting new shift_has_employee");
         dbHelper.postdbQuery(req, res, "insert into shift_has_employee set ?", post);
     },

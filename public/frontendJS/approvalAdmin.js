@@ -161,19 +161,24 @@ $(document).on('click','#Lagre',function (e) {
   //  console.log(data);
     for(i=0; i<skiftIDArray.length; i++){
         //alert("success!");
-        updateAbsence(absenceIDArray[i]);
+        fjernAnsatt(skiftIDArray[i],employeeIDArray[i]); //Removes employee from shift when approving absence
+        deleteAbsence(absenceIDArray[i]);
     }
     for(i=0; i<overtimeIDArray.length; i++){
         updateOvertime(overtimeIDArray[i]);
     }
 });
 function fjernAnsatt(skiftid,ansatt){
+    var id;
+    if(skiftid==null) {//if method is called from 'Godkjenn vaktbytte'
+        id = indeks;
+    } else id = skiftid;//If method is called from 'Godkjenn fravær'
     $.ajax({
         url:'/deleteShift_has_employee',
         type: 'DELETE',
-        data:{'shift_id':skiftid,'employee_id':ansatt},
+        data:{'shift_id':id,'employee_id':ansatt},
         success:function (data) {
-           // alert("vi bør lage en varsel her og");
+            alert("vi bør lage en varsel her og");
         }
     });
 }
@@ -203,22 +208,21 @@ function fjernAnsatteRequestShift(skiftid){
 }
 function deleteRequest(id) {
     $.ajax({
-        url: '/updateRequest',
+        url: '/deleteRequest',
         type:'DELETE',
         data:{'request_id':id},
         success:function (data) {
-           // alert("Request slettet.");
+            alert("Request slettet.");
         }
     });
 }
-function updateAbsence(id) {
-   // alert(id);
+function deleteAbsence(id) {
     $.ajax({
-        url: '/updateAbsence2',
-        type:'POST',
-        data:{'absence_id':id,'checked_by_admin':1},
+        url: '/deleteAbsence',
+        type:'DELETE',
+        data:{'absence_id':id},
         success:function (data) {
-           // alert("Absence oppdatert.");
+            alert("Absence slettet.");
         }
     });
 }
@@ -226,7 +230,7 @@ function updateOvertime(id) {
     $.ajax({
         url: '/updateOvertime2',
         type:'POST',
-        data:{'overtime_id':id,'checked_by_admin':1},
+        data:{'overtime_id':id},
         success:function (data) {
             //alert("Overtime oppdatert.");
         }

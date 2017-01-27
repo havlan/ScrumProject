@@ -121,6 +121,8 @@ module.exports = function (app, passport) {
         })
     });
 
+    app.post('/getEmpForShiftDateAll', isAdmin, getCtrl.getEmpForShiftDateAll);
+
     app.post('/changePassword', isLoggedIn, model.changePassword);
     app.post('/acceptRequestWith', isOfficeEmp, model.acceptRequestWith);
     app.get('/getAvailableEmpForShift/:id',isOfficeEmp, getCtrl.getAvailableEmpForShift);

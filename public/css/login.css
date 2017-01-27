@@ -1,5 +1,20 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:300);
 
+#successMessageBox {
+  position:fixed;
+  bottom:0;
+  width:100%;
+  margin:0;
+  z-index:99999;
+}
+#errorMessageBox {
+  position:fixed;
+  bottom:0;
+  width:100%;
+  margin:0;
+  z-index:99999;
+}
+
 .login-page {
   width: 360px;
   padding: 8% 0 0;
@@ -137,6 +152,8 @@ element {
 .container .info span .fa {
   color: #EF3B3A;
 }
+
+
 
 @media screen and (min-width: 480px)  {
     #loginbody {
