@@ -6,18 +6,7 @@ var nodemailer = require('nodemailer');
 var promise = require('bluebird');
 var async = require('async');
 
-var transporter = nodemailer.createTransport({
-    host: "smtp-mail.outlook.com", // hostname
-    secureConnection: false, // TLS requires secureConnection to be false
-    port: 587, // port for secure SMTP
-    tls: {
-        ciphers: 'SSLv3'
-    },
-    auth: {
-        user: 'minvakt.ikkesvar@outlook.com',
-        pass: 'Abigail4prez'
-    }
-});
+var transporter = require("./regWMail").transporter;
 function sendMailShift(rec) {
     var msg = {
         from : "minvakt.ikkesvar@outlook.com",
@@ -33,7 +22,7 @@ function sendMailShift(rec) {
 
 
 module.exports = {
-    sendMailOnFree : function(requ,resp){
+    sendMailOnFree : function(){
         var mailRecp ="";
         async.waterfall([
             function(done){
@@ -41,7 +30,6 @@ module.exports = {
                     conn.query("select email from available_emp_for_shift group by employee_id order by employee_id limit 3", function(err,rows){ // limit?????
                         conn.release();
                         if(err || !rows.length){
-                            resp.status(404).json({melding:"Fikk ikke send mail angående ledig vakt."});
                         }else{
                             done(null,rows);
                         }
@@ -60,10 +48,8 @@ module.exports = {
             }
         ], function(err, mail,ok){
             if(ok == 200){
-                resp.status(200).json({melding: "Eposter sendt!"});
                 sendMailShift(mail);
             }else{
-                resp.json(500).json({melding: "Eposter ikke sendt."});
             }
 
         })

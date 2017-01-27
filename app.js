@@ -14,7 +14,8 @@ var cookieParser = require('cookie-parser');
 var helmet = require('helmet');
 var xxlFilter = require('x-xss-protection');
 //var escape = require('escape-html');
-
+var cron = require('cron');
+var mod = require('./models/schedulerSM');
 require('./helpers/passtheport')(passport);
 
 
@@ -58,6 +59,12 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
+
+var job = new cron.CronJob('00 00 05 * * 7', function(){ // mail sent 05:00:00 sunday night, about available shifts
+    mod.sendMailOnFree();
+}, function(){
+    console.log(Date.now(), " sent mail.");
+}, true, 'Europe/Oslo');
 
 
 

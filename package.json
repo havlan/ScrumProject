@@ -17,6 +17,7 @@
     "connect-redis": "^3.2.0",
     "console-stamp": "^0.2.5",
     "cookie-parser": "^1.4.3",
+    "cron": "^1.2.1",
     "escape-html": "^1.0.3",
     "express": "^4.14.0",
     "express-handlebars": "^3.0.0",

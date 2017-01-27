@@ -81,9 +81,6 @@ module.exports = {
         console.log("USER ID "+req.session.passport.user.id);
         dbHelper.getdbQuery(req,res,"select end, start, id, title,description from available_emp_for_shift where employee_id = ?", req.session.passport.user.id);
     },
-    /*simpleLogin : function(username){
-        dbHelper.simpleLogin("select * from LoginInfo where Username = ?", [username]);
-    },*/
     getTypeNames : function (req, res) {
         dbHelper.getdbQuery(req,res,"Select name from Type");
     },

@@ -4,16 +4,6 @@ var nodemailer = require('nodemailer');
 var async = require('async');
 var pool = require('../helpers/db').getPool();
 var dbj = require('../helpers/db');
-var transporter = nodemailer.createTransport({
-    pool: true,
-    host: "smtp.gmail.com", // hostname
-    secure: true, // TLS requires secureConnection to be false
-    port: 465, // port for secure SMTP
-    auth: {
-        user: 'minvakt.ikkesvar@gmail.com',
-        pass: 'Abigail4prez'
-    }
-});
 var mailOptions;
 
 function sendMailUser(req, mail, pw) {
@@ -32,6 +22,16 @@ function sendMailUser(req, mail, pw) {
 
 
 module.exports = {
+    transporter : nodemailer.createTransport({
+        pool: true,
+        host: "smtp.gmail.com", // hostname
+        secure: true, // TLS requires secureConnection to be false
+        port: 465, // port for secure SMTP
+        auth: {
+            user: 'minvakt.ikkesvar@gmail.com',
+            pass: 'Abigail4prez'
+        }
+    }),
     forgotPwMail: function (request, response) { // email, username
         async.waterfall([
             function (done) {
@@ -137,7 +137,7 @@ module.exports = {
                 from: '"MinVakt" <minvakt.ikkesvar@outlook.com>', //Abigail4prez
                 to: from[0].email,
                 subject: 'Bytte godkjent.',
-                text: 'Vaktbytte mellom deg og ' + to[0].name + ' er godkjent. Din nye vakt burde være fjærnet fra din kalender.'
+                text: 'Vaktbytte mellom deg og ' + to[0].name + ' er godkjent. Din vakt burde være fjærnet fra din kalender.'
             };
             transporter.sendMail(mail1, function(err,inf){
                 if(err){

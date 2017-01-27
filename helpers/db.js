@@ -51,7 +51,7 @@ module.exports =
                 connection.query(query, get, function (err, rows) {
                     connection.release();
                     if (!err) {
-                        res.setHeader('Content-Type', 'application/json');
+                        res.type(json);
                         res.status(200).json(rows);
                         //console.log(rows);
                     } else {

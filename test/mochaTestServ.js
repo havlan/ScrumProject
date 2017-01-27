@@ -64,12 +64,12 @@ describe('=====TESTING PATHS AND ROUTING OF GET=====', function(){
             .get('/hest/hestere')
             .expect(404,done); // 404 not found
     });
-    it("GET /getOneEmployee", function(done){
+    /*it("GET /getOneEmployee", function(done){
         request(server)
             .get('/getOneEmployee')
             //.expect('Content-Type', 'application/json')
             .expect(302,done);
-    });
+    });*/
     it("GET /getType", function(done){
         request(server)
             .get('/getType')
@@ -166,11 +166,7 @@ describe('=====TESTING PATHS AND ROUTING OF GET=====', function(){
             .get('/getTypeNames')
             .expect(302,done);
     });
-    it("GET /getPossibleSiftsEvents", function(done){
-        request(server)
-            .get('/getPossibleSiftsEvents')
-            .expect(302,done);
-    });
+
     it("GET /getDepartment", function(done){
         request(server)
             .get('/getDepartment')
