@@ -165,7 +165,7 @@ $(document).on('click','#Lagre',function (e) {
         deleteAbsence(absenceIDArray[i]);
     }
     for(i=0; i<overtimeIDArray.length; i++){
-        deleteOvertime(overtimeIDArray[i]);
+        updateOvertime(overtimeIDArray[i]);
     }
 });
 function fjernAnsatt(skiftid,ansatt){
@@ -226,13 +226,13 @@ function deleteAbsence(id) {
         }
     });
 }
-function deleteOvertime(id) {
+function updateOvertime(id) {
     $.ajax({
-        url: '/deleteOvertime',
-        type:'DELETE',
+        url: '/updateOvertime2',
+        type:'POST',
         data:{'overtime_id':id},
         success:function (data) {
-            alert("Overtime slettet.");
+            //alert("Overtime oppdatert.");
         }
     });
 }
