@@ -213,9 +213,7 @@ module.exports = {
         dbHelper.postdbQuery(req, res, "insert into Overtime set ?", post);
     },
     postnewOvertime2: function (req, res) {
-        var post = {
-            postRequest
-        };
+
         console.log("Posting new overtime");
         dbHelper.postdbQuery(req, res, "insert into Overtime set ?", post);
     },

@@ -77,6 +77,7 @@ module.exports = {
         dbMiddelware.updateLogInInfo(req,res);
     },
     insertBulkAvailability : function(req,res){ // får inn en array med json obj
+        console.log(req.body.availarray);
         for(var i=0;i<req.body.availarray.length;i++){
             req.body.availarray[i][2] = req.session.passport.user.id;
             console.log(req.body.availarray[i]);
