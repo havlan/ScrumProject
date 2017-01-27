@@ -450,9 +450,175 @@ $(function() {
 });
 
 
-function assignDate() {
+// fane nr 2
 
-    var dag = "tir1";
+
+
+
+    function addRow(content,morecontent,evenmorecontent)
+    {
+        if (!document.getElementsByTagName) return;
+        tabBody=document.getElementsByTagName("tbody").item(0);
+        row=document.createElement("tr");
+        cell1 = document.createElement("td");
+        cell2 = document.createElement("td");
+        cell3 = document.createElement("td");
+        textnode1=document.createTextNode(content);
+        textnode2=document.createTextNode(morecontent);
+        textnode3=document.createTextNode(evenmorecontent);
+        cell1.appendChild(textnode1);
+        cell2.appendChild(textnode2);
+        cell3.appendChild(textnode3);
+        row.appendChild(cell1);
+        row.appendChild(cell2);
+        row.appendChild(cell3);
+        tabBody.appendChild(row);
+
+
+    }
+
+
+    var dates = [];
+    console.log(dates);
+    var availabilities = [];
+    console.log(availabilities);
+
+    function makeJsonArray() {
+    var AvailabilityJson;
+    AvailabilityJson = {
+    "day":dates,
+    "availability":availabilities
+};
+    console.log(AvailabilityJson);
+    $.ajax({
+    url:'/bulkAvail',
+    type:'POST',
+    data:{'availarray':AvailabilityJson},
+    success:function (data) {
+    alert("hest er livet");
+},
+    error: function (data) {
+    alert("nei,hest er best som pålegg");
+}
+});
+}
+
+
+    function getAvailable() {
+    var dagvakt = document.getElementById("AvaDay");
+    var kveldsvakt = document.getElementById("AvaEvening");
+    var nattevakt = document.getElementById("AvaNight");
+    var availability = 0;
+    var checkboxes = [dagvakt,kveldsvakt,nattevakt];
+
+    AvaDate = document.getElementById("AvaDate").value;
+    console.log(AvaDate);
+
+    for (i=0; i<checkboxes.length; i++){
+    if(checkboxes[i].checked == true) {
+    if (checkboxes[i] == dagvakt) {
+    var Dato = AvaDate + " 08:00:00";
+    console.log(Dato);
+    var vakt = "dagvakt";
+    if (typeof AvaDate !== 'undefined' && typeof vakt !== 'undefined'){
+    addRow(vakt,Dato, "ja");
+    dates.push(Dato);
+    availabilities.push(availability);
+}
+
+}
+    else if (checkboxes[i]== kveldsvakt){
+    var Dato = AvaDate + " 16:00:00";
+    console.log(Dato);
+    var vakt = "kveldsvakt";
+    if (typeof AvaDate !== 'undefined' && typeof vakt !== 'undefined'){
+    addRow(vakt,Dato, "ja");
+    dates.push(Dato);
+    availabilities.push(availability);
+}
+}
+
+    else if (checkboxes[i] == nattevakt){
+    var Dato = AvaDate + " 00:00:00";
+    console.log(Dato);
+    var vakt = "nattevakt";
+    if (typeof AvaDate !== 'undefined' && typeof vakt !== 'undefined'){
+    addRow(vakt,Dato, "ja");
+    dates.push(Dato);
+    availabilities.push(availability);
+}
+}
+}
+
+
+}
+
+
+
+
+}
+
+    function getUnavailable() {
+    var dagvakt = document.getElementById("AvaDay");
+    var kveldsvakt = document.getElementById("AvaEvening");
+    var nattevakt = document.getElementById("AvaNight");
+    var availability = 1;
+    var checkboxes = [dagvakt,kveldsvakt,nattevakt];
+
+    AvaDate = document.getElementById("AvaDate").value;
+    console.log(AvaDate);
+
+    for (i=0; i<checkboxes.length; i++){
+    if(checkboxes[i].checked == true) {
+    if (checkboxes[i] == dagvakt) {
+    var Dato = AvaDate + " 08:00:00";
+    console.log(Dato);
+    var vakt = "dagvakt";
+    if (typeof AvaDate !== 'undefined' && typeof vakt !== 'undefined'){
+    addRow(vakt,Dato, "nei");
+    dates.push(Dato);
+    availabilities.push(availability);
+}
+}
+    else if (checkboxes[i]== kveldsvakt){
+    var Dato = AvaDate + " 16:00:00";
+    console.log(Dato);
+    var vakt = "kveldsvakt";
+    if (typeof AvaDate !== 'undefined' && typeof vakt !== 'undefined'){
+    addRow(vakt,Dato, "nei");
+    dates.push(Dato);
+    availabilities.push(availability);
+}
+}
+
+    else if (checkboxes[i] == nattevakt){
+    var Dato = AvaDate + " 00:00:00";
+    console.log(Dato);
+    var vakt = "nattevakt";
+    if (typeof AvaDate !== 'undefined' && typeof vakt !== 'undefined'){
+    addRow(vakt,Dato, "nei");
+    dates.push(Dato);
+    availabilities.push(availability);
+}
+}
+}
+
+}
+
+
+
+
+}
+
+
+    function fillAvailabilityArray(date, availablity){
+    var AvalabilityJson;
+    AvalabilityJson = {
+    "availability": [availablity],
+    "day": ""[date]
+};
+
+
 
 
 

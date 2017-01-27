@@ -59,3 +59,33 @@ only screen and (max-width: 760px),
         padding-bottom:0.5em;
     }
 }
+
+
+/* fane 2*/
+
+.ava-content-left{
+    float: left;
+}
+
+.ava-content-right{
+    float: left;
+}
+
+.availableButton{
+    background-color: #4CAF50;
+    width: 100px;
+    height: 50px;
+}
+.unavailableButton{
+    background-color: #ffcccc;
+    width: 100px;
+    height: 50px;
+}
+
+#ava-choices{
+    display: block;
+    overflow-y: auto;
+    height: 150px;
+    border: 1px;
+    width: 300px;
+}

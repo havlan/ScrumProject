@@ -34,7 +34,44 @@
 <div class="tab-content">
     <div id="home" class="tab-pane fade in active">
         <h3>Sett tilgjengelighet</h3>
-        <p>Some content.</p>
+        <div class="ava-content">
+
+            <div class="ava-content-left">
+
+                <input id="AvaDate" type="date"><br>
+                <input id="AvaDay" value="08:00" type="checkbox">
+                <span>Dagvakt</span><br>
+                <input id="AvaEvening" value="16:00" type="checkbox">
+                <span>Kveldsvakt</span><br>
+                <input id="AvaNight" value="00:00" type="checkbox">
+                <span>Nattevakt</span><br>
+                <input id="AvaAllday"  type="checkbox">
+                <span>Alle</span><br>
+                <button onclick="getAvailable()">Tilgjengelig</button>
+                <button onclick="getUnavailable()">Utilgjengelig</button>
+
+            </div>
+            <div class="ava-content-right">
+                <table id="ava-choices">
+
+                    <thead>
+                    <tr>
+                        <th>Vakttype</th>
+                        <th>Dato</th>
+                        <th>Tilgjengelig???</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+
+                </table>
+                <button onclick="makeJsonArray()">submit</button>
+            </div>
+
+
+
+        </div>
     </div>
     <div id="menu1" class="tab-pane fade">
         <h3>Din tilgjengelighet</h3>
