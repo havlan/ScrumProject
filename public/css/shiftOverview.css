@@ -62,6 +62,10 @@ tbody {
 }
 
 
+#obsWarning{
+    border: solid 0.2em royalblue ;
+    padding:1%;
+}
 /*toolbar*/
 .navbar-shift{
     width: 100%;
