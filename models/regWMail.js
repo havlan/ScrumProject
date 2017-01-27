@@ -142,7 +142,7 @@ module.exports = {
                 from: '"MinVakt" <minvakt.ikkesvar@outlook.com>', //Abigail4prez
                 to: from[0].email,
                 subject: 'Bytte godkjent.',
-                text: 'Vaktbytte mellom deg og ' + to[0].name + ' er godkjent. Din nye vakt burde være fjærnet fra din kalender.'
+                text: 'Vaktbytte mellom deg og ' + to[0].name + ' er godkjent. Din vakt burde være fjærnet fra din kalender.'
             };
             transporter.sendMail(mail1, function(err,inf){
                 if(err){
