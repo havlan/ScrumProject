@@ -1,7 +1,7 @@
 
 
 var departments     = [];
-var employeesSyk    = [];
+var employeesSyk;
 var employeesHelp   = [];
 var employeesAnnet  = [];
 var eventId;
@@ -41,7 +41,10 @@ $(document).ready(function() {
             }],
         eventClick:  function(event, jsEvent, view) {
             $('#adminNewShiftModal').modal();
+            eventId = event.id;
         }
+
+
     });
 
     var modal = document.getElementById('adminNewShiftModal');
@@ -52,6 +55,13 @@ $(document).ready(function() {
     };
 
     createNumberDropdown();
+
+    $("#successMessageBox").hide();
+    $("#testButton").click(function showAlert() { //TODO
+        $("#successMessageBox").fadeTo(2000, 500).slideUp(500, function(){
+            $("#success-alert").slideUp(500);
+        });
+    });
 });
 
 
@@ -69,6 +79,7 @@ function createNumberDropdown(){
 //finds dispersion and calls createPeopleDropdown with correct numbers
 function getDispersion(res) {
     var ant = Number(res.value);
+    console.log(ant);
     var syk;
     if(ant%10 == 3 || (ant/5)%1<0.5) {
         syk = Math.floor(ant/5);
@@ -82,7 +93,7 @@ function getDispersion(res) {
         hjelp = Math.round(ant*0.3);
     }
     var annet = Math.round(ant/2);
-    getData(syk, hjelp, annet);
+    getData(syk, hjelp, annet, createPeopleDropdown);
 }
 
 function closeModal() {
@@ -90,7 +101,7 @@ function closeModal() {
     $("#adminNewShiftModal").modal('hide');
 }
 
-function getData(antSyk, antHjelp, antAnnet) {
+function getData(antSyk, antHjelp, antAnnet, cb) {
     $.ajax({
         url: '/getEmpForShiftDate', //this is the submit URL
         type: 'POST',
@@ -98,8 +109,13 @@ function getData(antSyk, antHjelp, antAnnet) {
         success: function(data){
             console.log("event id = "+eventId);
             console.log(data);
-            employeesSyk = data.responseJSON;
+            employeesSyk = data;
+
+            console.log(employeesSyk);
+
+
             createPeopleDropdown(antSyk, antHjelp, antAnnet);
+
         },
         failure: function(err) {console.log("Error"+err);}
     });
@@ -115,11 +131,12 @@ $.get('/getEmployee', {}, function(req, res, data){
 
 function createPeopleDropdown(antSyk, antHjelp, antAnnet) {
     console.log("data hentet");
+    console.log(this.employeesSyk);
     //alert(antSyk + " sykepleiere, " + antHjelp + " hjelpere, " + antAnnet + " annet");
     document.getElementById('peopleTable').innerHTML = "<tr><th  class='peopleTablecat'>Kategori</th><th class='peopleTableSel'>Ansatt</th></tr>";
     for(var i=0; i<antSyk; i++){
         document.getElementById('peopleTable').innerHTML += "<tr><td class='peopleTableCat'>Sykepleier</td><td class='peopleTableSel'><select id='syk" + i + "' class='peopleDropdown'></select></td></tr>";
-        makeDropdownS("#syk"+i,employeesSyk);
+        makeDropdownS("#syk"+i,this.employeesSyk);
     }
     for(var i=0; i<antHjelp; i++){
         document.getElementById('peopleTable').innerHTML += "<tr><td class='peopleTableCat'>Hjelpepleier</td><td class='peopleTableSel'><select id='hjelp" + i + "' class='peopleDropdown'></select></td></tr>";

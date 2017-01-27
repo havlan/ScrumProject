@@ -29,7 +29,7 @@ module.exports = function (app, passport) {
     app.get('/getEmployee_Shifts_fromCurrentDate', isLoggedIn, getCtrl.getEmployee_Shifts_fromCurrentDate);
     app.get('/getPersonalShiftEvents',isLoggedIn, getCtrl.getPersonalShiftEvents);
     app.get('/getTypeNames',isLoggedIn, getCtrl.getTypeNames);
-    app.get('/getPossibleSiftsEvents',isLoggedIn,getCtrl.getPossibleSiftsEvents);
+    app.get('/getPossibleShiftsEvents',isLoggedIn,getCtrl.getPossibleShiftsEvents);
     app.get('/getDepartment',isLoggedIn, getCtrl.getDepartment);
     app.get('/getNextShiftForEmp',isLoggedIn, getCtrl.getNextShiftForEmp);
     app.get('/getOvertimeView',isOfficeEmp,getCtrl.getOvertimeView);

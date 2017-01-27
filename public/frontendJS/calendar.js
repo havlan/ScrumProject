@@ -29,8 +29,13 @@ $(document).ready(function() {
                 textColor: 'black'
             },
             {
-                url: '/getPossibleSiftsEvents',
+                url: '/getPossibleShiftsEvents',
                 color: '#ffe066',
+                textColor: 'black'
+            },
+            {
+                url: '/getPersonalShiftsEventsDone',
+                color: '#af2a91',
                 textColor: 'black'
             }]
         ,
@@ -54,6 +59,13 @@ $(document).ready(function() {
 
     $.get('/getNextShiftForEmp', {}, function(req, res, data){
         document.getElementById("nextShiftInfo").innerHTML = "Dato: " +data.responseJSON[0].ndate + "<br><br>Sted: " + data.responseJSON[0].department_name;
+    });
+
+    $("#successMessageBox").hide();
+    $("#testButton").click(function showAlert() { //TODO
+        $("#successMessageBox").fadeTo(2000, 500).slideUp(500, function(){
+            $("#success-alert").slideUp(500);
+        });
     });
 
 });
