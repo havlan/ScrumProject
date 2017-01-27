@@ -40,7 +40,7 @@ $(document).ready(function() {
                 textColor: 'black'  // an option!
             }],
         eventClick:  function(event, jsEvent, view) {
-            $('#adminNewShiftModal').modal();
+            $('#fillShiftModal').modal();
             eventId = event.id;
         }
 

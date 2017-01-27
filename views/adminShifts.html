@@ -62,6 +62,26 @@
     </div>
 </div>
 
+<div id="fillShiftModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 id="fillShift" class="modal-title">Legg til person</h4>
+            </div>
+            <!-- Modal body-->
+            <div id="fillShiftModalContent" class="modal-body">
+                <label for="chooseDepartment">Velg ansatt</label><br>
+                <select id="choosePerson"></select><br>
+                <input type="submit" value="Lagre" id="saveFillShift">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="close" data-dismiss="modal">Lukk</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div id="container">
     <div id="sideTitle">Administrer vakter</div>
     <button type="button" class="menuBtn" id="createNewShift" data-toggle="modal" data-target="#adminNewShiftModal"><span>Opprett ny vakt</span>

@@ -83,7 +83,7 @@ module.exports = function (app, passport) {
     app.post('/getVaktliste3', isLoggedIn, getCtrl.getVaktliste3);
 
     app.post('/postUser', isOfficeEmp, postCtrl.postEmployee);
-    app.post('/delUser', isOfficeEmp, delCtrl.delLogin); // office auth
+    app.delete('/delUser', isOfficeEmp, delCtrl.delLogin); // office auth
     app.post('/postDepartment', isOfficeEmp, postCtrl.postDepartment);
     app.post('/postType', isOfficeEmp, postCtrl.postType);
     app.post('/postShift', isOfficeEmp, postCtrl.postShift);
@@ -93,14 +93,14 @@ module.exports = function (app, passport) {
     app.post('/postAbsence', isLoggedIn, postCtrl.postAbsence);
     app.post('/postOvertime', isLoggedIn, postCtrl.postOvertime);
     app.post('/postLogInInfo', isOfficeEmp, postCtrl.postLogInInfo);
-    app.post('/updateShift_has_employee', isOfficeEmp, postCtrl.updateShift_has_employee);
+    app.post('/updateShift_has_employee', isOfficeEmp, model.confirmShiftChange); // 1
     app.post('/updateEmployee', isOfficeEmp, postCtrl.updateEmployee);
     app.post('/updateEmployeePersonalInfo',isLoggedIn,postCtrl.updateEmployeePersonalInfo);
     app.post('/updateType', isOfficeEmp, postCtrl.updateType);
     app.post('/updateShift', isOfficeEmp, postCtrl.updateShift);
     app.post('/updateDepartment', isOfficeEmp, postCtrl.updateDepartment);
     app.post('/updateRequest', isOfficeEmp, postCtrl.updateRequest);
-    app.post('/updateRequest2', isOfficeEmp, postCtrl.updateRequest2);
+    app.post('/updateRequest2', isOfficeEmp, postCtrl.updateRequest2); // 2
     app.post('/updateAbsence2', isOfficeEmp, postCtrl.updateAbsence2);
     app.post('/updateOvertime', isOfficeEmp, postCtrl.updateOvertime);
     app.post('/updateOvertime2', isOfficeEmp, postCtrl.updateOvertime2);

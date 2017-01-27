@@ -34,8 +34,8 @@ $(document).ready(function() {
                 textColor: 'black'
             },
             {
-                url: '/getPersonalShiftsEventsDone',
-                color: '#af2a91',
+                url: '/getPersonalShiftEventsDone',
+                color: '#bdc8cb',
                 textColor: 'black'
             }]
         ,

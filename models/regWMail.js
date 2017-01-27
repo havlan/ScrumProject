@@ -3,17 +3,14 @@ var crypt = require('../middlewares/cryptoHash');
 var nodemailer = require('nodemailer');
 var async = require('async');
 var pool = require('../helpers/db').getPool();
-
+var dbj = require('../helpers/db');
 var transporter = nodemailer.createTransport({
     pool: true,
-    host: "smtp-mail.outlook.com", // hostname
-    secureConnection: false, // TLS requires secureConnection to be false
-    port: 587, // port for secure SMTP
-    tls: {
-        ciphers: 'SSLv3'
-    },
+    host: "smtp.gmail.com", // hostname
+    secure: true, // TLS requires secureConnection to be false
+    port: 465, // port for secure SMTP
     auth: {
-        user: 'minvakt.ikkesvar@outlook.com',
+        user: 'minvakt.ikkesvar@gmail.com',
         pass: 'Abigail4prez'
     }
 });
@@ -91,6 +88,73 @@ module.exports = {
                 console.log("MAIL");
                 sendMailUser(request, request.body.email, pw);
             }
+        })
+    },
+    confirmShiftChange : function(req,response){
+        var pk = req.body.shift_id;
+        var pk2 = req.body.employee_id;
+        async.waterfall([
+        function(done){
+            pool.getConnection(function(err,conn){
+                if(err){ response.status(500).json({melding:"Noe gikk galt."});}
+                conn.query("update shift_has_employee set ? where shift_id = ? and employee_id = ?",[{employee_id:req.body.employee_id2}, pk, pk2], function(err,rows){
+                    if(err){
+                        conn.release();
+                        response.status(404).json({melding:"Vakten eksisterer ikke i utgangspunktet."});
+                    }else{
+                        done(null,req.body.employee_id2, pk2,conn);
+                    }
+                })
+            })
+        },
+            function(til,fra, conn,cb){
+                conn.query("select email, name from Employee where employee_id = ?", til, function(err,res){
+                    if(err || !res.length){
+                        conn.release();
+                        response.status(404).json({melding:"Ikke funnet fra."});
+                    }else{
+                        console.log(res);
+                         cb(null,res, fra, conn)
+                    }
+                })
+
+            },
+            function(row, from, conn, end){
+                conn.query("select email, name from Employee where employee_id = ?", from, function(err,resu){
+                    conn.release();
+                    if(err){
+                        response.status(404).json({melding: "Fant ikke bytte fra."});
+                    }else{
+                        console.log(resu);
+                         end(row,resu);
+                        response.status(200).json({melding: "Endinger lagret"});
+                    }
+                })
+            }
+        ], function(to,from){
+            var mail1 = {
+                from: '"MinVakt" <minvakt.ikkesvar@outlook.com>', //Abigail4prez
+                to: to[0].email,
+                subject: 'Bytte godkjent.',
+                text: 'Vaktbytte mellom deg og ' + from[0].name + ' er godkjent. Din nye vakt burde dukke opp i kalenderen din.'
+            };
+            var mail2 = {
+                from: '"MinVakt" <minvakt.ikkesvar@outlook.com>', //Abigail4prez
+                to: from[0].email,
+                subject: 'Bytte godkjent.',
+                text: 'Vaktbytte mellom deg og ' + to[0].name + ' er godkjent. Din nye vakt burde være fjærnet fra din kalender.'
+            };
+            transporter.sendMail(mail1, function(err,inf){
+                if(err){
+                    console.log(err);
+                }else{
+                    console.log(inf.response);
+                }
+            })
+            transporter.sendMail(mail2, function(err,inf){
+                console.log(err||inf.response);
+            })
+
         })
     },
 
