@@ -190,6 +190,7 @@ module.exports = {
         console.log("Posting new request");
         dbHelper.postdbQuery(req, res, "insert into Request_shift set ? ", post);
     },
+    //hei
     postNewAbsence: function (req, res) {
         var post = {
             absence_id: req.body.absence_id,
