@@ -69,13 +69,11 @@ body, html {
     cursor: pointer !important;
 }
 /* MODAL */
-#newShiftModal{
-    text-align:center;
-}
 #organizeShiftTitle {
     text-align: center;
 }
 #adminNewShiftModal {
+    text-align: center;
     width:700px;
     min-width:300px;
     height:80%;

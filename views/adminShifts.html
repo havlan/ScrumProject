@@ -32,12 +32,22 @@
             </div>
             <!-- Modal body-->
             <div id="adminNewShiftModalContent" class="modal-body">
+                <div id="timeBox">
+                    <label for="datePicker">Dato</label><br>
+                    <input id = datePicker type="date" onchange="oppdateTable()">
+                    <form action="">
+                        <label>Vakt</label><br>
+                        <input type="radio" name="time" value="day"> Dag<br>
+                        <input type="radio" name="time" value="evening"> Kveld<br>
+                        <input type="radio" name="time" value="night"> Natt
+                    </form>
+                </div>
                 <div id="departmentBox">
-                    <p>Avdeling</p>
+                    <label for="chooseDepartment">Avdeling</label>
                     <select id="chooseDepartment"></select>
                 </div>
                 <div id="numberBox">
-                    <p>Antall</p>
+                    <label for="chooseNumber">Antall folk</label>
                     <select id="chooseNumber" onchange="getDispersion(this)"></select>
                 </div>
                 <div id="peopleBox">
@@ -51,9 +61,10 @@
         </div>
     </div>
 </div>
+
 <div id="container">
     <div id="sideTitle">Administrer vakter</div>
-    <button type="button" class="menuBtn" id="createNewShift" data-toggle="modal" data-target="#newShiftModal"><span>Opprett ny vakt</span>
+    <button type="button" class="menuBtn" id="createNewShift" data-toggle="modal" data-target="#adminNewShiftModal"><span>Opprett ny vakt</span>
     </button>
     <div id='calendarx'></div>
 </div>
