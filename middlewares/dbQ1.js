@@ -76,10 +76,10 @@ module.exports = {
         dbHelper.getdbQuery(req, res, "select e.employee_id as AnsattID,e.name as Navn, e.date as Dato,e.shift_id as Skift,e.type_name as Stilling,e.responsibility_allowed as Ansvarsvakt from Employee_Shifts_fromCurrentDate e where e.shift_id not in(select r.shift_id from Request r) and e.employee_id = ?",[req.session.passport.user.id]);
     },
     getPersonalShiftEvents : function (req, res) {
-        dbHelper.getdbQuery(req, res, "select * from JSON_EMPLOYEE_VIEW where employee_id = ? And start >= NOW()", req.session.passport.user.id);
+        dbHelper.getdbQuery(req, res, "select end, start, id, title,description,phone_nr from JSON_EMPLOYEE_VIEW where employee_id = ? And start >= NOW()", req.session.passport.user.id);
     },
     getPersonalShiftEventsDone : function (req, res) {
-        dbHelper.getdbQuery(req, res, "select * from JSON_EMPLOYEE_VIEW where employee_id = ? And start < NOW()", req.session.passport.user.id);
+        dbHelper.getdbQuery(req, res, "select end, start, id, title,description,email from JSON_EMPLOYEE_VIEW where employee_id = ? And start < NOW()", req.session.passport.user.id);
     },
     getPossibleShiftsEvents : function (req, res) {
         console.log("USER ID "+req.session.passport.user.id);
