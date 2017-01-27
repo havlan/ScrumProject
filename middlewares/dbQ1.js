@@ -320,7 +320,7 @@ module.exports = {
     updateOvertime2: function (req, res) {
         var pk = req.body.overtime_id;
         dbHelper.postdbQuery(req, res, "update Overtime set ? where overtime_id=?", [{
-            checked_by_admin: req.body.checked_by_admin
+            checked_by_admin: 1
         }, pk]);
     },
     updateRequest2: function (req, res) {
