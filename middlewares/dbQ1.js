@@ -77,7 +77,7 @@ module.exports = {
     getPersonalShiftEventsDone : function (req, res) {
         dbHelper.getdbQuery(req, res, "select * from JSON_EMPLOYEE_VIEW where employee_id = ? And start < CURDATE()", req.session.passport.user.id);
     },
-    getPossibleSiftsEvents : function (req, res) {
+    getPossibleShiftsEvents : function (req, res) {
         console.log("USER ID "+req.session.passport.user.id);
         dbHelper.getdbQuery(req,res,"select end, start, id, title,description from available_emp_for_shift where employee_id = ?", req.session.passport.user.id);
     },

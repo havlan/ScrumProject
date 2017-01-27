@@ -144,8 +144,8 @@ module.exports = {
     getPersonalShiftEvents : function (req, res) {
         dbMiddelware.getPersonalShiftEvents(req,res);
     },
-    getPossibleSiftsEvents : function (req, res) {
-        dbMiddelware.getPossibleSiftsEvents(req,res);
+    getPossibleShiftsEvents : function (req, res) {
+        dbMiddelware.getPossibleShiftsEvents(req,res);
     }
     ,
     getTypeNames : function (req, res) {

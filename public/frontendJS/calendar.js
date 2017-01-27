@@ -29,7 +29,7 @@ $(document).ready(function() {
                 textColor: 'black'
             },
             {
-                url: '/getPossibleSiftsEvents',
+                url: '/getPossibleShiftsEvents',
                 color: '#ffe066',
                 textColor: 'black'
             },
