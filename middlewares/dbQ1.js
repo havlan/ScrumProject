@@ -65,7 +65,7 @@ module.exports = {
     },
     getEmployee_Shifts_toCurrentDate: function (req, res) {
         console.log("USER ID "+req.session.passport.user.id);
-        dbHelper.getdbQuery(req, res, "select * from Employee_Shifts_toCurrentDate where employee_id = ?",[req.session.passport.user.id]);
+        dbHelper.getdbQuery(req, res, "select e.employee_id as AnsattID,e.name as Navn,e.date as Dato,e.type_name as Stilling, e.responsibility_allowed as Ansvarsvakt from Employee_Shifts_toCurrentDate e where employee_id = ?",[req.session.passport.user.id]);
     },
     getEmployee_Shifts_fromCurrentDate: function (req, res) {
         console.log("USER ID "+req.session.passport.user.id);
@@ -75,7 +75,7 @@ module.exports = {
         console.log("USER ID "+req.session.passport.user.id);
         dbHelper.getdbQuery(req, res, "select e.employee_id as AnsattID,e.name as Navn, e.date as Dato,e.shift_id as Skift,e.type_name as Stilling,e.responsibility_allowed as Ansvarsvakt from Employee_Shifts_fromCurrentDate e where e.shift_id not in(select r.shift_id from Request r) and e.employee_id = ?",[req.session.passport.user.id]);
     },
-    getPersonalShiftEvents : function (req, res) {
+        getPersonalShiftEvents : function (req, res) {
         dbHelper.getdbQuery(req, res, "select end, start, id, title,description,phone_nr from JSON_EMPLOYEE_VIEW where employee_id = ? And start >= NOW()", req.session.passport.user.id);
     },
     getPersonalShiftEventsDone : function (req, res) {
@@ -126,6 +126,9 @@ module.exports = {
     },
     getEmpForShiftDateAll : function (req,res) {
         dbHelper.getdbQuery(req,res, "SELECT ase.employee_id, ase.name FROM available_emp_for_shift ase Where ase.id = ?", [req.body.shift_id]);
+    },
+    getLoginInfoEmployee : function (req, res) {
+        dbHelper.getdbQuery(req,res,"select * from LoginInfo where employee_id = ?",req.params.id);
     },
 
 

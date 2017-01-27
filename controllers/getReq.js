@@ -135,6 +135,9 @@ module.exports = {
     getEmployee_Shifts_fromCurrentDate2:function(req,res){
         dbMiddelware.getEmployee_Shifts_fromCurrentDate2(req,res);
     },
+    getLoginInfoEmployee : function (req, res) {
+        dbMiddelware.getLoginInfoEmployee(req,res);
+    },
     getVaktliste1:function(req,res){
         dbMiddelware.getVaktliste1(req,res);
     },
