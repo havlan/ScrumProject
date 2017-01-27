@@ -129,9 +129,7 @@ function addAllColumnHeaders(list, selector) {
                 columnSet.push(key);
                 headerTr$.append($('<th/>').html(key));
             }
-
         }
-
     }
     $(selector).append(headerThead$);
     $(headerThead$).append(headerTr$);
