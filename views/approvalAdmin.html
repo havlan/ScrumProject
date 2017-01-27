@@ -4,16 +4,22 @@
     <title>Godkjenning</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
     <script src = "frontendJS/approvalAdmin.js"></script>
     <link rel="stylesheet" href="css/approvalAdmin.css">
 </head>
-<body>
-
 <div id="includedContent"></div>
 <script>$("#includedContent").load("menu");</script>
+<body>
+<div id="successMessageBox">
+    <span id="successMessage">default success</span>
+</div>
+<div id="errorMessageBox">
+    <span id="errorMessage">default error</span>
+</div>
 
-<h1 id="godkjenning">Godkjenning</h1>
+<div id="sideTitle">GODKJENNING</div>
+
 <section class="buttonsSection">
     <button type="button" class="approveButton" id ="leave" onclick="leaveFunction()" autofocus><span>Godkjenn fravær</span></button>
     <button type="button" class="approveButton" id ="overtime" onclick="overtimeFunction()"><span>Godkjenn overtid</span></button>
@@ -29,7 +35,6 @@
     </div>
 
 </section>
-
 <section class="approveSection" id="overtimeApproval" style="display:none">
     <h3>Overtid til godkjenning</h3>
     <div class="table-responsive">
@@ -37,7 +42,6 @@
         </table>
     </div>
 </section>
-
 <section class="approveSection" id="switchApproval" style="display:none">
     <h3>Vaktbytte til godkjenning</h3>
     <div class="table-responsive">
@@ -45,6 +49,7 @@
         </table>
     </div>
 </section>
+
 
 <div class="modal fade" id="approveModal" data-backdrop="static" data-keyboard="false" role="dialog">
     <div class="modal-dialog modal-sm">

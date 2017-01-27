@@ -5,7 +5,8 @@ var employeesSyk;
 var employeesHelp   = [];
 var employeesAnnet  = [];
 var eventId;
-
+var fillShiftList;
+var currShiftId;
 
 
 $(document).ready(function() {
@@ -30,18 +31,15 @@ $(document).ready(function() {
         //GETTING EVENTS FROM JSON FEED; SHORT AND EXTENDED
         eventSources: [
             {
-                url: '/getPersonalShiftEvents', // use the `url` property
-                color: 'green',    // an option!
-                textColor: 'black'  // an option!
-            },
-            {
                 url: '/getPossibleShiftsEvents', // use the `url` property
                 color: 'yellow',    // an option!
                 textColor: 'black'  // an option!
             }],
         eventClick:  function(event, jsEvent, view) {
+            getAvailableEmpForShift(event.id);
             $('#fillShiftModal').modal();
             eventId = event.id;
+            currShiftId = event.id;
         }
 
 
@@ -56,13 +54,59 @@ $(document).ready(function() {
 
     createNumberDropdown();
 
-    $("#successMessageBox").hide();
-    $("#testButton").click(function showAlert() { //TODO
-        $("#successMessageBox").fadeTo(2000, 500).slideUp(500, function(){
-            $("#success-alert").slideUp(500);
-        });
-    });
 });
+
+function getAvailableEmpForShift(id) {
+
+    $.ajax({
+        url: '/getEmpForShiftDateAll', //this is the submit URL
+        type: 'POST',
+        data: {'shift_id': id},
+        success: function(data){
+            console.log(data);
+            fillShiftList = data;
+
+            for (var i = 0; i < data.length; i++) {
+                var option = $('<option />').text(data[i].name);
+                $('#choosePerson').append(option);
+            }
+
+            //lag dropdown i modal
+        },
+        failure: function(err) {console.log("Error"+err);}
+    });
+
+
+
+}
+
+function saveFillShift() {
+    //runs when lagre button is clicked
+    //checks for valid input
+
+    //ajax post
+
+    var emp_id = fillShiftList[$("#choosePerson").prop('selectedIndex')].employee_id;
+
+
+    $.ajax({
+        url: '/postShift_has_employee', //this is the submit URL
+        type: 'POST',
+        data: {'shift_id': currShiftId,'employee_id': emp_id},
+        success: function(data){
+            employeesSyk = data;
+
+            location.reload();
+            //FEEDBACK
+        },
+        failure: function(err) {
+            console.log("Error"+err);
+            //FEEDBACK
+        }
+    });
+
+    $('#fillShiftModal').modal("hide");
+}
 
 
 
@@ -97,7 +141,6 @@ function getDispersion(res) {
 }
 
 function closeModal() {
-    console("asdfasdfa");
     $("#adminNewShiftModal").modal('hide');
 }
 

@@ -13,9 +13,16 @@
 <script>$("#includedContent").load("menu");</script>
 
 <body>
+<div id="successMessageBox">
+    <span id="successMessage">default success</span>
+</div>
+<div id="errorMessageBox">
+    <span id="errorMessage">default error</span>
+</div>
 
-<div class="flytt">
-    <h1>Oversikt over ansatte</h1>
+<div id="sideTitle">OVERSIKT OVER ANSATTE</div>
+
+<div id="flytt">
     <input autofocus type="text" id="nameInput" onkeyup="searchNameFunction()" placeholder="Søk på ansatt">
     <input type="text" id="positionInput" onkeyup="searchPositionFunction()" placeholder="Søk på stilling">
     <button type="button" id="addBtn" data-toggle="modal" data-target="#addModal">Legg til ansatt</button>

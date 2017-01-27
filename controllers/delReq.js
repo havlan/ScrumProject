@@ -20,5 +20,11 @@ module.exports = {
     },
     delRequest : function (req, res) {
         db.getdbQuery(req,res,"delete from Request where request_id = ?",req.body.request_id);
+    },
+    delAbsence : function (req, res) {
+        db.getdbQuery(req,res,"delete from Absence where absence_id = ?",req.body.absence_id);
+    },
+    delOvertime : function (req, res) {
+        db.getdbQuery(req,res,"delete from Overtime where overtime_id = ?",req.body.overtime_id);
     }
 }

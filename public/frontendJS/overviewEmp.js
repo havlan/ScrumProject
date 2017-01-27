@@ -9,6 +9,7 @@ $.get('/getEmployeeRestricted', {}, function(req, res, data){
     buildHtmlTable('#dbDataTable',myList);
     $("#cover").fadeOut(10); <!-- MÅ ligge etter det som tar legst å loade-->
 });
+
 //Build Table
 function buildHtmlTable(selector,list) {
     var columns = addAllColumnHeaders(list, selector);

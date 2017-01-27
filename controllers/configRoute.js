@@ -27,6 +27,7 @@ module.exports = function (app, passport) {
     app.get('/getVaktoversiktSite', isLoggedIn, getCtrl.getVaktoversiktSite);
     app.get('/getEmployee_Shifts_toCurrentDate', isLoggedIn, getCtrl.getEmployee_Shifts_toCurrentDate);
     app.get('/getEmployee_Shifts_fromCurrentDate', isLoggedIn, getCtrl.getEmployee_Shifts_fromCurrentDate);
+    app.get('/getEmployee_Shifts_fromCurrentDate2', isLoggedIn, getCtrl.getEmployee_Shifts_fromCurrentDate2);
     app.get('/getPersonalShiftEvents',isLoggedIn, getCtrl.getPersonalShiftEvents);
     app.get('/getTypeNames',isLoggedIn, getCtrl.getTypeNames);
     app.get('/getPossibleShiftsEvents',isLoggedIn,getCtrl.getPossibleShiftsEvents);
@@ -101,6 +102,7 @@ module.exports = function (app, passport) {
     app.post('/updateDepartment', isOfficeEmp, postCtrl.updateDepartment);
     app.post('/updateRequest', isOfficeEmp, postCtrl.updateRequest);
     app.post('/updateRequest2', isOfficeEmp, postCtrl.updateRequest2); // 2
+    app.post('/newLogin', isOfficeEmp , model.sendOnlyLogin);
     app.post('/updateAbsence2', isOfficeEmp, postCtrl.updateAbsence2);
     app.post('/updateOvertime', isOfficeEmp, postCtrl.updateOvertime);
     app.post('/updateOvertime2', isOfficeEmp, postCtrl.updateOvertime2);
@@ -120,6 +122,9 @@ module.exports = function (app, passport) {
         })
     });
     app.post('/bulkAvail', postCtrl.insertBulkAvailability);
+
+    app.post('/getEmpForShiftDateAll', isAdmin, getCtrl.getEmpForShiftDateAll);
+
     app.post('/changePassword', isLoggedIn, model.changePassword);
     app.post('/acceptRequestWith', isOfficeEmp, model.acceptRequestWith);
     app.get('/getAvailableEmpForShift/:id',isOfficeEmp, getCtrl.getAvailableEmpForShift);
@@ -127,6 +132,9 @@ module.exports = function (app, passport) {
     app.delete('/deleteShift_has_employee',isOfficeEmp,delCtrl.delShift_has_employee);
     app.delete('/deleteRequest_shift',isOfficeEmp,delCtrl.delRequest_shift);
     app.delete('/deleteRequest',isOfficeEmp,delCtrl.delRequest);
+    app.delete('/deleteAbsence',isOfficeEmp,delCtrl.delAbsence);
+    app.delete('/deleteOvertime',isOfficeEmp,delCtrl.delOvertime);
+
     //MÅ VÆRE SIST
     app.get('/forbudt',getCtrl.get403);
     app.get('/*', getCtrl.get404);

@@ -24,18 +24,18 @@ $(document).ready(function() {
         //GETTING EVENTS FROM JSON FEED; SHORT AND EXTENDED
         eventSources: [
             {
-                url: '/getPersonalShiftEvents',
-                color: '#8cd9ad',
-                textColor: 'black'
-            },
-            {
                 url: '/getPossibleShiftsEvents',
                 color: '#ffe066',
                 textColor: 'black'
             },
             {
-                url: '/getPersonalShiftsEventsDone',
-                color: '#af2a91',
+                url: '/getPersonalShiftEvents',
+                color: '#8cd9ad',
+                textColor: 'black'
+            },
+            {
+                url: '/getPersonalShiftEventsDone',
+                color: '#c4e6ff',
                 textColor: 'black'
             }]
         ,
@@ -58,19 +58,12 @@ $(document).ready(function() {
     });
 
     $.get('/getNextShiftForEmp', {}, function(req, res, data){
-        document.getElementById("nextShiftInfo").innerHTML = "Dato: " +data.responseJSON[0].ndate + "<br><br>Sted: " + data.responseJSON[0].department_name;
-    });
-
-    $("#successMessageBox").hide();
-    $("#testButton").click(function showAlert() { //TODO
-        $("#successMessageBox").fadeTo(2000, 500).slideUp(500, function(){
-            $("#success-alert").slideUp(500);
-        });
+        document.getElementById("nextShiftInfo").innerHTML = "Dato: " +data.responseJSON[0].ndate + "<br>Sted: " + data.responseJSON[0].department_name;
     });
 
 });
 
-$.get('/getEmployee_Shifts_fromCurrentDate',{},function (req,res,data) {
+$.get('/getEmployee_Shifts_fromCurrentDate2',{},function (req,res,data) {
     myList = data.responseJSON;
     buildHtmlTable('#vaktTable');
 });
@@ -127,23 +120,43 @@ $(document).on('click','#sendForespørsel',function (e) {
             type: 'POST',
             data: {'shift_id': data[i], 'checked_by_admin': 0,'explanation_request': ""},
             success: function (data) {
-                alert("success!");
                 console.log(data);
+                document.getElementById("successMessage").innerHTML = "Success!";
+                showSuccessMessage();
+            },
+            error: function(xhr){
+                if(xhr.status==404){
+                    document.getElementById("errorMessage").innerHTML = "ikke funnet";
+                    showErrorMessage();
+                } else {
+                    document.getElementById("errorMessage").innerHTML = "Det har oppstått en feil";
+                    showErrorMessage();
+                }
             }
         });
     }
 });
 
-$(document).on('click','#sendShiftRequest',function (e) {
-    var textinput = $("#explanation").val;
+$(document).on('click','#freeSave',function (e) {
+    var textinput = $("#expField").val();
     if(textinput.length<300){
         $.ajax({
             url: '/postRequest',
             type: 'POST',
             data: {'shift_id': event_id,'explanation_request': textinput, 'checked_by_admin': 0},
             success: function (data) {
-                alert("success!");
                 console.log(data);
+                document.getElementById("successMessage").innerHTML = "Success!";
+                showSuccessMessage();
+            },
+            error: function(xhr){
+                if(xhr.status==404){
+                    document.getElementById("errorMessage").innerHTML = "ikke funnet";
+                    showErrorMessage();
+                } else {
+                    document.getElementById("errorMessage").innerHTML = "Det har oppstått en feil";
+                    showErrorMessage();
+                }
             }
         });
     }else{
@@ -160,12 +173,84 @@ $(document).on('click','#sendRequest',function () {
             type: 'POST',
             data: {'shift_id': event_id},
             success: function (data) {
-                alert("success!");
-                console.log(data);
+                document.getElementById("successMessage").innerHTML = "Success!";
+                showSuccessMessage();
+            },
+            error: function(xhr){
+                if(xhr.status==404){
+                    document.getElementById("errorMessage").innerHTML = "ikke funnet";
+                    showErrorMessage();
+                } else {
+                    document.getElementById("errorMessage").innerHTML = "Det har oppstått en feil";
+                    showErrorMessage();
+                }
             }
         });
     }else {
         console.log("an error occurred 2B|!2B");
+        document.getElementById("errorMessage").innerHTML = "Det har oppstått en feil";
+        showErrorMessage();
     }
 });
 
+$(document).on('click','#overSave',function () {
+
+    var numberinput = $("#overTime").val();
+    var explenation = $("#overField").val();
+    console.log(numberinput);
+    console.log(explenation);
+
+    if (event_id!=null){
+        if (numberinput){
+            $.ajax({
+                url: '/postOvertime',
+                type: 'POST',
+                data: {'shift_id': event_id,
+                    'overtime': numberinput,
+                    'explanation': explenation},
+                success: function (data) {
+                    alert("success!");
+                    console.log(data);
+                },
+                error: function(xhr){
+                    if(xhr.status==404){
+                        document.getElementById("errorMessage").innerHTML = "ikke funnet";
+                        showErrorMessage();
+                    } else {
+                        document.getElementById("errorMessage").innerHTML = "Det har oppstått en feil";
+                        showErrorMessage();
+                    }
+                }
+            });
+        }else{
+            console.log("Du må legge til et nummer i overtidnummer feltet.")
+        }
+    }else {
+        console.log("Systemet fant ikke event_id");
+    }
+});
+
+
+function showExplanationField(){
+    document.getElementById('spaceFree').style.visibility = "visible";
+    document.getElementById('spaceOver').style.visibility="hidden";
+}
+function showOverField(){
+    document.getElementById('spaceFree').style.visibility = "hidden";
+    document.getElementById('spaceOver').style.visibility="visible";
+}
+
+function showSuccessMessage() {
+    var element = document.getElementById('successMessageBox');
+    element.style.display = "block";
+    setTimeout(function() {
+        element.style.display = "none";
+    }, 3000);
+}
+function showErrorMessage() {
+    var element = document.getElementById('errorMessageBox');
+    element.style.display = "block";
+    setTimeout(function() {
+        element.style.display = "none";
+    }, 3000);
+}

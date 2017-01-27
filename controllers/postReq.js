@@ -28,7 +28,7 @@ module.exports = {
         dbMiddelware.postNewAbsence(req,res);
     },
     postOvertime : function (req, res) {
-        dbMiddelware.postnewOvertime(req,res);
+        dbMiddelware.postnewOvertime2(req,res);
     },
     postLogInInfo : function (req, res) {
         dbMiddelware.postnewLogInInfo(req,res);

@@ -21,7 +21,6 @@ $(document).ready(function(){ // syntax for å hente data når dokument (html) e
     });
 });
 
-
 var myList= [];
 
 
@@ -82,8 +81,34 @@ $(function(){
             type: 'POST',
             data: {'phone_nr': $("#edittelefon").val(),'address':$('#editadresse').val(),'email':$('#editepost').val()},
             success: function(data){
-                alert('successfully submitted')
+                console.log(data);
+                document.getElementById("successMessage").innerHTML = "sendt";
+                showSuccessMessage();
+            },
+            error: function(xhr){
+                if(xhr.status==404){
+                    document.getElementById("errorMessage").innerHTML = "ikke funnet";
+                    showErrorMessage();
+                } else {
+                    document.getElementById("errorMessage").innerHTML = "Det har oppstått en feil";
+                    showErrorMessage();
+                }
             }
         });
     });
 });
+
+function showSuccessMessage() {
+    var element = document.getElementById('successMessageBox');
+    element.style.display = "block";
+    setTimeout(function() {
+        element.style.display = "none";
+    }, 3000);
+}
+function showErrorMessage() {
+    var element = document.getElementById('successMessageBox');
+    element.style.display = "block";
+    setTimeout(function() {
+        element.style.display = "none";
+    }, 3000);
+}

@@ -3,9 +3,8 @@
 <head>
     <link href="/css/fullcalendar.min.css" rel="stylesheet"/>
     <link href="/css/fullcalendar.print.min.css" rel="stylesheet" media="print"/>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="/frontendJS/moment.min.js"></script>
     <script src="/frontendJS/jquery.min.js"></script>
+    <script src="/frontendJS/moment.min.js"></script>
     <script src="/frontendJS/fullcalendar.min.js"></script>
     <script src="/frontendJS/nb.js"></script>
     <script src="/frontendJS/adminShifts.js"></script>
@@ -18,9 +17,11 @@
 <script>$("#includedContent").load("menu");</script>
 
 <body>
-<div class="alert alert-success fade in" id="successMessageBox"> <!-- TAG #successMessage FOR ALERTS -->
-    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-    <span id="successMessage">This is the default warning text</span>
+<div id="successMessageBox">
+    <span id="successMessage">default success</span>
+</div>
+<div id="errorMessageBox">
+    <span id="errorMessage">default error</span>
 </div>
 
 <div id="adminNewShiftModal" class="modal fade">
@@ -73,7 +74,7 @@
             <div id="fillShiftModalContent" class="modal-body">
                 <label for="chooseDepartment">Velg ansatt</label><br>
                 <select id="choosePerson"></select><br>
-                <input type="submit" value="Lagre" id="saveFillShift">
+                <input type="submit" value="Lagre" id="saveFillShift" onclick="saveFillShift()">
             </div>
             <div class="modal-footer">
                 <button type="button" class="close" data-dismiss="modal">Lukk</button>

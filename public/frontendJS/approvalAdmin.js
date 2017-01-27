@@ -4,23 +4,26 @@ var myList = [];
 window.ansattid = 0;
 window.nyansattid = 0;
 window.shift_id = 0;
-
+window.indeks = 0;
 function leaveFunction(){
     document.getElementById('leaveApproval').style.display = "block";
     document.getElementById('switchApproval').style.display = "none";
     document.getElementById('overtimeApproval').style.display = "none";
+    document.getElementById('Lagre').style.display = "block";
 
 }
 function overtimeFunction(){
     document.getElementById('leaveApproval').style.display = "none";
     document.getElementById('switchApproval').style.display = "none";
     document.getElementById('overtimeApproval').style.display = "block";
+    document.getElementById('Lagre').style.display = "block";
 
 }
 function switchFunction(){
     document.getElementById('leaveApproval').style.display = "none";
     document.getElementById('switchApproval').style.display = "block";
     document.getElementById('overtimeApproval').style.display = "none";
+    document.getElementById('Lagre').style.display = "none";
 
 }
 
@@ -133,39 +136,28 @@ $(document).on('click','#ansattTable .openModal2',function (e) {
 //When pressing 'Lagre'-button any row that is checked will get checked_by_admin=1
 $(document).on('click','#Lagre',function (e) {
     e.preventDefault();
-    var data = $("#leaveTable").find("input:checkbox:checked").map(function(){
+    var absenceIDArray = $("#leaveTable").find("input:checkbox:checked").map(function(){
         return $(this).closest("tr").find('td:eq(0)').text();
     }).toArray(); // <----
-    var data2 = $("#overtimeTable").find("input:checkbox:checked").map(function(){
+    var skiftIDArray = $("#leaveTable").find("input:checkbox:checked").map(function(){
+        return $(this).closest("tr").find('td:eq(3)').text();
+    }).toArray(); // <----
+    var employeeIDArray = $("#leaveTable").find("input:checkbox:checked").map(function(){
+        return $(this).closest("tr").find('td:eq(1)').text();
+    }).toArray(); // <----
+    var overtimeIDArray = $("#overtimeTable").find("input:checkbox:checked").map(function(){
         return $(this).closest("tr").find('td:eq(0)').text();
     }).toArray(); // <----
   //  console.log(data);
-    for(i=0; i<data.length; i++){
-        fjernAnsatt(i);
-        console.log(data[i]);
-        $.ajax({
-            url: '/updateAbsence2',
-            type:'POST',
-            data:{'absence_id':data[i],'checked_by_admin':1},
-            success:function (data) {
-                //alert("success!");
-            }
-        });
+    for(i=0; i<skiftIDArray.length; i++){
+        //alert("success!");
+        updateAbsence(absenceIDArray[i]);
     }
-    for(i=0; i<data2.length; i++){
-        console.log(data2[i]);
-        $.ajax({
-            url: '/updateOvertime2',
-            type:'POST',
-            data:{'overtime_id':data2[i],'checked_by_admin':1},
-            success:function (data) {
-               // alert("success!");
-            }
-        });
+    for(i=0; i<overtimeIDArray.length; i++){
+        updateOvertime(overtimeIDArray[i]);
     }
-
 });
-function fjernAnsatt(skiftid){
+function fjernAnsatt(skiftid,ansatt){
     var id;
     if(skiftid==null) {//if method is called from 'Godkjenn vaktbytte'
         id = indeks;
@@ -173,9 +165,19 @@ function fjernAnsatt(skiftid){
     $.ajax({
         url:'/deleteShift_has_employee',
         type: 'DELETE',
-        data:{'shift_id':id,'employee_id':ansattid},
+        data:{'shift_id':id,'employee_id':ansatt},
         success:function (data) {
-            alert("vi bør lage en varsel her og");
+            document.getElementById("successMessage").innerHTML = "Ansatt er fjernet";
+            showSuccessMessage();
+        },
+        error: function(xhr){
+            if(xhr.status==404){
+                document.getElementById("errorMessage").innerHTML = "ikke funnet";
+                showErrorMessage();
+            } else {
+                document.getElementById("errorMessage").innerHTML = "Det har oppstått en feil";
+                showErrorMessage();
+            }
         }
     });
 }
@@ -190,6 +192,17 @@ function erstattAnsatt() {
         data:{'employee_id':ansattid,'shift_id':skiftid,'employee_id2':nyansattid},
         success:function (data) {
             fjernAnsatteRequestShift(skiftid);
+            document.getElementById("successMessage").innerHTML = "Ansatt er erstattet";
+            showSuccessMessage();
+        },
+        error: function(xhr){
+            if(xhr.status==404){
+                document.getElementById("errorMessage").innerHTML = "ikke funnet";
+                showErrorMessage();
+            } else {
+                document.getElementById("errorMessage").innerHTML = "Det har oppstått en feil";
+                showErrorMessage();
+            }
         }
     });
 }
@@ -199,17 +212,94 @@ function fjernAnsatteRequestShift(skiftid){
         type:'DELETE',
         data:{'shift_id':skiftid},
         success:function (data) {
-            $.ajax({
-            url: '/deleteRequest',
-            type:'DELETE',
-            data:{'request_id':indeks},
-            success:function (data) {
-                 alert("success!");
+           deleteRequest(indeks);
+            document.getElementById("successMessage").innerHTML = "TODO er fjernet";//TODO
+            showSuccessMessage();
+        },
+        error: function(xhr){
+            if(xhr.status==404){
+                document.getElementById("errorMessage").innerHTML = "ikke funnet";
+                showErrorMessage();
+            } else {
+                document.getElementById("errorMessage").innerHTML = "Det har oppstått en feil";
+                showErrorMessage();
             }
-        });
         }
     });
 }
-
-
-
+function deleteRequest(id) {
+    $.ajax({
+        url: '/deleteRequest',
+        type:'DELETE',
+        data:{'request_id':id},
+        success:function (data) {
+            //alert("Request slettet.");
+            document.getElementById("successMessage").innerHTML = "TODO er fjernet"; //TODO
+            showSuccessMessage();
+        },
+        error: function(xhr) {
+            if (xhr.status == 404) {
+                document.getElementById("errorMessage").innerHTML = "ikke funnet";
+                showErrorMessage();
+            } else {
+                document.getElementById("errorMessage").innerHTML = "Det har oppstått en feil";
+                showErrorMessage();
+            }
+        }
+    });
+}
+function updateAbsence(id) {
+    $.ajax({
+        url: '/updateAbsence2',
+        type:'POST',
+        data:{'absence_id':id,'checked_by_admin':1},
+        success:function (data) {
+            alert("Absence slettet.");
+            document.getElementById("successMessage").innerHTML = "fravær er fjernet";
+            showSuccessMessage();
+        },
+        error: function(xhr){
+            if(xhr.status==404){
+                document.getElementById("errorMessage").innerHTML = "ikke funnet";
+                showErrorMessage();
+            } else {
+                document.getElementById("errorMessage").innerHTML = "Det har oppstått en feil";
+                showErrorMessage();
+            }
+        }
+    });
+}
+function updateOvertime(id) {
+    $.ajax({
+        url: '/updateOvertime2',
+        type:'POST',
+        data:{'overtime_id':id,'checked_by_admin':1},
+        success:function (data) {
+            document.getElementById("successMessage").innerHTML = "Overtid er oppdatert";
+            showSuccessMessage();
+        },
+        error: function(xhr){
+            if(xhr.status==404){
+                document.getElementById("errorMessage").innerHTML = "ikke funnet";
+                showErrorMessage();
+            } else {
+                document.getElementById("errorMessage").innerHTML = "Det har oppstått en feil";
+                showErrorMessage();
+            }
+        }
+    });
+}
+function showSuccessMessage() {
+    var element = document.getElementById('successMessageBox');
+    element.style.display = "block";
+    setTimeout(function() {
+        element.style.display = "none";
+    }, 3000);
+}
+function showErrorMessage() {
+    var element = document.getElementById('successMessageBox');
+    element.style.display = "block";
+    setTimeout(function() {
+        element.style.display = "none";
+    },3000);
+}

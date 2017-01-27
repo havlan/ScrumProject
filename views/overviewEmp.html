@@ -16,8 +16,15 @@
 <script>$("#includedContent").load("menu");</script>
 
 <body>
+<div id="successMessageBox">
+    <span id="successMessage">default success</span>
+</div>
+<div id="errorMessageBox">
+    <span id="errorMessage">default error</span>
+</div>
 
-<h2>Oversikt over ansatte</h2>
+<div id="container">
+<div id="sideTitle">KONTAKTINFO</div>
 
     <input autofocus type="text" id="nameInput" onkeyup="searchNameFunction()" placeholder="Søk på ansatt">
     <input type="text" id="positionInput" onkeyup="searchPositionFunction()" placeholder="Søk på stilling">
@@ -26,7 +33,7 @@
     <table class="table table-striped table-bordered cards-table" id="dbDataTable">
     </table>
 </div>
-
+</div>
 
 <!-- Modal-Info -->
 <div class="modal fade" id="infoModal" role="dialog">
