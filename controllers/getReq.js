@@ -44,7 +44,7 @@ module.exports = {
         res.sendFile(path.join(__dirname + '/../views/shiftOverview.html'));
     },
     getCalendarSite : function (req, res){
-        res.sendFile(path.join(__dirname + '/../views/calendar.html'));
+        res.sendFile(path.join(__dirname + '/../views/frontpageEmp.html'));
     },
     getApprovalAdminSite : function (req,res){
         res.sendFile(path.join(__dirname + '/../views/approvalAdmin.html'));
