@@ -6,19 +6,25 @@ var department = [];
 var today = new Date();
 
 function currentDay(today1) {
-    var dd = today1.getDate();
-    var mm = today1.getMonth() + 1; //January is 0!
+    try {
+        if(today1) {
+            var dd = today1.getDate();
+            var mm = today1.getMonth() + 1; //January is 0!
 
-    var yyyy = today1.getFullYear();
-    if (dd < 10) {
-        dd = '0' + dd;
+            var yyyy = today1.getFullYear();
+            if (dd < 10) {
+                dd = '0' + dd;
+            }
+            if (mm < 10) {
+                mm = '0' + mm;
+            }
+            today1 = yyyy + '-' + mm + '-' + dd;
+            console.log(today1);
+            return today1;
+        }
+    }catch(err){
+        throw err;
     }
-    if (mm < 10) {
-        mm = '0' + mm;
-    }
-    today1 = yyyy + '-' + mm + '-' + dd;
-    console.log(today1);
-    return today1;
 }
 
 $(document).ready(function () {

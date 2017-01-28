@@ -21,7 +21,7 @@ require('./middlewares/passtheport')(passport);
 app.engine('hbs', hbs({extname : 'hbs', layoutsDir: __dirname + '/public/css'}));
 app.set('views', path.join(__dirname + '/views'));
 app.set('view engine','hbs');
-//app.use(morgan('dev'));
+app.use(morgan('dev'));
 app.use(cookieParser());
 app.use(express.query());
 app.use(bodyParser.json());
@@ -46,6 +46,24 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
+app.use(helmet.contentSecurityPolicy({
+    directives: {
+        "defaultSrc": ["'self'"],
+        "scriptSrc":["'self'" ,"'unsafe-inline'", "maxcdn.bootstrapcdn.com" , "ajax.googleapis.com", "cdn.datatables.net"],
+        "styleSrc": ["'unsafe-inline'","'self'","'self'/public/css",'maxcdn.bootstrapcdn.com'],
+        "fontSrc" : ["*"],
+        "imgSrc":["'self'", "'self'/public/img"]
+    }
+}));
+
+app.use(function(req,res,next){
+    if(req.body) {
+        for (var item in req.body) {
+            req.sanitize(item).escape();
+        }
+    }
+    next();
+});
 
 var job = new cron.CronJob('00 00 05 * * 7', function(){ // mail sent 05:00:00 sunday night, about available shifts
     mod.sendMailOnFree();

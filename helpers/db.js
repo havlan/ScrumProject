@@ -103,8 +103,6 @@ module.exports =
                       console.log("Reverted test.");
                   }else if (err){
                       throw err;
-                  }else{
-                      return;
                   }
               })
             })

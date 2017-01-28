@@ -51,7 +51,7 @@ module.exports = function (app, passport) {
     app.get('/menu', isLoggedIn, getCtrl.getMenuSite);
     app.get('/overviewForAdmin', isOfficeEmp, getCtrl.getOverviewForAdminSite);
     app.get('/myProfile', isLoggedIn, getCtrl.getMyProfileSite);
-    app.get('/vaktoversikt', isOfficeEmp, getCtrl.getVaktoversiktSite);
+    app.get('/vaktoversikt', isLoggedIn, getCtrl.getVaktoversiktSite);
     app.get('/calendar', isLoggedIn, getCtrl.getCalendarSite);
     app.get('/approvalAdmin', isOfficeEmp, getCtrl.getApprovalAdminSite);
     app.get('/frontpageAdmin', isOfficeEmp, getCtrl.getFrontpageAdminSite);
