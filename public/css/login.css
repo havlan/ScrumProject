@@ -8,6 +8,7 @@ body, html {
     drop-shadow(1px 1px 1px #222); width:200px;
 }
 
+
 #successMessageBox, #errorMessageBox, #warningMessageBox {
     display:none;
     padding: 10px 0;

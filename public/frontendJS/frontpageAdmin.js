@@ -275,3 +275,11 @@ function showErrorMessage() {
         element.style.display = "none";
     }, 3000);
 }
+
+function showWarningMessage() {
+    var element = document.getElementById('warningMessageBox');
+    element.style.display = "block";
+    setTimeout(function() {
+        element.style.display = "none";
+    }, 3000);
+}
