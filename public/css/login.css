@@ -1,8 +1,11 @@
-@import url(https://fonts.googleapis.com/css?family=Roboto:300);
-
 body, html {
     width:100%;
     height:100%;
+}
+
+#logoPic{
+    drop-shadow(1px 1px 1px #222);
+    drop-shadow(1px 1px 1px #222); width:200px;
 }
 
 #successMessageBox, #errorMessageBox, #warningMessageBox {
