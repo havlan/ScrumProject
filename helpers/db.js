@@ -1,6 +1,8 @@
 var mysql = require('mysql');
 var cryptoHash = require('./../middlewares/cryptoHash');
 var async = require('async');
+var expressValidator = require('express-validator')
+
 
 var pool = mysql.createPool({
     connectionLimit: 27,
@@ -48,6 +50,7 @@ module.exports =
                     connection.release();
                     if (!err) {
                         if(rows.length > 0) {
+
                             res.status(200).json(rows);
                             //console.log(rows);
                         }else{
@@ -69,7 +72,6 @@ module.exports =
                         res.json({"Error": "Couldnt connect to MYSQL" + err});
                         throw err;
                     }
-                    console.log("Connected to database");
                     connection.query(query, post, function (err, rows) {
                         connection.release();
                         if (!err) {
@@ -97,11 +99,9 @@ module.exports =
                 if(err) {
                     throw err;
                 }
-              conn.query(query, function(err){
+              conn.query(query, function(err,res){
                   conn.release();
-                  if(!err){
-                      console.log("Reverted test.");
-                  }else if (err){
+                  if(!err) {
                       throw err;
                   }
               })

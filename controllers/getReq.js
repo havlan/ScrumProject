@@ -7,11 +7,6 @@ module.exports = {
     getRoot : function(req,res){
         res.sendFile(path.join(__dirname + '/../views/hMenu.html'));
     },
-
-    getUser : function(req,res){
-        res.sendFile(path.join(__dirname + '/../views/smashing.html'));
-    },
-
     getLogin : function (req,res) {
         res.sendFile(path.join(__dirname + '/../views/login.html'));
     },
@@ -47,9 +42,6 @@ module.exports = {
     },
     getAvailabilitySite : function(req,res){
         res.sendFile(path.join(__dirname + '/../views/availability.html'));
-    },
-    getLogo : function (req,res){
-        res.sendFile(path.join(__dirname + '/../public/img/MinVakt.png'));
     },
     getAdminShifts : function (req,res){
         res.sendFile(path.join(__dirname + '/../views/adminShifts.html'));
@@ -110,9 +102,6 @@ module.exports = {
     getEmployee_Shifts_fromCurrentDate2:function(req,res){
         dbHelper.getdbQuery(req, res, "select e.employee_id as AnsattID,e.name as Navn, e.date as Dato,e.shift_id as Skift,e.type_name as Stilling,e.responsibility_allowed as Ansvarsvakt from Employee_Shifts_fromCurrentDate e where e.shift_id not in(select r.shift_id from Request r) and e.employee_id = ?",[req.session.passport.user.id]);
     },
-    getLoginInfoEmployee : function (req, res) {
-        dbMiddelware.getLoginInfoEmployee(req,res);
-    },
     getVaktliste1:function(req,res){
         dbHelper.getdbQuery(req, res, "select * from WORKTOGETHERDAY1 where department_name = ? and DATE(date) = ?", [req.body.department_name,req.body.date]);
     },
@@ -149,7 +138,9 @@ module.exports = {
         dbHelper.getdbQuery(req, res, "select count(*) as total From available_shift");
     },
     getClearenceLevel : function (req, res) {
-        res.json(req.session.passport.user.is_admin);
+        if(req.session.passport.user) {
+            res.json(req.session.passport.user.is_admin);
+        }
     },
     getAbsenceNum : function (req, res) {
         dbHelper.getdbQuery(req, res, "select count(*) as total From Absence Where checked_by_admin=0");
@@ -169,10 +160,12 @@ module.exports = {
     getPersonalShiftEventsDone : function (req,res) {
         dbHelper.getdbQuery(req, res, "select end, start, id, title,description,email from JSON_EMPLOYEE_VIEW where employee_id = ? And start < NOW()", req.session.passport.user.id);
     },
-    getPossibleShiftsEvents : function(req,res){ // WHAT DOES THIS DO
+    getPossibleShiftsEvents : function(req,res){
         dbHelper.getdbQuery(req,res,"select end, start, id, title,description from available_emp_for_shift where employee_id = ?", req.session.passport.user.id);
     },
-
+    getLoginInfoEmployee : function (req, res) {
+        dbHelper.getdbQuery(req,res,"select * from LoginInfo where employee_id = ?",req.params.id);
+    },
     //restricted
     get403 : function (req, res) {
         res.status(403).sendFile(path.join(__dirname + '/../views/403.html'));

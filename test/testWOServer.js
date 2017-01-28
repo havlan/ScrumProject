@@ -2,7 +2,6 @@ var crypto = require('../middlewares/cryptoHash');
 var chai = require('chai');
 var should = chai.should;
 var assert = chai.assert;
-process.env.NODE_ENV = 'test'; // blocks console.log when running tests
 
 
 //TEST PWGEN

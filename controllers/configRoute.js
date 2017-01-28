@@ -7,66 +7,63 @@ var delCtrl = require('./delReq');
 var model = require('../models/regWMail');
 var avail = require('../models/avaiModel');
 
+/*
+syntax -> app.[REST_METHOD]('/PATH/TO/RESOURCE', ACCESS RESTRICTION, METHOD);
+ */
 
 module.exports = function (app, passport) {
-    app.get('/', isLoggedIn, getCtrl.getRoot);
-    app.get('/user', isLoggedIn, getCtrl.getUser);
-    app.get('/user/:id', isLoggedIn, getCtrl.getUser);
-    app.get('/login', getCtrl.getLogin);
-    app.get('/logout', logOut);
-    app.get('/getEmployee', isOfficeEmp, getCtrl.getEmployee);
-    app.get('/getOneEmployee', isLoggedIn, getCtrl.getOneEmployee);
-    app.get('/getEmployeeRestricted',isLoggedIn,getCtrl.getEmployeeRestricted);
-    //app.get('/getDepartment/:department_id').get(getCtrl.getDepartment);
-    app.get('/getType', isLoggedIn, getCtrl.getType);
-    app.get('/getShift', isLoggedIn, getCtrl.getShift);
-    app.get('/getShift_has_employee', isLoggedIn, getCtrl.getShift_has_employee);
-    app.get('/getRequest', isOfficeEmp, getCtrl.getRequest);
-    app.get('/getAbsence', isOfficeEmp, getCtrl.getAbsence);
-    app.get('/getOvertime', isOfficeEmp, getCtrl.getOvertime);
-    //app.get('/getUserInfo', isLoggedIn, getCtrl.getUserInfo);
-    app.get('/getVaktoversiktSite', isLoggedIn, getCtrl.getVaktoversiktSite);
-    app.get('/getEmployee_Shifts_toCurrentDate', isLoggedIn, getCtrl.getEmployee_Shifts_toCurrentDate);
-    app.get('/getEmployee_Shifts_fromCurrentDate', isLoggedIn, getCtrl.getEmployee_Shifts_fromCurrentDate);
-    app.get('/getEmployee_Shifts_fromCurrentDate2', isLoggedIn, getCtrl.getEmployee_Shifts_fromCurrentDate2);
-    app.get('/getPersonalShiftEvents',isLoggedIn, getCtrl.getPersonalShiftEvents);
-    app.get('/getTypeNames',isLoggedIn, getCtrl.getTypeNames);
-    app.get('/getPossibleShiftsEvents',isLoggedIn,getCtrl.getPossibleShiftsEvents);
-    app.get('/getDepartment',isLoggedIn, getCtrl.getDepartment);
-    app.get('/getNextShiftForEmp',isLoggedIn, getCtrl.getNextShiftForEmp);
-    app.get('/getOvertimeView',isOfficeEmp,getCtrl.getOvertimeView);
-    app.get('/getAbsenceView',isOfficeEmp,getCtrl.getAbsenceView);
-    app.get('/getRequestView',isOfficeEmp,getCtrl.getRequestView);
-    app.get('/getShiftChange', isLoggedIn,getCtrl.getShiftChange); // sjekk
-    app.get('/getEmployee2',isLoggedIn,getCtrl.getEmployee2);
-    app.get('/getAvailableShifts',isOfficeEmp,getCtrl.getAvailableShifts);
-    app.get('/getAbsenceNum',/*isOfficeEmp, */getCtrl.getAbsenceNum);
-    app.get('/getOvertimeNum',isOfficeEmp,getCtrl.getOvertimeNum);
-    app.get('/getChangeNum',isOfficeEmp,getCtrl.getChangeNum);
-    app.get('/getClearenceLevel',isLoggedIn,getCtrl.getClearenceLevel);
-    app.get('/getPersonalShiftEventsDone', isLoggedIn, getCtrl.getPersonalShiftEventsDone);
+    app.get('/', isLoggedIn, getCtrl.getRoot); // html ret
+    app.get('/login', getCtrl.getLogin); // html return
+    app.get('/logout', logOut); // logout -> redir login
+    app.get('/getEmployee', isOfficeEmp, getCtrl.getEmployee); // sql
+    app.get('/getOneEmployee', isLoggedIn, getCtrl.getOneEmployee); // sql with session.passport.user.id
+    app.get('/getEmployeeRestricted',isLoggedIn,getCtrl.getEmployeeRestricted); // sql
+    app.get('/getType', isLoggedIn, getCtrl.getType); // sql
+    app.get('/getShift', isLoggedIn, getCtrl.getShift); // sql
+    app.get('/getShift_has_employee', isLoggedIn, getCtrl.getShift_has_employee); // sql
+    app.get('/getRequest', isOfficeEmp, getCtrl.getRequest); // sql
+    app.get('/getAbsence', isOfficeEmp, getCtrl.getAbsence); //sql
+    app.get('/getOvertime', isOfficeEmp, getCtrl.getOvertime); // sql
+    app.get('/getVaktoversiktSite', isLoggedIn, getCtrl.getVaktoversiktSite); // sql
+    app.get('/getEmployee_Shifts_toCurrentDate', isLoggedIn, getCtrl.getEmployee_Shifts_toCurrentDate); // sql
+    app.get('/getEmployee_Shifts_fromCurrentDate', isLoggedIn, getCtrl.getEmployee_Shifts_fromCurrentDate); // sql
+    app.get('/getEmployee_Shifts_fromCurrentDate2', isLoggedIn, getCtrl.getEmployee_Shifts_fromCurrentDate2); // sql
+    app.get('/getPersonalShiftEvents',isLoggedIn, getCtrl.getPersonalShiftEvents); // sql
+    app.get('/getTypeNames',isLoggedIn, getCtrl.getTypeNames); // sql
+    app.get('/getPossibleShiftsEvents',isLoggedIn,getCtrl.getPossibleShiftsEvents); // sql
+    app.get('/getDepartment',isLoggedIn, getCtrl.getDepartment); // sql
+    app.get('/getNextShiftForEmp',isLoggedIn, getCtrl.getNextShiftForEmp); // sql
+    app.get('/getOvertimeView',isOfficeEmp,getCtrl.getOvertimeView); // sql
+    app.get('/getAbsenceView',isOfficeEmp,getCtrl.getAbsenceView); // sql
+    app.get('/getRequestView',isOfficeEmp,getCtrl.getRequestView); // sql
+    app.get('/getShiftChange', isLoggedIn,getCtrl.getShiftChange); //
+    app.get('/getEmployee2',isLoggedIn,getCtrl.getEmployee2); // sql
+    app.get('/getAvailableShifts',isOfficeEmp,getCtrl.getAvailableShifts);  // sql
+    app.get('/getAbsenceNum',isOfficeEmp, getCtrl.getAbsenceNum); // sql
+    app.get('/getOvertimeNum',isOfficeEmp,getCtrl.getOvertimeNum); // sql
+    app.get('/getChangeNum',isOfficeEmp,getCtrl.getChangeNum);  // sql
+    app.get('/getClearenceLevel',isLoggedIn,getCtrl.getClearenceLevel);  // sql
+    app.get('/getPersonalShiftEventsDone', isLoggedIn, getCtrl.getPersonalShiftEventsDone); // sql
     app.get('/getLoginInfoEmployee/:id',isOfficeEmp,getCtrl.getLoginInfoEmployee);
     app.get('/getAvailability',isLoggedIn, getCtrl.getAvailability);
     //Sites
-    app.get('/menu', isLoggedIn, getCtrl.getMenuSite);
-    app.get('/overviewForAdmin', isOfficeEmp, getCtrl.getOverviewForAdminSite);
-    app.get('/myProfile', isLoggedIn, getCtrl.getMyProfileSite);
-    app.get('/vaktoversikt', isLoggedIn, getCtrl.getVaktoversiktSite);
-    app.get('/calendar', isLoggedIn, getCtrl.getCalendarSite);
-    app.get('/approvalAdmin', isOfficeEmp, getCtrl.getApprovalAdminSite);
-    app.get('/frontpageAdmin', isOfficeEmp, getCtrl.getFrontpageAdminSite);
-    app.get('/OnePagedMenu', isLoggedIn, getCtrl.getOnePagedMenu);
-    app.get('/frontpageSuper', isAdmin, getCtrl.getFrontpageSuperSite);
-    app.get('/overviewEmp', isLoggedIn, getCtrl.getOverviewEmpSite);
-    app.get('/availability', isLoggedIn, getCtrl.getAvailabilitySite);
-    app.get('/appeal', isLoggedIn, getCtrl.getAppeal);
-    app.get('/adminShifts', isOfficeEmp, getCtrl.getAdminShifts);
+    app.get('/menu', isLoggedIn, getCtrl.getMenuSite); // html
+    app.get('/overviewForAdmin', isOfficeEmp, getCtrl.getOverviewForAdminSite); // html
+    app.get('/myProfile', isLoggedIn, getCtrl.getMyProfileSite); // html
+    app.get('/vaktoversikt', isLoggedIn, getCtrl.getVaktoversiktSite); // html
+    app.get('/calendar', isLoggedIn, getCtrl.getCalendarSite); // html
+    app.get('/approvalAdmin', isOfficeEmp, getCtrl.getApprovalAdminSite); // html
+    app.get('/frontpageAdmin', isOfficeEmp, getCtrl.getFrontpageAdminSite); // html
+    app.get('/OnePagedMenu', isLoggedIn, getCtrl.getOnePagedMenu); // html
+    app.get('/frontpageSuper', isAdmin, getCtrl.getFrontpageSuperSite); // html
+    app.get('/overviewEmp', isLoggedIn, getCtrl.getOverviewEmpSite); // html
+    app.get('/availability', isLoggedIn, getCtrl.getAvailabilitySite); // html
+    app.get('/appeal', isLoggedIn, getCtrl.getAppeal); // html
+    app.get('/adminShifts', isOfficeEmp, getCtrl.getAdminShifts); // html
     app.get('/getRequestShift/:id',isOfficeEmp,getCtrl.getRequestShift);
-    //Images
-    app.get('IMG01', isLoggedIn, getCtrl.getLogo);
 
     //post / put
-    app.post('/login', passport.authenticate('login', {
+    app.post('/login', passport.authenticate('login', { // login method with passport.js lib
         failureRedirect: '/login',
         failureFlash: true
     }), function (req, res) {

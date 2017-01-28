@@ -4,7 +4,7 @@ var should = require('should');
 var db = require('../helpers/db').getPool();
 
 
-describe('=====TESTING PATHS AND ROUTING OF GET=====', function(){
+describe('=====TESTING PATHS AND ROUTING OF GET=====\n', function(){
     before(function(){
         request(server).post('/login').send({
             "username":"Abigail",
@@ -25,28 +25,11 @@ describe('=====TESTING PATHS AND ROUTING OF GET=====', function(){
             .get('/')
             .expect(302, done);
     });
-    /*it("GET ROOT with accept setting of json",function getRootJson(done){
+    it("GET ROOT with accept setting of json",function getRootJson(done){
         request(server)
             .get('/')
             .set('Accept', 'application/json')
-            .expect('Content-Type','/json/')
-            .expect(200,done);
-    });*/
-
-    it("GET /user",function getUser(done){
-        request(server)
-            .get('/user')
-            .expect(302)
-            .end(function(req,res){
-                res.status.should.equal(302)
-                done();
-            }); // 200 == ok
-    });
-
-    it("GET /user/1", function(done){
-        request(server)
-            .get('/user/1')
-            .expect(302, done);
+            .expect(302,done);
     });
     it("GET /login", function testGetLogin(done){
         request(server)
@@ -64,12 +47,11 @@ describe('=====TESTING PATHS AND ROUTING OF GET=====', function(){
             .get('/hest/hestere')
             .expect(404,done); // 404 not found
     });
-    /*it("GET /getOneEmployee", function(done){
+    it("GET /getOneEmployee", function(done){
         request(server)
             .get('/getOneEmployee')
-            //.expect('Content-Type', 'application/json')
             .expect(302,done);
-    });*/
+    });
     it("GET /getType", function(done){
         request(server)
             .get('/getType')

@@ -56,7 +56,7 @@ app.use(helmet.contentSecurityPolicy({
     }
 }));
 
-app.use(function(req,res,next){
+app.use(function(req,res,next){ // escape
     if(req.body) {
         for (var item in req.body) {
             req.sanitize(item).escape();

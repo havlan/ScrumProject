@@ -46,19 +46,19 @@ describe('=====TESTING PATHS AND ROUTING OF POST METHODS=====', function() {
                 done();
             })
     });
-    it("/postType", function(done){
+    /*it("/postType", function(done){
         request(server)
             .post('/postType')
             .set("Content-Type","application/json")
-            .send({"name":"Vaskebjørn","rank:":1})
+            .send({"name":"Hest","rank:":1})
             .expect(302)
             //.expect('Content-Type', /json/)
             .end(function(err){
                 if(err) throw err;
-                db.revertTest("delete from Type where name = ?",["Vaskebjørn"]);
+                db.revertTest("delete from Type where name = ?",["Hest"]);
                 done();
             })
-    });
+    });*/
 
 
 
