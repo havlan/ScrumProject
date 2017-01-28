@@ -80,10 +80,8 @@ tbody {
 }
 .obsWarning{
     text-align: center;
-    border: solid 0.2em royalblue ;
     padding:1% 1% 1% 1%;
     margin:0 0 0 0;
-    height:70px;
     background-color: #c4e6ff;
     border-radius: 5px;
 }
