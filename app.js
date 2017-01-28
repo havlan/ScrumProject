@@ -7,22 +7,21 @@ var session = require('express-session');
 var expressValidator = require('express-validator')
 var passport = require('passport');
 var hbs = require('express-handlebars');
-var auth = require('./middlewares/authenticatePLANB');
 var flash = require('connect-flash');
 var morgan = require('morgan');
 var cookieParser = require('cookie-parser');
 var helmet = require('helmet');
-var xxlFilter = require('x-xss-protection');
 //var escape = require('escape-html');
 var cron = require('cron');
 var mod = require('./models/schedulerSM');
-require('./helpers/passtheport')(passport);
+var compression = require('compression');
+require('./middlewares/passtheport')(passport);
 
 
 app.engine('hbs', hbs({extname : 'hbs', layoutsDir: __dirname + '/public/css'}));
 app.set('views', path.join(__dirname + '/views'));
 app.set('view engine','hbs');
-app.use(morgan('dev'));
+//app.use(morgan('dev'));
 app.use(cookieParser());
 app.use(express.query());
 app.use(bodyParser.json());
@@ -31,7 +30,7 @@ app.use(express.static (__dirname + '/public'));
 //app.use('/views',express.static(__dirname + '/views'));
 app.use(expressValidator());
 app.use(helmet());
-app.use(xxlFilter());
+app.use(compression());
 
 app.use(session({
     secret: "hest",
@@ -42,19 +41,7 @@ app.use(session({
         httpOnly:true
     }
 }));
-/*app.use(function(req,res,next){
-   //res.header('Content-Type', 'application/json');
-    next();
-});*/
 
-/*app.use(function(req,res,err,next){
-    if(err){
-        res.body.error = err;
-        console.log("Error added to req.error");
-    }else{
-        next();
-    }
-});*/
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -63,7 +50,6 @@ app.use(flash());
 var job = new cron.CronJob('00 00 05 * * 7', function(){ // mail sent 05:00:00 sunday night, about available shifts
     mod.sendMailOnFree();
 }, function(){
-    console.log(Date.now(), " sent mail.");
 }, true, 'Europe/Oslo');
 
 

@@ -1,6 +1,5 @@
 var mysql = require('mysql');
 var cryptoHash = require('./../middlewares/cryptoHash');
-var localStrat = require('passport-local').Strategy;
 var async = require('async');
 
 var pool = mysql.createPool({
@@ -24,7 +23,6 @@ module.exports =
                     res.json({"error": "Error connecting to database: " + err});
                     return;
                 }
-                console.log('Connected to database');
                 connection.query(query, function (err, rows) {
                     connection.release(); // Legg tilbake i pool
                     if (!err) {
@@ -32,7 +30,6 @@ module.exports =
                         res.status(200);
                         res.json(rows);
                     } else {
-                        console.log("error: Error reading database: " + err);
                         res.status(500);
                         res.json({"error": "Error reading database: " + err});
                     }
@@ -47,37 +44,16 @@ module.exports =
                     res.json({"Error": "Couldnt connect to MYSQL" + err});
                     return;
                 }
-                console.log("Connected to database");
                 connection.query(query, get, function (err, rows) {
                     connection.release();
                     if (!err) {
-                        res.type(json);
-                        res.status(200).json(rows);
-                        //console.log(rows);
+                        if(rows.length > 0) {
+                            res.status(200).json(rows);
+                            //console.log(rows);
+                        }else{
+                            res.status(404)
+                        }
                     } else {
-                        console.log("error: Error reading database: " + err);
-                        res.status(500);
-                        console.log("Error reading database: ");
-                    }
-                });
-            });
-        },
-        getdbQWNext: function (req, res, query, get, next) {
-            pool.getConnection(function (err, connection) {
-                if (err) {
-                    res.status(500) //err
-                    res.json({"Error": "Couldnt connect to MYSQL" + err});
-                    return;
-                }
-                console.log("Connected to database");
-                connection.query(query, get, function (err, rows, next) {
-                    connection.release();
-                    if (!err) {
-                        //res.json(rows);
-                        console.log(rows);
-                        next();
-                    } else {
-                        console.log("error: Error reading database: " + err);
                         res.status(500);
                         console.log("Error reading database: ");
                     }
@@ -87,75 +63,35 @@ module.exports =
 
         postdbQuery: function (req, res, query, post) {
             pool.getConnection(function (err, connection) {
-                if (err) {
-                    res.status(500) //err
-                    res.json({"Error": "Couldnt connect to MYSQL" + err});
-                    return;
-                }
-                console.log("Connected to database");
-                connection.query(query, post, function (err, rows) {
-                    connection.release();
-                    if (!err) {
-                        res.json(rows);
-                    }else if(!err.fatal){
-                        res.status(409).json({melding:"Eksisterer."});
-                    } else {
-                        console.log("error: Error reading database: " + err);
-                        res.status(500);
-                        res.json({"error": "Error reading database: " + err});
+                try {
+                    if (err) {
+                        res.status(500) //err
+                        res.json({"Error": "Couldnt connect to MYSQL" + err});
+                        throw err;
                     }
-                });
+                    console.log("Connected to database");
+                    connection.query(query, post, function (err, rows) {
+                        connection.release();
+                        if (!err) {
+                            res.json(rows);
+                        } else if (err) {
+                            if (!err.fatal) {
+                                res.status(409).json({melding: "Eksisterer."});
+                            } else {
+                                res.status(500);
+                            }
+                        } else {
+                            res.status(500);
+                            res.json({"error": "Error reading database: " + err});
+                            throw err;
+                        }
+                    });
+                }catch (err){
+                    throw err;
+                }
             });
         },
-        createInQDone : function(req,res,query,done){ // USAGE: ADD NEW USERS models / regWMail
-            pool.getConnection(function(err,connection){
-                if(err){
-                    res.status(500); // int
-                    res.json({"Error": "Couldnt connect to MYSQL" + err});
-                    return;
-                }
-                console.log("Connected to database");
-                connection.query(query, function(err,qres){
-                    connection.release();
-                    if(err){
-                        console.log("ERR createInQDone",err);
-                        done(err);
-                        return;
-                    }
-                   if(qres.affectedRows == 0){
-                       return done(null, false, req.flash("postUserMsg", "Creation of user failed."));
-                   }else if(qres.affectedRows == 1){
-                       req.body.passToNext = res.insertId;
-                       console.log("PASS ID SET");
-                       return done(null, true); // went ok
-                   }else{
-                       return done(null, false, req.flash("postUserMsg", "Creation failed, more than 1 row affected"));
-                   }
-                });
-            })
-        },
-        createDone: function (req, res, query, get, next) {
-            pool.getConnection(function (err, connection) {
-                if (err) {
-                    res.status(500) //err
-                    res.json({"Error": "Couldnt connect to MYSQL" + err});
-                    return;
-                }
-                console.log("Connected to database");
-                connection.query(query, get, function (err, rows, next) {
-                    connection.release();
-                    if (!err) {
-                        res.json(rows);
-                        //console.log(rows);
-                        //next();
-                    } else {
-                        //console.log("error: Error reading database: " + err);
-                        res.status(500);
-                        console.log("Error reading database: createDone");
-                    }
-                });
-            });
-        },
+
         revertTest : function(query){
             pool.getConnection(function(err,conn){
                 if(err) {
@@ -165,9 +101,10 @@ module.exports =
                   conn.release();
                   if(!err){
                       console.log("Reverted test.");
-                  }else{
+                  }else if (err){
                       throw err;
-                      console.log("Test results went to db.");
+                  }else{
+                      return;
                   }
               })
             })
@@ -189,7 +126,6 @@ module.exports =
                         return cb(err);
                     }
                 })
-
                 var wrapIterator = function (iterator) {
                     return function (err) {
                         if (err) {

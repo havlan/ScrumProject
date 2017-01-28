@@ -1,9 +1,7 @@
-var queries = require('../middlewares/dbQ1');
 var crypt = require('../middlewares/cryptoHash');
 var nodemailer = require('nodemailer');
 var async = require('async');
 var pool = require('../helpers/db').getPool();
-var dbj = require('../helpers/db');
 var mailOptions;
 
 function sendMailUser(req, mail, pw) {
@@ -14,13 +12,15 @@ function sendMailUser(req, mail, pw) {
         text: 'Velkommen til Trondheim og systemet MinVakt.\nMin jobb er å gjøre din hverdag lettere.\n' +
         'Brukernavn: ' + req.body.username + '\nPassord:' + pw + '\nVennligst bytt passord når du har logget inn.'
     };
-    transporter.sendMail(mailOptions, function (err, inf) {
-        if (!err) console.log(inf.response);
-        else console.log(err);
-    })
+    try {
+        transporter.sendMail(mailOptions, function (err, inf) {
+            if (!err) console.log(inf.response);
+            else console.log(err);
+        })
+    }catch(err){
+        throw err;
+    }
 }
-
-
 module.exports = {
     transporter : nodemailer.createTransport({
         pool: true,
@@ -35,38 +35,43 @@ module.exports = {
     forgotPwMail: function (request, response) { // email, username
         async.waterfall([
             function (done) {
-                console.log("METHOD 1");
                 pool.getConnection(function (er, conn) {
-                    if (er) {
-                        response.json(er);
+                    try {
+                        if (er) {
+                            response.json(er);
+                        }
+                        console.log(request.body);
+                        conn.query('select * from LoginInfo where username = ?', request.body.username, function (err, rows) {
+                            console.log(rows);
+                            if (err || !rows.length) {
+                                response.status(404).json({melding: err});
+                                conn.release();
+                            }
+                            else {
+                                done(null, conn, rows[0])
+                            }
+                        })
+                    }catch(zerr){
+                        throw zerr;
                     }
-                    console.log(request.body);
-                    conn.query('select * from LoginInfo where username = ?', request.body.username, function (err, rows) {
-                        console.log(rows);
-                        if (err || !rows.length) {
-                            response.status(404).json({melding:err});
-                            conn.release();
-                        }
-                        else {
-                            done(null, conn, rows[0])
-                        }
-                    })
                 })
             },
             function (conn, login, call) {
-                console.log("METHOD 2");
-                conn.query("select * from Employee where employee_id = ? and email = ? ", [login.employee_id, request.body.email], function (err1, rows) {
-                    if (err1) {
-                        conn.release();
-                        response.status(404).json(err1);
-                    } else { // exists in login and employee
-                        //var pw = crypt.generatePassword(), sh = crypt.genRandomString(16), pwobj = crypt.sha512(pw,sh);
-                        call(null, conn, login);
-                    }
-                })
+                try {
+                    conn.query("select * from Employee where employee_id = ? and email = ? ", [login.employee_id, request.body.email], function (err1, rows) {
+                        if (err1) {
+                            conn.release();
+                            response.status(404).json(err1);
+                        } else { // exists in login and employee
+                            //var pw = crypt.generatePassword(), sh = crypt.genRandomString(16), pwobj = crypt.sha512(pw,sh);
+                            call(null, conn, login);
+                        }
+                    })
+                }catch (gerr){
+                    throw gerr;
+                }
             },
             function (conn, loginData, done) {
-                console.log("METHOD 3");
                 var pw = crypt.generatePassword(), sh = crypt.genRandomString(16), pwobj = crypt.sha512(pw, sh);
                 var usr = {password_hash: pwobj.passwordHash, password_salt: pwobj.salt};
                 conn.query("update  LoginInfo set ? where username = ?", [usr, request.body.username], function (err2, rows) {
@@ -80,7 +85,6 @@ module.exports = {
             }
         ], function (err, ok, pw) {
             if (ok == 200) {
-                console.log("MAIL");
                 sendMailUser(request, request.body.email, pw);
             }
         })
@@ -91,64 +95,82 @@ module.exports = {
         async.waterfall([
         function(done){
             pool.getConnection(function(err,conn){
-                if(err){ response.status(500).json({melding:"Noe gikk galt."});}
-                conn.query("update shift_has_employee set ? where shift_id = ? and employee_id = ?",[{employee_id:req.body.employee_id2}, pk, pk2], function(err,rows){
-                    if(err){
-                        conn.release();
-                        response.status(404).json({melding:"Vakten eksisterer ikke i utgangspunktet."});
-                    }else{
-                        done(null,req.body.employee_id2, pk2,conn);
+                try {
+                    if (err) {
+                        response.status(500).json({melding: "Noe gikk galt."});
                     }
-                })
+                    conn.query("update shift_has_employee set ? where shift_id = ? and employee_id = ?", [{employee_id: req.body.employee_id2}, pk, pk2], function (err, rows) {
+                        if (err) {
+                            conn.release();
+                            response.status(404).json({melding: "Vakten eksisterer ikke i utgangspunktet."});
+                        } else {
+                            done(null, req.body.employee_id2, pk2, conn);
+                        }
+                    })
+                }catch(exc){
+                    throw exc;
+                }
             })
+
         },
             function(til,fra, conn,cb){
-                conn.query("select email, name from Employee where employee_id = ?", til, function(err,res){
-                    if(err || !res.length){
-                        conn.release();
-                        response.status(404).json({melding:"Ikke funnet fra."});
-                    }else{
-                        console.log(res);
-                         cb(null,res, fra, conn)
-                    }
-                })
+                try {
+                    conn.query("select email, name from Employee where employee_id = ?", til, function (err, res) {
+                        if (err || !res.length) {
+                            conn.release();
+                            response.status(404).json({melding: "Ikke funnet fra."});
+                        } else {
+                            console.log(res);
+                            cb(null, res, fra, conn)
+                        }
+                    })
+                }catch(exh){
+                    throw exh;
+                }
 
             },
             function(row, from, conn, end){
-                conn.query("select email, name from Employee where employee_id = ?", from, function(err,resu){
-                    conn.release();
-                    if(err){
-                        response.status(404).json({melding: "Fant ikke bytte fra."});
-                    }else{
-                        console.log(resu);
-                         end(row,resu);
-                        response.status(200).json({melding: "Endinger lagret"});
-                    }
-                })
+                try {
+                    conn.query("select email, name from Employee where employee_id = ?", from, function (err, resu) {
+                        conn.release();
+                        if (err) {
+                            response.status(404).json({melding: "Fant ikke bytte fra."});
+                        } else {
+                            end(row, resu);
+                            response.status(200).json({melding: "Endinger lagret"});
+                        }
+                    })
+                }catch(ex){
+                    throw ex;
+                }
             }
         ], function(to,from){
-            var mail1 = {
-                from: '"MinVakt" <minvakt.ikkesvar@outlook.com>', //Abigail4prez
-                to: to[0].email,
-                subject: 'Bytte godkjent.',
-                text: 'Vaktbytte mellom deg og ' + from[0].name + ' er godkjent. Din nye vakt burde dukke opp i kalenderen din.'
-            };
-            var mail2 = {
-                from: '"MinVakt" <minvakt.ikkesvar@outlook.com>', //Abigail4prez
-                to: from[0].email,
-                subject: 'Bytte godkjent.',
-                text: 'Vaktbytte mellom deg og ' + to[0].name + ' er godkjent. Din vakt burde være fjærnet fra din kalender.'
-            };
-            transporter.sendMail(mail1, function(err,inf){
-                if(err){
-                    console.log(err);
-                }else{
-                    console.log(inf.response);
-                }
-            })
-            transporter.sendMail(mail2, function(err,inf){
-                console.log(err||inf.response);
-            })
+            try {
+                var mail1 = {
+                    from: '"MinVakt" <minvakt.ikkesvar@outlook.com>', //Abigail4prez
+                    to: to[0].email,
+                    subject: 'Bytte godkjent.',
+                    text: 'Vaktbytte mellom deg og ' + from[0].name + ' er godkjent. Din nye vakt burde dukke opp i kalenderen din.'
+                };
+                var mail2 = {
+                    from: '"MinVakt" <minvakt.ikkesvar@outlook.com>', //Abigail4prez
+                    to: from[0].email,
+                    subject: 'Bytte godkjent.',
+                    text: 'Vaktbytte mellom deg og ' + to[0].name + ' er godkjent. Din vakt burde være fjærnet fra din kalender.'
+                };
+                transporter.sendMail(mail1, function (err, inf) {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        console.log(inf.response);
+                    }
+                })
+                transporter.sendMail(mail2, function (err, inf) {
+                    console.log(err || inf.response);
+                })
+            }catch (er){
+                throw er;
+            }
 
         })
     },
@@ -302,10 +324,6 @@ module.exports = {
             res.json({Message: "Mail sent"});
         })
 
-    },
-    nyNodeETest: function (req, res) {
-        var obj = {notat: "Villsvin er 90 % vilt og 10% svin"};
-        dbMethods.createDone(req, res, "insert into NodeETest set ?", obj);
     },
 
     changePassword: function (req, res) {
