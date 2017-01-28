@@ -5,9 +5,11 @@
   "main": "server.js",
   "scripts": {
     "test": "./node_modules/.bin/mocha --reporter spec",
-    "doc": "./node_modules/.bin/"
+    "doc": "./node_modules/.bin/",
+    "count": "cloc app/"
   },
   "dependencies": {
+    "cloc": "2.0.0",
     "async": "^2.1.4",
     "body-parser": "^1.15.2",
     "chai": "^3.5.0",
@@ -53,5 +55,8 @@
   "bugs": {
     "url": "https://github.com/hlongdayle/scrumLords2017/issues"
   },
-  "homepage": "https://github.com/hlongdayle/scrumLords2017#readme"
+  "homepage": "https://github.com/hlongdayle/scrumLords2017#readme",
+  "devDependencies": {
+    "cloc": "^2.0.0"
+  }
 }
