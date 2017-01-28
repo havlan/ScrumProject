@@ -189,7 +189,7 @@ $(document).on('click','#sendRequest',function () {
                     showErrorMessage();
                 } else if (xhr.status==409) {
                     document.getElementById("warningMessage").innerHTML = "Du har alt sendt forespørsel";
-                    showWarningError();
+                    showWarningMessage();
                 }else {
                     document.getElementById("errorMessage").innerHTML = "Det har oppstått en feil";
                     showErrorMessage();
@@ -264,8 +264,7 @@ function showErrorMessage() {
         element.style.display = "none";
     }, 3000);
 }
-
-function showWarningError() {
+function showWarningMessage() {
     var element = document.getElementById('warningMessageBox');
     element.style.display = "block";
     setTimeout(function() {

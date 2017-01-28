@@ -106,7 +106,15 @@ function showSuccessMessage() {
     }, 3000);
 }
 function showErrorMessage() {
-    var element = document.getElementById('successMessageBox');
+    var element = document.getElementById('errorMessageBox');
+    element.style.display = "block";
+    setTimeout(function() {
+        element.style.display = "none";
+    }, 3000);
+}
+
+function showWarningMessage() {
+    var element = document.getElementById('warningMessageBox');
     element.style.display = "block";
     setTimeout(function() {
         element.style.display = "none";

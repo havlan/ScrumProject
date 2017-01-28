@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Tilgjengelighet</title>
 
-    <script src ="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" >
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <!--<script src="/frontendJS/jquery.min.js"></script>-->
@@ -29,107 +29,86 @@
 </div>
 
 <div id="container">
-
-<div id="sideTitle">TILGJENGELIGHET</div>
-
-<ul class="nav nav-tabs">
-    <li class="active"><a data-toggle="tab" href="#home">Sett tilgjengelighet</a></li>
-    <li><a data-toggle="tab" href="#menu1">Din tilgjengelighet </a></li>
-</ul>
-<div class="tab-content">
-    <div id="home" class="tab-pane fade in active">
-
-        <div class="ava-content">
-
-            <div class="ava-content-left">
-                <label for="AvaDate">Dato</label><br>
-                <input id="AvaDate" type="date" required><br>
-                <label>Tidspunkt</label><br>
-                <input id="AvaDay" value="08:00" type="checkbox">
-                <span>Dagvakt</span><br>
-                <input id="AvaEvening" value="16:00" type="checkbox">
-                <span>Kveldsvakt</span><br>
-                <input id="AvaNight" value="00:00" type="checkbox">
-                <span>Nattevakt</span><br>
-                <input id="AvaAllday"  type="checkbox">
-                <span>Alle</span><br>
-                <button onclick="getAvailable()" id="avaButton1">Tilgjengelig</button>
-                <button onclick="getUnavailable()" id="avaButton2">Utilgjengelig</button>
-            </div>
-            <div class="ava-content-right">
-                <table id="ava-choices">
-                    <thead>
-                    <tr>
-                        <th style="width:25%;">Vakttype</th>
-                        <th style="width:50%;">Dato</th>
-                        <th style="width:25%;">Tilgjengelig</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
-                <button onclick="makeJsonArray()" id="avaButton3">submit</button>
-                <button onclick="emptyTable()" id="avaButton4">tøm</button>
-            </div>
-
+    <div id="sideTitle">TILGJENGELIGHET</div>
+    <div class="ava-content">
+        <div class="ava-content-left">
+            <label for="AvaDate">Dato</label><br>
+            <input id="AvaDate" type="date" required><br>
+            <label>Tidspunkt</label><br>
+            <input id="AvaDay" value="08:00" type="checkbox">
+            <span>Dagvakt</span><br>
+            <input id="AvaEvening" value="16:00" type="checkbox">
+            <span>Kveldsvakt</span><br>
+            <input id="AvaNight" value="00:00" type="checkbox">
+            <span>Nattevakt</span><br>
+            <input id="AvaAllday" type="checkbox">
+            <span>Alle</span><br>
+            <button onclick="getAvailable()" id="avaButton1">Tilgjengelig</button>
+            <button onclick="getUnavailable()" id="avaButton2">Utilgjengelig</button>
         </div>
-    </div>
-    <div id="menu1" class="tab-pane fade">
-
-        <input type="week" id="myWeek" value="2014-W5">
-        <table id="TingTang"></table>
-
-        <table id="available-table" border="1">
-            <tr>
-                <th>Vakt</th>
-                <th>man</th>
-                <th>tir</th>
-                <th>ons</th>
-                <th>tor</th>
-                <th>fre</th>
-                <th>lør</th>
-                <th>søn</th>
-            </tr>
-            <tr id="2">
-                <td id ="1">Dagvakt</td>
-                <td id="man1"></td>
-                <td id="tir1"></td>
-                <td id="ons1"></td>
-                <td id="tor1"></td>
-                <td id="fre1"></td>
-                <td id="lør1"></td>
-                <td id="søn1"></td>
-
-            </tr>
-            <tr id="4">
-                <td id="3">Kveldsvakt </td>
-                <td id="man2"></td>
-                <td id="tir2"></td>
-                <td id="ons2"></td>
-                <td id="tor2"></td>
-                <td id="fre2"></td>
-                <td id="lør2"></td>
-                <td id="søn2"></td>
-            </tr>
-            <tr id="6">
-                <td id="5">Nattevakt</td>
-                <td id="man3"></td>
-                <td id="tir3"></td>
-                <td id="ons3"></td>
-                <td id="tor3"></td>
-                <td id="fre3"></td>
-                <td id="lør3"></td>
-                <td id="søn3"></td>
-            </tr>
-        </table>
+        <div class="ava-content-right">
+            <table id="ava-choices">
+                <thead>
+                <tr>
+                    <th style="width:25%;">Vakttype</th>
+                    <th style="width:50%;">Dato</th>
+                    <th style="width:25%;">Tilgjengelig</th>
+                </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+            <button onclick="makeJsonArray()" id="avaButton3">submit</button>
+            <button onclick="emptyTable()" id="avaButton4">tøm</button>
+        </div>
 
     </div>
-</div>
+    <!--<input type="week" id="myWeek" value="2014-W5">-->
+    <table id="TingTang"></table>
 
-</div>
+    <table id="available-table" border="1">
+        <tr>
+            <th>Vakt</th>
+            <th>man</th>
+            <th>tir</th>
+            <th>ons</th>
+            <th>tor</th>
+            <th>fre</th>
+            <th>lør</th>
+            <th>søn</th>
+        </tr>
+        <tr id="2">
+            <td id="1">Dagvakt</td>
+            <td id="man1"></td>
+            <td id="tir1"></td>
+            <td id="ons1"></td>
+            <td id="tor1"></td>
+            <td id="fre1"></td>
+            <td id="lør1"></td>
+            <td id="søn1"></td>
 
+        </tr>
+        <tr id="4">
+            <td id="3">Kveldsvakt</td>
+            <td id="man2"></td>
+            <td id="tir2"></td>
+            <td id="ons2"></td>
+            <td id="tor2"></td>
+            <td id="fre2"></td>
+            <td id="lør2"></td>
+            <td id="søn2"></td>
+        </tr>
+        <tr id="6">
+            <td id="5">Nattevakt</td>
+            <td id="man3"></td>
+            <td id="tir3"></td>
+            <td id="ons3"></td>
+            <td id="tor3"></td>
+            <td id="fre3"></td>
+            <td id="lør3"></td>
+            <td id="søn3"></td>
+        </tr>
+    </table>
+</div>
 </body>
-
-
-
 </html>

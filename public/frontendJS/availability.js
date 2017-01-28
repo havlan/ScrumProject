@@ -331,11 +331,22 @@ function makeJsonArray() {
         url: '/bulkAvail',
         type: 'POST',
         data: {'availarray': yarr},
-        success: function (data) {
-            alert("hest er livet");
+        success:function (data) {
+            document.getElementById("successMessage").innerHTML = "Overtid oppdatert";
+            showSuccessMessage();
+            getOvertimeTable();
         },
-        error: function (data) {
-            alert("nei,hest er best som pålegg");
+        error: function(xhr){
+            if(xhr.status==404){
+                document.getElementById("errorMessage").innerHTML = "ikke funnet";
+                showErrorMessage();
+            } else if(xhr.status==409){
+                document.getElementById("warningMessage").innerHTML = "tilgjengelighet er allerede registrert";
+                showWarningMessage();
+            } else {
+                document.getElementById("errorMessage").innerHTML = "Det har oppstått en feil";
+                showErrorMessage();
+            }
         }
     })
 
@@ -474,5 +485,25 @@ function makeJsonArray() {
 
     }
 
+function showSuccessMessage() {
+    var element = document.getElementById('successMessageBox');
+    element.style.display = "block";
+    setTimeout(function() {
+        element.style.display = "none";
+    }, 3000);
+}
+function showErrorMessage() {
+    var element = document.getElementById('errorMessageBox');
+    element.style.display = "block";
+    setTimeout(function() {
+        element.style.display = "none";
+    }, 3000);
+}
 
-
+function showWarningMessage() {
+    var element = document.getElementById('warningMessageBox');
+    element.style.display = "block";
+    setTimeout(function() {
+        element.style.display = "none";
+    }, 3000);
+}

@@ -1,9 +1,13 @@
-@import url(https://fonts.googleapis.com/css?family=Roboto:300);
-
 body, html {
     width:100%;
     height:100%;
 }
+
+#logoPic{
+    drop-shadow(1px 1px 1px #222);
+    drop-shadow(1px 1px 1px #222); width:200px;
+}
+
 
 #successMessageBox, #errorMessageBox, #warningMessageBox {
     display:none;
@@ -39,11 +43,9 @@ body, html {
   padding: 8% 0 0;
   margin: auto;
 }
-
 element {
     --main-bg-color: #91a8ee;
 }
-
 #loginbody{
     background: var(--main-bg-color); /* For browsers that do not support gradients */
     background: -webkit-linear-gradient(left top, #91a8ee, #c2f0f0, #e9eefc,#4169e1); /* For Safari 5.1 to 6.0 */
@@ -188,8 +190,6 @@ element {
 .container .info span .fa {
   color: #EF3B3A;
 }
-
-
 
 @media screen and (max-width: 480px)  {
     #loginbody {

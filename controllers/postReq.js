@@ -178,8 +178,8 @@ module.exports = {
         console.log(req.body.availarray);
         for(var i=0;i<req.body.availarray.length;i++){
             req.body.availarray[i][2] = req.session.passport.user.id;
-            console.log(req.body.availarray[i]);
+            //console.log(req.body.availarray[i]);
         }
-        dbHelper.postdbQuery(req,res,"insert into Availability (day, availability, employee_id) values ?", [req.body.availarray]); // insert into Availability (day,availability,employee_id) values ('2017-03-25 00:00:00', 1,1);
+        dbHelper.postdbQuery(req,res,"replace into Availability (day, availability, employee_id) values ?", [req.body.availarray]); // insert into Availability (day,availability,employee_id) values ('2017-03-25 00:00:00', 1,1);
     }
 }

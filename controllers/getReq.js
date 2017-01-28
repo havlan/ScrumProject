@@ -1,35 +1,22 @@
 var path = require('path');
-var bodyParser = require('body-parser');
 var dbHelper = require('../helpers/db');
-var totalgetReq = 0;
 
 
 module.exports = {
 
     getRoot : function(req,res){
-        //res.redirect('/login'); //
-        console.log("ROOT: ",req.session);
-        console.log("GET ROOT", req.isAuthenticated());
         res.sendFile(path.join(__dirname + '/../views/hMenu.html'));
     },
 
     getUser : function(req,res){
-        //get user functionality here
         res.sendFile(path.join(__dirname + '/../views/smashing.html'));
     },
 
     getLogin : function (req,res) {
         res.sendFile(path.join(__dirname + '/../views/login.html'));
     },
-
-    //Site
     getOnePagedMenu : function (req,res){
         res.sendFile(path.join(__dirname + '/../views/OnePagedMenu.html'));
-    },
-
-    //Sites
-    getLoginSite : function (req, res){
-        res.sendFile(path.join(__dirname + '/../views/Login.html'));
     },
     getMenuSite : function (req, res){
         res.sendFile(path.join(__dirname + '/../views/hMenu.html'));
@@ -189,14 +176,13 @@ module.exports = {
         dbHelper.getdbQuery(req,res, "SELECT e.employee_id, e.name, e.type_name FROM Employee e WHERE ? NOT IN(SELECT a.day FROM Availability a WHERE a.employee_id = e.employee_id AND availability = 1) AND ? NOT IN(SELECT date FROM Shift ss, shift_has_employee she WHERE ss.shift_id = she.shift_id AND she.employee_id = e.employee_id)",[req.body.date1, req.body.date2]);
     },
 
-
+    //restricted
     get403 : function (req, res) {
         res.status(403).sendFile(path.join(__dirname + '/../views/403.html'));
     },
-    //404 må være sist
+    //404 last
     get404 : function (req, res) {
         res.status(404).sendFile(path.join(__dirname + '/../views/404.html'));
-        //res.send('what???', 404);
     },
 
 
