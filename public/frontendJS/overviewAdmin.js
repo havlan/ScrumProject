@@ -14,6 +14,7 @@ $.get('/getEmployee', {}, function(req, res, data){
     //document.getElementById("data").innerHTML = myList;
 
     buildHtmlTable('#excelDataTable',myList);
+    $("#excelDataTable").tablesorter();
     //tableCreate();
 });
 //Build Table
@@ -43,7 +44,7 @@ function addAllColumnHeaders(myList, selector) {
         for (var key in rowHash) {
             if ($.inArray(key, columnSet) == -1) {
                 columnSet.push(key);
-                headerTr$.append($('<th/>').html(key));
+                headerTr$.append($('<th id="hei"/>').html(key));
             }
         }
     }
