@@ -1,5 +1,4 @@
-
-var departments     = [];
+var departments = [];
 
 var employeesSyk = [];
 var employeesHelp = [];
@@ -10,9 +9,12 @@ var fillShiftList;
 var currShiftId;
 var disp = getDispersion(0);
 
+var dropIds = [];
+var date;
+var place;
 
 
-$(document).ready(function() {
+$(document).ready(function () {
 
     $('#calendarx').fullCalendar({
         header: {
@@ -25,7 +27,7 @@ $(document).ready(function() {
         timeFormat: 'H:mm',
         eventLimit: true,
         locale: 'nb',
-        weekNumbers:true,
+        weekNumbers: true,
         navLinks: true,
         editable: false,
         height: 'auto',
@@ -38,7 +40,7 @@ $(document).ready(function() {
                 color: '#ffe066',    // an option!
                 textColor: 'black'  // an option!
             }],
-        eventClick:  function(event, jsEvent, view) {
+        eventClick: function (event, jsEvent, view) {
             getAvailableEmpForShift(event.id);
             $('#fillShiftModal').modal();
             eventId = event.id;
@@ -51,7 +53,7 @@ $(document).ready(function() {
     var modal = document.getElementById('adminNewShiftModal');
     var span = document.getElementsByClassName("close")[0];
 
-    span.onclick = function() {
+    span.onclick = function () {
         modal.style.display = "none";
     };
 
@@ -63,7 +65,7 @@ function getAvailableEmpForShift(id) {
         url: '/getEmpForShiftDateAll', //this is the submit URL
         type: 'POST',
         data: {'shift_id': id},
-        success: function(data){
+        success: function (data) {
             console.log(data);
             fillShiftList = data;
 
@@ -74,7 +76,9 @@ function getAvailableEmpForShift(id) {
 
             //lag dropdown i modal
         },
-        failure: function(err) {console.log("Error"+err);}
+        failure: function (err) {
+            console.log("Error" + err);
+        }
     });
 }
 
@@ -83,19 +87,19 @@ function saveFillShift() {
     $.ajax({
         url: '/postShift_has_employee', //this is the submit URL
         type: 'POST',
-        data: {'shift_id': currShiftId,'employee_id': emp_id},
-        success: function(data){
+        data: {'shift_id': currShiftId, 'employee_id': emp_id},
+        success: function (data) {
             employeesSyk = data;
             location.reload();
         },
-        failure: function(err) {
-            console.log("Error"+err);
+        failure: function (err) {
+            console.log("Error" + err);
         }
     });
     $('#fillShiftModal').modal("hide");
 }
 
-function createNumberDropdown(){
+function createNumberDropdown() {
     console.log("kjører num drop");
     $('#chooseNumber').append($('<option />').text(0));
     for (var i = 4; i < 21; i++) {
@@ -107,23 +111,23 @@ function createNumberDropdown(){
 function getDispersion(res) {
     var ant = res;
     var syk;
-    if(ant%10 == 3 || (ant/5)%1<0.5) {
-        syk = Math.floor(ant/5);
+    if (ant % 10 == 3 || (ant / 5) % 1 < 0.5) {
+        syk = Math.floor(ant / 5);
     } else {
-        syk = Math.round(ant/5);
+        syk = Math.round(ant / 5);
     }
     var hjelp;
-    if(ant%10 == 9 || (ant*0.3)%1<=0.5) {
-        hjelp = Math.floor(ant*0.3);
+    if (ant % 10 == 9 || (ant * 0.3) % 1 <= 0.5) {
+        hjelp = Math.floor(ant * 0.3);
     } else {
-        hjelp = Math.round(ant*0.3);
+        hjelp = Math.round(ant * 0.3);
     }
-    var annet = Math.round(ant/2);
+    var annet = Math.round(ant / 2);
     //getData(syk, hjelp, annet, createPeopleDropdown);
     return {
-        "syk":syk,
-        "hjelp":hjelp,
-        "annet":annet
+        "syk": syk,
+        "hjelp": hjelp,
+        "annet": annet
     };
 
 }
@@ -132,32 +136,33 @@ function closeModal() {
     $("#adminNewShiftModal").modal('hide');
 }
 
-$.get('/getDepartment', {}, function(req, res, data){
+$.get('/getDepartment', {}, function (req, res, data) {
     departments = data.responseJSON;
-    makeDropdown('#chooseDepartment',departments);
+    console.log(departments);
+    makeDropdown('#chooseDepartment', departments);
 });
 
 function updateTable() {
-    var employeesSyk = [];
-    var employeesHelp = [];
-    var employeesAnnet = [];
+    employeesSyk = [];
+    employeesHelp = [];
+    employeesAnnet = [];
 
     var quan = Number($("#chooseNumber option:selected").text());
-    var place = $("#chooseDepartment option:selected").text();
+    place = $("#chooseDepartment option:selected").text();
     var date2 = new Date($("#datePicker").val());
 
     var shift = document.querySelector('input[name="time"]:checked').value;
 
-    if(shift == 'day'){
+    if (shift == 'day') {
         date2.setHours(8);
-    } else if (shift == 'evening'){
+    } else if (shift == 'evening') {
         date2.setHours(16)
-    }else {
+    } else {
         date2.setHours(0);
-        date2.setUTCDate(date2.getUTCDate()+1);
+        date2.setUTCDate(date2.getUTCDate() + 1);
     }
 
-    date = date2.getFullYear() + "-" + (date2.getUTCMonth()+1) + "-" + date2.getUTCDate() + " " + date2.getHours() + ":00:00";
+    date = date2.getFullYear() + "-" + (date2.getUTCMonth() + 1) + "-" + date2.getUTCDate() + " " + date2.getHours() + ":00:00";
     disp = getDispersion(quan);
 
 
@@ -165,13 +170,13 @@ function updateTable() {
         url: '/getAvailableEmpForDate', //this is the submit URL
         type: 'POST',
         data: {'date1': date, 'date2': date},
-        success: function(data){
-            for(var i = 0; i < data.length; i++){
-                if(data[i].type_name == 'Sykepleier'){
+        success: function (data) {
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].type_name == 'Sykepleier') {
                     employeesSyk.push(data[i]);
                 }
 
-                if(data[i].type_name == 'Sykepleier' || data[i].type_name == 'Hjelpepleier'){
+                if (data[i].type_name == 'Sykepleier' || data[i].type_name == 'Hjelpepleier') {
                     employeesHelp.push(data[i]);
                 }
 
@@ -180,30 +185,36 @@ function updateTable() {
 
             createPeopleDropdown(disp.syk, disp.hjelp, disp.annet, employeesSyk, employeesHelp, employeesAnnet);
         },
-        failure: function(err) {
-            console.log("Error"+err);
+        failure: function (err) {
+            console.log("Error" + err);
         }
     });
 }
 
 function createPeopleDropdown(antSyk, antHjelp, antAnnet, sykList, hjelpList, annetList) {
+
+    dropIds = [];
+
     document.getElementById('peopleTable').innerHTML = "<tr><th  class='peopleTablecat'>Kategori</th><th class='peopleTableSel'>Ansatt</th></tr>";
-    for(var i=0; i<antSyk; i++){
+    for (var i = 0; i < antSyk; i++) {
         document.getElementById('peopleTable').innerHTML += "<tr><td class='peopleTableCat'>Sykepleier</td><td class='peopleTableSel'><select id='syk" + i + "' class='peopleDropdown' onchange='updateTheChosenOnes(this)'></select></td></tr>";
-        makeDropdownS("#syk"+i,sykList);
+        makeDropdownS("#syk" + i, sykList);
+        dropIds.push({"id": "#syk" + i, "cat": "0"});
     }
-    for(var i=0; i<antHjelp; i++){
+    for (var i = 0; i < antHjelp; i++) {
         document.getElementById('peopleTable').innerHTML += "<tr><td class='peopleTableCat'>Hjelpepleier</td><td class='peopleTableSel'><select id='hjelp" + i + "' class='peopleDropdown' onchange='updateTheChosenOnes(this)'></select></td></tr>";
-        makeDropdownS("#hjelp" + i,hjelpList);
+        makeDropdownS("#hjelp" + i, hjelpList);
+        dropIds.push({"id": "#hjelp" + i, "cat": "1"});
     }
-    for(var i=0; i<antAnnet; i++){
+    for (var i = 0; i < antAnnet; i++) {
         document.getElementById('peopleTable').innerHTML += "<tr><td class='peopleTableCat'>Annet</td><td class='peopleTableSel'><select id='annet" + i + "' class='peopleDropdown' onchange='updateTheChosenOnes(this)'></select></td></tr>";
-        makeDropdownS("#annet" + i,annetList);
+        makeDropdownS("#annet" + i, annetList);
+        dropIds.push({"id": "#annet" + i, "cat": "2"});
     }
 }
 
 
-function makeDropdownS(selector,list) {
+function makeDropdownS(selector, list) {
     $(selector).append($('<option />').text("Ingen valgt"));
     for (var i = 0; i < list.length; i++) {
         var cellValue = list[i].name;
@@ -213,7 +224,7 @@ function makeDropdownS(selector,list) {
     }
 }
 
-function makeDropdown(selector,list) {
+function makeDropdown(selector, list) {
     var columns = addAllColumnHeaders(list, selector);
     for (var i = 0; i < list.length; i++) {
         var cellValue = list[i][columns[1]];
@@ -242,22 +253,77 @@ function addAllColumnHeaders(list, selector) {
 }
 
 function updateTheChosenOnes(selector) {
-    console.log(selector.id);
+
+
 }
 
 
 function createNewShifts() {
-    //noen ifs
-    //ajax post som tar inn arrayer
+    var sheToSend = [];
+    var shiftToSend = [];
 
 
 
-    console.log("Lager nye shifts");
+
+    for (var i = 0; i < dropIds.length; i++) {
+        var index1 = $(dropIds[i].id).prop('selectedIndex');
+        var valid = true;
+        var emp1 = 0;
+
+        if (index1 == 0) {
+
+        } else {
+            if (dropIds[i].cat == "0") {
+                emp1 = employeesSyk[index1 - 1].employee_id;
+            } else if (dropIds[i].cat == "1") {
+                emp1 = employeesHelp[index1 - 1].employee_id;
+            } else {
+                emp1 = employeesAnnet[index1 - 1].employee_id;
+            }
+            for (var j = i + 1; j < dropIds.length; j++) {
+                var index2 = $(dropIds[j].id).prop('selectedIndex');
+                var emp2 = 0;
+
+
+                if (index2 == 0) {
+
+                } else {
+                    if (dropIds[j].cat == "0") {
+                        emp2 = employeesSyk[index2 - 1].employee_id;
+                    } else if (dropIds[j].cat == "1") {
+                        emp2 = employeesHelp[index2 - 1].employee_id;
+                    } else {
+                        emp2 = employeesAnnet[index2 - 1].employee_id;
+                    }
+                    if (emp1 == emp2) {
+                        console.log("NOPE");
+                        valid = false;
+                        return;
+                    }
+                }
+            }
+            sheToSend.push({"employee_id":emp1});
+        }
+        var rank = "Lærling";
+        if (dropIds[i].cat == "0") {
+            rank = "Sykepleier";
+        } else if (dropIds[i].cat == "1") {
+            rank = "Hjelpepleier";
+        }
+
+        var depId = departments[$('#chooseDepartment').prop('selectedIndex')].department_id;
+
+        shiftToSend.push({"minutes":"480","date":date,"department_id":depId,"type_name":rank});
+    }
+    console.log("sending");
+    console.log(shiftToSend);
+    console.log(sheToSend);
+
 
 }
 
 $(function close() {
-    $(".custom-close").on('click', function() {
+    $(".custom-close").on('click', function () {
         $('#adminNewShiftModal').modal('hide');
     });
 });
