@@ -6,6 +6,7 @@ var postCtrl = require('./postReq');
 var delCtrl = require('./delReq');
 var model = require('../models/regWMail');
 var avail = require('../models/avaiModel');
+var shiftModel = require('../models/shiftModel');
 
 
 module.exports = function (app, passport) {
@@ -126,6 +127,8 @@ module.exports = function (app, passport) {
 
     app.post('/getEmpForShiftDateAll', isAdmin, getCtrl.getEmpForShiftDateAll);
     app.post('/getAvailableEmpForDate', isOfficeEmp, getCtrl.getAvailableEmpForDate);
+    app.post('/postNewShiftsFromBulk', isOfficeEmp, shiftModel.createNewShifts);
+
 
     app.post('/changePassword', isLoggedIn, model.changePassword);
     app.post('/acceptRequestWith', isOfficeEmp, model.acceptRequestWith);

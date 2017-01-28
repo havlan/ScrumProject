@@ -57,6 +57,8 @@ $(document).ready(function () {
         modal.style.display = "none";
     };
 
+    document.getElementById('datePicker').valueAsDate = new Date();
+
     createNumberDropdown();
 });
 
@@ -100,7 +102,6 @@ function saveFillShift() {
 }
 
 function createNumberDropdown() {
-    console.log("kjører num drop");
     $('#chooseNumber').append($('<option />').text(0));
     for (var i = 4; i < 21; i++) {
         var option = $('<option />').text(i);
@@ -138,7 +139,6 @@ function closeModal() {
 
 $.get('/getDepartment', {}, function (req, res, data) {
     departments = data.responseJSON;
-    console.log(departments);
     makeDropdown('#chooseDepartment', departments);
 });
 
@@ -197,17 +197,17 @@ function createPeopleDropdown(antSyk, antHjelp, antAnnet, sykList, hjelpList, an
 
     document.getElementById('peopleTable').innerHTML = "<tr><th  class='peopleTablecat'>Kategori</th><th class='peopleTableSel'>Ansatt</th></tr>";
     for (var i = 0; i < antSyk; i++) {
-        document.getElementById('peopleTable').innerHTML += "<tr><td class='peopleTableCat'>Sykepleier</td><td class='peopleTableSel'><select id='syk" + i + "' class='peopleDropdown' onchange='updateTheChosenOnes(this)'></select></td></tr>";
+        document.getElementById('peopleTable').innerHTML += "<tr><td class='peopleTableCat'>Sykepleier</td><td class='peopleTableSel'><select id='syk" + i + "' class='peopleDropdown'></select></td></tr>";
         makeDropdownS("#syk" + i, sykList);
         dropIds.push({"id": "#syk" + i, "cat": "0"});
     }
     for (var i = 0; i < antHjelp; i++) {
-        document.getElementById('peopleTable').innerHTML += "<tr><td class='peopleTableCat'>Hjelpepleier</td><td class='peopleTableSel'><select id='hjelp" + i + "' class='peopleDropdown' onchange='updateTheChosenOnes(this)'></select></td></tr>";
+        document.getElementById('peopleTable').innerHTML += "<tr><td class='peopleTableCat'>Hjelpepleier</td><td class='peopleTableSel'><select id='hjelp" + i + "' class='peopleDropdown'></select></td></tr>";
         makeDropdownS("#hjelp" + i, hjelpList);
         dropIds.push({"id": "#hjelp" + i, "cat": "1"});
     }
     for (var i = 0; i < antAnnet; i++) {
-        document.getElementById('peopleTable').innerHTML += "<tr><td class='peopleTableCat'>Annet</td><td class='peopleTableSel'><select id='annet" + i + "' class='peopleDropdown' onchange='updateTheChosenOnes(this)'></select></td></tr>";
+        document.getElementById('peopleTable').innerHTML += "<tr><td class='peopleTableCat'>Annet</td><td class='peopleTableSel'><select id='annet" + i + "' class='peopleDropdown'></select></td></tr>";
         makeDropdownS("#annet" + i, annetList);
         dropIds.push({"id": "#annet" + i, "cat": "2"});
     }
@@ -217,7 +217,7 @@ function createPeopleDropdown(antSyk, antHjelp, antAnnet, sykList, hjelpList, an
 function makeDropdownS(selector, list) {
     $(selector).append($('<option />').text("Ingen valgt"));
     for (var i = 0; i < list.length; i++) {
-        var cellValue = list[i].name;
+        var cellValue = list[i].employee_id + ". " + list[i].name;
         if (cellValue == null) cellValue = "Ingen data fra DB";
         var option = $('<option />').text(cellValue);
         $(selector).append(option);
@@ -252,18 +252,12 @@ function addAllColumnHeaders(list, selector) {
     return columnSet;
 }
 
-function updateTheChosenOnes(selector) {
 
-
-}
 
 
 function createNewShifts() {
     var sheToSend = [];
     var shiftToSend = [];
-
-
-
 
     for (var i = 0; i < dropIds.length; i++) {
         var index1 = $(dropIds[i].id).prop('selectedIndex');
@@ -302,7 +296,6 @@ function createNewShifts() {
                     }
                 }
             }
-            sheToSend.push({"employee_id":emp1});
         }
         var rank = "Lærling";
         if (dropIds[i].cat == "0") {
@@ -313,12 +306,43 @@ function createNewShifts() {
 
         var depId = departments[$('#chooseDepartment').prop('selectedIndex')].department_id;
 
+        sheToSend.push({"employee_id":emp1});
         shiftToSend.push({"minutes":"480","date":date,"department_id":depId,"type_name":rank});
     }
-    console.log("sending");
-    console.log(shiftToSend);
-    console.log(sheToSend);
 
+    var shifts = [];
+    var shiftemps = [];
+
+    for (var u = 0; u < shiftToSend.length; u++) {
+        shifts[u] = new Array(4);
+        shifts[u][0] = shiftToSend[u].minutes;
+        shifts[u][1] = shiftToSend[u].date;
+        shifts[u][2] = shiftToSend[u].department_id;
+        shifts[u][3] = shiftToSend[u].type_name;
+    }
+
+    for (var k = 0; k < sheToSend.length; k++) {
+        shiftemps[k] = new Array(1);
+        shiftemps[k][0] = sheToSend[k].employee_id;
+    }
+
+
+    if(valid){
+        $.ajax({
+            url: '/postNewShiftsFromBulk', //this is the submit URL
+            type: 'POST',
+            data: {'shifts': shifts, 'shiftemps':shiftemps},
+            success: function (data) {
+                location.reload();
+            },
+            failure: function (err) {
+                console.log("Error" + err);
+            }
+        })
+        $('#adminNewShiftModal').modal("hide");
+
+
+    }
 
 }
 
