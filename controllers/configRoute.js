@@ -125,6 +125,7 @@ module.exports = function (app, passport) {
     app.post('/bulkAvail', postCtrl.insertBulkAvailability /*avail.postAvail*/);
 
     app.post('/getEmpForShiftDateAll', isAdmin, getCtrl.getEmpForShiftDateAll);
+    app.post('/getAvailableEmpForDate', isOfficeEmp, getCtrl.getAvailableEmpForDate);
 
     app.post('/changePassword', isLoggedIn, model.changePassword);
     app.post('/acceptRequestWith', isOfficeEmp, model.acceptRequestWith);

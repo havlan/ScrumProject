@@ -57,9 +57,15 @@ module.exports = {
     getRequestView : function (req, res) {
         dbHelper.getdbQuery(req,res,"select r.shift_id as Skift, e.employee_id as AnsattID, e.name as Navn,s.shift_id as Skift,s.date as Dato, r.explanation_request as Årsak,d.department_name as Avdeling from Employee e,Shift s,shift_has_employee she,Request r,Department d where e.employee_id = she.employee_id and s.shift_id = she.shift_id and r.shift_id = she.shift_id and s.department_id = d.department_id group by r.request_id order by r.request_id");
     },
+    getSaltHash: function (req, res) {
+        dbHelper.getdbQuery(req, res, "select password_hash, password_salt, is_admin from LoginInfo where Username = ?", req.body.username);
+    },
+    getSaltHash: function(req,res,next){
+        dbHelper.getdbQWNext(req,res, "select password_hash, password_salt, is_admin from LoginInfo where Username = ?",[req.body.username],next);
+    },
     getEmployee_Shifts_toCurrentDate: function (req, res) {
         console.log("USER ID "+req.session.passport.user.id);
-        dbHelper.getdbQuery(req, res, "select e.employee_id as AnsattID,e.name as Navn,e.date as Dato,e.type_name as Stilling, e.responsibility_allowed as Ansvarsvakt from Employee_Shifts_toCurrentDate e where employee_id = ?",[req.session.passport.user.id]);
+        dbHelper.getdbQuery(req, res, "select * from Employee_Shifts_toCurrentDate where employee_id = ?",[req.session.passport.user.id]);
     },
     getEmployee_Shifts_fromCurrentDate: function (req, res) {
         console.log("USER ID "+req.session.passport.user.id);
@@ -69,7 +75,7 @@ module.exports = {
         console.log("USER ID "+req.session.passport.user.id);
         dbHelper.getdbQuery(req, res, "select e.employee_id as AnsattID,e.name as Navn, e.date as Dato,e.shift_id as Skift,e.type_name as Stilling,e.responsibility_allowed as Ansvarsvakt from Employee_Shifts_fromCurrentDate e where e.shift_id not in(select r.shift_id from Request r) and e.employee_id = ?",[req.session.passport.user.id]);
     },
-        getPersonalShiftEvents : function (req, res) {
+    getPersonalShiftEvents : function (req, res) {
         dbHelper.getdbQuery(req, res, "select end, start, id, title,description,phone_nr from JSON_EMPLOYEE_VIEW where employee_id = ? And start >= NOW()", req.session.passport.user.id);
     },
     getPersonalShiftEventsDone : function (req, res) {
@@ -121,10 +127,9 @@ module.exports = {
     getEmpForShiftDateAll : function (req,res) {
         dbHelper.getdbQuery(req,res, "SELECT ase.employee_id, ase.name FROM available_emp_for_shift ase Where ase.id = ?", [req.body.shift_id]);
     },
-    getLoginInfoEmployee : function (req, res) {
-        dbHelper.getdbQuery(req,res,"select * from LoginInfo where employee_id = ?",req.params.id);
+    getAvailableEmpForDate : function (req,res) {
+        dbHelper.getdbQuery(req,res, "SELECT e.employee_id, e.name, e.type_name FROM Employee e WHERE ? NOT IN(SELECT a.day FROM Availability a WHERE a.employee_id = e.employee_id AND availability = 1) AND ? NOT IN(SELECT date FROM Shift ss, shift_has_employee she WHERE ss.shift_id = she.shift_id AND she.employee_id = e.employee_id)",[req.body.date1, req.body.date2]);
     },
-
 
     //POST/PUT
 
@@ -141,14 +146,17 @@ module.exports = {
             pers_id: req.body.pers_id,
             total_hours: req.body.total_hours
         };
+        console.log("Posting new Employee");
         dbHelper.postdbQuery(req, res, "insert into Employee set ?", post);
     },
     postNewDepartment: function (req, res) {
         var post = {department_id: req.body.department_id, department_name: req.body.department_name};
+        console.log("Posting new Department");
         dbHelper.postdbQuery(req, res, "insert into Department set ?", post);
     },
     postNewType: function (req, res) {
         var post = {name: req.body.name, rank: req.body.rank};
+        console.log("Posting new Type");
         dbHelper.postdbQuery(req, res, "insert into Type set ?", post);
     },
     postNewShift: function (req, res) {
@@ -159,10 +167,12 @@ module.exports = {
             department_id: req.body.department_id,
             type_name: req.body.type_name
         };
+        console.log("Posting new Shift");
         dbHelper.postdbQuery(req, res, "insert into Shift set ?", post);
     },
     postNewShift_has_employee: function (req, res) {
         var post = {shift_id: req.body.shift_id, employee_id: req.body.employee_id};
+        console.log("Posting new shift_has_employee");
         dbHelper.postdbQuery(req, res, "insert into shift_has_employee set ?", post);
     },
     postNewRequest: function (req, res) {
@@ -171,6 +181,7 @@ module.exports = {
             employee_id: req.session.passport.user.id,
             explanation_request: req.body.explanation.request
         };
+        console.log("Posting new request");
         dbHelper.postdbQuery(req, res, "insert into Request set ?", post);
     },
     postNewRequestShift: function (req, res) {
@@ -178,9 +189,9 @@ module.exports = {
             Shift_shift_id: req.body.shift_id,
             Employee_employee_id: req.session.passport.user.id
         };
-        dbHelper.postdbQuery(req, res, "insert into Request_shift set ? ", post);
+        console.log("Posting new request");
+        dbHelper.postdbQuery(req, res, "insert into Request_shift set ?", post);
     },
-    //hei
     postNewAbsence: function (req, res) {
         var post = {
             absence_id: req.body.absence_id,
@@ -188,6 +199,7 @@ module.exports = {
             shift_id: req.body.shift_id,
             employee_id: req.body.employee_id
         };
+        console.log("Posting new absence");
         dbHelper.postdbQuery(req, res, "insert into Absence set ?", post);
     },
     postnewOvertime: function (req, res) {
@@ -199,15 +211,14 @@ module.exports = {
             overtime: req.body.overtime,
             explanation: req.body.explanation
         };
+        console.log("Posting new overtime");
         dbHelper.postdbQuery(req, res, "insert into Overtime set ?", post);
     },
     postnewOvertime2: function (req, res) {
         var post = {
-            shift_id: req.body.shift_id,
-            employee_id: req.session.passport.user.id,
-            overtime: req.body.overtime,
-            explanation_overtime: req.body.explanation
+            //postRequest
         };
+        console.log("Posting new overtime");
         dbHelper.postdbQuery(req, res, "insert into Overtime set ?", post);
     },
     postnewLogInInfo: function (req, res) {
@@ -217,6 +228,7 @@ module.exports = {
             password_salt: req.body.password_salt,
             employee_id: req.body.employee_id
         };
+        console.log("Posting new LogInInfo");
         dbHelper.postdbQuery(req, res, "insert into LogInInfo set ?", post);
     },
     getVaktliste1: function (req,res) {

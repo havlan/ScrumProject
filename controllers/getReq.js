@@ -185,6 +185,9 @@ module.exports = {
     getPossibleShiftsEvents : function(req,res){ // WHAT DOES THIS DO
         dbHelper.getdbQuery(req,res,"select end, start, id, title,description from available_emp_for_shift where employee_id = ?", req.session.passport.user.id);
     },
+    getAvailableEmpForDate : function (req,res) {
+        dbMiddelware.getAvailableEmpForDate(req,res);
+    },
 
 
     get403 : function (req, res) {
