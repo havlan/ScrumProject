@@ -1,22 +1,4 @@
 
-$.get('/getAvailableShifts', {}, function(req, res, data){
-    console.log( data );
-    document.getElementById("freeShiftsNumber").innerHTML = data.responseJSON[0].total;
-});
-$.get('/getAbsenceNum', {}, function(req, res, data){
-    console.log( data );
-    document.getElementById("absenceWarning").innerHTML = data.responseJSON[0].total + " fravær til godkjenning";
-});
-$.get('/getOvertimeNum', {}, function(req, res, data){
-    console.log( data );
-    document.getElementById("overtimeWarning").innerHTML = data.responseJSON[0].total + " overtid til godkjenning";
-});
-$.get('/getChangeNum', {}, function(req, res, data){
-    console.log( data );
-    document.getElementById("changeWarning").innerHTML = data.responseJSON[0].total + " bytteforespørsel";
-});
-
-
 var event_id;
 
 $(document).ready(function() {
@@ -82,6 +64,10 @@ $(document).ready(function() {
         }
     });
 
+    $.get('/getNextShiftForEmp', {}, function(req, res, data){
+        document.getElementById("nextShiftInfo").innerHTML = "Dato: " +data.responseJSON[0].ndate + "<br>Sted: " + data.responseJSON[0].department_name;
+    });
+
 });
 
 $.get('/getEmployee_Shifts_fromCurrentDate2',{},function (req,res,data) {
@@ -134,7 +120,7 @@ $(document).on('click','#sendForespørsel',function (e) {
         return $(this).closest("tr").find('td:eq(3)').text();
     }).toArray(); // <----
     console.log(data);
-    for (i = 0; i < data.length; i++) {
+     for (i = 0; i < data.length; i++) {
         console.log(data[i]);
         $.ajax({
             url: '/postRequest',
@@ -201,7 +187,10 @@ $(document).on('click','#sendRequest',function () {
                 if(xhr.status==404){
                     document.getElementById("errorMessage").innerHTML = "ikke funnet";
                     showErrorMessage();
-                } else {
+                } else if (xhr.status==409) {
+                    document.getElementById("warningMessage").innerHTML = "Du har alt sendt forespørsel";
+                    showWarningError();
+                }else {
                     document.getElementById("errorMessage").innerHTML = "Det har oppstått en feil";
                     showErrorMessage();
                 }
@@ -270,6 +259,14 @@ function showSuccessMessage() {
 }
 function showErrorMessage() {
     var element = document.getElementById('errorMessageBox');
+    element.style.display = "block";
+    setTimeout(function() {
+        element.style.display = "none";
+    }, 3000);
+}
+
+function showWarningError() {
+    var element = document.getElementById('warningMessageBox');
     element.style.display = "block";
     setTimeout(function() {
         element.style.display = "none";

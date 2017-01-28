@@ -1,59 +1,51 @@
-
-
 var myList = [];
-var typeNames =[];
+var typeNames = [];
 window.indeks = 0;
 var currentDay = new Date();
 var currentWeek = getWeekNumber(currentDay);
 console.log(currentWeek);
 var selectedWeek = currentWeek[1];
 
-
-$.get('/getAvailability', {}, function(req, res, data){
+$.get('/getAvailability', {}, function (req, res, data) {
 
     console.log(data);
     console.log(data.responseJSON);
     myList = data.responseJSON;
-   // buildHtmlTable('#TingTang',myList);
+    // buildHtmlTable('#TingTang',myList);
     //tableCreate();
 
 
-
-
-    $( "#available-next" ).click(function neste() {
+    $("#available-next").click(function neste() {
         selectedWeek++;
         console.log(selectedWeek);
 
 
-
     });
 
-    $( "#available-prev" ).click(function forrige() {
+    $("#available-prev").click(function forrige() {
         selectedWeek--;
     });
 
 
-
-    $('#available').on('click', function(){
-        if ( $(boxs).hasClass( 'highlight' ) ) {
+    $('#available').on('click', function () {
+        if ($(boxs).hasClass('highlight')) {
             $('.highlight').removeClass('unavailable');
-            $('.highlight').each(function() {
+            $('.highlight').each(function () {
                 var aval1 = 1;
                 var date;
 
             });
 
 
-
         }
 
     });
 
-    $('#unavailable').on('click', function(){
-        if ( $(boxs).hasClass( 'highlight' ) ) {
+    $('#unavailable').on('click', function () {
+        if ($(boxs).hasClass('highlight')) {
             $('.highlight').removeClass('available');
-            $('.highlight').each(function() {
-                alert( this.id );
+            $('.highlight').each(function () {
+                alert(this.id);
             });
             $('.highlight').addClass('unavailable').removeClass('highlight');
         }
@@ -61,7 +53,7 @@ $.get('/getAvailability', {}, function(req, res, data){
     });
 
 
-    for(i=0; i<myList.length; i++) {
+    for (i = 0; i < myList.length; i++) {
 
         var tableDay = data.responseJSON[i].day;
         var available1 = data.responseJSON[i].availability;
@@ -76,10 +68,6 @@ $.get('/getAvailability', {}, function(req, res, data){
         console.log(weekNr)
         var weekDay = jsDate.getDay();
         var hour = jsDate.getHours();
-
-
-
-
 
 
         if (selectedWeek == weekNr[1]) {
@@ -307,38 +295,26 @@ $.get('/getAvailability', {}, function(req, res, data){
     }
 
 
-
-
-
 });
-
-
 
 
 function getWeekNumber(d) {
     // Copy date so don't modify original
     d = new Date(+d);
-    d.setHours(0,0,0,0);
+    d.setHours(0, 0, 0, 0);
     // Set to nearest Thursday: current date + 4 - current day number
     // Make Sunday's day number 7
-    d.setDate(d.getDate() + 4 - (d.getDay()||7));
+    d.setDate(d.getDate() + 4 - (d.getDay() || 7));
     // Get first day of year
-    var yearStart = new Date(d.getFullYear(),0,1);
+    var yearStart = new Date(d.getFullYear(), 0, 1);
     // Calculate full weeks to nearest Thursday
-    var weekNo = Math.ceil(( ( (d - yearStart) / 86400000) + 1)/7);
+    var weekNo = Math.ceil(( ( (d - yearStart) / 86400000) + 1) / 7);
     // Return array of year and week number
     return [d.getFullYear(), weekNo];
 }
 
 
-
-
-
-
-
-
-
-$(function() {
+$(function () {
 
     /* Get all rows from your 'table' but not the first one
      * that includes headers. */
@@ -346,8 +322,7 @@ $(function() {
     var boxs = $('td');
 
 
-
-    boxs.on('click', function(e) {
+    boxs.on('click', function (e) {
 
         /* Get current row */
         var box = $(this);
@@ -370,7 +345,7 @@ $(function() {
 
 
     /* Create 'click' event handler for rows */
-    $('#1').on('click', function(e) {
+    $('#1').on('click', function (e) {
 
         /* Get current row */
         var row = $('#2');
@@ -389,7 +364,7 @@ $(function() {
 
     });
 
-    $('#3').on('click', function(e) {
+    $('#3').on('click', function (e) {
 
         /* Get current row */
         var row = $('#4');
@@ -409,7 +384,7 @@ $(function() {
 
     });
 
-    $('#5').on('click', function(e) {
+    $('#5').on('click', function (e) {
 
         /* Get current row */
         var row = $('#6');
@@ -429,20 +404,15 @@ $(function() {
     });
 
 
-
-
-
-
-
-
     /* This 'event' is used just to avoid that the table text
      * gets selected (just for styling).
      * For example, when pressing 'Shift' keyboard key and clicking
      * (without this 'event') the text of the 'table' will be selected.
      * You can remove it if you want, I just tested this in
      * Chrome v30.0.1599.69 */
-    $(document).bind('selectstart dragstart', function(e) {
-        e.preventDefault(); return false;
+    $(document).bind('selectstart dragstart', function (e) {
+        e.preventDefault();
+        return false;
     });
 
 
@@ -452,13 +422,195 @@ $(function() {
 });
 
 
-function assignDate() {
+// fane nr 2
 
-    var dag = "tir1";
 
+function addRow(content, morecontent, evenmorecontent) {
+    if (!document.getElementsByTagName) return;
+    tabBody = document.getElementsByTagName("tbody").item(0);
+    row = document.createElement("tr");
+    cell1 = document.createElement("td");
+    cell2 = document.createElement("td");
+    cell3 = document.createElement("td");
+    textnode1 = document.createTextNode(content);
+    textnode2 = document.createTextNode(morecontent);
+    textnode3 = document.createTextNode(evenmorecontent);
+    cell1.appendChild(textnode1);
+    cell2.appendChild(textnode2);
+    cell3.appendChild(textnode3);
+    row.appendChild(cell1);
+    row.appendChild(cell2);
+    row.appendChild(cell3);
+    tabBody.appendChild(row);
+
+
+}
+
+
+var dates = [];
+console.log(dates);
+var availabilities = [];
+console.log(availabilities);
+
+function makeJsonArray() {
+
+    var yarr = [];
+    for (v = 0; v < dates.length; v++) {
+        yarr[v] = new Array(2);
+        yarr[v][0] = dates[v];
+        yarr[v][1] = availabilities[v];
+        console.log(yarr);
+    }
+
+
+
+    /*for(i=0;i<dates.length;i++){
+     console.log("DATES: ",dates[i], " AVAILABILIRIES: ",availabilities[i]);
+     yarr[i][0] = dates[i];
+     yarr[i][1] = availabilities[i];
+     }*/
+
+    /*var yarr = getAvailable();*/
+    $.ajax({
+        url: '/bulkAvail',
+        type: 'POST',
+        data: {'availarray': yarr},
+        success: function (data) {
+            alert("hest er livet");
+        },
+        error: function (data) {
+            alert("nei,hest er best som pålegg");
+        }
+    })
+
+
+
+    dates.length = 0;
+    availabilities.length = 0;
+    var new_tbody = document.createElement('tbody');
+    var old_tbody = tabBody;
+    old_tbody.parentNode.replaceChild(new_tbody, old_tbody)
 
 
 
 }
+
+    function emptyTable() {
+        dates.length = 0;
+        availabilities.length = 0;
+        var new_tbody = document.createElement('tbody');
+        var old_tbody = tabBody;
+        old_tbody.parentNode.replaceChild(new_tbody, old_tbody)
+
+    }
+
+    function getAvailable() {
+        var dagvakt = document.getElementById("AvaDay");
+        var kveldsvakt = document.getElementById("AvaEvening");
+        var nattevakt = document.getElementById("AvaNight");
+        var availability = 0;
+        var checkboxes = [dagvakt, kveldsvakt, nattevakt];
+        AvaDate = document.getElementById("AvaDate").value;
+        console.log(AvaDate);
+
+        var yarr = [];
+        for (i = 0; i < checkboxes.length; i++) {
+            yarr[i] = new Array(2);
+            if (checkboxes[i].checked == true) {
+                if (checkboxes[i] == dagvakt) {
+                    var Dato = AvaDate + " 08:00:00";
+                    console.log(Dato);
+                    var vakt = "dagvakt";
+                    if (typeof AvaDate != 'undefined' && typeof vakt != 'undefined') { // //if($('#ava-choices').closest("tr").find('td:eq(2)').text() == "ja"){
+                        addRow(vakt, Dato, "ja");
+                        dates.push(Dato);
+                        availabilities.push(availability);
+                    }
+                } else if (checkboxes[i] == kveldsvakt) {
+                    var Dato = AvaDate + " 16:00:00";
+                    console.log(Dato);
+                    var vakt = "kveldsvakt";
+                    if (typeof AvaDate != 'undefined' && typeof vakt != 'undefined') {
+                        addRow(vakt, Dato, "ja");
+                        dates.push(Dato);
+                        availabilities.push(availability);
+
+                    }
+                } else if (checkboxes[i] == nattevakt) {
+                    var Dato = AvaDate + " 00:00:00";
+                    console.log(Dato);
+                    var vakt = "nattevakt";
+                    if (typeof AvaDate != 'undefined' && typeof vakt != 'undefined') {
+                        addRow(vakt, Dato, "ja");
+                        dates.push(Dato);
+                        availabilities.push(availability);
+                    }
+                }
+            }
+        }
+        return yarr;
+    }
+
+    function getUnavailable() {
+        var dagvakt = document.getElementById("AvaDay");
+        var kveldsvakt = document.getElementById("AvaEvening");
+        var nattevakt = document.getElementById("AvaNight");
+        var availability = 1;
+        var checkboxes = [dagvakt, kveldsvakt, nattevakt];
+
+        AvaDate = document.getElementById("AvaDate").value;
+        console.log(AvaDate);
+
+        for (i = 0; i < checkboxes.length; i++) {
+            if (checkboxes[i].checked == true) {
+                if (checkboxes[i] == dagvakt) {
+                    var Dato = AvaDate + " 08:00:00";
+                    console.log(Dato);
+                    var vakt = "dagvakt";
+                    if (typeof AvaDate !== 'undefined' && typeof vakt !== 'undefined') {
+                        addRow(vakt, Dato, "nei");
+                        dates.push(Dato);
+                        availabilities.push(availability);
+                    }
+                }
+                else if (checkboxes[i] == kveldsvakt) {
+                    var Dato = AvaDate + " 16:00:00";
+                    console.log(Dato);
+                    var vakt = "kveldsvakt";
+                    if (typeof AvaDate !== 'undefined' && typeof vakt !== 'undefined') {
+                        addRow(vakt, Dato, "nei");
+                        dates.push(Dato);
+                        availabilities.push(availability);
+                    }
+                }
+
+                else if (checkboxes[i] == nattevakt) {
+                    var Dato = AvaDate + " 00:00:00";
+                    console.log(Dato);
+                    var vakt = "nattevakt";
+                    if (typeof AvaDate !== 'undefined' && typeof vakt !== 'undefined') {
+                        addRow(vakt, Dato, "nei");
+                        dates.push(Dato);
+                        availabilities.push(availability);
+                    }
+                }
+            }
+
+        }
+
+
+    }
+
+
+    function fillAvailabilityArray(date, availablity) {
+        var AvalabilityJson;
+        AvalabilityJson = {
+            "availability": [availablity],
+            "day": ""[date]
+        };
+
+
+    }
+
 
 

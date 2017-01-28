@@ -97,8 +97,18 @@ function removeFunction() {
             url: '/delUser', //this is the submit URL
             type: 'POST',
             data: {'employee_id':indeks},
-            success: function(data){
-                alert('Bruker fjernet fra systemet')
+            success: function (data) {
+                document.getElementById("successMessage").innerHTML = "Brukeren er fjernet fra systemet";
+                showSuccessMessage();
+            },
+            error: function(xhr){
+                if(xhr.status==404){
+                    document.getElementById("errorMessage").innerHTML = "ikke funnet";
+                    showErrorMessage();
+                } else {
+                    document.getElementById("errorMessage").innerHTML = "Det har oppstått en feil";
+                    showErrorMessage();
+                }
             }
         });
     }
@@ -144,11 +154,22 @@ $(function() {
                 type: 'POST',
                 data: {'username': $('#username').val(), 'is_admin': $('#is_admin').val(),'employee_id':indeks},
                 success: function (data) {
-                    alert('Bruker lagt til systemet');
+                    document.getElementById("successMessage").innerHTML = "Bruker lagt til systemet";
+                    showSuccessMessage();
+                },
+                error: function(xhr){
+                    if(xhr.status==404){
+                        document.getElementById("errorMessage").innerHTML = "ikke funnet";
+                        showErrorMessage();
+                    } else {
+                        document.getElementById("errorMessage").innerHTML = "Det har oppstått en feil";
+                        showErrorMessage();
+                    }
                 },
                 failure: function (data) {
                     alert('Ansatt har allerede en bruker i systemet');
                 }
+
             });
         }
     });
@@ -159,6 +180,11 @@ $(document).on('click','#excelDataTable td',function(){
     indeks = $(this).closest("tr").find('td:eq(2)').text();
   //  alert(indeks);
     var hei = indeks-1;
+    var check = [];
+    $.get('/getLoginInfoEmployee/'+indeks,{},function (req, res, data) {
+        check = data.responseJSON;
+        console.log(check);
+    });
     $.get('/getEmployee', {}, function(req, res, data) {
         //Fyll inn redigeringsfelt
         document.getElementById("navndb").value = (data.responseJSON[hei].Navn);
@@ -174,6 +200,13 @@ $(document).on('click','#excelDataTable td',function(){
         document.getElementById("epostdb2").innerHTML = (data.responseJSON[hei].Epost);
         document.getElementById("adressedb2").innerHTML = (data.responseJSON[hei].Adresse);
         document.getElementById("personnummerdb2").innerHTML = (data.responseJSON[hei].PersNr);
+        if(check.length == 0){
+            document.getElementById('addInfo').style.display = "inline";
+            document.getElementById('remove').style.display = "none";
+        }else{
+            document.getElementById('addInfo').style.display = "none";
+            document.getElementById('remove').style.display = "inline";
+        }
         //Trigge modal
         $('#myModal').modal("show");
         //Felt under profilbilde
@@ -190,10 +223,22 @@ $(function(){
             type: 'POST',
             data: {'is_admin':parseInt($('#admin').text()),'username':$('#brukernavn').text(),'name': $("#fornavn").text(),'address':$('#adresse').text(),'email':$('#epost').text(),'type_name':$('#stilling').text(),'pers_id':parseInt($('#personnummer').text(),10),'phone_nr':parseInt($('#telefon').text(),10),'seniority':parseInt($('#seniority').text()),'responsibility_allowed':$('#responsibility').val(),'total_hours':0},
             success: function(data){
+                document.getElementById("successMessage").innerHTML = "sendt";
+                showSuccessMessage();
             },
             failure: function(err){
                 console.log("ERR");
+            },
+            error: function(xhr){
+                if(xhr.status==404){
+                    document.getElementById("errorMessage").innerHTML = "ikke funnet";
+                    showErrorMessage();
+                } else {
+                    document.getElementById("errorMessage").innerHTML = "Det har oppstått en feil";
+                    showErrorMessage();
+                }
             }
+
         });
         $('#addModal').modal('toggle');
     });
@@ -212,8 +257,17 @@ $(function(){
             data: {'name': $("#navndb").val(),'address':$('#adressedb').val(),'email':$('#epostdb').val(),'type_name':strUser,'pers_id':$('#personnummerdb').val(),'phone_nr':$('#telefondb').val(),'employee_id':indeks},
             success: function(data){
                 console.log(JSON.stringify(data));
-                alert("HEST ER BEST! HEST ER LIVET");
-                //document.getElementById('newUserFeedback').innerHTML("Success");
+                document.getElementById("successMessage").innerHTML = "HEST ER BEST! HEST ER LIVET";
+                showSuccessMessage();
+            },
+            error: function(xhr){
+                if(xhr.status==404){
+                    document.getElementById("errorMessage").innerHTML = "ikke funnet";
+                    showErrorMessage();
+                } else {
+                    document.getElementById("errorMessage").innerHTML = "Det har oppstått en feil";
+                    showErrorMessage();
+                }
             }
         });
     });
@@ -241,4 +295,17 @@ function makeDropdown(selector) {
     }
 }
 
-
+function showSuccessMessage() {
+    var element = document.getElementById('successMessageBox');
+    element.style.display = "block";
+    setTimeout(function() {
+        element.style.display = "none";
+    }, 3000);
+}
+function showErrorMessage() {
+    var element = document.getElementById('successMessageBox');
+    element.style.display = "block";
+    setTimeout(function() {
+        element.style.display = "none";
+    }, 3000);
+}

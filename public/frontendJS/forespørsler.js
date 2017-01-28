@@ -71,3 +71,4 @@ function timeDifference(d, dd) {
         (minutes-shiftlength) + " minutter overtid",
     ].join(", ");
 };
+

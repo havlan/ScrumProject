@@ -8,13 +8,35 @@ html, body{
     width:100%;
 }
 
-#successMessageBox {
+#successMessageBox, #errorMessageBox, #warningMessageBox {
+    display:none;
+    padding: 10px 0;
+    font-size:20px;
+    text-align: center;
     position:fixed;
-    bottom:0;
-    width:100%;
+    top:52px;
+    width:calc(100% - 2px);
     margin:0;
     z-index:99999;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px #888888 ;
 }
+#successMessageBox {
+    background-color: #ccffcc ;
+    border: 1px solid #7CbF70 ;
+    color: #7CbF70 ;
+}
+#errorMessageBox {
+    background-color: #ffcccc ;
+    border: 1px solid #ff7777 ;
+    color: #ff7777 ;
+}
+#warningMessageBox {
+    background-color: #ffb;
+    border: 1px solid #bb2;
+    color: #bb2;
+}
+
 #sideTitle {
     font-weight: bold;
     font-size: 25px;
@@ -38,7 +60,7 @@ html, body{
 }
 .fc-basic-view .fc-body .fc-row{
     min-height:3.5em;
-    height:7vw;
+    height:6.5vw;
     max-height:14vh;
 }
 .fc-toolbar.fc-header-toolbar {
@@ -132,8 +154,8 @@ html, body{
     cursor:pointer;
     width: 150px;
 }
-#sendShiftRequest{
-    background-color: #4CAF50;
+.sendShiftRequest{
+    background-color: royalblue;
     border: none;
     border-radius: 5px;
     color: white;
@@ -141,6 +163,7 @@ html, body{
     text-align: center;
     cursor:pointer;
     width: 150px;
+    padding-bottom: 1%;
 }
 #sendRequest {
     background-color: #4CAF50;
@@ -187,12 +210,55 @@ html, body{
     background-color:  #8cd9ad;
     padding: 2%;
 }
-#explanation{
+#doneShiftsText{
+    background-color: #c4e6ff;
+    padding: 2%;
+}
+.explanation{
     width: 50%;
 }
 #reason{
     width: 70%;
 }
+#overTime{
+    width: 30%;
+}
+#fri{
+    padding: 2%;
+}
+#overtid{
+    padding: 2%;
+}
+#spaceOver{
+    padding: 2%;
+}
+#spaceFree{
+    padding:2%;
+}
+#freeSave{
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 5px 10px;
+    text-align: center;
+    cursor:pointer;
+    width: 150px;
+    position: relative;
+}
+#overSave{
+    margin-top: 1%;
+    position: relative;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 5px 10px;
+    text-align: center;
+    cursor:pointer;
+    width: 150px;
+}
+
 @media
 only screen and (max-width: 760px),
 (min-device-width: 768px) and (max-device-width: 1024px)  {
@@ -233,6 +299,7 @@ only screen and (max-width: 760px),
          width: calc(50% - 1em);
          margin: 0.5em 0.5em 0.5em 0.5em;
      }
+
     .menuBtn{
         float:left;
         font-size: 1em;
@@ -335,5 +402,4 @@ only screen and (max-width: 760px),
 .radio label input[type="radio"]:disabled + .cr{
     opacity: .5;
 }
-
 

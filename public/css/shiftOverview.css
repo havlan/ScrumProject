@@ -1,5 +1,47 @@
 @charset "utf-8";
 
+#successMessageBox, #errorMessageBox, #warningMessageBox {
+    display:none;
+    padding: 10px 0;
+    font-size:20px;
+    text-align: center;
+    position:fixed;
+    top:52px;
+    width:calc(100% - 2px);
+    margin:0;
+    z-index:99999;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px #888888 ;
+}
+#successMessageBox {
+    background-color: #ccffcc ;
+    border: 1px solid #7CbF70 ;
+    color: #7CbF70 ;
+}
+#errorMessageBox {
+    background-color: #ffcccc ;
+    border: 1px solid #ff7777 ;
+    color: #ff7777 ;
+}
+#warningMessageBox {
+    background-color: #ffb;
+    border: 1px solid #bb2;
+    color: #bb2;
+}
+
+#container {
+    width:96%;
+    margin: 0 2% 0 2%;
+}
+#sideTitle {
+    font-weight: bold;
+    font-size: 25px;
+    padding-bottom:10px;
+    text-align:center;
+    border-bottom: 1px #bbb solid;
+    margin:0 0 20px 0;
+    width:100%;
+}
 
 body, html{
     width:100%;
@@ -15,13 +57,32 @@ thead {
     width: 100%;
     display: table-header-group;
 }
+th {
+    background-color: white;
+}
 tbody {
     height: 10vw;
     width: 100%;
     overflow-y: scroll;
 }
+#noShifts{
+    display: none;
+}
 
-
+.table-responsive {
+    position:absolute;
+    width:96%;
+    min-height:110px;
+}
+.obsWarning{
+    text-align: center;
+    border: solid 0.2em royalblue ;
+    padding:33px 1% 1% 1%;
+    margin:0 20px 0 0;
+    height:90px;
+    background-color: #c4e6ff;
+    border-radius: 5px;
+}
 /*toolbar*/
 .navbar-shift{
     width: 100%;
@@ -85,3 +146,42 @@ table.sortable td:nth-child(even) {
     width: 100px;
 }
 */
+
+#dbDataTable {
+    border-collapse: collapse;
+    width: 100%;
+    border: 1px solid #ddd;
+    font-size: 16px;
+
+}
+
+#dbDataTable th, #dbDataTable td {
+    text-align: left;
+    padding: 5px;
+}
+
+#dbDataTable tr {
+    border-bottom: 1px solid #ddd;
+}
+#dbDataTable td:hover{
+    color: darkgray;
+}
+
+#dbDataTable tr.header{
+    background-color: #f1f1f1;
+}
+#dbDataTable tr:hover{
+    background-color: aliceblue;
+    cursor: pointer;
+}
+@media
+only screen and (max-width: 760px),
+(min-device-width: 768px) and (max-device-width: 1024px)  {
+    #sideTitle {
+        width: calc(100% - 1em);
+        margin-left:0.5em;
+        margin-bottom:0.5em;
+        font-size: 1.5em;
+        padding-bottom:0.5em;
+    }
+}

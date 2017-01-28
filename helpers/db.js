@@ -97,6 +97,8 @@ module.exports =
                     connection.release();
                     if (!err) {
                         res.json(rows);
+                    }else if(!err.fatal){
+                        res.status(409).json({melding:"Eksisterer."});
                     } else {
                         console.log("error: Error reading database: " + err);
                         res.status(500);

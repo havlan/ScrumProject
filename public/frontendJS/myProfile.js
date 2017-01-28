@@ -21,11 +21,10 @@ $(document).ready(function(){ // syntax for å hente data når dokument (html) e
     });
 });
 
-
 var myList= [];
 
 
-$.get('/getEmployeeshiftstoCurrentDate', {}, function(req, res, data){
+$.get('/getEmployee_shifts_toCurrentDate', {}, function(req, res, data){
     console.log(data);
     console.log(data.responseJSON[0]);
     myList = data.responseJSON;
@@ -80,13 +79,36 @@ $(function(){
         $.ajax({
             url: '/updateEmployeePersonalInfo', //this is the submit URL
             type: 'POST',
-            data: {'phone_nr': parseInt($("#edittelefon").val(),10),'address':$('#editadresse').val(),'email':$('#editepost').val()},
+            data: {'phone_nr': $("#edittelefon").val(),'address':$('#editadresse').val(),'email':$('#editepost').val()},
             success: function(data){
-                document.getElementById('editfeedback').innerHTML = "<strong>Data lagret.</strong>";
+                console.log(data);
+                document.getElementById("successMessage").innerHTML = "sendt";
+                showSuccessMessage();
             },
-            error:function (xhr, ajaxOptions, thrownError) {
-                document.getElementById('editfeedback').innerHTML = thrownError;
+            error: function(xhr){
+                if(xhr.status==404){
+                    document.getElementById("errorMessage").innerHTML = "ikke funnet";
+                    showErrorMessage();
+                } else {
+                    document.getElementById("errorMessage").innerHTML = "Det har oppstått en feil";
+                    showErrorMessage();
+                }
             }
         });
     });
 });
+
+function showSuccessMessage() {
+    var element = document.getElementById('successMessageBox');
+    element.style.display = "block";
+    setTimeout(function() {
+        element.style.display = "none";
+    }, 3000);
+}
+function showErrorMessage() {
+    var element = document.getElementById('successMessageBox');
+    element.style.display = "block";
+    setTimeout(function() {
+        element.style.display = "none";
+    }, 3000);
+}

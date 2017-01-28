@@ -1,5 +1,34 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:300);
 
+#successMessageBox, #errorMessageBox, #warningMessageBox {
+    display:none;
+    padding: 10px 0;
+    font-size:20px;
+    text-align: center;
+    position:fixed;
+    top:52px;
+    width:calc(100% - 2px);
+    margin:0;
+    z-index:99999;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px #888888 ;
+}
+#successMessageBox {
+    background-color: #ccffcc ;
+    border: 1px solid #7CbF70 ;
+    color: #7CbF70 ;
+}
+#errorMessageBox {
+    background-color: #ffcccc ;
+    border: 1px solid #ff7777 ;
+    color: #ff7777 ;
+}
+#warningMessageBox {
+    background-color: #ffb;
+    border: 1px solid #bb2;
+    color: #bb2;
+}
+
 .login-page {
   width: 360px;
   padding: 8% 0 0;
@@ -137,6 +166,8 @@ element {
 .container .info span .fa {
   color: #EF3B3A;
 }
+
+
 
 @media screen and (min-width: 480px)  {
     #loginbody {
