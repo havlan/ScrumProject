@@ -20,6 +20,14 @@ abbreviations.xml
 keymap.xml
 laf.xml
 
+/coverage/*
+/coverage
+coverage
+.nyc_output
+/.nyc_output
+_windows
+
+
 # Runtime data
 pids
 *.pid

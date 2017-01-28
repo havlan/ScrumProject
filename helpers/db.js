@@ -1,6 +1,6 @@
 var mysql = require('mysql');
 var cryptoHash = require('./../middlewares/cryptoHash');
-var localStrat = require('passport-local').Strategy;
+var async = require('async');
 
 var pool = mysql.createPool({
     connectionLimit: 27,
@@ -23,14 +23,13 @@ module.exports =
                     res.json({"error": "Error connecting to database: " + err});
                     return;
                 }
-                console.log('Connected to database');
                 connection.query(query, function (err, rows) {
                     connection.release(); // Legg tilbake i pool
                     if (!err) {
                         //console.log(rows);
+                        res.status(200);
                         res.json(rows);
                     } else {
-                        console.log("error: Error reading database: " + err);
                         res.status(500);
                         res.json({"error": "Error reading database: " + err});
                     }
@@ -45,36 +44,16 @@ module.exports =
                     res.json({"Error": "Couldnt connect to MYSQL" + err});
                     return;
                 }
-                console.log("Connected to database");
                 connection.query(query, get, function (err, rows) {
                     connection.release();
                     if (!err) {
-                        res.json(rows);
-                        //console.log(rows);
+                        if(rows.length > 0) {
+                            res.status(200).json(rows);
+                            //console.log(rows);
+                        }else{
+                            res.status(404)
+                        }
                     } else {
-                        console.log("error: Error reading database: " + err);
-                        res.status(500);
-                        console.log("Error reading database: ");
-                    }
-                });
-            });
-        },
-        getdbQWNext: function (req, res, query, get, next) {
-            pool.getConnection(function (err, connection) {
-                if (err) {
-                    res.status(500) //err
-                    res.json({"Error": "Couldnt connect to MYSQL" + err});
-                    return;
-                }
-                console.log("Connected to database");
-                connection.query(query, get, function (err, rows, next) {
-                    connection.release();
-                    if (!err) {
-                        //res.json(rows);
-                        console.log(rows);
-                        next();
-                    } else {
-                        console.log("error: Error reading database: " + err);
                         res.status(500);
                         console.log("Error reading database: ");
                     }
@@ -84,24 +63,106 @@ module.exports =
 
         postdbQuery: function (req, res, query, post) {
             pool.getConnection(function (err, connection) {
-                if (err) {
-                    res.status(500) //err
-                    res.json({"Error": "Couldnt connect to MYSQL" + err});
-                    return;
-                }
-                console.log("Connected to database");
-                connection.query(query, post, function (err, rows) {
-                    connection.release();
-                    if (!err) {
-                        res.json(rows);
-                    }else if(!err.fatal){
-                        res.status(409).json({melding:"Eksisterer."});
-                    } else {
-                        console.log("error: Error reading database: " + err);
-                        res.status(500);
-                        res.json({"error": "Error reading database: " + err});
+                try {
+                    if (err) {
+                        res.status(500) //err
+                        res.json({"Error": "Couldnt connect to MYSQL" + err});
+                        throw err;
                     }
-                });
+                    console.log("Connected to database");
+                    connection.query(query, post, function (err, rows) {
+                        connection.release();
+                        if (!err) {
+                            res.json(rows);
+                        } else if (err) {
+                            if (!err.fatal) {
+                                res.status(409).json({melding: "Eksisterer."});
+                            } else {
+                                res.status(500);
+                            }
+                        } else {
+                            res.status(500);
+                            res.json({"error": "Error reading database: " + err});
+                            throw err;
+                        }
+                    });
+                }catch (err){
+                    throw err;
+                }
             });
+        },
+
+        revertTest : function(query){
+            pool.getConnection(function(err,conn){
+                if(err) {
+                    throw err;
+                }
+              conn.query(query, function(err){
+                  conn.release();
+                  if(!err){
+                      console.log("Reverted test.");
+                  }else if (err){
+                      throw err;
+                  }
+              })
+            })
+        },
+
+        fallDoubleQuery : function (tasks, cb) {
+        pool.getConnection(function (err, conn, done) {
+            if (err) {
+                return cb(err);
+            }
+            conn.beginTransaction(function (err) {
+                if (err) {
+                    done();
+                    return cb(err);
+                }
+                conn.query(q1, function(err){
+                    if(err){
+                        done();
+                        return cb(err);
+                    }
+                })
+                var wrapIterator = function (iterator) {
+                    return function (err) {
+                        if (err) {
+                            conn.rollback( function () {
+                                done();
+                                cb(err);
+                            });
+                        }
+                        else {
+                            var args = Array.prototype.slice.call(arguments, 1);
+                            var next = iterator.next();
+                            if (next) {
+                                args.unshift(conn);
+                                args.push(wrapIterator(next));
+                            }
+                            else {
+                                args.unshift(conn);
+                                args.push(function (err, results) {
+                                    var args = Array.prototype.slice.call(arguments, 0);
+                                    if (err) {
+                                        conn.rollback(function () {
+                                            done();
+                                            cb(err);
+                                        });
+                                    } else {
+                                        conn.commit( function () {
+                                            done();
+                                            cb.apply(null, args);
+                                        })
+                                    }
+                                })
+                            } async.setImmediate(function () {
+                                iterator.apply(null, args);
+                            });
+                        }
+                    };
+                };
+                wrapIterator(async.iterator(tasks))();
+            });
+        });
         }
     };
