@@ -43,7 +43,7 @@
 
             <div class="ava-content-left">
                 <label for="AvaDate">Dato</label><br>
-                <input id="AvaDate" type="date"><br>
+                <input id="AvaDate" type="date" required><br>
                 <label>Tidspunkt</label><br>
                 <input id="AvaDay" value="08:00" type="checkbox">
                 <span>Dagvakt</span><br>
@@ -77,21 +77,12 @@
     </div>
     <div id="menu1" class="tab-pane fade">
 
-        <div id="shift-buttons" class="btn-group">
-            <button type="button" class="btn btn-default" id="available-prev">
-                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-            </button>
-            <button type="button" class="btn btn-default" id="available-next">
-                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-            </button>
-        </div>
-        <p id="weeknr"></p>
-
+        <input type="week" id="myWeek" value="2014-W5">
         <table id="TingTang"></table>
 
         <table id="available-table" border="1">
             <tr>
-                <th>Vakt :) </th>
+                <th>Vakt</th>
                 <th>man</th>
                 <th>tir</th>
                 <th>ons</th>
@@ -133,11 +124,6 @@
             </tr>
         </table>
 
-        <button id="available">tilgjengelig
-        </button>
-
-        <button id="unavailable">utilgjengelig
-        </button>
     </div>
 </div>
 
