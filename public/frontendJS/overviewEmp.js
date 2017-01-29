@@ -9,7 +9,11 @@ $.get('/getEmployeeRestricted', {}, function(req, res, data){
     $("#cover").fadeOut(10); <!-- MÅ ligge etter det som tar legst å loade-->
 });
 
-//Build Table
+/**
+ * Builds a table given JSON data and an ID in HTML file
+ * @function
+ * @params {text} selector - id of table in HTML file you want to build,{JSONArray} list - an array with data to fill the table.
+ */
 function buildHtmlTable(selector,list) {
     var columns = addAllColumnHeaders(list, selector);
     var tbody = $('<tbody/>');
@@ -26,6 +30,11 @@ function buildHtmlTable(selector,list) {
     }
     $(selector).append(tbody);
 }
+/**
+ * Adds columnheaders to table
+ * @function
+ * @params {text} selector - id of table in HTML file you want to build,{JSONArray} list - an array with data to fill the table.
+ */
 function addAllColumnHeaders(myList, selector) {
     var columnSet = [];
     var headerThead$ = $('<thead/>');
@@ -43,7 +52,10 @@ function addAllColumnHeaders(myList, selector) {
     $(headerThead$).append(headerTr$);
     return columnSet;
 }
-//search for name(s)
+/**
+ * Searches through table based on employee name
+ * @function
+ */
 function searchNameFunction() {
     var input, filter, table, tr, td, i;
     input = document.getElementById("nameInput");
@@ -63,7 +75,10 @@ function searchNameFunction() {
         }
     }
 }
-//search for position
+/**
+ * Searches through table based on employee position
+ * @function
+ */
 function searchPositionFunction() {
     var input, filter, table, tr, td, i;
     input = document.getElementById("positionInput");

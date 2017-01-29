@@ -35,3 +35,9 @@ documentation.build(['./public/frontendJS/myProfile.js'], {}, function (err, res
         fs.writeFileSync('./documentation/myProfile.md', output);
     });
 });
+
+documentation.build(['./public/frontendJS/overviewEmp.js'], {}, function (err, res) {
+    documentation.formats.md(res, {}, function(err, output) {
+        fs.writeFileSync('./documentation/overviewEmp.md', output);
+    });
+});
