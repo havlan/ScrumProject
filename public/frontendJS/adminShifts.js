@@ -14,6 +14,7 @@ var date;
 var place;
 
 
+
 $(document).ready(function () {
 
     $('#calendarx').fullCalendar({
@@ -62,6 +63,11 @@ $(document).ready(function () {
     createNumberDropdown();
 });
 
+/**
+ * Fetches the employees available for the the selected shift.
+ * @function
+ * @param id
+ */
 function getAvailableEmpForShift(id) {
     $.ajax({
         url: '/getEmpForShiftDateAll', //this is the submit URL
@@ -83,6 +89,10 @@ function getAvailableEmpForShift(id) {
     });
 }
 
+/**
+ * Saves the chosen employee for the chosen shift
+ * @function
+ */
 function saveFillShift() {
     var emp_id = fillShiftList[$("#choosePerson").prop('selectedIndex')].employee_id;
     $.ajax({
@@ -100,6 +110,10 @@ function saveFillShift() {
     $('#fillShiftModal').modal("hide");
 }
 
+/**
+ * Creates select-amount-dropdown for the new-shift-modal.
+ * @function
+ */
 function createNumberDropdown() {
     $('#chooseNumber').append($('<option />').text(0));
     for (var i = 4; i < 21; i++) {
@@ -107,7 +121,14 @@ function createNumberDropdown() {
         $('#chooseNumber').append(option);
     }
 }
-//finds dispersion and calls createPeopleDropdown with correct numbers
+
+
+/**
+ * Finds the amount of each employeetype for a shift.
+ * @function
+ * @param res
+ * @returns {{syk: *, hjelp: *, annet: number}}
+ */
 function getDispersion(res) {
     var ant = res;
     var syk;
@@ -132,15 +153,16 @@ function getDispersion(res) {
 
 }
 
-function closeModal() {
-    $("#adminNewShiftModal").modal('hide');
-}
 
 $.get('/getDepartment', {}, function (req, res, data) {
     departments = data.responseJSON;
     makeDropdown('#chooseDepartment', departments);
 });
 
+/**
+ * Updates the employee-table in the new-shift-modal.
+ * @function
+ */
 function updateTable() {
     employeesSyk = [];
     employeesHelp = [];
@@ -190,6 +212,17 @@ function updateTable() {
     });
 }
 
+
+/**
+ * Creates the dropdowns in the employees-table in the new-shift-modal.
+ * @function
+ * @param antSyk
+ * @param antHjelp
+ * @param antAnnet
+ * @param sykList
+ * @param hjelpList
+ * @param annetList
+ */
 function createPeopleDropdown(antSyk, antHjelp, antAnnet, sykList, hjelpList, annetList) {
 
     dropIds = [];
@@ -213,6 +246,12 @@ function createPeopleDropdown(antSyk, antHjelp, antAnnet, sykList, hjelpList, an
 }
 
 
+/**
+ * creates a dropdown.
+ * @function
+ * @param selector
+ * @param list
+ */
 function makeDropdownS(selector, list) {
     $(selector).append($('<option />').text("Ingen valgt"));
     for (var i = 0; i < list.length; i++) {
@@ -223,6 +262,13 @@ function makeDropdownS(selector, list) {
     }
 }
 
+
+/**
+ * creates a dropdown.
+ * @function
+ * @param selector
+ * @param list
+ */
 function makeDropdown(selector, list) {
     var columns = addAllColumnHeaders(list, selector);
     for (var i = 0; i < list.length; i++) {
@@ -233,6 +279,13 @@ function makeDropdown(selector, list) {
     }
 }
 
+/**
+ * Adds columnheaders.
+ * @function
+ * @param list
+ * @param selector
+ * @returns {Array}
+ */
 function addAllColumnHeaders(list, selector) {
     var columnSet = [];
     var headerThead$ = $('<thead/>');
@@ -251,9 +304,11 @@ function addAllColumnHeaders(list, selector) {
     return columnSet;
 }
 
-
-
-
+/**
+ * Insert new shifts in the database, and binds them with an employee if chosen.
+ * It cancels if an employee is chosen more than once.
+ * @function
+ */
 function createNewShifts() {
     var sheToSend = [];
     var shiftToSend = [];
@@ -346,6 +401,7 @@ function createNewShifts() {
     }
 
 }
+
 
 $(function close() {
     $(".custom-close").on('click', function () {
