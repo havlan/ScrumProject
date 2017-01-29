@@ -78,7 +78,15 @@ var server = app.listen(3000, function(){
 });
 
 
+var documentation = require('documentation');
+var fs = require('fs');
 
+documentation.build(['app.js'], {}, function (err, res) {
+    documentation.formats.md(res, {}, function(err, output) {
+        // output is a string of JSON data
+        fs.writeFileSync('./output.md', output);
+    });
+});
 
 //tests imports app
 module.exports = server;
