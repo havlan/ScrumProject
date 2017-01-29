@@ -1,6 +1,9 @@
 
 
-
+/**
+ * Gets information from Employee for the employee who is logged in
+ * @function
+ */
 $(document).ready(function(){ // syntax for å hente data når dokument (html) er lastet inn
     $("#sortTable").tablesorter();
 
@@ -22,7 +25,10 @@ $(document).ready(function(){ // syntax for å hente data når dokument (html) e
 
 var myList= [];
 
-
+/**
+ * Gets all shifts an employee has had to this date from view and makes a table
+ * @function
+ */
 $.get('/getEmployee_shifts_toCurrentDate', {}, function(req, res, data){
     myList = data.responseJSON;
     //document.getElementById("data").innerHTML = myList;
@@ -31,7 +37,11 @@ $.get('/getEmployee_shifts_toCurrentDate', {}, function(req, res, data){
     //tableCreate();
 });
 
-
+/**
+ * Builds a table given JSON data and an ID in HTML file
+ * @function
+ * @params {text} selector - id of table in HTML file you want to build,{JSONArray} list - an array with data to fill the table.
+ */
 function buildHtmlTable(selector) {
     var columns = addAllColumnHeaders(myList, selector);
     var tbody = $('<tbody/>');
@@ -48,7 +58,11 @@ function buildHtmlTable(selector) {
     $(selector).append(tbody);
 }
 
-
+/**
+ * Adds columnheaders to table
+ * @function
+ * @params {text} selector - id of table in HTML file you want to build,{JSONArray} list - an array with data to fill the table.
+ */
 function addAllColumnHeaders(myList, selector) {
 
     var columnSet = [];
@@ -69,7 +83,10 @@ function addAllColumnHeaders(myList, selector) {
 
     return columnSet;
 }
-
+/**
+ * Submits changes made to personal info for employee
+ * @function
+ */
 $(function(){
     $('#editModal').on('submit', function(e){
         e.preventDefault();
