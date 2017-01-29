@@ -6,8 +6,7 @@ var safereg = require('safe-regex');
 
 //passport configuration
 module.exports = function (passport) {
-
-    passport.serializeUser(function (user, done) {
+    passport.serializeUser(function (user, done) { // creating user session, serializing and deserializing after each request. Heavy?
         done(null, {
             username: user.username,
             id: user.employee_id,
@@ -15,7 +14,7 @@ module.exports = function (passport) {
         });
     })
 
-    passport.deserializeUser(function (user, done) {
+    passport.deserializeUser(function (user, done) { // deserialize with serializing. Create session loggin
         pool.getConnection(function (err, connection) {
             if (err) {
                 return done(err);
@@ -32,7 +31,7 @@ module.exports = function (passport) {
             });
         });
     });
-    passport.use('login', new localStrat({
+    passport.use('login', new localStrat({ // local login (MySQL)
             usernameField: 'username',
             passwordField: 'password',
             passReqToCallback: true

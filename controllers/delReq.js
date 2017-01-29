@@ -1,4 +1,3 @@
-var dbMiddelware = require('../middlewares/dbQ1');
 var db = require('../helpers/db');
 
 module.exports = {

@@ -2,6 +2,7 @@ var request = require('supertest');
 var server = require('../app');
 var should = require('should');
 var db = require('../helpers/db').getPool();
+var dbM = require('../helpers/db');
 
 
 describe('=====TESTING PATHS AND ROUTING OF GET=====\n', function(){

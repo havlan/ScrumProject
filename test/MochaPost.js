@@ -6,14 +6,37 @@ var db = require('../helpers/db');
 
 describe('=====TESTING PATHS AND ROUTING OF POST METHODS=====', function() {
     before(function () {
-        request(server)
+        /*request(server)
             .post('/login')
             .send({
             "username": "Abigail",
             "password": "pizza123"
-        }).expect(200);
+        }).expect(200);*/
     });
 
+    it('/login', function(done){
+        request(server)
+            .post('/login')
+            .set("Content-Type","application/json")
+            .send({"username":'Abigail', "password":'pizza123'})
+            .expect(200)
+            .end(function(err,res){
+                res.status.should.equal(302);
+                done();
+            })
+    });
+    it('/postShift_has_employee', function(done){
+        request(server)
+            .post('/postShift_has_employee')
+            .set("Content-Type","application/json")
+            .send({"shift_id":49,"employee_id":5})
+            .expect(200)
+            .end(function(err,res){
+                res.status.should.equal(302);
+                done();
+            })
+    });
+    it('/getdbQuery')
     it("/postUser", function(done){
         request(server)
             .post('/postUser')

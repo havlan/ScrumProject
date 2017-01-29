@@ -2,7 +2,7 @@ var async = require('async');
 var pool = require('../helpers/db').getPool();
 
 module.exports = {
-    postAvail : function(req,res){
+    postAvail : function(req,res){ // TODO delete?
         var okidoki;
         async.waterfall([
             function(done){

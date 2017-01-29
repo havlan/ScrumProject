@@ -18,27 +18,6 @@ module.exports =
         getPool : function () {
             return pool;
         },
-        dbQuery: function (req, res, query) {
-            pool.getConnection(function (err, connection) {
-                if (err) {
-                    res.status(500); // Internal server error
-                    res.json({"error": "Error connecting to database: " + err});
-                    return;
-                }
-                connection.query(query, function (err, rows) {
-                    connection.release(); // Legg tilbake i pool
-                    if (!err) {
-                        //console.log(rows);
-                        res.status(200);
-                        res.json(rows);
-                    } else {
-                        res.status(500);
-                        res.json({"error": "Error reading database: " + err});
-                    }
-                });
-            });
-        },
-
         getdbQuery: function (req, res, query, get) {
             pool.getConnection(function (err, connection) {
                 if (err) {
@@ -49,16 +28,13 @@ module.exports =
                 connection.query(query, get, function (err, rows) {
                     connection.release();
                     if (!err) {
-                        if(rows.length > 0) {
-
+                        if(rows) {
                             res.status(200).json(rows);
-                            //console.log(rows);
                         }else{
                             res.status(404)
                         }
                     } else {
                         res.status(500);
-                        console.log("Error reading database: ");
                     }
                 });
             });

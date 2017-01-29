@@ -5,7 +5,7 @@ var async = require('async');
 var transporter = require("./regWMail").transporter;
 function sendMailShift(rec) {
     var msg = {
-        from : "minvakt.ikkesvar@outlook.com",
+        from : "minvakt.ikkesvar@gmail.com",
         to: rec,
         subject : "Ledige vakter",
         text: "Hei!\nDet er flere ledige vakter tilgjengelig i din personlige kalender.\nDet eneste du trenger å gjøre er å logge inn, husk at en god kollega hjelper de som ikke kan.\nMvh MinVakt."

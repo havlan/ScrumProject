@@ -4,9 +4,9 @@ var async = require('async');
 var pool = require('../helpers/db').getPool();
 var mailOptions;
 
-function sendMailUser(req, mail, pw) {
+function sendMailUser(req, mail, pw) { // sends mail user registers
     mailOptions = {
-        from: '"MinVakt" <minvakt.ikkesvar@outlook.com>', //Abigail4prez
+        from: '"MinVakt" <minvakt.ikkesvar@gmail.com>', //pass: Abigail4prez
         to: mail,
         subject: 'Velkommen til min vakt!',
         text: 'Velkommen til Trondheim og systemet MinVakt.\nMin jobb er å gjøre din hverdag lettere.\n' +
@@ -147,13 +147,13 @@ module.exports = {
         ], function(to,from){
             try {
                 var mail1 = {
-                    from: '"MinVakt" <minvakt.ikkesvar@outlook.com>', //Abigail4prez
+                    from: '"MinVakt" <minvakt.ikkesvar@gmail.com>', //Abigail4prez
                     to: to[0].email,
                     subject: 'Bytte godkjent.',
                     text: 'Vaktbytte mellom deg og ' + from[0].name + ' er godkjent. Din nye vakt burde dukke opp i kalenderen din.'
                 };
                 var mail2 = {
-                    from: '"MinVakt" <minvakt.ikkesvar@outlook.com>', //Abigail4prez
+                    from: '"MinVakt" <minvakt.ikkesvar@gmail.com>', //Abigail4prez
                     to: from[0].email,
                     subject: 'Bytte godkjent.',
                     text: 'Vaktbytte mellom deg og ' + to[0].name + ' er godkjent. Din vakt burde være fjærnet fra din kalender.'
@@ -308,32 +308,12 @@ module.exports = {
             }
         });
     },
-
-    sendTestMail: function (req, res) {
-        var mailOptions = {
-            from: '"MinVakt" <minvakt.ikkesvar@outlook.com>', //Abigail4prez
-            to: req.body.email,
-            subject: 'Velkommen til min vakt!',
-            text: 'Velkommen til Trondheim og systemet MinVakt.\nGet Trolled to the max!\n http://imgur.com/gallery/3o2pdZB\nMerry christmas.',
-        }
-        transporter.sendMail(mailOptions, function (err, inf) {
-            if (err) {
-                return console.log("MAIL ERR: ", err);
-            }
-            console.log("User info sent to ", req.body.email + "\n" + inf);
-            res.json({Message: "Mail sent"});
-        })
-
-    },
-
     changePassword: function (req, res) {
-        console.log("changePassword()");
 
         pool.getConnection(function (er, conn) {
             if (er) {
                 res.json(er);
             }
-            console.log("query 1")
             conn.query("select * from LoginInfo where username = ?", [req.session.passport.user.username], function (err, rows) {
 
                 if (err) {
@@ -351,7 +331,6 @@ module.exports = {
                         res.json("feil pw");
                         conn.release();
                     }
-                    console.log("query 2");
                     conn.query("update LoginInfo set ? where ?", [{
                         password_hash: newSaltHash.passwordHash,
                         password_salt: newSaltHash.salt
@@ -390,7 +369,6 @@ module.exports = {
                         throw err;
                     })
                 } else {
-                    console.log("q1: " + req.body.emp_id + " " + req.body.shift_id);
                     conn.query("update shift_has_employee set employee_id = ? where shift_id = ?", [req.body.emp_id, req.body.shift_id], function (err3, rows2) {
                         if (err3 || rows2.affectedRows != 1) {
                             return conn.rollback(function () {
@@ -421,7 +399,6 @@ module.exports = {
                 res.json(err);
                 return;
             }
-            console.log("begintransaction");
             conn.beginTransaction(function () {
                 if (err) {
                     return conn.rollback(function () {
@@ -431,7 +408,6 @@ module.exports = {
                         throw err;
                     })
                 } else {
-                    console.log("q1: " + req.body.emp_id1 + " " + req.body.shift_id1);
                     conn.query("Update shift_has_employee set employee_id = ? where shift_id = ?", [req.body.emp_id1, req.body.shift_id1], function (err2,rows) {
                         if (err2 || rows.affectedRows != 1) {
                             return conn.rollback(function () {
@@ -439,7 +415,6 @@ module.exports = {
                                 throw err2;
                             })
                         } else {
-                            console.log("q2: "  + req.body.emp_id2 + " " + req.body.shift_id2);
                             conn.query("update shift_has_employee set employee_id = ? where shift_id = ?", [req.body.emp_id2, req.body.shift_id2], function (err3, rows2) {
                                 if (err3 || rows2.affectedRows != 1) {
                                     return conn.rollback(function () {

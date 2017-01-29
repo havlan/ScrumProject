@@ -5,7 +5,7 @@ var generator = require('generate-password');
 
 module.exports = {
 //generer password
-    generatePassword : function () { // min 8, store små bokstaver + 2 spes tegn
+    generatePassword : function () { // generate random password
         var password = generator.generate({
             length: 8,
             numbers: true,

@@ -2,38 +2,36 @@ var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 var path = require('path');
-//var router = require('./controllers/routes');
 var session = require('express-session');
 var expressValidator = require('express-validator')
 var passport = require('passport');
-var hbs = require('express-handlebars');
 var flash = require('connect-flash');
 var morgan = require('morgan');
 var cookieParser = require('cookie-parser');
 var helmet = require('helmet');
-//var escape = require('escape-html');
 var cron = require('cron');
 var mod = require('./models/schedulerSM');
 var compression = require('compression');
-require('./middlewares/passtheport')(passport);
+require('./middlewares/passtheport')(passport); // pass passport to config (serialize, deserialize)
 
 
-app.engine('hbs', hbs({extname : 'hbs', layoutsDir: __dirname + '/public/css'}));
 app.set('views', path.join(__dirname + '/views'));
 app.set('view engine','hbs');
-app.use(morgan('dev'));
-app.use(cookieParser());
+//app.use(morgan('dev')); // dev logging
+app.use(cookieParser()); // parse cookies
 app.use(express.query());
-app.use(bodyParser.json());
+app.use(bodyParser.json({ // parse json
+    "strict": true,
+    "type": "*/json"
+}));
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
-app.use(express.static (__dirname + '/public'));
-//app.use('/views',express.static(__dirname + '/views'));
-app.use(expressValidator());
-app.use(helmet());
-app.use(compression());
+app.use(express.static (__dirname + '/public')); // css/js
+app.use(expressValidator()); // escape
+app.use(helmet()); // safety pkg
+app.use(compression()); // compresses req,res headers to reduce responsetime
 
-app.use(session({
-    secret: "hest",
+app.use(session({ // session, keeps user logged in etc
+    secret: "0havvv1h32hewfivoi",
     resave: false,
     saveUninitialized: true,
     cookie: {
@@ -43,10 +41,10 @@ app.use(session({
 }));
 
 
-app.use(passport.initialize());
-app.use(passport.session());
-app.use(flash());
-app.use(helmet.contentSecurityPolicy({
+app.use(passport.initialize()); // session init
+app.use(passport.session()); // passport config session
+app.use(flash()); // flash req msg
+app.use(helmet.contentSecurityPolicy({ // csp protection vs scripts
     directives: {
         "defaultSrc": ["'self'"],
         "scriptSrc":["'self'" ,"'unsafe-inline'", "maxcdn.bootstrapcdn.com" , "ajax.googleapis.com", "cdn.datatables.net"],
