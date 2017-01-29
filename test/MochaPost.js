@@ -36,7 +36,6 @@ describe('=====TESTING PATHS AND ROUTING OF POST METHODS=====', function() {
                 done();
             })
     });
-    it('/getdbQuery')
     it("/postUser", function(done){
         request(server)
             .post('/postUser')
