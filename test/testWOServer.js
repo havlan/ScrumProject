@@ -11,7 +11,6 @@ before(function(){
     pw = crypto.generatePassword();
     salt = crypto.genRandomString(16);
     hash = crypto.sha512(pw,salt);
-    //console.log("====TEST====\nPW:" + pw + "\nSalt:"+salt+"\nHash:"+hash.passwordHash);
 
 });
 //var username = req.body.username

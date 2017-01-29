@@ -1,8 +1,6 @@
 
 $.get('/getClearenceLevel', {}, function(req, res, data){
-    console.log(data);
     var clearence = data.responseJSON;
-    console.log(clearence);
     if (clearence == 0) {
         showA();
     } else if (clearence == 1) {

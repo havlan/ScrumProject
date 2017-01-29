@@ -1,3 +1,13 @@
+body, html {
+    width:100%;
+    height:100%;
+}
+
+#logoPic{
+    drop-shadow(1px 1px 1px #222);
+    drop-shadow(1px 1px 1px #222); width:200px;
+}
+
 
 #successMessageBox, #errorMessageBox, #warningMessageBox {
     display:none;
@@ -33,11 +43,9 @@
   padding: 8% 0 0;
   margin: auto;
 }
-
 element {
     --main-bg-color: #91a8ee;
 }
-
 #loginbody{
     background: var(--main-bg-color); /* For browsers that do not support gradients */
     background: -webkit-linear-gradient(left top, #91a8ee, #c2f0f0, #e9eefc,#4169e1); /* For Safari 5.1 to 6.0 */
@@ -78,20 +86,37 @@ element {
   width:100%;
 }
 #saveEdit{
-  background-color: royalblue;
-  border: none;
-  color: white;
-  padding: 10px 20px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  position: relative;
-  margin-left: 70%;
-  border-radius:5px;
+    background-color: royalblue;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    position: relative;
+    margin-left: 75%;
+    border-radius:5px;
+    box-shadow: 2px 2px 5px #888888;
+}
+#saveEdit:hover {
+    background-color: #6585e7;
+}
+.closeButton {
+    background-color: royalblue;
+    color: white;
+    padding: 10px 20px;
+    border-radius:5px;
+    border:none;
+    box-shadow: 2px 2px 5px #888888;
+}
+.closeButton:hover{
+    background-color: #6585e7;
 }
 #newPassword .modal-dialog{
-  width: 350px;
+    width: 350px;
+    margin-left: calc(50% - 175px);
+    margin-right: calc(50% - 175px);
 }
 .form input {
   font-family: "Roboto", sans-serif;
@@ -166,11 +191,12 @@ element {
   color: #EF3B3A;
 }
 
-
-
-@media screen and (min-width: 480px)  {
+@media screen and (max-width: 480px)  {
     #loginbody {
         background-size: 100% 250%;
     }
-
+    .login-page {
+        width:100%;
+        padding:1.5em;
+    }
 }

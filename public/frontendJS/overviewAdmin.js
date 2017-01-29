@@ -8,12 +8,11 @@ $.get('/getEmployee', {}, function(req, res, data){
 
     //$("#includedContent").load("menu");
 
-    console.log(data);
-    console.log(data.responseJSON[0]);
     myList = data.responseJSON;
     //document.getElementById("data").innerHTML = myList;
 
     buildHtmlTable('#excelDataTable',myList);
+    $("#excelDataTable").tablesorter();
     //tableCreate();
 });
 //Build Table
@@ -43,7 +42,7 @@ function addAllColumnHeaders(myList, selector) {
         for (var key in rowHash) {
             if ($.inArray(key, columnSet) == -1) {
                 columnSet.push(key);
-                headerTr$.append($('<th/>').html(key));
+                headerTr$.append($('<th id="hei"/>').html(key));
             }
         }
     }
@@ -183,7 +182,6 @@ $(document).on('click','#excelDataTable td',function(){
     var check = [];
     $.get('/getLoginInfoEmployee/'+indeks,{},function (req, res, data) {
         check = data.responseJSON;
-        console.log(check);
     });
     $.get('/getEmployee', {}, function(req, res, data) {
         //Fyll inn redigeringsfelt
@@ -226,9 +224,6 @@ $(function(){
                 document.getElementById("successMessage").innerHTML = "sendt";
                 showSuccessMessage();
             },
-            failure: function(err){
-                console.log("ERR");
-            },
             error: function(xhr){
                 if(xhr.status==404){
                     document.getElementById("errorMessage").innerHTML = "ikke funnet";
@@ -256,7 +251,6 @@ $(function(){
             type: 'POST',
             data: {'name': $("#navndb").val(),'address':$('#adressedb').val(),'email':$('#epostdb').val(),'type_name':strUser,'pers_id':$('#personnummerdb').val(),'phone_nr':$('#telefondb').val(),'employee_id':indeks},
             success: function(data){
-                console.log(JSON.stringify(data));
                 document.getElementById("successMessage").innerHTML = "HEST ER BEST! HEST ER LIVET";
                 showSuccessMessage();
             },
@@ -274,8 +268,6 @@ $(function(){
 });
 
 $.get('/getTypeNames', {}, function(req, res, data){
-    console.log(data);
-    console.log(data.responseJSON);
 
     typeNames = data.responseJSON;
 
@@ -303,7 +295,15 @@ function showSuccessMessage() {
     }, 3000);
 }
 function showErrorMessage() {
-    var element = document.getElementById('successMessageBox');
+    var element = document.getElementById('errorMessageBox');
+    element.style.display = "block";
+    setTimeout(function() {
+        element.style.display = "none";
+    }, 3000);
+}
+
+function showWarningMessage() {
+    var element = document.getElementById('warningMessageBox');
     element.style.display = "block";
     setTimeout(function() {
         element.style.display = "none";

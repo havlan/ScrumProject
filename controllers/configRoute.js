@@ -5,11 +5,8 @@ var getCtrl = require('./getReq');
 var postCtrl = require('./postReq');
 var delCtrl = require('./delReq');
 var model = require('../models/regWMail');
-var avail = require('../models/avaiModel');
+var shiftModel = require('../models/shiftModel');
 
-/*
-syntax -> app.[REST_METHOD]('/PATH/TO/RESOURCE', ACCESS RESTRICTION, METHOD);
- */
 
 module.exports = function (app, passport) {
     app.get('/', isLoggedIn, getCtrl.getRoot); // html ret
@@ -63,7 +60,7 @@ module.exports = function (app, passport) {
     app.get('/getRequestShift/:id',isOfficeEmp,getCtrl.getRequestShift);
 
     //post / put
-    app.post('/login', passport.authenticate('login', { // login method with passport.js lib
+    app.post('/login', passport.authenticate('login', {
         failureRedirect: '/login',
         failureFlash: true
     }), function (req, res) {
@@ -113,7 +110,11 @@ module.exports = function (app, passport) {
         })
     });
     app.post('/bulkAvail', postCtrl.insertBulkAvailability /*avail.postAvail*/);
+
     app.post('/getEmpForShiftDateAll', isAdmin, getCtrl.getEmpForShiftDateAll);
+    app.post('/getAvailableEmpForDate', isOfficeEmp, getCtrl.getAvailableEmpForDate);
+    app.post('/postNewShiftsFromBulk', isOfficeEmp, shiftModel.createNewShifts);
+
     app.post('/changePassword', isLoggedIn, model.changePassword);
     app.post('/acceptRequestWith', isOfficeEmp, model.acceptRequestWith);
     app.get('/getAvailableEmpForShift/:id',isOfficeEmp, getCtrl.getAvailableEmpForShift);

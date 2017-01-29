@@ -22,7 +22,6 @@ $(function () {
             type: 'POST',
             data: $('#forgot').serialize(),
             success: function(data){
-                console.log("HORSES FUCK YEAH",JSON.stringify(data));
                 alert("Success!");
                 document.getElementById("successMessage").innerHTML = "Success!";
                 showSuccessMessage();

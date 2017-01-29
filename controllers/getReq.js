@@ -94,13 +94,16 @@ module.exports = {
         dbHelper.getdbQuery(req, res, "select * from Overtime");
     },
     getEmployee_Shifts_toCurrentDate:function(req,res){
-        dbHelper.getdbQuery(req, res, "select * from Employee_Shifts_toCurrentDate where employee_id = ?",[req.session.passport.user.id]);
+        dbHelper.getdbQuery(req, res, "select employee_id as AnsattID,name as Navn,date as Dato,type_name as Stilling,responsibility_allowed as Ansvarsvakt from Employee_Shifts_toCurrentDate where employee_id = ?",[req.session.passport.user.id]);
     },
     getEmployee_Shifts_fromCurrentDate:function(req,res){
         dbHelper.getdbQuery(req, res, "select e.employee_id as AnsattID,e.name as Navn, e.date as Dato,e.shift_id as Skift,e.type_name as Stilling,e.responsibility_allowed as Ansvarsvakt from Employee_Shifts_fromCurrentDate e where e.employee_id = ?",[req.session.passport.user.id]);
     },
     getEmployee_Shifts_fromCurrentDate2:function(req,res){
         dbHelper.getdbQuery(req, res, "select e.employee_id as AnsattID,e.name as Navn, e.date as Dato,e.shift_id as Skift,e.type_name as Stilling,e.responsibility_allowed as Ansvarsvakt from Employee_Shifts_fromCurrentDate e where e.shift_id not in(select r.shift_id from Request r) and e.employee_id = ?",[req.session.passport.user.id]);
+    },
+    getLoginInfoEmployee : function (req, res) {
+        dbHelper.getdbQuery(req,res,"select * from LoginInfo where employee_id = ?",req.params.id);
     },
     getVaktliste1:function(req,res){
         dbHelper.getdbQuery(req, res, "select * from WORKTOGETHERDAY1 where department_name = ? and DATE(date) = ?", [req.body.department_name,req.body.date]);
@@ -163,8 +166,8 @@ module.exports = {
     getPossibleShiftsEvents : function(req,res){
         dbHelper.getdbQuery(req,res,"select end, start, id, title,description from available_emp_for_shift where employee_id = ?", req.session.passport.user.id);
     },
-    getLoginInfoEmployee : function (req, res) {
-        dbHelper.getdbQuery(req,res,"select * from LoginInfo where employee_id = ?",req.params.id);
+    getAvailableEmpForDate : function (req,res) {
+        dbHelper.getdbQuery(req,res, "SELECT e.employee_id, e.name, e.type_name FROM Employee e WHERE ? NOT IN(SELECT a.day FROM Availability a WHERE a.employee_id = e.employee_id AND availability = 1) AND ? NOT IN(SELECT date FROM Shift ss, shift_has_employee she WHERE ss.shift_id = she.shift_id AND she.employee_id = e.employee_id)",[req.body.date1, req.body.date2]);
     },
     //restricted
     get403 : function (req, res) {

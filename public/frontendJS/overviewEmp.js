@@ -3,10 +3,9 @@
  */
 var myList = [];
 $.get('/getEmployeeRestricted', {}, function(req, res, data){
-    console.log(data);
-    console.log(data.responseJSON[0]);
     myList = data.responseJSON;
     buildHtmlTable('#dbDataTable',myList);
+    $("#dbDataTable").tablesorter();
     $("#cover").fadeOut(10); <!-- MÅ ligge etter det som tar legst å loade-->
 });
 
@@ -81,4 +80,27 @@ function searchPositionFunction() {
             }
         }
     }
+}
+
+function showSuccessMessage() {
+    var element = document.getElementById('successMessageBox');
+    element.style.display = "block";
+    setTimeout(function() {
+        element.style.display = "none";
+    }, 3000);
+}
+function showErrorMessage() {
+    var element = document.getElementById('errorMessageBox');
+    element.style.display = "block";
+    setTimeout(function() {
+        element.style.display = "none";
+    }, 3000);
+}
+
+function showWarningMessage() {
+    var element = document.getElementById('warningMessageBox');
+    element.style.display = "block";
+    setTimeout(function() {
+        element.style.display = "none";
+    }, 3000);
 }

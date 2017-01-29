@@ -40,26 +40,26 @@
             <div id="adminNewShiftModalContent" class="modal-body">
                 <div id="timeBox">
                     <label for="datePicker">Dato</label><br>
-                    <input id = datePicker type="date" onchange="oppdateTable()">
-                    <form action="">
+                    <input id ="datePicker" type="date" onchange="updateTable()">
+                    <form action="" onchange="updateTable()">
                         <label>Vakt</label><br>
-                        <input type="radio" name="time" value="day"> Dag<br>
-                        <input type="radio" name="time" value="evening"> Kveld<br>
+                        <input type="radio" name="time" value="day" checked> Dag
+                        <input type="radio" name="time" value="evening"> Kveld
                         <input type="radio" name="time" value="night"> Natt
                     </form>
                 </div>
                 <div id="departmentBox">
                     <label for="chooseDepartment">Avdeling</label>
-                    <select id="chooseDepartment"></select>
+                    <select id="chooseDepartment" onchange="updateTable()"></select>
                 </div>
                 <div id="numberBox">
                     <label for="chooseNumber">Antall folk</label>
-                    <select id="chooseNumber" onchange="getDispersion(this)"></select>
+                    <select id="chooseNumber" onchange="updateTable()"></select>
                 </div>
                 <div id="peopleBox">
                     <table id="peopleTable"></table>
                 </div>
-                <input type="submit" value="Lagre" id="saveNewShift">
+                <input type="submit" value="Lagre" id="saveNewShift" onclick="createNewShifts()">
             </div>
             <div class="modal-footer">
                 <button type="button" class="close" data-dismiss="modal">Lukk</button>

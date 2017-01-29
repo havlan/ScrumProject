@@ -47,7 +47,7 @@ app.use(flash()); // flash req msg
 app.use(helmet.contentSecurityPolicy({ // csp protection vs scripts
     directives: {
         "defaultSrc": ["'self'"],
-        "scriptSrc":["'self'" ,"'unsafe-inline'", "maxcdn.bootstrapcdn.com" , "ajax.googleapis.com", "cdn.datatables.net"],
+        "scriptSrc":["'self'" ,"'unsafe-inline'","'unsafe-eval", "maxcdn.bootstrapcdn.com" , "ajax.googleapis.com", "cdn.datatables.net"],
         "styleSrc": ["'unsafe-inline'","'self'","'self'/public/css",'maxcdn.bootstrapcdn.com'],
         "fontSrc" : ["*"],
         "imgSrc":["'self'", "'self'/public/img"]

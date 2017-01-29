@@ -1,5 +1,23 @@
 @charset "utf-8";
 
+body, html{
+    width:100%;
+    height:100%;
+}
+
+thead {
+    width: 100%;
+    display: table-header-group;
+}
+th {
+    background-color: white;
+}
+tbody {
+    height: 10vw;
+    width: 100%;
+    overflow-y: auto;
+}
+
 #successMessageBox, #errorMessageBox, #warningMessageBox {
     display:none;
     padding: 10px 0;
@@ -43,43 +61,27 @@
     width:100%;
 }
 
-body, html{
-    width:100%;
-    height:100%;
-}
-
-
 #size, #size1, #size2{
     width: 100%;
     display: block;
 }
-thead {
-    width: 100%;
-    display: table-header-group;
-}
-th {
-    background-color: white;
-}
-tbody {
-    height: 10vw;
-    width: 100%;
-    overflow-y: scroll;
-}
+
 #noShifts{
     display: none;
 }
 
+#dayTable {
+    margin-bottom:0;
+}
 .table-responsive {
     position:absolute;
     width:96%;
-    min-height:110px;
+    border:none;
 }
 .obsWarning{
     text-align: center;
-    border: solid 0.2em royalblue ;
-    padding:33px 1% 1% 1%;
-    margin:0 20px 0 0;
-    height:90px;
+    padding:1% 1% 1% 1%;
+    margin:0 0 0 0;
     background-color: #c4e6ff;
     border-radius: 5px;
 }
@@ -87,47 +89,37 @@ tbody {
 .navbar-shift{
     width: 100%;
 }
-
 div{
     display: block;
 }
-
 button{
     position: relative;
 }
-
 #shift-buttons{
     display: inline-block;
 }
 #shift-prev{
     float:left;
 }
-
 #shift-next{
     float:left;
 }
-
 .navbar-shift{
     float: left;
     text-align:center;
 }
-
 .shift-left{
     float: left;
 }
-
 .shift-right{
     float: right;
 }
-
 .shift-center{
     display: inline-block;
 }
-
 .shift-clear{
     clear: both;
 }
-
 #department-dropdown{
     width: 170px;
 }
@@ -146,7 +138,6 @@ table.sortable td:nth-child(even) {
     width: 100px;
 }
 */
-
 #dbDataTable {
     border-collapse: collapse;
     width: 100%;
@@ -154,19 +145,16 @@ table.sortable td:nth-child(even) {
     font-size: 16px;
 
 }
-
 #dbDataTable th, #dbDataTable td {
     text-align: left;
     padding: 5px;
 }
-
 #dbDataTable tr {
     border-bottom: 1px solid #ddd;
 }
 #dbDataTable td:hover{
     color: darkgray;
 }
-
 #dbDataTable tr.header{
     background-color: #f1f1f1;
 }
@@ -174,6 +162,7 @@ table.sortable td:nth-child(even) {
     background-color: aliceblue;
     cursor: pointer;
 }
+
 @media
 only screen and (max-width: 760px),
 (min-device-width: 768px) and (max-device-width: 1024px)  {

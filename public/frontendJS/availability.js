@@ -3,299 +3,255 @@ var typeNames = [];
 window.indeks = 0;
 var currentDay = new Date();
 var currentWeek = getWeekNumber(currentDay);
-console.log(currentWeek);
 var selectedWeek = currentWeek[1];
 
-$.get('/getAvailability', {}, function (req, res, data) {
 
-    console.log(data);
-    console.log(data.responseJSON);
+$.get('/getAvailability', {}, function (req, res, data) {
     myList = data.responseJSON;
     // buildHtmlTable('#TingTang',myList);
     //tableCreate();
+        for (i = 0; i < myList.length; i++) {
+
+            var tableDay = data.responseJSON[i].day;
+            var available1 = data.responseJSON[i].availability;
+            // Split timestamp into [ Y, M, D, h, m, s ]
+            var t = tableDay.split(/[- T : . Z]/);
+
+            // Apply each element to the Date function
+            var jsDate = new Date(Date.UTC(t[0], t[1] - 1, t[2], t[3], t[4], t[5]));
+            var weekNr = getWeekNumber(jsDate);
+            var weekDay = jsDate.getDay();
+            var hour = jsDate.getHours();
+
+            console.log("UKENUMMER:" +weekNr[1]);
+            if (currentWeek!=null) {
+                if (weekDay == 1) {
+                    if (hour >= 8 && hour < 16) {
+                        if (available1 == 0) {
+                            var start = document.getElementById("man1");
+                            start.classList.add("available");
+                        } else if (available1 == 1) {
+                            var start = document.getElementById("man1");
+                            start.classList.add("unavailable");
+                        }
+
+                    } else if (hour >= 16 && hour < 24) {
+                        if (available1 == 0) {
+                            var start = document.getElementById("man2");
+                            start.classList.add("available");
+                        } else if (available1 == 1) {
+                            var start = document.getElementById("man2");
+                            start.classList.add("unavailable");
+                        }
 
 
-    $("#available-next").click(function neste() {
-        selectedWeek++;
-        console.log(selectedWeek);
-
-
-    });
-
-    $("#available-prev").click(function forrige() {
-        selectedWeek--;
-    });
-
-
-    $('#available').on('click', function () {
-        if ($(boxs).hasClass('highlight')) {
-            $('.highlight').removeClass('unavailable');
-            $('.highlight').each(function () {
-                var aval1 = 1;
-                var date;
-
-            });
-
-
-        }
-
-    });
-
-    $('#unavailable').on('click', function () {
-        if ($(boxs).hasClass('highlight')) {
-            $('.highlight').removeClass('available');
-            $('.highlight').each(function () {
-                alert(this.id);
-            });
-            $('.highlight').addClass('unavailable').removeClass('highlight');
-        }
-
-    });
-
-
-    for (i = 0; i < myList.length; i++) {
-
-        var tableDay = data.responseJSON[i].day;
-        var available1 = data.responseJSON[i].availability;
-        // Split timestamp into [ Y, M, D, h, m, s ]
-        var t = tableDay.split(/[- T : . Z]/);
-
-        // Apply each element to the Date function
-        var jsDate = new Date(Date.UTC(t[0], t[1] - 1, t[2], t[3], t[4], t[5]));
-
-        console.log(jsDate);
-        var weekNr = getWeekNumber(jsDate);
-        console.log(weekNr)
-        var weekDay = jsDate.getDay();
-        var hour = jsDate.getHours();
-
-
-        if (selectedWeek == weekNr[1]) {
-            if (weekDay == 1) {
-                if (hour >= 8 && hour < 16) {
-                    if (available1 == 0) {
-                        var start = document.getElementById("man1");
-                        start.classList.add("available");
-                    } else if (available1 == 1) {
-                        var start = document.getElementById("man1");
-                        start.classList.add("unavailable");
-                    }
-
-                } else if (hour >= 16 && hour < 24) {
-                    if (available1 == 0) {
-                        var start = document.getElementById("man2");
-                        start.classList.add("available");
-                    } else if (available1 == 1) {
-                        var start = document.getElementById("man2");
-                        start.classList.add("unavailable");
-                    }
-
-
-                } else if (hour >= 0 && hour < 8) {
-                    if (available1 == 0) {
-                        var start = document.getElementById("man3");
-                        start.classList.add("available");
-                    } else if (available1 == 1) {
-                        var start = document.getElementById("man3");
-                        start.classList.add("unavailable");
+                    } else if (hour >= 0 && hour < 8) {
+                        if (available1 == 0) {
+                            var start = document.getElementById("man3");
+                            start.classList.add("available");
+                        } else if (available1 == 1) {
+                            var start = document.getElementById("man3");
+                            start.classList.add("unavailable");
+                        }
                     }
                 }
-            }
 
-            if (weekDay == 2) {
-                if (hour >= 8 && hour < 16) {
-                    if (available1 == 0) {
-                        var start = document.getElementById("tir1");
-                        start.classList.add("available");
-                    } else if (available1 == 1) {
-                        var start = document.getElementById("tir1");
-                        start.classList.add("unavailable");
-                    }
+                if (weekDay == 2) {
+                    if (hour >= 8 && hour < 16) {
+                        if (available1 == 0) {
+                            var start = document.getElementById("tir1");
+                            start.classList.add("available");
+                        } else if (available1 == 1) {
+                            var start = document.getElementById("tir1");
+                            start.classList.add("unavailable");
+                        }
 
-                } else if (hour >= 16 && hour < 24) {
-                    if (available1 == 0) {
-                        var start = document.getElementById("tir2");
-                        start.classList.add("available");
-                    } else if (available1 == 1) {
-                        var start = document.getElementById("tir2");
-                        start.classList.add("unavailable");
-                    }
-
-
-                } else if (hour >= 0 && hour < 8) {
-                    if (available1 == 0) {
-                        var start = document.getElementById("tir3");
-                        start.classList.add("available");
-                    } else if (available1 == 1) {
-                        var start = document.getElementById("tir3");
-                        start.classList.add("unavailable");
-                    }
-                }
-            }
-
-            if (weekDay == 3) {
-                if (hour >= 8 && hour < 16) {
-                    if (available1 == 0) {
-                        var start = document.getElementById("ons1");
-                        start.classList.add("available");
-                    } else if (available1 == 1) {
-                        var start = document.getElementById("ons1");
-                        start.classList.add("unavailable");
-                    }
-
-                } else if (hour >= 16 && hour < 24) {
-                    if (available1 == 0) {
-                        var start = document.getElementById("ons2");
-                        start.classList.add("available");
-                    } else if (available1 == 1) {
-                        var start = document.getElementById("ons2");
-                        start.classList.add("unavailable");
-                    }
+                    } else if (hour >= 16 && hour < 24) {
+                        if (available1 == 0) {
+                            var start = document.getElementById("tir2");
+                            start.classList.add("available");
+                        } else if (available1 == 1) {
+                            var start = document.getElementById("tir2");
+                            start.classList.add("unavailable");
+                        }
 
 
-                } else if (hour >= 0 && hour < 8) {
-                    if (available1 == 0) {
-                        var start = document.getElementById("ons3");
-                        start.classList.add("available");
-                    } else if (available1 == 1) {
-                        var start = document.getElementById("ons3");
-                        start.classList.add("unavailable");
+                    } else if (hour >= 0 && hour < 8) {
+                        if (available1 == 0) {
+                            var start = document.getElementById("tir3");
+                            start.classList.add("available");
+                        } else if (available1 == 1) {
+                            var start = document.getElementById("tir3");
+                            start.classList.add("unavailable");
+                        }
                     }
                 }
-            }
 
-            if (weekDay == 4) {
-                if (hour >= 8 && hour < 16) {
-                    if (available1 == 0) {
-                        var start = document.getElementById("tor1");
-                        start.classList.add("available");
-                    } else if (available1 == 1) {
-                        var start = document.getElementById("tor1");
-                        start.classList.add("unavailable");
-                    }
+                if (weekDay == 3) {
+                    if (hour >= 8 && hour < 16) {
+                        if (available1 == 0) {
+                            var start = document.getElementById("ons1");
+                            start.classList.add("available");
+                        } else if (available1 == 1) {
+                            var start = document.getElementById("ons1");
+                            start.classList.add("unavailable");
+                        }
 
-                } else if (hour >= 16 && hour < 24) {
-                    if (available1 == 0) {
-                        var start = document.getElementById("tor2");
-                        start.classList.add("available");
-                    } else if (available1 == 1) {
-                        var start = document.getElementById("tor2");
-                        start.classList.add("unavailable");
-                    }
-
-
-                } else if (hour >= 0 && hour < 8) {
-                    if (available1 == 0) {
-                        var start = document.getElementById("tor3");
-                        start.classList.add("available");
-                    } else if (available1 == 1) {
-                        var start = document.getElementById("tor3");
-                        start.classList.add("unavailable");
-                    }
-                }
-            }
-
-            if (weekDay == 5) {
-                if (hour >= 8 && hour < 16) {
-                    if (available1 == 0) {
-                        var start = document.getElementById("fre1");
-                        start.classList.add("available");
-                    } else if (available1 == 1) {
-                        var start = document.getElementById("fre1");
-                        start.classList.add("unavailable");
-                    }
-
-                } else if (hour >= 16 && hour < 24) {
-                    if (available1 == 0) {
-                        var start = document.getElementById("fre2");
-                        start.classList.add("available");
-                    } else if (available1 == 1) {
-                        var start = document.getElementById("fre2");
-                        start.classList.add("unavailable");
-                    }
+                    } else if (hour >= 16 && hour < 24) {
+                        if (available1 == 0) {
+                            var start = document.getElementById("ons2");
+                            start.classList.add("available");
+                        } else if (available1 == 1) {
+                            var start = document.getElementById("ons2");
+                            start.classList.add("unavailable");
+                        }
 
 
-                } else if (hour >= 0 && hour < 8) {
-                    if (available1 == 0) {
-                        var start = document.getElementById("fre3");
-                        start.classList.add("available");
-                    } else if (available1 == 1) {
-                        var start = document.getElementById("fre3");
-                        start.classList.add("unavailable");
+                    } else if (hour >= 0 && hour < 8) {
+                        if (available1 == 0) {
+                            var start = document.getElementById("ons3");
+                            start.classList.add("available");
+                        } else if (available1 == 1) {
+                            var start = document.getElementById("ons3");
+                            start.classList.add("unavailable");
+                        }
                     }
                 }
-            }
 
-            if (weekDay == 6) {
-                if (hour >= 8 && hour < 16) {
-                    if (available1 == 0) {
-                        var start = document.getElementById("lør1");
-                        start.classList.add("available");
-                    } else if (available1 == 1) {
-                        var start = document.getElementById("lør1");
-                        start.classList.add("unavailable");
-                    }
+                if (weekDay == 4) {
+                    if (hour >= 8 && hour < 16) {
+                        if (available1 == 0) {
+                            var start = document.getElementById("tor1");
+                            start.classList.add("available");
+                        } else if (available1 == 1) {
+                            var start = document.getElementById("tor1");
+                            start.classList.add("unavailable");
+                        }
 
-                } else if (hour >= 16 && hour < 24) {
-                    if (available1 == 0) {
-                        var start = document.getElementById("lør2");
-                        start.classList.add("available");
-                    } else if (available1 == 1) {
-                        var start = document.getElementById("lør2");
-                        start.classList.add("unavailable");
-                    }
-
-
-                } else if (hour >= 0 && hour < 8) {
-                    if (available1 == 0) {
-                        var start = document.getElementById("lør3");
-                        start.classList.add("available");
-                    } else if (available1 == 1) {
-                        var start = document.getElementById("lør3");
-                        start.classList.add("unavailable");
-                    }
-                }
-            }
-
-            if (weekDay == 0) {
-                if (hour >= 8 && hour < 16) {
-                    if (available1 == 0) {
-                        var start = document.getElementById("søn1");
-                        start.classList.add("available");
-                    } else if (available1 == 1) {
-                        var start = document.getElementById("søn1");
-                        start.classList.add("unavailable");
-                    }
-
-                } else if (hour >= 16 && hour < 24) {
-                    if (available1 == 0) {
-                        var start = document.getElementById("søn2");
-                        start.classList.add("available");
-                    } else if (available1 == 1) {
-                        var start = document.getElementById("søn2");
-                        start.classList.add("unavailable");
-                    }
+                    } else if (hour >= 16 && hour < 24) {
+                        if (available1 == 0) {
+                            var start = document.getElementById("tor2");
+                            start.classList.add("available");
+                        } else if (available1 == 1) {
+                            var start = document.getElementById("tor2");
+                            start.classList.add("unavailable");
+                        }
 
 
-                } else if (hour >= 0 && hour < 8) {
-                    if (available1 == 0) {
-                        var start = document.getElementById("søn3");
-                        start.classList.add("available");
-                    } else if (available1 == 1) {
-                        var start = document.getElementById("søn3");
-                        start.classList.add("unavailable");
+                    } else if (hour >= 0 && hour < 8) {
+                        if (available1 == 0) {
+                            var start = document.getElementById("tor3");
+                            start.classList.add("available");
+                        } else if (available1 == 1) {
+                            var start = document.getElementById("tor3");
+                            start.classList.add("unavailable");
+                        }
                     }
                 }
+
+                if (weekDay == 5) {
+                    if (hour >= 8 && hour < 16) {
+                        if (available1 == 0) {
+                            var start = document.getElementById("fre1");
+                            start.classList.add("available");
+                        } else if (available1 == 1) {
+                            var start = document.getElementById("fre1");
+                            start.classList.add("unavailable");
+                        }
+
+                    } else if (hour >= 16 && hour < 24) {
+                        if (available1 == 0) {
+                            var start = document.getElementById("fre2");
+                            start.classList.add("available");
+                        } else if (available1 == 1) {
+                            var start = document.getElementById("fre2");
+                            start.classList.add("unavailable");
+                        }
+
+
+                    } else if (hour >= 0 && hour < 8) {
+                        if (available1 == 0) {
+                            var start = document.getElementById("fre3");
+                            start.classList.add("available");
+                        } else if (available1 == 1) {
+                            var start = document.getElementById("fre3");
+                            start.classList.add("unavailable");
+                        }
+                    }
+                }
+
+                if (weekDay == 6) {
+                    if (hour >= 8 && hour < 16) {
+                        if (available1 == 0) {
+                            var start = document.getElementById("lør1");
+                            start.classList.add("available");
+                        } else if (available1 == 1) {
+                            var start = document.getElementById("lør1");
+                            start.classList.add("unavailable");
+                        }
+
+                    } else if (hour >= 16 && hour < 24) {
+                        if (available1 == 0) {
+                            var start = document.getElementById("lør2");
+                            start.classList.add("available");
+                        } else if (available1 == 1) {
+                            var start = document.getElementById("lør2");
+                            start.classList.add("unavailable");
+                        }
+
+
+                    } else if (hour >= 0 && hour < 8) {
+                        if (available1 == 0) {
+                            var start = document.getElementById("lør3");
+                            start.classList.add("available");
+                        } else if (available1 == 1) {
+                            var start = document.getElementById("lør3");
+                            start.classList.add("unavailable");
+                        }
+                    }
+                }
+
+                if (weekDay == 0) {
+                    if (hour >= 8 && hour < 16) {
+                        if (available1 == 0) {
+                            var start = document.getElementById("søn1");
+                            start.classList.add("available");
+                        } else if (available1 == 1) {
+                            var start = document.getElementById("søn1");
+                            start.classList.add("unavailable");
+                        }
+
+                    } else if (hour >= 16 && hour < 24) {
+                        if (available1 == 0) {
+                            var start = document.getElementById("søn2");
+                            start.classList.add("available");
+                        } else if (available1 == 1) {
+                            var start = document.getElementById("søn2");
+                            start.classList.add("unavailable");
+                        }
+
+
+                    } else if (hour >= 0 && hour < 8) {
+                        if (available1 == 0) {
+                            var start = document.getElementById("søn3");
+                            start.classList.add("available");
+                        } else if (available1 == 1) {
+                            var start = document.getElementById("søn3");
+                            start.classList.add("unavailable");
+                        }
+                    }
+                }
+
+
             }
 
 
         }
-
-
-    }
 
 
 });
+
+
 
 
 function getWeekNumber(d) {
@@ -313,113 +269,6 @@ function getWeekNumber(d) {
     return [d.getFullYear(), weekNo];
 }
 
-
-$(function () {
-
-    /* Get all rows from your 'table' but not the first one
-     * that includes headers. */
-    var rows = $('tr').not(':first');
-    var boxs = $('td');
-
-
-    boxs.on('click', function (e) {
-
-        /* Get current row */
-        var box = $(this);
-
-        /* Check if 'Ctrl', 'cmd' or 'Shift' keyboard key was pressed
-         * 'Ctrl' => is represented by 'e.ctrlKey' or 'e.metaKey'
-         * 'Shift' => is represented by 'e.shiftKey' */
-        if ((e.ctrlKey || e.metaKey) || e.shiftKey) {
-            /* If pressed highlight the other row that was clicked */
-            box.addClass('highlight');
-        } else {
-            /* Otherwise just highlight one row and clean others */
-            boxs.removeClass('highlight');
-            rows.removeClass('highlight');
-            box.addClass('highlight');
-
-        }
-
-    });
-
-
-    /* Create 'click' event handler for rows */
-    $('#1').on('click', function (e) {
-
-        /* Get current row */
-        var row = $('#2');
-
-        /* Check if 'Ctrl', 'cmd' or 'Shift' keyboard key was pressed
-         * 'Ctrl' => is represented by 'e.ctrlKey' or 'e.metaKey'
-         * 'Shift' => is represented by 'e.shiftKey' */
-        if ((e.ctrlKey || e.metaKey) || e.shiftKey) {
-            /* If pressed highlight the other row that was clicked */
-            row.addClass('highlight');
-        } else {
-            /* Otherwise just highlight one row and clean others */
-            rows.removeClass('highlight');
-            row.addClass('highlight');
-        }
-
-    });
-
-    $('#3').on('click', function (e) {
-
-        /* Get current row */
-        var row = $('#4');
-
-        /* Check if 'Ctrl', 'cmd' or 'Shift' keyboard key was pressed
-         * 'Ctrl' => is represented by 'e.ctrlKey' or 'e.metaKey'
-         * 'Shift' => is represented by 'e.shiftKey' */
-        if ((e.ctrlKey || e.metaKey) || e.shiftKey) {
-            /* If pressed highlight the other row that was clicked */
-            row.addClass('highlight');
-            $('#3').removeClass('highlight');
-        } else {
-            /* Otherwise just highlight one row and clean others */
-            rows.removeClass('highlight');
-            row.addClass('highlight');
-        }
-
-    });
-
-    $('#5').on('click', function (e) {
-
-        /* Get current row */
-        var row = $('#6');
-
-        /* Check if 'Ctrl', 'cmd' or 'Shift' keyboard key was pressed
-         * 'Ctrl' => is represented by 'e.ctrlKey' or 'e.metaKey'
-         * 'Shift' => is represented by 'e.shiftKey' */
-        if ((e.ctrlKey || e.metaKey) || e.shiftKey) {
-            /* If pressed highlight the other row that was clicked */
-            row.addClass('highlight');
-        } else {
-            /* Otherwise just highlight one row and clean others */
-            rows.removeClass('highlight');
-            row.addClass('highlight');
-        }
-
-    });
-
-
-    /* This 'event' is used just to avoid that the table text
-     * gets selected (just for styling).
-     * For example, when pressing 'Shift' keyboard key and clicking
-     * (without this 'event') the text of the 'table' will be selected.
-     * You can remove it if you want, I just tested this in
-     * Chrome v30.0.1599.69 */
-    $(document).bind('selectstart dragstart', function (e) {
-        e.preventDefault();
-        return false;
-    });
-
-
-    function placeAvalability(selector, list) {
-
-    }
-});
 
 
 // fane nr 2
@@ -448,9 +297,7 @@ function addRow(content, morecontent, evenmorecontent) {
 
 
 var dates = [];
-console.log(dates);
 var availabilities = [];
-console.log(availabilities);
 
 function makeJsonArray() {
 
@@ -459,27 +306,28 @@ function makeJsonArray() {
         yarr[v] = new Array(2);
         yarr[v][0] = dates[v];
         yarr[v][1] = availabilities[v];
-        console.log(yarr);
     }
 
-
-
-    /*for(i=0;i<dates.length;i++){
-     console.log("DATES: ",dates[i], " AVAILABILIRIES: ",availabilities[i]);
-     yarr[i][0] = dates[i];
-     yarr[i][1] = availabilities[i];
-     }*/
-
-    /*var yarr = getAvailable();*/
     $.ajax({
         url: '/bulkAvail',
         type: 'POST',
         data: {'availarray': yarr},
-        success: function (data) {
-            alert("hest er livet");
+        success:function (data) {
+            document.getElementById("successMessage").innerHTML = "Tilgengelighet oppdatert";
+            showSuccessMessage();
+            getOvertimeTable();
         },
-        error: function (data) {
-            alert("nei,hest er best som pålegg");
+        error: function(xhr){
+            if(xhr.status==404){
+                document.getElementById("errorMessage").innerHTML = "ikke funnet";
+                showErrorMessage();
+            } else if(xhr.status==409){
+                document.getElementById("warningMessage").innerHTML = "tilgjengelighet er allerede registrert";
+                showWarningMessage();
+            } else {
+                document.getElementById("errorMessage").innerHTML = "Det har oppstått en feil";
+                showErrorMessage();
+            }
         }
     })
 
@@ -505,99 +353,97 @@ function makeJsonArray() {
     }
 
     function getAvailable() {
-        var dagvakt = document.getElementById("AvaDay");
-        var kveldsvakt = document.getElementById("AvaEvening");
-        var nattevakt = document.getElementById("AvaNight");
-        var availability = 0;
-        var checkboxes = [dagvakt, kveldsvakt, nattevakt];
-        AvaDate = document.getElementById("AvaDate").value;
-        console.log(AvaDate);
+        var valid = document.getElementById('AvaDate').validity.valid;
+        if (valid == true) {
+            var dagvakt = document.getElementById("AvaDay");
+            var kveldsvakt = document.getElementById("AvaEvening");
+            var nattevakt = document.getElementById("AvaNight");
+            var availability = 0;
+            var checkboxes = [dagvakt, kveldsvakt, nattevakt];
+            AvaDate = document.getElementById("AvaDate").value;
 
-        var yarr = [];
-        for (i = 0; i < checkboxes.length; i++) {
-            yarr[i] = new Array(2);
-            if (checkboxes[i].checked == true) {
-                if (checkboxes[i] == dagvakt) {
-                    var Dato = AvaDate + " 08:00:00";
-                    console.log(Dato);
-                    var vakt = "dagvakt";
-                    if (typeof AvaDate != 'undefined' && typeof vakt != 'undefined') { // //if($('#ava-choices').closest("tr").find('td:eq(2)').text() == "ja"){
-                        addRow(vakt, Dato, "ja");
-                        dates.push(Dato);
-                        availabilities.push(availability);
-                    }
-                } else if (checkboxes[i] == kveldsvakt) {
-                    var Dato = AvaDate + " 16:00:00";
-                    console.log(Dato);
-                    var vakt = "kveldsvakt";
-                    if (typeof AvaDate != 'undefined' && typeof vakt != 'undefined') {
-                        addRow(vakt, Dato, "ja");
-                        dates.push(Dato);
-                        availabilities.push(availability);
+            var yarr = [];
+            for (i = 0; i < checkboxes.length; i++) {
+                yarr[i] = new Array(2);
+                if (checkboxes[i].checked == true) {
+                    if (checkboxes[i] == dagvakt) {
+                        var Dato = AvaDate + " 08:00:00";
+                        var vakt = "dagvakt";
+                        if (typeof AvaDate != 'undefined' && typeof vakt != 'undefined') { // //if($('#ava-choices').closest("tr").find('td:eq(2)').text() == "ja"){
+                            addRow(vakt, Dato, "ja");
+                            dates.push(Dato);
+                            availabilities.push(availability);
+                        }
+                    } else if (checkboxes[i] == kveldsvakt) {
+                        var Dato = AvaDate + " 16:00:00";
+                        var vakt = "kveldsvakt";
+                        if (typeof AvaDate != 'undefined' && typeof vakt != 'undefined') {
+                            addRow(vakt, Dato, "ja");
+                            dates.push(Dato);
+                            availabilities.push(availability);
 
-                    }
-                } else if (checkboxes[i] == nattevakt) {
-                    var Dato = AvaDate + " 00:00:00";
-                    console.log(Dato);
-                    var vakt = "nattevakt";
-                    if (typeof AvaDate != 'undefined' && typeof vakt != 'undefined') {
-                        addRow(vakt, Dato, "ja");
-                        dates.push(Dato);
-                        availabilities.push(availability);
+                        }
+                    } else if (checkboxes[i] == nattevakt) {
+                        var Dato = AvaDate + " 00:00:00";
+                        var vakt = "nattevakt";
+                        if (typeof AvaDate != 'undefined' && typeof vakt != 'undefined') {
+                            addRow(vakt, Dato, "ja");
+                            dates.push(Dato);
+                            availabilities.push(availability);
+                        }
                     }
                 }
             }
+            return yarr;
+
         }
-        return yarr;
     }
 
     function getUnavailable() {
-        var dagvakt = document.getElementById("AvaDay");
-        var kveldsvakt = document.getElementById("AvaEvening");
-        var nattevakt = document.getElementById("AvaNight");
-        var availability = 1;
-        var checkboxes = [dagvakt, kveldsvakt, nattevakt];
+        var valid = document.getElementById('AvaDate').validity.valid;
+        if (valid == true) {
+            var dagvakt = document.getElementById("AvaDay");
+            var kveldsvakt = document.getElementById("AvaEvening");
+            var nattevakt = document.getElementById("AvaNight");
+            var availability = 1;
+            var checkboxes = [dagvakt, kveldsvakt, nattevakt];
 
-        AvaDate = document.getElementById("AvaDate").value;
-        console.log(AvaDate);
+            AvaDate = document.getElementById("AvaDate").value;
 
-        for (i = 0; i < checkboxes.length; i++) {
-            if (checkboxes[i].checked == true) {
-                if (checkboxes[i] == dagvakt) {
-                    var Dato = AvaDate + " 08:00:00";
-                    console.log(Dato);
-                    var vakt = "dagvakt";
-                    if (typeof AvaDate !== 'undefined' && typeof vakt !== 'undefined') {
-                        addRow(vakt, Dato, "nei");
-                        dates.push(Dato);
-                        availabilities.push(availability);
+            for (i = 0; i < checkboxes.length; i++) {
+                if (checkboxes[i].checked == true) {
+                    if (checkboxes[i] == dagvakt) {
+                        var Dato = AvaDate + " 08:00:00";
+                        var vakt = "dagvakt";
+                        if (typeof AvaDate !== 'undefined' && typeof vakt !== 'undefined') {
+                            addRow(vakt, Dato, "nei");
+                            dates.push(Dato);
+                            availabilities.push(availability);
+                        }
+                    }
+                    else if (checkboxes[i] == kveldsvakt) {
+                        var Dato = AvaDate + " 16:00:00";
+                        var vakt = "kveldsvakt";
+                        if (typeof AvaDate !== 'undefined' && typeof vakt !== 'undefined') {
+                            addRow(vakt, Dato, "nei");
+                            dates.push(Dato);
+                            availabilities.push(availability);
+                        }
+                    }
+
+                    else if (checkboxes[i] == nattevakt) {
+                        var Dato = AvaDate + " 00:00:00";
+                        var vakt = "nattevakt";
+                        if (typeof AvaDate !== 'undefined' && typeof vakt !== 'undefined') {
+                            addRow(vakt, Dato, "nei");
+                            dates.push(Dato);
+                            availabilities.push(availability);
+                        }
                     }
                 }
-                else if (checkboxes[i] == kveldsvakt) {
-                    var Dato = AvaDate + " 16:00:00";
-                    console.log(Dato);
-                    var vakt = "kveldsvakt";
-                    if (typeof AvaDate !== 'undefined' && typeof vakt !== 'undefined') {
-                        addRow(vakt, Dato, "nei");
-                        dates.push(Dato);
-                        availabilities.push(availability);
-                    }
-                }
 
-                else if (checkboxes[i] == nattevakt) {
-                    var Dato = AvaDate + " 00:00:00";
-                    console.log(Dato);
-                    var vakt = "nattevakt";
-                    if (typeof AvaDate !== 'undefined' && typeof vakt !== 'undefined') {
-                        addRow(vakt, Dato, "nei");
-                        dates.push(Dato);
-                        availabilities.push(availability);
-                    }
-                }
             }
-
         }
-
 
     }
 
@@ -612,5 +458,25 @@ function makeJsonArray() {
 
     }
 
+function showSuccessMessage() {
+    var element = document.getElementById('successMessageBox');
+    element.style.display = "block";
+    setTimeout(function() {
+        element.style.display = "none";
+    }, 3000);
+}
+function showErrorMessage() {
+    var element = document.getElementById('errorMessageBox');
+    element.style.display = "block";
+    setTimeout(function() {
+        element.style.display = "none";
+    }, 3000);
+}
 
-
+function showWarningMessage() {
+    var element = document.getElementById('warningMessageBox');
+    element.style.display = "block";
+    setTimeout(function() {
+        element.style.display = "none";
+    }, 3000);
+}

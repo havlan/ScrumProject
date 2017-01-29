@@ -146,7 +146,7 @@ $(document).on('click','#switchTable .openModal',function () {
         $('#approveModal').modal('hide');
     }
     //on modal close
-    $('#closeModal').on('click',function () {
+    $('#approveModal').on('hidden.bs.modal',function () {
         $('input[class=openModal]').prop('checked', false);
         $('#ansattTable').remove();
     });
@@ -200,179 +200,199 @@ $(document).on('click','#Lagre',function (e) {
  * @function
  * @params {number} skiftid - id of shift,{number} ansatt - id of employee
  */
-function fjernAnsatt(skiftid,ansatt){
+function fjernAnsatt(skiftid,ansatt) {
     var id;
-    if(skiftid==null) {//if method is called from 'Godkjenn vaktbytte'
+    if (skiftid == null) {//if method is called from 'Godkjenn vaktbytte'
         id = indeks;
     } else id = skiftid;//If method is called from 'Godkjenn fravær'
-    $.ajax({
-        url:'/deleteShift_has_employee',
-        type: 'DELETE',
-        data:{'shift_id':id,'employee_id':ansatt},
-        success:function (data) {
-            document.getElementById("successMessage").innerHTML = "Ansatt er fjernet";
-            showSuccessMessage();
-        },
-        error: function(xhr){
-            if(xhr.status==404){
-                document.getElementById("errorMessage").innerHTML = "ikke funnet";
-                showErrorMessage();
-            } else {
-                document.getElementById("errorMessage").innerHTML = "Det har oppstått en feil";
-                showErrorMessage();
+    function fjernAnsatt() {
+        $.ajax({
+            url: '/deleteShift_has_employee',
+            type: 'DELETE',
+            data: {'shift_id': id, 'employee_id': ansatt},
+            success: function (data) {
+                document.getElementById("successMessage").innerHTML = "Ansatt er fjernet";
+                showSuccessMessage();
+                getSwitchTable();
+            },
+            error: function (xhr) {
+                if (xhr.status == 404) {
+                    document.getElementById("errorMessage").innerHTML = "ikke funnet";
+                    showErrorMessage();
+                } else {
+                    document.getElementById("errorMessage").innerHTML = "Det har oppstått en feil";
+                    showErrorMessage();
+                }
             }
-        }
-    });
-}
-/**
- * Replaces an employee in shift_has_employee with another
- * @function
- * @params {number} skiftid - id of shift,{number} nyansattid - id of employee to replace, {number} - id of employee to be replaced
- */
-function erstattAnsatt() {
-    var skiftid = indeks;
-    console.log(ansattid);
-    console.log(nyansattid);
-    console.log(skiftid);
-    $.ajax({
-        url: '/updateShift_has_employee',
-        type:'POST',
-        data:{'employee_id':ansattid,'shift_id':skiftid,'employee_id2':nyansattid},
-        success:function (data) {
-            fjernAnsatteRequestShift(skiftid);
-            document.getElementById("successMessage").innerHTML = "Ansatt er erstattet";
-            showSuccessMessage();
-        },
-        error: function(xhr){
-            if(xhr.status==404){
-                document.getElementById("errorMessage").innerHTML = "ikke funnet";
-                showErrorMessage();
-            } else {
-                document.getElementById("errorMessage").innerHTML = "Det har oppstått en feil";
-                showErrorMessage();
+        });
+    }
+
+    /**
+     * Replaces an employee in shift_has_employee with another
+     * @function
+     * @params {number} skiftid - id of shift,{number} nyansattid - id of employee to replace, {number} - id of employee to be replaced
+     */
+    function erstattAnsatt() {
+        var skiftid = indeks;
+        $.ajax({
+            url: '/updateShift_has_employee',
+            type: 'POST',
+            data: {'employee_id': ansattid, 'shift_id': skiftid, 'employee_id2': nyansattid},
+            success: function (data) {
+                fjernAnsatteRequestShift(skiftid);
+                document.getElementById("successMessage").innerHTML = "Ansatt er erstattet";
+                showSuccessMessage();
+                getSwitchTable();
+            },
+            error: function (xhr) {
+                if (xhr.status == 404) {
+                    document.getElementById("errorMessage").innerHTML = "ikke funnet";
+                    showErrorMessage();
+                } else {
+                    document.getElementById("errorMessage").innerHTML = "Det har oppstått en feil";
+                    showErrorMessage();
+                }
             }
-        }
-    });
-}
-/**
- * Removes all employees connected to a specific shift in Request_shift
- * @function
- * @params {number} skiftid - id of shift
- */
-function fjernAnsatteRequestShift(skiftid){
-    $.ajax({
-        url:'/deleteRequest_shift',
-        type:'DELETE',
-        data:{'shift_id':skiftid},
-        success:function (data) {
-           deleteRequest(indeks);
-        },
-        error: function(xhr){
-            if(xhr.status==404){
-                document.getElementById("errorMessage").innerHTML = "ikke funnet";
-                showErrorMessage();
-            } else {
-                document.getElementById("errorMessage").innerHTML = "Det har oppstått en feil";
-                showErrorMessage();
+        });
+    }
+
+    /**
+     * Removes all employees connected to a specific shift in Request_shift
+     * @function
+     * @params {number} skiftid - id of shift
+     */
+    function fjernAnsatteRequestShift(skiftid) {
+        $.ajax({
+            url: '/deleteRequest_shift',
+            type: 'DELETE',
+            data: {'shift_id': skiftid},
+            success: function (data) {
+                deleteRequest(indeks);
+                document.getElementById("successMessage").innerHTML = "TODO er fjernet";//TODO
+                showSuccessMessage();
+            },
+            error: function (xhr) {
+                if (xhr.status == 404) {
+                    document.getElementById("errorMessage").innerHTML = "ikke funnet";
+                    showErrorMessage();
+                } else {
+                    document.getElementById("errorMessage").innerHTML = "Det har oppstått en feil";
+                    showErrorMessage();
+                }
             }
-        }
-    });
-}
-/**
- * Removes a specific request from Request
- * @function
- * @params {number} request_id - id of request
- */
-function deleteRequest(id) {
-    $.ajax({
-        url: '/deleteRequest',
-        type:'DELETE',
-        data:{'request_id':id},
-        success:function (data) {
-            //alert("Request slettet.");
-        },
-        error: function(xhr) {
-            if (xhr.status == 404) {
-                document.getElementById("errorMessage").innerHTML = "ikke funnet";
-                showErrorMessage();
-            } else {
-                document.getElementById("errorMessage").innerHTML = "Det har oppstått en feil";
-                showErrorMessage();
+        });
+    }
+
+    /**
+     * Removes a specific request from Request
+     * @function
+     * @params {number} request_id - id of request
+     */
+    function deleteRequest(id) {
+        $.ajax({
+            url: '/deleteRequest',
+            type: 'DELETE',
+            data: {'request_id': id},
+            success: function (data) {
+                //alert("Request slettet.");
+                document.getElementById("successMessage").innerHTML = "TODO er fjernet"; //TODO
+                showSuccessMessage();
+            },
+            error: function (xhr) {
+                if (xhr.status == 404) {
+                    document.getElementById("errorMessage").innerHTML = "ikke funnet";
+                    showErrorMessage();
+                } else {
+                    document.getElementById("errorMessage").innerHTML = "Det har oppstått en feil";
+                    showErrorMessage();
+                }
             }
-        }
-    });
-}
-/**
- * Sets a request in Absence to checked_by_admin
- * @function
- * @params {number} id - id of absence
- */
-function updateAbsence(id) {
-    $.ajax({
-        url: '/updateAbsence2',
-        type:'POST',
-        data:{'absence_id':id,'checked_by_admin':1},
-        success:function (data) {
-            alert("Absence slettet.");
-            document.getElementById("successMessage").innerHTML = "fravær er fjernet";
-            showSuccessMessage();
-        },
-        error: function(xhr){
-            if(xhr.status==404){
-                document.getElementById("errorMessage").innerHTML = "ikke funnet";
-                showErrorMessage();
-            } else {
-                document.getElementById("errorMessage").innerHTML = "Det har oppstått en feil";
-                showErrorMessage();
+        });
+    }
+
+    /**
+     * Sets a request in Absence to checked_by_admin
+     * @function
+     * @params {number} id - id of absence
+     */
+    function updateAbsence(id) {
+        $.ajax({
+            url: '/updateAbsence2',
+            type: 'POST',
+            data: {'absence_id': id, 'checked_by_admin': 1},
+            success: function (data) {
+                document.getElementById("successMessage").innerHTML = "Fravær godkjent";
+                showSuccessMessage();
+                getAbsenceTable();
+            },
+            error: function (xhr) {
+                if (xhr.status == 404) {
+                    document.getElementById("errorMessage").innerHTML = "ikke funnet";
+                    showErrorMessage();
+                } else {
+                    document.getElementById("errorMessage").innerHTML = "Det har oppstått en feil";
+                    showErrorMessage();
+                }
             }
-        }
-    });
-}
-/**
- * Sets a request in Overtime to checked_by_admin
- * @function
- * @params {number} id - id of overtime
- */
-function updateOvertime(id) {
-    $.ajax({
-        url: '/updateOvertime2',
-        type:'POST',
-        data:{'overtime_id':id,'checked_by_admin':1},
-        success:function (data) {
-            document.getElementById("successMessage").innerHTML = "Overtid er oppdatert";
-            showSuccessMessage();
-        },
-        error: function(xhr){
-            if(xhr.status==404){
-                document.getElementById("errorMessage").innerHTML = "ikke funnet";
-                showErrorMessage();
-            } else {
-                document.getElementById("errorMessage").innerHTML = "Det har oppstått en feil";
-                showErrorMessage();
+        });
+    }
+
+    /**
+     * Sets a request in Overtime to checked_by_admin
+     * @function
+     * @params {number} id - id of overtime
+     */
+    function updateOvertime(id) {
+        $.ajax({
+            url: '/updateOvertime2',
+            type: 'POST',
+            data: {'overtime_id': id, 'checked_by_admin': 1},
+            success: function (data) {
+                document.getElementById("successMessage").innerHTML = "Overtid oppdatert";
+                showSuccessMessage();
+                getOvertimeTable();
+            },
+            error: function (xhr) {
+                if (xhr.status == 404) {
+                    document.getElementById("errorMessage").innerHTML = "ikke funnet";
+                    showErrorMessage();
+                } else {
+                    document.getElementById("errorMessage").innerHTML = "Det har oppstått en feil";
+                    showErrorMessage();
+                }
             }
-        }
-    });
+        });
+    }
+
+    /**
+     * Shows a success-message
+     * @function
+     */
+    function showSuccessMessage() {
+        var element = document.getElementById('successMessageBox');
+        element.style.display = "block";
+        setTimeout(function () {
+            element.style.display = "none";
+        }, 3000);
+    }
+
+    /**
+     * Shows an error-message
+     * @function
+     */
+    function showErrorMessage() {
+        var element = document.getElementById('errorMessageBox');
+        element.style.display = "block";
+        setTimeout(function () {
+            element.style.display = "none";
+        }, 3000);
+    }
+
+    function showWarningMessage() {
+        var element = document.getElementById('warningMessageBox');
+        element.style.display = "block";
+        setTimeout(function () {
+            element.style.display = "none";
+        }, 3000);
+    }
 }
-/**
- * Shows a success-message
- * @function
- */
-function showSuccessMessage() {
-    var element = document.getElementById('successMessageBox');
-    element.style.display = "block";
-    setTimeout(function() {
-        element.style.display = "none";
-    }, 3000);
-}
-/**
- * Shows an error-message
- * @function
- */
-function showErrorMessage() {
-    var element = document.getElementById('successMessageBox');
-    element.style.display = "block";
-    setTimeout(function() {
-        element.style.display = "none";
-    },3000);
-}
-//h
