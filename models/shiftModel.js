@@ -17,41 +17,38 @@ module.exports = {
                             console.log(err2);
                         })
                     } else {
-                        var sql = "INSERT INTO Shift (minutes, date, department_id, type_name) values ?";
-
-                        conn.query(sql, [req.body.shifts], function (error, res2) {
+                        conn.query("INSERT INTO Shift (minutes, date, department_id, type_name) values (?,?,?,?)", [req.body.minutes, req.body.date, req.body.department_id, req.body.type_name], function (error, res2) {
                             if (error) {
                                 return conn.rollback(function () {
                                     conn.release();
                                     console.log(error);
                                 })
                             } else {
-
-                                var shiftIds = [];
-                                var indeks = 0;
-                                for (var i = 0; i < res2.affectedRows; i++) {
-                                    if (req.body.shiftemps[i][0] != 0) {
-                                        shiftIds[indeks] = new Array(2);
-                                        shiftIds[indeks][0] = res2.insertId + i;
-                                        shiftIds[indeks][1] = req.body.shiftemps[i][0];
-                                        indeks++;
-                                    }
+                                if(req.body.emp != 0){
+                                    conn.query("insert into shift_has_employee (shift_id,employee_id) values (?,?)", [res2.insertId, req.body.emp], function (error, res3) {
+                                        if (error) {
+                                            return conn.rollback(function () {
+                                                conn.release();
+                                            })
+                                        } else {
+                                            conn.commit(function (gerr) {
+                                                conn.release();
+                                                res.status(200).json(res3);
+                                                if (gerr) {
+                                                    console.log(gerr);
+                                                }
+                                            })
+                                        }
+                                    })
+                                } else {
+                                    conn.commit(function (yerr) {
+                                        conn.release();
+                                        res.status(200).json(res2);
+                                        if (yerr) {
+                                            console.log(yerr);
+                                        }
+                                    })
                                 }
-
-                                conn.query("insert into shift_has_employee (shift_id,employee_id) values ?", [shiftIds], function (error, res3) {
-                                    if (error) {
-                                        return conn.rollback(function () {
-                                            conn.release();
-                                        })
-                                    } else {
-                                        conn.commit(function (gerr) {
-                                            conn.release();
-                                            if (gerr) {
-                                                console.log(gerr);
-                                            }
-                                        })
-                                    }
-                                })
                             }
                         })
                     }

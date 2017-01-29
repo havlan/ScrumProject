@@ -306,7 +306,7 @@ function createNewShifts() {
         var depId = departments[$('#chooseDepartment').prop('selectedIndex')].department_id;
 
         sheToSend.push({"employee_id":emp1});
-        shiftToSend.push({minutes:"480",date:date,department_id:depId,type_name:rank});
+        shiftToSend.push({"minutes":"480","date":date,"department_id":depId,"type_name":rank});
     }
 
     var shifts = [];
@@ -326,20 +326,23 @@ function createNewShifts() {
     }
 
     if(valid){
-        $.ajax({
-            url: '/postNewShiftsFromBulk', //this is the submit URL
-            type: 'POST',
-            data: {'shifts': shifts, 'shiftemps':shiftemps},
-            success: function (data) {
-                location.reload();
-            },
-            failure: function (err) {
-                console.log("Error" + err);
-            }
-        })
+        for(var t = 0; t < shiftToSend.length; t++) {
+            $.ajax({
+                url: '/postNewShiftsFromBulk', //this is the submit URL
+                type: 'POST',
+                data: {'minutes': shiftToSend[t].minutes, 'date': shiftToSend[t].date, 'department_id':shiftToSend[t].department_id, 'type_name':shiftToSend[t].type_name, 'emp':sheToSend[t].employee_id},
+                success: function (data) {
+                    if(t = shiftToSend.length-1){
+                        location.reload();
+                    }
+                },
+                failure: function (err) {
+                    console.log("Error" + err);
+
+                }
+            })
+        }
         $('#adminNewShiftModal').modal("hide");
-
-
     }
 
 }
