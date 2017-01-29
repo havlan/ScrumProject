@@ -272,7 +272,10 @@ $(function(){
     });
 
 });
-//myModal edit
+/**
+ * Updates new information on an employee
+ * @function
+ */
 $(function(){
     $('#myModal').on('submit', function(e){
      //   alert($("#adressedb").val());
@@ -284,7 +287,7 @@ $(function(){
             type: 'POST',
             data: {'name': $("#navndb").val(),'address':$('#adressedb').val(),'email':$('#epostdb').val(),'type_name':strUser,'pers_id':$('#personnummerdb').val(),'phone_nr':$('#telefondb').val(),'employee_id':indeks},
             success: function(data){
-                document.getElementById("successMessage").innerHTML = "HEST ER BEST! HEST ER LIVET";
+                document.getElementById("successMessage").innerHTML = "Oppdatert";
                 showSuccessMessage();
             },
             error: function(xhr){
@@ -300,6 +303,10 @@ $(function(){
     });
 });
 
+/**
+ * Gets data from Type and makes a dropdown
+ * @function
+ */
 $.get('/getTypeNames', {}, function(req, res, data){
 
     typeNames = data.responseJSON;
@@ -309,7 +316,11 @@ $.get('/getTypeNames', {}, function(req, res, data){
 });
 
 
-
+/**
+ * Creates a dropdown given an id
+ * @function
+ * @param {text} selector - id of given dropdown in HTML file
+ */
 function makeDropdown(selector) {
     var columns = addAllColumnHeaders(typeNames, selector);
     for (var i = 0; i < typeNames.length; i++) {

@@ -305,7 +305,7 @@ function fjernAnsatt(skiftid,ansatt) {
             data: {'request_id': id},
             success: function (data) {
                 //alert("Request slettet.");
-                document.getElementById("successMessage").innerHTML = "t";
+                document.getElementById("successMessage").innerHTML = "";
                 //showSuccessMessage();
             },
             error: function (xhr) {
