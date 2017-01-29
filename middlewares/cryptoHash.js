@@ -4,7 +4,12 @@ var generator = require('generate-password');
 
 
 module.exports = {
-//generer password
+
+    /**
+     * Generates a random password.
+     * @function
+     * @returns password
+     */
     generatePassword : function () { // generate random password
         var password = generator.generate({
             length: 8,
@@ -52,15 +57,5 @@ module.exports = {
             /** Gives us salt of length 16 */
             var passwordData = sha512(userpassword, salt);
 
-            /**
-             * passwordData.salt and passwordData.passwordHash is stored in db.
-             *
-             * when user logs in:
-             *  - The user will enter the username/email and the password.
-             *  - Fetch the hash and the salt based on the username entered
-             *  - Combine the salt with the user password
-             *  - Hash the combination with the same hashing algorithm.
-             *  - Compare the result.
-             */
         }
 }

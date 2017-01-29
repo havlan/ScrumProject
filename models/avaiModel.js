@@ -2,6 +2,13 @@ var async = require('async');
 var pool = require('../helpers/db').getPool();
 
 module.exports = {
+
+    /**
+     * Inserts multiple new rows in the Availability table.
+     * @function
+     * @param req
+     * @param res
+     */
     postAvail : function(req,res){ // TODO delete?
         var okidoki;
         async.waterfall([

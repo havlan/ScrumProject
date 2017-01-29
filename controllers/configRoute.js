@@ -128,6 +128,15 @@ module.exports = function (app, passport) {
     app.get('/forbudt',getCtrl.get403);
     app.get('/*', getCtrl.get404);
 };
+
+
+/**
+ * Logged-in checker. User is redirected to the login page if not logged in.
+ * @function
+ * @param req
+ * @param res
+ * @param next
+ */
 function isLoggedIn(req, res, next) {
     if (req.isAuthenticated()) {
         next();
@@ -135,6 +144,16 @@ function isLoggedIn(req, res, next) {
         res.redirect('/login');
     }
 }
+
+/**
+ * Checks if the user is an officeemployee. This grants the user more power.
+ * If a non-officeemployee-user tries to access officeemployee-restricted resources,
+ * the user is redirected to the access-denied page.
+ * @function
+ * @param req
+ * @param res
+ * @param next
+ */
 function isOfficeEmp (req,res,next){
     if(req.isAuthenticated() && req.session.passport){
         if(req.session.passport.user.is_admin == 1 || req.session.passport.user.is_admin == 0){
@@ -147,6 +166,14 @@ function isOfficeEmp (req,res,next){
     }
 }
 
+/**
+ * Checks if the user is an admin.
+ * A non-admin will be redirected to the user-page if access is attempted.
+ * @function
+ * @param req
+ * @param res
+ * @param next
+ */
 function isAdmin(req, res, next) {
     if (req.isAuthenticated() && req.session.passport) {
         if (req.session.passport.user.is_admin == 0) {
@@ -156,6 +183,13 @@ function isAdmin(req, res, next) {
         res.redirect('/user');
     }
 }
+
+/**
+ * Logs the user out of the system and redirects the user to the login page.
+ * @f
+ * @param req
+ * @param res
+ */
 function logOut(req, res) {
     req.logout();
     res.redirect('/login');
