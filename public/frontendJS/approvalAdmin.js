@@ -135,7 +135,7 @@ $(document).on('click','#switchTable .openModal',function (e) {
         $('#approveModal').modal('hide');
     }
     //on modal close
-    $('#closeModal').on('click',function () {
+    $('#approveModal').on('hidden.bs.modal',function () {
         $('input[class=openModal]').prop('checked', false);
         $('#ansattTable').remove();
     });
