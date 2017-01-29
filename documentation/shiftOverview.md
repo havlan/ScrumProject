@@ -3,3 +3,58 @@
 ## department
 
 Created by LittleGpNator on 13.01.2017.
+
+## ready
+
+Updates table
+
+## get
+
+Displays a dropdown with the department names from the database
+
+## makeDropdown
+
+Makes a dropdown
+
+**Parameters**
+
+-   `selector`  
+-   `list`  
+
+## oppdateTable
+
+Updates the table with the information about the three shift types
+on a date on a chosen place
+
+## buildHtmlTable
+
+Builds a HTML table with data from the database
+
+**Parameters**
+
+-   `selector`  
+-   `list`  
+-   `index2`  
+
+## addAllColumnHeaders
+
+Adds all column headers
+
+**Parameters**
+
+-   `list`  
+-   `selector`  
+
+Returns **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)** 
+
+## showSuccessMessage
+
+Displays a success message
+
+## showErrorMessage
+
+Displays an error message
+
+## showWarningMessage
+
+Displays a warning message
