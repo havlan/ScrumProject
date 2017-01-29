@@ -5,16 +5,27 @@
 var department = [];
 var today = new Date();
 
-
+/**
+ * Updates table
+ * @function
+ */
 $(document).ready(function () {
     oppdateTable();
 });
-
+/**
+ * Displays a dropdown with the department names from the database
+ * @function
+ */
 $.get('/getDepartment', {}, function (req, res, data) {
     department = data.responseJSON;
     makeDropdown('#departmentInput', department);
 });
-
+/**
+ * Makes a dropdown
+ * @function
+ * @param selector
+ * @param list
+ */
 function makeDropdown(selector, list) {
     var columns = addAllColumnHeaders(list, selector);
     for (var i = 0; i < list.length; i++) {
@@ -25,7 +36,11 @@ function makeDropdown(selector, list) {
     }
 }
 
-
+/**
+ * Updates the table with the information about the three shift types
+ * on a date on a chosen place
+ * @function
+ */
 function oppdateTable() {
     $(".table").empty();
 
@@ -107,7 +122,13 @@ function oppdateTable() {
     });
 };
 
-
+/**
+ * Builds a HTML table with data from the database
+ * @function
+ * @param selector
+ * @param list
+ * @param index2
+ */
 function buildHtmlTable(selector, list, index2) {
     var columns = addAllColumnHeaders(list, selector);
     var tbody = $('<tbody ' + "id= tbodyid" + '/>');
@@ -124,6 +145,13 @@ function buildHtmlTable(selector, list, index2) {
     $(selector).append(tbody);
 }
 
+/**
+ * Adds all column headers
+ * @function
+ * @param list
+ * @param selector
+ * @returns {Array}
+ */
 function addAllColumnHeaders(list, selector) {
 
     var columnSet = [];
@@ -143,6 +171,10 @@ function addAllColumnHeaders(list, selector) {
     return columnSet;
 }
 
+/**
+ * Displays a success message
+ * @function
+ */
 function showSuccessMessage() {
     var element = document.getElementById('successMessageBox');
     element.style.display = "block";
@@ -150,6 +182,10 @@ function showSuccessMessage() {
         element.style.display = "none";
     }, 3000);
 }
+/**
+ * Displays an error message
+ * @function
+ */
 function showErrorMessage() {
     var element = document.getElementById('errorMessageBox');
     element.style.display = "block";
@@ -157,7 +193,10 @@ function showErrorMessage() {
         element.style.display = "none";
     }, 3000);
 }
-
+/**
+ * Displays a warning message
+ * @function
+ */
 function showWarningMessage() {
     var element = document.getElementById('warningMessageBox');
     element.style.display = "block";
