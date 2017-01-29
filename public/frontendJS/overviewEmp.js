@@ -1,7 +1,8 @@
-/**
- * Created by rebekkaheggebo on 20.01.2017.
- */
 var myList = [];
+/**
+ * Gets restricted info from Employee and creates a table
+ * @function
+ */
 $.get('/getEmployeeRestricted', {}, function(req, res, data){
     myList = data.responseJSON;
     buildHtmlTable('#dbDataTable',myList);
