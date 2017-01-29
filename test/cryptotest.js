@@ -34,23 +34,15 @@ function saltHashPassword(userpassword) {
     var salt = genRandomString(16);
     /** Gives us salt of length 16 */
     var passwordData = sha512(userpassword, salt);
-    console.log('UserPassword = ' + userpassword);
-    console.log('Passwordhash = ' + passwordData.passwordHash);
-    console.log('\nSalt = ' + passwordData.salt);
 
     var test = 'pizza123';
 
     var passwordTest = sha512(test, passwordData.salt);
 
-    console.log("I db:                          " + passwordData.passwordHash);
-    console.log("Hash av det bruker skreiv inn: " + passwordTest.passwordHash);
 
     if(passwordData.passwordHash == passwordTest.passwordHash){
-        console.log("Hack");
 
-        console.log("I db:                          " + passwordData.passwordHash);
-        console.log("Hash av det bruker skreiv inn: " + passwordTest.passwordHash);
-    } else console.log("Nei");
+    }
 }
 
 //saltHashPassword('pizza123');

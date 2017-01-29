@@ -17,7 +17,6 @@ describe('=====TESTING PATHS AND ROUTING OF GET=====', function(){
     after(function(done){
         server.close();
         done();
-        //console.log("Req error after supertest: ", res.body.error) // undefined bcuz no errs
     });
 
     it("GET ROOT", function getRoot(done) { // 200 == ok, when redirecting http status code 302 is res.

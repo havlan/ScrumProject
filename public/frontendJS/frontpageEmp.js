@@ -24,18 +24,17 @@ $(document).ready(function() {
         //GETTING EVENTS FROM JSON FEED; SHORT AND EXTENDED
         eventSources: [
             {
-                url: '/getPossibleShiftsEvents',
-                color: '#ffe066',
+                url: '/getPersonalShiftEventsDone',
+                color: '#c4e6ff',
                 textColor: 'black'
             },
             {
                 url: '/getPersonalShiftEvents',
                 color: '#8cd9ad',
                 textColor: 'black'
-            },
-            {
-                url: '/getPersonalShiftEventsDone',
-                color: '#c4e6ff',
+            },{
+                url: '/getPossibleShiftsEvents',
+                color: '#ffe066',
                 textColor: 'black'
             }]
         ,
@@ -119,15 +118,12 @@ $(document).on('click','#sendForespørsel',function (e) {
     var data = $("#vaktTable").find("input:checkbox:checked").map(function () {
         return $(this).closest("tr").find('td:eq(3)').text();
     }).toArray(); // <----
-    console.log(data);
      for (i = 0; i < data.length; i++) {
-        console.log(data[i]);
         $.ajax({
             url: '/postRequest',
             type: 'POST',
             data: {'shift_id': data[i], 'checked_by_admin': 0,'explanation_request': ""},
             success: function (data) {
-                console.log(data);
                 document.getElementById("successMessage").innerHTML = "Success!";
                 showSuccessMessage();
             },
@@ -152,7 +148,6 @@ $(document).on('click','#freeSave',function (e) {
             type: 'POST',
             data: {'shift_id': event_id,'explanation_request': textinput, 'checked_by_admin': 0},
             success: function (data) {
-                console.log(data);
                 document.getElementById("successMessage").innerHTML = "Success!";
                 showSuccessMessage();
             },
@@ -173,7 +168,6 @@ $(document).on('click','#freeSave',function (e) {
 
 
 $(document).on('click','#sendRequest',function () {
-    console.log(event_id);
     if (event_id!=null){
         $.ajax({
             url: '/postRequestShift',
@@ -197,7 +191,6 @@ $(document).on('click','#sendRequest',function () {
             }
         });
     }else {
-        console.log("an error occurred 2B|!2B");
         document.getElementById("errorMessage").innerHTML = "Det har oppstått en feil";
         showErrorMessage();
     }
@@ -207,8 +200,6 @@ $(document).on('click','#overSave',function () {
 
     var numberinput = $("#overTime").val();
     var explenation = $("#overField").val();
-    console.log(numberinput);
-    console.log(explenation);
 
     if (event_id!=null){
         if (numberinput){
@@ -220,7 +211,6 @@ $(document).on('click','#overSave',function () {
                     'explanation': explenation},
                 success: function (data) {
                     alert("success!");
-                    console.log(data);
                 },
                 error: function(xhr){
                     if(xhr.status==404){
@@ -232,11 +222,7 @@ $(document).on('click','#overSave',function () {
                     }
                 }
             });
-        }else{
-            console.log("Du må legge til et nummer i overtidnummer feltet.")
         }
-    }else {
-        console.log("Systemet fant ikke event_id");
     }
 });
 

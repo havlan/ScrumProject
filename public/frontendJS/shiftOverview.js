@@ -11,8 +11,6 @@ $(document).ready(function () {
 });
 
 $.get('/getDepartment', {}, function (req, res, data) {
-    console.log(data);
-    console.log(data.responseJSON);
     department = data.responseJSON;
     makeDropdown('#departmentInput', department);
 });
@@ -30,6 +28,7 @@ function makeDropdown(selector, list) {
 
 function oppdateTable() {
     $(".table").empty();
+
     $.ajax({
         url: '/getVaktliste2', //this is the submit URL
         type: 'POST',
@@ -38,7 +37,6 @@ function oppdateTable() {
             'date': document.getElementById("datePicker").value
         },
         success: function (req, res, data) {
-            console.log(data);
             buildHtmlTable('#dayTable', data.responseJSON);
             document.getElementById("successMessage").innerHTML = "Success!";
             showSuccessMessage();
@@ -65,7 +63,6 @@ function oppdateTable() {
             'date': document.getElementById("datePicker").value
         },
         success: function (req, res, data) {
-            console.log(data);
             buildHtmlTable('#evningTable', data.responseJSON);
             document.getElementById("successMessage").innerHTML = "Success!";
             showSuccessMessage();
@@ -91,7 +88,6 @@ function oppdateTable() {
             'date': document.getElementById("datePicker").value
         },
         success: function (req, res, data) {
-            console.log(data);
             buildHtmlTable('#nightTable', data.responseJSON);
             document.getElementById("successMessage").innerHTML = "Success!";
             showSuccessMessage();

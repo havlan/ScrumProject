@@ -3,14 +3,10 @@ var typeNames = [];
 window.indeks = 0;
 var currentDay = new Date();
 var currentWeek = getWeekNumber(currentDay);
-console.log(currentWeek);
 var selectedWeek = currentWeek[1];
 
 
 $.get('/getAvailability', {}, function (req, res, data) {
-
-    console.log(data);
-    console.log(data.responseJSON);
     myList = data.responseJSON;
     // buildHtmlTable('#TingTang',myList);
     //tableCreate();
@@ -23,10 +19,7 @@ $.get('/getAvailability', {}, function (req, res, data) {
 
             // Apply each element to the Date function
             var jsDate = new Date(Date.UTC(t[0], t[1] - 1, t[2], t[3], t[4], t[5]));
-
-            console.log(jsDate);
             var weekNr = getWeekNumber(jsDate);
-            console.log(weekNr);
             var weekDay = jsDate.getDay();
             var hour = jsDate.getHours();
 
@@ -304,9 +297,7 @@ function addRow(content, morecontent, evenmorecontent) {
 
 
 var dates = [];
-console.log(dates);
 var availabilities = [];
-console.log(availabilities);
 
 function makeJsonArray() {
 
@@ -315,18 +306,8 @@ function makeJsonArray() {
         yarr[v] = new Array(2);
         yarr[v][0] = dates[v];
         yarr[v][1] = availabilities[v];
-        console.log(yarr);
     }
 
-
-
-    /*for(i=0;i<dates.length;i++){
-     console.log("DATES: ",dates[i], " AVAILABILIRIES: ",availabilities[i]);
-     yarr[i][0] = dates[i];
-     yarr[i][1] = availabilities[i];
-     }*/
-
-    /*var yarr = getAvailable();*/
     $.ajax({
         url: '/bulkAvail',
         type: 'POST',
@@ -380,7 +361,6 @@ function makeJsonArray() {
             var availability = 0;
             var checkboxes = [dagvakt, kveldsvakt, nattevakt];
             AvaDate = document.getElementById("AvaDate").value;
-            console.log(AvaDate);
 
             var yarr = [];
             for (i = 0; i < checkboxes.length; i++) {
@@ -388,7 +368,6 @@ function makeJsonArray() {
                 if (checkboxes[i].checked == true) {
                     if (checkboxes[i] == dagvakt) {
                         var Dato = AvaDate + " 08:00:00";
-                        console.log(Dato);
                         var vakt = "dagvakt";
                         if (typeof AvaDate != 'undefined' && typeof vakt != 'undefined') { // //if($('#ava-choices').closest("tr").find('td:eq(2)').text() == "ja"){
                             addRow(vakt, Dato, "ja");
@@ -397,7 +376,6 @@ function makeJsonArray() {
                         }
                     } else if (checkboxes[i] == kveldsvakt) {
                         var Dato = AvaDate + " 16:00:00";
-                        console.log(Dato);
                         var vakt = "kveldsvakt";
                         if (typeof AvaDate != 'undefined' && typeof vakt != 'undefined') {
                             addRow(vakt, Dato, "ja");
@@ -407,7 +385,6 @@ function makeJsonArray() {
                         }
                     } else if (checkboxes[i] == nattevakt) {
                         var Dato = AvaDate + " 00:00:00";
-                        console.log(Dato);
                         var vakt = "nattevakt";
                         if (typeof AvaDate != 'undefined' && typeof vakt != 'undefined') {
                             addRow(vakt, Dato, "ja");
@@ -432,13 +409,11 @@ function makeJsonArray() {
             var checkboxes = [dagvakt, kveldsvakt, nattevakt];
 
             AvaDate = document.getElementById("AvaDate").value;
-            console.log(AvaDate);
 
             for (i = 0; i < checkboxes.length; i++) {
                 if (checkboxes[i].checked == true) {
                     if (checkboxes[i] == dagvakt) {
                         var Dato = AvaDate + " 08:00:00";
-                        console.log(Dato);
                         var vakt = "dagvakt";
                         if (typeof AvaDate !== 'undefined' && typeof vakt !== 'undefined') {
                             addRow(vakt, Dato, "nei");
@@ -448,7 +423,6 @@ function makeJsonArray() {
                     }
                     else if (checkboxes[i] == kveldsvakt) {
                         var Dato = AvaDate + " 16:00:00";
-                        console.log(Dato);
                         var vakt = "kveldsvakt";
                         if (typeof AvaDate !== 'undefined' && typeof vakt !== 'undefined') {
                             addRow(vakt, Dato, "nei");
@@ -459,7 +433,6 @@ function makeJsonArray() {
 
                     else if (checkboxes[i] == nattevakt) {
                         var Dato = AvaDate + " 00:00:00";
-                        console.log(Dato);
                         var vakt = "nattevakt";
                         if (typeof AvaDate !== 'undefined' && typeof vakt !== 'undefined') {
                             addRow(vakt, Dato, "nei");

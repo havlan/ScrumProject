@@ -36,8 +36,6 @@ $(document).ready(function () {
 function getAbsenceTable() {
     $.get('/getAbsenceView', {}, function(req, res, data){
         $('#leaveTable').empty();
-        console.log(data);
-        console.log(data.responseJSON[0]);
         myList = data.responseJSON;
         buildHtmlTable('#leaveTable',myList);
         $('#leaveTable').tablesorter();
@@ -127,7 +125,6 @@ $(document).on('click','#switchTable .openModal',function (e) {
         $.get('/getRequestShift/'+parseInt(indeks),function(req,res,data1){
             $('#hei').append('<table class="table table-striped table-bordered" id="ansattTable"></table>');
             buildHtmlTable2("#ansattTable",data1.responseJSON);
-            console.log(data1.responseJSON);
         });
         $('#approveModal').modal('show');
         //if checkbox is unchecked
@@ -166,8 +163,7 @@ $(document).on('click','#Lagre',function (e) {
     }).toArray(); // <----
     var overtimeIDArray = $("#overtimeTable").find("input:checkbox:checked").map(function(){
         return $(this).closest("tr").find('td:eq(0)').text();
-    }).toArray(); // <----
-  //  console.log(data);
+    }).toArray();
     for(i=0; i<skiftIDArray.length; i++){
         //alert("success!");
         updateAbsence(absenceIDArray[i]);
@@ -177,8 +173,6 @@ $(document).on('click','#Lagre',function (e) {
     }
 });
 function fjernAnsatt(){
-    console.log("skift: " +indeks);
-    console.log("ansatt:" +ansattid);
     $.ajax({
         url:'/deleteShift_has_employee',
         type: 'DELETE',
@@ -201,9 +195,6 @@ function fjernAnsatt(){
 }
 function erstattAnsatt() {
     var skiftid = indeks;
-    console.log(ansattid);
-    console.log(nyansattid);
-    console.log(skiftid);
     $.ajax({
         url: '/updateShift_has_employee',
         type:'POST',

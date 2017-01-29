@@ -3,8 +3,6 @@
  */
 var myList = [];
 $.get('/getEmployeeRestricted', {}, function(req, res, data){
-    console.log(data);
-    console.log(data.responseJSON[0]);
     myList = data.responseJSON;
     buildHtmlTable('#dbDataTable',myList);
     $("#dbDataTable").tablesorter();

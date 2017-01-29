@@ -55,7 +55,6 @@ module.exports =
                         }
                     } else {
                         res.status(500);
-                        console.log("Error reading database: ");
                     }
                 });
             });
@@ -69,7 +68,6 @@ module.exports =
                         res.json({"Error": "Couldnt connect to MYSQL" + err});
                         throw err;
                     }
-                    console.log("Connected to database");
                     connection.query(query, post, function (err, rows) {
                         connection.release();
                         if (!err) {
@@ -100,7 +98,6 @@ module.exports =
               conn.query(query, function(err){
                   conn.release();
                   if(!err){
-                      console.log("Reverted test.");
                   }else if (err){
                       throw err;
                   }

@@ -5,7 +5,6 @@ $(document).ready(function(){ // syntax for å hente data når dokument (html) e
     $("#sortTable").tablesorter();
 
     $.get('/getOneEmployee', {}, function(req, res, data){
-        console.log(data);
         document.getElementById("navn").innerHTML               = data.responseJSON[0].name;
         document.getElementById("stillingsprosent").innerHTML   = data.responseJSON[0].seniority;
         document.getElementById("tlfnr").innerHTML              = data.responseJSON[0].phone_nr;
@@ -25,8 +24,6 @@ var myList= [];
 
 
 $.get('/getEmployee_shifts_toCurrentDate', {}, function(req, res, data){
-    console.log(data);
-    console.log(data.responseJSON[0]);
     myList = data.responseJSON;
     //document.getElementById("data").innerHTML = myList;
 
@@ -81,7 +78,6 @@ $(function(){
             type: 'POST',
             data: {'phone_nr': $("#edittelefon").val(),'address':$('#editadresse').val(),'email':$('#editepost').val()},
             success: function(data){
-                console.log(data);
                 document.getElementById("successMessage").innerHTML = "sendt";
                 showSuccessMessage();
             },

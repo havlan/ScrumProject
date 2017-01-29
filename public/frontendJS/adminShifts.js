@@ -68,7 +68,6 @@ function getAvailableEmpForShift(id) {
         type: 'POST',
         data: {'shift_id': id},
         success: function (data) {
-            console.log(data);
             fillShiftList = data;
 
             for (var i = 0; i < data.length; i++) {
