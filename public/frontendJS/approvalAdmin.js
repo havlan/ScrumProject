@@ -57,7 +57,7 @@ $.get('/getRequestView',{},function (req,res,data) {
 /**
  * Builds a table given JSON data and an ID in HTML file
  * @function
- * @param {text} selector - id of table in HTML file you want to build,{JSONArray} list - an array with data to fill the table.
+ * @params {text} selector - id of table in HTML file you want to build,{JSONArray} list - an array with data to fill the table.
  */
 function buildHtmlTable(selector,list) {
     var columns = addAllColumnHeaders(list, selector);
@@ -122,8 +122,14 @@ function buildHtmlTable2(selector,list) {
     }
     $(selector).append(tbody);
 }
-//when you press a checkbox in switchtable
-$(document).on('click','#switchTable .openModal',function (e) {
+/**
+ * Opens modal when pressing table row in switchTable, finds id from selected row
+ * If checkbox on select row is checked, approveModal will show with a table 'ansattTable'
+ * And will fill this table with data
+ * Closes modal on click
+ * @function
+ */
+$(document).on('click','#switchTable .openModal',function () {
     indeks = $(this).closest("tr").find('td:eq(0)').text();
     //if checkbox is checked
     if ($(this).is(':checked')) {
@@ -149,14 +155,22 @@ $(document).on('click','#switchTable .openModal',function (e) {
         $('input[type="checkbox"]').not(this).prop('checked', false);
     });
 });
-
+/**
+ * Selects employee_id from checked row in ansattTable in modal
+ * Unchecks all other rows
+ * @function
+ */
 $(document).on('click','#ansattTable .openModal2',function (e) {
     if ($(this).is(':checked')) {
         $('input[class="openModal2"]').not(this).prop('checked', false);
         nyansattid = $(this).closest("tr").find('td:eq(0)').text();
     }
 });
-
+/**
+ * Generates arrays with id's from checked rows in leaveTable and overtimeTable
+ * Updates Absence and Overtime in database
+ * @function
+ */
 //When pressing 'Lagre'-button any row that is checked will get checked_by_admin=1
 $(document).on('click','#Lagre',function (e) {
     e.preventDefault();
@@ -181,6 +195,11 @@ $(document).on('click','#Lagre',function (e) {
         updateOvertime(overtimeIDArray[i]);
     }
 });
+/**
+ * Removes an employee from Shift_has_employee in database
+ * @function
+ * @params {number} skiftid - id of shift,{number} ansatt - id of employee
+ */
 function fjernAnsatt(skiftid,ansatt){
     var id;
     if(skiftid==null) {//if method is called from 'Godkjenn vaktbytte'
@@ -205,6 +224,11 @@ function fjernAnsatt(skiftid,ansatt){
         }
     });
 }
+/**
+ * Replaces an employee in shift_has_employee with another
+ * @function
+ * @params {number} skiftid - id of shift,{number} nyansattid - id of employee to replace, {number} - id of employee to be replaced
+ */
 function erstattAnsatt() {
     var skiftid = indeks;
     console.log(ansattid);
@@ -230,6 +254,11 @@ function erstattAnsatt() {
         }
     });
 }
+/**
+ * Removes all employees connected to a specific shift in Request_shift
+ * @function
+ * @params {number} skiftid - id of shift
+ */
 function fjernAnsatteRequestShift(skiftid){
     $.ajax({
         url:'/deleteRequest_shift',
@@ -237,8 +266,6 @@ function fjernAnsatteRequestShift(skiftid){
         data:{'shift_id':skiftid},
         success:function (data) {
            deleteRequest(indeks);
-            document.getElementById("successMessage").innerHTML = "TODO er fjernet";//TODO
-            showSuccessMessage();
         },
         error: function(xhr){
             if(xhr.status==404){
@@ -251,6 +278,11 @@ function fjernAnsatteRequestShift(skiftid){
         }
     });
 }
+/**
+ * Removes a specific request from Request
+ * @function
+ * @params {number} request_id - id of request
+ */
 function deleteRequest(id) {
     $.ajax({
         url: '/deleteRequest',
@@ -258,8 +290,6 @@ function deleteRequest(id) {
         data:{'request_id':id},
         success:function (data) {
             //alert("Request slettet.");
-            document.getElementById("successMessage").innerHTML = "TODO er fjernet"; //TODO
-            showSuccessMessage();
         },
         error: function(xhr) {
             if (xhr.status == 404) {
@@ -272,6 +302,11 @@ function deleteRequest(id) {
         }
     });
 }
+/**
+ * Sets a request in Absence to checked_by_admin
+ * @function
+ * @params {number} id - id of absence
+ */
 function updateAbsence(id) {
     $.ajax({
         url: '/updateAbsence2',
@@ -293,6 +328,11 @@ function updateAbsence(id) {
         }
     });
 }
+/**
+ * Sets a request in Overtime to checked_by_admin
+ * @function
+ * @params {number} id - id of overtime
+ */
 function updateOvertime(id) {
     $.ajax({
         url: '/updateOvertime2',
@@ -313,6 +353,10 @@ function updateOvertime(id) {
         }
     });
 }
+/**
+ * Shows a success-message
+ * @function
+ */
 function showSuccessMessage() {
     var element = document.getElementById('successMessageBox');
     element.style.display = "block";
@@ -320,6 +364,10 @@ function showSuccessMessage() {
         element.style.display = "none";
     }, 3000);
 }
+/**
+ * Shows an error-message
+ * @function
+ */
 function showErrorMessage() {
     var element = document.getElementById('successMessageBox');
     element.style.display = "block";
