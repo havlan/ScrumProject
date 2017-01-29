@@ -13,18 +13,16 @@ describe('=====TESTING PATHS AND ROUTING OF POST METHODS=====', function() {
             "password": "pizza123"
         }).expect(200);*/
     });
+    after(function(){
+    });
 
-    it('/login', function(done){
+    /*it('/login', function(done){
         request(server)
             .post('/login')
             .set("Content-Type","application/json")
             .send({"username":'Abigail', "password":'pizza123'})
-            .expect(200)
-            .end(function(err,res){
-                res.status.should.equal(302);
-                done();
-            })
-    });
+            .expect(302,done);
+    });*/
     it('/postShift_has_employee', function(done){
         request(server)
             .post('/postShift_has_employee')
