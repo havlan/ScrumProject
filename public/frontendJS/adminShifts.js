@@ -201,12 +201,12 @@ function createPeopleDropdown(antSyk, antHjelp, antAnnet, sykList, hjelpList, an
         dropIds.push({"id": "#syk" + i, "cat": "0"});
     }
     for (var i = 0; i < antHjelp; i++) {
-        document.getElementById('peopleTable').innerHTML += "<tr><td class='peopleTableCat'>Hjelpepleier</td><td class='peopleTableSel'><select id='hjelp" + i + "' class='peopleDropdown'></select></td></tr>";
+        document.getElementById('peopleTable').innerHTML += "<tr><td class='peopleTableCat'>Helsefagarbeider</td><td class='peopleTableSel'><select id='hjelp" + i + "' class='peopleDropdown'></select></td></tr>";
         makeDropdownS("#hjelp" + i, hjelpList);
         dropIds.push({"id": "#hjelp" + i, "cat": "1"});
     }
     for (var i = 0; i < antAnnet; i++) {
-        document.getElementById('peopleTable').innerHTML += "<tr><td class='peopleTableCat'>Annet</td><td class='peopleTableSel'><select id='annet" + i + "' class='peopleDropdown'></select></td></tr>";
+        document.getElementById('peopleTable').innerHTML += "<tr><td class='peopleTableCat'>Assistent</td><td class='peopleTableSel'><select id='annet" + i + "' class='peopleDropdown'></select></td></tr>";
         makeDropdownS("#annet" + i, annetList);
         dropIds.push({"id": "#annet" + i, "cat": "2"});
     }
@@ -296,17 +296,17 @@ function createNewShifts() {
                 }
             }
         }
-        var rank = "Lærling";
+        var rank = "Assistent";
         if (dropIds[i].cat == "0") {
             rank = "Sykepleier";
         } else if (dropIds[i].cat == "1") {
-            rank = "Hjelpepleier";
+            rank = "Helsefagarbeider";
         }
 
         var depId = departments[$('#chooseDepartment').prop('selectedIndex')].department_id;
 
         sheToSend.push({"employee_id":emp1});
-        shiftToSend.push({"minutes":"480","date":date,"department_id":depId,"type_name":rank});
+        shiftToSend.push({minutes:"480",date:date,department_id:depId,type_name:rank});
     }
 
     var shifts = [];
@@ -324,7 +324,6 @@ function createNewShifts() {
         shiftemps[k] = new Array(1);
         shiftemps[k][0] = sheToSend[k].employee_id;
     }
-
 
     if(valid){
         $.ajax({
