@@ -35,13 +35,13 @@ documentation.build(['./public/frontendJS/myProfile.js'], {}, function (err, res
         fs.writeFileSync('./documentation/myProfile.md', output);
     });
 });
-
-documentation.build(['C:\Users\torsku\WebstormProjects\scrumLords2017\public\frontendJS\overviewEmp.js'], {}, function (err, res) {
+/*
+documentation.build(['./public/frontendJS/overviewEmp.js'], {}, function (err, res) {
     documentation.formats.md(res, {}, function(err, output) {
         fs.writeFileSync('./documentation/overviewEmp.md', output);
     });
 });
-
+*/
 
 documentation.build(['./public/frontendJS/shiftOverview.js'], {}, function (err, res) {
     documentation.formats.md(res, {}, function(err, output) {
@@ -52,5 +52,30 @@ documentation.build(['./public/frontendJS/shiftOverview.js'], {}, function (err,
 documentation.build(['./public/frontendJS/frontpageAdmin.js'], {}, function (err, res) {
     documentation.formats.md(res, {}, function(err, output) {
         fs.writeFileSync('./documentation/frontpageAdmin.md', output);
+    });
+});
+documentation.build(['./middlewares/cryptoHash.js'], {}, function (err, res) {
+    documentation.formats.md(res, {}, function(err, output) {
+        fs.writeFileSync('./documentation/cryptoHash.md', output);
+    });
+});
+documentation.build(['./models/regWMail.js'], {}, function (err, res) {
+    documentation.formats.md(res, {}, function(err, output) {
+        fs.writeFileSync('./documentation/regWMail.md', output);
+    });
+});
+documentation.build(['./models/shiftModel.js'], {}, function (err, res) {
+    documentation.formats.md(res, {}, function(err, output) {
+        fs.writeFileSync('./documentation/shiftModel.md', output);
+    });
+});
+documentation.build(['./helpers/db.js'], {}, function (err, res) {
+    documentation.formats.md(res, {}, function(err, output) {
+        fs.writeFileSync('./documentation/db.md', output);
+    });
+});
+documentation.build(['./controllers/configRoute.js'], {}, function (err, res) {
+    documentation.formats.md(res, {}, function(err, output) {
+        fs.writeFileSync('./documentation/configRoute.md', output);
     });
 });
