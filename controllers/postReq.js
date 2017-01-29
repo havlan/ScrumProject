@@ -42,7 +42,7 @@ module.exports = {
         var post = {
             shift_id: req.body.shift_id,
             employee_id: req.session.passport.user.id,
-            explanation_request: req.body.explanation.request
+            explanation_request: req.body.explanation_request
         };
         dbHelper.postdbQuery(req, res, "insert into Request set ?", post);
     },
