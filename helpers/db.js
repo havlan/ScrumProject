@@ -18,6 +18,16 @@ module.exports =
         getPool : function () {
             return pool;
         },
+
+        /**
+         * Connects to the database and executes the inserted query.
+         * Sends back the result. Used for GET-requests.
+         * @function
+         * @param req
+         * @param res
+         * @param query
+         * @param get
+         */
         getdbQuery: function (req, res, query, get) {
             pool.getConnection(function (err, connection) {
                 if (err) {
@@ -40,6 +50,15 @@ module.exports =
             });
         },
 
+        /**
+         * Connects to the database and executes the inserted query.
+         * Sends back the result. Used for POST-requests.
+         * @function
+         * @param req
+         * @param res
+         * @param query
+         * @param post
+         */
         postdbQuery: function (req, res, query, post) {
             pool.getConnection(function (err, connection) {
                 try {
@@ -82,63 +101,5 @@ module.exports =
                   }
               })
             })
-        },
-
-        fallDoubleQuery : function (tasks, cb) {
-        pool.getConnection(function (err, conn, done) {
-            if (err) {
-                return cb(err);
-            }
-            conn.beginTransaction(function (err) {
-                if (err) {
-                    done();
-                    return cb(err);
-                }
-                conn.query(q1, function(err){
-                    if(err){
-                        done();
-                        return cb(err);
-                    }
-                })
-                var wrapIterator = function (iterator) {
-                    return function (err) {
-                        if (err) {
-                            conn.rollback( function () {
-                                done();
-                                cb(err);
-                            });
-                        }
-                        else {
-                            var args = Array.prototype.slice.call(arguments, 1);
-                            var next = iterator.next();
-                            if (next) {
-                                args.unshift(conn);
-                                args.push(wrapIterator(next));
-                            }
-                            else {
-                                args.unshift(conn);
-                                args.push(function (err, results) {
-                                    var args = Array.prototype.slice.call(arguments, 0);
-                                    if (err) {
-                                        conn.rollback(function () {
-                                            done();
-                                            cb(err);
-                                        });
-                                    } else {
-                                        conn.commit( function () {
-                                            done();
-                                            cb.apply(null, args);
-                                        })
-                                    }
-                                })
-                            } async.setImmediate(function () {
-                                iterator.apply(null, args);
-                            });
-                        }
-                    };
-                };
-                wrapIterator(async.iterator(tasks))();
-            });
-        });
         }
     };

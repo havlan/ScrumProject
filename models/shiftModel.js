@@ -1,6 +1,14 @@
 var pool = require('../helpers/db').getPool();
 
 module.exports = {
+
+    /**
+     * Inserts new shifts in the database.
+     * Also binds the shifts to employees if chosen(second query).
+     * @function
+     * @param req
+     * @param res
+     */
     createNewShifts : function (req,res) {
         try {
             pool.getConnection(function (err, conn) {

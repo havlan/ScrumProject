@@ -4,6 +4,13 @@ var async = require('async');
 var pool = require('../helpers/db').getPool();
 var mailOptions;
 
+/**
+ * Sends mail to a new user with a login username and password.
+ * @function
+ * @param req
+ * @param mail
+ * @param pw
+ */
 function sendMailUser(req, mail, pw) { // sends mail user registers
     mailOptions = {
         from: '"MinVakt" <minvakt.ikkesvar@gmail.com>', //pass: Abigail4prez
@@ -31,6 +38,12 @@ var transporter  = nodemailer.createTransport({
         pass: 'Abigail4prez'
     }
 });
+
+/**
+ * Sends mails to input about available shifts.
+ * @function
+ * @param rec
+ */
 function sendMailShift(rec) {
     var msg = {
         from : "minvakt.ikkesvar@gmail.com",
@@ -44,6 +57,11 @@ function sendMailShift(rec) {
     })
 }
 module.exports = {
+
+    /**
+     * Fetches emails for the available-shifts-mail-operation.
+     * @function
+     */
     sendMailOnFree : function(){
         var mailRecp ="";
         async.waterfall([
@@ -83,7 +101,14 @@ module.exports = {
             }
         })
     },
-    forgotPwMail: function (request, response) { // email, username
+
+    /**
+     * Sends new logininfo to a user.
+     * @function
+     * @param request
+     * @param response
+     */
+    forgotPwMail: function (request, response) {
         async.waterfall([
             function (done) {
                 pool.getConnection(function (er, conn) {
@@ -140,6 +165,13 @@ module.exports = {
             }
         })
     },
+
+    /**
+     * Sends mail about shift change between two users.
+     * @function
+     * @param req
+     * @param response
+     */
     confirmShiftChange : function(req,response){
         var pk = req.body.shift_id;
         var pk2 = req.body.employee_id;
@@ -226,6 +258,12 @@ module.exports = {
         })
     },
 
+    /**
+     * Creates a new user and sends mail about logininfo
+     * @function
+     * @param req
+     * @param response
+     */
     postNewUserFall: function (req, response) {
         var pw = crypt.generatePassword(), sh = crypt.genRandomString(16), pwobj = crypt.sha512(pw, sh),
             logUsr = {
@@ -293,6 +331,13 @@ module.exports = {
             }
         });
     },
+
+    /**
+     * Resurrection of a user via new logininfo on mail.
+     * @function
+     * @param req
+     * @param response
+     */
     sendOnlyLogin: function (req, response) {
         var pw = crypt.generatePassword(), sh = crypt.genRandomString(16);
         var pwobj = crypt.sha512(pw, sh);
@@ -356,6 +401,13 @@ module.exports = {
             }
         });
     },
+
+    /**
+     * Changes the password for a user.
+     * @function
+     * @param req
+     * @param res
+     */
     changePassword: function (req, res) {
         try {
             pool.getConnection(function (er, conn) {
@@ -402,6 +454,13 @@ module.exports = {
             throw herr;
         }
     },
+
+    /**
+     * Changes two shifts between two users.
+     * @function
+     * @param req
+     * @param res
+     */
     acceptRequestWith: function (req, res) {
         try {
             pool.getConnection(function (err, conn) {

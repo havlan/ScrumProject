@@ -4,8 +4,12 @@ var localStrat = require('passport-local').Strategy;
 var pool = require('./../helpers/db').getPool();
 var safereg = require('safe-regex');
 
-//passport configuration
+
 module.exports = function (passport) {
+    /**
+     * Serializes the user and creates a session.
+     * @function
+     */
     passport.serializeUser(function (user, done) { // creating user session, serializing and deserializing after each request. Heavy?
         done(null, {
             username: user.username,
@@ -14,6 +18,10 @@ module.exports = function (passport) {
         });
     })
 
+    /**
+     * Deserializes the user.
+     * @function
+     */
     passport.deserializeUser(function (user, done) { // deserialize with serializing. Create session loggin
         pool.getConnection(function (err, connection) {
             if (err) {
@@ -31,6 +39,10 @@ module.exports = function (passport) {
             });
         });
     });
+    /**
+     * Authorizes the user login input.
+     * @function
+     */
     passport.use('login', new localStrat({ // local login (MySQL)
             usernameField: 'username',
             passwordField: 'password',
