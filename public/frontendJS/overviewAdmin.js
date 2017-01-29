@@ -17,10 +17,10 @@ $.get('/getEmployee', {}, function(req, res, data){
 });
 
 /**
- * Builds a table given JSON data and an ID in HTML file
- * @function
- * @params {text} selector - id of table in HTML file you want to build,{JSONArray} list - an array with data to fill the table.
- */
+* Builds a table given JSON data and an ID in HTML file
+* @function
+* @params {text} selector - id of table in HTML file you want to build,{JSONArray} list - an array with data to fill the table.
+*/
 function buildHtmlTable(selector,list) {
     var columns = addAllColumnHeaders(list, selector);
     var tbody = $('<tbody/>');
