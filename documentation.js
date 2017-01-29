@@ -10,14 +10,10 @@
 var documentation = require('documentation');
 var fs = require('fs');
 
-documentation.build(['/Users/LittleGpNator/WebstormProjects/scrumLords2017/public/frontendJS/'], {}, function (err, res) {
+
+documentation.build(['/Users/LittleGpNator/WebstormProjects/scrumLords2017/public/frontendJS/approvalAdmin.js'], {}, function (err, res) {
     documentation.formats.md(res, {}, function(err, output) {
-        fs.writeFileSync('./output.md', output);
+        fs.writeFileSync('./approvalAdmin.md', output);
     });
 });
 
-documentation.build(['app.js'], {}, function (err, res) {
-    documentation.formats.md(res, {}, function(err, output) {
-        fs.writeFileSync('./output.md', output);
-    });
-});
