@@ -21,17 +21,68 @@ function sendMailUser(req, mail, pw) { // sends mail user registers
         throw err;
     }
 }
+var transporter  = nodemailer.createTransport({
+    pool: true,
+    host: "smtp.gmail.com", // hostname
+    secure: true, // TLS requires secureConnection to be false
+    port: 465, // port for secure SMTP
+    auth: {
+        user: 'minvakt.ikkesvar@gmail.com',
+        pass: 'Abigail4prez'
+    }
+});
+function sendMailShift(rec) {
+    var msg = {
+        from : "minvakt.ikkesvar@gmail.com",
+        to: rec,
+        subject : "Ledige vakter",
+        text: "Hei!\nDet er flere ledige vakter tilgjengelig i din personlige kalender.\nDet eneste du trenger å gjøre er å logge inn, husk at en god kollega hjelper de som ikke kan.\nMvh MinVakt."
+    };
+    transporter.sendMail(msg, function (err, inf) {
+        if (!err) console.log(inf.response);
+        else console.log(err);
+    })
+}
 module.exports = {
-    transporter : nodemailer.createTransport({
-        pool: true,
-        host: "smtp.gmail.com", // hostname
-        secure: true, // TLS requires secureConnection to be false
-        port: 465, // port for secure SMTP
-        auth: {
-            user: 'minvakt.ikkesvar@gmail.com',
-            pass: 'Abigail4prez'
-        }
-    }),
+    sendMailOnFree : function(){
+        var mailRecp ="";
+        async.waterfall([
+            function(done){
+                pool.getConnection(function(err,conn){
+                    try {
+                        conn.query("select email from available_emp_for_shift group by employee_id order by employee_id limit 3", function (err, rows) { // limit?????
+                            conn.release();
+                            if (err) {
+                                throw err;
+                            } else {
+                                done(null, rows);
+                            }
+                        })
+                    }catch(error){
+                        throw error;
+                    }finally{
+                        conn.release();
+                    }
+                })
+            },
+            function(rows,done){
+                for(var i=0;i<rows.length;i++){
+                    console.log(rows[i].email);
+                    mailRecp += rows[i].email;
+                    mailRecp += ",";
+                }
+                mailRecp = mailRecp.substr(0, mailRecp.length-1);
+                done(null, mailRecp,200);
+            }
+        ], function(err, mail,ok){
+            try {
+                if (ok == 200) {
+                    sendMailShift(mail);
+                }
+            }catch (mailerr){
+            }
+        })
+    },
     forgotPwMail: function (request, response) { // email, username
         async.waterfall([
             function (done) {
@@ -196,15 +247,14 @@ module.exports = {
                     conn.beginTransaction(function () {
                         if (err) {
                             return conn.rollback(function () {
-                                console.log(err);
-                                throw err;
+                                //throw err;
                             })
                         } else {
                             console.log(req.body.employee_id);
-                            conn.query("insert into Employee set ? ", emp, function (err, res) {
-                                if (err) {
-                                    return conn.rollback(function () {
-                                        throw err;
+                            conn.query("insert into Employee set ? ", emp, function (err2, res) {
+                                if (err2) {
+                                     return conn.rollback(function () {
+                                        //throw err2;
                                     })
                                 } else {
                                     done(null, conn, res.insertId); // sends affected id
@@ -225,7 +275,7 @@ module.exports = {
                         return conn.rollback(function () {
                             conn.release();
                             done(err, null);
-                            throw err;
+                            //throw err;
                         })
                     } else {
                         conn.commit(function () {
@@ -260,9 +310,8 @@ module.exports = {
                     conn.beginTransaction(function () {
                         if (err) {
                             return conn.rollback(function () {
-                                console.log(err);
                                 response.status(500).json({melding:err});
-                                throw err;
+                                //throw err;
                             })
                         } else {
                             console.log(req.body.employee_id);
@@ -289,7 +338,6 @@ module.exports = {
                             conn.release();
                             response.json(err);
                             done(err, null);
-                            throw err;
                         })
                     } else {
                         conn.commit(function () {
@@ -309,134 +357,100 @@ module.exports = {
         });
     },
     changePassword: function (req, res) {
+        try {
+            pool.getConnection(function (er, conn) {
+                if (er) {
+                    res.json(er);
+                }
+                conn.query("select * from LoginInfo where username = ?", [req.session.passport.user.username], function (err, rows) {
 
-        pool.getConnection(function (er, conn) {
-            if (er) {
-                res.json(er);
-            }
-            conn.query("select * from LoginInfo where username = ?", [req.session.passport.user.username], function (err, rows) {
-
-                if (err) {
-                    res.json(404, err);
-                    conn.release();
-                } else if (!rows.length) {
-                    res.json(404, err);
-                    conn.release();
-                } else {
-                    var pwCheckHash = crypt.sha512(req.body.oldpw, rows[0].password_salt);
-                    if (pwCheckHash.passwordHash == rows[0].password_hash) {
-                        var newSaltHash = crypt.sha512(req.body.newpw, crypt.genRandomString(16));
+                    if (err) {
+                        res.json(404, err);
+                        conn.release();
+                    } else if (!rows.length) {
+                        res.json(404, err);
+                        conn.release();
                     } else {
-                        res.status(404);
-                        res.json("feil pw");
-                        conn.release();
-                    }
-                    conn.query("update LoginInfo set ? where ?", [{
-                        password_hash: newSaltHash.passwordHash,
-                        password_salt: newSaltHash.salt
-                    }, {username: req.session.passport.user.username}], function (err2, rows2) {
-                        if (err2) {
-                            console.log(err2);
+                        var pwCheckHash = crypt.sha512(req.body.oldpw, rows[0].password_salt);
+                        if (pwCheckHash.passwordHash == rows[0].password_hash) {
+                            var newSaltHash = crypt.sha512(req.body.newpw, crypt.genRandomString(16));
+                        } else {
                             res.status(404);
-                            res.json(err2);
-                            conn.release();
-                        } else {
-                            res.status(200);
-                            res.redirect("/myProfile");
+                            res.json("feil pw");
                             conn.release();
                         }
-                    })
-                }
-
-            })
-        })
-    },
-
-    acceptRequest : function () {
-        pool.getConnection(function (err, conn) {
-            if (err) {
-                res.json(err);
-                conn.release();
-                return;
-            }
-            console.log("begintransaction");
-            conn.beginTransaction(function () {
-                if (err) {
-                    return conn.rollback(function () {
-                        conn.release();
-                        console.log(err);
-                        res.json(err);
-                        throw err;
-                    })
-                } else {
-                    conn.query("update shift_has_employee set employee_id = ? where shift_id = ?", [req.body.emp_id, req.body.shift_id], function (err3, rows2) {
-                        if (err3 || rows2.affectedRows != 1) {
-                            return conn.rollback(function () {
+                        conn.query("update LoginInfo set ? where ?", [{
+                            password_hash: newSaltHash.passwordHash,
+                            password_salt: newSaltHash.salt
+                        }, {username: req.session.passport.user.username}], function (err2, rows2) {
+                            if (err2) {
+                                console.log(err2);
+                                res.status(404);
+                                res.json(err2);
                                 conn.release();
-                                throw(err3);
-                            })
-                        } else {
-                            conn.release();
-                            conn.commit(function () {
+                            } else {
                                 res.status(200);
-                                console.log(rows2);
-                                res.json(rows2);
-                            })
-                        }
-                    })
-                }
-            })
-
-
-        })
-    },
-
-    acceptRequestWith: function (req, res) {
-        console.log("AcceptWith");
-        pool.getConnection(function (err, conn) {
-            if (err) {
-                conn.release();
-                res.json(err);
-                return;
-            }
-            conn.beginTransaction(function () {
-                if (err) {
-                    return conn.rollback(function () {
-                        conn.release();
-                        console.log(err);
-                        res.json(err);
-                        throw err;
-                    })
-                } else {
-                    conn.query("Update shift_has_employee set employee_id = ? where shift_id = ?", [req.body.emp_id1, req.body.shift_id1], function (err2,rows) {
-                        if (err2 || rows.affectedRows != 1) {
-                            return conn.rollback(function () {
+                                res.redirect("/myProfile");
                                 conn.release();
-                                throw err2;
-                            })
-                        } else {
-                            conn.query("update shift_has_employee set employee_id = ? where shift_id = ?", [req.body.emp_id2, req.body.shift_id2], function (err3, rows2) {
-                                if (err3 || rows2.affectedRows != 1) {
-                                    return conn.rollback(function () {
-                                        conn.release();
-                                        throw(err3);
-                                    })
-                                } else {
-                                    conn.release();
-                                    conn.commit(function () {
-                                        res.status(200);
-                                        console.log(rows2);
-                                        res.json(rows2);
-                                    })
-                                }
-                            })
-                        }
-                    })
-                }
+                            }
+                        })
+                    }
+
+                })
             })
+        }catch (herr){
+            throw herr;
+        }
+    },
+    acceptRequestWith: function (req, res) {
+        try {
+            pool.getConnection(function (err, conn) {
+                if (err) {
+                    conn.release();
+                    res.json(err);
+                    return;
+                }
+                conn.beginTransaction(function () {
+                    if (err) {
+                        return conn.rollback(function () {
+                            conn.release();
+                            console.log(err);
+                            res.json(err);
+                            //throw err;
+                        })
+                    } else {
+                        conn.query("Update shift_has_employee set employee_id = ? where shift_id = ?", [req.body.emp_id1, req.body.shift_id1], function (err2, rows) {
+                            if (err2 || rows.affectedRows != 1) {
+                                return conn.rollback(function () {
+                                    conn.release();
+                                    //throw err2;
+                                })
+                            } else {
+                                conn.query("update shift_has_employee set employee_id = ? where shift_id = ?", [req.body.emp_id2, req.body.shift_id2], function (err3, rows2) {
+                                    if (err3 || rows2.affectedRows != 1) {
+                                        return conn.rollback(function () {
+                                            conn.release();
+                                            //throw(err3);
+                                        })
+                                    } else {
+                                        conn.release();
+                                        conn.commit(function () {
+                                            res.status(200);
+                                            console.log(rows2);
+                                            res.json(rows2);
+                                        })
+                                    }
+                                })
+                            }
+                        })
+                    }
+                })
 
 
-        })
+            })
+        }catch(zerr){
+            throw zerr;
+        }
 
     }
 };
