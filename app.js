@@ -10,7 +10,7 @@ var morgan = require('morgan');
 var cookieParser = require('cookie-parser');
 var helmet = require('helmet');
 var cron = require('cron');
-var mod = require('./models/schedulerSM');
+var mod = require('./models/regWMail');
 var compression = require('compression');
 require('./middlewares/passtheport')(passport); // pass passport to config (serialize, deserialize)
 

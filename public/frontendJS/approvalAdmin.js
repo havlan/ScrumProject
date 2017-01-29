@@ -205,7 +205,6 @@ function fjernAnsatt(skiftid,ansatt) {
     if (skiftid == null) {//if method is called from 'Godkjenn vaktbytte'
         id = indeks;
     } else id = skiftid;//If method is called from 'Godkjenn fravær'
-    function fjernAnsatt() {
         $.ajax({
             url: '/deleteShift_has_employee',
             type: 'DELETE',
@@ -395,4 +394,3 @@ function fjernAnsatt(skiftid,ansatt) {
             element.style.display = "none";
         }, 3000);
     }
-}
