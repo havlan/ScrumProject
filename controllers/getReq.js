@@ -166,6 +166,9 @@ module.exports = {
     getPossibleShiftsEvents : function(req,res){
         dbHelper.getdbQuery(req,res,"select end, start, id, title,description from available_emp_for_shift where employee_id = ?", req.session.passport.user.id);
     },
+    getAvailableEmpForDate : function (req,res) {
+        dbHelper.getdbQuery(req,res, "SELECT e.employee_id, e.name, e.type_name FROM Employee e WHERE ? NOT IN(SELECT a.day FROM Availability a WHERE a.employee_id = e.employee_id AND availability = 1) AND ? NOT IN(SELECT date FROM Shift ss, shift_has_employee she WHERE ss.shift_id = she.shift_id AND she.employee_id = e.employee_id)",[req.body.date1, req.body.date2]);
+    },
     //restricted
     get403 : function (req, res) {
         res.status(403).sendFile(path.join(__dirname + '/../views/403.html'));

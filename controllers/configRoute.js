@@ -5,7 +5,7 @@ var getCtrl = require('./getReq');
 var postCtrl = require('./postReq');
 var delCtrl = require('./delReq');
 var model = require('../models/regWMail');
-var avail = require('../models/avaiModel');
+var shiftModel = require('../models/shiftModel');
 
 
 module.exports = function (app, passport) {
