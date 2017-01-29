@@ -22,3 +22,10 @@ documentation.build(['./public/frontendJS/overviewAdmin.js'], {}, function (err,
         fs.writeFileSync('./documentation/overviewAdmin.md', output);
     });
 });
+
+
+documentation.build(['./public/frontendJS/login.js'], {}, function (err, res) {
+    documentation.formats.md(res, {}, function(err, output) {
+        fs.writeFileSync('./documentation/login.md', output);
+    });
+});
