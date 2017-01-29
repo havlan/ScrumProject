@@ -1,11 +1,12 @@
 var myList = [];
-var typeNames = [];
 window.indeks = 0;
 var currentDay = new Date();
 var currentWeek = getWeekNumber(currentDay);
-var selectedWeek = currentWeek[1];
 
-
+/**
+ * Gets data from the database, data is displayed as list and in a grid with colors
+ * @function
+ */
 $.get('/getAvailability', {}, function (req, res, data) {
     myList = data.responseJSON;
     // buildHtmlTable('#TingTang',myList);
@@ -252,8 +253,11 @@ $.get('/getAvailability', {}, function (req, res, data) {
 });
 
 
-
-
+/**
+ * Returns week number and year
+ * @param d
+ * @returns {[*,*]}
+ */
 function getWeekNumber(d) {
     // Copy date so don't modify original
     d = new Date(+d);
@@ -273,7 +277,13 @@ function getWeekNumber(d) {
 
 // fane nr 2
 
-
+/**
+ * Adds a row to the table
+ * @function
+ * @param content
+ * @param morecontent
+ * @param evenmorecontent
+ */
 function addRow(content, morecontent, evenmorecontent) {
     if (!document.getElementsByTagName) return;
     tabBody = document.getElementsByTagName("tbody").item(0);
@@ -299,6 +309,10 @@ function addRow(content, morecontent, evenmorecontent) {
 var dates = [];
 var availabilities = [];
 
+/**
+ * Sends information about availability to the database
+ * @function
+ */
 function makeJsonArray() {
 
     var yarr = [];
@@ -342,6 +356,10 @@ function makeJsonArray() {
 
 
 }
+/**
+ * Clears the table if the user wants to "cancel"
+ * @funtion
+ */
 
     function emptyTable() {
         dates.length = 0;
@@ -351,7 +369,10 @@ function makeJsonArray() {
         old_tbody.parentNode.replaceChild(new_tbody, old_tbody)
 
     }
-
+/**
+ * Gets input data from the user and saves the shifts the user is marked as available
+ * @returns {Array}
+ */
     function getAvailable() {
         var valid = document.getElementById('AvaDate').validity.valid;
         if (valid == true) {
@@ -399,7 +420,11 @@ function makeJsonArray() {
         }
     }
 
-    function getUnavailable() {
+/**
+ * Gets input data from the user and saves the shifts the user is marked as unavailable
+ * @function
+ */
+function getUnavailable() {
         var valid = document.getElementById('AvaDate').validity.valid;
         if (valid == true) {
             var dagvakt = document.getElementById("AvaDay");
@@ -447,17 +472,10 @@ function makeJsonArray() {
 
     }
 
-
-    function fillAvailabilityArray(date, availablity) {
-        var AvalabilityJson;
-        AvalabilityJson = {
-            "availability": [availablity],
-            "day": ""[date]
-        };
-
-
-    }
-
+/**
+ * Displays success message
+ * @funtion
+ */
 function showSuccessMessage() {
     var element = document.getElementById('successMessageBox');
     element.style.display = "block";
@@ -465,6 +483,10 @@ function showSuccessMessage() {
         element.style.display = "none";
     }, 3000);
 }
+/**
+ * Displays error message
+ * @function
+ */
 function showErrorMessage() {
     var element = document.getElementById('errorMessageBox');
     element.style.display = "block";
@@ -472,7 +494,10 @@ function showErrorMessage() {
         element.style.display = "none";
     }, 3000);
 }
-
+/**
+ * Displays warning message
+ * @function
+ */
 function showWarningMessage() {
     var element = document.getElementById('warningMessageBox');
     element.style.display = "block";
