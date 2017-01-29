@@ -27,23 +27,38 @@ function switchFunction(){
 
 }
 
-//Gets data for tables
+/**
+ * Fills leaveTable with data from Absence
+ * @function
+ */
 $.get('/getAbsenceView', {}, function(req, res, data){
     console.log(data);
     console.log(data.responseJSON[0]);
     myList = data.responseJSON;
     buildHtmlTable('#leaveTable',myList);
 });
+/**
+ * Fills overtimeTable with data from Overtime
+ * @function
+ */
 $.get('/getOvertimeView',{},function (req,res,data) {
     myList = data.responseJSON;
     buildHtmlTable('#overtimeTable',myList);
 });
+/**
+ * Fills switchTable with data from Request
+ * @function
+ */
 $.get('/getRequestView',{},function (req,res,data) {
     myList = data.responseJSON;
     buildHtmlTable('#switchTable',myList);
 });
 
-//Builds a table in HTML document for a specific table id from a list
+/**
+ * Builds a table given JSON data and an ID in HTML file
+ * @function
+ * @param {text} selector - id of table in HTML file you want to build,{JSONArray} list - an array with data to fill the table.
+ */
 function buildHtmlTable(selector,list) {
     var columns = addAllColumnHeaders(list, selector);
     var tbody = $('<tbody/>');
@@ -61,6 +76,11 @@ function buildHtmlTable(selector,list) {
     }
     $(selector).append(tbody);
 }
+/**
+ * Adds columnheaders to table
+ * @function
+ * @param {text} selector - id of table in HTML file you want to build,{JSONArray} list - an array with data to fill the table.
+ */
 function addAllColumnHeaders(list, selector) {
     var columnSet = [];
     var headerThead$ = $('<thead/>');
@@ -80,7 +100,11 @@ function addAllColumnHeaders(list, selector) {
     $(headerThead$).append(headerTr$);
     return columnSet;
 }
-//Different checkbox class, should only be able to select one at a time
+/**
+ * Builds a table given JSON data and an ID in HTML file, slightly different form buildHtmlTable(different class input type)
+ * @function
+ * @param {text} selector - id of table in HTML file you want to build,{JSONArray} list - an array with data to fill the table.
+ */
 function buildHtmlTable2(selector,list) {
     var columns = addAllColumnHeaders(list, selector);
     var tbody = $('<tbody/>');
