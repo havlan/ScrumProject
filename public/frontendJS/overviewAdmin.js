@@ -305,7 +305,7 @@ $(function(){
 
 /**
  * Gets data from Type and makes a dropdown
- * @function
+ * @$
  */
 $.get('/getTypeNames', {}, function(req, res, data){
 

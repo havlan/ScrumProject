@@ -222,7 +222,7 @@ function fjernAnsatt(skiftid,ansatt) {
             type: 'DELETE',
             data: {'shift_id': skiftid, 'employee_id': ansatt},
             success: function (data) {
-                document.getElementById("successMessage").innerHTML = "Ansatt er fjernet";
+                document.getElementById("successMessage").innerHTML = "Ansatt er fjernet fra skiftet";
                 showSuccessMessage();
                 getSwitch();
             },
