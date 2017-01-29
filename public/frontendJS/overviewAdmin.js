@@ -15,8 +15,12 @@ $.get('/getEmployee', {}, function(req, res, data){
     $("#excelDataTable").tablesorter();
     //tableCreate();
 });
-//Build Table
 
+/**
+ * Builds a table given JSON data and an ID in HTML file
+ * @function
+ * @params {text} selector - id of table in HTML file you want to build,{JSONArray} list - an array with data to fill the table.
+ */
 function buildHtmlTable(selector,list) {
     var columns = addAllColumnHeaders(list, selector);
     var tbody = $('<tbody/>');
@@ -33,6 +37,11 @@ function buildHtmlTable(selector,list) {
     }
     $(selector).append(tbody);
 }
+/**
+ * Adds columnheaders to table
+ * @function
+ * @params {text} selector - id of table in HTML file you want to build,{JSONArray} list - an array with data to fill the table.
+ */
 function addAllColumnHeaders(myList, selector) {
     var columnSet = [];
     var headerThead$ = $('<thead/>');
@@ -50,7 +59,10 @@ function addAllColumnHeaders(myList, selector) {
     $(headerThead$).append(headerTr$);
     return columnSet;
 }
-//search for name(s)
+/**
+ * Searches through table based on employee name
+ * @function
+ */
 function searchNameFunction() {
     var input, filter, table, tr, td, i;
     input = document.getElementById("nameInput");
@@ -70,7 +82,10 @@ function searchNameFunction() {
         }
     }
 }
-//search for position
+/**
+ * Searches through table based on employee position
+ * @function
+ */
 function searchPositionFunction() {
     var input, filter, table, tr, td, i;
     input = document.getElementById("positionInput");
@@ -88,7 +103,10 @@ function searchPositionFunction() {
         }
     }
 }
-// remove employee logininfo
+/**
+ * Removes user from  LoginInfo (and thereby the system)
+ * @function
+ */
 function removeFunction() {
    // alert(indeks);
     if (confirm("Er du sikker på at du vil fjerne denne brukeren?\n Informasjon om den ansatte vil fortsatt ligge i systemet,\n men den ansatte kan ikke lenger bruke det.") == true) {
@@ -143,6 +161,10 @@ function hideInfo() {
     document.getElementById("addInfo").style.display="none";
 }
 
+/**
+ * Adds new LoginInfo for an employee
+ * @function
+ */
 $(function() {
     $('#logInInfo').on('submit', function (e) {
         alert(indeks);
@@ -174,7 +196,12 @@ $(function() {
     });
 });
 
-//myModal info
+/**
+ * Triggers a modal when pressing a table row
+ * Finds employee id from selected row (indeks)
+ * Fills modal with information for Employee
+ * @function
+ */
 $(document).on('click','#excelDataTable td',function(){
     indeks = $(this).closest("tr").find('td:eq(2)').text();
   //  alert(indeks);
@@ -212,7 +239,13 @@ $(document).on('click','#excelDataTable td',function(){
         $("#positionModal").val(data.responseJSON[hei].Stilling);
     });
 });
-//addModal submit
+
+/**
+ * Triggers a modal when pressing a table row
+ * Finds employee id from selected row (indeks)
+ * Fills modal with information for Employee
+ * @function
+ */
 $(function(){
     $('#addModal').on('submit', function(e){
         e.preventDefault();
