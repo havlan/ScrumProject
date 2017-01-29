@@ -1,3 +1,4 @@
+
 function absenceFunction(){
     document.getElementById('absenceAppeal').style.display = "block";
     document.getElementById('changeAppeal').style.display = "none";
@@ -5,6 +6,7 @@ function absenceFunction(){
     document.getElementById('overtimeAppeal').style.display = "none";
 
 }
+
 function changeFunction(){
     document.getElementById('absenceAppeal').style.display = "none";
     document.getElementById('changeAppeal').style.display = "block";

@@ -1,19 +1,30 @@
 /**
  * Created by torsku on 23.01.2017.
  */
+
+/**
+ * Opens modal when "forgotten password?" is clicked
+ * @function
+ */
 $(function () {
     $('#klikk').on('click',function () {
         $('#newPassword').modal("show");
     })
 });
-
+/**
+ * hides success and error message box
+ * @function
+ */
 $( document ).ready(function() {
-    getRandomColor();
-
     $("#successMessageBox").hide();
     $("#errorMessageBox").hide();
 });
 
+/**
+ * When clicked an e-mail is sent to the user
+ * @function
+ * @param user input
+ */
 $(function () {
     $('#saveEdit').on('click',function (e) {
         e.preventDefault();
@@ -39,13 +50,11 @@ $(function () {
     })
 });
 
-function getRandomColor() {
 
-    var randomColor = "#"+((1<<24)*Math.random()|0).toString(16);
-
-    document.documentElement.style.setProperty('main-bg-color', randomColor);
-}
-
+/**
+ * Displays success message
+ * @function
+ */
 function showSuccessMessage() {
     var element = document.getElementById('successMessageBox');
     element.style.display = "block";
@@ -53,6 +62,10 @@ function showSuccessMessage() {
         element.style.display = "none";
     }, 3000);
 }
+/**
+ * Displays error message
+ * @function
+ */
 function showErrorMessage() {
     var element = document.getElementById('successMessageBox');
     element.style.display = "block";
