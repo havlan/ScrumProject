@@ -164,7 +164,7 @@ module.exports = {
                     } else {
                         console.log(inf.response);
                     }
-                })
+                });
                 transporter.sendMail(mail2, function (err, inf) {
                     console.log(err || inf.response);
                 })

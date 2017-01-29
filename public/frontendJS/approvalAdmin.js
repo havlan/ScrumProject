@@ -26,33 +26,47 @@ function switchFunction(){
     document.getElementById('Lagre').style.display = "none";
 
 }
-
+$(document).ready(function () {
+    getAbsence();
+    getOvertime();
+    getSwitch();
+});
 /**
  * Fills leaveTable with data from Absence
  * @function
  */
-$.get('/getAbsenceView', {}, function(req, res, data){
-    console.log(data);
-    console.log(data.responseJSON[0]);
-    myList = data.responseJSON;
-    buildHtmlTable('#leaveTable',myList);
-});
+function getAbsence() {
+    $("#leaveTable").empty();
+    $.get('/getAbsenceView', {}, function(req, res, data){
+        console.log(data);
+        console.log(data.responseJSON[0]);
+        myList = data.responseJSON;
+        buildHtmlTable('#leaveTable',myList);
+    });
+}
 /**
  * Fills overtimeTable with data from Overtime
  * @function
  */
-$.get('/getOvertimeView',{},function (req,res,data) {
-    myList = data.responseJSON;
-    buildHtmlTable('#overtimeTable',myList);
-});
+function getOvertime() {
+    $("#overtimeTable").empty();
+    $.get('/getOvertimeView',{},function (req,res,data) {
+        myList = data.responseJSON;
+        buildHtmlTable('#overtimeTable',myList);
+    });
+}
 /**
  * Fills switchTable with data from Request
  * @function
  */
-$.get('/getRequestView',{},function (req,res,data) {
-    myList = data.responseJSON;
-    buildHtmlTable('#switchTable',myList);
-});
+function getSwitch(){
+    $("#switchTable").empty();
+    $.get('/getRequestView',{},function (req,res,data) {
+        myList = data.responseJSON;
+        buildHtmlTable('#switchTable',myList);
+    });
+}
+
 
 /**
  * Builds a table given JSON data and an ID in HTML file
@@ -79,7 +93,7 @@ function buildHtmlTable(selector,list) {
 /**
  * Adds columnheaders to table
  * @function
- * @param {text} selector - id of table in HTML file you want to build,{JSONArray} list - an array with data to fill the table.
+ * @params {text} selector - id of table in HTML file you want to build,{JSONArray} list - an array with data to fill the table.
  */
 function addAllColumnHeaders(list, selector) {
     var columnSet = [];
@@ -103,7 +117,7 @@ function addAllColumnHeaders(list, selector) {
 /**
  * Builds a table given JSON data and an ID in HTML file, slightly different form buildHtmlTable(different class input type)
  * @function
- * @param {text} selector - id of table in HTML file you want to build,{JSONArray} list - an array with data to fill the table.
+ * @params {text} selector - id of table in HTML file you want to build,{JSONArray} list - an array with data to fill the table.
  */
 function buildHtmlTable2(selector,list) {
     var columns = addAllColumnHeaders(list, selector);
@@ -138,7 +152,7 @@ $(document).on('click','#switchTable .openModal',function () {
         $.get('/getRequestShift/'+parseInt(indeks),function(req,res,data1){
             $('#hei').append('<table class="table table-striped table-bordered" id="ansattTable"></table>');
             buildHtmlTable2("#ansattTable",data1.responseJSON);
-            console.log(data1.responseJSON);
+            //console.log(data1.responseJSON);
         });
         $('#approveModal').modal('show');
         //if checkbox is unchecked
@@ -201,19 +215,16 @@ $(document).on('click','#Lagre',function (e) {
  * @params {number} skiftid - id of shift,{number} ansatt - id of employee
  */
 function fjernAnsatt(skiftid,ansatt) {
-    var id;
-    if (skiftid == null) {//if method is called from 'Godkjenn vaktbytte'
-        id = indeks;
-    } else id = skiftid;//If method is called from 'Godkjenn fravær'
-    function fjernAnsatt() {
+    skiftid = indeks;
+    ansatt = ansattid;
         $.ajax({
             url: '/deleteShift_has_employee',
             type: 'DELETE',
-            data: {'shift_id': id, 'employee_id': ansatt},
+            data: {'shift_id': skiftid, 'employee_id': ansatt},
             success: function (data) {
                 document.getElementById("successMessage").innerHTML = "Ansatt er fjernet";
                 showSuccessMessage();
-                getSwitchTable();
+                getSwitch();
             },
             error: function (xhr) {
                 if (xhr.status == 404) {
@@ -225,8 +236,7 @@ function fjernAnsatt(skiftid,ansatt) {
                 }
             }
         });
-    }
-
+}
     /**
      * Replaces an employee in shift_has_employee with another
      * @function
@@ -242,7 +252,7 @@ function fjernAnsatt(skiftid,ansatt) {
                 fjernAnsatteRequestShift(skiftid);
                 document.getElementById("successMessage").innerHTML = "Ansatt er erstattet";
                 showSuccessMessage();
-                getSwitchTable();
+                getSwitch();
             },
             error: function (xhr) {
                 if (xhr.status == 404) {
@@ -268,8 +278,8 @@ function fjernAnsatt(skiftid,ansatt) {
             data: {'shift_id': skiftid},
             success: function (data) {
                 deleteRequest(indeks);
-                document.getElementById("successMessage").innerHTML = "TODO er fjernet";//TODO
-                showSuccessMessage();
+                document.getElementById("successMessage").innerHTML = "";
+              //  showSuccessMessage();
             },
             error: function (xhr) {
                 if (xhr.status == 404) {
@@ -295,8 +305,8 @@ function fjernAnsatt(skiftid,ansatt) {
             data: {'request_id': id},
             success: function (data) {
                 //alert("Request slettet.");
-                document.getElementById("successMessage").innerHTML = "TODO er fjernet"; //TODO
-                showSuccessMessage();
+                document.getElementById("successMessage").innerHTML = "t";
+                //showSuccessMessage();
             },
             error: function (xhr) {
                 if (xhr.status == 404) {
@@ -323,7 +333,7 @@ function fjernAnsatt(skiftid,ansatt) {
             success: function (data) {
                 document.getElementById("successMessage").innerHTML = "Fravær godkjent";
                 showSuccessMessage();
-                getAbsenceTable();
+                getAbsence();
             },
             error: function (xhr) {
                 if (xhr.status == 404) {
@@ -350,7 +360,7 @@ function fjernAnsatt(skiftid,ansatt) {
             success: function (data) {
                 document.getElementById("successMessage").innerHTML = "Overtid oppdatert";
                 showSuccessMessage();
-                getOvertimeTable();
+                getOvertime();
             },
             error: function (xhr) {
                 if (xhr.status == 404) {
@@ -395,4 +405,3 @@ function fjernAnsatt(skiftid,ansatt) {
             element.style.display = "none";
         }, 3000);
     }
-}
