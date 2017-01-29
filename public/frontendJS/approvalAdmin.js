@@ -91,10 +91,10 @@ function buildHtmlTable(selector,list) {
     $(selector).append(tbody);
 }
 /**
- * Adds columnheaders to table
- * @function
- * @params {text} selector - id of table in HTML file you want to build,{JSONArray} list - an array with data to fill the table.
- */
+* Adds columnheaders to table
+* @function
+* @params {text} selector - id of table in HTML file you want to build,{JSONArray} list - an array with data to fill the table.
+*/
 function addAllColumnHeaders(list, selector) {
     var columnSet = [];
     var headerThead$ = $('<thead/>');
