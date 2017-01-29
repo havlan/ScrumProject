@@ -4,23 +4,28 @@ module.exports = {
     createNewShifts : function (req,res) {
         try {
             pool.getConnection(function (err, conn) {
-                if (err) res.status(500).json({message: "FUCK"});
-                conn.beginTransaction(function (err) {
-                    if (err) {
+                if (err) res.status(500).json({message: "error"});
+
+                conn.on('error', function(err) {
+                    console.log('Query error: ' + err);
+                });
+
+                conn.beginTransaction(function (err2) {
+                    if (err2) {
                         return conn.rollback(function () {
                             conn.release();
-                            console.log(err);
-                            throw err;
+                            console.log(err2);
                         })
                     } else {
-                        conn.query("insert into Shift (minutes, date, department_id, type_name) values ?", [req.body.shifts], function (error, res2) {
+                        var sql = "INSERT INTO Shift (minutes, date, department_id, type_name) values ?";
+
+                        conn.query(sql, [req.body.shifts], function (error, res2) {
                             if (error) {
                                 return conn.rollback(function () {
                                     conn.release();
-                                    throw error;
+                                    console.log(error);
                                 })
                             } else {
-                                console.log(res2);
 
                                 var shiftIds = [];
                                 var indeks = 0;
@@ -37,13 +42,12 @@ module.exports = {
                                     if (error) {
                                         return conn.rollback(function () {
                                             conn.release();
-                                            throw error;
                                         })
                                     } else {
                                         conn.commit(function (gerr) {
                                             conn.release();
                                             if (gerr) {
-                                                throw gerr;
+                                                console.log(gerr);
                                             }
                                         })
                                     }
