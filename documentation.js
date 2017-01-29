@@ -36,7 +36,7 @@ documentation.build(['./public/frontendJS/myProfile.js'], {}, function (err, res
     });
 });
 
-documentation.build(['./public/frontendJS/overviewEmp.js'], {}, function (err, res) {
+documentation.build(['C:\Users\torsku\WebstormProjects\scrumLords2017\public\frontendJS\overviewEmp.js'], {}, function (err, res) {
     documentation.formats.md(res, {}, function(err, output) {
         fs.writeFileSync('./documentation/overviewEmp.md', output);
     });
