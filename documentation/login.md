@@ -3,3 +3,27 @@
 ## $
 
 Created by torsku on 23.01.2017.
+
+## $
+
+Opens modal when "forgotten password?" is clicked
+
+## $
+
+When clicked an e-mail is sent to the user
+
+**Parameters**
+
+-   `user`  input
+
+## ready
+
+hides success and error message box
+
+## showSuccessMessage
+
+Displays success message
+
+## showErrorMessage
+
+Displays error message
