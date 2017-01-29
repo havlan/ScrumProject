@@ -23,8 +23,8 @@ $.get('/getAvailability', {}, function (req, res, data) {
             var weekDay = jsDate.getDay();
             var hour = jsDate.getHours();
 
-
-            if (selectedWeek == weekNr[1]) {
+            console.log("UKENUMMER:" +weekNr[1]);
+            if (currentWeek!=null) {
                 if (weekDay == 1) {
                     if (hour >= 8 && hour < 16) {
                         if (available1 == 0) {
@@ -313,7 +313,7 @@ function makeJsonArray() {
         type: 'POST',
         data: {'availarray': yarr},
         success:function (data) {
-            document.getElementById("successMessage").innerHTML = "Overtid oppdatert";
+            document.getElementById("successMessage").innerHTML = "Tilgengelighet oppdatert";
             showSuccessMessage();
             getOvertimeTable();
         },
