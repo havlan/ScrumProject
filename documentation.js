@@ -17,3 +17,8 @@ documentation.build(['./public/frontendJS/approvalAdmin.js'], {}, function (err,
     });
 });
 
+documentation.build(['./public/frontendJS/overviewAdmin.js'], {}, function (err, res) {
+    documentation.formats.md(res, {}, function(err, output) {
+        fs.writeFileSync('./documentation/overviewAdmin.md', output);
+    });
+});
