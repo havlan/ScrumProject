@@ -1,0 +1,351 @@
+/********** GENERAL ELEMENTS **********/
+* {
+    color:#000000;
+    font-size: 20px;
+    text-decoration:none;
+    margin:0px 0px 0px 0px;
+    padding:0px 0px 0px 0px;
+}
+html, body {
+    height: 100%;
+    width: 100%;
+    min-width: 450px;
+    min-height: 377.5px;
+    margin: 0;
+    overflow:hidden;
+}
+
+/********** HEADER ELEMENTS **********/
+.header_elements {
+    height:40px;
+    position:absolute;
+    display:inline-block;
+}
+.header_text_element {
+    display: inline-block;
+    padding-top: 9px;
+    padding-bottom: 9px;
+    position:absolute;
+}
+header {
+    position: fixed;
+    background-color: #b1d5ed;
+    width:100%;
+    min-width: 490px;
+}
+#image {
+    width:40px;
+    background-color:#b1d599;
+}
+#dropdown_button {
+    background-color:#9ab6bf;
+    margin-left:40px;
+    width: 100px;
+}
+#dropdown_button_text {
+    padding-left: 10px;
+    padding-right: 42px;
+}
+header p {
+    left:50%;
+    text-align: center;
+}
+#logout_button {
+    background-color:#9ab6bf;
+    right:0px;
+    width:80px;
+}
+#logout_button_text {
+    padding-left: 9px
+}
+#dropdown_box {
+    position:fixed;
+    background-color:#00ff00;
+    width:200px;
+    height:420px;
+    top:40px;
+    left:40px;
+}
+
+
+/********** BELOW HEADER **********/
+main {
+    display: block;
+    width:100%;
+    height: calc(100%);
+}
+
+/********** ALL SIDEBAR ELEMENTS **********/
+.sidebar_elements{
+    width:40px;
+    display:block;
+    position:relative;
+}
+sidebar {
+    position:fixed;
+    display: inline-block;
+    float:left;
+    background-color: #a5c1d3;
+    height:100%;
+}
+.sidebar_item {
+    width:inherit;
+    position:inherit;
+    height: 40px;
+    background-color:#9ab6bf;
+    text-align:center;
+}
+.sidebar_logo { /*replace with pic*/
+    padding-top: 9px;
+    display:block;
+    width:inherit;
+    height:30px;
+}
+
+
+/********** RIGHT OF SIDEBAR  **********/
+#mainbox {
+    background-color: #f7f1ef;
+    height:100%;
+    display: block;
+    width: calc(100% - 40px);
+    overflow-y: auto;
+    overflow-x:hidden;
+}
+
+#mainbox object {
+    height: 100%;
+    width:100%;
+}
+
+/********** MEDIA QUERIES **********/
+/** longer **/
+@media screen and (max-aspect-ratio: 3/2) {
+    #notifications_main {
+        width:calc(100vw - 50px);
+        height: calc(100% - 75vw + 15px );
+        min-height: 190px;
+    }
+    .notification {
+        width:calc(50% - 5px);
+        height:90px;
+    }
+    .notification_seen {
+        width:calc(50% - 5px);
+        height:90px;
+    }
+    .cal_info_link {
+        font-size: 1.5vw;
+        line-height: 2.75vw;
+    }
+    .cal_num_link {
+        font-size: 1.5vw;
+    }
+}
+
+/** larger **/
+@media screen and (min-aspect-ratio: 3/2) {
+    #calendar_main {
+        max-width: calc(133.33vh - 50px);
+    }
+    #notifications_main {
+        width:calc(100% - 100vh - 10px);
+        height: calc(100vh - 50px )
+    }
+    .notification {
+        width:calc(100% - 5px);
+        height:20%;
+        min-height: 40px;
+    }
+    .notification_seen {
+        width:calc(100% - 5px);
+        height:20%;
+        min-height: 40px;
+    }
+    .cal_info_link {
+        font-size: 2vh;
+        line-height: 3.25vh;
+    }
+    .cal_num_link {
+        font-size: 2vh;
+    }
+}
+/** smaller than 450px width **/
+@media screen and (max-width: 450px) {
+
+}
+
+/********** CALENDAR **********/
+#calendar_main {
+    margin:5px 5px 5px 5px;
+    float:left;
+    width: calc(100vw - 50px);
+    height: calc(75vw - 30px);
+    min-width: 440px;
+    min-height: 327.5px;
+    max-height: calc(100vh - 50px);
+}
+#calendar_menu {
+    background-color: #ffdddd;
+    text-align: center;
+    width:100%;
+    height:40px;
+}
+#calendar_menu_left {
+    width:30%;
+    height:40px;
+    float:left;
+}
+#calendar_arrow_left {
+    background-color: aqua;
+    float:left;
+    width:40px;
+    height:40px;
+}
+#calendar_today_button {
+    background-color: #ffcccc;
+    font-size: 15px;
+    float:left;
+    width:40px;
+    height:20px;
+    margin:10px 0px 0px 9px;
+}
+#calendar_menu_center {
+    width:40%;
+    height:40px;
+    float:left;
+}
+#calendar_month {
+    height:20px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+#calendar_menu_right {
+    width:30%;
+    height:40px;
+    float:right;
+}
+#calendar_arrow_right {
+    background-color: aqua;
+    float:right;
+    width:40px;
+    height:40px;
+}
+#calendar_table {
+    display:grid;
+    width:100%;
+    height:25px;
+}
+#calendar_table th {
+    width:14.3%;
+    height:20px;
+    font-size:13px;
+}
+#calendar_row_holder {
+    height:calc(100% - 60px);
+    width:100%;
+}
+#calendar_row_holder tr {
+    width:100%;
+    height:16.7%;
+}
+#calendar_row_holder tr td{
+    background-color:#ffeeee;
+    width:14.3%;
+    height:16.7%;
+}
+.calendar_number {
+    background-color:#ffdddd;
+    width:100%;
+    text-align: right;
+    font-size: 10px;
+    height:25%;
+}
+.cal_num_link {
+    display:block;
+    width: 100%;
+    height: 100%;
+}
+.calendar_info_rows {
+    width:100%;
+    height:25%;
+}
+.cal_info_link {
+    text-align: center;
+    display:block;
+    width: 100%;
+    height: 100%;
+}
+/********** NOTIFICATIONS  **********/
+#notifications_main {
+    margin: 5px 5px 5px 5px;
+    background-color: azure;
+    position: relative;
+    overflow:auto;
+}
+#notifications_menu {
+    background-color:darkturquoise;
+    text-align: center;
+    width: 100%;
+    height:24px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+#notifications_box {
+    height:calc(100% - 40px);
+    padding: 2.5px 2.5px 2.5px 2.5px;
+}
+.notification {
+    float: left;
+    margin:2.5px 2.5px 2.5px 2.5px;
+    background-color:aquamarine;
+}
+.notification_seen {
+    float: left;
+    margin:2.5px 2.5px 2.5px 2.5px;
+    background-color: #dddddd;
+}
+.notification_button_seen {
+    display:block;
+    margin:5px 5px 5px 5px;
+    float:right;
+    width:30px;
+    height:calc(100% - 10px);
+    background-color: #eeeeee;
+}
+.notification_text {
+    float:left;
+    margin:5px 0px 5px 5px;
+    width:calc(100% - 45px);
+    height:calc(100% - 10px);
+}
+.notification_button {
+    background-color: antiquewhite;
+    display:block;
+    margin:5px 5px 5px 5px;
+    float:right;
+    width:30px;
+    height:calc(100% - 10px);
+}
+
+
+/********** HIDDEN AND SHOWN **********/
+.hidden {
+    display:none;
+}
+.shown {
+    display:block;
+}
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+}

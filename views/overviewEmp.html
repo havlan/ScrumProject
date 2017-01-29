@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Oversikt over ansatte</title>
+
+    <script src ="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" >
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="frontendJS/tablesorter.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/overviewEmp.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="frontendJS/overviewEmp.js"></script>
+
+</head>
+
+<div id="includedContent"></div>
+<script>$("#includedContent").load("menu");</script>
+
+<body>
+<div id="successMessageBox">
+    <span id="successMessage">default success</span>
+</div>
+<div id="errorMessageBox">
+    <span id="errorMessage">default error</span>
+</div>
+<div id="warningMessageBox">
+    <span id="warningMessage">default error</span>
+</div>
+
+<div id="container">
+<div id="sideTitle">KONTAKTINFO</div>
+
+    <input autofocus type="text" id="nameInput" onkeyup="searchNameFunction()" placeholder="Søk på ansatt">
+    <input type="text" id="positionInput" onkeyup="searchPositionFunction()" placeholder="Søk på stilling">
+
+<div class="table-responsive">
+    <table class="table table-striped table-bordered cards-table" id="dbDataTable">
+    </table>
+</div>
+</div>
+
+<!-- Modal-Info -->
+<div class="modal fade" id="infoModal" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <!-- Modal header-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h3 class="modal-title">Informasjon om ansatt</h3>
+            </div>
+            <!-- Modal body-->
+
+            <main class="modal-body">
+                <img id="picEmpInfo" src="http://www.freeiconspng.com/uploads/profile-icon-9.png" alt="Bilde av ansatt"
+                     height="150px" width="150px"></img>
+                <table id = "infoTable">
+                    <tr>
+                        <th class="info" id="nameEmp">Navn</th>
+
+                    </tr>
+                    <tr>
+                        <td class="info">Telefonnummer</td>
+                        <td class="db" id = "tlfnrInfo">FRADATABASE</td>
+                    </tr>
+                    <tr>
+                        <td class="info">E-postadresse</td>
+                        <td class="db" id = "emailInfo">FRADATABASE</td>
+                    </tr>
+                    <tr>
+                        <td class="info">Adresse</td>
+                        <td class="db" id = "adresseInfo">FRADATABASE</td>
+                    </tr>
+                </table>
+            </main>
+            <!-- Modal footer-->
+            <div class="modal-footer">
+                <button type="button" class="closeButton" data-dismiss="modal">Lukk</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

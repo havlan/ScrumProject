@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MinProfil</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src ="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" >
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <link href ="css/myProfile.css" rel="stylesheet" type = "text/css" > <!-- public + /css/myProfile.css   -->
+    <script type="text/javascript" src="frontendJS/tablesorter.js"></script>
+    <script src = "frontendJS/myProfile.js"></script>
+    <script src = "frontendJS/sendPassword.js"></script>
+</head>
+
+<div id="includedContent"></div>
+<script>$("#includedContent").load("menu");</script>
+
+<body class="profile">
+<div id="successMessageBox">
+    <span id="successMessage">default success</span>
+</div>
+<div id="errorMessageBox">
+    <span id="errorMessage">default error</span>
+</div>
+<div id="warningMessageBox">
+    <span id="warningMessage">default error</span>
+</div>
+
+<div id="sideTitle">MIN PROFIL</div>
+
+<div class = flytt>
+
+    <!-- Info Ansatt -->
+    <main class="infoEmp">
+        <h1 id = "navn"></h1>
+        <table>
+            <tr>
+                <td class="info">Stillingsprosent:</td>
+                <td class="db" id = "stillingsprosent"></td>
+            </tr>
+            <tr>
+                <td class="info">Telefonnummer:</td>
+                <td class="db" id = "tlfnr"></td>
+            </tr>
+            <tr>
+                <td class="info">E-postadresse:</td>
+                <td class="db" id = "email"></td>
+            </tr>
+            <tr>
+                <td class="info">Adresse:</td>
+                <td class="db" id = "address"></td>
+            </tr>
+            <tr>
+                <td class="info">Stilling:</td>
+                <td class="db" id = "type_name"></td>
+            </tr>
+            <tr>
+                <td class="info">Timer:</td>
+                <td class="db" id = "total_hours"></td>
+            </tr>
+        </table>
+        <button type="button" id="editBtn" data-toggle="modal" data-target="#editModal" autofocus>Rediger</button>
+        <button type="button" id="passwordBtn" data-toggle="modal" data-target="#password">Endre passord</button>
+        <button type="button" id="historyBtn" data-toggle="modal" data-target="#historyModal">Historikk</button>
+    </main>
+
+    <!-- Modal:Edit info -->
+    <div class="modal fade" id="editModal" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <!-- Modal content-->
+            <!-- Modal header-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h3 class="modal-title">Rediger informasjon</h3>
+                </div>
+                <!-- Modal body-->
+                <main class="modal-body">
+                    <form id="editEmp">
+                        <p>
+                        Telefonnummer:
+                        <input required class="inputEdit" id="edittelefon" type="tel" name="phone" autofocus>
+                        </p>
+                        <p>
+                        Adresse:
+                        <input required class="inputEdit" id="editadresse" type="text" name="address" >
+                        </p>
+                        <p>
+                        E-post:
+                        <input required class="inputEdit" id="editepost" type="email" name="email">
+                        </p>
+                        <br>
+                        <input type="submit" class="saveEdit" value="Lagre">
+                    </form>
+                </main>
+                <!-- Modal footer-->
+                <div class="modal-footer">
+                    <p id="editfeedback"></p>
+                    <button type="button" class="close" data-dismiss="modal">Lukk</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal:history -->
+    <div class="modal fade" id="historyModal" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <!-- Modal content-->
+            <!-- Modal header-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h3 class="modal-title">Historikk</h3>
+                </div>
+                <!-- Modal body-->
+                <table class="table-striped" id="histTable">
+                </table>
+                <!-- Modal footer-->
+                <div class="modal-footer">
+                    <button type="button" class="close" data-dismiss="modal">Lukk</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal:password -->
+    <div class="modal fade" id="password" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <!-- Modal content-->
+            <!-- Modal header-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h3 class="modal-title">Endre passord</h3>
+                </div>
+                <!-- Modal body-->
+                <section id="passwordBody">
+                    <form id="passwordForm" action="/changePassword" method="post">
+                        <p>
+                        Gammelt passord:
+                            <input required class="inputEdit"type="password" placeholder="eks: katt123" value="" name="oldpw">
+                        </p>
+                        <p>
+                        Nytt passord:
+                            <input required class="inputEdit" type="password" placeholder="eks: xxxxxxxx" value="" name="newpw">
+                        </p>
+                        <p>
+                        Gjenta nytt passord:
+                            <input required class="inputEdit" type="password" placeholder="eks: xxxxxxxx" value="" name="newpw2">
+                        </p>
+                        <br>
+                        <input type="submit" class="saveEdit" value="Lagre">
+                    </form>
+                </section>
+                <!-- Modal footer-->
+                <div class="modal-footer">
+                    <button type="button" class="close" data-dismiss="modal">Lukk</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+</body>
+</html>
+
+<!--"https://s3.amazonaws.com/whisperinvest-images/default.png" -->

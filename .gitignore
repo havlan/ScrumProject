@@ -15,6 +15,18 @@ markdown_navigator.shared.xml
 vcs.xml
 web-browsers.xml
 inspection
+git.xml
+abbreviations.xml
+keymap.xml
+laf.xml
+
+/coverage/*
+/coverage
+coverage
+.nyc_output
+/.nyc_output
+_windows
+
 
 # Runtime data
 pids

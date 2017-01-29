@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<head>
+    <title> Oversikt over ansatte</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src ="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" >
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="frontendJS/tablesorter.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/overviewAdmin.css">
+    <script src="frontendJS/overviewAdmin.js"></script>
+
+</head>
+<div id="includedContent"></div>
+<script>$("#includedContent").load("menu");</script>
+
+<body>
+<div id="successMessageBox">
+    <span id="successMessage">default success</span>
+</div>
+<div id="errorMessageBox">
+    <span id="errorMessage">default error</span>
+</div>
+<div id="warningMessageBox">
+    <span id="warningMessage">default error</span>
+</div>
+
+<div id="sideTitle">OVERSIKT OVER ANSATTE</div>
+
+<div id="flytt">
+    <input autofocus type="text" id="nameInput" onkeyup="searchNameFunction()" placeholder="Søk på ansatt">
+    <input type="text" id="positionInput" onkeyup="searchPositionFunction()" placeholder="Søk på stilling">
+    <button type="button" id="addBtn" data-toggle="modal" data-target="#addModal">Legg til ansatt</button>
+
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered cards-table" data-toggle="table" id="excelDataTable">
+        </table>
+    </div>
+
+
+    <!-- 1:Modal-Add -->
+    <div class="modal fade" id="addModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <!-- Modal header-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h3 class="modal-title">Legg til ansatt</h3>
+                </div>
+                <!-- Modal body-->
+
+                <main class="modal-body">
+                    <form id="addEmp">
+                        <p>
+                            Navn:
+                            <input required class="input" id="fornavn" type="text" name="name"
+                                   placeholder="eks: Jan Skrotnes">
+                            <br>
+                        </p>
+                        <p>
+                            Brukernavn:
+                            <input required class="input" id="brukernavn" type="text" name="username"
+                                   placeholder="eks: ola_nordmann_96">
+                            <br>
+                        </p>
+                        <p>
+                            Brukertype:
+                            <select class="input" id="usertype">
+                                <option value="1">Administrasjon</option>
+                                <option value="2">Ansatt</option>
+                            </select>
+                            <br>
+                        </p>
+                        <p>
+                            Stilling:
+                            <select class="input" id="stilling">
+                            </select>
+                            <br>
+                        </p>
+                        <p>
+                            Telefonnummer:
+                            <input required class="input" id="telefon" type="number" name="phone"
+                                   placeholder="eks: +47 12345678">
+                            <br>
+                        </p>
+                        <p>
+                            E-postadresse:
+                            <input required class="input" id="epost" type="text" name="email"
+                                   placeholder="eks: noen@mail.no">
+                            <br>
+                        </p>
+                        <p>
+                            Adresse:
+                            <input required class="input" id="adresse" type="text" name="address"
+                                   placeholder="eks: Gateveien 1">
+                            <br>
+                        </p>
+                        <p>
+                            Personnummer:
+                            <input required class="input" id="personnummer" type="text" name="persNo"
+                                   placeholder="11 siffer">
+                            <br>
+                        </p>
+                        <p>
+                            Ansiennitet:
+                            <input required class="input" id="seniority" type="text" name="seniority"
+                                   placeholder="eks: 69">
+                            <br>
+                        </p>
+                        <p>
+                            Ansvarsvakt:
+                            <select class="input" id="responsibility">
+                                <option value="0">Ja</option>
+                                <option value="1">Nei</option>
+                            </select>
+                            <br>
+                        </p>
+                        <br>
+                        <p id="newUserFeedback"></p>
+                        <button class="saveEdit" id="save" type="submit" value="submit">Lagre &#10003;</button>
+                    </form>
+                </main>
+                <!-- Modal footer-->
+                <div class="modal-footer">
+                    <button type="button" class="close" data-dismiss="modal">Lukk</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- 2:Modal-Edit -->
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <!-- Modal header-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h3 class="modal-title">Oversikt over ansatt</h3>
+                </div>
+                <!-- Modal body-->
+                <main class="modal-body">
+                    <section id="personForm" style="display:none;">
+                        <form id="editEmp">
+                            <p>
+                                Navn:
+                                <input required class="dbInfo" id="navndb" type="text" name="name">
+                            </p>
+                            <p>
+                                Stilling:
+                                <select class="dbInfo" id="stillingDropdown">
+                                </select>
+                            </p>
+                            <p>
+                                Telefonnummer:
+                                <input required class="dbInfo" id="telefondb" type="number" name="phone">
+                            </p>
+                            <p>
+                                E-postadresse:
+                                <input required class="dbInfo" id="epostdb" type="text" name="email">
+                            </p>
+                            <p>
+                                Adresse:
+                                <input required class="dbInfo" id="adressedb" type="text" name="address">
+                            </p>
+                            <p>
+                                Personnummer:
+                                <input required class="dbInfo" id="personnummerdb" type="number" name="persNo">
+                                <br>
+                            </p>
+                            <br>
+                            <button type="button" class="backBtn" id="back" onclick="hideForm()" display="none">&#8592;Tilbake</button>
+                            <button type="submit" class="saveEdit" id="saveEditBtn" value="submit" display="none">Lagre
+                                &#10003;</button>
+
+                        </form>
+                    </section>
+                    <section id="personInfo" style="display:block">
+                        <table cellspacing="10">
+                            <tr>
+                                <td class="info">Navn:</td>
+                                <td class="persInfodb" id="navndb2"></td>
+                            </tr>
+                            <tr>
+                                <td class="info" id="">Stilling:</td>
+                                <td class="persInfodb" id="stillingdb2"></td>
+                            </tr>
+                            <tr>
+                                <td class="info">Telefonnummer:</td>
+                                <td class="persInfodb" id="telefondb2"></td>
+                            </tr>
+                            <tr>
+                                <td class="info">E-postadresse:</td>
+                                <td class="persInfodb" id="epostdb2"></td>
+                            </tr>
+                            <tr>
+                                <td class="info">Adresse:</td>
+                                <td class="persInfodb" id="adressedb2"></td>
+                            </tr>
+                            <tr>
+                                <td class="info">Personnummer:</td>
+                                <td class="persInfodb" id="personnummerdb2"></td>
+                            </tr>
+                        </table>
+                    </section>
+                    <section id="logInInfo" style="display:none;">
+                        <form id="loginForm">
+
+                            <p>Fungerer bare hvis ansatt ikke allerede har en bruker</p>
+
+                            Brukernavn:
+                            <input required class="input" id="username" type="text" name="Brukernavn">
+                            <br>
+                            Brukertype:
+                            <input required class="input" id="is_admin" type="text" name="Admin?">
+                            <br>
+                            <br>
+                            <button type="button" class="backBtn" id="back2" onclick="hideForm()" display="none">&#8592;Tilbake</button>
+                            <button type="submit" class="saveEdit" value="submit" id="saveLogin" display="none">Lagre
+                            </button>
+                        </form>
+
+                    </section>
+                    <aside class="buttons">
+                        <button type="button" id="edit" onclick="hideInfo()" display="inline"> &#x2710; Rediger</button>
+                        <button type="button" id="remove" onclick="removeFunction()" data-dismiss="modal"
+                                display="inline"> Deaktiver bruker
+                        </button>
+                        <button type="button" id="addInfo" onclick="addFunction()" display="inline"> Aktiver bruker
+                        </button>
+                    </aside>
+                </main>
+
+                <!-- Modal footer-->
+                <div class="modal-footer">
+                    <button type="button" class="close" data-dismiss="modal">Lukk</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End all modal -->
+
+</div>
+</body>
+</html>

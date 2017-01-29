@@ -1,0 +1,167 @@
+/**
+ * Created by LittleGpNator on 13.01.2017.
+ */
+
+var department = [];
+var today = new Date();
+
+
+$(document).ready(function () {
+    oppdateTable();
+});
+
+$.get('/getDepartment', {}, function (req, res, data) {
+    department = data.responseJSON;
+    makeDropdown('#departmentInput', department);
+});
+
+function makeDropdown(selector, list) {
+    var columns = addAllColumnHeaders(list, selector);
+    for (var i = 0; i < list.length; i++) {
+        var cellValue0 = list[i][columns[1]];
+        if (cellValue0 == null) cellValue0 = "Ingen data fra DB";
+        var option = $('<option />').text(cellValue0);
+        $(selector).append(option);
+    }
+}
+
+
+function oppdateTable() {
+    $(".table").empty();
+
+    $.ajax({
+        url: '/getVaktliste2', //this is the submit URL
+        type: 'POST',
+        data: {
+            'department_name': $("#departmentInput").find(":selected").text(),
+            'date': document.getElementById("datePicker").value
+        },
+        success: function (req, res, data) {
+            buildHtmlTable('#dayTable', data.responseJSON);
+            document.getElementById("successMessage").innerHTML = "Success!";
+            showSuccessMessage();
+        },
+        error: function(xhr){
+            if(xhr.status==404){
+                document.getElementById("errorMessage").innerHTML = "ikke funnet";
+                showErrorMessage();
+            } else {
+                document.getElementById("errorMessage").innerHTML = "Det har oppstått en feil";
+                showErrorMessage();
+            }
+        },
+        failure: function (err) {
+            console.log("Error" + err);
+        }
+    });
+
+    $.ajax({
+        url: '/getVaktliste3', //this is the submit URL
+        type: 'POST',
+        data: {
+            'department_name': $("#departmentInput").find(":selected").text(),
+            'date': document.getElementById("datePicker").value
+        },
+        success: function (req, res, data) {
+            buildHtmlTable('#evningTable', data.responseJSON);
+            document.getElementById("successMessage").innerHTML = "Success!";
+            showSuccessMessage();
+        },
+        error: function(xhr){
+            if(xhr.status==404){
+                document.getElementById("errorMessage").innerHTML = "ikke funnet";
+                showErrorMessage();
+            } else {
+                document.getElementById("errorMessage").innerHTML = "Det har oppstått en feil";
+                showErrorMessage();
+            }
+        },
+        failure: function (err) {
+            console.log("Error" + err);
+        }
+    });
+    $.ajax({
+        url: '/getVaktliste1', //this is the submit URL
+        type: 'POST',
+        data: {
+            'department_name': $("#departmentInput").find(":selected").text(),
+            'date': document.getElementById("datePicker").value
+        },
+        success: function (req, res, data) {
+            buildHtmlTable('#nightTable', data.responseJSON);
+            document.getElementById("successMessage").innerHTML = "Success!";
+            showSuccessMessage();
+        },
+        error: function(xhr){
+            if(xhr.status==404){
+                document.getElementById("errorMessage").innerHTML = "ikke funnet";
+                showErrorMessage();
+            } else {
+                document.getElementById("errorMessage").innerHTML = "Det har oppstått en feil";
+                showErrorMessage();
+            }
+        },
+        failure: function (err) {
+            console.log("Error" + err);
+        }
+    });
+};
+
+
+function buildHtmlTable(selector, list, index2) {
+    var columns = addAllColumnHeaders(list, selector);
+    var tbody = $('<tbody ' + "id= tbodyid" + '/>');
+    for (var i = 0; i < list.length; i++) {
+        var row$ = $('<tr/>');
+        for (var colIndex = 0; colIndex < columns.length; colIndex++) {
+            var cellValue = list[i][columns[colIndex]];
+            if (cellValue == null) cellValue = "";
+            row$.append($('<td/>').html(cellValue));
+        }
+        $(tbody).append(row$);
+
+    }
+    $(selector).append(tbody);
+}
+
+function addAllColumnHeaders(list, selector) {
+
+    var columnSet = [];
+    var headerThead$ = $('<thead/>');
+    var headerTr$ = $('<tr/>');
+    for (var i = 0; i < list.length; i++) {
+        var rowHash = list[i];
+        for (var key in rowHash) {
+            if ($.inArray(key, columnSet) == -1) {
+                columnSet.push(key);
+                headerTr$.append($('<th/>').html(key));
+            }
+        }
+    }
+    $(selector).append(headerThead$);
+    $(headerThead$).append(headerTr$);
+    return columnSet;
+}
+
+function showSuccessMessage() {
+    var element = document.getElementById('successMessageBox');
+    element.style.display = "block";
+    setTimeout(function() {
+        element.style.display = "none";
+    }, 3000);
+}
+function showErrorMessage() {
+    var element = document.getElementById('errorMessageBox');
+    element.style.display = "block";
+    setTimeout(function() {
+        element.style.display = "none";
+    }, 3000);
+}
+
+function showWarningMessage() {
+    var element = document.getElementById('warningMessageBox');
+    element.style.display = "block";
+    setTimeout(function() {
+        element.style.display = "none";
+    }, 3000);
+}

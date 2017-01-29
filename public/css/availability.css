@@ -1,0 +1,204 @@
+body {
+    padding: 0;
+    font-family: "Lucida Grande","Helvetica","Arial","Verdana",sans-serif;
+    font-size: 14px;
+}
+html, body {
+    height:100%;
+    width:100%;
+}
+
+#successMessageBox, #errorMessageBox, #warningMessageBox {
+    display:none;
+    padding: 10px 0;
+    font-size:20px;
+    text-align: center;
+    position:fixed;
+    top:52px;
+    width:calc(100% - 2px);
+    margin:0;
+    z-index:99999;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px #888888;
+}
+#successMessageBox {
+    background-color: #ccffcc;
+    border: 1px solid #7CbF70;
+    color: #7CbF70;
+}
+#errorMessageBox {
+    background-color: #ffcccc;
+    border: 1px solid #ff7777;
+    color: #ff7777;
+}
+#warningMessageBox {
+    background-color: #ffb;
+    border: 1px solid #bb2;
+    color: #bb2;
+}
+
+#container {
+    width:96%;
+    margin: 0 2% 0 2%;
+}
+#sideTitle {
+    font-weight: bold;
+    font-size: 25px;
+    padding-bottom:10px;
+    margin-bottom:20px;
+    text-align:center;
+    border-bottom: 1px #bbb solid;
+    width:100%;
+}
+
+#home {
+    width:100%;
+    height:auto;
+}
+
+#shift-buttons {
+    margin-top:10px;
+    width:79px;
+    margin-left: calc(50% - 40px);
+    margin-right: calc(50% - 40px);
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px #888888;
+}
+#available-table {
+    border-color: black;
+    width:500px;
+    box-shadow: 2px 2px 5px #888888;
+    margin-left: calc(50% - 250px);
+    margin-right: calc(50% - 250px);
+}
+#available-table th{
+    text-align: center;
+}
+#available-table td{
+    width: 12.5%;
+    height: 40px;
+}
+tr { cursor: default; }
+.highlight { background: yellow !important; }
+
+.available { background: #9d0; }
+.unavailable { background: #f55; }
+
+.ava-content {
+    height:auto;
+}
+.ava-content th{
+    width: 20%;
+}
+.ava-content-left{
+    padding: 10px;
+    margin:3% 1.5% 3% 3%;
+    float: left;
+    border: solid #f2f2f2 1px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px #888888;
+}
+.ava-content-right{
+    margin: 3% 3% 3% 1.5%;
+    padding: 10px 10px 40px 10px;
+    float: left;
+    border: solid #f2f2f2 1px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px #888888;
+    min-height: 215px;
+    width:60%;
+    max-width: 600px;
+    position:relative;
+}
+#ava-choices {
+    width:100%;
+    overflow-y: auto;
+    border: 1px;
+    border-color: #4B4B4B
+}
+#avaButton1 {
+    background-color: #9d0;
+    border: solid #8c0 1px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px #888888;
+    color:white;
+}
+#avaButton2 {
+    background-color: #f55;
+    border: solid #d44 1px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px #888888;
+    color:white;
+}
+#avaButton3 {
+    position:absolute;
+    bottom:10px;
+    left:10px;
+    background-color: royalblue;
+    border: solid royalblue 1px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px #888888;
+    color:white;
+}
+#avaButton4 {
+    position:absolute;
+    bottom: 10px;
+    right:10px;
+    background-color: #fa4;
+    border: solid #d93 1px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px #888888;
+    color:white;
+}
+
+@media
+only screen and (max-width: 760px),
+(min-device-width: 768px) and (max-device-width: 1024px)  {
+    #container {
+        width:calc(100% - 1em);
+        height:auto;
+        margin:0.5em;
+        font-size: 1em;
+    }
+    #sideTitle {
+        width:100%;
+        margin:0 0 0.5em 0;
+        font-size: 1.5em;
+        padding-bottom:0.5em;
+    }
+    .ava-content {
+        width: 100%;
+    }
+    .ava-content-left{
+        width:15em;
+        padding: 0.5em;
+        margin:0.5em calc(50% - 7.5em) 0.5em calc(50% - 7.5em);
+    }
+    .ava-content-right{
+        max-width:none;
+        width: 100%;
+        margin:0 0 0.5em 0;
+        padding: 1em 1em 3em 1em;
+    }
+    #avaButton3 {
+        bottom:1em;
+        left:1em;
+    }
+    #avaButton4 {
+        bottom: 1em;
+        right:1em;
+    }
+    #shift-buttons {
+        margin-top:1em;
+    }
+    #available-table {
+        width:100%;
+        margin-left: 0;
+        margin-right: 0;
+        margin-bottom: 1em;
+    }
+    #available-table td{
+        width: 12.5%;
+        height: 3em;
+    }
+}

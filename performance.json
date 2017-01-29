@@ -1,0 +1,18 @@
+{
+  "config":{
+    "target":"http://127.0.0.1:3000/login",
+    "phrases": [
+      {
+        "duration": 10,
+        "arrivalDate": 1
+      }
+    ]
+  },
+  "scenarios":[{
+    "flow":[{
+      "get":{
+        "url":"/"
+      }
+    }]
+  }]
+}

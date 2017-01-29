@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--<script src="/frontendJS/jquery.min.js"></script>-->
+    <script src ="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" >
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <script src="/frontendJS/moment.min.js"></script>
+    <script src="/frontendJS/fullcalendar.min.js"></script>
+    <script src="/frontendJS/nb.js"></script>
+    <script src="frontendJS/frontpageEmp.js"></script>
+    <link href="/css/fullcalendar.min.css" rel="stylesheet"/>
+    <link href="/css/fullcalendar.print.min.css" rel="stylesheet" media="print"/>
+    <link rel="stylesheet" href="/css/frontpageEmp.css">
+</head>
+
+<div id="includedContent"></div>
+<script>$("#includedContent").load("menu");</script>
+
+<body>
+<div id="successMessageBox">
+    <span id="successMessage">default success</span>
+</div>
+<div id="errorMessageBox">
+    <span id="errorMessage">default error</span>
+</div>
+<div id="warningMessageBox">
+    <span id="warningMessage">default error</span>
+</div>
+
+<div id="container">
+    <div id="sideTitle">HJEM FOR ANSATTE</div>
+
+    <div id='calendar'></div>
+    <aside id="menuEmp">
+        <button type="button" class="menuBtn" onclick="location.href='/availability';" id="availabilityB"><span>Tilgjengelighet</span></button>
+        <button type="button" class="menuBtn" id="shiftB" data-toggle="modal" data-target="#switchModal"><span>Frigjør vakter</span></button>
+    </aside>
+
+    <aside id="nextShift">
+        <h4 class="shiftHeader"> NESTE VAKT</h4>
+        <p id="nextShiftInfo"></p>
+    </aside>
+    <aside id="warning">
+        <h4 class="shiftHeader" > FORKLARING </h4>
+        <div>
+            <div id="myShifts"></div>
+            <p id="myShiftsText">De grønne vaktene er vakter du har godkjent. Trykk på disse for å få oversikt over den enkelte vakten, be om fri eller søke om overtid. På "frigjør vakter" kan man be om fri fra flere vakter samtidig. </p>
+            <div id="availShifts"></div>
+            <p id="availShiftsText">De gule vaktene er ledige vakter du kan ta. Trykk på vaktene for å sende inn forespørsel om å ta den enkelte vakten.</p>
+            <div id="doneShifts"></div>
+            <p id="doneShiftsText">De blå vaktene er vakter du allerede har hatt. Du kan finne fullsteding oversikt over disse i historikken under Min profil.</p>
+        </div>
+    </aside>
+
+    <!-- 1:Modal-switch -->
+    <div class="modal fade" id="switchModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <!-- Modal header-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h3 class="modal-title">Dine vakter</h3>
+                </div>
+                <!-- Modal body-->
+                <main class="modal-body">
+                    <p>Her kan du be om fri fra flere vakter samtidig.</p>
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered" id="vaktTable">
+                        </table>
+                    </div>
+                    <input type="text" id="reason" required placeholder="Skriv inn begrunnelse">
+                    <button type="button" id="sendForespørsel" data-dismiss="modal">Send forespørsel</button>
+
+                </main>
+                <!-- Modal footer-->
+                <div class="modal-footer">
+                    <button type="button" class="close" data-dismiss="modal">Lukk</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal: Be om fri -->
+<div id="fullCalModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 id="modalShift" class="modal-title"></h4>
+            </div>
+            <div id="modalBody" class="modal-body">
+                <p id ="begin"></p>
+                <p id="end"></p>
+                <p id="department"></p>
+                <div id="freeDiv">
+                    <button type="button" class="sendShiftRequest" onclick="showExplanationField()" >Be om fri</button>
+                    <p id="spaceFree" style="visibility:hidden">
+                    <input class="explanation" id="expField"placeholder="Begrunnelse for avspasering" >
+                    <button type="button" id="freeSave">Send </button>
+                    </p>
+                </div>
+                <div id="overtimeDiv">
+                    <button type="button" id="overBtn"class="sendShiftRequest" onclick="showOverField()" >Søk om overtid</button>
+                    <p id="spaceOver" style="visibility:hidden">
+                    <input type="number" id="overTime" name="overtimeClock" min="0" max="10"step="0.25" placeholder="Antall timer">
+                    <input class="explanation" id="overField" placeholder="Begrunnelse for overtid"  >
+                    <button type="button" id="overSave" onclick="">Send</button>
+                    </p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="close" data-dismiss="modal">Lukk</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal: Be om vakt -->
+<div id="fullCalModalFree" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 id="modalShiftFree" class="modal-title"></h4>
+            </div>
+            <div id="modalBodyFree" class="modal-body">
+                <p id ="beginFree"></p>
+                <p id="endFree"></p>
+                <p id="departmentFree"></p>
+                <button type="button" id="sendRequest" data-dismiss="modal">Be om vakt</button>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="close" data-dismiss="modal">Lukk</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal: Tidligere vakt -->
+<div id="fullCalModalDone" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 id="modalShiftDone" class="modal-title"></h4>
+            </div>
+            <div id="modalBodyDone" class="modal-body">
+                <p id ="beginDone"></p>
+                <p id="endDone"></p>
+                <p id="departmentDone"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="close" data-dismiss="modal">Lukk</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

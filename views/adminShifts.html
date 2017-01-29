@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src ="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" >
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <link href="/css/fullcalendar.min.css" rel="stylesheet"/>
+    <link href="/css/fullcalendar.print.min.css" rel="stylesheet" media="print"/>
+    <script src="/frontendJS/moment.min.js"></script>
+    <script src="/frontendJS/fullcalendar.min.js"></script>
+    <script src="/frontendJS/nb.js"></script>
+    <script src="/frontendJS/adminShifts.js"></script>
+    <link href="/css/adminShifts.css" rel="stylesheet"/>
+    <script type="text/javascript" src="events.json"></script>
+</head>
+
+<div id="includedContent"></div>
+<script>$("#includedContent").load("menu");</script>
+
+<body>
+<div id="successMessageBox">
+    <span id="successMessage">default success</span>
+</div>
+<div id="errorMessageBox">
+    <span id="errorMessage">default error</span>
+</div>
+<div id="warningMessageBox">
+    <span id="warningMessage">default error</span>
+</div>
+
+<div id="adminNewShiftModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 id="modalShift" class="modal-title">Legg til vakter</h4>
+            </div>
+            <!-- Modal body-->
+            <div id="adminNewShiftModalContent" class="modal-body">
+                <div id="timeBox">
+                    <label for="datePicker">Dato</label><br>
+                    <input id ="datePicker" type="date" onchange="updateTable()">
+                    <form action="" onchange="updateTable()">
+                        <label>Vakt</label><br>
+                        <input type="radio" name="time" value="day" checked> Dag
+                        <input type="radio" name="time" value="evening"> Kveld
+                        <input type="radio" name="time" value="night"> Natt
+                    </form>
+                </div>
+                <div id="departmentBox">
+                    <label for="chooseDepartment">Avdeling</label>
+                    <select id="chooseDepartment" onchange="updateTable()"></select>
+                </div>
+                <div id="numberBox">
+                    <label for="chooseNumber">Antall folk</label>
+                    <select id="chooseNumber" onchange="updateTable()"></select>
+                </div>
+                <div id="peopleBox">
+                    <table id="peopleTable"></table>
+                </div>
+                <input type="submit" value="Lagre" id="saveNewShift" onclick="createNewShifts()">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="close" data-dismiss="modal">Lukk</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="fillShiftModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 id="fillShift" class="modal-title">Legg til person</h4>
+            </div>
+            <!-- Modal body-->
+            <div id="fillShiftModalContent" class="modal-body">
+                <label for="chooseDepartment">Velg ansatt</label><br>
+                <select id="choosePerson"></select><br>
+                <input type="submit" value="Lagre" id="saveFillShift" onclick="saveFillShift()">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="close" data-dismiss="modal">Lukk</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="container">
+    <div id="sideTitle">Administrer vakter</div>
+    <button type="button" class="menuBtn" id="createNewShift" data-toggle="modal" data-target="#adminNewShiftModal"><span>Opprett ny vakt</span>
+    </button>
+    <div id='calendarx'></div>
+</div>
+
+
+</body>
+</html>

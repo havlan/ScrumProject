@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<head>
+    <title>vaktoversikt</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src ="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" >
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="css/shiftOverview.css">
+    <script src="frontendJS/shiftOverview.js"></script>
+    <script src = "https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+    <script src = "https://cdn.datatables.net/1.10.13/js/dataTables.bootstrap.min.js"></script>
+
+<head/>
+
+
+<div id="includedContent"></div>
+<script> $("#includedContent").load("menu"); </script>
+
+<body>
+<div id="successMessageBox">
+    <span id="successMessage">default success</span>
+</div>
+<div id="errorMessageBox">
+    <span id="errorMessage">default error</span>
+</div>
+<div id="warningMessageBox">
+    <span id="warningMessage">default error</span>
+</div>
+
+<div id="container">
+<div id="sideTitle">VAKTOVERSIKT</div>
+
+    <div class="main-content">
+        <div class="navbar-shift">
+            <div class="shift-left">
+                <div id="shift-buttons" class="btn-group">
+                    <div class="form-group">
+                        <label for="datePicker">Dato: </label>
+                        <input id = datePicker type="date" onchange="oppdateTable()">
+                    </div>
+                    <!--<button type="button" class="btn btn-default" id="shift-prev">
+                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                    </button>
+                    <button type="button" class="btn btn-default" id="shift-next">
+                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                    </button>-->
+
+            </div>
+            </div>
+            <div class="shift-right">
+                <div class="shift-buttons">
+                    <label for="departmentInput">Avdeling: </label>
+                    <select id="departmentInput" class="input" onchange="oppdateTable()">
+                    </select>
+                </div>
+
+            </div>
+
+            <div class="shift-center">
+                <h2 id="date"></h2>
+
+            </div>
+            <div class="shift-clear"></div>
+        </div>
+
+    </div>
+    <div class="vaktbok-body">
+
+        <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#home ">Dagsvakt  </a></li>
+            <li><a data-toggle="tab"                href="#menu1">Kveldsvakt</a></li>
+            <li><a data-toggle="tab"                href="#menu2">Nattevakt </a></li>
+        </ul>
+
+        <div class="tab-content">
+            <div id="home" class="tab-pane fade in active">
+                <h3>08:00-16:00</h3>
+                <div class="day-content">
+                    <div class="table-responsive">
+                        <table id="dayTable" class="table table-striped table-bordered">
+
+
+                        </table>
+                    </div>
+                    <div class="obs">
+                        <p class= "obsWarning">OBS! Hvis siden til en valgt dato er tom er dette fordi det ikke er lagt inn vakter på denne datoen enda</p>
+                    </div>
+                </div>
+            </div>
+            <div id="menu1" class="tab-pane fade">
+                <h3>16:00-24:00</h3>
+                <div class="evening-content">
+                    <div class="table-responsive">
+                        <table id="eveningTable" class="table table-striped table-bordered">
+
+                        </table>
+                    </div>
+                    <div class="obs">
+                        <p class= "obsWarning">OBS! Hvis siden til en valgt dato er tom er dette fordi det ikke er lagt inn vakter på denne datoen enda</p>
+                    </div>
+                </div>
+            </div>
+            <div id="menu2" class="tab-pane fade">
+                <h3>24:00-08:00</h3>
+                <div class="night-content">
+                    <div class="table-responsive">
+                        <table id="nightTable" class="table table-striped table-bordered">
+
+                        </table>
+                    </div>
+                    <div class="obs">
+                        <p class= "obsWarning">OBS! Hvis siden til en valgt dato er tom er dette fordi det ikke er lagt inn vakter på denne datoen enda</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+
+
+<table></table>
+
+</body>
+</html>
+
