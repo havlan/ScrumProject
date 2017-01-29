@@ -42,6 +42,13 @@ documentation.build(['./public/frontendJS/overviewEmp.js'], {}, function (err, r
     });
 });
 
+
+documentation.build(['./public/frontendJS/shiftOverview.js'], {}, function (err, res) {
+    documentation.formats.md(res, {}, function(err, output) {
+        fs.writeFileSync('./documentation/shiftOverview.md', output);
+    });
+});
+
 documentation.build(['./public/frontendJS/frontpageAdmin.js'], {}, function (err, res) {
     documentation.formats.md(res, {}, function(err, output) {
         fs.writeFileSync('./documentation/frontpageAdmin.md', output);
