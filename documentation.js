@@ -48,6 +48,7 @@ documentation.build(['./public/frontendJS/overviewEmp.js'], {}, function (err, r
         fs.writeFileSync('./documentation/overviewEmp.md', output);
     });
 });
+*/
 
 
 documentation.build(['./public/frontendJS/shiftOverview.js'], {}, function (err, res) {
