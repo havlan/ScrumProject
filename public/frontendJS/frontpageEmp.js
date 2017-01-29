@@ -156,6 +156,7 @@ $(document).on('click','#freeSave',function (e) {
             success: function (data) {
                 document.getElementById("successMessage").innerHTML = "Success!";
                 showSuccessMessage();
+                $('#fullCalModal').modal('hide');
             },
             error: function(xhr){
                 if(xhr.status==404){
