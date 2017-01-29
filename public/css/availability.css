@@ -56,20 +56,33 @@ html, body {
     height:auto;
 }
 
+#shift-buttons {
+    margin-top:10px;
+    width:79px;
+    margin-left: calc(50% - 40px);
+    margin-right: calc(50% - 40px);
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px #888888;
+}
+#available-table {
+    border-color: black;
+    width:500px;
+    box-shadow: 2px 2px 5px #888888;
+    margin-left: calc(50% - 250px);
+    margin-right: calc(50% - 250px);
+}
 #available-table th{
     text-align: center;
 }
-
 #available-table td{
-    width: 50px;
-    height: 35px;
+    width: 12.5%;
+    height: 40px;
 }
-
 tr { cursor: default; }
 .highlight { background: yellow !important; }
 
-.available { background: #b1d9b3; }
-.unavailable { background: #ffdbcf; }
+.available { background: #9d0; }
+.unavailable { background: #f55; }
 
 .ava-content {
     height:auto;
@@ -87,7 +100,7 @@ tr { cursor: default; }
 }
 .ava-content-right{
     margin: 3% 3% 3% 1.5%;
-    padding: 10px;
+    padding: 10px 10px 40px 10px;
     float: left;
     border: solid #f2f2f2 1px;
     border-radius: 5px;
@@ -95,16 +108,7 @@ tr { cursor: default; }
     min-height: 215px;
     width:60%;
     max-width: 600px;
-}
-.availableButton{
-    background-color: #4CAF50;
-    width: 100px;
-    height: 50px;
-}
-.unavailableButton{
-    background-color: #ffcccc;
-    width: 100px;
-    height: 50px;
+    position:relative;
 }
 #ava-choices {
     width:100%;
@@ -112,8 +116,39 @@ tr { cursor: default; }
     border: 1px;
     border-color: #4B4B4B
 }
+#avaButton1 {
+    background-color: #9d0;
+    border: solid #8c0 1px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px #888888;
+    color:white;
+}
+#avaButton2 {
+    background-color: #f55;
+    border: solid #d44 1px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px #888888;
+    color:white;
+}
 #avaButton3 {
-
+    position:absolute;
+    bottom:10px;
+    left:10px;
+    background-color: royalblue;
+    border: solid royalblue 1px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px #888888;
+    color:white;
+}
+#avaButton4 {
+    position:absolute;
+    bottom: 10px;
+    right:10px;
+    background-color: #fa4;
+    border: solid #d93 1px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px #888888;
+    color:white;
 }
 
 @media
@@ -123,6 +158,7 @@ only screen and (max-width: 760px),
         width:calc(100% - 1em);
         height:auto;
         margin:0.5em;
+        font-size: 1em;
     }
     #sideTitle {
         width:100%;
@@ -135,13 +171,34 @@ only screen and (max-width: 760px),
     }
     .ava-content-left{
         width:15em;
-        padding: 10px;
-        margin:1em calc(50% - 7.5em) 1em calc(50% - 7.5em);
+        padding: 0.5em;
+        margin:0.5em calc(50% - 7.5em) 0.5em calc(50% - 7.5em);
     }
     .ava-content-right{
         max-width:none;
         width: 100%;
         margin:0 0 0.5em 0;
-        padding: 1em;
+        padding: 1em 1em 3em 1em;
+    }
+    #avaButton3 {
+        bottom:1em;
+        left:1em;
+    }
+    #avaButton4 {
+        bottom: 1em;
+        right:1em;
+    }
+    #shift-buttons {
+        margin-top:1em;
+    }
+    #available-table {
+        width:100%;
+        margin-left: 0;
+        margin-right: 0;
+        margin-bottom: 1em;
+    }
+    #available-table td{
+        width: 12.5%;
+        height: 3em;
     }
 }

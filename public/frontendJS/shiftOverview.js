@@ -5,36 +5,12 @@
 var department = [];
 var today = new Date();
 
-function currentDay(today1) {
-    try {
-        if(today1) {
-            var dd = today1.getDate();
-            var mm = today1.getMonth() + 1; //January is 0!
-
-            var yyyy = today1.getFullYear();
-            if (dd < 10) {
-                dd = '0' + dd;
-            }
-            if (mm < 10) {
-                mm = '0' + mm;
-            }
-            today1 = yyyy + '-' + mm + '-' + dd;
-            console.log(today1);
-            return today1;
-        }
-    }catch(err){
-        throw err;
-    }
-}
 
 $(document).ready(function () {
-    $("#datepicker").val(currentDay());
     oppdateTable();
 });
 
 $.get('/getDepartment', {}, function (req, res, data) {
-    console.log(data);
-    console.log(data.responseJSON);
     department = data.responseJSON;
     makeDropdown('#departmentInput', department);
 });
@@ -52,6 +28,7 @@ function makeDropdown(selector, list) {
 
 function oppdateTable() {
     $(".table").empty();
+
     $.ajax({
         url: '/getVaktliste2', //this is the submit URL
         type: 'POST',
@@ -60,7 +37,6 @@ function oppdateTable() {
             'date': document.getElementById("datePicker").value
         },
         success: function (req, res, data) {
-            console.log(data);
             buildHtmlTable('#dayTable', data.responseJSON);
             document.getElementById("successMessage").innerHTML = "Success!";
             showSuccessMessage();
@@ -87,7 +63,6 @@ function oppdateTable() {
             'date': document.getElementById("datePicker").value
         },
         success: function (req, res, data) {
-            console.log(data);
             buildHtmlTable('#evningTable', data.responseJSON);
             document.getElementById("successMessage").innerHTML = "Success!";
             showSuccessMessage();
@@ -113,7 +88,6 @@ function oppdateTable() {
             'date': document.getElementById("datePicker").value
         },
         success: function (req, res, data) {
-            console.log(data);
             buildHtmlTable('#nightTable', data.responseJSON);
             document.getElementById("successMessage").innerHTML = "Success!";
             showSuccessMessage();
@@ -177,7 +151,15 @@ function showSuccessMessage() {
     }, 3000);
 }
 function showErrorMessage() {
-    var element = document.getElementById('successMessageBox');
+    var element = document.getElementById('errorMessageBox');
+    element.style.display = "block";
+    setTimeout(function() {
+        element.style.display = "none";
+    }, 3000);
+}
+
+function showWarningMessage() {
+    var element = document.getElementById('warningMessageBox');
     element.style.display = "block";
     setTimeout(function() {
         element.style.display = "none";

@@ -146,7 +146,7 @@ $(document).on('click','#switchTable .openModal',function () {
         $('#approveModal').modal('hide');
     }
     //on modal close
-    $('#closeModal').on('click',function () {
+    $('#approveModal').on('hidden.bs.modal',function () {
         $('input[class=openModal]').prop('checked', false);
         $('#ansattTable').remove();
     });
@@ -205,6 +205,7 @@ function fjernAnsatt(skiftid,ansatt){
     if(skiftid==null) {//if method is called from 'Godkjenn vaktbytte'
         id = indeks;
     } else id = skiftid;//If method is called from 'Godkjenn fravær'
+function fjernAnsatt(){
     $.ajax({
         url:'/deleteShift_has_employee',
         type: 'DELETE',
@@ -212,6 +213,7 @@ function fjernAnsatt(skiftid,ansatt){
         success:function (data) {
             document.getElementById("successMessage").innerHTML = "Ansatt er fjernet";
             showSuccessMessage();
+            getSwitchTable();
         },
         error: function(xhr){
             if(xhr.status==404){
@@ -231,9 +233,6 @@ function fjernAnsatt(skiftid,ansatt){
  */
 function erstattAnsatt() {
     var skiftid = indeks;
-    console.log(ansattid);
-    console.log(nyansattid);
-    console.log(skiftid);
     $.ajax({
         url: '/updateShift_has_employee',
         type:'POST',
@@ -242,6 +241,7 @@ function erstattAnsatt() {
             fjernAnsatteRequestShift(skiftid);
             document.getElementById("successMessage").innerHTML = "Ansatt er erstattet";
             showSuccessMessage();
+            getSwitchTable();
         },
         error: function(xhr){
             if(xhr.status==404){
@@ -266,6 +266,8 @@ function fjernAnsatteRequestShift(skiftid){
         data:{'shift_id':skiftid},
         success:function (data) {
            deleteRequest(indeks);
+            document.getElementById("successMessage").innerHTML = "TODO er fjernet";//TODO
+            showSuccessMessage();
         },
         error: function(xhr){
             if(xhr.status==404){
@@ -290,6 +292,8 @@ function deleteRequest(id) {
         data:{'request_id':id},
         success:function (data) {
             //alert("Request slettet.");
+            document.getElementById("successMessage").innerHTML = "TODO er fjernet"; //TODO
+            showSuccessMessage();
         },
         error: function(xhr) {
             if (xhr.status == 404) {
@@ -313,9 +317,9 @@ function updateAbsence(id) {
         type:'POST',
         data:{'absence_id':id,'checked_by_admin':1},
         success:function (data) {
-            alert("Absence slettet.");
-            document.getElementById("successMessage").innerHTML = "fravær er fjernet";
+            document.getElementById("successMessage").innerHTML = "Fravær godkjent";
             showSuccessMessage();
+            getAbsenceTable();
         },
         error: function(xhr){
             if(xhr.status==404){
@@ -339,8 +343,9 @@ function updateOvertime(id) {
         type:'POST',
         data:{'overtime_id':id,'checked_by_admin':1},
         success:function (data) {
-            document.getElementById("successMessage").innerHTML = "Overtid er oppdatert";
+            document.getElementById("successMessage").innerHTML = "Overtid oppdatert";
             showSuccessMessage();
+            getOvertimeTable();
         },
         error: function(xhr){
             if(xhr.status==404){
@@ -369,9 +374,17 @@ function showSuccessMessage() {
  * @function
  */
 function showErrorMessage() {
-    var element = document.getElementById('successMessageBox');
+    var element = document.getElementById('errorMessageBox');
     element.style.display = "block";
     setTimeout(function() {
         element.style.display = "none";
-    },3000);
+    }, 3000);
+}
+
+function showWarningMessage() {
+    var element = document.getElementById('warningMessageBox');
+    element.style.display = "block";
+    setTimeout(function() {
+        element.style.display = "none";
+    }, 3000);
 }

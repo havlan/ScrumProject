@@ -24,8 +24,6 @@
 <script>
     $(document).ready(function() {
         $.get('/Batman', {}, function (req, res, data) {
-            console.log(data);
-            console.log(data.responseJSON[1]);
 
             document.getElementById("h99").innerHTML = data.responseJSON[0].notat
             document.getElementById("name1").innerHTML = data.responseJSON[0].name;
