@@ -1,8 +1,13 @@
-# scrumLords2017
-MinVakt === Scrum prosjekt, systemutvikling 2 2017
+# Installasjon
 
-__Script for å få installert dependencies, npm install når du er i git bash / cmd / terminal " npm install " __
-
+##Lokal testing  
+Sørg for å ha installert `npm` og `node.js` [last ned node.js](https://nodejs.org/en/download/)  
+`git clone https://github.com/hlongdayle/scrumLords2017.git`  
+`cd to/the/right/directory`  
+`npm install`  
+`npm test`  
+`node/nodemon app.js` (nodemon kjører automatisk på endring i filstrukturen, mens node gjør ikke det)  
+det skal nå komme log om at serveren kjører på en gitt port, mest sannsynlig 3000  
 
 #controllers/ – defines your app routes and their logic
 #helpers/ – code and functionality to be shared by different parts of the project
