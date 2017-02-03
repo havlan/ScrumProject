@@ -22,7 +22,7 @@ function sendMailUser(req, mail, pw) { // sends mail user registers
     try {
         transporter.sendMail(mailOptions, function (err, inf) {
             if (!err) console.log(inf.response);
-            else console.log(err);
+            //else console.log(err);
         })
     }catch(err){
         throw err;
@@ -53,7 +53,7 @@ function sendMailShift(rec) {
     };
     transporter.sendMail(msg, function (err, inf) {
         if (!err) console.log(inf.response);
-        else console.log(err);
+        //else console.log(err);
     })
 }
 module.exports = {
@@ -115,7 +115,6 @@ module.exports = {
                         if (er) {
                             response.json(er);
                         }
-                        console.log(request.body);
                         conn.query('select * from LoginInfo where username = ?', request.body.username, function (err, rows) {
                             if (err || !rows.length) {
                                 response.status(404).json({melding: err});
