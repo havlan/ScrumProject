@@ -85,7 +85,6 @@ module.exports = {
             },
             function(rows,done){
                 for(var i=0;i<rows.length;i++){
-                    console.log(rows[i].email);
                     mailRecp += rows[i].email;
                     mailRecp += ",";
                 }
@@ -118,7 +117,6 @@ module.exports = {
                         }
                         console.log(request.body);
                         conn.query('select * from LoginInfo where username = ?', request.body.username, function (err, rows) {
-                            console.log(rows);
                             if (err || !rows.length) {
                                 response.status(404).json({melding: err});
                                 conn.release();
@@ -203,7 +201,6 @@ module.exports = {
                             conn.release();
                             response.status(404).json({melding: "Ikke funnet fra."});
                         } else {
-                            console.log(res);
                             cb(null, res, fra, conn)
                         }
                     })
@@ -243,13 +240,13 @@ module.exports = {
                 };
                 transporter.sendMail(mail1, function (err, inf) {
                     if (err) {
-                        console.log(err);
+                        //console.log(err);
                     } else {
                         console.log(inf.response);
                     }
                 });
                 transporter.sendMail(mail2, function (err, inf) {
-                    console.log(err || inf.response);
+                    //console.log(err || inf.response);
                 })
             }catch (er){
                 throw er;
@@ -359,7 +356,6 @@ module.exports = {
                                 //throw err;
                             })
                         } else {
-                            console.log(req.body.employee_id);
                             conn.query("select email from Employee where employee_id = ?", [req.body.employee_id], function (err, res) {
                                 if (err) {
                                     return conn.rollback(function () {
@@ -436,7 +432,7 @@ module.exports = {
                             password_salt: newSaltHash.salt
                         }, {username: req.session.passport.user.username}], function (err2, rows2) {
                             if (err2) {
-                                console.log(err2);
+                                //console.log(err2);
                                 res.status(404);
                                 res.json(err2);
                                 conn.release();
@@ -473,7 +469,7 @@ module.exports = {
                     if (err) {
                         return conn.rollback(function () {
                             conn.release();
-                            console.log(err);
+                            //console.log(err);
                             res.json(err);
                             //throw err;
                         })
@@ -495,7 +491,7 @@ module.exports = {
                                         conn.release();
                                         conn.commit(function () {
                                             res.status(200);
-                                            console.log(rows2);
+                                            //console.log(rows2);
                                             res.json(rows2);
                                         })
                                     }
