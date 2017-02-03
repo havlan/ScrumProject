@@ -84,7 +84,6 @@ function getAvailableEmpForShift(id) {
             //lag dropdown i modal
         },
         failure: function (err) {
-            console.log("Error" + err);
         }
     });
 }
@@ -104,7 +103,7 @@ function saveFillShift() {
             location.reload();
         },
         failure: function (err) {
-            console.log("Error" + err);
+            console.log("Error");
         }
     });
     $('#fillShiftModal').modal("hide");
@@ -207,7 +206,6 @@ function updateTable() {
             createPeopleDropdown(disp.syk, disp.hjelp, disp.annet, employeesSyk, employeesHelp, employeesAnnet);
         },
         failure: function (err) {
-            console.log("Error" + err);
         }
     });
 }
@@ -344,7 +342,6 @@ function createNewShifts() {
                         emp2 = employeesAnnet[index2 - 1].employee_id;
                     }
                     if (emp1 == emp2) {
-                        console.log("NOPE");
                         valid = false;
                         return;
                     }
@@ -392,8 +389,6 @@ function createNewShifts() {
                     }
                 },
                 failure: function (err) {
-                    console.log("Error" + err);
-
                 }
             })
         }
