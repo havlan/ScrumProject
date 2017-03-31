@@ -1,3 +1,7 @@
+<img src = "https://travis-ci.org/havlan/scrumLords2017.png">
+
+
+
 # Installasjon
 
 ##Lokal testing  
