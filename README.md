@@ -1,11 +1,7 @@
-<img src = "https://travis-ci.org/havlan/scrumLords2017.png">
-
-
-
 # Installasjon
 
 ## Lokal testing  
-Sørg for å ha installert `npm` og `node.js` [last ned node.js](https://nodejs.org/en/download/)  
+Sørg for å ha installert `npm` og `node.js` 
 `git clone https://github.com/hlongdayle/scrumLords2017.git`  
 `cd to/the/right/directory`  
 `npm install`  
